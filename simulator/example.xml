@@ -1,0 +1,63 @@
+<configuration mode="" atmosphericAttenuation="0.0">
+   <fileNameReport></fileNameReport>
+   <fileNameDigitalElevationModel></fileNameDigitalElevationModel>
+   <fileNameScatterModel></fileNameScatterModel>
+   <constellations class="java.util.LinkedList">
+      <constellation power="0.0">
+         <emitter>
+            <semimajorAxis>0.0</semimajorAxis>
+            <eccentricity>0.0</eccentricity>
+            <inclination>0.0</inclination>
+            <rightAngleOfAscendingNode>0.0</rightAngleOfAscendingNode>
+            <trueAnomaly>0.0</trueAnomaly>
+            <argumentOfPerigee>0.0</argumentOfPerigee>
+         </emitter>
+         <receivers class="java.util.LinkedList">
+            <satellite>
+               <semimajorAxis>0.0</semimajorAxis>
+               <eccentricity>0.0</eccentricity>
+               <inclination>0.0</inclination>
+               <rightAngleOfAscendingNode>0.0</rightAngleOfAscendingNode>
+               <trueAnomaly>0.0</trueAnomaly>
+               <argumentOfPerigee>0.0</argumentOfPerigee>
+            </satellite>
+            <satellite>
+               <semimajorAxis>0.0</semimajorAxis>
+               <eccentricity>0.0</eccentricity>
+               <inclination>0.0</inclination>
+               <rightAngleOfAscendingNode>0.0</rightAngleOfAscendingNode>
+               <trueAnomaly>0.0</trueAnomaly>
+               <argumentOfPerigee>0.0</argumentOfPerigee>
+            </satellite>
+         </receivers>
+      </constellation>
+      <constellation power="0.0">
+         <emitter>
+            <semimajorAxis>0.0</semimajorAxis>
+            <eccentricity>0.0</eccentricity>
+            <inclination>0.0</inclination>
+            <rightAngleOfAscendingNode>0.0</rightAngleOfAscendingNode>
+            <trueAnomaly>0.0</trueAnomaly>
+            <argumentOfPerigee>0.0</argumentOfPerigee>
+         </emitter>
+         <receivers class="java.util.LinkedList">
+            <satellite>
+               <semimajorAxis>0.0</semimajorAxis>
+               <eccentricity>0.0</eccentricity>
+               <inclination>0.0</inclination>
+               <rightAngleOfAscendingNode>0.0</rightAngleOfAscendingNode>
+               <trueAnomaly>0.0</trueAnomaly>
+               <argumentOfPerigee>0.0</argumentOfPerigee>
+            </satellite>
+            <satellite>
+               <semimajorAxis>0.0</semimajorAxis>
+               <eccentricity>0.0</eccentricity>
+               <inclination>0.0</inclination>
+               <rightAngleOfAscendingNode>0.0</rightAngleOfAscendingNode>
+               <trueAnomaly>0.0</trueAnomaly>
+               <argumentOfPerigee>0.0</argumentOfPerigee>
+            </satellite>
+         </receivers>
+      </constellation>
+   </constellations>
+</configuration>
