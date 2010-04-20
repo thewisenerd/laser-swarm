@@ -1,0 +1,10 @@
+\contentsline {chapter}{\numberline {1}General Summary}{2}
+\contentsline {section}{\numberline {1.1}Requirements}{2}
+\contentsline {section}{\numberline {1.2}System Description}{2}
+\contentsline {chapter}{\numberline {2}Technical Design Development}{3}
+\contentsline {section}{\numberline {2.1}Work Flow Diagram}{3}
+\contentsline {section}{\numberline {2.2}Work Breakdown Structure}{3}
+\contentsline {section}{\numberline {2.3}Project Approach Description}{3}
+\contentsline {section}{\numberline {2.4}Organizational Breakdown Structure}{3}
+\contentsline {section}{\numberline {2.5}Timeline}{3}
+\contentsline {chapter}{\numberline {3}Approach with respect to sustainable development}{4}

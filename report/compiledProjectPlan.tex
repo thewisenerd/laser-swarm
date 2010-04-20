@@ -1,0 +1,121 @@
+\documentclass[11pt]{report}
+\usepackage{graphicx}
+%\usepackage{mathptmx}
+\topmargin -1.5cm
+\oddsidemargin -0.04cm
+\evensidemargin -0.04cm
+\textwidth 16.59cm
+\textheight 21.94cm
+\parskip 7.2pt
+
+\begin{document}
+%%%%%%%%%%%%%
+%
+%	TOP MATTER
+%
+%%%%%%%%%%%%%
+
+\begin{titlepage}
+\begin{center}
+
+\textsc{\LARGE Delft University of Technology}\\[1.5cm]
+
+\textsc{\Huge Laser Swarm}\\[0.5cm]
+\textsc{\small Project Plan}\\[1.5cm]
+\textsc{\large Design Synthesis Excersise}\\[2.5cm]
+
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft} \large
+\emph{Authors:}\\
+\textsc{S. Billemont\\
+L.S. Boersma\\
+B. Buyens\\
+S.R. Finck\\
+J.P. Florijn\\
+T.C. Goossens\\
+N.S. Oborin\\
+A.J. Vorobiev\\
+G.J. van der Wel\\
+Z. Zhou\\}
+\end{flushleft}
+\end{minipage}
+\begin{minipage}{0.4\textwidth}
+\begin{flushright}
+\emph{Tutor:}\\
+\textsc{Ben Gorte}\\[1cm]
+\emph{Coaches:}\\
+\textsc{Prem Sundaramoorthy\\
+Mathieu Willaert}
+\end{flushright}
+\end{minipage}
+\vfill
+
+\today
+\end{center}
+\end{titlepage}
+
+%%%%%%%%%%%%%
+%
+%	ABSTRACT
+%
+%%%%%%%%%%%%%
+
+\input{chapters/abstract.tex}
+
+%%%%%%%%%%%%%
+%
+%	TOC
+%
+%%%%%%%%%%%%%
+
+\tableofcontents
+
+%%%%%%%%%%%%%
+%
+%	GENERAL SUMMARY
+%
+%%%%%%%%%%%%%
+\chapter{General Summary}
+\label{dseSummary}
+
+\input{chapters/dsePPRequirements.tex}
+\input{chapters/dsePPSystemDescription.tex}
+
+%%%%%%%%%%%%%
+%
+%	DSE PROJECT PLAN
+%
+%%%%%%%%%%%%%
+
+\chapter{Technical Design Development}
+\label{dse}
+% DSE WFD
+\input{chapters/dsePPWFD.tex}
+% DSE WBS
+\input{chapters/dsePPWBS.tex}
+% DSE Project Approach Description
+\input{chapters/dseProjectApproachDescription.tex}
+% DSE OBS
+\input{chapters/dsePPOBS.tex}
+% DSE Timeline
+\input{chapters/dsePPTimeline.tex}
+
+%%%%%%%%%%%%%
+%
+%	SUSTAINABLE
+%
+%%%%%%%%%%%%%
+
+\chapter{Approach with respect to sustainable development}
+\label{dseSustainable}
+
+
+
+%%%%%%%%%%%%%
+%
+%	APPENDICIES
+%
+%%%%%%%%%%%%%
+
+
+\end{document}
