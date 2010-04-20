@@ -8,5 +8,6 @@
 	<classpathentry kind="lib" path="C:/Documents and Settings/simon/workspace/laser-swarm-simulator/lib/slf4j-api-1.5.10.jar"/>
 	<classpathentry kind="lib" path="C:/Documents and Settings/simon/workspace/laser-swarm-simulator/lib/google-Collections/google-collections-1.0.jar" sourcepath="C:/Documents and Settings/simon/workspace/laser-swarm-simulator/lib/google-Collections/google-collections-1.0-sources.jar"/>
 	<classpathentry kind="lib" path="C:/Documents and Settings/simon/workspace/laser-swarm-simulator/lib/logback-core-0.9.16.jar"/>
+	<classpathentry kind="lib" path="C:/Documents and Settings/simon/workspace/laser-swarm-simulator/lib/Jat_fat.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
