@@ -15,6 +15,8 @@ import com.lyndir.lhunath.lib.system.logging.Logger;
 
 @Root
 public class Configuration {
+	public static Configuration instance;
+
 	@Attribute
 	private String mode = "";
 	
@@ -22,7 +24,10 @@ public class Configuration {
 	private float atmosphericAttenuation = 0f;
 	
 	@Element
-	private String fileNameReport = "";
+	private String filePrefixReport = "";
+	
+	@Element
+	private String filePathReport = "";
 	
 	@Element
 	private String fileNameDigitalElevationModel = "";
@@ -42,8 +47,11 @@ public class Configuration {
 	public String getFileNameDigitalElevationModel() {
 		return fileNameDigitalElevationModel;
 	}
-	public String getFileNameReport() {
-		return fileNameReport;
+	public String getFilePrefixReport() {
+		return filePrefixReport;
+	}
+	public String getFilePathReport() {
+		return filePathReport;
 	}
 	public String getFileNameScatterModel() {
 		return fileNameScatterModel;
@@ -59,11 +67,19 @@ public class Configuration {
 		constellations.add(new Constellation());
 	}
 	
-	public Configuration(float atmAtt, String mod, String DEM, String report, String model, List<Constellation> consts) {
+	public static Configuration getInstance() {
+		if (instance == null) {
+			Configuration.read("configuration.xml");
+		}
+		return instance;
+	}
+	
+	public Configuration(float atmAtt, String mod, String DEM, String prefix, String path, String model, List<Constellation> consts) {
 		atmosphericAttenuation = atmAtt;
 		mode = mod;
 		fileNameDigitalElevationModel = DEM;
-		fileNameReport = report;
+		filePrefixReport = prefix;
+		filePathReport = path;
 		fileNameScatterModel = model;
 		constellations = consts;
 	}
@@ -74,7 +90,7 @@ public class Configuration {
 		Serializer serializer = new Persister();
 		File result = new File(filename);
 		try {
-			serializer.write(this, result);
+			serializer.write(instance, result);
 		} catch (Exception e) {
 			success = false;
 			logger.inf(e, "Configuration file writing failed");
@@ -82,8 +98,17 @@ public class Configuration {
 		return success;
 	}
 	
-	public boolean read(String filename)
+	public static boolean read(String filename)
 	{
-		return true;
+		boolean success = true;
+		Serializer serializer = new Persister();
+		File source = new File(filename);
+		try {
+			instance = serializer.read(Configuration.class, source);
+		} catch (Exception e) {
+			success = false;
+			logger.inf(e, "Configuration file reading failed");
+		}
+		return success;
 	}
 }

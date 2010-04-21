@@ -1,5 +1,7 @@
 package com.google.code.laserswarm.conf;
 
+import jat.cm.KeplerElements;
+
 import org.simpleframework.xml.Element;
 
 public class Satellite {
@@ -38,6 +40,9 @@ public class Satellite {
 	}
 	public float getTrueAnomaly() {
 		return trueAnomaly;
+	}
+	public KeplerElements getKeplerElements() {
+		return new KeplerElements(semimajorAxis, eccentricity, inclination, rightAngleOfAscendingNode, argumentOfPerigee, trueAnomaly);
 	}
 	
 	public Satellite() {
