@@ -1,11 +1,12 @@
 <configuration mode="" atmosphericAttenuation="0.0">
-   <fileNameReport></fileNameReport>
-   <fileNameDigitalElevationModel></fileNameDigitalElevationModel>
-   <fileNameScatterModel></fileNameScatterModel>
+   <filePathReport>../report/simulator/</filePathReport>
+   <filePrefixReport>test</filePrefixReport>
+   <fileNameDigitalElevationModel>DEM</fileNameDigitalElevationModel>
+   <fileNameScatterModel>Scatter</fileNameScatterModel>
    <constellations class="java.util.LinkedList">
-      <constellation power="0.0">
+      <constellation power="100.0">
          <emitter>
-            <semimajorAxis>0.0</semimajorAxis>
+            <semimajorAxis>7000</semimajorAxis>
             <eccentricity>0.0</eccentricity>
             <inclination>0.0</inclination>
             <rightAngleOfAscendingNode>0.0</rightAngleOfAscendingNode>
@@ -14,48 +15,48 @@
          </emitter>
          <receivers class="java.util.LinkedList">
             <satellite>
-               <semimajorAxis>0.0</semimajorAxis>
+               <semimajorAxis>7000</semimajorAxis>
                <eccentricity>0.0</eccentricity>
                <inclination>0.0</inclination>
                <rightAngleOfAscendingNode>0.0</rightAngleOfAscendingNode>
                <trueAnomaly>0.0</trueAnomaly>
-               <argumentOfPerigee>0.0</argumentOfPerigee>
+               <argumentOfPerigee>1.0</argumentOfPerigee>
             </satellite>
             <satellite>
-               <semimajorAxis>0.0</semimajorAxis>
+               <semimajorAxis>7000</semimajorAxis>
                <eccentricity>0.0</eccentricity>
                <inclination>0.0</inclination>
                <rightAngleOfAscendingNode>0.0</rightAngleOfAscendingNode>
                <trueAnomaly>0.0</trueAnomaly>
-               <argumentOfPerigee>0.0</argumentOfPerigee>
+               <argumentOfPerigee>2.0</argumentOfPerigee>
             </satellite>
          </receivers>
       </constellation>
-      <constellation power="0.0">
+      <constellation power="1000.0">
          <emitter>
-            <semimajorAxis>0.0</semimajorAxis>
+            <semimajorAxis>7200</semimajorAxis>
             <eccentricity>0.0</eccentricity>
             <inclination>0.0</inclination>
             <rightAngleOfAscendingNode>0.0</rightAngleOfAscendingNode>
             <trueAnomaly>0.0</trueAnomaly>
-            <argumentOfPerigee>0.0</argumentOfPerigee>
+            <argumentOfPerigee>30</argumentOfPerigee>
          </emitter>
          <receivers class="java.util.LinkedList">
             <satellite>
-               <semimajorAxis>0.0</semimajorAxis>
+               <semimajorAxis>7200</semimajorAxis>
                <eccentricity>0.0</eccentricity>
                <inclination>0.0</inclination>
                <rightAngleOfAscendingNode>0.0</rightAngleOfAscendingNode>
                <trueAnomaly>0.0</trueAnomaly>
-               <argumentOfPerigee>0.0</argumentOfPerigee>
+               <argumentOfPerigee>30</argumentOfPerigee>
             </satellite>
             <satellite>
-               <semimajorAxis>0.0</semimajorAxis>
+               <semimajorAxis>7200</semimajorAxis>
                <eccentricity>0.0</eccentricity>
                <inclination>0.0</inclination>
                <rightAngleOfAscendingNode>0.0</rightAngleOfAscendingNode>
                <trueAnomaly>0.0</trueAnomaly>
-               <argumentOfPerigee>0.0</argumentOfPerigee>
+               <argumentOfPerigee>30</argumentOfPerigee>
             </satellite>
          </receivers>
       </constellation>
