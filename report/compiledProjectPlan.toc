@@ -12,6 +12,6 @@
 \contentsline {section}{\numberline {2.5}Timeline}{5}
 \contentsline {section}{\numberline {2.6}Risk management plan}{5}
 \contentsline {subsection}{\numberline {2.6.1}Risk identification}{5}
-\contentsline {subsection}{\numberline {2.6.2}Risk prioritisation}{6}
-\contentsline {subsection}{\numberline {2.6.3}Risk reduction and contigency plans}{7}
+\contentsline {subsection}{\numberline {2.6.2}Risk prioritization}{6}
+\contentsline {subsection}{\numberline {2.6.3}Risk reduction and contingency plans}{7}
 \contentsline {chapter}{\numberline {3}Approach with respect to sustainable development}{8}
