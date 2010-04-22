@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (MiKTeX 2.8) (preloaded format=pdflatex 2010.4.20)  21 APR 2010 17:29
+This is pdfTeX, Version 3.1415926-1.40.10 (MiKTeX 2.8) (preloaded format=pdflatex 2010.4.20)  22 APR 2010 11:26
 entering extended mode
 **C:/Users/Alex/Desktop/Laser*Swarm/laser-swarm/report/compiledProjectPlan.tex
 ("C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/report/compiledProjectPlan.tex"
@@ -108,36 +108,38 @@ ription.tex" [2
 Chapter 2.
 ("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\chapters/dsePPWFD.tex")
 ("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\chapters/dsePPWBS.tex")
-("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\chapters/dseProjectAppro
-achDescription.tex")
+("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\chapters/dsePPProjectApp
+roachDescription.tex" [4
+
+])
 ("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\chapters/dsePPOBS.tex")
 ("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\chapters/dsePPTimeline.t
-ex") [4
-
-]
+ex")
+("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\chapters/dsePPRiskMP.tex
+" [5] [6]) [7]
 Chapter 3.
-[5
+[8
 
 ]
 ("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\compiledProjectPlan.aux"
 ) ) 
 Here is how much of TeX's memory you used:
- 991 strings out of 495285
- 14669 string characters out of 3179881
- 60901 words of memory out of 3000000
- 4198 multiletter control sequences out of 15000+200000
- 11000 words of font info for 38 fonts, out of 3000000 for 9000
+ 997 strings out of 495285
+ 14894 string characters out of 3179881
+ 63921 words of memory out of 3000000
+ 4201 multiletter control sequences out of 15000+200000
+ 11307 words of font info for 39 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
- 25i,4n,19p,647b,247s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 25i,7n,19p,708b,247s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 ><C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmbx12.pfb><
 C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C
 :/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/P
 rogram Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Pro
 gram Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on compiledProjectPlan.pdf (7 pages, 96938 bytes).
+Output written on compiledProjectPlan.pdf (10 pages, 108289 bytes).
 PDF statistics:
- 50 PDF objects out of 1000 (max. 8388607)
+ 59 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

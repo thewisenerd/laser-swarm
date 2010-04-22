@@ -8,6 +8,10 @@
 \contentsline {section}{\numberline {2.1}Work Flow Diagram}{4}
 \contentsline {section}{\numberline {2.2}Work Breakdown Structure}{4}
 \contentsline {section}{\numberline {2.3}Project Approach Description}{4}
-\contentsline {section}{\numberline {2.4}Organizational Breakdown Structure}{4}
-\contentsline {section}{\numberline {2.5}Timeline}{4}
-\contentsline {chapter}{\numberline {3}Approach with respect to sustainable development}{5}
+\contentsline {section}{\numberline {2.4}Organizational Breakdown Structure}{5}
+\contentsline {section}{\numberline {2.5}Timeline}{5}
+\contentsline {section}{\numberline {2.6}Risk management plan}{5}
+\contentsline {subsection}{\numberline {2.6.1}Risk identification}{5}
+\contentsline {subsection}{\numberline {2.6.2}Risk prioritisation}{6}
+\contentsline {subsection}{\numberline {2.6.3}Risk reduction and contigency plans}{7}
+\contentsline {chapter}{\numberline {3}Approach with respect to sustainable development}{8}
