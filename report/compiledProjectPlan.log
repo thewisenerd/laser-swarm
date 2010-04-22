@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (MiKTeX 2.8) (preloaded format=pdflatex 2010.4.20)  22 APR 2010 13:49
+This is pdfTeX, Version 3.1415926-1.40.10 (MiKTeX 2.8) (preloaded format=pdflatex 2010.4.20)  22 APR 2010 16:00
 entering extended mode
 **C:/Users/Alex/Desktop/Laser*Swarm/laser-swarm/report/compiledProjectPlan.tex
 ("C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/report/compiledProjectPlan.tex"
@@ -106,40 +106,81 @@ ription.tex" [2
 
 ]) [3]
 Chapter 2.
-("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\chapters/dsePPWFD.tex")
-("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\chapters/dsePPWBS.tex")
+("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\chapters/dsePPWFD.tex"
+<chapters/img/Workflow_diagram_BR.jpg, id=23, 655.12755pt x 327.624pt>
+File: chapters/img/Workflow_diagram_BR.jpg Graphic file (type jpg)
+
+<use chapters/img/Workflow_diagram_BR.jpg>
+<chapters/img/Workflow_diagram_MTR.jpg, id=24, 819.90315pt x 556.479pt>
+File: chapters/img/Workflow_diagram_MTR.jpg Graphic file (type jpg)
+
+<use chapters/img/Workflow_diagram_MTR.jpg>
+<chapters/img/Workflow_diagram_FR.jpg, id=25, 607.67026pt x 426.99525pt>
+File: chapters/img/Workflow_diagram_FR.jpg Graphic file (type jpg)
+
+<use chapters/img/Workflow_diagram_FR.jpg>)
+("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\chapters/dsePPWBS.tex"
+<chapters/img/Work_break_down_structure.jpg, id=26, 768.7119pt x 554.91315pt>
+File: chapters/img/Work_break_down_structure.jpg Graphic file (type jpg)
+
+<use chapters/img/Work_break_down_structure.jpg>)
 ("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\chapters/dsePPProjectApp
 roachDescription.tex" [4
 
 ])
-("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\chapters/dsePPOBS.tex")
+("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\chapters/dsePPOBS.tex"
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 7.
+
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\base\omscmr.fd"
+File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 7.
+
+<chapters/img/Organogram.jpg, id=30, 512.75565pt x 690.4194pt>
+File: chapters/img/Organogram.jpg Graphic file (type jpg)
+
+<use chapters/img/Organogram.jpg>)
 ("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\chapters/dsePPTimeline.t
-ex")
+ex" [5])
 ("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\chapters/dsePPRiskMP.tex
-" [5] [6]) [7]
+" [6] [7]) [8] [9 <C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/report/chapter
+s/img/Workflow_diagram_BR.jpg>] [10 <C:/Users/Alex/Desktop/Laser Swarm/laser-sw
+arm/report/chapters/img/Workflow_diagram_MTR.jpg>] [11 <C:/Users/Alex/Desktop/L
+aser Swarm/laser-swarm/report/chapters/img/Workflow_diagram_FR.jpg>] [12 <C:/Us
+ers/Alex/Desktop/Laser Swarm/laser-swarm/report/chapters/img/Work_break_down_st
+ructure.jpg>] [13 <C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/report/chapter
+s/img/Organogram.jpg>]
 Chapter 3.
-[8
+
+("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\chapters/dseSustainable.
+tex") [14
+
+]
+Appendix A.
+[15
 
 ]
 ("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\compiledProjectPlan.aux"
 ) ) 
 Here is how much of TeX's memory you used:
- 997 strings out of 495285
- 14894 string characters out of 3179881
- 63921 words of memory out of 3000000
- 4201 multiletter control sequences out of 15000+200000
+ 1050 strings out of 495285
+ 16364 string characters out of 3179881
+ 67985 words of memory out of 3000000
+ 4241 multiletter control sequences out of 15000+200000
  11307 words of font info for 39 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
- 25i,7n,19p,708b,247s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 25i,7n,19p,742b,257s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 ><C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmbx12.pfb><
 C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C
 :/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/P
-rogram Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Pro
-gram Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on compiledProjectPlan.pdf (10 pages, 108280 bytes).
+rogram Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Pro
+gram Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Progr
+am Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmti12.pfb>
+Output written on compiledProjectPlan.pdf (17 pages, 8308555 bytes).
 PDF statistics:
- 59 PDF objects out of 1000 (max. 8388607)
+ 90 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 26 words of extra memory for PDF output out of 10000 (max. 10000000)
 
