@@ -1,11 +1,12 @@
 package com.google.code.laserswarm.math;
 
-import org.apache.commons.math.geometry.Vector3D;
+import javax.vecmath.Vector3d;
+
 
 /**
  * A distribution implemention.
  * <p>
- * Evaluate the probability in a given direction (vector, normailzed). <br />
+ * Evaluate the probability in a given direction (vector, normalized). <br />
  * The up vector is considered to be <0,1,0>
  * </p>
  * 
@@ -19,9 +20,9 @@ public interface Distribution {
 	 * Evaluate the distribution for a given direction <0,1,0> is considered to be up
 	 * 
 	 * @param x
-	 *            Directional vector (normaized)
+	 *            Directional vector (normalized)
 	 * @return The probability in the given direction
 	 */
-	double probability(Vector3D x);
+	double probability(Vector3d x);
 
 }

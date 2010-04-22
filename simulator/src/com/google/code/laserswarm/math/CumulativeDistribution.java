@@ -2,7 +2,7 @@ package com.google.code.laserswarm.math;
 
 import java.util.List;
 
-import org.apache.commons.math.geometry.Vector3D;
+import javax.vecmath.Vector3d;
 
 import com.google.common.collect.Lists;
 
@@ -29,7 +29,7 @@ public class CumulativeDistribution implements Distribution {
 	private List<Distribution>	factors	= Lists.newLinkedList();
 
 	@Override
-	public double probability(Vector3D x) {
+	public double probability(Vector3d x) {
 		double probability = mainDistribution.probability(x);
 
 		for (Distribution factor : factors)
