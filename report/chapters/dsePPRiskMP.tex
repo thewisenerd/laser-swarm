@@ -39,11 +39,12 @@ The risks will be assigned a probability and impact to determine the highest ris
 \begin{table}
 	\centering
 		\begin{tabular}{c|c||c|c|c|c|}
-		probability of occurrence &  & negligible & low & medium & high \\ \hline \hline
-		 & severe & 5,12 & 8 & 1,2,3,4 &  \\ \hline
-		 & high & 10 & 6,13 &  &  \\ \hline
-		consequences & medium & & & 7 & \\ \hline
-		 & low & 11 & & 9 & \\ \hline
+		\multicolumn{2}{c||}{} & \multicolumn{4}{|c|}{probability of occurrence} \\ \cline{3-6}
+		\multicolumn{2}{c||}{} & negligible & low & medium & high \\ \hline \hline
+		\multirow{5}{*}{consequences} & severe & 5,11 & 7 & 1,2,3,4 &  \\ \cline{2-6}
+		 & high & 9 & 6,12 &  &  \\ \cline{2-6}
+		 & medium & & & & \\ \cline{2-6}
+		 & low & 10 & & 8 & \\ \cline{2-6}
 		 & negligible & & & & \\
 		\hline
 	\end{tabular}

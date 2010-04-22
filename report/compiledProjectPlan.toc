@@ -6,12 +6,13 @@
 \contentsline {section}{\numberline {1.5}System Description}{3}
 \contentsline {chapter}{\numberline {2}Technical Design Development}{4}
 \contentsline {section}{\numberline {2.1}Work Flow Diagram}{4}
-\contentsline {section}{\numberline {2.2}Work Breakdown Structure}{5}
-\contentsline {section}{\numberline {2.3}Project Approach Description}{9}
-\contentsline {section}{\numberline {2.4}Organizational Breakdown Structure}{9}
-\contentsline {section}{\numberline {2.5}Time line}{11}
-\contentsline {section}{\numberline {2.6}Risk management plan}{12}
-\contentsline {subsection}{\numberline {2.6.1}Risk identification}{12}
-\contentsline {subsection}{\numberline {2.6.2}Risk prioritization}{12}
-\contentsline {subsection}{\numberline {2.6.3}Risk reduction and contingency plans}{14}
-\contentsline {chapter}{\numberline {3}Approach with respect to sustainable development}{15}
+\contentsline {section}{\numberline {2.2}Work Breakdown Structure}{4}
+\contentsline {section}{\numberline {2.3}Project Approach Description}{4}
+\contentsline {section}{\numberline {2.4}Organizational Breakdown Structure}{5}
+\contentsline {section}{\numberline {2.5}Time line}{6}
+\contentsline {section}{\numberline {2.6}Risk management plan}{6}
+\contentsline {subsection}{\numberline {2.6.1}Risk identification}{6}
+\contentsline {subsection}{\numberline {2.6.2}Risk prioritization}{7}
+\contentsline {subsection}{\numberline {2.6.3}Risk reduction and contingency plans}{8}
+\contentsline {chapter}{\numberline {3}Approach with respect to sustainable development}{14}
+\contentsline {chapter}{\numberline {A}Gantt Chart}{15}
