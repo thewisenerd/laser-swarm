@@ -86,7 +86,7 @@ public class ElevationModel {
 	 */
 	public Point3d getIntersecion(Vector3d direction, Point3d origin)
 			throws PointOutsideEnvelopeException {
-		/* Find the intersecion with the sphere (r = r(EPSG:3785) + average height) */
+		/* Find the intersection with the sphere (r = r(EPSG:3785) + average height) */
 		double r = 6378137 + getAverageHeight();
 		List<Point3d> collPoints = collision(direction, origin, r);
 
