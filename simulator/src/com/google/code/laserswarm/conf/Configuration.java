@@ -21,6 +21,8 @@ public class Configuration {
 
 	@Attribute
 	private String				mode							= "";
+	@Element
+	private int					simThreads						= 4;
 
 	@Attribute
 	private float				atmOpticalThickness				= 0.25f;
@@ -104,6 +106,10 @@ public class Configuration {
 
 	public String getMode() {
 		return mode;
+	}
+
+	public int getSimThreads() {
+		return simThreads;
 	}
 
 	public boolean write(String filename) {
