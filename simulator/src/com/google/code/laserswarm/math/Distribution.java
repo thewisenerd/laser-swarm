@@ -17,7 +17,7 @@ import javax.vecmath.Vector3d;
 public interface Distribution {
 
 	/**
-	 * Evaluate the distribution for a given direction <0,1,0> is considered to be up
+	 * Evaluate the distribution for a given direction. <0,0,1> is considered to be up
 	 * 
 	 * @param x
 	 *            Directional vector (normalized)

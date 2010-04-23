@@ -2,8 +2,6 @@ package com.google.code.laserswarm.earthModel;
 
 import javax.vecmath.Vector3d;
 
-import org.geotools.referencing.operation.projection.PointOutsideEnvelopeException;
-
 import com.google.code.laserswarm.math.Distribution;
 
 
@@ -15,15 +13,15 @@ public class ScatteringCharacteristics implements Distribution {
 	private double theta0;
 	private double R_Lambertian;
 	private Vector3d incidenceVector;
-	@Override
 	/**
-	 * Find the percentage of incoming radiation (irradiation) that is emitted in the specified direction
+	 * Find the percentage of incoming radiation (irradiation) that is emitted in the specified direction.
 	 * 
 	 * @param exittanceVector
 	 *            Direction of the outgoing radiation, where the z-axis of the coordinate system is the
-	 *            local surface normal
-	 * @return the percentage of incoming radiation (irradiation) that is emitted in the specified direction
+	 *            local surface normal.
+	 * @return the percentage of incoming radiation (irradiation) that is emitted in the specified direction.
 	 */
+	@Override
 	public double probability(Vector3d exittanceVector) {
 		// find angle between exittance and surface normal
 		double theta1 = exittanceVector.angle(new Vector3d(0, 0, 1));
@@ -39,17 +37,17 @@ public class ScatteringCharacteristics implements Distribution {
 		return R_HenyeyGreenstein;
 	}
 	/**
-	 * Set up the ScatteringCharacteristics
+	 * Set up the ScatteringCharacteristics.
 	 * 
 	 * @param incidenceVector
 	 *            Direction of the incoming radiation, where the z-axis of the coordinate system is the
-	 *            local surface normal
+	 *            local surface normal.
 	 * @param indexOfRefraction
-	 *            The index of reflection of the local terrain
+	 *            The index of reflection of the local terrain.
 	 * @param kappaMinnaert
-	 *            The local Minnaert constant (kappa)
+	 *            The local Minnaert constant (kappa).
 	 * @param thetaHenyeyGreenstein
-	 *            The local Henyey-Greenstein constant (theta)
+	 *            The local Henyey-Greenstein constant (theta).
 	 */
 	public ScatteringCharacteristics(Vector3d incidenceVector, double indexOfRefraction, double kappaMinnaert, double thetaHenyeyGreenstein) {
 		// find angle between incidence and surface normal
