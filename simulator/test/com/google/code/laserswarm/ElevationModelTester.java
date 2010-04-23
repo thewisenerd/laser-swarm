@@ -28,9 +28,11 @@ public class ElevationModelTester {
 				r * Math.cos(lon));
 		Vector3d dir = new Vector3d(testPoint);
 		dir.normalize();
-		logger.inf("Testing point long: %s lat: %s", lon, lat);
-		logger.inf("Testing with point %s", testPoint);
+		logger.inf("Testing pnt long: %s lat: %s", lon, lat);
+		logger.inf("Testing with pnt %s", testPoint);
 		logger.inf("Testing with direction %s", dir);
+		logger.inf("Testing pnt surface h: %s", ElevationModel.R0 + dem.getElevation(//
+				new DirectPosition2D((180 / Math.PI) * lon, (180 / Math.PI) * lat)));
 
 		Point3d onSurfPoint = null;
 		try {
@@ -39,9 +41,13 @@ public class ElevationModelTester {
 			logger.err(e, "");
 		}
 
-		double rp = new Vector3d(onSurfPoint).length();
-		double theta = Math.acos(onSurfPoint.z / rp); // long
-		double phi = Math.atan2(onSurfPoint.y, onSurfPoint.x); // lat
+		// double rp = new Vector3d(onSurfPoint).length();
+		// double theta = Math.acos(onSurfPoint.z / rp); // long
+		// double phi = Math.atan2(onSurfPoint.y, onSurfPoint.x); // lat
+
+		double rp = onSurfPoint.x;
+		double phi = onSurfPoint.y;
+		double theta = onSurfPoint.z;
 
 		logger.inf("The found point was %s", onSurfPoint);
 		logger.inf("The found point oint long: %s lat: %s", theta, phi);

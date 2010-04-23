@@ -21,7 +21,7 @@ public class ElevationModel {
 	private GridCoverage2D		coverage;
 
 	private Double				averageHeight;
-	private static final double	R0		= 6378137;
+	public static final double	R0		= 6378137;
 
 	private static final Logger	logger	= Logger.get(ElevationModel.class);
 
@@ -99,6 +99,13 @@ public class ElevationModel {
 		return coverage;
 	}
 
+	/**
+	 * Get the elevation of a point on the dem wrt R0 (EPSG:3785)
+	 * 
+	 * @param point
+	 *            Point in (lon, lat)
+	 * @return Elevation wrt EPSG:3785 in [m]
+	 */
 	public double getElevation(DirectPosition2D point) {
 		double[] dest = new double[1];
 		dest = getCoverage().evaluate((DirectPosition) point, dest);
@@ -133,13 +140,13 @@ public class ElevationModel {
 				p = collPoints.iterator().next();
 				break;
 			case 2:
-				double dMax = Double.NEGATIVE_INFINITY;
+				double dMin = Double.POSITIVE_INFINITY;
 				for (Point3d point3d : collPoints) {
 					Vector3d d = new Vector3d(origin);
 					d.sub(point3d);
-					if (d.lengthSquared() > dMax) {
+					if (d.lengthSquared() < dMin) {
 						p = point3d;
-						dMax = d.lengthSquared();
+						dMin = d.lengthSquared();
 					}
 				}
 				break;
