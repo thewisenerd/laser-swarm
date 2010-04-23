@@ -28,7 +28,7 @@ public class ElevationModel {
 		this.setCoverage(coverage);
 	}
 
-	private List<Point3d> coll(Vector3d direction, Point3d origin, double radius) {
+	private List<Point3d> collision(Vector3d direction, Point3d origin, double radius) {
 		Vector3d o = new Vector3d(origin);
 		double A = direction.lengthSquared();
 		double B = 2 * direction.dot(o);
@@ -88,7 +88,7 @@ public class ElevationModel {
 			throws PointOutsideEnvelopeException {
 		/* Find the intersecion with the sphere (r = r(EPSG:3785) + average height) */
 		double r = 6378137 + getAverageHeight();
-		List<Point3d> collPoints = coll(direction, origin, r);
+		List<Point3d> collPoints = collision(direction, origin, r);
 
 		Point3d p = null;
 		switch (collPoints.size()) {
