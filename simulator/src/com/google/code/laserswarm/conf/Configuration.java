@@ -46,9 +46,26 @@ public class Configuration {
 
 	public static Configuration getInstance() {
 		if (instance == null) {
-			Configuration.read(configName);
+			boolean success = Configuration.read(configName);
+			if (!success) {
+				instance = new Configuration();
+			}
 		}
 		return instance;
+	}
+
+	/**
+	 * Make a new config file
+	 */
+	public static void main(String[] args) {
+		String name = getInstance().configName;
+		logger.inf("Removing %s", name);
+		try {
+			(new File(name)).delete();
+		} catch (Exception e) {
+		}
+		logger.inf("Making a new cfg and saving");
+		getInstance().write(name);
 	}
 
 	public static boolean read(String filename) {
@@ -59,7 +76,7 @@ public class Configuration {
 			instance = serializer.read(Configuration.class, source);
 		} catch (Exception e) {
 			success = false;
-			logger.inf(e, "Configuration file reading failed");
+			logger.inf(e, "Configuration file reading failed(%s)", configName);
 		}
 		return success;
 	}
@@ -118,10 +135,12 @@ public class Configuration {
 		File result = new File(filename);
 		try {
 			serializer.write(instance, result);
+			logger.inf("Configuration file written (%s)", configName);
 		} catch (Exception e) {
 			success = false;
-			logger.inf(e, "Configuration file writing failed");
+			logger.inf(e, "Configuration file writing failed (%s)", configName);
 		}
 		return success;
 	}
+
 }
