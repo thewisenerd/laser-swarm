@@ -18,6 +18,15 @@ public class Atmosphere {
 		return computeIntesity(I0, 1, optThick);
 	}
 
+	/**
+	 * Compute the new intensity if a ray travels through the atmosphere
+	 * 
+	 * @param I0
+	 *            Input strength
+	 * @param Angle
+	 *            Angle of the input ray in ENU system
+	 * @return The intensity as received on the surface
+	 */
 	public double computeIntesity(double I0, double angle) {
 		return computeIntesity(I0, 1 / Math.cos(angle), optThick);
 	}
