@@ -1,4 +1,4 @@
-<configuration mode="" atmosphericAttenuation="0.0">
+<configuration mode="" atmOpticalThickness="0.0">
    <filePathReport>../report/simulator/</filePathReport>
    <filePrefixReport>test</filePrefixReport>
    <fileNameDigitalElevationModel>DEM</fileNameDigitalElevationModel>
