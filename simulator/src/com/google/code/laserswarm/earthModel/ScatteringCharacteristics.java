@@ -16,14 +16,16 @@ public class ScatteringCharacteristics implements Distribution {
 	@Override
 	public double probability(Vector3d exittanceVector) {
 		// TODO Auto-generated method stub
-		double theta1 = exittanceVector.angle(new Vector3d(0, 1, 0));
-		double dPhi = incidenceVector.angle(exittanceVector);
+		double theta1 = exittanceVector.angle(new Vector3d(0, 0, 1));
+		Vector3d projIncidence = new Vector3d(incidenceVector.x, incidenceVector.y, 0);
+		Vector3d projExittance = new Vector3d(exittanceVector.x, exittanceVector.y, 0);
+		double dPhi = projIncidence.angle(projExittance);
 		double R_Minnaert = R_Lambertian*(Math.pow(Math.cos(theta0)*Math.cos(theta1), kappa - 1));
 		double R_HenyeyGreenstein = R_Minnaert*(1-Theta*Theta)/Math.pow((1 + 2*Theta*(Math.cos(theta0)*Math.cos(theta1) + Math.sin(theta0)*Math.sin(theta1)*Math.cos(dPhi)) + Theta*Theta), 1.5);
 		return R_HenyeyGreenstein;
 	}
 	public ScatteringCharacteristics(Vector3d incidenceVector, double indexOfRefraction, double kappaMinnaert, double thetaHenyeyGreenstein) {
-		theta0 = incidenceVector.angle(new Vector3d(0, 1, 0));
+		theta0 = incidenceVector.angle(new Vector3d(0, 0, 1));
 		refrSurf = indexOfRefraction;
 		kappa = kappaMinnaert;
 		Theta = thetaHenyeyGreenstein;
