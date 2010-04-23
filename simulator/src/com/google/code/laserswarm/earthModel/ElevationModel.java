@@ -9,6 +9,7 @@ import javax.vecmath.Vector3d;
 import org.geotools.coverage.grid.GridCoverage2D;
 import org.geotools.geometry.DirectPosition2D;
 import org.geotools.referencing.operation.projection.PointOutsideEnvelopeException;
+import org.opengis.geometry.DirectPosition;
 import org.ujmp.core.Matrix;
 
 import com.google.common.base.Preconditions;
@@ -20,6 +21,7 @@ public class ElevationModel {
 	private GridCoverage2D		coverage;
 
 	private Double				averageHeight;
+	private static final double	R0		= 6378137;
 
 	private static final Logger	logger	= Logger.get(ElevationModel.class);
 
@@ -28,17 +30,39 @@ public class ElevationModel {
 		this.setCoverage(coverage);
 	}
 
+	/**
+	 * Compute the intersections of a ray with a sphere with a given radius
+	 * 
+	 * @param direction
+	 *            Direction of the ray
+	 * @param origin
+	 *            Origin of the ray
+	 * @param radius
+	 *            Radius of the sphere (center in <0,0,0>)
+	 * @return A list of intersection points
+	 */
 	private List<Point3d> collision(Vector3d direction, Point3d origin, double radius) {
 		Vector3d o = new Vector3d(origin);
-		double A = direction.lengthSquared();
-		double B = 2 * direction.dot(o);
-		double C = o.lengthSquared() - radius * radius;
 
+		direction.normalize();
+
+		double B = 2 * direction.dot(o);
+		double C = o.lengthSquared() - (radius * radius);
+
+		/* List of intersection points */
 		ArrayList<Point3d> points = new ArrayList<Point3d>();
 
-		double t1 = (-B + Math.sqrt(B * B - 4 * A * C)) / (2 * A);
-		double t2 = (-B - Math.sqrt(B * B - 4 * A * C)) / (2 * A);
+		/*
+		 * Solve char eq {@see
+		 * http://www.siggraph.org/education/materials/HyperGraph/raytrace/rtinter1.htm}
+		 */
+		double t1 = (-B + Math.sqrt(B * B - 4 * C)) / (2);
+		double t2 = (-B - Math.sqrt(B * B - 4 * C)) / (2);
 
+		/**
+		 * if we have a collision then compute its 3D position on the sphere <br />
+		 * !NOT THE DEM!
+		 */
 		if (!Double.isNaN(t1)) {
 			Vector3d d = new Vector3d(direction);
 			d.scale(t1);
@@ -46,6 +70,7 @@ public class ElevationModel {
 			o.add(d);
 			points.add(new Point3d(o));
 		}
+		/* do the same as above if the 2nd point exists and is unique */
 		if (!Double.isNaN(t2) && t1 != t2) {
 			Vector3d d = new Vector3d(direction);
 			d.scale(t2);
@@ -57,6 +82,11 @@ public class ElevationModel {
 		return points;
 	}
 
+	/**
+	 * Get the average height of the DEM
+	 * 
+	 * @return average height above the ellisoid
+	 */
 	private Double getAverageHeight() {
 		if (averageHeight == null) {
 			/* Compute the avg height of the coverage */
@@ -67,6 +97,12 @@ public class ElevationModel {
 
 	public GridCoverage2D getCoverage() {
 		return coverage;
+	}
+
+	public double getElevation(DirectPosition2D point) {
+		double[] dest = new double[1];
+		dest = getCoverage().evaluate((DirectPosition) point, dest);
+		return dest[0];
 	}
 
 	public Matrix getElevationData() {
@@ -80,16 +116,17 @@ public class ElevationModel {
 	 *            Direction of the XYZ ray (ECEF)
 	 * @param origin
 	 *            Origin of the ray (ECEF)
-	 * @return Point on the 3D surface where the intersection is;
+	 * @return Point on the 3D surface where the intersection is; (r, phi, theta)
 	 * @throws PointOutsideEnvelopeException
 	 *             When it does not intersect;
 	 */
 	public Point3d getIntersecion(Vector3d direction, Point3d origin)
 			throws PointOutsideEnvelopeException {
 		/* Find the intersection with the sphere (r = r(EPSG:3785) + average height) */
-		double r = 6378137 + getAverageHeight();
+		double r = R0 + getAverageHeight();
 		List<Point3d> collPoints = collision(direction, origin, r);
 
+		/* Based on the number of collisions, find the closes intersection */
 		Point3d p = null;
 		switch (collPoints.size()) {
 			case 1:
@@ -111,14 +148,18 @@ public class ElevationModel {
 						"The ray does not intersect the earth. Learn to point your craft man.");
 		}
 
+		/* Find is spherical coordinates */
 		double rp = new Vector3d(p).length();
 		double theta = Math.acos(p.z / rp); // long
 		double phi = Math.atan2(p.y, p.x); // lat
 
-		if (coverage.getEnvelope2D().contains(new DirectPosition2D( //
-				(180 / Math.PI) * theta, (180 / Math.PI) * phi)))
-			return p;
-		else
+		/* The (lon, lat) coordinate */
+		DirectPosition2D dp = new DirectPosition2D((180 / Math.PI) * theta, (180 / Math.PI) * phi);
+		/* If it is in the envelope return the 3D surface point */
+		if (coverage.getEnvelope2D().contains(dp)) {
+			double h = getElevation(dp);
+			return new Point3d(R0 + h, phi, theta);
+		} else
 			throw new PointOutsideEnvelopeException("The ray does not intersect the coverage.");
 	}
 
@@ -142,7 +183,7 @@ public class ElevationModel {
 		float[] z5 = (float[]) coverage.evaluate(new DirectPosition2D(pos.x + dAngle, pos.y));
 		float[] z4 = (float[]) coverage.evaluate(new DirectPosition2D(pos.x - dAngle, pos.y));
 
-		double g = dAngle * 6378137;
+		double g = dAngle * R0;
 		double dx = (z5[0] - z4[0]) / (2 * g); // dz/d(lat)
 		double dy = (z2[0] - z7[0]) / (2 * g); // dz/d(lon)
 
