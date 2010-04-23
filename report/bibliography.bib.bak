@@ -1,0 +1,26 @@
+@Electronic{ fresnel1,
+	title = "Fresnel equations",
+	url = "http://www.economicexpert.com/a/Fresnel:equations.html"
+}
+
+@Electronic{ fresnel2,
+	title = "Fresnel equations",
+	author = "Thayer Watkins",
+	url = "http://www.inyourfacefotos.com/fresnel.htm"
+}
+
+@Book{ rees,
+	title = "Physical Principles of Remote Sensing",
+	author = "W. G. Rees",
+	publisher = "Cambridge University Press",
+	address = "Cambridge",
+	edition = "second edition, sixth printing",
+	year = "2001",
+	isbn = "9780521669481"
+}
+
+@Electronic{ refractiveIndices,
+	title = "List of refractive indices",
+	url = "http://en.wikipedia.org/wiki/List_of_refractive_indices"
+}
+
