@@ -143,13 +143,14 @@ public class ElevationModel {
 		float[] z4 = (float[]) coverage.evaluate(new DirectPosition2D(pos.x - dAngle, pos.y));
 
 		double g = dAngle * 6378137;
-		double dx = (z5[0] - z4[0]) / (2 * g);
-		double dy = (z2[0] - z7[0]) / (2 * g);
+		double dx = (z5[0] - z4[0]) / (2 * g); // dz/d(lat)
+		double dy = (z2[0] - z7[0]) / (2 * g); // dz/d(lon)
 
 		Vector3d dF_dx = new Vector3d(1, 0, dx);
 		Vector3d dF_dy = new Vector3d(0, 1, dy);
+
 		Vector3d n = new Vector3d();
-		n.cross(dF_dy, dF_dx);
+		n.cross(dF_dx, dF_dy);
 		// in ENU system (local, lon;lat;up)
 
 		return n;

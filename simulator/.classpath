@@ -26,5 +26,6 @@
 	<classpathentry kind="lib" path="lib/jai/jai_core.jar"/>
 	<classpathentry kind="lib" path="lib/geotools-2.6.3/gt-swing-2.6.3.jar"/>
 	<classpathentry kind="lib" path="lib/geotools-2.6.3/gt-epsg-hsql-2.6.3.jar"/>
+	<classpathentry kind="lib" path="lib/commons-math-2.1/commons-math-2.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
