@@ -36,8 +36,8 @@ public class ElevationModel {
 
 		ArrayList<Point3d> points = new ArrayList<Point3d>();
 
-		double t1 = (-B + Math.sqrt(B * B - 4 * C)) / 2;
-		double t2 = (-B + Math.sqrt(B * B - 4 * C)) / 2;
+		double t1 = (-B + Math.sqrt(B * B - 4 * A * C)) / (2 * A);
+		double t2 = (-B - Math.sqrt(B * B - 4 * A * C)) / (2 * A);
 
 		if (!Double.isNaN(t1)) {
 			Vector3d d = new Vector3d(direction);
