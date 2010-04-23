@@ -12,7 +12,9 @@ public class Constellation {
 	@Attribute
 	private float			power			= 0f;
 	@Element
-	private int				pulseFrequency	= 5000;
+	private double			pulseFrequency	= 5000;
+	@Element
+	private double			laserWaveLength	= 300E-9;
 
 	@Element
 	private Satellite		emitter;
@@ -25,7 +27,6 @@ public class Constellation {
 		emitter = new Satellite();
 		receivers.add(new Satellite());
 		receivers.add(new Satellite());
-
 	}
 
 	public Constellation(float P, int pulseFrequency, Satellite emit, List<Satellite> recv) {
@@ -39,11 +40,15 @@ public class Constellation {
 		return emitter;
 	}
 
+	public double getLaserWaveLength() {
+		return laserWaveLength;
+	}
+
 	public float getPower() {
 		return power;
 	}
 
-	public int getPulseFrequency() {
+	public double getPulseFrequency() {
 		return pulseFrequency;
 	}
 

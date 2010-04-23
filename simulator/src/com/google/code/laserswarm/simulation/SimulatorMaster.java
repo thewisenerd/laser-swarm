@@ -34,7 +34,7 @@ public class SimulatorMaster {
 			/* Run the next pending template */
 			if (templates.size() > 0) {
 				SimTemplate templ = templates.iterator().next();
-				Simulator sim = new Simulator(templ);
+				Simulator sim = new Simulator(templ, earth);
 				sim.start();
 				templates.remove(templ);
 				runningTemplates.put(templ, sim);

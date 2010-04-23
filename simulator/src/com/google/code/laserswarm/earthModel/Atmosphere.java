@@ -4,9 +4,17 @@ import com.google.code.laserswarm.conf.Configuration;
 
 public class Atmosphere {
 
+	private static Atmosphere	instance;
+
 	public static double computeIntesity(double I0, double l, double optThick) {
 		double I = I0 * Math.exp(-optThick * l);
 		return I;
+	}
+
+	public static Atmosphere getInstance() {
+		if (instance == null)
+			instance = new Atmosphere();
+		return instance;
 	}
 
 	private float	optThick	= Configuration.instance.getAtmOpticalThickness();

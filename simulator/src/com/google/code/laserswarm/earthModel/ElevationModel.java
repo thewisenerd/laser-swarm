@@ -101,10 +101,8 @@ public class ElevationModel {
 
 	/**
 	 * Get the elevation of a point on the dem wrt R0 (EPSG:3785)
-	 * 
-	 * @param point
-	 *            Point in (lon, lat)
-	 * @return Elevation wrt EPSG:3785 in [m]
+	 * @param point Point in (lon, lat)
+	 * @return
 	 */
 	public double getElevation(DirectPosition2D point) {
 		double[] dest = new double[1];
