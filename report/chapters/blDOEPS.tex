@@ -1,0 +1,33 @@
+\section{Electrical Power Subsystem}
+\label{blDOEPS}
+
+The electrical power subsystem (EPS) is divided in to three parts: the power source, the energy storage and the power regulation and control.
+These are also the three main branches in the EPS design options structure. Each of these will be considered individually in this section.
+
+\subsection{The power source}
+\label{blDOPS}
+
+Launch vehicles use primary batteries as power source because launches are quite short and thus can be kept fairly small. 
+For missions lasting from weeks to years, however, batteries would be too large to be useful.
+Typically, there are four types of power sources for longer missions: static power sources, dynamic power sources, fuel cells and photovoltaic solar cells.
+
+Static power sources use a heat source for thermal-to-electric conversion. This conversion can be done by either a thermoelectric or a thermionic
+concept. The thermoelectric converter uses the fact that the radioactive source (typically plutonium-238 or uranium-235) has a slow rate of decay.
+Because of this, there exists a temperature gradient between the p-n junction of individual cells which is used to provide the desired dc electrical output. The efficiency of such a system is about 5 tot 8\%.
+Thermionic energy conversion, on the other hand, uses a hot electrode facing a cooler electrode to convert thermal energy to electrical.
+These electrodes are sealed in a chamber containing an ionized gas. The hotter electrode can be seen as the emitter: it emits electrons that flow
+across the inter-electrode gap towards the receiver (the cooler electrode). Once arrived, these electrons condense and return to the emitter through an electrical load connected externally between the two electrodes. Typical system efficiency is about 10 - 20\%.
+
+Dynamic power sources function somewhat differently. They also use a heat source (typically concentrated solar radiation, radioisotopes or a nuclear-fission reaction) to produce thermal energy but the conversion method to electrical power is different. The generated heat is used to heat up a fluid to drive an energy-conversion heat engine. This is done using a Stirling cycle (efficiency of 25-30\%), a Rankine cycle (efficiency of 15-20\%) or a Brayton cycle (efficiency of 20-35\%).
+
+Fuel cells are self-contained generators that convert the chemical energy of an oxidation into electrical power. They consist of two half-cells, each with an electrode and an electrolyte. The two half-cells may use the same electrolyte or they may use different ones.
+In the fuel cell, one half-cell gets oxidized, it loses electrons, and the other is reduced, it gains electrons. As the electrons flow from
+one half-cell to the other a difference in charge and thus an electric current is created.
+The efficiency of fuel cells can be as high as 80\%, but will drop significantly at higher currents.
+
+Photovoltaic solar cells are most common. They convert incident solar radiation directly in to electrical power. They consist of a semiconductor with metal plates on the top and bottom. Part of the incident solar radiation gets absorbed and is transferred to the
+semiconductor. The energy excites electrons who are then free to move around. The metal plates move the electrons, which creates a current,
+to power different subsystems. An efficiency of 29\% has been achieved \cite{doody1} in the lab, but production efficiencies are around 22\% \cite{larson}.
+
+A comparative table for the different power sources can be found in table 11-35 on page 410 of \cite{larson}.
+
