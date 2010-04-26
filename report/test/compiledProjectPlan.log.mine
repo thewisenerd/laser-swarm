@@ -1,0 +1,190 @@
+This is pdfTeX, Version 3.1415926-1.40.10 (MiKTeX 2.8) (preloaded format=pdflatex 2010.4.20)  22 APR 2010 17:46
+entering extended mode
+**C:/Users/Alex/Desktop/Laser*Swarm/laser-swarm/report/compiledProjectPlan.tex
+("C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/report/compiledProjectPlan.tex"
+LaTeX2e <2009/09/24>
+Babel <v3.8l> and hyphenation patterns for english, dumylang, nohyphenation, ge
+rman, ngerman, german-x-2009-06-19, ngerman-x-2009-06-19, french, loaded.
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\base\report.cls"
+Document Class: report 2007/10/19 v1.4h Standard LaTeX document class
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\base\size11.clo"
+File: size11.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@chapter=\count80
+\c@section=\count81
+\c@subsection=\count82
+\c@subsubsection=\count83
+\c@paragraph=\count84
+\c@subparagraph=\count85
+\c@figure=\count86
+\c@table=\count87
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\graphics\graphicx.sty"
+Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
+
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\graphics\keyval.sty"
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\graphics\graphics.sty"
+Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
+
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\graphics\trig.sty"
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\00miktex\graphics.cfg"
+File: graphics.cfg 2007/01/18 v1.5 graphics configuration of teTeX/TeXLive
+)
+Package graphics Info: Driver file: pdftex.def on input line 91.
+
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\pdftex-def\pdftex.def"
+File: pdftex.def 2010/02/14 v0.04n Graphics/color for pdfTeX
+\Gread@gobject=\count88
+))
+\Gin@req@height=\dimen103
+\Gin@req@width=\dimen104
+)
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\multirow\multirow.sty"
+\bigstrutjot=\dimen105
+)
+("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\compiledProjectPlan.aux"
+)
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+ ("C:\Program Files (x86)\MiKTeX 2.8\tex\context\base\supp-pdf.tex"
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count89
+\scratchdimen=\dimen106
+\scratchbox=\box26
+\nofMPsegments=\count90
+\nofMParguments=\count91
+\everyMPshowfont=\toks15
+\MPscratchCnt=\count92
+\MPscratchDim=\dimen107
+\MPnumerator=\count93
+\everyMPtoPDFconversion=\toks16
+)
+("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\chapters/titlePagePP.tex
+"
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <10.95> on input line 24.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 24.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 24.
+ [1
+
+{C:/ProgramData/MiKTeX/2.8/pdftex/config/pdftex.map}])
+("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\chapters/abstract.tex"
+[1])
+("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\compiledProjectPlan.toc"
+)
+\tf@toc=\write3
+ [1
+
+]
+Chapter 1.
+("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\chapters/dsePPIntro.tex"
+) ("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\chapters/dsePPMNS.tex"
+) ("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\chapters/dsePPPOS.tex"
+)
+("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\chapters/dsePPRequiremen
+ts.tex")
+("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\chapters/dsePPSystemDesc
+ription.tex" [2
+
+]) [3]
+Chapter 2.
+("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\chapters/dsePPWFD.tex"
+<chapters/img/Workflow_diagram_BR.jpg, id=23, 655.12755pt x 327.624pt>
+File: chapters/img/Workflow_diagram_BR.jpg Graphic file (type jpg)
+
+<use chapters/img/Workflow_diagram_BR.jpg>
+<chapters/img/Workflow_diagram_MTR.jpg, id=24, 819.90315pt x 556.479pt>
+File: chapters/img/Workflow_diagram_MTR.jpg Graphic file (type jpg)
+
+<use chapters/img/Workflow_diagram_MTR.jpg>
+<chapters/img/Workflow_diagram_FR.jpg, id=25, 607.67026pt x 426.99525pt>
+File: chapters/img/Workflow_diagram_FR.jpg Graphic file (type jpg)
+
+<use chapters/img/Workflow_diagram_FR.jpg>)
+("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\chapters/dsePPWBS.tex"
+<chapters/img/Work_break_down_structure.jpg, id=26, 768.7119pt x 554.91315pt>
+File: chapters/img/Work_break_down_structure.jpg Graphic file (type jpg)
+
+<use chapters/img/Work_break_down_structure.jpg>)
+("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\chapters/dsePPProjectApp
+roachDescription.tex" [4
+
+])
+("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\chapters/dsePPOBS.tex"
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 7.
+
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\base\omscmr.fd"
+File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 7.
+
+<chapters/img/Organogram.jpg, id=30, 512.75565pt x 690.4194pt>
+File: chapters/img/Organogram.jpg Graphic file (type jpg)
+
+<use chapters/img/Organogram.jpg>)
+("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\chapters/dsePPTimeline.t
+ex" [5])
+("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\chapters/dsePPRiskMP.tex
+" [6] [7]) [8] [9 <C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/report/chapter
+s/img/Workflow_diagram_BR.jpg>] [10 <C:/Users/Alex/Desktop/Laser Swarm/laser-sw
+arm/report/chapters/img/Workflow_diagram_MTR.jpg>] [11 <C:/Users/Alex/Desktop/L
+aser Swarm/laser-swarm/report/chapters/img/Workflow_diagram_FR.jpg>] [12 <C:/Us
+ers/Alex/Desktop/Laser Swarm/laser-swarm/report/chapters/img/Work_break_down_st
+ructure.jpg>] [13 <C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/report/chapter
+s/img/Organogram.jpg>]
+Chapter 3.
+
+("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\chapters/dseSustainable.
+tex") [14
+
+]
+Appendix A.
+[15
+
+]
+("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\compiledProjectPlan.aux"
+) ) 
+Here is how much of TeX's memory you used:
+ 1063 strings out of 495285
+ 16672 string characters out of 3179881
+ 69981 words of memory out of 3000000
+ 4250 multiletter control sequences out of 15000+200000
+ 11307 words of font info for 39 fonts, out of 3000000 for 9000
+ 14 hyphenation exceptions out of 8191
+ 25i,9n,19p,715b,257s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmbx10.pfb
+><C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmbx12.pfb><
+C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C
+:/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/P
+rogram Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Progr
+am Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program
+ Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Program F
+iles (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmti12.pfb>
+Output written on compiledProjectPlan.pdf (17 pages, 8316719 bytes).
+PDF statistics:
+ 94 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 500000)
+ 26 words of extra memory for PDF output out of 10000 (max. 10000000)
+
