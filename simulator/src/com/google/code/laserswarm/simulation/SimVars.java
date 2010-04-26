@@ -5,6 +5,7 @@ import java.util.HashMap;
 import javax.vecmath.Point3d;
 
 import com.google.code.laserswarm.conf.Satellite;
+import com.google.code.laserswarm.earthModel.ScatteringCharacteristics;
 
 public class SimVars {
 
@@ -29,5 +30,7 @@ public class SimVars {
 
 	public HashMap<Satellite, Double>	photonDensity;	// added
 	public HashMap<Satellite, Integer>	photonsE;		// added
+
+	public ScatteringCharacteristics	scatter;
 
 }

@@ -5,6 +5,7 @@ import jat.cm.Constants;
 import javax.vecmath.Point3d;
 import javax.vecmath.Vector3d;
 
+import org.geotools.geometry.DirectPosition2D;
 import org.geotools.referencing.operation.projection.PointOutsideEnvelopeException;
 
 import com.google.code.laserswarm.conf.Configuration;
@@ -12,6 +13,8 @@ import com.google.code.laserswarm.conf.Constellation;
 import com.google.code.laserswarm.conf.Satellite;
 import com.google.code.laserswarm.earthModel.Atmosphere;
 import com.google.code.laserswarm.earthModel.ElevationModel;
+import com.google.code.laserswarm.earthModel.ScatteringCharacteristics;
+import com.google.code.laserswarm.earthModel.ScatteringParam;
 import com.google.common.collect.Maps;
 import com.lyndir.lhunath.lib.system.logging.Logger;
 
@@ -58,8 +61,12 @@ public class Simulator implements Runnable {
 			simVals.pE = Maps.newHashMap();
 
 			/* Find the intersection location and time */
+			Point3d sphere = null;
 			try {
-				simVals.pR = earth.getIntersecion(new Vector3d(simVals.p0), simVals.p0);
+				sphere = earth.getIntersecion(new Vector3d(simVals.p0), simVals.p0);
+				simVals.pR = new Point3d(sphere.x * Math.sin(sphere.z) * Math.cos(sphere.y),//
+						sphere.x * Math.sin(sphere.z) * Math.sin(sphere.y),//
+						sphere.x * Math.cos(sphere.z));
 			} catch (PointOutsideEnvelopeException e) {
 				logger.wrn(e, "Point at t=%d is out of the dem grid", simVals.t0);
 				continue;
@@ -67,6 +74,8 @@ public class Simulator implements Runnable {
 			Vector3d dR = new Vector3d(simVals.pR);
 			dR.sub(simVals.p0);
 			simVals.tR = dR.length() / Constants.c;
+			Vector3d surfNormal = earth.getSurfaceNormal(new DirectPosition2D(
+					sphere.z * (180 / Math.PI), sphere.y * (180 / Math.PI)));
 
 			/* Make pulses (with downtravel) */
 			simVals.power0 = constalation.getPower();
@@ -74,10 +83,23 @@ public class Simulator implements Runnable {
 			simVals.powerR = Atmosphere.getInstance().computeIntesity(simVals.power0, angle);
 
 			/* Make scatter characteristics */
-			// NOOOOOOO
+			angle = Math.acos(dR.dot(surfNormal)) / (dR.length() * surfNormal.length());
+			double z = dR.length() * Math.cos(angle);
+			double x = dR.length() * Math.sin(angle);
+			Vector3d incidence = new Vector3d(x, 0, z);
+			ScatteringParam testParam = new ScatteringParam(2.4, 1, 1);
+			simVals.scatter = new ScatteringCharacteristics(incidence, testParam);
 
 			/* Compute scatter power per sat */
-			// NOOOOOOO
+			for (Satellite sat : constalation.getReceivers()) {
+				dR = new Vector3d(simVals.pE.get(sat));
+				dR.sub(simVals.pR);
+				angle = Math.acos(dR.dot(surfNormal)) / (dR.length() * surfNormal.length());
+				z = dR.length() * Math.cos(angle);
+				x = dR.length() * Math.sin(angle);
+				Vector3d exittanceVector = new Vector3d(x, 0, z);
+				simVals.powerR_SC.put(sat, simVals.scatter.probability(exittanceVector));
+			}
 
 			/* Travel up through atm */
 			for (Satellite sat : constalation.getReceivers()) {
