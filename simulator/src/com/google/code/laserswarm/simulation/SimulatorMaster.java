@@ -7,14 +7,15 @@ import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.earthModel.ElevationModel;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 import com.lyndir.lhunath.lib.system.logging.Logger;
 
 public class SimulatorMaster {
 
 	private ElevationModel				earth;
-	private LinkedHashSet<SimTemplate>	templates;
+	private LinkedHashSet<SimTemplate>	templates	= Sets.newLinkedHashSet();
 
-	private static final Logger			logger	= Logger.get(SimulatorMaster.class);
+	private static final Logger			logger		= Logger.get(SimulatorMaster.class);
 
 	public SimulatorMaster(ElevationModel earth) {
 		this.earth = earth;

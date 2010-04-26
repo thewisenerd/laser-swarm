@@ -16,7 +16,7 @@
             <trueAnomaly>0.0</trueAnomaly>
             <argumentOfPerigee>0.0</argumentOfPerigee>
          </emitter>
-         <receivers class="java.util.HashSet">
+         <receivers class="java.util.LinkedList">
             <satellite>
                <semimajorAxis>0.0</semimajorAxis>
                <eccentricity>0.0</eccentricity>
@@ -46,7 +46,7 @@
             <trueAnomaly>0.0</trueAnomaly>
             <argumentOfPerigee>0.0</argumentOfPerigee>
          </emitter>
-         <receivers class="java.util.HashSet">
+         <receivers class="java.util.LinkedList">
             <satellite>
                <semimajorAxis>0.0</semimajorAxis>
                <eccentricity>0.0</eccentricity>

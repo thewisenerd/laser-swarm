@@ -43,27 +43,29 @@ public class Simulator implements Runnable {
 	@Override
 	public void run() {
 		double T0 = 0;
-		double TE = 0;
+		double TE = 100;
 
 		/* Make a list start times */
 		Configuration config = template.getConfig();
-		Constellation constalation = config.getConstellations().iterator().next();
+		Constellation constalation = template.getConstellation();
 		double f = constalation.getPulseFrequency();
 		double dt = (1 / f);
 		double ePhoton = (Constants.c * 6.62606896E-34) / constalation.getLaserWaveLength();
 
-		int samples = (int) Math.ceil((TE - T0) / f);
+		int samples = (int) Math.ceil((TE - T0) / dt);
 
 		KeplerElements k = constalation.getEmitter().getKeplerElements();
-		OrbitClass emittorOrbit = new OrbitClass(new Time(0), k);
+		OrbitClass emittorOrbit = new OrbitClass(new Time(50630), k);
 		HashMap<Satellite, OrbitClass> receiverOrbits = Maps.newHashMap();
 		for (Satellite sat : constalation.getReceivers()) {
 			k = sat.getKeplerElements();
-			OrbitClass o = new OrbitClass(new Time(0), k);
+			OrbitClass o = new OrbitClass(new Time(50630), k);
 			receiverOrbits.put(sat, o);
 		}
 
 		for (int i = 0; i < samples; i++) {
+			if (i % 1000 == 0)
+				logger.dbg("Running sample %s of %s", i, samples);
 			SimVars simVals = new SimVars();
 
 			/* Start time */
@@ -87,9 +89,10 @@ public class Simulator implements Runnable {
 						sphere.x * Math.sin(sphere.z) * Math.sin(sphere.y),//
 						sphere.x * Math.cos(sphere.z));
 			} catch (PointOutsideEnvelopeException e) {
-				logger.wrn(e, "Point at t=%d is out of the dem grid", simVals.t0);
+				// logger.wrn(e, "Point at t=%s is out of the dem grid", simVals.t0);
 				continue;
 			}
+			logger.dbg("Yey over point");
 			Vector3d dR = new Vector3d(simVals.pR);
 			dR.sub(simVals.p0);
 			simVals.tR = dR.length() / Constants.c;
@@ -143,7 +146,6 @@ public class Simulator implements Runnable {
 
 		}
 
-		throw new UnsupportedOperationException();
 	}
 
 	public Thread start() {
