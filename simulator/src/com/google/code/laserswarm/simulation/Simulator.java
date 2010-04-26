@@ -2,9 +2,11 @@ package com.google.code.laserswarm.simulation;
 
 import jat.cm.Constants;
 import jat.cm.KeplerElements;
+import jat.spacetime.CalDate;
 import jat.spacetime.Time;
 
 import java.util.HashMap;
+import java.util.List;
 
 import javax.vecmath.Point3d;
 import javax.vecmath.Vector3d;
@@ -20,20 +22,28 @@ import com.google.code.laserswarm.earthModel.Atmosphere;
 import com.google.code.laserswarm.earthModel.ElevationModel;
 import com.google.code.laserswarm.earthModel.ScatteringCharacteristics;
 import com.google.code.laserswarm.earthModel.ScatteringParam;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.lyndir.lhunath.lib.system.logging.Logger;
 
 public class Simulator implements Runnable {
 
+	public static final CalDate	epoch	= new CalDate(2000, 1, 1, 0, 0, 0);
+	private static final Logger	logger	= Logger.get(Simulator.class);
+
 	private SimTemplate			template;
 	private Thread				thread;
 	private ElevationModel		earth;
 
-	private static final Logger	logger	= Logger.get(Simulator.class);
+	private List<SimVars>		dataPoints;
 
 	public Simulator(SimTemplate templ, ElevationModel earth) {
 		this.template = templ;
 		this.earth = earth;
+	}
+
+	public List<SimVars> getDataPoints() {
+		return dataPoints;
 	}
 
 	public Thread getThread() {
@@ -42,8 +52,8 @@ public class Simulator implements Runnable {
 
 	@Override
 	public void run() {
-		double T0 = 0;
-		double TE = 100;
+		double T0 = 481597;
+		double TE = 481603;
 
 		/* Make a list start times */
 		Configuration config = template.getConfig();
@@ -55,17 +65,22 @@ public class Simulator implements Runnable {
 		int samples = (int) Math.ceil((TE - T0) / dt);
 
 		KeplerElements k = constalation.getEmitter().getKeplerElements();
-		OrbitClass emittorOrbit = new OrbitClass(new Time(50630), k);
+
+		OrbitClass emittorOrbit = new OrbitClass(new Time(epoch), k);
+		emittorOrbit.propogate(T0);
 		HashMap<Satellite, OrbitClass> receiverOrbits = Maps.newHashMap();
 		for (Satellite sat : constalation.getReceivers()) {
 			k = sat.getKeplerElements();
-			OrbitClass o = new OrbitClass(new Time(50630), k);
+			OrbitClass o = new OrbitClass(new Time(epoch), k);
+			o.propogate(T0);
 			receiverOrbits.put(sat, o);
 		}
 
+		dataPoints = Lists.newLinkedList();
+
 		for (int i = 0; i < samples; i++) {
-			if (i % 1000 == 0)
-				logger.dbg("Running sample %s of %s", i, samples);
+			// if (i % 100 == 0)
+			// logger.dbg("Running sample %s of %s", i, samples);
 			SimVars simVals = new SimVars();
 
 			/* Start time */
@@ -89,10 +104,11 @@ public class Simulator implements Runnable {
 						sphere.x * Math.sin(sphere.z) * Math.sin(sphere.y),//
 						sphere.x * Math.cos(sphere.z));
 			} catch (PointOutsideEnvelopeException e) {
+				// if (i % 100 == 0)
 				// logger.wrn(e, "Point at t=%s is out of the dem grid", simVals.t0);
 				continue;
 			}
-			logger.dbg("Yey over point");
+			logger.dbg("Yey over point (s:%s |t:%s)", i, T0 + i * dt);
 			Vector3d dR = new Vector3d(simVals.pR);
 			dR.sub(simVals.p0);
 			simVals.tR = dR.length() / Constants.c;
@@ -144,8 +160,9 @@ public class Simulator implements Runnable {
 				simVals.photonsE.put(sat, nrP);
 			}
 
+			dataPoints.add(simVals);
 		}
-
+		logger.inf("Found %s points", dataPoints.size());
 	}
 
 	public Thread start() {
@@ -153,5 +170,4 @@ public class Simulator implements Runnable {
 		thread.start();
 		return thread;
 	}
-
 }

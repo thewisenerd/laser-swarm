@@ -101,7 +101,9 @@ public class ElevationModel {
 
 	/**
 	 * Get the elevation of a point on the dem wrt R0 (EPSG:3785)
-	 * @param point Point in (lon, lat)
+	 * 
+	 * @param point
+	 *            Point in (lon, lat)
 	 * @return
 	 */
 	public double getElevation(DirectPosition2D point) {
@@ -161,11 +163,13 @@ public class ElevationModel {
 		/* The (lon, lat) coordinate */
 		DirectPosition2D dp = new DirectPosition2D((180 / Math.PI) * theta, (180 / Math.PI) * phi);
 		/* If it is in the envelope return the 3D surface point */
+		// logger.dbg("phi: %s | theta: %s", phi * 180 / Math.PI, theta * 180 / Math.PI);
 		if (coverage.getEnvelope2D().contains(dp)) {
 			double h = getElevation(dp);
 			return new Point3d(R0 + h, phi, theta);
 		} else
-			throw new PointOutsideEnvelopeException("The ray does not intersect the coverage.");
+			throw new PointOutsideEnvelopeException(String.format(
+					"The ray does not intersect the coverage. (lat:%s;long:%s)", phi, theta));
 	}
 
 	/**

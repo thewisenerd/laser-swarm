@@ -29,7 +29,7 @@ public class Constellation {
 		receivers.add(new Satellite());
 	}
 
-	public Constellation(double P, int pulseFrequency, Satellite emit, List<Satellite> recv) {
+	public Constellation(double P, double pulseFrequency, Satellite emit, List<Satellite> recv) {
 		power = P;
 		emitter = emit;
 		receivers = recv;

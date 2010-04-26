@@ -26,6 +26,7 @@ public class ElevationModelTester extends TestCase {
 		} catch (DemCreationException e1) {
 			fail("Cannot load the DEM");
 		}
+
 		double lon = (Math.PI / 180) * dem.getCoverage().getEnvelope2D().getCenterX();
 		double lat = (Math.PI / 180) * dem.getCoverage().getEnvelope2D().getCenterY();
 

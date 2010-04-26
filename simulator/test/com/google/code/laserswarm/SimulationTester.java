@@ -21,9 +21,10 @@ public class SimulationTester extends TestCase {
 	public static final String	CfgName	= "unitTestConfig.xml";
 
 	private Constellation mkTestConstilation() {
-		Satellite emittor = new Satellite((float) ElevationModel.R0, 0f, (float) Math.PI / 2, 0f, 0f, 0f);
+		Satellite emittor = new Satellite(6700f, 0f, (float) Math.PI / 2, (float) (3.2 * Math.PI / 180),
+				0f, 0f);
 		LinkedList<Satellite> r = Lists.newLinkedList();
-		return new Constellation(1E6, 5000, emittor, r);
+		return new Constellation(1E6, 50, emittor, r);
 	}
 
 	public void testSim() {
