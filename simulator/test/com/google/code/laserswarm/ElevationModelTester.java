@@ -5,6 +5,8 @@ import java.io.File;
 import javax.vecmath.Point3d;
 import javax.vecmath.Vector3d;
 
+import junit.framework.TestCase;
+
 import org.geotools.geometry.DirectPosition2D;
 import org.geotools.referencing.operation.projection.PointOutsideEnvelopeException;
 
@@ -13,12 +15,17 @@ import com.google.code.laserswarm.util.demReader.DemCreationException;
 import com.google.code.laserswarm.util.demReader.DemReader;
 import com.lyndir.lhunath.lib.system.logging.Logger;
 
-public class ElevationModelTester {
+public class ElevationModelTester extends TestCase {
 
 	private static final Logger	logger	= Logger.get(ElevationModelTester.class);
 
-	public static void main(String[] args) throws DemCreationException {
-		ElevationModel dem = DemReader.parseDem(new File("DEM/srtm_37_02-red.asc"));
+	public void testDemCreation() {
+		ElevationModel dem = null;
+		try {
+			dem = DemReader.parseDem(new File("DEM/srtm_37_02-red.asc"));
+		} catch (DemCreationException e1) {
+			fail("Cannot load the DEM");
+		}
 		double lon = (Math.PI / 180) * dem.getCoverage().getEnvelope2D().getCenterX();
 		double lat = (Math.PI / 180) * dem.getCoverage().getEnvelope2D().getCenterY();
 
@@ -54,5 +61,8 @@ public class ElevationModelTester {
 
 		logger.inf("The surface normal is %s", dem.getSurfaceNormal(new DirectPosition2D(theta
 				* (180 / Math.PI), phi * (180 / Math.PI))));
+
+		assertEquals(phi, lat, 1E-6);
+		assertEquals(theta, lon, 1E-6);
 	}
 }
