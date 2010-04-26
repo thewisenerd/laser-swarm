@@ -15,12 +15,17 @@ import com.lyndir.lhunath.lib.system.logging.Logger;
 
 @Root
 public class Configuration {
+
+	public enum Modes {
+		ALL;
+	}
+
 	public static Configuration	instance;
 
 	private static final String	configName						= "configuration.xml";
 
 	@Attribute
-	private String				mode							= "";
+	private Modes				mode							= Modes.ALL;
 	@Element
 	private int					simThreads						= 4;
 
@@ -28,16 +33,16 @@ public class Configuration {
 	private float				atmOpticalThickness				= 0.25f;
 
 	@Element
-	private String				filePrefixReport				= "";
+	private String				filePrefixReport				= " ";
 
 	@Element
-	private String				filePathReport					= "";
+	private String				filePathReport					= " ";
 
 	@Element
-	private String				fileNameDigitalElevationModel	= "";
+	private String				fileNameDigitalElevationModel	= " ";
 
 	@Element
-	private String				fileNameScatterModel			= "";
+	private String				fileNameScatterModel			= " ";
 
 	@ElementList
 	private List<Constellation>	constellations					= Lists.newLinkedList();
@@ -81,12 +86,34 @@ public class Configuration {
 		return success;
 	}
 
+	public static boolean write() {
+		return write(configName);
+	}
+
+	public static boolean write(String filename) {
+		return write(filename, getInstance());
+	}
+
+	public static boolean write(String filename, Configuration cfg) {
+		boolean success = true;
+		Serializer serializer = new Persister();
+		File result = new File(filename);
+		try {
+			serializer.write(cfg, result);
+			logger.inf("Configuration file written (%s)", filename);
+		} catch (Exception e) {
+			success = false;
+			logger.inf(e, "Configuration file writing failed (%s)", filename);
+		}
+		return success;
+	}
+
 	public Configuration() {
 		constellations.add(new Constellation());
 		constellations.add(new Constellation());
 	}
 
-	public Configuration(float atmAtt, String mod, String DEM, String prefix, String path, String model,
+	public Configuration(float atmAtt, Modes mod, String DEM, String prefix, String path, String model,
 			List<Constellation> consts) {
 		atmOpticalThickness = atmAtt;
 		mode = mod;
@@ -121,26 +148,12 @@ public class Configuration {
 		return filePrefixReport;
 	}
 
-	public String getMode() {
+	public Modes getMode() {
 		return mode;
 	}
 
 	public int getSimThreads() {
 		return simThreads;
-	}
-
-	public boolean write(String filename) {
-		boolean success = true;
-		Serializer serializer = new Persister();
-		File result = new File(filename);
-		try {
-			serializer.write(instance, result);
-			logger.inf("Configuration file written (%s)", configName);
-		} catch (Exception e) {
-			success = false;
-			logger.inf(e, "Configuration file writing failed (%s)", configName);
-		}
-		return success;
 	}
 
 }
