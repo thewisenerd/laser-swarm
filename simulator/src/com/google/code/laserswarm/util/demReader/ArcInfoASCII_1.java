@@ -11,6 +11,7 @@ import org.geotools.referencing.CRS;
 import org.opengis.referencing.FactoryException;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.MatrixFactory;
+import org.ujmp.core.calculation.Calculation.Ret;
 
 import com.google.code.laserswarm.earthModel.ElevationModel;
 import com.google.code.laserswarm.util.DebugUtil;
@@ -60,6 +61,7 @@ public class ArcInfoASCII_1 extends DemReader {
 
 		Envelope2D envelope = null;
 		Matrix matrix = null;
+		Double NODATA_value = -9999d;
 		try {
 			BufferedReader reader = Files.newReader(getDemFile(), Charsets.UTF_8);
 			String line;
@@ -74,7 +76,7 @@ public class ArcInfoASCII_1 extends DemReader {
 			lastDouble.processLine(reader.readLine());
 			double cellsize = lastDouble.getResult();
 			lastDouble.processLine(reader.readLine());
-			double NODATA_value = lastDouble.getResult();
+			NODATA_value = lastDouble.getResult();
 
 			try {
 				envelope = new Envelope2D(CRS.decode("EPSG:3785"), xllcorner, yllcorner, // 
@@ -123,10 +125,11 @@ public class ArcInfoASCII_1 extends DemReader {
 
 		DebugUtil.showMemUsage();
 
+		matrix.replace(Ret.ORIG, NODATA_value, -10);
+
 		GridCoverage2D coverage = new GridCoverageFactory().create("DEM", matrix.toFloatArray(),
 				envelope);
 		return new ElevationModel(matrix, coverage);
 
 	}
-
 }
