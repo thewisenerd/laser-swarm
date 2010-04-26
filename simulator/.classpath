@@ -28,5 +28,6 @@
 	<classpathentry kind="lib" path="lib/commons-math-2.1/commons-math-2.1.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Jat"/>
 	<classpathentry kind="lib" path="lib/junit/junit-4.7.jar" sourcepath="lib/junit/junit-4.7-sources.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
