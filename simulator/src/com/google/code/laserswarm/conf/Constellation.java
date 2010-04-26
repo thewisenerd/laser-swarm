@@ -1,12 +1,12 @@
 package com.google.code.laserswarm.conf;
 
-import java.util.List;
+import java.util.Set;
 
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
 
-import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
 public class Constellation {
 	@Attribute
@@ -20,7 +20,7 @@ public class Constellation {
 	private Satellite		emitter;
 
 	@ElementList
-	private List<Satellite>	receivers		= Lists.newLinkedList();
+	private Set<Satellite>	receivers		= Sets.newHashSet();
 
 	public Constellation() {
 		power = 0f;
@@ -29,7 +29,7 @@ public class Constellation {
 		receivers.add(new Satellite());
 	}
 
-	public Constellation(float P, int pulseFrequency, Satellite emit, List<Satellite> recv) {
+	public Constellation(float P, int pulseFrequency, Satellite emit, Set<Satellite> recv) {
 		power = P;
 		emitter = emit;
 		receivers = recv;
@@ -52,7 +52,7 @@ public class Constellation {
 		return pulseFrequency;
 	}
 
-	public List<Satellite> getReceivers() {
+	public Set<Satellite> getReceivers() {
 		return receivers;
 	}
 }

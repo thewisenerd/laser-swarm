@@ -1,6 +1,10 @@
 package com.google.code.laserswarm.simulation;
 
 import jat.cm.Constants;
+import jat.cm.KeplerElements;
+import jat.spacetime.Time;
+
+import java.util.HashMap;
 
 import javax.vecmath.Point3d;
 import javax.vecmath.Vector3d;
@@ -8,6 +12,7 @@ import javax.vecmath.Vector3d;
 import org.geotools.geometry.DirectPosition2D;
 import org.geotools.referencing.operation.projection.PointOutsideEnvelopeException;
 
+import com.google.code.laserswarm.Orbit.OrbitClass;
 import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.conf.Constellation;
 import com.google.code.laserswarm.conf.Satellite;
@@ -49,6 +54,15 @@ public class Simulator implements Runnable {
 
 		int samples = (int) Math.ceil((TE - T0) / f);
 
+		KeplerElements k = constalation.getEmitter().getKeplerElements();
+		OrbitClass emittorOrbit = new OrbitClass(new Time(0), k);
+		HashMap<Satellite, OrbitClass> receiverOrbits = Maps.newHashMap();
+		for (Satellite sat : constalation.getReceivers()) {
+			k = sat.getKeplerElements();
+			OrbitClass o = new OrbitClass(new Time(0), k);
+			receiverOrbits.put(sat, o);
+		}
+
 		for (int i = 0; i < samples; i++) {
 			SimVars simVals = new SimVars();
 
@@ -56,9 +70,14 @@ public class Simulator implements Runnable {
 			simVals.t0 = (i * dt + T0);
 
 			/* Find the position of the constelation at that time */
-			// TODO: fit in orbits
-			simVals.p0 = new Point3d();
+			simVals.p0 = emittorOrbit.ECEF_point();
+			emittorOrbit.propogate(dt);
 			simVals.pE = Maps.newHashMap();
+			for (Satellite sat : constalation.getReceivers()) {
+				OrbitClass o = receiverOrbits.get(sat);
+				simVals.pE.put(sat, o.ECEF_point());
+				o.propogate(dt);
+			}
 
 			/* Find the intersection location and time */
 			Point3d sphere = null;
