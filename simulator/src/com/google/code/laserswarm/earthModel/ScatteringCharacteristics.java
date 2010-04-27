@@ -29,7 +29,7 @@ public class ScatteringCharacteristics implements Distribution {
 	public ScatteringCharacteristics(Vector3d incidenceVector, double indexOfRefraction,
 			double kappaMinnaert, double thetaHenyeyGreenstein) {
 		// find angle between incidence and surface normal
-		theta0 = incidenceVector.angle(new Vector3d(0, 0, 1));
+		theta0 = incidenceVector.angle(new Vector3d(0, 0, -1));
 		refrSurf = indexOfRefraction;
 		kappa = kappaMinnaert;
 		Theta = thetaHenyeyGreenstein;
@@ -37,11 +37,19 @@ public class ScatteringCharacteristics implements Distribution {
 		// find the transmittance angle from Snell's law
 		double theta_t = Math.asin(refrAir / refrSurf * Math.sin(theta0));
 		// calculate both Fresnel coefficients (s for perpendicular, p for parallel radiation)
-		double fresnel_s = (Math.sin(theta0) - Math.sin(theta_t))
-				/ (Math.sin(theta0) + Math.sin(theta_t));
-		double fresnel_p = (Math.tan(theta0) - Math.tan(theta_t))
-				/ (Math.tan(theta0) + Math.tan(theta_t));
+		// double fresnel_s = (Math.sin(theta0) - Math.sin(theta_t))
+		// / (Math.sin(theta0) + Math.sin(theta_t));
+		// double fresnel_p =(Math.tan(theta0) - Math.tan(theta_t))
+		// / (Math.tan(theta0) + Math.tan(theta_t));
 		// find the Lambertian BRDF
+		double fresnel_s = Math.pow( //
+				((refrAir * Math.cos(theta0) - refrSurf * Math.cos(theta_t)) / //
+				(refrAir * Math.cos(theta0) + refrSurf * Math.cos(theta_t))) //
+				, 2);
+		double fresnel_p = Math.pow( //
+				((refrAir * Math.cos(theta_t) - refrSurf * Math.cos(theta0)) / //
+				(refrAir * Math.cos(theta_t) + refrSurf * Math.cos(theta0))) //
+				, 2);
 		R_Lambertian = 2 / Math.PI * Math.abs(fresnel_s * fresnel_p) * Math.cos(theta0)
 				* Math.sin(theta0);
 	}

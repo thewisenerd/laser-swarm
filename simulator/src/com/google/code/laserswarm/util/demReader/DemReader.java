@@ -15,6 +15,8 @@ public abstract class DemReader {
 		if (type.equals("asc")) {
 			logger.inf("Using ASCII DEM PARSER");
 			return new ArcInfoASCII_1(demFile).parse();
+		} else if (type.equals("tif")) {
+			return new GeoTiffParser(demFile).parse();
 		} else {
 			throw new DemFormatException();
 		}

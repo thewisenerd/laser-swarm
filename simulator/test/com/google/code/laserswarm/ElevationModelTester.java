@@ -19,7 +19,11 @@ public class ElevationModelTester extends TestCase {
 
 	private static final Logger	logger	= Logger.get(ElevationModelTester.class);
 
-	public void testDemCreation() {
+	public static void main(String[] args) throws Exception {
+		new ElevationModelTester().testGeoTiffRead();
+	}
+
+	public void testDemIntersection() {
 		ElevationModel dem = null;
 		try {
 			dem = DemReader.parseDem(new File("DEM/srtm_37_02-red.asc"));
@@ -65,5 +69,10 @@ public class ElevationModelTester extends TestCase {
 
 		assertEquals(phi, lat, 1E-6);
 		assertEquals(theta, lon, 1E-6);
+	}
+
+	public void testGeoTiffRead() throws DemCreationException {
+		ElevationModel dem = DemReader.parseDem(new File(
+				"C:/Documents and Settings/simon/Desktop/ASTER GDEM BE/ASTGTM_N48E000_dem.tif"));
 	}
 }

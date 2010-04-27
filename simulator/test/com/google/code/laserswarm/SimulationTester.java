@@ -2,6 +2,7 @@ package com.google.code.laserswarm;
 
 import java.io.File;
 import java.lang.reflect.Field;
+import java.util.HashMap;
 import java.util.LinkedList;
 
 import junit.framework.TestCase;
@@ -11,6 +12,7 @@ import com.google.code.laserswarm.conf.Constellation;
 import com.google.code.laserswarm.conf.Satellite;
 import com.google.code.laserswarm.earthModel.ElevationModel;
 import com.google.code.laserswarm.simulation.SimTemplate;
+import com.google.code.laserswarm.simulation.Simulator;
 import com.google.code.laserswarm.simulation.SimulatorMaster;
 import com.google.code.laserswarm.util.demReader.DemCreationException;
 import com.google.code.laserswarm.util.demReader.DemReader;
@@ -20,10 +22,15 @@ public class SimulationTester extends TestCase {
 
 	public static final String	CfgName	= "unitTestConfig.xml";
 
+	public static void main(String[] args) {
+		new SimulationTester().testSim();
+	}
+
 	private Constellation mkTestConstilation() {
-		Satellite emittor = new Satellite(6700f, 0f, (float) Math.PI / 2, (float) (3.2 * Math.PI / 180),
-				0f, 0f);
+		Satellite emittor = new Satellite("SAT01", 6700f, 0f, (float) Math.PI / 2,
+				(float) (3.2 * Math.PI / 180), 0f, 0f);
 		LinkedList<Satellite> r = Lists.newLinkedList();
+		r.add(emittor);
 		return new Constellation(1E6, 50, emittor, r);
 	}
 
@@ -54,7 +61,12 @@ public class SimulationTester extends TestCase {
 		SimulatorMaster mgr = new SimulatorMaster(dem);
 		mgr.addSimTemplate(new SimTemplate(Configuration.getInstance(), testConstallation));
 
-		mgr.runSim();
+		HashMap<SimTemplate, Simulator> points = mgr.runSim();
+		for (Simulator sim : points.values()) {
+			System.out.println(sim);
+			System.out.println(sim.getDataPoints());
+			System.out.println(sim.getDataPoints().toString());
+		}
 	}
 
 }

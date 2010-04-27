@@ -87,12 +87,16 @@ public class Simulator implements Runnable {
 			simVals.t0 = (i * dt + T0);
 
 			/* Find the position of the constelation at that time */
-			simVals.p0 = emittorOrbit.ECEF_point();
+			Point3d pos = emittorOrbit.ECEF_point();
+			pos.scale(1E3);
+			simVals.p0 = pos;
 			emittorOrbit.propogate(dt);
 			simVals.pE = Maps.newHashMap();
 			for (Satellite sat : constalation.getReceivers()) {
 				OrbitClass o = receiverOrbits.get(sat);
-				simVals.pE.put(sat, o.ECEF_point());
+				pos = o.ECEF_point();
+				pos.scale(1E3);
+				simVals.pE.put(sat, pos);
 				o.propogate(dt);
 			}
 
@@ -117,22 +121,23 @@ public class Simulator implements Runnable {
 
 			/* Make pulses (with downtravel) */
 			simVals.power0 = constalation.getPower();
-			double angle = dR.angle(new Vector3d(simVals.pR));
+			double angle = Math.PI - dR.angle(new Vector3d(simVals.pR));
 			simVals.powerR = Atmosphere.getInstance().computeIntesity(simVals.power0, angle);
 
 			/* Make scatter characteristics */
-			angle = Math.acos(dR.dot(surfNormal)) / (dR.length() * surfNormal.length());
+			angle = Math.acos((dR.dot(surfNormal)) / (dR.length() * surfNormal.length()));
 			double z = dR.length() * Math.cos(angle);
 			double x = dR.length() * Math.sin(angle);
 			Vector3d incidence = new Vector3d(x, 0, z);
-			ScatteringParam testParam = new ScatteringParam(2.4, 1, 1);
+			ScatteringParam testParam = new ScatteringParam(2.4, 1, 0.8);
 			simVals.scatter = new ScatteringCharacteristics(incidence, testParam);
 
 			/* Compute scatter power per sat */
+			simVals.powerR_SC = Maps.newHashMap();
 			for (Satellite sat : constalation.getReceivers()) {
 				dR = new Vector3d(simVals.pE.get(sat));
 				dR.sub(simVals.pR);
-				angle = Math.acos(dR.dot(surfNormal)) / (dR.length() * surfNormal.length());
+				angle = Math.acos(((dR.dot(surfNormal)) / (dR.length() * surfNormal.length())));
 				z = dR.length() * Math.cos(angle);
 				x = dR.length() * Math.sin(angle);
 				Vector3d exittanceVector = new Vector3d(x, 0, z);
@@ -140,6 +145,8 @@ public class Simulator implements Runnable {
 			}
 
 			/* Travel up through atm */
+			simVals.tE = Maps.newHashMap();
+			simVals.powerE = Maps.newHashMap();
 			for (Satellite sat : constalation.getReceivers()) {
 				dR = new Vector3d(simVals.pE.get(sat));
 				dR.sub(simVals.pR);
@@ -150,6 +157,8 @@ public class Simulator implements Runnable {
 			}
 
 			/* Power/photons per receiver */
+			simVals.photonsE = Maps.newHashMap();
+			simVals.photonDensity = Maps.newHashMap();
 			for (Satellite sat : constalation.getReceivers()) {
 				Double powerReceived = simVals.powerE.get(sat);
 				double energy = powerReceived * dt;
