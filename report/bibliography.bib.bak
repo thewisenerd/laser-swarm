@@ -1,6 +1,18 @@
 % This file was created with JabRef 2.6.
 % Encoding: Cp1252
 
+@ELECTRONIC{doody1,
+  author = {Dave Doody},
+  month = {February},
+  year = {2001},
+  title = {The Basics of Space Flight.},
+  language = {English},
+  organization = {Jet Propulsion Laboratory, California Institute of Technology},
+  url = {http://www2.jpl.nasa.gov/basics/bsf11-3.php},
+  owner = {Sean},
+  timestamp = {2010.04.26}
+}
+
 @ELECTRONIC{Owen1999,
   author = {G. Scott Owen},
   month = {June},
