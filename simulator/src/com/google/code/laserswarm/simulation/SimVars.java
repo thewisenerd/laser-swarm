@@ -9,28 +9,60 @@ import com.google.code.laserswarm.earthModel.ScatteringCharacteristics;
 
 public class SimVars {
 
+	/**
+	 * Time of origin.
+	 */
 	public double						t0;			// added
+	/**
+	 * Time from origin to reflection.
+	 */
 	public double						tR;			// added
+	/**
+	 * Time from reflection to endpoint.
+	 */
 	public HashMap<Satellite, Double>	tE;			// added
 
+	/**
+	 * Point of origin.
+	 */
 	public Point3d						p0;			// added
+	/**
+	 * Point of reflection.
+	 */
 	public Point3d						pR;			// added
+	/**
+	 * Endpoints.
+	 */
 	public HashMap<Satellite, Point3d>	pE;			// added
 
+	/**
+	 * Original power.
+	 */
 	public double						power0;		// added
 	/**
-	 * Power reflected
+	 * Power reflected.
 	 */
 	public double						powerR;		// added
 	/**
-	 * Power reflected after scatter
+	 * Power reflected after scatter.
 	 */
 	public HashMap<Satellite, Double>	powerR_SC;
+	/**
+	 * Power reaching endpoints.
+	 */
 	public HashMap<Satellite, Double>	powerE;		// added
 
+	/**
+	 * Photons per square meter.
+	 */
 	public HashMap<Satellite, Double>	photonDensity;	// added
+	/**
+	 * Photons received at the endpoint.
+	 */
 	public HashMap<Satellite, Integer>	photonsE;		// added
-
+	/**
+	 * Scattering characteristics for this footprint.
+	 */
 	public ScatteringCharacteristics	scatter;
 
 	@Override
