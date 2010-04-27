@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (MiKTeX 2.8) (preloaded format=pdflatex 2010.4.20)  27 APR 2010 13:26
+This is pdfTeX, Version 3.1415926-1.40.10 (MiKTeX 2.8) (preloaded format=pdflatex 2010.4.20)  27 APR 2010 14:19
 entering extended mode
 **C:/Users/Alex/Desktop/Laser*Swarm/laser-swarm/report/compiledBaseLine.tex
 ("C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/report/compiledBaseLine.tex"
@@ -23,12 +23,23 @@ File: size11.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
 )
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\multirow\multirow.sty"
+\bigstrutjot=\dimen103
+)
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\acronym\acronym.sty"
+Package: acronym 2009/10/20 v1.35 Support for acronyms (Tobias Oetiker)
+
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\bigfoot\suffix.sty"
+Package: suffix 2006/07/15 1.5 Variant command support
+)
+\AC@clearlist=\toks14
+)
 ("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\graphics\graphicx.sty"
 Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
 
 ("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\graphics\keyval.sty"
 Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
-\KV@toks@=\toks14
+\KV@toks@=\toks15
 )
 ("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\graphics\graphics.sty"
 Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
@@ -45,33 +56,22 @@ Package graphics Info: Driver file: pdftex.def on input line 91.
 File: pdftex.def 2010/02/14 v0.04n Graphics/color for pdfTeX
 \Gread@gobject=\count88
 ))
-\Gin@req@height=\dimen103
-\Gin@req@width=\dimen104
-)
-("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\multirow\multirow.sty"
-\bigstrutjot=\dimen105
-)
-("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\acronym\acronym.sty"
-Package: acronym 2009/10/20 v1.35 Support for acronyms (Tobias Oetiker)
-
-("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\bigfoot\suffix.sty"
-Package: suffix 2006/07/15 1.5 Variant command support
-)
-\AC@clearlist=\toks15
+\Gin@req@height=\dimen104
+\Gin@req@width=\dimen105
 )
 ("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\compiledBaseLine.aux")
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
 
 ("C:\Program Files (x86)\MiKTeX 2.8\tex\context\base\supp-pdf.tex"
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -107,32 +107,80 @@ c")
 ("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\chapters/acronyms.tex")
 [2]
 Chapter 1.
+("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\chapters/blIn.tex")
 [3
 
 ]
 Chapter 2.
+("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\chapters/blFUNFlows.tex"
+Package acronym Info: Label `acro:FFD' newly defined as it shall be overridden
+although it is yet undefined on input line 3.
+Package acronym Info: Label `acro:EOL' newly defined as it shall be overridden
+although it is yet undefined on input line 5.
+
+Underfull \hbox (badness 10000) in paragraph at lines 3--6
+
+ []
+
+<chapters/img/pic_FFD.pdf, id=24, 845.1575pt x 597.23125pt>
+File: chapters/img/pic_FFD.pdf Graphic file (type pdf)
+
+<use chapters/img/pic_FFD.pdf>
+Package acronym Info: Label `acro:FBS' newly defined as it shall be overridden
+although it is yet undefined on input line 15.
+
+Underfull \hbox (badness 10000) in paragraph at lines 15--23
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 15--23
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 15--23
+
+ []
+
+[4
+
+] [5 <C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/report/chapters/img/pic_FFD
+.pdf, page is rotated 90 degrees>]
+<chapters/img/pic_FBS.pdf, id=158, 597.23125pt x 845.1575pt>
+File: chapters/img/pic_FBS.pdf Graphic file (type pdf)
+
+<use chapters/img/pic_FBS.pdf>)
 ("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\chapters/blFRReqDisc.tex
-") [4
-
-]
+"
+Package acronym Info: Label `acro:MNS' newly defined as it shall be overridden
+although it is yet undefined on input line 9.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 11.
+ ("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\base\omscmr.fd"
+File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 11.
+) [6] [7 <C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/report/chapters/img/pic
+_FBS.pdf>]
 Chapter 3.
-[5
-
-]
-Chapter 4.
-[6
-
-]
-Chapter 5.
-[7
-
-]
-Chapter 6.
 [8
 
 ]
-Chapter 7.
+Chapter 4.
 [9
+
+]
+Chapter 5.
+[10
+
+]
+Chapter 6.
+[11
+
+]
+Chapter 7.
+[12
 
 ]
 Chapter 8.
@@ -141,48 +189,49 @@ Package acronym Info: Label `acro:RAMS' newly defined as it shall be overridden
 
 although it is yet undefined on input line 2.
 
-<chapters/img/subsystem_reliability_analysis.png, id=43, 359.54324pt x 318.5902
-6pt>
+<chapters/img/subsystem_reliability_analysis.png, id=227, 359.54324pt x 318.590
+26pt>
 File: chapters/img/subsystem_reliability_analysis.png Graphic file (type png)
- <use chapters/img/subsystem_reliability_analysis.png> [10
+ <use chapters/img/subsystem_reliability_analysis.png> [13
 
 ])
 ("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\compiledBaseLine.bbl"
-[11] [12 <C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/report/chapters/img/sub
+[14] [15 <C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/report/chapters/img/sub
 system_reliability_analysis.png (PNG copy)>]
 
 LaTeX Warning: Empty `thebibliography' environment on input line 3.
 
-) [13
+) [16
 
 ]
 Appendix A.
-[14
-
-]
-Appendix B.
-[15
+[17
 
 ] ("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\compiledBaseLine.aux")
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
  ) 
 Here is how much of TeX's memory you used:
- 1218 strings out of 495285
- 16954 string characters out of 3179881
- 65158 words of memory out of 3000000
- 4426 multiletter control sequences out of 15000+200000
+ 1287 strings out of 495285
+ 18122 string characters out of 3179881
+ 68812 words of memory out of 3000000
+ 4484 multiletter control sequences out of 15000+200000
  11909 words of font info for 41 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
- 25i,8n,19p,797b,269s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 25i,8n,21p,1001b,270s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmbx10.pfb>
 <C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C
 :/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:
 /Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Pr
 ogram Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><C:/Pr
-ogram Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Prog
-ram Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on compiledBaseLine.pdf (17 pages, 182125 bytes).
+ogram Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Prog
+ram Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Progra
+m Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmti12.pfb>
+Output written on compiledBaseLine.pdf (19 pages, 652216 bytes).
 PDF statistics:
- 86 PDF objects out of 1000 (max. 8388607)
+ 270 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 22 words of extra memory for PDF output out of 10000 (max. 10000000)
 

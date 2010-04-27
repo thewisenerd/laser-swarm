@@ -1,9 +1,10 @@
 \documentclass[11pt]{report}
-\usepackage{graphicx}
+%\usepackage{graphicx}
 
 \usepackage{multirow}
 \usepackage[printonlyused]{acronym}
 \usepackage{multirow}
+\usepackage[pdftex]{graphicx}
 
 \topmargin -1.5cm
 \oddsidemargin -0.04cm
@@ -28,7 +29,6 @@
 %%%%%%%%%%%%%
 
 \input{chapters/abstractBL.tex}
-
 
 %%%%%%%%%%%%%
 %
@@ -58,7 +58,7 @@
 \chapter{Introduction}
 \label{blIntro}
 %Intro
-%\input{chapters/blIn.tex}
+\input{chapters/blIn.tex}
 
 %%%%%%%%%%%%%
 %
@@ -68,6 +68,7 @@
 
 \chapter{Functions and Requirements}
 \label{blFuncChapter}
+\input{chapters/blFUNFlows.tex}
 \input{chapters/blFRReqDisc.tex}
 %%%%%%%%%%%%%
 %
