@@ -18,9 +18,8 @@ import com.google.code.laserswarm.Orbit.OrbitClass;
 import com.google.code.laserswarm.conf.Constellation;
 import com.google.code.laserswarm.conf.Satellite;
 import com.google.code.laserswarm.earthModel.Atmosphere;
-import com.google.code.laserswarm.earthModel.ElevationModel;
+import com.google.code.laserswarm.earthModel.EarthModel;
 import com.google.code.laserswarm.earthModel.ScatteringCharacteristics;
-import com.google.code.laserswarm.earthModel.ScatteringParam;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.lyndir.lhunath.lib.system.logging.Logger;
@@ -32,11 +31,11 @@ public class Simulator implements Runnable {
 
 	private SimTemplate			template;
 	private Thread				thread;
-	private ElevationModel		earth;
+	private EarthModel			earth;
 
 	private List<SimVars>		dataPoints;
 
-	public Simulator(SimTemplate templ, ElevationModel earth) {
+	public Simulator(SimTemplate templ, EarthModel earth) {
 		this.template = templ;
 		this.earth = earth;
 	}
@@ -102,7 +101,7 @@ public class Simulator implements Runnable {
 			/* Find the intersection location and time */
 			Point3d sphere = null;
 			try {
-				sphere = earth.getIntersecion(new Vector3d(simVals.p0), simVals.p0);
+				sphere = earth.getDem().getIntersecion(new Vector3d(simVals.p0), simVals.p0);
 				simVals.pR = new Point3d(sphere.x * Math.sin(sphere.z) * Math.cos(sphere.y),//
 						sphere.x * Math.sin(sphere.z) * Math.sin(sphere.y),//
 						sphere.x * Math.cos(sphere.z));
@@ -115,8 +114,9 @@ public class Simulator implements Runnable {
 			Vector3d dR = new Vector3d(simVals.pR);
 			dR.sub(simVals.p0);
 			simVals.tR = dR.length() / Constants.c;
-			Vector3d surfNormal = earth.getSurfaceNormal(new DirectPosition2D(
-					sphere.z * (180 / Math.PI), sphere.y * (180 / Math.PI)));
+			DirectPosition2D reflectionPoint = new DirectPosition2D(sphere.z * (180 / Math.PI), sphere.y
+					* (180 / Math.PI));
+			Vector3d surfNormal = earth.getDem().getSurfaceNormal(reflectionPoint);
 
 			/* Make pulses (with downtravel) */
 			simVals.power0 = constellation.getPower();
@@ -130,8 +130,8 @@ public class Simulator implements Runnable {
 			double z = dR.length() * Math.cos(angle);
 			double x = dR.length() * Math.sin(angle);
 			Vector3d incidence = new Vector3d(x, 0, z);
-			ScatteringParam testParam = new ScatteringParam(2.4, 1, 0.8);
-			simVals.scatter = new ScatteringCharacteristics(incidence, testParam);
+			simVals.scatter = new ScatteringCharacteristics(incidence, earth
+					.getScatteringParam(reflectionPoint));
 
 			/* Compute scatter power per sat */
 			simVals.powerR_SC = Maps.newHashMap();

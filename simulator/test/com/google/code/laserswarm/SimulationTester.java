@@ -11,13 +11,12 @@ import junit.framework.TestCase;
 import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.conf.Constellation;
 import com.google.code.laserswarm.conf.Satellite;
+import com.google.code.laserswarm.earthModel.EarthModel;
 import com.google.code.laserswarm.earthModel.ElevationModel;
 import com.google.code.laserswarm.simulation.SimTemplate;
-import com.google.code.laserswarm.simulation.SimVarUtil;
 import com.google.code.laserswarm.simulation.SimVars;
 import com.google.code.laserswarm.simulation.Simulator;
 import com.google.code.laserswarm.simulation.SimulatorMaster;
-import com.google.code.laserswarm.util.RetrievalExecption;
 import com.google.code.laserswarm.util.demReader.DemCreationException;
 import com.google.code.laserswarm.util.demReader.DemReader;
 import com.google.common.collect.Lists;
@@ -65,7 +64,9 @@ public class SimulationTester extends TestCase {
 		} catch (DemCreationException e1) {
 			fail("Cannot load the DEM");
 		}
-		SimulatorMaster mgr = new SimulatorMaster(dem);
+		EarthModel earth = new EarthModel(dem);
+
+		SimulatorMaster mgr = new SimulatorMaster(earth);
 		mgr.addSimTemplate(new SimTemplate(Configuration.getInstance(), testConstallation));
 
 		HashMap<SimTemplate, Simulator> points = mgr.runSim();
@@ -73,17 +74,18 @@ public class SimulationTester extends TestCase {
 			int nP = 0;
 			List<SimVars> pnts = sim.getDataPoints();
 			for (SimVars simVar : pnts) {
-				System.out.println(simVar);
+				System.out.println(simVar.photonsE);
+				System.out.println(simVar.scatter);
 				for (Satellite sat : simVar.photonsE.keySet()) {
 					nP += simVar.photonsE.get(sat);
 				}
 			}
-			try {
-				System.out.println(SimVarUtil.getField("photonsE", pnts));
-			} catch (RetrievalExecption e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			// try {
+			// System.out.println(SimVarUtil.getField("photonsE", pnts));
+			// } catch (RetrievalExecption e) {
+			// // TODO Auto-generated catch block
+			// e.printStackTrace();
+			// }
 			logger.inf("Received %s photons in total (%s pulses)", nP, pnts.size());
 		}
 

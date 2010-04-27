@@ -98,4 +98,9 @@ public class ScatteringCharacteristics implements Distribution {
 		return R_HenyeyGreenstein;
 	}
 
+	@Override
+	public String toString() {
+		return "Index of Refraction:" + refrSurf + "\nkappaMinnaert:" + kappa
+				+ "\nthetaHenyeyGreenstein:" + Theta;
+	}
 }
