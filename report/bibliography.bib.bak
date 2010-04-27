@@ -13,6 +13,19 @@
   timestamp = {2010.04.26}
 }
 
+@ARTICLE{,
+  author = {Jusef Hassoun, Stefania Panero, Priscilla Reale, and Bruno Scrosati},
+  title = {A New, Safe, High-Rate and High-Energy Polymer
+	
+	Lithium-Ion Battery},
+  journal = {Advanced Materials},
+  year = {2009},
+  volume = {21},
+  pages = {4807 - 4810},
+  owner = {Sean},
+  timestamp = {2010.04.27}
+}
+
 @ELECTRONIC{Owen1999,
   author = {G. Scott Owen},
   month = {June},
@@ -40,6 +53,18 @@
   url = {http://www.inyourfacefotos.com/fresnel.htm}
 }
 
+@BOOK{sse,
+  title = {Spacecraft Systems Engineering},
+  publisher = {John Wiley \& Sons Ltd.},
+  year = {2007},
+  editor = {Peter Fortescue {et al.}},
+  address = {Chichester, West Sussex, England},
+  edition = {3},
+  month = {January},
+  owner = {Alex},
+  timestamp = {2010.04.27}
+}
+
 @BOOK{larson,
   title = {Space Mission Analysis And Design},
   publisher = {Microcosm Press and Springer},
@@ -54,6 +79,11 @@
 @ELECTRONIC{fresnel1,
   title = {Fresnel equations},
   url = {http://www.economicexpert.com/a/Fresnel:equations.html}
+}
+
+@ELECTRONIC{fresnel3,
+  title = {Fresnel equations},
+  url = {http://en.wikipedia.org/wiki/Fresnel_equations}
 }
 
 @ELECTRONIC{refractiveIndices,
