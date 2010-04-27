@@ -1,11 +1,10 @@
 \section{Electrical Power Subsystem}
 \label{blDOEPS}
 
-The electrical power subsystem (EPS) is divided in to three parts: the power source, the energy storage and the power regulation and control.
-These are also the three main branches in the EPS design options structure. Each of these will be considered individually in this section.
+The electrical power system (EPS) is divided in to four parts: the power source, the energy storage, the power regulation and control and the power distribution. These are also the four main branches in the EPS design options structure. Each of these will be considered individually in this section.
 
 \subsection{The power source}
-\label{blDOPS}
+\label{blDOsource}
 
 Launch vehicles use primary batteries as power source because launches are quite short and thus can be kept fairly small. 
 For missions lasting from weeks to years, however, batteries would be too large to be useful.
@@ -13,21 +12,56 @@ Typically, there are four types of power sources for longer missions: static pow
 
 Static power sources use a heat source for thermal-to-electric conversion. This conversion can be done by either a thermoelectric or a thermionic
 concept. The thermoelectric converter uses the fact that the radioactive source (typically plutonium-238 or uranium-235) has a slow rate of decay.
-Because of this, there exists a temperature gradient between the p-n junction of individual cells which is used to provide the desired dc electrical output. The efficiency of such a system is about 5 tot 8\%.
+Because of this, there exists a temperature gradient between the p-n junction of individual cells which is used to provide the desired direct current electrical output. The efficiency of such a system is about 5 tot 8\%.
 Thermionic energy conversion, on the other hand, uses a hot electrode facing a cooler electrode to convert thermal energy to electrical.
 These electrodes are sealed in a chamber containing an ionized gas. The hotter electrode can be seen as the emitter: it emits electrons that flow
 across the inter-electrode gap towards the receiver (the cooler electrode). Once arrived, these electrons condense and return to the emitter through an electrical load connected externally between the two electrodes. Typical system efficiency is about 10 - 20\%.
 
-Dynamic power sources function somewhat differently. They also use a heat source (typically concentrated solar radiation, radioisotopes or a nuclear-fission reaction) to produce thermal energy but the conversion method to electrical power is different. The generated heat is used to heat up a fluid to drive an energy-conversion heat engine. This is done using a Stirling cycle (efficiency of 25-30\%), a Rankine cycle (efficiency of 15-20\%) or a Brayton cycle (efficiency of 20-35\%).
+Dynamic power sources function somewhat differently. They also use a heat source (typically concentrated solar radiation, radio isotopes or a nuclear-fission reaction) to produce thermal energy but the conversion method to electrical power is different. The generated heat is used to heat up a fluid to drive an energy-conversion heat engine. This is done using a Stirling cycle (efficiency of 25-30\%), a Rankine cycle (efficiency of 15-20\%) or a Brayton cycle (efficiency of 20-35\%).
 
 Fuel cells are self-contained generators that convert the chemical energy of an oxidation into electrical power. They consist of two half-cells, each with an electrode and an electrolyte. The two half-cells may use the same electrolyte or they may use different ones.
 In the fuel cell, one half-cell gets oxidized, it loses electrons, and the other is reduced, it gains electrons. As the electrons flow from
-one half-cell to the other a difference in charge and thus an electric current is created.
+one half-cell to the other a difference in charge and thus an electric current is created. Fuel cells can be regenerative or not, unfortunately regenerative types have not been space-proven yet\cite{rees}.
 The efficiency of fuel cells can be as high as 80\%, but will drop significantly at higher currents.
 
 Photovoltaic solar cells are most common. They convert incident solar radiation directly in to electrical power. They consist of a semiconductor with metal plates on the top and bottom. Part of the incident solar radiation gets absorbed and is transferred to the
 semiconductor. The energy excites electrons who are then free to move around. The metal plates move the electrons, which creates a current,
-to power different subsystems. An efficiency of 29\% has been achieved \cite{doody1} in the lab, but production efficiencies are around 22\% \cite{larson}.
+to power different subsystems. An efficiency of 29\% has been achieved \cite{doody1} in the lab, but production efficiencies are around 22\% \cite{larson}. Several options are available for the placing of the solar cells. The biggest difference is between solar panels and body-fixed solar cells. Body-fixed solar cells require a spinning satellite to be able to make optimal use of the cells. Solar panels, however, can be pointed towards the sun to have minimum cosine loss. The panels can be rigid or flexible, flexible panels being easier to transport but less strong than rigid panels.
 
 A comparative table for the different power sources can be found in table 11-35 on page 410 of \cite{larson}.
 
+\subsection{Power storage}
+\label{blDOstorage}
+
+Power storage is the second subdivision of the EPS. They can either provide all the power for short missions (primary batteries) or they provide back-up power for longer mission(secondary batteries).
+
+Batteries can be both a power source and a power storage system. The following design options apply for both uses.
+
+Primary batteries usually are used for short-term missions, up to about one day. Sometimes they are also used for long-term mission for tasks that require small power usage like memory back-up for example. They have a high specific energy density, which makes them a good choice for short missions. The number of batteries and their corresponding weight and size required for longer mission makes them a bad candidate. The most typical battery type use silver zinc, lithium thionyl chloride, lithium sulfur dioxide, lithium monoflouride and thermal cells.
+
+Secondary batteries are mostly used on missions which use photovoltaics as a power source. Here they provide power when the solar panels are eclipsed and at moments when power requirement peaks. To keep the secondary batteries from becoming too large, they are required to be rechargeable. Some common secondary batteries are: Nickel-Cadmium, Nickel-Hydrogen (both space qualified), Lithium-Ion and Sodium-Sulfur (both under development). The nickel-hydrogen batteries have three space-qualified design variants: individual, common and single pressure vessel.
+
+The individual pressure vessel contains only one electrochemical cell within. Usually they are connected in series to obtain the desired voltage.
+The internal electrode stacks are connected in parallel.
+The only difference between the individual and common pressure vessel is that the common pressure vessel has two electrode stacks, connected in series. This means that there are only half as much pressure vessel and less pieces, resulting in a higher specific energy density. 
+Finally, the single pressure vessel has multiple cells connected in series that share a common supply of hydrogen. The cell stacks are each contained in a container with its own electrolyte supply\cite{larson}. 
+
+Lithium-Ion batteries offer a significant advantage over nickel based ones. According to \cite{larson}, these types of batteries should be space qualified in the near future. At the moment, the effect of temperature on the performance is being researched. At the moment there are no components that are expected to be critically effected by temperature, resulting in a wide temperature range. Thus lithium-ion batteries may be a very interesting candidate for space applications in the near future\cite{lithium1}.
+
+\subsection{Power regulation and control}
+\label{blDOregulation}
+
+The power regulation mainly concerns the bus regulation. The bus is the connection between power source and the different loads. It can be unregulated, quasi-regulated or fully regulated. The unregulated bus has its converters at the individual loads (see section \ref{blDOdistribution}).
+A quasi-regulated bus has a battery charge regulator and a fully regulated bus also has a battery discharge regulator.
+Batteries can be charged individually or in parallel. Batteries that are charged in parallel degrade faster. Because the current is not controlled, one battery could receive all the charge current. Eventually the batteries will balance out, but the battery life will be limited to about five years. To ensure a longer lifetime, they should be charged individually (for example by using a linear, charge-current-control design). A parallel charging system, however, is simpler and smaller than an individually charging system.
+
+For satellites using solar arrays the interface between the arrays and the bus also needs to be controlled. There are two ways of doing this: with a peak-power tracker (PPT) and with direct-energy-transfer (DET). 
+A PPT is a non-dissipative system: it exacts the exact power the satellite requires (up to the arrays's peak power). Every solar panel has a peak power point, which can be seen from the panel's IV-curve. So the panel produces the most power at a certain current and voltage. But when a battery is charging, it is charged at it's own current and voltage. The result of this is that the battery will change the panel's current and voltage to it's own, forcing the solar panel to under perform. A PPT uses a DC/DC converter to change the solar panel's output to the required battery input, thus letting the panel perform at it's peak power point, increasing the efficiency. However, because the PPT is connected in series to the solar array, it uses about 4-7\% of the total power.
+
+A DET system uses a shunt regulator to shunt away the excess power from the subsystem, usually at the array, to avoid internal energy dissipation. Shunt regulators can keep the bus voltage at a predetermined voltage. These systems are extremely efficient and has a lot of advantages over a PPT system: lower mass, less parts and a higher total efficiency at EOL.
+
+\subsection{Power distribution}
+\label{blDOdistribution}
+
+A power distribution system (PDS) consists of the cabling, fault protection and on/off switching gear. The first choice to make is the type of current of the distribution system. Mostly direct current is used because spacecraft generate direct current. An AC/DC converter would need more electronics, resulting in more parts and a higher mass. 
+The PDS can either be centralized or decentralized. The decentralized option requires a converter at each individual load, resulting in an unregulated bus. The centralized option regulates power to all loads from the main bus. The advantage here is that the EPS does not have to be tailor-designed.  
