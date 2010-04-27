@@ -13,6 +13,18 @@
   timestamp = {2010.04.26}
 }
 
+@ARTICLE{reliability,
+  author = {Jean-Francois Castet, Joseph H.Saleh},
+  title = {Satellite and satellite subsystems reliability: Statistical data
+	analysis and modeling},
+  journal = {Reliability Engineering and System Safety},
+  year = {2009},
+  volume = {94},
+  pages = {1718-1728},
+  owner = {Zhou},
+  timestamp = {2010.04.27}
+}
+
 @ARTICLE{lithium1,
   author = {Jusef Hassoun, Stefania Panero, Priscilla Reale, and Bruno Scrosati},
   title = {A New, Safe, High-Rate and High-Energy Polymer
@@ -91,14 +103,3 @@
   url = {http://en.wikipedia.org/wiki/List_of_refractive_indices}
 }
 
-@ARTICLE{Reliability,
-  author = {Jean-Francois Castet, Joseph H.Saleh},
-  title = {Satellite and satellite subsystems reliability: Statistical data analysis
- and modeling},
-  journal = {Reliability Engineering and System Safety},
-  year = {2009},
-  volume = {94},
-  pages = {1718-1728},
-  owner = {Zhou},
-  timestamp = {2010.04.27}
-}

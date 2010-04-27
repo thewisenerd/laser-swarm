@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (MiKTeX 2.8) (preloaded format=pdflatex 2010.4.20)  27 APR 2010 13:17
+This is pdfTeX, Version 3.1415926-1.40.10 (MiKTeX 2.8) (preloaded format=pdflatex 2010.4.20)  27 APR 2010 13:26
 entering extended mode
 **C:/Users/Alex/Desktop/Laser*Swarm/laser-swarm/report/compiledBaseLine.tex
 ("C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/report/compiledBaseLine.tex"
@@ -141,43 +141,15 @@ Package acronym Info: Label `acro:RAMS' newly defined as it shall be overridden
 
 although it is yet undefined on input line 2.
 
+<chapters/img/subsystem_reliability_analysis.png, id=43, 359.54324pt x 318.5902
+6pt>
+File: chapters/img/subsystem_reliability_analysis.png Graphic file (type png)
+ <use chapters/img/subsystem_reliability_analysis.png> [10
 
-LaTeX Warning: File `img/subsystem_reliability_analysis.png' not found on input
- line 9.
-
-
-! Package pdftex.def Error: File `img/subsystem_reliability_analysis.png' not f
-ound.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.9 ...=0]{img/subsystem_reliability_analysis.png}
-                                                  
-Using draft setting for this image.
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-[10
-
-]
-
-! LaTeX Error: There's no line here to end.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.26 S
-      ince the mission consists of a swarm of satellites it will be possible...
-
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-) ("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\compiledBaseLine.bbl"
-[11] [12]
+])
+("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\compiledBaseLine.bbl"
+[11] [12 <C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/report/chapters/img/sub
+system_reliability_analysis.png (PNG copy)>]
 
 LaTeX Warning: Empty `thebibliography' environment on input line 3.
 
@@ -194,24 +166,23 @@ Appendix B.
 ] ("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\compiledBaseLine.aux")
  ) 
 Here is how much of TeX's memory you used:
- 1216 strings out of 495285
- 16758 string characters out of 3179881
+ 1218 strings out of 495285
+ 16954 string characters out of 3179881
  65158 words of memory out of 3000000
- 4423 multiletter control sequences out of 15000+200000
- 12077 words of font info for 42 fonts, out of 3000000 for 9000
+ 4426 multiletter control sequences out of 15000+200000
+ 11909 words of font info for 41 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
- 25i,7n,19p,797b,284s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 25i,8n,19p,797b,269s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmbx10.pfb>
 <C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C
 :/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:
 /Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Pr
 ogram Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><C:/Pr
 ogram Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Prog
-ram Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Progra
-m Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on compiledBaseLine.pdf (17 pages, 129057 bytes).
+ram Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmti12.pfb>
+Output written on compiledBaseLine.pdf (17 pages, 182125 bytes).
 PDF statistics:
- 89 PDF objects out of 1000 (max. 8388607)
+ 86 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 6 words of extra memory for PDF output out of 10000 (max. 10000000)
 
