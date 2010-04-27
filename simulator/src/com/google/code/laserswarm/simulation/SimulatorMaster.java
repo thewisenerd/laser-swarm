@@ -57,7 +57,7 @@ public class SimulatorMaster {
 				try {
 					Thread.sleep(50);
 				} catch (InterruptedException e) {
-					logger.err(e, "INTERUPED while simuating");
+					logger.err(e, "INTERRUPTED while simulating");
 				}
 			} while (runningTemplates.size() >= Configuration.instance.getSimThreads());
 
