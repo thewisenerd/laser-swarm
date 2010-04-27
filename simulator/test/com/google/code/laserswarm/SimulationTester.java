@@ -14,9 +14,11 @@ import com.google.code.laserswarm.conf.Satellite;
 import com.google.code.laserswarm.earthModel.EarthModel;
 import com.google.code.laserswarm.earthModel.ElevationModel;
 import com.google.code.laserswarm.simulation.SimTemplate;
+import com.google.code.laserswarm.simulation.SimVarUtil;
 import com.google.code.laserswarm.simulation.SimVars;
 import com.google.code.laserswarm.simulation.Simulator;
 import com.google.code.laserswarm.simulation.SimulatorMaster;
+import com.google.code.laserswarm.util.RetrievalExecption;
 import com.google.code.laserswarm.util.demReader.DemCreationException;
 import com.google.code.laserswarm.util.demReader.DemReader;
 import com.google.common.collect.Lists;
@@ -80,12 +82,12 @@ public class SimulationTester extends TestCase {
 					nP += simVar.photonsE.get(sat);
 				}
 			}
-			// try {
-			// System.out.println(SimVarUtil.getField("photonsE", pnts));
-			// } catch (RetrievalExecption e) {
-			// // TODO Auto-generated catch block
-			// e.printStackTrace();
-			// }
+			try {
+				System.out.println(SimVarUtil.getField("photonsE", pnts));
+			} catch (RetrievalExecption e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			logger.inf("Received %s photons in total (%s pulses)", nP, pnts.size());
 		}
 
