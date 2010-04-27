@@ -13,6 +13,15 @@
   timestamp = {2010.04.26}
 }
 
+@ELECTRONIC{icesatc98a,
+  author = {Douglas Isbell},
+  title = {ICESat Press Release C98-a},
+  organization = {NASA},
+  url = {http://icesat.gsfc.nasa.gov/press_release/c98-a.html},
+  owner = {Alex},
+  timestamp = {2010.04.28}
+}
+
 @ARTICLE{reliability,
   author = {Jean-Francois Castet, Joseph H.Saleh},
   title = {Satellite and satellite subsystems reliability: Statistical data
