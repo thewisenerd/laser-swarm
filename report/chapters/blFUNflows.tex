@@ -1,4 +1,5 @@
 \section{Functional Flow Diagram}
+\label{section_FFD}
 The Functional Flow Diagram (FFD) shows the functions the system needs to perform during its mission life. The schematic representation can be found in figure \ref{pic_FFD} on page \pageref{pic_FFD}.
 \\ \\
 The first thing that needs to happen, after being build, is that the satellites are put into their orbits and pointed towards Earth. After that the measurements can start; the emitter sends down laser pulses and notifies the receivers signals are sent. The receivers can adjust their attitude and then pick up reflected photons, turn them into an electric signal and inform the computer, which puts the data in a buffer. The data of the receivers can be either directly to a ground station or first send to the main satellite (the emitter) and then to the ground. The data on the ground can be split up made into data packages, which can be distributed to research institutes and other interested parties. With those datasets the terrain model can be produced. At the End-of-Life (EOL) of the mission the satellites are decommissioned to make room for other satellites.
@@ -10,6 +11,7 @@ The first thing that needs to happen, after being build, is that the satellites 
 \end{figure}
 
 \section{Functional Breakdown Structure}
+\label{section_FBS}
 The Functional Breakdown (FBS) shows the functions the system needs to perform broken up in subtasks from other functions. The schematic representation can be found in figure \ref{pic_FBS} on page \pageref{pic_FBS}.
 \\ \\
 The main function for the system is to be able to produce a terrain model, which is the reason to make the measurements. To be able to produce the terrain model the measurements need to be made, the data needs to be transferred to the ground and the data needs to be analysed. Because the mission needs to be sustainable the satellites are decommissioned at the end of their life, so they will not pose a threat to other satellites in the same orbit.
@@ -32,5 +34,3 @@ Acronyms used:\\
 EOL End-of-life\\
 FBS Functional Breakdown Structure\\
 FFD Functional Flow Diagram
-
-
