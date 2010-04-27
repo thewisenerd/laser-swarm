@@ -5,6 +5,7 @@ import com.google.code.laserswarm.conf.Constellation;
 
 public class SimTemplate {
 
+	@Deprecated
 	private Configuration	config;
 	private Constellation	constellation;
 
@@ -13,6 +14,7 @@ public class SimTemplate {
 		this.constellation = constellation;
 	}
 
+	@Deprecated
 	public Configuration getConfig() {
 		return config;
 	}
