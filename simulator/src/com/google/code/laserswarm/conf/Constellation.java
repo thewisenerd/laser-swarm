@@ -14,7 +14,7 @@ public class Constellation {
 	@Element
 	private double			pulseFrequency	= 5000;
 	@Element
-	private double			pulselength		= 100E-15;					// s
+	private double			pulselength		= 100E-12;					// s
 	@Element
 	private double			laserWaveLength	= 300E-9;
 

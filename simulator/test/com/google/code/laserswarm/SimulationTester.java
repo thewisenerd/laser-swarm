@@ -4,6 +4,7 @@ import java.io.File;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 
 import junit.framework.TestCase;
 
@@ -12,26 +13,32 @@ import com.google.code.laserswarm.conf.Constellation;
 import com.google.code.laserswarm.conf.Satellite;
 import com.google.code.laserswarm.earthModel.ElevationModel;
 import com.google.code.laserswarm.simulation.SimTemplate;
+import com.google.code.laserswarm.simulation.SimVarUtil;
+import com.google.code.laserswarm.simulation.SimVars;
 import com.google.code.laserswarm.simulation.Simulator;
 import com.google.code.laserswarm.simulation.SimulatorMaster;
+import com.google.code.laserswarm.util.RetrievalExecption;
 import com.google.code.laserswarm.util.demReader.DemCreationException;
 import com.google.code.laserswarm.util.demReader.DemReader;
 import com.google.common.collect.Lists;
+import com.lyndir.lhunath.lib.system.logging.Logger;
 
 public class SimulationTester extends TestCase {
 
 	public static final String	CfgName	= "unitTestConfig.xml";
+
+	private static final Logger	logger	= Logger.get(SimulationTester.class);
 
 	public static void main(String[] args) {
 		new SimulationTester().testSim();
 	}
 
 	private Constellation mkTestConstilation() {
-		Satellite emittor = new Satellite("SAT01", (0.1 * 0.1), 6700f, 0f, (float) Math.PI / 2,
+		Satellite emittor = new Satellite("SAT01", (0.08 * 0.08), 6700f, 0f, (float) Math.PI / 2,
 				(float) (3.2 * Math.PI / 180), 0f, 0f);
 		LinkedList<Satellite> r = Lists.newLinkedList();
 		r.add(emittor);
-		return new Constellation(1E2, 50, emittor, r);
+		return new Constellation(10, 50, emittor, r);
 	}
 
 	public void testSim() {
@@ -63,10 +70,23 @@ public class SimulationTester extends TestCase {
 
 		HashMap<SimTemplate, Simulator> points = mgr.runSim();
 		for (Simulator sim : points.values()) {
-			System.out.println(sim);
-			System.out.println(sim.getDataPoints());
-			System.out.println(sim.getDataPoints().toString());
+			int nP = 0;
+			List<SimVars> pnts = sim.getDataPoints();
+			for (SimVars simVar : pnts) {
+				System.out.println(simVar);
+				for (Satellite sat : simVar.photonsE.keySet()) {
+					nP += simVar.photonsE.get(sat);
+				}
+			}
+			try {
+				System.out.println(SimVarUtil.getField("photonsE", pnts));
+			} catch (RetrievalExecption e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			logger.inf("Received %s photons in total (%s pulses)", nP, pnts.size());
 		}
+
 	}
 
 }

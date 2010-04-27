@@ -68,6 +68,7 @@
 	<classpathentry kind="lib" path="lib/junit/junit-4.7.jar" sourcepath="lib/junit/junit-4.7-sources.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="lib" path="lib/geotools-2.6.3/gt-geotiff-2.6.3.jar"/>
+	<classpathentry kind="lib" path="lib/Chart2D_1.9.6k.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
 >>>>>>> .r166

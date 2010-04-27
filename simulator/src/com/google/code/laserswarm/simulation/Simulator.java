@@ -15,7 +15,6 @@ import org.geotools.geometry.DirectPosition2D;
 import org.geotools.referencing.operation.projection.PointOutsideEnvelopeException;
 
 import com.google.code.laserswarm.Orbit.OrbitClass;
-import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.conf.Constellation;
 import com.google.code.laserswarm.conf.Satellite;
 import com.google.code.laserswarm.earthModel.Atmosphere;
@@ -56,10 +55,10 @@ public class Simulator implements Runnable {
 		double TE = 481603;
 
 		/* Make a list start times */
-		Configuration config = template.getConfig();
 		Constellation constalation = template.getConstellation();
 		double f = constalation.getPulseFrequency();
 		double dt = (1 / f);
+		logger.dbg("f: %s, dt:%s", f, dt);
 		double ePhoton = (Constants.c * 6.62606896E-34) / constalation.getLaserWaveLength();
 
 		int samples = (int) Math.ceil((TE - T0) / dt);

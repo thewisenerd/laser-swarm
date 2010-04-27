@@ -7,7 +7,7 @@
    <constellations class="java.util.LinkedList">
       <constellation power="0.0">
          <pulseFrequency>5000.0</pulseFrequency>
-         <pulselength>1.0E-13</pulselength>
+         <pulselength>1.0E-10</pulselength>
          <laserWaveLength>3.0E-7</laserWaveLength>
          <beamDivergence>1.16665E-4</beamDivergence>
          <emitter>
@@ -45,7 +45,7 @@
       </constellation>
       <constellation power="0.0">
          <pulseFrequency>5000.0</pulseFrequency>
-         <pulselength>1.0E-13</pulselength>
+         <pulselength>1.0E-10</pulselength>
          <laserWaveLength>3.0E-7</laserWaveLength>
          <beamDivergence>1.16665E-4</beamDivergence>
          <emitter>
