@@ -74,5 +74,6 @@ public class GeoTiffParser extends DemReader {
 		Style style = styleFactory.createStyle();
 
 		coverage.getGridGeometry().getGridRange2D();
+		return null;
 	}
 }

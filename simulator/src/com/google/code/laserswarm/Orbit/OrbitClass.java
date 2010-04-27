@@ -1,7 +1,6 @@
 package com.google.code.laserswarm.Orbit;
 
 import jat.cm.Constants;
-import jat.cm.GroundTrack;
 import jat.cm.KeplerElements;
 import jat.cm.TwoBody;
 import jat.cm.cm;
@@ -17,11 +16,11 @@ public class OrbitClass {
 	public static void main(String[] args) {
 		Time now = new Time(2007, 1, 4, 0, 0, 0.);
 		double pi = Math.PI;
-		KeplerElements kep = new KeplerElements(6725, 1/13.0, 90 * pi / 180, 0.0, 0, 0);
+		KeplerElements kep = new KeplerElements(6725, 1 / 13.0, 90 * pi / 180, 0.0, 0, 0);
 		OrbitClass or1 = new OrbitClass(now, kep);
 		OrbitClass or2 = new OrbitClass(now.plus(TimeUtils.days2sec * 365), kep);
 		for (int i = 0; i < 365; i++) {
-			or1.t_cur.step_seconds(3600 );
+			or1.t_cur.step_seconds(3600);
 			double lat = Math.asin((or1.ECEF().get(2, 0)) / (or1.ECEF().getColumnVector(0).mag()))
 					* Constants.rad2deg;
 			double lon = Math.atan2(or1.ECEF().get(1, 0), or1.ECEF().get(0, 0)) * Constants.rad2deg;
@@ -33,9 +32,9 @@ public class OrbitClass {
 
 			System.out.print("@" + or1.t_cur.get_sim_time() / 3600 + "\n" + or1.ECEF() + " " + "\n "
 					+ or1.ECI() + "\n");
-		
+
 		}
-		GroundTrack.main(kep);
+		// GroundTrack.main(kep);
 	}
 
 	public Time				epoch0, t_cur;	// in MJD to determine earth position
