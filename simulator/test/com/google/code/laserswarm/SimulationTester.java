@@ -27,11 +27,11 @@ public class SimulationTester extends TestCase {
 	}
 
 	private Constellation mkTestConstilation() {
-		Satellite emittor = new Satellite("SAT01", 6700f, 0f, (float) Math.PI / 2,
+		Satellite emittor = new Satellite("SAT01", (0.1 * 0.1), 6700f, 0f, (float) Math.PI / 2,
 				(float) (3.2 * Math.PI / 180), 0f, 0f);
 		LinkedList<Satellite> r = Lists.newLinkedList();
 		r.add(emittor);
-		return new Constellation(1E6, 50, emittor, r);
+		return new Constellation(1E2, 50, emittor, r);
 	}
 
 	public void testSim() {

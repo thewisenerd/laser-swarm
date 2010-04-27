@@ -14,7 +14,12 @@ public class Constellation {
 	@Element
 	private double			pulseFrequency	= 5000;
 	@Element
+	private double			pulselength		= 100E-15;					// s
+	@Element
 	private double			laserWaveLength	= 300E-9;
+
+	@Element
+	private double			beamDivergence	= 2.3333E-4 / 2;			// rad for the halft beam /|
 
 	@Element
 	private Satellite		emitter;
@@ -36,6 +41,10 @@ public class Constellation {
 		this.pulseFrequency = pulseFrequency;
 	}
 
+	public double getBeamDivergence() {
+		return beamDivergence;
+	}
+
 	public Satellite getEmitter() {
 		return emitter;
 	}
@@ -50,6 +59,10 @@ public class Constellation {
 
 	public double getPulseFrequency() {
 		return pulseFrequency;
+	}
+
+	public double getPulselength() {
+		return pulselength;
 	}
 
 	public List<Satellite> getReceivers() {

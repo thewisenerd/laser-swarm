@@ -122,7 +122,9 @@ public class Simulator implements Runnable {
 			/* Make pulses (with downtravel) */
 			simVals.power0 = constalation.getPower();
 			double angle = Math.PI - dR.angle(new Vector3d(simVals.pR));
-			simVals.powerR = Atmosphere.getInstance().computeIntesity(simVals.power0, angle);
+			double rFootprint = dR.length() * Math.tan(constalation.getBeamDivergence());
+			simVals.powerR = Atmosphere.getInstance().computeIntesity(simVals.power0, angle)
+					/ (rFootprint * Math.PI * Math.PI);
 
 			/* Make scatter characteristics */
 			angle = Math.acos((dR.dot(surfNormal)) / (dR.length() * surfNormal.length()));
@@ -141,7 +143,8 @@ public class Simulator implements Runnable {
 				z = dR.length() * Math.cos(angle);
 				x = dR.length() * Math.sin(angle);
 				Vector3d exittanceVector = new Vector3d(x, 0, z);
-				simVals.powerR_SC.put(sat, simVals.scatter.probability(exittanceVector));
+				simVals.powerR_SC
+						.put(sat, simVals.powerR * simVals.scatter.probability(exittanceVector));
 			}
 
 			/* Travel up through atm */
@@ -151,9 +154,10 @@ public class Simulator implements Runnable {
 				dR = new Vector3d(simVals.pE.get(sat));
 				dR.sub(simVals.pR);
 				angle = dR.angle(new Vector3d(simVals.pR));
+				simVals.tE.put(sat, dR.length() / Constants.c);
+
 				simVals.powerE.put(sat, Atmosphere.getInstance().computeIntesity(
 						simVals.powerR_SC.get(sat), angle));
-				simVals.tE.put(sat, dR.length() / Constants.c);
 			}
 
 			/* Power/photons per receiver */
@@ -161,8 +165,10 @@ public class Simulator implements Runnable {
 			simVals.photonDensity = Maps.newHashMap();
 			for (Satellite sat : constalation.getReceivers()) {
 				Double powerReceived = simVals.powerE.get(sat);
-				double energy = powerReceived * dt;
+
+				double energy = powerReceived * constalation.getPulselength();
 				simVals.photonDensity.put(sat, energy / ePhoton);
+				energy = energy * sat.getAperatureArea();
 				int nrP = (int) Math.floor(energy / ePhoton);
 				if (Math.random() < (energy / ePhoton) - nrP)
 					nrP++;

@@ -23,13 +23,18 @@ public class Satellite {
 	@Element
 	private float	argumentOfPerigee			= 0f;
 
-	private String	name;
+	@Element
+	private String	name						= "SAT";
+
+	@Element
+	private double	aperatureArea				= (0.08 * 0.08);	// m²
 
 	public Satellite() {
 		trueAnomaly = semimajorAxis = rightAngleOfAscendingNode = inclination = eccentricity = argumentOfPerigee = 0f;
 	}
 
-	public Satellite(String name, float a, float e, float i, float raan, float ta, float w) {
+	public Satellite(String name, double aperatureArea, float a, float e, float i, float raan, float ta,
+			float w) {
 		this.name = name;
 		trueAnomaly = ta;
 		semimajorAxis = a;
@@ -37,6 +42,11 @@ public class Satellite {
 		inclination = i;
 		eccentricity = e;
 		argumentOfPerigee = w;
+		this.aperatureArea = aperatureArea;
+	}
+
+	public double getAperatureArea() {
+		return aperatureArea;
 	}
 
 	public float getArgumentOfPerigee() {

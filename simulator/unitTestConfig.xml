@@ -7,7 +7,9 @@
    <constellations class="java.util.LinkedList">
       <constellation power="0.0">
          <pulseFrequency>5000.0</pulseFrequency>
+         <pulselength>1.0E-13</pulselength>
          <laserWaveLength>3.0E-7</laserWaveLength>
+         <beamDivergence>1.16665E-4</beamDivergence>
          <emitter>
             <semimajorAxis>0.0</semimajorAxis>
             <eccentricity>0.0</eccentricity>
@@ -15,6 +17,8 @@
             <rightAngleOfAscendingNode>0.0</rightAngleOfAscendingNode>
             <trueAnomaly>0.0</trueAnomaly>
             <argumentOfPerigee>0.0</argumentOfPerigee>
+            <name>SAT</name>
+            <aperatureArea>0.0064</aperatureArea>
          </emitter>
          <receivers class="java.util.LinkedList">
             <satellite>
@@ -24,6 +28,8 @@
                <rightAngleOfAscendingNode>0.0</rightAngleOfAscendingNode>
                <trueAnomaly>0.0</trueAnomaly>
                <argumentOfPerigee>0.0</argumentOfPerigee>
+               <name>SAT</name>
+               <aperatureArea>0.0064</aperatureArea>
             </satellite>
             <satellite>
                <semimajorAxis>0.0</semimajorAxis>
@@ -32,12 +38,16 @@
                <rightAngleOfAscendingNode>0.0</rightAngleOfAscendingNode>
                <trueAnomaly>0.0</trueAnomaly>
                <argumentOfPerigee>0.0</argumentOfPerigee>
+               <name>SAT</name>
+               <aperatureArea>0.0064</aperatureArea>
             </satellite>
          </receivers>
       </constellation>
       <constellation power="0.0">
          <pulseFrequency>5000.0</pulseFrequency>
+         <pulselength>1.0E-13</pulselength>
          <laserWaveLength>3.0E-7</laserWaveLength>
+         <beamDivergence>1.16665E-4</beamDivergence>
          <emitter>
             <semimajorAxis>0.0</semimajorAxis>
             <eccentricity>0.0</eccentricity>
@@ -45,6 +55,8 @@
             <rightAngleOfAscendingNode>0.0</rightAngleOfAscendingNode>
             <trueAnomaly>0.0</trueAnomaly>
             <argumentOfPerigee>0.0</argumentOfPerigee>
+            <name>SAT</name>
+            <aperatureArea>0.0064</aperatureArea>
          </emitter>
          <receivers class="java.util.LinkedList">
             <satellite>
@@ -54,6 +66,8 @@
                <rightAngleOfAscendingNode>0.0</rightAngleOfAscendingNode>
                <trueAnomaly>0.0</trueAnomaly>
                <argumentOfPerigee>0.0</argumentOfPerigee>
+               <name>SAT</name>
+               <aperatureArea>0.0064</aperatureArea>
             </satellite>
             <satellite>
                <semimajorAxis>0.0</semimajorAxis>
@@ -62,6 +76,8 @@
                <rightAngleOfAscendingNode>0.0</rightAngleOfAscendingNode>
                <trueAnomaly>0.0</trueAnomaly>
                <argumentOfPerigee>0.0</argumentOfPerigee>
+               <name>SAT</name>
+               <aperatureArea>0.0064</aperatureArea>
             </satellite>
          </receivers>
       </constellation>
