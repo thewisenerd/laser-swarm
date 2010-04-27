@@ -17,7 +17,7 @@ public class Atmosphere {
 		return instance;
 	}
 
-	private float	optThick	= Configuration.instance.getAtmOpticalThickness();
+	private float	optThick	= Configuration.getInstance().getAtmOpticalThickness();
 
 	public Atmosphere() {
 	}

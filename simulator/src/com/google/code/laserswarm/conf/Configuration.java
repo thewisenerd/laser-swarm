@@ -20,34 +20,34 @@ public class Configuration {
 		ALL;
 	}
 
-	public static Configuration	instance;
+	private static Configuration	instance;
 
-	private static final String	configName						= "configuration.xml";
-
-	@Attribute
-	private Modes				mode							= Modes.ALL;
-	@Element
-	private int					simThreads						= 4;
+	private static final String		configName						= "configuration.xml";
 
 	@Attribute
-	private float				atmOpticalThickness				= 0.25f;
+	private Modes					mode							= Modes.ALL;
+	@Element
+	private int						simThreads						= 4;
+
+	@Attribute
+	private float					atmOpticalThickness				= 0.25f;
 
 	@Element
-	private String				filePrefixReport				= " ";
+	private String					filePrefixReport				= " ";
 
 	@Element
-	private String				filePathReport					= " ";
+	private String					filePathReport					= " ";
 
 	@Element
-	private String				fileNameDigitalElevationModel	= " ";
+	private String					fileNameDigitalElevationModel	= " ";
 
 	@Element
-	private String				fileNameScatterModel			= " ";
+	private String					fileNameScatterModel			= " ";
 
 	@ElementList
-	private List<Constellation>	constellations					= Lists.newLinkedList();
+	private List<Constellation>		constellations					= Lists.newLinkedList();
 
-	private static final Logger	logger							= Logger.get(Configuration.class);
+	private static final Logger		logger							= Logger.get(Configuration.class);
 
 	public static Configuration getInstance() {
 		if (instance == null) {

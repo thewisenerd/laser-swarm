@@ -7,7 +7,7 @@ public class LaserSwarm {
 	private static final Logger	logger	= Logger.get(LaserSwarm.class);
 
 	public static void main(String[] args) {
-		Configuration conf = Configuration.getInstance();
-		logger.inf(conf.getFileNameDigitalElevationModel());
+		Configuration instance = Configuration.getInstance();
+
 	}
 }
