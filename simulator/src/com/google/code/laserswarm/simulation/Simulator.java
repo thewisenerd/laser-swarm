@@ -55,20 +55,20 @@ public class Simulator implements Runnable {
 		double TE = 481603;
 
 		/* Make a list start times */
-		Constellation constalation = template.getConstellation();
-		double f = constalation.getPulseFrequency();
+		Constellation constellation = template.getConstellation();
+		double f = constellation.getPulseFrequency();
 		double dt = (1 / f);
 		logger.dbg("f: %s, dt:%s", f, dt);
-		double ePhoton = (Constants.c * 6.62606896E-34) / constalation.getLaserWaveLength();
+		double ePhoton = (Constants.c * 6.62606896E-34) / constellation.getLaserWaveLength();
 
 		int samples = (int) Math.ceil((TE - T0) / dt);
 
-		KeplerElements k = constalation.getEmitter().getKeplerElements();
+		KeplerElements k = constellation.getEmitter().getKeplerElements();
 
 		OrbitClass emittorOrbit = new OrbitClass(new Time(epoch), k);
 		emittorOrbit.propogate(T0);
 		HashMap<Satellite, OrbitClass> receiverOrbits = Maps.newHashMap();
-		for (Satellite sat : constalation.getReceivers()) {
+		for (Satellite sat : constellation.getReceivers()) {
 			k = sat.getKeplerElements();
 			OrbitClass o = new OrbitClass(new Time(epoch), k);
 			o.propogate(T0);
@@ -91,7 +91,7 @@ public class Simulator implements Runnable {
 			simVals.p0 = pos;
 			emittorOrbit.propogate(dt);
 			simVals.pE = Maps.newHashMap();
-			for (Satellite sat : constalation.getReceivers()) {
+			for (Satellite sat : constellation.getReceivers()) {
 				OrbitClass o = receiverOrbits.get(sat);
 				pos = o.ECEF_point();
 				pos.scale(1E3);
@@ -119,9 +119,9 @@ public class Simulator implements Runnable {
 					sphere.z * (180 / Math.PI), sphere.y * (180 / Math.PI)));
 
 			/* Make pulses (with downtravel) */
-			simVals.power0 = constalation.getPower();
+			simVals.power0 = constellation.getPower();
 			double angle = Math.PI - dR.angle(new Vector3d(simVals.pR));
-			double rFootprint = dR.length() * Math.tan(constalation.getBeamDivergence());
+			double rFootprint = dR.length() * Math.tan(constellation.getBeamDivergence());
 			simVals.powerR = Atmosphere.getInstance().computeIntesity(simVals.power0, angle)
 					/ (rFootprint * Math.PI * Math.PI);
 
@@ -135,7 +135,7 @@ public class Simulator implements Runnable {
 
 			/* Compute scatter power per sat */
 			simVals.powerR_SC = Maps.newHashMap();
-			for (Satellite sat : constalation.getReceivers()) {
+			for (Satellite sat : constellation.getReceivers()) {
 				dR = new Vector3d(simVals.pE.get(sat));
 				dR.sub(simVals.pR);
 				angle = Math.acos(((dR.dot(surfNormal)) / (dR.length() * surfNormal.length())));
@@ -149,7 +149,7 @@ public class Simulator implements Runnable {
 			/* Travel up through atm */
 			simVals.tE = Maps.newHashMap();
 			simVals.powerE = Maps.newHashMap();
-			for (Satellite sat : constalation.getReceivers()) {
+			for (Satellite sat : constellation.getReceivers()) {
 				dR = new Vector3d(simVals.pE.get(sat));
 				dR.sub(simVals.pR);
 				angle = dR.angle(new Vector3d(simVals.pR));
@@ -162,10 +162,10 @@ public class Simulator implements Runnable {
 			/* Power/photons per receiver */
 			simVals.photonsE = Maps.newHashMap();
 			simVals.photonDensity = Maps.newHashMap();
-			for (Satellite sat : constalation.getReceivers()) {
+			for (Satellite sat : constellation.getReceivers()) {
 				Double powerReceived = simVals.powerE.get(sat);
 
-				double energy = powerReceived * constalation.getPulselength();
+				double energy = powerReceived * constellation.getPulselength();
 				simVals.photonDensity.put(sat, energy / ePhoton);
 				energy = energy * sat.getAperatureArea();
 				int nrP = (int) Math.floor(energy / ePhoton);
