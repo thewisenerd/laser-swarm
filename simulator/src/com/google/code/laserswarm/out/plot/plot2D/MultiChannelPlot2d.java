@@ -1,4 +1,4 @@
-package com.google.code.laserswarm.plot.plot2D;
+package com.google.code.laserswarm.out.plot.plot2D;
 
 import java.awt.Color;
 import java.awt.Graphics2D;

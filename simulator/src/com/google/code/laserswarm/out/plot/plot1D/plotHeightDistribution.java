@@ -1,4 +1,4 @@
-package com.google.code.laserswarm.plot.plot1D;
+package com.google.code.laserswarm.out.plot.plot1D;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
