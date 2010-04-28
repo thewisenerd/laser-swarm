@@ -3,6 +3,7 @@ package com.google.code.laserswarm.util.demReader;
 import java.io.File;
 
 import com.google.code.laserswarm.earthModel.ElevationModel;
+import com.google.code.laserswarm.earthModel.IElevationModel;
 import com.lyndir.lhunath.lib.system.logging.Logger;
 
 public abstract class DemReader {
@@ -10,7 +11,7 @@ public abstract class DemReader {
 	private static final Logger	logger	= Logger.get(DemReader.class);
 
 	public static void main(String[] args) {
-		ElevationModel dem = null;
+		IElevationModel dem = null;
 		try {
 			dem = DemReader.parseDem(new File("DEM/ASTGTM_N48E000_dem.asc"));
 		} catch (DemCreationException e) {
@@ -42,5 +43,5 @@ public abstract class DemReader {
 		return demFile;
 	}
 
-	public abstract ElevationModel parse() throws DemCreationException;
+	public abstract IElevationModel parse() throws DemCreationException;
 }

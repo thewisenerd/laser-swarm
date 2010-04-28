@@ -15,7 +15,7 @@ import org.ujmp.core.Matrix;
 import com.google.common.base.Preconditions;
 import com.lyndir.lhunath.lib.system.logging.Logger;
 
-public class ElevationModel {
+public class ElevationModel implements IElevationModel {
 
 	private Matrix				elevationData;
 	private GridCoverage2D		coverage;
@@ -99,12 +99,8 @@ public class ElevationModel {
 		return coverage;
 	}
 
-	/**
-	 * Get the elevation of a point on the dem wrt R0 (EPSG:3785)
-	 * 
-	 * @param point
-	 *            Point in (lon, lat)
-	 * @return
+	/* (non-Javadoc)
+	 * @see com.google.code.laserswarm.earthModel.IElevationModel#getElevation(org.geotools.geometry.DirectPosition2D)
 	 */
 	public double getElevation(DirectPosition2D point) {
 		double[] dest = new double[1];
@@ -116,16 +112,8 @@ public class ElevationModel {
 		return elevationData;
 	}
 
-	/**
-	 * Find the intersection of a ray with the given DEM
-	 * 
-	 * @param direction
-	 *            Direction of the XYZ ray (ECEF)
-	 * @param origin
-	 *            Origin of the ray (ECEF)
-	 * @return Point on the 3D surface where the intersection is; (r, phi, theta)
-	 * @throws PointOutsideEnvelopeException
-	 *             When it does not intersect;
+	/* (non-Javadoc)
+	 * @see com.google.code.laserswarm.earthModel.IElevationModel#getIntersecion(javax.vecmath.Vector3d, javax.vecmath.Point3d)
 	 */
 	public Point3d getIntersecion(Vector3d direction, Point3d origin)
 			throws PointOutsideEnvelopeException {
@@ -172,12 +160,8 @@ public class ElevationModel {
 					"The ray does not intersect the coverage. (lat:%s;long:%s)", phi, theta));
 	}
 
-	/**
-	 * Get the surface normal in the ENU reference system (East, North, Up)
-	 * 
-	 * @param pos
-	 *            Position of the point in (lat, long)
-	 * @return The local surface normal in the ENU system
+	/* (non-Javadoc)
+	 * @see com.google.code.laserswarm.earthModel.IElevationModel#getSurfaceNormal(org.geotools.geometry.DirectPosition2D)
 	 */
 	public Vector3d getSurfaceNormal(DirectPosition2D pos) {
 		// 1 2 3

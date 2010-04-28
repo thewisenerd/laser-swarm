@@ -11,6 +11,7 @@ import org.geotools.geometry.DirectPosition2D;
 import org.geotools.referencing.operation.projection.PointOutsideEnvelopeException;
 
 import com.google.code.laserswarm.earthModel.ElevationModel;
+import com.google.code.laserswarm.earthModel.IElevationModel;
 import com.google.code.laserswarm.util.demReader.DemCreationException;
 import com.google.code.laserswarm.util.demReader.DemReader;
 import com.lyndir.lhunath.lib.system.logging.Logger;
@@ -72,7 +73,7 @@ public class ElevationModelTester extends TestCase {
 	}
 
 	public void testGeoTiffRead() throws DemCreationException {
-		ElevationModel dem = DemReader.parseDem(new File(
+		IElevationModel dem = DemReader.parseDem(new File(
 				"C:/Documents and Settings/simon/Desktop/ASTER GDEM BE/ASTGTM_N48E000_dem.tif"));
 	}
 }

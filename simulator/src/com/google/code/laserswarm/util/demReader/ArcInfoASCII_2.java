@@ -11,7 +11,7 @@ import org.geotools.coverage.grid.GridCoverage2D;
 import org.geotools.gce.arcgrid.ArcGridReader;
 import org.ujmp.core.doublematrix.impl.ImageMatrix;
 
-import com.google.code.laserswarm.earthModel.ElevationModel;
+import com.google.code.laserswarm.earthModel.IElevationModel;
 import com.google.code.laserswarm.plot.plot2D.Plot2D;
 import com.lyndir.lhunath.lib.system.logging.Logger;
 
@@ -21,7 +21,7 @@ public class ArcInfoASCII_2 extends DemReader {
 
 	public static void main(String[] args) {
 		try {
-			ElevationModel dem = new ArcInfoASCII_2(new File("DEM/srtm_37_02-red.asc")).parse();
+			IElevationModel dem = new ArcInfoASCII_2(new File("DEM/srtm_37_02-red.asc")).parse();
 		} catch (DemCreationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -37,7 +37,7 @@ public class ArcInfoASCII_2 extends DemReader {
 	}
 
 	@Override
-	public ElevationModel parse() throws DemCreationException {
+	public IElevationModel parse() throws DemCreationException {
 		URI arcURL = getDemFile().toURI();
 		GridCoverage2D gc2 = null;
 		try {

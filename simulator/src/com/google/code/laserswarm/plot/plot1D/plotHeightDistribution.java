@@ -13,7 +13,7 @@ import javax.imageio.ImageIO;
 
 import org.geotools.geometry.DirectPosition2D;
 
-import com.google.code.laserswarm.earthModel.ElevationModel;
+import com.google.code.laserswarm.earthModel.IElevationModel;
 import com.google.common.collect.Lists;
 import com.lyndir.lhunath.lib.system.logging.Logger;
 
@@ -36,7 +36,7 @@ public class plotHeightDistribution {
 	 * @param plotFile
 	 *            File to plot to.
 	 */
-	public void plot(DirectPosition2D start, DirectPosition2D end, ElevationModel DEM, double nSteps,
+	public void plot(DirectPosition2D start, DirectPosition2D end, IElevationModel DEM, double nSteps,
 			double lineThickness, String plotFile) {
 		double dLat = end.y - start.y;
 		double dLon = end.x - start.x;

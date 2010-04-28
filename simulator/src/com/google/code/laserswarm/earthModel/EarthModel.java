@@ -2,18 +2,24 @@ package com.google.code.laserswarm.earthModel;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Set;
 
 import javax.media.jai.Interpolation;
+import javax.vecmath.Point3d;
+import javax.vecmath.Vector3d;
 
 import org.geotools.coverage.grid.GridCoverage2D;
 import org.geotools.coverage.grid.GridCoverageFactory;
 import org.geotools.coverage.grid.Interpolator2D;
 import org.geotools.geometry.DirectPosition2D;
+import org.geotools.geometry.Envelope2D;
+import org.geotools.referencing.operation.projection.PointOutsideEnvelopeException;
 import org.opengis.geometry.Envelope;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.exceptions.MatrixException;
 
+import com.google.common.collect.Sets;
 import com.lyndir.lhunath.lib.system.logging.Logger;
 
 /**
@@ -22,9 +28,9 @@ import com.lyndir.lhunath.lib.system.logging.Logger;
  *         s.billemont@student.tudelft.nl)
  * 
  */
-public class EarthModel {
+public class EarthModel implements IElevationModel {
 
-	private ElevationModel		dem;
+	private Set<ElevationModel>	dems	= Sets.newHashSet();
 	private GridCoverage2D		kappaMinnaertMap;
 	private GridCoverage2D		surfaceRefractionMap;
 	private GridCoverage2D		thetaHenyeyGreensteinMap;
@@ -32,17 +38,69 @@ public class EarthModel {
 	private static final Logger	logger	= Logger.get(EarthModel.class);
 
 	public EarthModel(ElevationModel dem) {
-		this.dem = dem;
+		this.dems.add(dem);
 		loadCoef(new File("."));
 	}
 
 	public EarthModel(ElevationModel dem, File coefFolder) {
-		this.dem = dem;
+		this.dems.add(dem);
 		loadCoef(coefFolder);
 	}
 
-	public ElevationModel getDem() {
-		return dem;
+	public EarthModel(Set<ElevationModel> dems) {
+		this.dems = dems;
+	}
+
+	public EarthModel(Set<ElevationModel> dems, File coefFolder) {
+		this.dems = dems;
+		loadCoef(new File("."));
+	}
+
+	public ElevationModel findCoverage(DirectPosition2D point) {
+		for (ElevationModel dem : dems) {
+			if (dem.getCoverage().getEnvelope2D().contains(point))
+				return dem;
+		}
+		return null;
+	}
+
+	public Envelope2D getCompleteEnvelope2D() {
+		Envelope2D env = null;
+		for (ElevationModel dem : dems) {
+			Envelope2D e = dem.getCoverage().getEnvelope2D();
+			if (env == null) {
+				env = e;
+				continue;
+			}
+			env.add(e.getBounds2D());
+		}
+		return env;
+	}
+
+	public Set<ElevationModel> getDem() {
+		return dems;
+	}
+
+	@Override
+	public double getElevation(DirectPosition2D point) {
+		ElevationModel dem = findCoverage(point);
+		if (dem == null)
+			return -1;
+		else
+			return dem.getElevation(point);
+	}
+
+	@Override
+	public Point3d getIntersecion(Vector3d direction, Point3d origin)
+			throws PointOutsideEnvelopeException {
+		for (ElevationModel dem : dems) {
+			try {
+				Point3d i = dem.getIntersecion(direction, origin);
+				return i;
+			} catch (PointOutsideEnvelopeException e) {
+			}
+		}
+		throw new PointOutsideEnvelopeException("The ray does not intersect the coverage.");
 	}
 
 	public GridCoverage2D getKappaMinnaertMap() {
@@ -55,6 +113,15 @@ public class EarthModel {
 		float[] thetaHenyeyGreenstein = (float[]) thetaHenyeyGreensteinMap.evaluate(point);
 
 		return new ScatteringParam(indexOfRefraction[0], kappaMinnaert[0], thetaHenyeyGreenstein[0]);
+	}
+
+	@Override
+	public Vector3d getSurfaceNormal(DirectPosition2D pos) {
+		ElevationModel dem = findCoverage(pos);
+		if (dem == null)
+			return null;
+		else
+			return dem.getSurfaceNormal(pos);
 	}
 
 	public GridCoverage2D getSurfaceRefractionMap() {
@@ -83,7 +150,7 @@ public class EarthModel {
 			logger.err(e1, "Cannot import scatter coef");
 		}
 
-		Envelope e = dem.getCoverage().getEnvelope();
+		Envelope e = getCompleteEnvelope2D();
 		kappaMinnaertMap = Interpolator2D.create(new GridCoverageFactory().create("KAPPA", // 
 				m_kappa.toFloatArray(), e), Interpolation.getInstance(Interpolation.INTERP_BICUBIC));
 		surfaceRefractionMap = Interpolator2D.create(new GridCoverageFactory().create("REFR", // 

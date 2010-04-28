@@ -101,7 +101,7 @@ public class Simulator implements Runnable {
 			/* Find the intersection location and time */
 			Point3d sphere = null;
 			try {
-				sphere = earth.getDem().getIntersecion(new Vector3d(simVals.p0), simVals.p0);
+				sphere = earth.getIntersecion(new Vector3d(simVals.p0), simVals.p0);
 				simVals.pR = new Point3d(sphere.x * Math.sin(sphere.z) * Math.cos(sphere.y),//
 						sphere.x * Math.sin(sphere.z) * Math.sin(sphere.y),//
 						sphere.x * Math.cos(sphere.z));
@@ -116,7 +116,7 @@ public class Simulator implements Runnable {
 			simVals.tR = dR.length() / Constants.c;
 			DirectPosition2D reflectionPoint = new DirectPosition2D(sphere.z * (180 / Math.PI), sphere.y
 					* (180 / Math.PI));
-			Vector3d surfNormal = earth.getDem().getSurfaceNormal(reflectionPoint);
+			Vector3d surfNormal = earth.getSurfaceNormal(reflectionPoint);
 
 			/* Make pulses (with downtravel) */
 			simVals.power0 = constellation.getPower();

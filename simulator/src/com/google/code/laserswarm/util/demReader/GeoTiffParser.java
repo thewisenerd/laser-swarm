@@ -14,13 +14,14 @@ import org.geotools.gce.geotiff.GeoTiffReader;
 import org.ujmp.core.doublematrix.impl.ImageMatrix;
 
 import com.google.code.laserswarm.earthModel.ElevationModel;
+import com.google.code.laserswarm.earthModel.IElevationModel;
 import com.google.code.laserswarm.plot.plot2D.Plot2D;
 
 public class GeoTiffParser extends DemReader {
 
 	public static void main(String[] args) {
 		try {
-			ElevationModel dem = new GeoTiffParser(new File("DEM/ASTGTM_N48E000_dem.tif")).parse();
+			IElevationModel dem = new GeoTiffParser(new File("DEM/ASTGTM_N48E000_dem.tif")).parse();
 		} catch (DemCreationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
