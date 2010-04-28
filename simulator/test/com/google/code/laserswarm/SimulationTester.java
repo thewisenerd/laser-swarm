@@ -34,7 +34,7 @@ public class SimulationTester extends TestCase {
 		new SimulationTester().testSim();
 	}
 
-	private Constellation mkTestConstilation() {
+	private static Constellation mkTestConstilation() {
 		Satellite emittor = new Satellite("SAT01", (0.08 * 0.08), 6700f, 0f, (float) Math.PI / 2,
 				(float) (3.2 * Math.PI / 180), 0f, 0f);
 		LinkedList<Satellite> r = Lists.newLinkedList();
@@ -42,7 +42,7 @@ public class SimulationTester extends TestCase {
 		return new Constellation(10, 50, emittor, r);
 	}
 
-	public void testSim() {
+	public static HashMap<SimTemplate, Simulator> sim() {
 		Configuration cfg = new Configuration();
 		Configuration.write(CfgName, cfg);
 		Configuration.read(CfgName);
@@ -72,6 +72,11 @@ public class SimulationTester extends TestCase {
 		mgr.addSimTemplate(new SimTemplate(Configuration.getInstance(), testConstallation));
 
 		HashMap<SimTemplate, Simulator> points = mgr.runSim();
+		return points;
+	}
+
+	public void testSim() {
+		HashMap<SimTemplate, Simulator> points = sim();
 		for (Simulator sim : points.values()) {
 			int nP = 0;
 			List<SimVars> pnts = sim.getDataPoints();
