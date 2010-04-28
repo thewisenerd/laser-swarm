@@ -1,7 +1,6 @@
 package com.google.code.laserswarm.util.demReader;
 
 import java.awt.image.BufferedImage;
-import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -10,17 +9,23 @@ import java.nio.channels.FileChannel;
 
 import org.geotools.coverage.grid.GridCoverage2D;
 import org.geotools.data.DataSourceException;
-import org.geotools.factory.CommonFactoryFinder;
 import org.geotools.factory.Hints;
 import org.geotools.gce.geotiff.GeoTiffReader;
-import org.geotools.styling.Style;
-import org.geotools.styling.StyleFactory;
-import org.opengis.geometry.Envelope;
-import org.opengis.referencing.crs.CoordinateReferenceSystem;
+import org.ujmp.core.doublematrix.impl.ImageMatrix;
 
 import com.google.code.laserswarm.earthModel.ElevationModel;
+import com.google.code.laserswarm.plot.plot2D.Plot2D;
 
 public class GeoTiffParser extends DemReader {
+
+	public static void main(String[] args) {
+		try {
+			ElevationModel dem = new GeoTiffParser(new File("DEM/ASTGTM_N48E000_dem.tif")).parse();
+		} catch (DemCreationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	public GeoTiffParser(File demFile) {
 		super(demFile);
@@ -59,21 +64,17 @@ public class GeoTiffParser extends DemReader {
 			ex.printStackTrace();
 			return null;
 		}
-		RenderedImage renderedImage = coverage.getRenderedImage();
-		CoordinateReferenceSystem crs = coverage.getCoordinateReferenceSystem2D();
-		Envelope env = coverage.getEnvelope();
 
-		System.out.println(crs.toString());
-
-		// PlanarImage i = PlanarImage.wrapRenderedImage(renderedImage);
-
-		BufferedImage mine = new BufferedImage(renderedImage.getWidth(), renderedImage.getHeight(),
-				BufferedImage.TYPE_BYTE_GRAY);
-
-		StyleFactory styleFactory = CommonFactoryFinder.getStyleFactory(null);
-		Style style = styleFactory.createStyle();
-
-		coverage.getGridGeometry().getGridRange2D();
+		BufferedImage bufferedIm = Plot2D.mkImage(coverage);
+		ImageMatrix m;
+		try {
+			m = new ImageMatrix(bufferedIm);
+			m.showGUI();
+			Plot2D.make(m);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
 	}
 }

@@ -9,6 +9,16 @@ public abstract class DemReader {
 
 	private static final Logger	logger	= Logger.get(DemReader.class);
 
+	public static void main(String[] args) {
+		ElevationModel dem = null;
+		try {
+			dem = DemReader.parseDem(new File("DEM/ASTGTM_N48E000_dem.asc"));
+		} catch (DemCreationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 	public static ElevationModel parseDem(File demFile) throws DemCreationException {
 		String fileName = demFile.getName();
 		String type = fileName.substring(fileName.lastIndexOf(".") + 1);

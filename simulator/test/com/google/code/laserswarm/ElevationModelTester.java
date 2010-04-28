@@ -26,7 +26,7 @@ public class ElevationModelTester extends TestCase {
 	public void testDemIntersection() {
 		ElevationModel dem = null;
 		try {
-			dem = DemReader.parseDem(new File("DEM/srtm_37_02-red.asc"));
+			dem = DemReader.parseDem(new File("DEM/ASTGTM_N48E000_dem.asc"));
 		} catch (DemCreationException e1) {
 			fail("Cannot load the DEM");
 		}
