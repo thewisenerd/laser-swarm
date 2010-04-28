@@ -19,7 +19,7 @@ public class Constellation {
 	private double			laserWaveLength	= 300E-9;
 
 	@Element
-	private double			beamDivergence	= 2.3333E-4 / 2;			// rad for the halft beam /|
+	private double			beamDivergence	= 2.3333E-4 / 2;			// rad for the half beam /|
 
 	@Element
 	private Satellite		emitter;
