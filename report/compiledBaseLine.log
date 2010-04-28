@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (MiKTeX 2.8) (preloaded format=pdflatex 2010.4.20)  28 APR 2010 10:30
+This is pdfTeX, Version 3.1415926-1.40.10 (MiKTeX 2.8) (preloaded format=pdflatex 2010.4.20)  28 APR 2010 10:42
 entering extended mode
 **C:/Users/Alex/Desktop/Laser*Swarm/laser-swarm/report/compiledBaseLine.tex
 ("C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/report/compiledBaseLine.tex"
@@ -26,20 +26,24 @@ File: size11.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 ("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\multirow\multirow.sty"
 \bigstrutjot=\dimen103
 )
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\tools\enumerate.sty"
+Package: enumerate 1999/03/05 v3.00 enumerate extensions (DPC)
+\@enLab=\toks14
+)
 ("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\acronym\acronym.sty"
 Package: acronym 2009/10/20 v1.35 Support for acronyms (Tobias Oetiker)
 
 ("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\bigfoot\suffix.sty"
 Package: suffix 2006/07/15 1.5 Variant command support
 )
-\AC@clearlist=\toks14
+\AC@clearlist=\toks15
 )
 ("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\graphics\graphicx.sty"
 Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
 
 ("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\graphics\keyval.sty"
 Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
-\KV@toks@=\toks15
+\KV@toks@=\toks16
 )
 ("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\graphics\graphics.sty"
 Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
@@ -64,22 +68,22 @@ File: pdftex.def 2010/02/14 v0.04n Graphics/color for pdfTeX
 \WF@size=\dimen107
 \c@WF@wrappedlines=\count89
 \WF@box=\box26
-\WF@everypar=\toks16
+\WF@everypar=\toks17
 Package: wrapfig 2003/01/31  v 3.6
 )
 ("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\compiledBaseLine.aux")
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
 
 ("C:\Program Files (x86)\MiKTeX 2.8\tex\context\base\supp-pdf.tex"
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -88,11 +92,11 @@ LaTeX Font Info:    ... okay on input line 17.
 \scratchbox=\box27
 \nofMPsegments=\count91
 \nofMParguments=\count92
-\everyMPshowfont=\toks17
+\everyMPshowfont=\toks18
 \MPscratchCnt=\count93
 \MPscratchDim=\dimen109
 \MPnumerator=\count94
-\everyMPtoPDFconversion=\toks18
+\everyMPtoPDFconversion=\toks19
 )
 ("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\chapters/titlePageBL.tex
 "
@@ -110,20 +114,20 @@ Package acronym Info: Label `acro:LiDAR' newly defined as it shall be overridde
 n
 although it is yet undefined on input line 2.
 [1]) ("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\compiledBaseLine.to
-c")
-\tf@toc=\write3
- [1
+c" [1
 
-]
+])
+\tf@toc=\write3
+ [2]
 ("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\chapters/acronyms.tex")
-[2]
+[3]
 Chapter 1.
 ("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\chapters/blIn.tex"
 Package acronym Info: Label `acro:RAMS' newly defined as it shall be overridden
 
 although it is yet undefined on input line 8.
 )
-[3
+[4
 
 ]
 Chapter 2.
@@ -137,7 +141,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 3--6
 
  []
 
-<chapters/img/pic_FFD.pdf, id=24, 845.1575pt x 597.23125pt>
+<chapters/img/pic_FFD.pdf, id=27, 845.1575pt x 597.23125pt>
 File: chapters/img/pic_FFD.pdf Graphic file (type pdf)
 
 <use chapters/img/pic_FFD.pdf>
@@ -158,11 +162,11 @@ Underfull \hbox (badness 10000) in paragraph at lines 15--23
 
  []
 
-[4
+[5
 
-] [5 <C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/report/chapters/img/pic_FFD
+] [6 <C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/report/chapters/img/pic_FFD
 .pdf, page is rotated 90 degrees>]
-<chapters/img/pic_FBS.pdf, id=158, 597.23125pt x 845.1575pt>
+<chapters/img/pic_FBS.pdf, id=161, 597.23125pt x 845.1575pt>
 File: chapters/img/pic_FBS.pdf Graphic file (type pdf)
 
 <use chapters/img/pic_FBS.pdf>)
@@ -176,7 +180,7 @@ File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 11.
- [6] [7 <C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/report/chapters/img/pic_
+ [7] [8 <C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/report/chapters/img/pic_
 FBS.pdf>]
 Package acronym Info: Label `acro:ADCS' newly defined as it shall be overridden
 
@@ -185,7 +189,7 @@ Package acronym Info: Label `acro:GLAS' newly defined as it shall be overridden
 
 although it is yet undefined on input line 38.
 
-<chapters/img/glas.jpg, id=211, 451.6875pt x 602.25pt>
+<chapters/img/glas.jpg, id=214, 451.6875pt x 602.25pt>
 File: chapters/img/glas.jpg Graphic file (type jpg)
 
 <use chapters/img/glas.jpg>
@@ -198,65 +202,173 @@ Underfull \hbox (badness 10000) in paragraph at lines 44--44
 \OT1/cmr/m/n/10.95 stalled on the ICE-Sat.
  []
 
-) [8 <C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/report/chapters/img/glas.jp
+) [9 <C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/report/chapters/img/glas.jp
 g>]
 Chapter 3.
-[9
-
-]
-Chapter 4.
 [10
 
 ]
-Chapter 5.
+Chapter 4.
+("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\chapters/blTRA.tex"
+Underfull \hbox (badness 10000) in paragraph at lines 17--20
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 21--24
+
+ []
+
 [11
 
 ]
+Underfull \hbox (badness 10000) in paragraph at lines 25--28
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 37--40
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 43--45
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 43--45
+
+ []
+
+[12] <chapters/img/TRA_ADCS_P.png, id=229, 592.01175pt x 309.5565pt>
+File: chapters/img/TRA_ADCS_P.png Graphic file (type png)
+
+<use chapters/img/TRA_ADCS_P.png>
+Underfull \hbox (badness 10000) in paragraph at lines 69--71
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 69--71
+
+ []
+
+[13 <C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/report/chapters/img/TRA_ADCS
+_P.png (PNG copy)>]
+<chapters/img/TRA_ADCS_A.png, id=233, 592.01175pt x 314.97675pt>
+File: chapters/img/TRA_ADCS_A.png Graphic file (type png)
+
+<use chapters/img/TRA_ADCS_A.png>
+Underfull \hbox (badness 10000) in paragraph at lines 95--97
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 95--97
+
+ []
+
+[14 <C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/report/chapters/img/TRA_ADCS
+_A.png (PNG copy)>]
+Underfull \hbox (badness 10000) in paragraph at lines 106--107
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 121--123
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 133--140
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 144--147
+
+ []
+
+[15]
+Underfull \hbox (badness 10000) in paragraph at lines 151--154
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 171--174
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 187--190
+
+ []
+
+[16]
+Underfull \hbox (badness 10000) in paragraph at lines 205--208
+
+ []
+
+<chapters/img/TRA_RM.png, id=243, 686.565pt x 685.3605pt>
+File: chapters/img/TRA_RM.png Graphic file (type png)
+
+<use chapters/img/TRA_RM.png>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+) [17] [18 <C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/report/chapters/img/T
+RA_RM.png (PNG copy)>]
+Chapter 5.
+[19
+
+]
 Chapter 6.
-[12
+[20
 
 ]
 Chapter 7.
-[13
+[21
 
 ]
 Chapter 8.
 ("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\chapters/blRAMS.tex"
-<chapters/img/subsystem_reliability_analysis.png, id=231, 359.54324pt x 318.590
+<chapters/img/subsystem_reliability_analysis.png, id=260, 359.54324pt x 318.590
 26pt>
 File: chapters/img/subsystem_reliability_analysis.png Graphic file (type png)
- <use chapters/img/subsystem_reliability_analysis.png> [14
+ <use chapters/img/subsystem_reliability_analysis.png> [22
 
 ])
 ("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\compiledBaseLine.bbl"
-[15] [16 <C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/report/chapters/img/sub
-system_reliability_analysis.png (PNG copy)>]) [17
+[23] [24 <C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/report/chapters/img/sub
+system_reliability_analysis.png (PNG copy)>]) [25
 
 ]
 Appendix A.
-[18
+[26
 
 ] ("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\compiledBaseLine.aux")
  ) 
 Here is how much of TeX's memory you used:
- 1397 strings out of 495285
- 19430 string characters out of 3179881
- 70215 words of memory out of 3000000
- 4588 multiletter control sequences out of 15000+200000
- 12255 words of font info for 42 fonts, out of 3000000 for 9000
+ 1451 strings out of 495285
+ 20470 string characters out of 3179881
+ 70661 words of memory out of 3000000
+ 4632 multiletter control sequences out of 15000+200000
+ 12614 words of font info for 43 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
- 25i,8n,21p,1001b,270s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 25i,8n,21p,1001b,368s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmbx10.pfb>
 <C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C
+:/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmbxti10.pfb><C
 :/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:
 /Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Pr
 ogram Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><C:/Pr
 ogram Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Prog
 ram Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Progra
 m Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on compiledBaseLine.pdf (20 pages, 932550 bytes).
+Output written on compiledBaseLine.pdf (28 pages, 1191818 bytes).
 PDF statistics:
- 274 PDF objects out of 1000 (max. 8388607)
+ 306 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 27 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 42 words of extra memory for PDF output out of 10000 (max. 10000000)
 

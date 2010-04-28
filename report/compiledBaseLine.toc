@@ -1,21 +1,25 @@
-\contentsline {chapter}{\numberline {1}Introduction}{3}
-\contentsline {chapter}{\numberline {2}Functions and Requirements}{4}
-\contentsline {section}{\numberline {2.1}Functional Flow Diagram}{4}
-\contentsline {section}{\numberline {2.2}Functional Breakdown Structure}{4}
-\contentsline {section}{\numberline {2.3}Requirement Discovery Tree}{6}
-\contentsline {subsection}{\numberline {2.3.1}Mission Need Statement}{6}
-\contentsline {subsection}{\numberline {2.3.2}Requirement Discovery}{6}
-\contentsline {subsubsection}{Cost Budget Requirement}{6}
-\contentsline {subsubsection}{Mass Budget Requirement}{8}
-\contentsline {subsubsection}{Lifetime Requirement}{8}
-\contentsline {chapter}{\numberline {3}Budgets}{9}
-\contentsline {chapter}{\numberline {4}Technical Risk Assessment}{10}
-\contentsline {chapter}{\numberline {5}Design Options}{11}
-\contentsline {chapter}{\numberline {6}Approach with respect to sustainable development}{12}
-\contentsline {chapter}{\numberline {7}Return on Investment and Operational Profit}{13}
-\contentsline {chapter}{\numberline {8}R.A.M.S.}{14}
-\contentsline {section}{\numberline {8.1}Reliability}{14}
-\contentsline {section}{\numberline {8.2}Availability}{14}
-\contentsline {section}{\numberline {8.3}Maintainability}{14}
-\contentsline {section}{\numberline {8.4}Safety}{15}
-\contentsline {chapter}{\numberline {A}Requirement Discovery Trees}{18}
+\contentsline {chapter}{\numberline {1}Introduction}{4}
+\contentsline {chapter}{\numberline {2}Functions and Requirements}{5}
+\contentsline {section}{\numberline {2.1}Functional Flow Diagram}{5}
+\contentsline {section}{\numberline {2.2}Functional Breakdown Structure}{5}
+\contentsline {section}{\numberline {2.3}Requirement Discovery Tree}{7}
+\contentsline {subsection}{\numberline {2.3.1}Mission Need Statement}{7}
+\contentsline {subsection}{\numberline {2.3.2}Requirement Discovery}{7}
+\contentsline {subsubsection}{Cost Budget Requirement}{7}
+\contentsline {subsubsection}{Mass Budget Requirement}{9}
+\contentsline {subsubsection}{Lifetime Requirement}{9}
+\contentsline {chapter}{\numberline {3}Budgets}{10}
+\contentsline {chapter}{\numberline {4}Technical Risk Assessment}{11}
+\contentsline {section}{\numberline {4.1}Ground segment}{11}
+\contentsline {section}{\numberline {4.2}During mission}{12}
+\contentsline {section}{\numberline {4.3}Measurement protocol}{15}
+\contentsline {section}{\numberline {4.4}Post-mission}{17}
+\contentsline {chapter}{\numberline {5}Design Options}{19}
+\contentsline {chapter}{\numberline {6}Approach with respect to sustainable development}{20}
+\contentsline {chapter}{\numberline {7}Return on Investment and Operational Profit}{21}
+\contentsline {chapter}{\numberline {8}R.A.M.S.}{22}
+\contentsline {section}{\numberline {8.1}Reliability}{22}
+\contentsline {section}{\numberline {8.2}Availability}{22}
+\contentsline {section}{\numberline {8.3}Maintainability}{22}
+\contentsline {section}{\numberline {8.4}Safety}{23}
+\contentsline {chapter}{\numberline {A}Requirement Discovery Trees}{26}
