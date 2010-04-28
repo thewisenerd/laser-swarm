@@ -1,6 +1,6 @@
 package com.google.code.laserswarm;
 
-import com.google.code.laserswarm.table.writeLaTeXTable;
+import com.google.code.laserswarm.out.table.writeLaTeXTable;
 
 public class TestWriteLaTeXTable {
 	public static void main(String[] args) {

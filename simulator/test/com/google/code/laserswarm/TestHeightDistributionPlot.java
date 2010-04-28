@@ -5,7 +5,7 @@ import java.io.File;
 import org.geotools.geometry.DirectPosition2D;
 
 import com.google.code.laserswarm.earthModel.IElevationModel;
-import com.google.code.laserswarm.plot.plot1D.plotHeightDistribution;
+import com.google.code.laserswarm.out.plot1D.plotHeightDistribution;
 import com.google.code.laserswarm.util.demReader.DemCreationException;
 import com.google.code.laserswarm.util.demReader.DemReader;
 

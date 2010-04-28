@@ -7,8 +7,8 @@ import junit.framework.TestCase;
 
 import com.google.code.laserswarm.earthModel.EarthModel;
 import com.google.code.laserswarm.earthModel.ElevationModel;
-import com.google.code.laserswarm.plot.plot2D.MultiChannelPlot2d;
-import com.google.code.laserswarm.plot.plot2D.Plot2D;
+import com.google.code.laserswarm.out.plot2D.MultiChannelPlot2d;
+import com.google.code.laserswarm.out.plot2D.Plot2D;
 import com.google.code.laserswarm.util.demReader.DemCreationException;
 import com.google.code.laserswarm.util.demReader.DemReader;
 
