@@ -15,7 +15,7 @@ import org.ujmp.core.doublematrix.impl.ImageMatrix;
 
 import com.google.code.laserswarm.earthModel.ElevationModel;
 import com.google.code.laserswarm.earthModel.IElevationModel;
-import com.google.code.laserswarm.plot.plot2D.Plot2D;
+import com.google.code.laserswarm.out.plot2D.Plot2D;
 
 public class GeoTiffParser extends DemReader {
 

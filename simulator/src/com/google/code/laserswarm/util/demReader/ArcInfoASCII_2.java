@@ -12,7 +12,7 @@ import org.geotools.gce.arcgrid.ArcGridReader;
 import org.ujmp.core.doublematrix.impl.ImageMatrix;
 
 import com.google.code.laserswarm.earthModel.IElevationModel;
-import com.google.code.laserswarm.plot.plot2D.Plot2D;
+import com.google.code.laserswarm.out.plot2D.Plot2D;
 import com.lyndir.lhunath.lib.system.logging.Logger;
 
 public class ArcInfoASCII_2 extends DemReader {
