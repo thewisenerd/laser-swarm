@@ -2,6 +2,7 @@ package com.google.code.laserswarm.conf;
 
 import java.io.File;
 import java.util.List;
+import java.util.Set;
 
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
@@ -11,13 +12,14 @@ import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import com.lyndir.lhunath.lib.system.logging.Logger;
 
 @Root
 public class Configuration {
 
-	public enum Modes {
-		ALL;
+	public enum Actions {
+		SIMULATE, PROCESS, TABULATE, PLOT_DISK, PLOT_SCREEN, SLEEP;
 	}
 
 	private static Configuration	instance;
@@ -25,7 +27,15 @@ public class Configuration {
 	private static final String		configName						= "configuration.xml";
 
 	@Attribute
-	private Modes					mode							= Modes.ALL;
+	private static Set<Actions>		mode;
+	static {
+		mode = Sets.newHashSet();
+		mode.add(Actions.SIMULATE);
+		mode.add(Actions.PROCESS);
+		mode.add(Actions.PLOT_DISK);
+		mode.add(Actions.TABULATE);
+	}
+
 	@Element
 	private int						simThreads						= 4;
 
@@ -113,8 +123,8 @@ public class Configuration {
 		constellations.add(new Constellation());
 	}
 
-	public Configuration(float atmAtt, Modes mod, String DEM, String prefix, String path, String model,
-			List<Constellation> consts) {
+	public Configuration(float atmAtt, Set<Actions> mod, String DEM, String prefix, String path,
+			String model, List<Constellation> consts) {
 		atmOpticalThickness = atmAtt;
 		mode = mod;
 		fileNameDigitalElevationModel = DEM;
@@ -148,12 +158,16 @@ public class Configuration {
 		return filePrefixReport;
 	}
 
-	public Modes getMode() {
+	public Set<Actions> getMode() {
 		return mode;
 	}
 
 	public int getSimThreads() {
 		return simThreads;
+	}
+
+	public boolean hasAction(Actions a) {
+		return mode.contains(a);
 	}
 
 }

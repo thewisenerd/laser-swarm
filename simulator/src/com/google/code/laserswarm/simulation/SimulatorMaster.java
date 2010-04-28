@@ -10,6 +10,12 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.lyndir.lhunath.lib.system.logging.Logger;
 
+/**
+ * 
+ * @author Simon Billemont, TUDelft, Faculty Aerospace Engineering (aodtorusan@gmail.com or
+ *         s.billemont@student.tudelft.nl)
+ * 
+ */
 public class SimulatorMaster {
 
 	private EarthModel					earth;
