@@ -79,10 +79,10 @@ public class writeLaTeXTable {
 						+ "$A_{aperture}$ [$m^{2}$] & a [km] & e [-] & i [rad] & $\\Omega$ [rad] & "
 						+ "$\\theta$ [rad]& $\\omega$ [rad] \\\\\\hline");
 				Satellite emit = conf.getConstellation().getEmitter();
-				tableOut.write("\n\t\t" + n + " & " + emit.toString() + " & "
-						+ format(emit.getAperatureArea()) + " & " + format(emit.getSemimajorAxis())
-						+ " & " + format(emit.getEccentricity()) + " & " + format(emit.getInclination())
-						+ " & " + format(emit.getRightAngleOfAscendingNode()) + " & "
+				tableOut.write("\n\t\t" + n + " & " + emit.toString() + " & - & "
+						+ format(emit.getSemimajorAxis()) + " & " + format(emit.getEccentricity())
+						+ " & " + format(emit.getInclination()) + " & "
+						+ format(emit.getRightAngleOfAscendingNode()) + " & "
 						+ format(emit.getTrueAnomaly()) + " & " + format(emit.getArgumentOfPerigee())
 						+ "\\\\\\hline");
 				for (Satellite recv : conf.getConstellation().getReceivers()) {
@@ -95,7 +95,8 @@ public class writeLaTeXTable {
 							+ format(recv.getTrueAnomaly()) + " & "
 							+ format(recv.getArgumentOfPerigee()) + "\\\\\\hline");
 				}
-				tableOut.write("\n\t\t\\caption{Details of Swarm " + num + ".}"
+				tableOut.write("\n\t\t\\caption{Satellites in Swarm " + num
+						+ ". The first Satellite is the emitter.}"
 						+ "\n\t\\end{longtable}\n\\end{center}\n\n");
 			}
 			tableOut.close();
