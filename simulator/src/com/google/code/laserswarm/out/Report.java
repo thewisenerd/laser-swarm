@@ -10,7 +10,7 @@ import com.google.code.laserswarm.out.table.writeLaTeXTable;
 import com.google.code.laserswarm.simulation.SimTemplate;
 import com.google.code.laserswarm.simulation.Simulator;
 
-public class report {
+public class Report {
 	private static Configuration	conf	= Configuration.getInstance();
 
 	public static void write(HashMap<SimTemplate, Simulator> sims) {
