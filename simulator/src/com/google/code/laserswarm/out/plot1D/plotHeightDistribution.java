@@ -1,0 +1,132 @@
+package com.google.code.laserswarm.out.plot1D;
+
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.imageio.ImageIO;
+import javax.vecmath.Vector3d;
+
+import com.google.code.laserswarm.conf.Configuration;
+import com.google.code.laserswarm.simulation.SimVars;
+import com.google.common.collect.Lists;
+import com.lyndir.lhunath.lib.system.logging.Logger;
+
+public class plotHeightDistribution {
+	private static final Logger	logger	= Logger.get(plotHeightDistribution.class);
+
+	/**
+	 * Plots height versus time.
+	 * 
+	 * @param sims
+	 *            The list of SimVars used to plot.
+	 * @param lineThickness
+	 *            Line thickness used in the plot.
+	 * @param plotFile
+	 *            File to plot to.
+	 */
+	public void plot(List<SimVars> sims, double lineThickness, String plotFile) {
+		int width = 1600;
+		int height = 200;
+		int hOffset = 50;
+		int wOffset = 60;
+		BufferedImage bimg = new BufferedImage(width + wOffset, height + hOffset,
+				BufferedImage.TYPE_INT_RGB); // New BufferedImage used for writing
+		Graphics2D g = bimg.createGraphics(); // create Graphics context and map Graphics context to new
+		// instance of Graphics2D
+		g.setBackground(Color.white); // set the background to white
+		g.clearRect(0, 0, width + wOffset, height + hOffset);
+		g.setPaintMode(); // set mode to overwrite pixels
+		g.setColor(new Color(0, 0, 0)); // set color to black
+		for (int l = 0; l < lineThickness; l++) {
+			g.drawLine(wOffset, height - l, width + wOffset, height - l);
+			g.drawLine(wOffset + l, height, wOffset + l, 0);
+		}
+		ArrayList<Double> h = Lists.newArrayList();
+		ArrayList<Double> theta = Lists.newArrayList();
+		ArrayList<Double> phi = Lists.newArrayList();
+		ArrayList<Double> dist = Lists.newArrayList();
+		dist.add(0.0);
+		double hMax = Double.MIN_VALUE;
+		double hMin = Double.MAX_VALUE;
+		for (SimVars aSim : sims) {
+			double rp = new Vector3d(aSim.pR).length();
+			double hFound = rp - Configuration.R0;
+			theta.add(Math.acos(aSim.pR.z / rp)); // longitude
+			phi.add(Math.atan2(aSim.pR.y, aSim.pR.x)); // latitude
+			h.add(hFound);
+			if (hFound > hMax) {
+				hMax = hFound;
+			}
+			if (hFound < hMin) {
+				hMin = hFound;
+			}
+			if (theta.size() > 1) {
+				double lat1 = theta.get(theta.size() - 2);
+				double lat2 = theta.get(theta.size() - 1);
+				double lon1 = phi.get(phi.size() - 2);
+				double lon2 = phi.get(phi.size() - 1);
+				double dLat = lat2 - lat1;
+				double dLon = lon2 - lon1;
+				double a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(lat1) * Math.cos(lat2)
+						* Math.sin(dLon / 2) * Math.sin(dLon / 2);
+				double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+				dist.add(dist.get(dist.size() - 1) + Configuration.R0 * c);
+			}
+		}
+		double hDiff = hMax - hMin;
+		int size = h.size();
+		double scaleFactor = 1;
+		double plotOffset = 3;
+		int fontSize = 20;
+		Font font = new Font("Arial", Font.PLAIN, fontSize);
+		g.setFont(font);
+		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		for (int n = 0; n < size - 1; n++) {
+			for (int l = 0; l < lineThickness; l++) {
+				int x1 = wOffset + (int) (((double) n) / ((double) size) * width);
+				int y1 = height - (int) ((h.get(n) - hMin) / hDiff * height * scaleFactor) - l;
+				int x2 = wOffset + (int) (((double) n + 1) / (size) * width);
+				int y2 = height - (int) ((h.get(n + 1) - hMin) / hDiff * height * scaleFactor) - l;
+				g.drawLine(x1, y1, x2, y2);
+			}
+		}
+		final float dash1[] = { 10.0f };
+		final BasicStroke dashed = new BasicStroke(1.0f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER,
+				10.0f, dash1, 0.0f);
+		g.setStroke(dashed);
+		for (int i = 1; i < 5; i++) {
+			g.drawLine(wOffset, height - (int) (i * 0.25 * height * scaleFactor), wOffset + width,
+					height - (int) (i * 0.25 * height * scaleFactor));
+		}
+		for (int i = 1; i < 9; i++) {
+			g.drawLine(wOffset + (int) (i * 0.125 * width), 0, wOffset + (int) (i * 0.125 * width),
+					height);
+		}
+		g.drawString("h [m]", 5, (int) (0.13 * height * scaleFactor + fontSize));
+		for (int i = 0; i < 5; i++) {
+			g.drawString(Integer.toString((int) ((1 - i * 0.25) * hMax)), 5, (int) (i * 0.25 * height
+					* scaleFactor + plotOffset + fontSize));
+		}
+		for (int i = 0; i < 8; i++) {
+			g.drawString("(" + Math.floor(1000 * 180 / Math.PI * theta.get((int) (i * 0.125 * size)))
+					/ 1000 + "," + Math.floor(1000 * 180 / Math.PI * phi.get((int) (i * 0.125 * size)))
+					/ 1000 + ")", wOffset + (int) (i * 0.125 * width), height + hOffset - 5);
+		}
+		for (int i = 0; i < 8; i++) {
+			g.drawString("" + Math.floor(dist.get((int) (i * 0.125 * dist.size()))) / 1000, wOffset
+					+ (int) (i * 0.125 * width), height + (int) (0.5 * hOffset - 5));
+		}
+		try {
+			ImageIO.write(bimg, "png", new File(plotFile + ".png"));
+		} catch (Exception e) {
+			logger.inf(e, "Plot file writing failed.");
+		}
+	}
+}
