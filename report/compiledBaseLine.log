@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (MiKTeX 2.8) (preloaded format=pdflatex 2010.4.20)  28 APR 2010 11:11
+This is pdfTeX, Version 3.1415926-1.40.10 (MiKTeX 2.8) (preloaded format=pdflatex 2010.4.20)  28 APR 2010 15:03
 entering extended mode
 **C:/Users/Alex/Desktop/Laser*Swarm/laser-swarm/report/compiledBaseLine.tex
 ("C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/report/compiledBaseLine.tex"
@@ -205,7 +205,9 @@ Underfull \hbox (badness 10000) in paragraph at lines 44--44
 ) [9 <C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/report/chapters/img/glas.jp
 g>]
 Chapter 3.
-[10
+
+("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\chapters/blBudgetCost.te
+x") [10
 
 ]
 Chapter 4.
@@ -296,6 +298,11 @@ Underfull \hbox (badness 10000) in paragraph at lines 151--154
  []
 
 [15]
+Underfull \hbox (badness 10000) in paragraph at lines 164--167
+
+ []
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 171--174
 
  []
@@ -353,10 +360,10 @@ Appendix A.
 ] ("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\compiledBaseLine.aux")
  ) 
 Here is how much of TeX's memory you used:
- 1466 strings out of 495285
- 20983 string characters out of 3179881
- 70694 words of memory out of 3000000
- 4638 multiletter control sequences out of 15000+200000
+ 1475 strings out of 495285
+ 21225 string characters out of 3179881
+ 70752 words of memory out of 3000000
+ 4644 multiletter control sequences out of 15000+200000
  12614 words of font info for 43 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
  25i,8n,21p,1001b,388s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -369,7 +376,7 @@ ogram Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><C:/Pr
 ogram Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Prog
 ram Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Progra
 m Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on compiledBaseLine.pdf (29 pages, 1197044 bytes).
+Output written on compiledBaseLine.pdf (29 pages, 1197585 bytes).
 PDF statistics:
  311 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

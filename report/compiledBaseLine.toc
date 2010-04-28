@@ -8,7 +8,8 @@
 \contentsline {subsubsection}{Cost Budget Requirement}{7}
 \contentsline {subsubsection}{Mass Budget Requirement}{9}
 \contentsline {subsubsection}{Lifetime Requirement}{9}
-\contentsline {chapter}{\numberline {3}Budgets}{10}
+\contentsline {chapter}{\numberline {3}Budget Breakdown}{10}
+\contentsline {section}{\numberline {3.1}Cost Budget Breakdown}{10}
 \contentsline {chapter}{\numberline {4}Technical Risk Assessment}{11}
 \contentsline {section}{\numberline {4.1}Ground segment}{11}
 \contentsline {section}{\numberline {4.2}During mission}{12}
