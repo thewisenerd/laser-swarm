@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (MiKTeX 2.8) (preloaded format=pdflatex 2010.4.20)  28 APR 2010 10:42
+This is pdfTeX, Version 3.1415926-1.40.10 (MiKTeX 2.8) (preloaded format=pdflatex 2010.4.20)  28 APR 2010 11:11
 entering extended mode
 **C:/Users/Alex/Desktop/Laser*Swarm/laser-swarm/report/compiledBaseLine.tex
 ("C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/report/compiledBaseLine.tex"
@@ -290,12 +290,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 144--147
 
  []
 
-[15]
+
 Underfull \hbox (badness 10000) in paragraph at lines 151--154
 
  []
 
-
+[15]
 Underfull \hbox (badness 10000) in paragraph at lines 171--174
 
  []
@@ -310,7 +310,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 205--208
 
  []
 
-<chapters/img/TRA_RM.png, id=243, 686.565pt x 685.3605pt>
+<chapters/img/TRA_RM.png, id=243, 683.55376pt x 709.4505pt>
 File: chapters/img/TRA_RM.png Graphic file (type png)
 
 <use chapters/img/TRA_RM.png>
@@ -324,39 +324,42 @@ Chapter 5.
 
 ]
 Chapter 6.
+("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\chapters/blSSPRO.tex")
+("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\chapters/blSSOPE.tex")
+("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\chapters/blSSEOL.tex")
 [20
 
-]
+] [21]
 Chapter 7.
-[21
+[22
 
 ]
 Chapter 8.
 ("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\chapters/blRAMS.tex"
-<chapters/img/subsystem_reliability_analysis.png, id=260, 359.54324pt x 318.590
+<chapters/img/subsystem_reliability_analysis.png, id=265, 359.54324pt x 318.590
 26pt>
 File: chapters/img/subsystem_reliability_analysis.png Graphic file (type png)
- <use chapters/img/subsystem_reliability_analysis.png> [22
+ <use chapters/img/subsystem_reliability_analysis.png> [23
 
 ])
 ("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\compiledBaseLine.bbl"
-[23] [24 <C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/report/chapters/img/sub
-system_reliability_analysis.png (PNG copy)>]) [25
+[24] [25 <C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/report/chapters/img/sub
+system_reliability_analysis.png (PNG copy)>]) [26
 
 ]
 Appendix A.
-[26
+[27
 
 ] ("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\compiledBaseLine.aux")
  ) 
 Here is how much of TeX's memory you used:
- 1451 strings out of 495285
- 20470 string characters out of 3179881
- 70661 words of memory out of 3000000
- 4632 multiletter control sequences out of 15000+200000
+ 1466 strings out of 495285
+ 20983 string characters out of 3179881
+ 70694 words of memory out of 3000000
+ 4638 multiletter control sequences out of 15000+200000
  12614 words of font info for 43 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
- 25i,8n,21p,1001b,368s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 25i,8n,21p,1001b,388s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmbx10.pfb>
 <C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C
 :/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmbxti10.pfb><C
@@ -366,9 +369,9 @@ ogram Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><C:/Pr
 ogram Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Prog
 ram Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Progra
 m Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on compiledBaseLine.pdf (28 pages, 1191818 bytes).
+Output written on compiledBaseLine.pdf (29 pages, 1197044 bytes).
 PDF statistics:
- 306 PDF objects out of 1000 (max. 8388607)
+ 311 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 42 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 48 words of extra memory for PDF output out of 10000 (max. 10000000)
 
