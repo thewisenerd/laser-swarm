@@ -8,6 +8,7 @@ import com.google.code.laserswarm.conf.Constellation;
 import com.google.code.laserswarm.conf.Configuration.Actions;
 import com.google.code.laserswarm.earthModel.EarthModel;
 import com.google.code.laserswarm.earthModel.ElevationModel;
+import com.google.code.laserswarm.out.Report;
 import com.google.code.laserswarm.simulation.SimTemplate;
 import com.google.code.laserswarm.simulation.Simulator;
 import com.google.code.laserswarm.simulation.SimulatorMaster;
@@ -46,6 +47,13 @@ public class LaserSwarm {
 				config.hasAction(Actions.TABULATE)) {
 			process();
 		}
+
+		if (config.hasAction(Actions.PLOT_DISK) || //
+				config.hasAction(Actions.PLOT_SCREEN) || //
+				config.hasAction(Actions.TABULATE)) {
+			Report.write(simulations);
+		}
+
 	}
 
 	private void process() {
