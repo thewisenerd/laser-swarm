@@ -57,6 +57,12 @@
   timestamp = {2010.04.27}
 }
 
+@ELECTRONIC{kuphaldt,
+  author = {Tony R. Kuphaldt},
+  owner = {Sean},
+  timestamp = {2010.04.28}
+}
+
 @ELECTRONIC{Owen1999,
   author = {G. Scott Owen},
   month = {June},
