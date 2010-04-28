@@ -55,7 +55,8 @@ The power regulation mainly concerns the bus regulation. The bus is the connecti
 A quasi-regulated bus has a battery charge regulator and a fully regulated bus also has a battery discharge regulator.
 Batteries can be charged individually or in parallel. Batteries that are charged in parallel degrade faster. Because the current is not controlled, one battery could receive all the charge current. Eventually the batteries will balance out, but the battery life will be limited to about five years. To ensure a longer lifetime, they should be charged individually (for example by using a linear, charge-current-control design). A parallel charging system, however, is simpler and smaller than an individually charging system.
 
-For satellites using solar arrays the interface between the arrays and the bus also needs to be controlled. There are two ways of doing this: with a peak-power tracker (PPT) and with direct-energy-transfer (DET). 
+Because the optimum power source output and the bus input are different, a system has to be put in place to deal with this. An example of two possibilities will be given and explained for solar panels.
+There are two ways of doing this: with a peak-power tracker (PPT) and with direct-energy-transfer (DET). 
 A PPT is a non-dissipative system: it exacts the exact power the satellite requires (up to the arrays's peak power). Every solar panel has a peak power point, which can be seen from the panel's IV-curve. So the panel produces the most power at a certain current and voltage. But when a battery is charging, it is charged at it's own current and voltage. The result of this is that the battery will change the panel's current and voltage to it's own, forcing the solar panel to under perform. A PPT uses a DC/DC converter to change the solar panel's output to the required battery input, thus letting the panel perform at it's peak power point, increasing the efficiency. However, because the PPT is connected in series to the solar array, it uses about 4-7\% of the total power.
 
 A DET system uses a shunt regulator to shunt away the excess power from the subsystem, usually at the array, to avoid internal energy dissipation. Shunt regulators can keep the bus voltage at a predetermined voltage. These systems are extremely efficient and has a lot of advantages over a PPT system: lower mass, less parts and a higher total efficiency at EOL.
@@ -63,5 +64,13 @@ A DET system uses a shunt regulator to shunt away the excess power from the subs
 \subsection{Power distribution}
 \label{blDOdistribution}
 
-A power distribution system (PDS) consists of the cabling, fault protection and on/off switching gear. The first choice to make is the type of current of the distribution system. Mostly direct current is used because spacecraft generate direct current. An AC/DC converter would need more electronics, resulting in more parts and a higher mass. 
-The PDS can either be centralized or decentralized. The decentralized option requires a converter at each individual load, resulting in an unregulated bus. The centralized option regulates power to all loads from the main bus. The advantage here is that the EPS does not have to be tailor-designed.  
+A power distribution system (PDS) consists of the electrical load profile, the control options and fault protection.
+After the load profile has been determined, the first choice to make is the type of current of the distribution system. Mostly direct current is used because spacecraft generate direct current. An AC/DC converter would need more electronics, resulting in more parts and a higher mass. 
+But systems working with alternating current can be single phase or multiple phases\cite{kuphaldt}. THe main difference is that in a single phase system all voltages from the source vary in unison, whereas the different currents of the multi-phase system reach their peak value at different times. Each mode has its advantages and disadvantages. Single phase systems are simpler and thus cheaper but when higher loads are required multi-phase system are more useful. They can help to reduce vibrations, for example.
+
+The PDS can either be centralized or decentralized. The decentralized option requires a converter at each individual load, resulting in an unregulated bus. The centralized option regulates power to all loads from the main bus. The advantage here is that the EPS does not have to be tailor-designed. 
+
+The fault protection mainly is about isolating failed loads. If it is not isolated, a short circuit can occur. This will draw excess power and stress the cables. The isolation is usually done with fuses. The different design options here are the fuse types and location.
+The short circuit can also be dealt with by using cables that have extra current carrying capabilities. These come in varying types and sizes.
+A last option is to foresee extra power storage capabilities to cope with a short circuit.
+Of course, the fault protection options are not limited to the use of just one of these. In practice, the three are used simultaneoulsy.
