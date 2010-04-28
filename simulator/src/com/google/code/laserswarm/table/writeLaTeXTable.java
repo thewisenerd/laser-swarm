@@ -8,7 +8,7 @@ import java.util.List;
 
 import com.google.code.laserswarm.conf.Constellation;
 import com.google.code.laserswarm.conf.Satellite;
-import com.google.code.laserswarm.plot.plot1D.plotHeightDistribution;
+import com.google.code.laserswarm.out.plot.plot1D.plotHeightDistribution;
 import com.google.code.laserswarm.simulation.SimTemplate;
 import com.google.code.laserswarm.simulation.SimVars;
 import com.google.code.laserswarm.simulation.Simulator;

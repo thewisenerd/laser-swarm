@@ -13,6 +13,8 @@ import javax.vecmath.Vector3d;
 
 import org.geotools.geometry.DirectPosition2D;
 import org.geotools.referencing.operation.projection.PointOutsideEnvelopeException;
+import org.opengis.coverage.CannotEvaluateException;
+import org.opengis.coverage.PointOutsideCoverageException;
 
 import com.google.code.laserswarm.Orbit.OrbitClass;
 import com.google.code.laserswarm.conf.Constellation;
@@ -50,8 +52,8 @@ public class Simulator implements Runnable {
 
 	@Override
 	public void run() {
-		double T0 = 481597;
-		double TE = 481603;
+		double T0 = 525442.25;
+		double TE = 525455.50;
 
 		/* Make a list start times */
 		Constellation constellation = template.getConstellation();
@@ -77,7 +79,7 @@ public class Simulator implements Runnable {
 		dataPoints = Lists.newLinkedList();
 
 		for (int i = 0; i < samples; i++) {
-			// if (i % 100 == 0)
+			// if (i % 1000 == 0)
 			// logger.dbg("Running sample %s of %s", i, samples);
 			SimVars simVals = new SimVars();
 
@@ -116,7 +118,13 @@ public class Simulator implements Runnable {
 			simVals.tR = dR.length() / Constants.c;
 			DirectPosition2D reflectionPoint = new DirectPosition2D(sphere.z * (180 / Math.PI), sphere.y
 					* (180 / Math.PI));
-			Vector3d surfNormal = earth.getSurfaceNormal(reflectionPoint);
+			Vector3d surfNormal = null;
+			try {
+				surfNormal = earth.getSurfaceNormal(reflectionPoint);
+			} catch (PointOutsideCoverageException e) {
+				logger.wrn(e, "Cannot find surf normal of sample %s (prolly border case) :", i, simVals);
+				continue;
+			}
 
 			/* Make pulses (with downtravel) */
 			simVals.power0 = constellation.getPower();
@@ -130,8 +138,13 @@ public class Simulator implements Runnable {
 			double z = dR.length() * Math.cos(angle);
 			double x = dR.length() * Math.sin(angle);
 			Vector3d incidence = new Vector3d(x, 0, z);
-			simVals.scatter = new ScatteringCharacteristics(incidence, earth
-					.getScatteringParam(reflectionPoint));
+			try {
+				simVals.scatter = new ScatteringCharacteristics(incidence, earth
+						.getScatteringParam(reflectionPoint));
+			} catch (CannotEvaluateException e) {
+				logger.wrn(e, "Cannot find Scattering param of sample %s:", i, simVals);
+				continue;
+			}
 
 			/* Compute scatter power per sat */
 			simVals.powerR_SC = Maps.newHashMap();

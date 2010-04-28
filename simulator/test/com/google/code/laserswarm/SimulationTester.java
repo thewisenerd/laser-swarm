@@ -36,7 +36,7 @@ public class SimulationTester extends TestCase {
 
 	private static Constellation mkTestConstilation() {
 		Satellite emittor = new Satellite("SAT01", (0.08 * 0.08), 6700f, 0f, (float) Math.PI / 2,
-				(float) (3.2 * Math.PI / 180), 0f, 0f);
+				(float) (8.5 * Math.PI / 180), 0f, 0f);
 		LinkedList<Satellite> r = Lists.newLinkedList();
 		r.add(emittor);
 		return new Constellation(10, 50, emittor, r);
@@ -60,13 +60,18 @@ public class SimulationTester extends TestCase {
 			e.printStackTrace();
 		}
 
-		ElevationModel dem = null;
-		try {
-			dem = DemReader.parseDem(new File("DEM/srtm_37_02-red.asc"));
-		} catch (DemCreationException e1) {
-			fail("Cannot load the DEM");
+		EarthModel earth = new EarthModel();
+
+		File demFolder = new File("DEM");
+		for (File demF : demFolder.listFiles()) {
+			try {
+				ElevationModel dem = DemReader.parseDem(demF.getAbsoluteFile());
+				earth.add(dem);
+			} catch (DemCreationException e) {
+				logger.err(e, "");
+			}
 		}
-		EarthModel earth = new EarthModel(dem);
+		earth.loadCoef(); // Stretch refl coef
 
 		SimulatorMaster mgr = new SimulatorMaster(earth);
 		mgr.addSimTemplate(new SimTemplate(Configuration.getInstance(), testConstallation));

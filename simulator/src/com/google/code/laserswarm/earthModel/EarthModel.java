@@ -37,9 +37,13 @@ public class EarthModel implements IElevationModel {
 
 	private static final Logger	logger	= Logger.get(EarthModel.class);
 
+	public EarthModel() {
+		loadCoef(new File("."));
+	}
+
 	public EarthModel(ElevationModel dem) {
 		this.dems.add(dem);
-		loadCoef(new File("."));
+		loadCoef();
 	}
 
 	public EarthModel(ElevationModel dem, File coefFolder) {
@@ -53,7 +57,11 @@ public class EarthModel implements IElevationModel {
 
 	public EarthModel(Set<ElevationModel> dems, File coefFolder) {
 		this.dems = dems;
-		loadCoef(new File("."));
+		loadCoef();
+	}
+
+	public void add(ElevationModel dem) {
+		dems.add(dem);
 	}
 
 	public ElevationModel findCoverage(DirectPosition2D point) {
@@ -132,30 +140,38 @@ public class EarthModel implements IElevationModel {
 		return thetaHenyeyGreensteinMap;
 	}
 
-	private void loadCoef(File baseFolder) {
-		File kappa = new File(baseFolder, "kappaMinnaertMap.csv");
-		File refr = new File(baseFolder, "surfaceRefractionMap.csv");
-		File greenSt = new File(baseFolder, "thetaHenyeyGreensteinMap.csv");
+	public void loadCoef() {
+		loadCoef(new File("."));
+	}
 
-		Matrix m_kappa = null;
-		Matrix m_refr = null;
-		Matrix m_greenSt = null;
+	public void loadCoef(File baseFolder) {
 		try {
-			m_kappa = MatrixFactory.importFromFile(kappa);
-			m_refr = MatrixFactory.importFromFile(refr);
-			m_greenSt = MatrixFactory.importFromFile(greenSt);
-		} catch (MatrixException e1) {
-			logger.err(e1, "Cannot import scatter coef");
-		} catch (IOException e1) {
-			logger.err(e1, "Cannot import scatter coef");
-		}
+			File kappa = new File(baseFolder, "kappaMinnaertMap.csv");
+			File refr = new File(baseFolder, "surfaceRefractionMap.csv");
+			File greenSt = new File(baseFolder, "thetaHenyeyGreensteinMap.csv");
 
-		Envelope e = getCompleteEnvelope2D();
-		kappaMinnaertMap = Interpolator2D.create(new GridCoverageFactory().create("KAPPA", // 
-				m_kappa.toFloatArray(), e), Interpolation.getInstance(Interpolation.INTERP_BICUBIC));
-		surfaceRefractionMap = Interpolator2D.create(new GridCoverageFactory().create("REFR", // 
-				m_refr.toFloatArray(), e), Interpolation.getInstance(Interpolation.INTERP_BICUBIC));
-		thetaHenyeyGreensteinMap = Interpolator2D.create(new GridCoverageFactory().create("GREENST", //
-				m_greenSt.toFloatArray(), e), Interpolation.getInstance(Interpolation.INTERP_BICUBIC));
+			Matrix m_kappa = null;
+			Matrix m_refr = null;
+			Matrix m_greenSt = null;
+			try {
+				m_kappa = MatrixFactory.importFromFile(kappa);
+				m_refr = MatrixFactory.importFromFile(refr);
+				m_greenSt = MatrixFactory.importFromFile(greenSt);
+			} catch (MatrixException e1) {
+				logger.err(e1, "Cannot import scatter coef");
+			} catch (IOException e1) {
+				logger.err(e1, "Cannot import scatter coef");
+			}
+
+			Envelope e = getCompleteEnvelope2D();
+			kappaMinnaertMap = Interpolator2D.create(new GridCoverageFactory().create("KAPPA", // 
+					m_kappa.toFloatArray(), e), Interpolation.getInstance(Interpolation.INTERP_BICUBIC));
+			surfaceRefractionMap = Interpolator2D.create(new GridCoverageFactory().create("REFR", // 
+					m_refr.toFloatArray(), e), Interpolation.getInstance(Interpolation.INTERP_BICUBIC));
+			thetaHenyeyGreensteinMap = Interpolator2D.create(new GridCoverageFactory().create("GREENST", //
+					m_greenSt.toFloatArray(), e), Interpolation
+					.getInstance(Interpolation.INTERP_BICUBIC));
+		} catch (Exception e) {
+		}
 	}
 }

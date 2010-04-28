@@ -23,7 +23,7 @@ public abstract class DemReader {
 	public static ElevationModel parseDem(File demFile) throws DemCreationException {
 		String fileName = demFile.getName();
 		String type = fileName.substring(fileName.lastIndexOf(".") + 1);
-		if (type.equals("asc")) {
+		if (type.equals("asc") || type.equals("AGR")) {
 			logger.inf("Using ASCII DEM PARSER");
 			return new ArcInfoASCII_1(demFile).parse();
 		} else if (type.equals("tif")) {

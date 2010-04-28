@@ -28,6 +28,8 @@ public class ElevationModel implements IElevationModel {
 	public ElevationModel(Matrix matrix, GridCoverage2D coverage) {
 		setElevationData(matrix);
 		this.setCoverage(coverage);
+		getAverageHeight();
+		elevationData = null;
 	}
 
 	/**
@@ -99,8 +101,11 @@ public class ElevationModel implements IElevationModel {
 		return coverage;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.google.code.laserswarm.earthModel.IElevationModel#getElevation(org.geotools.geometry.DirectPosition2D)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @seecom.google.code.laserswarm.earthModel.IElevationModel#getElevation(org.geotools.geometry.
+	 * DirectPosition2D)
 	 */
 	public double getElevation(DirectPosition2D point) {
 		double[] dest = new double[1];
@@ -112,8 +117,11 @@ public class ElevationModel implements IElevationModel {
 		return elevationData;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.google.code.laserswarm.earthModel.IElevationModel#getIntersecion(javax.vecmath.Vector3d, javax.vecmath.Point3d)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.google.code.laserswarm.earthModel.IElevationModel#getIntersecion(javax.vecmath.Vector3d,
+	 * javax.vecmath.Point3d)
 	 */
 	public Point3d getIntersecion(Vector3d direction, Point3d origin)
 			throws PointOutsideEnvelopeException {
@@ -160,8 +168,11 @@ public class ElevationModel implements IElevationModel {
 					"The ray does not intersect the coverage. (lat:%s;long:%s)", phi, theta));
 	}
 
-	/* (non-Javadoc)
-	 * @see com.google.code.laserswarm.earthModel.IElevationModel#getSurfaceNormal(org.geotools.geometry.DirectPosition2D)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @seecom.google.code.laserswarm.earthModel.IElevationModel#getSurfaceNormal(org.geotools.geometry.
+	 * DirectPosition2D)
 	 */
 	public Vector3d getSurfaceNormal(DirectPosition2D pos) {
 		// 1 2 3
