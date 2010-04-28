@@ -1,5 +1,7 @@
 package com.google.code.laserswarm.conf;
 
+import jat.spacetime.CalDate;
+
 import java.io.File;
 import java.util.List;
 import java.util.Set;
@@ -25,6 +27,19 @@ public class Configuration {
 	private static Configuration	instance;
 
 	private static final String		configName						= "configuration.xml";
+
+	/**
+	 * Location of the DEMs
+	 */
+	public static File				demDir							= new File("DEM");
+	/**
+	 * Earth radius based on EPSG:3785 ellipsoid (sphereoid)
+	 */
+	public static double			R0								= 6378137;
+	/**
+	 * Orbit epoch date
+	 */
+	public static final CalDate		epoch							= new CalDate(2000, 1, 1, 0, 0, 0);
 
 	@Attribute
 	private static Set<Actions>		mode;

@@ -13,7 +13,7 @@ import java.util.List;
 import javax.imageio.ImageIO;
 import javax.vecmath.Vector3d;
 
-import com.google.code.laserswarm.earthModel.ElevationModel;
+import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.simulation.SimVars;
 import com.google.common.collect.Lists;
 import com.lyndir.lhunath.lib.system.logging.Logger;
@@ -57,7 +57,7 @@ public class plotHeightDistribution {
 		double hMin = Double.MAX_VALUE;
 		for (SimVars aSim : sims) {
 			double rp = new Vector3d(aSim.pR).length();
-			double hFound = rp - ElevationModel.R0;
+			double hFound = rp - Configuration.R0;
 			theta.add(Math.acos(aSim.pR.z / rp)); // longitude
 			phi.add(Math.atan2(aSim.pR.y, aSim.pR.x)); // latitude
 			h.add(hFound);
@@ -77,7 +77,7 @@ public class plotHeightDistribution {
 				double a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(lat1) * Math.cos(lat2)
 						* Math.sin(dLon / 2) * Math.sin(dLon / 2);
 				double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-				dist.add(dist.get(dist.size() - 1) + ElevationModel.R0 * c);
+				dist.add(dist.get(dist.size() - 1) + Configuration.R0 * c);
 			}
 		}
 		double hDiff = hMax - hMin;
@@ -92,7 +92,7 @@ public class plotHeightDistribution {
 			for (int l = 0; l < lineThickness; l++) {
 				int x1 = wOffset + (int) (((double) n) / ((double) size) * width);
 				int y1 = height - (int) ((h.get(n) - hMin) / hDiff * height * scaleFactor) - l;
-				int x2 = wOffset + (int) (((double) n + 1) / ((double) size) * width);
+				int x2 = wOffset + (int) (((double) n + 1) / (size) * width);
 				int y2 = height - (int) ((h.get(n + 1) - hMin) / hDiff * height * scaleFactor) - l;
 				g.drawLine(x1, y1, x2, y2);
 			}

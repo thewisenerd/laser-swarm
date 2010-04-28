@@ -12,6 +12,7 @@ import org.geotools.referencing.operation.projection.PointOutsideEnvelopeExcepti
 import org.opengis.geometry.DirectPosition;
 import org.ujmp.core.Matrix;
 
+import com.google.code.laserswarm.conf.Configuration;
 import com.google.common.base.Preconditions;
 import com.lyndir.lhunath.lib.system.logging.Logger;
 
@@ -21,7 +22,6 @@ public class ElevationModel implements IElevationModel {
 	private GridCoverage2D		coverage;
 
 	private Double				averageHeight;
-	public static final double	R0		= 6378137;
 
 	private static final Logger	logger	= Logger.get(ElevationModel.class);
 
@@ -126,7 +126,7 @@ public class ElevationModel implements IElevationModel {
 	public Point3d getIntersecion(Vector3d direction, Point3d origin)
 			throws PointOutsideEnvelopeException {
 		/* Find the intersection with the sphere (r = r(EPSG:3785) + average height) */
-		double r = R0 + getAverageHeight();
+		double r = Configuration.R0 + getAverageHeight();
 		List<Point3d> collPoints = collision(direction, origin, r);
 
 		/* Based on the number of collisions, find the closes intersection */
@@ -162,7 +162,7 @@ public class ElevationModel implements IElevationModel {
 		// logger.dbg("phi: %s | theta: %s", phi * 180 / Math.PI, theta * 180 / Math.PI);
 		if (coverage.getEnvelope2D().contains(dp)) {
 			double h = getElevation(dp);
-			return new Point3d(R0 + h, phi, theta);
+			return new Point3d(Configuration.R0 + h, phi, theta);
 		} else
 			throw new PointOutsideEnvelopeException(String.format(
 					"The ray does not intersect the coverage. (lat:%s;long:%s)", phi, theta));
@@ -187,7 +187,7 @@ public class ElevationModel implements IElevationModel {
 		float[] z5 = (float[]) coverage.evaluate(new DirectPosition2D(pos.x + dAngle, pos.y));
 		float[] z4 = (float[]) coverage.evaluate(new DirectPosition2D(pos.x - dAngle, pos.y));
 
-		double g = dAngle * R0;
+		double g = dAngle * Configuration.R0;
 		double dx = (z5[0] - z4[0]) / (2 * g); // dz/d(lat)
 		double dy = (z2[0] - z7[0]) / (2 * g); // dz/d(lon)
 

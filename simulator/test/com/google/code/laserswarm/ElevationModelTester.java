@@ -10,6 +10,7 @@ import junit.framework.TestCase;
 import org.geotools.geometry.DirectPosition2D;
 import org.geotools.referencing.operation.projection.PointOutsideEnvelopeException;
 
+import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.earthModel.ElevationModel;
 import com.google.code.laserswarm.earthModel.IElevationModel;
 import com.google.code.laserswarm.util.demReader.DemCreationException;
@@ -44,7 +45,7 @@ public class ElevationModelTester extends TestCase {
 		logger.inf("Testing pnt long: %s lat: %s", lon, lat);
 		logger.inf("Testing with pnt %s", testPoint);
 		logger.inf("Testing with direction %s", dir);
-		logger.inf("Testing pnt surface h: %s", ElevationModel.R0 + dem.getElevation(//
+		logger.inf("Testing pnt surface h: %s", Configuration.R0 + dem.getElevation(//
 				new DirectPosition2D((180 / Math.PI) * lon, (180 / Math.PI) * lat)));
 
 		Point3d onSurfPoint = null;

@@ -2,7 +2,6 @@ package com.google.code.laserswarm.simulation;
 
 import jat.cm.Constants;
 import jat.cm.KeplerElements;
-import jat.spacetime.CalDate;
 import jat.spacetime.Time;
 
 import java.util.HashMap;
@@ -17,6 +16,7 @@ import org.opengis.coverage.CannotEvaluateException;
 import org.opengis.coverage.PointOutsideCoverageException;
 
 import com.google.code.laserswarm.Orbit.OrbitClass;
+import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.conf.Constellation;
 import com.google.code.laserswarm.conf.Satellite;
 import com.google.code.laserswarm.earthModel.Atmosphere;
@@ -28,7 +28,6 @@ import com.lyndir.lhunath.lib.system.logging.Logger;
 
 public class Simulator implements Runnable {
 
-	public static final CalDate	epoch	= new CalDate(2000, 1, 1, 0, 0, 0);
 	private static final Logger	logger	= Logger.get(Simulator.class);
 
 	private SimTemplate			template;
@@ -66,12 +65,12 @@ public class Simulator implements Runnable {
 
 		KeplerElements k = constellation.getEmitter().getKeplerElements();
 
-		OrbitClass emittorOrbit = new OrbitClass(new Time(epoch), k);
+		OrbitClass emittorOrbit = new OrbitClass(new Time(Configuration.epoch), k);
 		emittorOrbit.propogate(T0);
 		HashMap<Satellite, OrbitClass> receiverOrbits = Maps.newHashMap();
 		for (Satellite sat : constellation.getReceivers()) {
 			k = sat.getKeplerElements();
-			OrbitClass o = new OrbitClass(new Time(epoch), k);
+			OrbitClass o = new OrbitClass(new Time(Configuration.epoch), k);
 			o.propogate(T0);
 			receiverOrbits.put(sat, o);
 		}
