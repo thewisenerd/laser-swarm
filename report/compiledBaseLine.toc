@@ -7,7 +7,7 @@
 \contentsline {subsection}{\numberline {2.3.2}Requirement Discovery}{6}
 \contentsline {subsubsection}{Cost Budget Requirement}{6}
 \contentsline {subsubsection}{Mass Budget Requirement}{8}
-\contentsline {subsubsection}{Lifetime Budget Requirement}{8}
+\contentsline {subsubsection}{Lifetime Requirement}{8}
 \contentsline {chapter}{\numberline {3}Budgets}{9}
 \contentsline {chapter}{\numberline {4}Technical Risk Assessment}{10}
 \contentsline {chapter}{\numberline {5}Design Options}{11}

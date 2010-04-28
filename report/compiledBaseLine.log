@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (MiKTeX 2.8) (preloaded format=pdflatex 2010.4.20)  28 APR 2010 01:08
+This is pdfTeX, Version 3.1415926-1.40.10 (MiKTeX 2.8) (preloaded format=pdflatex 2010.4.20)  28 APR 2010 09:35
 entering extended mode
 **C:/Users/Alex/Desktop/Laser*Swarm/laser-swarm/report/compiledBaseLine.tex
 ("C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/report/compiledBaseLine.tex"
@@ -173,6 +173,9 @@ FBS.pdf>]
 Package acronym Info: Label `acro:ADCS' newly defined as it shall be overridden
 
 although it is yet undefined on input line 28.
+Package acronym Info: Label `acro:GLAS' newly defined as it shall be overridden
+
+although it is yet undefined on input line 38.
 )
 [8]
 Chapter 3.
@@ -214,10 +217,10 @@ Appendix A.
 ] ("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\compiledBaseLine.aux")
  ) 
 Here is how much of TeX's memory you used:
- 1308 strings out of 495285
- 18314 string characters out of 3179881
- 68978 words of memory out of 3000000
- 4505 multiletter control sequences out of 15000+200000
+ 1321 strings out of 495285
+ 18427 string characters out of 3179881
+ 69208 words of memory out of 3000000
+ 4518 multiletter control sequences out of 15000+200000
  12255 words of font info for 42 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
  25i,8n,21p,1001b,270s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -229,7 +232,7 @@ ogram Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><C:/Pr
 ogram Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Prog
 ram Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Progra
 m Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on compiledBaseLine.pdf (20 pages, 661906 bytes).
+Output written on compiledBaseLine.pdf (20 pages, 662647 bytes).
 PDF statistics:
  273 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
