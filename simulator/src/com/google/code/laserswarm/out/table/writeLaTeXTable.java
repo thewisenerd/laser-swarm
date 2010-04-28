@@ -74,8 +74,8 @@ public class writeLaTeXTable {
 				num++;
 				int n = 1;
 				tableOut.write("\\begin{center}\n\t\\begin{longtable}"
-						+ "{| c | c | c | c | c | c | c | c | c |}"
-						+ "\\hline\n\t\t\\label{t:performance}\n\t\tSat no. & Name &"
+						+ "{| c | c | c | c | c | c | c | c | c |}" + "\\hline\n\t\t\\label{t:swarm"
+						+ num + "}\n\t\tSat no. & Name &"
 						+ "$A_{aperture}$ [$m^{2}$] & a [km] & e [-] & i [rad] & $\\Omega$ [rad] & "
 						+ "$\\theta$ [rad]& $\\omega$ [rad] \\\\\\hline");
 				Satellite emit = conf.getConstellation().getEmitter();
