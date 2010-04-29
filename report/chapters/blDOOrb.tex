@@ -17,7 +17,7 @@ The most important of the four Keplerian elements during this part of the design
 The following sections will each describe one of the four main categories. They are described in the order listed in the first paragraph of this section. However, first the most common orbits are discussed in the following paragraphs.
 
 \subsection {Common orbits}
-\label{blOrbCommon}
+\label{sec:blOrbCommon}
 Some special orbits are repeated multiple times in the orbit architecture trees as shown in Figure-ref(???) to Figure-ref(???). These common orbits are the polar orbit, the sun synchronous orbit, the sun synchronous polar orbit, the frozen orbit and the repeat orbit.
 
 \begin{enumerate}
@@ -30,7 +30,7 @@ Some special orbits are repeated multiple times in the orbit architecture trees 
 	\item Frozen orbit:
 	An orbit where there are no long-term changes in argument of perigee and eccentricity. The eccentricity is determined based on a given semimajor axis and inclination.
 	\item Repeat orbit:
-	An orbit where the satellite comes across the same point on the ground after a integral number of revolutions. A combination of a repeat orbit and a frozen orbit is of course also possible.
+	An orbit where the satellite comes across the same point on the ground after a integral number of revolutions. A combination of a repeat orbit and a frozen orbit also a possibility.
 \end{enumerate}
 
 \subsection{\ac{LEO}}
@@ -39,13 +39,17 @@ The altitude of a satellite in \acs{LEO} ranges from approximately 80 to 2000 [k
 
 \subsection{\ac{MEO}}
 \label{sec:blOrb2}
-The altitudes for these orbits range from 2000 to 35.700 [km], which is between the \acs{LEO} and the \ac{GEO}.
+The altitudes for these orbits range from 2000 to 35.700 [km], which is in between the \acs{LEO} and the \ac{GEO}. These are the last orbits where sun synchronous orbits are typically used. This is because of the increase in inclination angle, as mentioned in \ref{sec:blOrbCommon}.
 
 \subsection{\ac{GEO}}
 \label{sec:blOrb3}
+This type of orbit is characterized by the satellite completing its orbit in exactly one day. This is not to be confused with a Geostationary orbit, which is a special case of geosynchronous orbit where the eccentricity is 0 and the altitude 35.700 [km].
+For the reason mentioned in section \ref{sec:blOrbCommon} sun synchronous orbits are not used at this altitude. \acs{GEO} has two special types of orbits, the supersynchronous and the subsynchronous orbits. These orbits are located at several hundred kilometers from the \acs{GEO}?? orbit, they are placed under the \acs{GEO} category due to their functions relating to the \acs{GEO}. The supersynchronous orbit is also known as a graveyard orbit (or other similar synonyms}, as the last name suggests this orbit is used to store dead satellites. The subsynchronous orbit is often used a storage orbit. ???
 
 \subsection{\ac{HEO}}
 \label{sec:blOrb4}
+Continuing the trend indicated in previous sections these orbits are located above the \acs{GEO} orbit. Also for these orbits sun synchronous orbits are not used.
 
 \subsubsection{\ac{HEllO}}
 \label{sec:blOrb4.5}
+The \ac{HEllO} are defined as a subcategory of the \acs{HEO} because a satellite in one of these orbits spends most of its time at the apogee, at the point furthest away from Earth. Despite the high eccentricity these orbits can take any shape. Some special ones are the Moniya orbit and the Tundra orbit ???
