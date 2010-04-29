@@ -20,6 +20,7 @@ import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.conf.Constellation;
 import com.google.code.laserswarm.conf.Satellite;
 import com.google.code.laserswarm.earthModel.Atmosphere;
+import com.google.code.laserswarm.earthModel.Convert;
 import com.google.code.laserswarm.earthModel.EarthModel;
 import com.google.code.laserswarm.earthModel.ScatteringCharacteristics;
 import com.google.common.collect.Lists;
@@ -34,6 +35,9 @@ public class Simulator implements Runnable {
 	private Thread				thread;
 	private EarthModel			earth;
 
+	private double				T0		= 525442.25;
+	private double				TE		= 525455.50;
+
 	private List<SimVars>		dataPoints;
 
 	public Simulator(SimTemplate templ, EarthModel earth) {
@@ -41,8 +45,22 @@ public class Simulator implements Runnable {
 		this.earth = earth;
 	}
 
+	public Simulator(SimTemplate templ, EarthModel earth, double T0, double TE) {
+		this.template = templ;
+		this.earth = earth;
+		setTime(T0, TE);
+	}
+
 	public List<SimVars> getDataPoints() {
 		return dataPoints;
+	}
+
+	public double getT0() {
+		return T0;
+	}
+
+	public double getTE() {
+		return TE;
 	}
 
 	public Thread getThread() {
@@ -51,9 +69,6 @@ public class Simulator implements Runnable {
 
 	@Override
 	public void run() {
-		double T0 = 525442.25;
-		double TE = 525455.50;
-
 		/* Make a list start times */
 		Constellation constellation = template.getConstellation();
 		double f = constellation.getPulseFrequency();
@@ -103,9 +118,7 @@ public class Simulator implements Runnable {
 			Point3d sphere = null;
 			try {
 				sphere = earth.getIntersecion(new Vector3d(simVals.p0), simVals.p0);
-				simVals.pR = new Point3d(sphere.x * Math.sin(sphere.z) * Math.cos(sphere.y),//
-						sphere.x * Math.sin(sphere.z) * Math.sin(sphere.y),//
-						sphere.x * Math.cos(sphere.z));
+				simVals.pR = Convert.xyz(sphere);
 			} catch (PointOutsideEnvelopeException e) {
 				// if (i % 100 == 0)
 				// logger.wrn(e, "Point at t=%s is out of the dem grid", simVals.t0);
@@ -115,7 +128,7 @@ public class Simulator implements Runnable {
 			Vector3d dR = new Vector3d(simVals.pR);
 			dR.sub(simVals.p0);
 			simVals.tR = dR.length() / Constants.c;
-			DirectPosition2D reflectionPoint = new DirectPosition2D(sphere.z * (180 / Math.PI), sphere.y
+			DirectPosition2D reflectionPoint = new DirectPosition2D(sphere.y * (180 / Math.PI), sphere.z
 					* (180 / Math.PI));
 			Vector3d surfNormal = null;
 			try {
@@ -189,6 +202,11 @@ public class Simulator implements Runnable {
 			dataPoints.add(simVals);
 		}
 		logger.inf("Found %s points", dataPoints.size());
+	}
+
+	private void setTime(double T0, double TE) {
+		this.T0 = T0;
+		this.TE = TE;
 	}
 
 	public Thread start() {

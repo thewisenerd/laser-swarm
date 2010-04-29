@@ -152,9 +152,10 @@ public class ElevationModel implements IElevationModel {
 		}
 
 		/* Find is spherical coordinates */
-		double rp = new Vector3d(p).length();
-		double theta = Math.acos(p.z / rp); // long
-		double phi = Math.atan2(p.y, p.x); // lat
+		Point3d sphere = Convert.sphere(p);
+		double rp = sphere.x;
+		double theta = sphere.y;
+		double phi = sphere.z;
 
 		/* The (lon, lat) coordinate */
 		DirectPosition2D dp = new DirectPosition2D((180 / Math.PI) * theta, (180 / Math.PI) * phi);
@@ -162,7 +163,7 @@ public class ElevationModel implements IElevationModel {
 		// logger.dbg("phi: %s | theta: %s", phi * 180 / Math.PI, theta * 180 / Math.PI);
 		if (coverage.getEnvelope2D().contains(dp)) {
 			double h = getElevation(dp);
-			return new Point3d(Configuration.R0 + h, phi, theta);
+			return new Point3d(Configuration.R0 + h, theta, phi);
 		} else
 			throw new PointOutsideEnvelopeException(String.format(
 					"The ray does not intersect the coverage. (lat:%s;long:%s)", phi, theta));

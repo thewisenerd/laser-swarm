@@ -11,6 +11,7 @@ import org.geotools.geometry.DirectPosition2D;
 import org.geotools.referencing.operation.projection.PointOutsideEnvelopeException;
 
 import com.google.code.laserswarm.conf.Configuration;
+import com.google.code.laserswarm.earthModel.Convert;
 import com.google.code.laserswarm.earthModel.ElevationModel;
 import com.google.code.laserswarm.earthModel.IElevationModel;
 import com.google.code.laserswarm.util.demReader.DemCreationException;
@@ -37,9 +38,8 @@ public class ElevationModelTester extends TestCase {
 		double lat = (Math.PI / 180) * dem.getCoverage().getEnvelope2D().getCenterY();
 
 		double r = 7000000;
-		Point3d testPoint = new Point3d(r * Math.sin(lon) * Math.cos(lat),//
-				r * Math.sin(lon) * Math.sin(lat),//
-				r * Math.cos(lon));
+		Point3d testPoint = Convert.sphere(new Point3d(r, lon, lat));
+
 		Vector3d dir = new Vector3d(testPoint);
 		dir.normalize();
 		logger.inf("Testing pnt long: %s lat: %s", lon, lat);
@@ -54,10 +54,6 @@ public class ElevationModelTester extends TestCase {
 		} catch (PointOutsideEnvelopeException e) {
 			logger.err(e, "");
 		}
-
-		// double rp = new Vector3d(onSurfPoint).length();
-		// double theta = Math.acos(onSurfPoint.z / rp); // long
-		// double phi = Math.atan2(onSurfPoint.y, onSurfPoint.x); // lat
 
 		double rp = onSurfPoint.x;
 		double phi = onSurfPoint.y;

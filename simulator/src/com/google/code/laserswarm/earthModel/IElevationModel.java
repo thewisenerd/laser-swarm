@@ -24,7 +24,7 @@ public interface IElevationModel {
 	 *            Direction of the XYZ ray (ECEF)
 	 * @param origin
 	 *            Origin of the ray (ECEF)
-	 * @return Point on the 3D surface where the intersection is; (r, phi, theta)
+	 * @return Point on the 3D surface where the intersection is; (r, theta, phi)
 	 * @throws PointOutsideEnvelopeException
 	 *             When it does not intersect;
 	 */
@@ -35,7 +35,7 @@ public interface IElevationModel {
 	 * Get the surface normal in the ENU reference system (East, North, Up)
 	 * 
 	 * @param pos
-	 *            Position of the point in (lat, long)
+	 *            Position of the point in (long, lat)
 	 * @return The local surface normal in the ENU system
 	 */
 	public abstract Vector3d getSurfaceNormal(DirectPosition2D pos);

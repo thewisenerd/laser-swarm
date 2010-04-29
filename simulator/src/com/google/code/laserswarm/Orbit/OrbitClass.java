@@ -138,6 +138,11 @@ public class OrbitClass {
 		return x;
 	}
 
+	public Point3d ECI_point() {
+		Matrix m = ECI();
+		return new Point3d(m.get(0, 0), m.get(1, 0), m.get(2, 0));
+	}
+
 	public Matrix PQW() {
 		Matrix r_pqw = new Matrix(3, 1);
 		double p = cm.p(ke.a, ke.e);

@@ -8,7 +8,7 @@ public class TestHeightDistributionPlot {
 	public static void main(String[] args) throws DemCreationException {
 		plotHeightDistribution plot = new plotHeightDistribution();
 		for (Simulator sim : SimulationTester.sim().values()) {
-			plot.plot(sim.getDataPoints(), 3, "../report/simulator/img/testHeightPlot");
+			plot.plot(sim.getDataPoints(), 3, "testHeightPlot");
 		}
 	}
 }

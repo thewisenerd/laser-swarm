@@ -11,9 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.imageio.ImageIO;
-import javax.vecmath.Vector3d;
+import javax.vecmath.Point3d;
 
 import com.google.code.laserswarm.conf.Configuration;
+import com.google.code.laserswarm.earthModel.Convert;
 import com.google.code.laserswarm.simulation.SimVars;
 import com.google.common.collect.Lists;
 import com.lyndir.lhunath.lib.system.logging.Logger;
@@ -56,10 +57,11 @@ public class plotHeightDistribution {
 		double hMax = Double.MIN_VALUE;
 		double hMin = Double.MAX_VALUE;
 		for (SimVars aSim : sims) {
-			double rp = new Vector3d(aSim.pR).length();
+			Point3d sphere = Convert.sphere(aSim.pR);
+			double rp = sphere.x;
 			double hFound = rp - Configuration.R0;
-			theta.add(Math.acos(aSim.pR.z / rp)); // longitude
-			phi.add(Math.atan2(aSim.pR.y, aSim.pR.x)); // latitude
+			theta.add(sphere.y); // longitude
+			phi.add(sphere.z); // latitude
 			h.add(hFound);
 			if (hFound > hMax) {
 				hMax = hFound;
