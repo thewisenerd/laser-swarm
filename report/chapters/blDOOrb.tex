@@ -1,6 +1,6 @@
 \section{Orbit Architecture}
 \label{blDOOrb}
-In this section the design options in the orbit architecture tree as seen in Figure-ref(???) to Figure-ref(???) are described. The orbits are divided in four categories: \ac{LEO}, \ac{MEO}, \ac{GEO} and finally \ac{HEO}. Certain orbits like transfer orbits and hyperbolic and parabolic trajectories are not included as they are not relevant for the mission.
+In this section the design options in the orbit architecture tree as seen in Figure-ref(???) to Figure-ref(???) are described. The orbits are divided in four categories: \ac{LEO}, \ac{MEO}, \ac{GEO} and finally \ac{HEO}. Certain orbits like hyperbolic and parabolic trajectories are not included as they are not relevant for the mission.
 
 After the main categories there are subdivisions, which can in turn have subdivisions as well. These subdivisions list the special orbits types that are possible, sometimes there is also a block called ``other''. This is because special orbit types have special constraints, as will be detailed in later sections; whereas the ``other'' block is there to represent all the other possible orbits.
 
@@ -43,13 +43,15 @@ The altitudes for these orbits range from 2000 to 35.700 [km], which is in betwe
 
 \subsection{\ac{GEO}}
 \label{sec:blOrb3}
-This type of orbit is characterized by the satellite completing its orbit in exactly one day. This is not to be confused with a Geostationary orbit, which is a special case of geosynchronous orbit where the eccentricity is 0 and the altitude 35.700 [km].
-For the reason mentioned in section \ref{sec:blOrbCommon} sun synchronous orbits are not used at this altitude. \acs{GEO} has two special types of orbits, the supersynchronous and the subsynchronous orbits. These orbits are located at several hundred kilometers from the \acs{GEO}?? orbit, they are placed under the \acs{GEO} category due to their functions relating to the \acs{GEO}. The supersynchronous orbit is also known as a graveyard orbit (or other similar synonyms}, as the last name suggests this orbit is used to store dead satellites. The subsynchronous orbit is often used a storage orbit. ???
+This type of orbit is characterized by the satellite completing its orbit in exactly one day. This is not to be confused with a Geostationary orbit, which is a special case of geosynchronous orbit where the eccentricity is 0 and the altitude 35.786 [km].
+For the reason mentioned in section \ref{sec:blOrbCommon} sun synchronous orbits are not used at this altitude. \acs{GEO} has two special types of orbits, the supersynchronous and the subsynchronous orbits. 
+The apogee of supersynchronous orbits is located located at significantly higher altitude than that of a \acs{GEO} orbit, they are placed under the \acs{GEO} category due relation with the \acs{GEO}. The supersynchronous orbit is also known as a graveyard orbit (or other similar synonyms}, as the last name suggests this orbit is used to store dead satellites. Recently another application is used, namely to send the satellite to supersynchronous orbit and change the inclination here and then place the satellite in \acs{GEO}. This is a more efficient maneuver than changing the inclination at \acs{GEO}\cite{jerOrbit}. 
+Sometimes a payload is placed in a subsynchronous orbit by the rocket after which the payload has to use its own propulsion to get into \acs{GEO}.
 
 \subsection{\ac{HEO}}
 \label{sec:blOrb4}
-Continuing the trend indicated in previous sections these orbits are located above the \acs{GEO} orbit. Also for these orbits sun synchronous orbits are not used.
+Continuing the trend indicated in previous sections these orbits are located above the \acs{GEO} orbits. Sun synchronous orbits usually are not used for this orbit as well.
 
 \subsubsection{\ac{HEllO}}
 \label{sec:blOrb4.5}
-The \ac{HEllO} are defined as a subcategory of the \acs{HEO} because a satellite in one of these orbits spends most of its time at the apogee, at the point furthest away from Earth. Despite the high eccentricity these orbits can take any shape. Some special ones are the Moniya orbit and the Tundra orbit ???
+The \ac{HEllO} are defined as a subcategory of the \acs{HEO}, because a satellite in one of these orbits spends most of its time at its apogee. Other than their high eccentricity, the other orbital elements can take any value. Some special orbits are the Molniya orbit and the Tundra orbit. The Molniya orbit has a period of half a sidereal day and the Tundra orbit has a period of a whole sidereal day. For both orbits the inclination often used is 63.4 degrees, this inclination ensures there is no shift or perigee along the orbit. When designing an orbit with a different incidence angle the oblates of the Earth has to be accounted for to negate this effect.
