@@ -1,37 +1,53 @@
-\contentsline {chapter}{\numberline {1}Introduction}{4}
-\contentsline {chapter}{\numberline {2}Functions and Requirements}{5}
-\contentsline {section}{\numberline {2.1}Functional Flow Diagram}{5}
-\contentsline {section}{\numberline {2.2}Functional Breakdown Structure}{5}
-\contentsline {section}{\numberline {2.3}Requirement Discovery Tree}{7}
-\contentsline {subsection}{\numberline {2.3.1}Mission Need Statement}{7}
-\contentsline {subsection}{\numberline {2.3.2}Requirement Discovery}{7}
-\contentsline {subsubsection}{Cost Budget Requirement}{7}
-\contentsline {subsubsection}{Mass Budget Requirement}{9}
-\contentsline {subsubsection}{Lifetime Requirement}{9}
-\contentsline {chapter}{\numberline {3}Budget Breakdown}{10}
-\contentsline {section}{\numberline {3.1}Cost Budget Breakdown}{10}
-\contentsline {chapter}{\numberline {4}Technical Risk Assessment}{14}
-\contentsline {section}{\numberline {4.1}Ground segment}{14}
-\contentsline {section}{\numberline {4.2}During mission}{15}
-\contentsline {section}{\numberline {4.3}Measurement protocol}{18}
-\contentsline {section}{\numberline {4.4}Post-mission}{20}
-\contentsline {chapter}{\numberline {5}Design Options}{22}
-\contentsline {section}{\numberline {5.1}ADCS}{22}
-\contentsline {subsection}{\numberline {5.1.1}Attitude determination}{22}
-\contentsline {subsection}{\numberline {5.1.2}Attitude control}{22}
-\contentsline {section}{\numberline {5.2}Electrical Power Subsystem}{23}
-\contentsline {subsection}{\numberline {5.2.1}The power source}{23}
-\contentsline {subsection}{\numberline {5.2.2}Power storage}{25}
-\contentsline {subsection}{\numberline {5.2.3}Power regulation and control}{25}
-\contentsline {subsection}{\numberline {5.2.4}Power distribution}{26}
-\contentsline {chapter}{\numberline {6}Approach with respect to sustainable development}{27}
-\contentsline {section}{\numberline {6.1}Production and Logistics}{27}
-\contentsline {section}{\numberline {6.2}Operations}{27}
-\contentsline {section}{\numberline {6.3}End Of Life}{28}
-\contentsline {chapter}{\numberline {7}Return on Investment and Operational Profit}{29}
-\contentsline {chapter}{\numberline {8}R.A.M.S.}{30}
-\contentsline {section}{\numberline {8.1}Reliability}{30}
-\contentsline {section}{\numberline {8.2}Availability}{30}
-\contentsline {section}{\numberline {8.3}Maintainability}{30}
-\contentsline {section}{\numberline {8.4}Safety}{31}
-\contentsline {chapter}{\numberline {A}Requirement Discovery Trees}{34}
+\contentsline {chapter}{\numberline {1}Introduction}{5}
+\contentsline {chapter}{\numberline {2}Functions and Requirements}{6}
+\contentsline {section}{\numberline {2.1}Functional Flow Diagram}{6}
+\contentsline {section}{\numberline {2.2}Functional Breakdown Structure}{6}
+\contentsline {section}{\numberline {2.3}Requirement Discovery Tree}{8}
+\contentsline {subsection}{\numberline {2.3.1}Mission Need Statement}{8}
+\contentsline {subsection}{\numberline {2.3.2}Requirement Discovery}{8}
+\contentsline {subsubsection}{Cost Budget Requirement}{8}
+\contentsline {subsubsection}{Mass Budget Requirement}{10}
+\contentsline {subsubsection}{Lifetime Requirement}{10}
+\contentsline {chapter}{\numberline {3}Budget Breakdown}{11}
+\contentsline {section}{\numberline {3.1}Mass budget}{11}
+\contentsline {section}{\numberline {3.2}Cost Budget Breakdown}{11}
+\contentsline {chapter}{\numberline {4}Technical Risk Assessment}{16}
+\contentsline {section}{\numberline {4.1}Ground segment}{16}
+\contentsline {section}{\numberline {4.2}During mission}{17}
+\contentsline {section}{\numberline {4.3}Measurement protocol}{20}
+\contentsline {section}{\numberline {4.4}Post-mission}{22}
+\contentsline {chapter}{\numberline {5}Design Options}{24}
+\contentsline {section}{\numberline {5.1}ADCS}{24}
+\contentsline {subsection}{\numberline {5.1.1}Attitude determination}{24}
+\contentsline {subsection}{\numberline {5.1.2}Attitude control}{24}
+\contentsline {section}{\numberline {5.2}Electrical Power Subsystem}{25}
+\contentsline {subsection}{\numberline {5.2.1}The power source}{25}
+\contentsline {subsection}{\numberline {5.2.2}Power storage}{27}
+\contentsline {subsection}{\numberline {5.2.3}Power regulation and control}{27}
+\contentsline {subsection}{\numberline {5.2.4}Power distribution}{28}
+\contentsline {section}{\numberline {5.3}Orbit Architecture}{28}
+\contentsline {subsection}{\numberline {5.3.1}Common orbits}{29}
+\contentsline {subsection}{\numberline {5.3.2}LEO}{29}
+\contentsline {subsection}{\numberline {5.3.3}MEO}{29}
+\contentsline {subsection}{\numberline {5.3.4}GEO}{30}
+\contentsline {subsection}{\numberline {5.3.5}HEO}{30}
+\contentsline {subsubsection}{HEllO}{30}
+\contentsline {section}{\numberline {5.4}Optical Emitting Payload}{30}
+\contentsline {subsection}{\numberline {5.4.1}Introduction}{30}
+\contentsline {subsection}{\numberline {5.4.2}laser characteristics}{31}
+\contentsline {subsection}{\numberline {5.4.3}Types of lasers}{31}
+\contentsline {section}{\numberline {5.5}Optical Receiver Payload}{32}
+\contentsline {subsection}{\numberline {5.5.1}Introduction}{32}
+\contentsline {subsection}{\numberline {5.5.2}Types of Optical Receiving Devices}{32}
+\contentsline {subsection}{\numberline {5.5.3}Important parameters for optical receiving devices}{34}
+\contentsline {chapter}{\numberline {6}Approach with respect to sustainable development}{39}
+\contentsline {section}{\numberline {6.1}Production and Logistics}{39}
+\contentsline {section}{\numberline {6.2}Operations}{39}
+\contentsline {section}{\numberline {6.3}End Of Life}{40}
+\contentsline {chapter}{\numberline {7}Return on Investment and Operational Profit}{41}
+\contentsline {chapter}{\numberline {8}R.A.M.S.}{42}
+\contentsline {section}{\numberline {8.1}Reliability}{42}
+\contentsline {section}{\numberline {8.2}Availability}{42}
+\contentsline {section}{\numberline {8.3}Maintainability}{42}
+\contentsline {section}{\numberline {8.4}Safety}{43}
+\contentsline {chapter}{\numberline {A}Requirement Discovery Trees}{46}

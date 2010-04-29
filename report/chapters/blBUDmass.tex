@@ -3,21 +3,23 @@
 A satellite is build up from a number of subsystems, which all have a mass. Figure \ref{massbreakdown} on page \pageref{massbreakdown} shows the different subsystems and some examples of components that contribute to the mass of the subsystem. In table \ref{rotsubsystemmass} rules of thumb for finding the mass of the different subsystems are given in terms of the satellite's dry mass. It has to be noted that the rules mainly count for conventional satellites. When using micro- or even nano-satellites there might be another distribution of mass, since some systems like computers can be miniaturised while other systems like antennas can not. 
 
 \begin{figure} [h]
-\includegraphics[width=0.8/textwidth]{chapters/img/mass_breakdown.png}
+\centering
+\includegraphics[width=0.8\textwidth]{chapters/img/mass_breakdown.png}
 \label{massbreakdown}
 \caption{Mass breakdown over the different subsystems}
 \end{figure}
 
 \begin{table} [h]
-\begin{tabular}{l l l}
+\centering
+\begin{tabular}{p{10cm} l l}
 Subsystem & Rule of Thumb & Source \\ \hline
 Propulsion & 2.5-7 \% & \cite{Space2b} \\ 
 \ac{ADCS} (incl. \ac{GNC}) & 3-9 \% & \cite{Space2b} \\ 
-\ac{C\&DH} and \ac{TT\&C} & 2.5-7 \% & \cite{Space2b} \\ 
+\ac{CDH} and \ac{TTC} & 2.5-7 \% & \cite{Space2b} \\ 
 Thermal & 3 \% & \cite{larson} \\ 
 Power & 20-40 \% & \cite{Space2b} \\ 
-Structure & Mechanics & 18-25 \% & \cite{Space2b} \\ 
-Payload & 15-50 \% & \cite{larson} \\ 
+Structure \& Mechanics & 18-25 \% & \cite{Space2b} \\ 
+Payload & 15-50 \% & \cite{larson} 
 \end{tabular} 
 \caption{Rules of Thumb for the estimation of subsystem mass in terms of the dry mass}
 \label{rotsubsystemmass}
