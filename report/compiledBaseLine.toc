@@ -12,45 +12,45 @@
 \contentsline {section}{\numberline {3.1}Mass budget}{11}
 \contentsline {section}{\numberline {3.2}Cost Budget Breakdown}{11}
 \contentsline {section}{\numberline {3.3}Power Budget Breakdown}{12}
-\contentsline {chapter}{\numberline {4}Technical Risk Assessment}{16}
-\contentsline {section}{\numberline {4.1}Ground segment}{16}
-\contentsline {section}{\numberline {4.2}During mission}{17}
-\contentsline {section}{\numberline {4.3}Measurement protocol}{20}
-\contentsline {section}{\numberline {4.4}Post-mission}{22}
-\contentsline {chapter}{\numberline {5}Design Options}{24}
-\contentsline {section}{\numberline {5.1}ADCS}{24}
-\contentsline {subsection}{\numberline {5.1.1}Attitude determination}{24}
-\contentsline {subsection}{\numberline {5.1.2}Attitude control}{24}
-\contentsline {section}{\numberline {5.2}Electrical Power Subsystem}{25}
-\contentsline {subsection}{\numberline {5.2.1}The power source}{25}
-\contentsline {subsection}{\numberline {5.2.2}Power storage}{27}
-\contentsline {subsection}{\numberline {5.2.3}Power regulation and control}{27}
-\contentsline {subsection}{\numberline {5.2.4}Power distribution}{28}
-\contentsline {section}{\numberline {5.3}Orbit Architecture}{28}
-\contentsline {subsection}{\numberline {5.3.1}Common orbits}{29}
-\contentsline {subsection}{\numberline {5.3.2}LEO}{29}
-\contentsline {subsection}{\numberline {5.3.3}MEO}{29}
-\contentsline {subsection}{\numberline {5.3.4}GEO}{29}
-\contentsline {subsection}{\numberline {5.3.5}HEO}{30}
-\contentsline {subsubsection}{HEllO}{30}
-\contentsline {section}{\numberline {5.4}Optical Emitting Payload}{30}
-\contentsline {subsection}{\numberline {5.4.1}Introduction}{30}
-\contentsline {subsection}{\numberline {5.4.2}laser characteristics}{31}
-\contentsline {subsection}{\numberline {5.4.3}Types of lasers}{31}
-\contentsline {section}{\numberline {5.5}Optical Receiver Payload}{32}
-\contentsline {subsection}{\numberline {5.5.1}Introduction}{32}
-\contentsline {subsection}{\numberline {5.5.2}Types of Optical Receiving Devices}{32}
-\contentsline {subsection}{\numberline {5.5.3}Important parameters for optical receiving devices}{33}
-\contentsline {chapter}{\numberline {6}Approach with respect to sustainable development}{39}
-\contentsline {section}{\numberline {6.1}Production and Logistics}{39}
-\contentsline {section}{\numberline {6.2}Operations}{39}
-\contentsline {section}{\numberline {6.3}End Of Life}{40}
-\contentsline {chapter}{\numberline {7}Return on Investment and Operational Profit}{41}
-\contentsline {section}{\numberline {7.1}Market Analyses}{41}
-\contentsline {section}{\numberline {7.2}Investment and Profit Opportunities}{41}
-\contentsline {chapter}{\numberline {8}R.A.M.S.}{43}
-\contentsline {section}{\numberline {8.1}Reliability}{43}
-\contentsline {section}{\numberline {8.2}Availability}{43}
-\contentsline {section}{\numberline {8.3}Maintainability}{43}
-\contentsline {section}{\numberline {8.4}Safety}{44}
-\contentsline {chapter}{\numberline {A}Requirement Discovery Trees}{47}
+\contentsline {chapter}{\numberline {4}Technical Risk Assessment}{17}
+\contentsline {section}{\numberline {4.1}Ground segment}{17}
+\contentsline {section}{\numberline {4.2}During mission}{18}
+\contentsline {section}{\numberline {4.3}Measurement protocol}{21}
+\contentsline {section}{\numberline {4.4}Post-mission}{23}
+\contentsline {chapter}{\numberline {5}Design Options}{25}
+\contentsline {section}{\numberline {5.1}ADCS}{25}
+\contentsline {subsection}{\numberline {5.1.1}Attitude determination}{25}
+\contentsline {subsection}{\numberline {5.1.2}Attitude control}{25}
+\contentsline {section}{\numberline {5.2}Electrical Power Subsystem}{26}
+\contentsline {subsection}{\numberline {5.2.1}The power source}{26}
+\contentsline {subsection}{\numberline {5.2.2}Power storage}{28}
+\contentsline {subsection}{\numberline {5.2.3}Power regulation and control}{28}
+\contentsline {subsection}{\numberline {5.2.4}Power distribution}{29}
+\contentsline {section}{\numberline {5.3}Orbit Architecture}{29}
+\contentsline {subsection}{\numberline {5.3.1}Common orbits}{33}
+\contentsline {subsection}{\numberline {5.3.2}Low Earth Orbit}{34}
+\contentsline {subsection}{\numberline {5.3.3}Medium Earth Orbit}{34}
+\contentsline {subsection}{\numberline {5.3.4}Geosynchronous Orbit}{34}
+\contentsline {subsection}{\numberline {5.3.5}High Earth Orbit}{36}
+\contentsline {subsubsection}{Highly Elliptical Orbit}{36}
+\contentsline {section}{\numberline {5.4}Optical Emitting Payload}{36}
+\contentsline {subsection}{\numberline {5.4.1}Introduction}{36}
+\contentsline {subsection}{\numberline {5.4.2}laser characteristics}{37}
+\contentsline {subsection}{\numberline {5.4.3}Types of lasers}{38}
+\contentsline {section}{\numberline {5.5}Optical Receiver Payload}{38}
+\contentsline {subsection}{\numberline {5.5.1}Introduction}{38}
+\contentsline {subsection}{\numberline {5.5.2}Types of Optical Receiving Devices}{38}
+\contentsline {subsection}{\numberline {5.5.3}Important parameters for optical receiving devices}{40}
+\contentsline {chapter}{\numberline {6}Approach with respect to sustainable development}{44}
+\contentsline {section}{\numberline {6.1}Production and Logistics}{44}
+\contentsline {section}{\numberline {6.2}Operations}{44}
+\contentsline {section}{\numberline {6.3}End Of Life}{45}
+\contentsline {chapter}{\numberline {7}Return on Investment and Operational Profit}{46}
+\contentsline {section}{\numberline {7.1}Market Analysis}{46}
+\contentsline {section}{\numberline {7.2}Investment and Profit Opportunities}{46}
+\contentsline {chapter}{\numberline {8}R.A.M.S.}{48}
+\contentsline {section}{\numberline {8.1}Reliability}{48}
+\contentsline {section}{\numberline {8.2}Availability}{48}
+\contentsline {section}{\numberline {8.3}Maintainability}{48}
+\contentsline {section}{\numberline {8.4}Safety}{49}
+\contentsline {chapter}{\numberline {A}Requirement Discovery Trees}{52}
