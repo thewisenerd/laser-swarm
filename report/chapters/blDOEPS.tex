@@ -1,39 +1,29 @@
 \section{Electrical Power Subsystem}
 \label{blDOEPS}
 
-The electrical power system (EPS) is divided in to four parts: the power source, the energy storage, the power regulation and control and the power distribution. These are also the four main branches in the EPS design options structure. Each of these will be considered individually in this section.
+The \ac{EPS} is divided in to four parts: the power source, the energy storage, the power regulation \& control and the power distribution. These are also the four main branches in the \ac{EPS} design options structure. Each of these will be considered individually in this section.
 
 \subsection{The power source}
 \label{blDOsource}
 
-Launch vehicles use primary batteries as power source because launches are quite short and thus can be kept fairly small. 
-For missions lasting from weeks to years, however, batteries would be too large to be useful.
-Typically, there are four types of power sources for longer missions: static power sources, dynamic power sources, fuel cells and photovoltaic solar cells.
+Launch vehicles use primarily batteries as power source, because launches are quite short and thus the batteries can be kept fairly small. For missions lasting from weeks to years however, batteries required would be too large to make a mission affordable. Typically, there are four types of power sources for longer missions: static power sources, dynamic power sources, fuel cells and photovoltaic solar cells. 
 
-Static power sources use a heat source for thermal-to-electric conversion. This conversion can be done by either a thermoelectric or a thermionic
-concept. The thermoelectric converter uses the fact that the radioactive source (typically plutonium-238 or uranium-235) has a slow rate of decay.
-Because of this, there exists a temperature gradient between the p-n junction of individual cells which is used to provide the desired direct current electrical output. The efficiency of such a system is about 5 tot 8\%.
-Thermionic energy conversion, on the other hand, uses a hot electrode facing a cooler electrode to convert thermal energy to electrical.
-These electrodes are sealed in a chamber containing an ionized gas. The hotter electrode can be seen as the emitter: it emits electrons that flow
-across the inter-electrode gap towards the receiver (the cooler electrode). Once arrived, these electrons condense and return to the emitter through an electrical load connected externally between the two electrodes. Typical system efficiency is about 10 - 20\%.
+Static power sources use a heat source for thermal-to-electric conversion. This conversion can be done by either a thermoelectric or a thermionic concept. The thermoelectric converter uses the fact that the radioactive source (typically plutonium-238 or uranium-235) has a slow rate of decay. Because of this, there exists a temperature gradient between the p-n junction of individual cells which is used to provide the desired direct current electrical output. The efficiency of such a system is about 5 tot 8\%.
+
+Thermionic energy conversion on the other hand, uses a hot electrode facing a cooler electrode to convert thermal energy to electrical. These electrodes are sealed in a chamber containing an ionized gas. The hotter electrode can be seen as the emitter: it emits electrons that flow across the inter-electrode gap towards the receiver (the cooler electrode). Once arrived, these electrons condense and return to the emitter through an electrical load connected externally between the two electrodes. Typical system efficiency is about 10 - 20\%.
 
 Dynamic power sources function somewhat differently. They also use a heat source (typically concentrated solar radiation, radio isotopes or a nuclear-fission reaction) to produce thermal energy but the conversion method to electrical power is different. The generated heat is used to heat up a fluid to drive an energy-conversion heat engine. This is done using a Stirling cycle (efficiency of 25-30\%), a Rankine cycle (efficiency of 15-20\%) or a Brayton cycle (efficiency of 20-35\%).
 
-Fuel cells are self-contained generators that convert the chemical energy of an oxidation into electrical power. They consist of two half-cells, each with an electrode and an electrolyte. The two half-cells may use the same electrolyte or they may use different ones.
-In the fuel cell, one half-cell gets oxidized, it loses electrons, and the other is reduced, it gains electrons. As the electrons flow from
-one half-cell to the other a difference in charge and thus an electric current is created. Fuel cells can be regenerative or not, unfortunately regenerative types have not been space-proven yet\cite{rees}.
-The efficiency of fuel cells can be as high as 80\%, but will drop significantly at higher currents.
+Fuel cells are self-contained generators that convert the chemical energy of an oxidation into electrical power. They consist of two half-cells, each with an electrode and an electrolyte. The two half-cells may use the same electrolyte or they may use different ones. In the fuel cell, one half-cell gets oxidized, it loses electrons, and the other is reduced, it gains electrons. As the electrons flow from one half-cell to the other a difference in charge and thus an electric current is created. Fuel cells can be regenerative or not, unfortunately regenerative types have not been space-proven yet\cite{rees}. The efficiency of fuel cells can be as high as 80\%, but will drop significantly at higher currents.
 
-Photovoltaic solar cells are most common. They convert incident solar radiation directly in to electrical power. They consist of a semiconductor with metal plates on the top and bottom. Part of the incident solar radiation gets absorbed and is transferred to the
-semiconductor. The energy excites electrons who are then free to move around. The metal plates move the electrons, which creates a current,
-to power different subsystems. An efficiency of 29\% has been achieved \cite{doody1} in the lab, but production efficiencies are around 22\% \cite{larson}. Several options are available for the placing of the solar cells. The biggest difference is between solar panels and body-fixed solar cells. Body-fixed solar cells require a spinning satellite to be able to make optimal use of the cells. Solar panels, however, can be pointed towards the sun to have minimum cosine loss. The panels can be rigid or flexible, flexible panels being easier to transport but less strong than rigid panels.
+Photovoltaic solar cells are most commonly used in space. They convert incident solar radiation directly in to electrical power. They consist of a semiconductor with metal plates on the top and bottom. Part of the incident solar radiation gets absorbed and is transferred to the semiconductor. The energy excites electrons who are then free to move around. The metal plates move the electrons, which creates a current, to power different subsystems. An efficiency of 29\% has been achieved \cite{doody1} in the lab, but production efficiencies are around 22\% \cite{larson}. Several options are available for the placing of the solar cells. The biggest difference is between solar panels and body-fixed solar cells. Body-fixed solar cells require a spinning satellite to be able to make optimal use of the cells. Solar panels however, can be pointed towards the Sun to have minimum cosine loss. The panels can be rigid or flexible, flexible panels being easier to transport but less efficient compared to rigid panels.
 
 A comparative table for the different power sources can be found in table 11-35 on page 410 of \cite{larson}.
 
 \subsection{Power storage}
 \label{blDOstorage}
 
-Power storage is the second subdivision of the EPS. They can either provide all the power for short missions (primary batteries) or they provide back-up power for longer mission(secondary batteries).
+Power storage is the second subdivision of the \ac{EPS}. They can either provide all the power for short missions (primary batteries) or they provide back-up power for longer mission(secondary batteries).
 
 Batteries can be both a power source and a power storage system. The following design options apply for both uses.
 
