@@ -76,7 +76,7 @@ Multiple-axes thruster systems are very efficient ways for controlling attitude 
 Mechanical reliability is an import aspect for using active reaction and momentum wheels. 
 
 \textit{F1c. Control Moment gyros.}\\ 
-A control-moment-gyro system consists of a spinning rotor and one or more motorized gimbals that tilt the rotor's angular momentum. Mechanical reliability is an import aspect for using this. Since it is also dependent on the motorized gimbals, the reliability is slightly lower than the reaction and momentum wheels.
+A control-moment-gyro system consists of a spinning rotor and one or more motorized gimbals that tilt the rotor's angular momentum. Mechanical reliability is an important aspect for using this. Since it is also dependent on the motorized gimbals, the reliability is slightly lower than the reaction and momentum wheels.
 
 \textit{F1d. Magnetic torquers}\\ 
 The magnetic torquers interact with the Earth's magnetic field, creating compensating torques to induce stability. Reliability is high due to the fact that the magnetic field is known and the system is dependent on a low number of parameters.
@@ -96,17 +96,17 @@ Assuming a high technical readiness level of the sensors, the reliability is con
 \textit{G1. Solar Panels}\\
 
 \textit{G1a. Solar panel deflection error or mechanical failure.}\\ 
-During launch, the solar panels are retracted to achieve the lowest volume as possible. During the initializing of the mission (assuming the spacecraft is in the right orbit), the solar panels need to be deflected. Errors can occur due to mechanical reasons or external disturbances. The probability of this is pretty low. The consequence can be however that the effective solar panel is decreased and hence a decrease in electrical power will occur. This makes the consequences pretty severe. Any other mechanical failure (broken joints, internal PN-junction failure, maybe even losing an entire solar panel) will have severe consequences as well. 
+During launch, the solar panels are retracted to achieve the lowest volume possible. During the initializing of the mission (assuming the spacecraft is in the right orbit), the solar panels need to be deployed. Errors can occur due to mechanical reasons or external disturbances. The probability of this is pretty low. The consequence can be however that the effective solar panel is decreased and hence a decrease in available electrical power will occur. This makes the consequences pretty severe. Any other mechanical failure (broken joints, internal PN-junction failure, maybe even losing an entire solar panel) will have severe consequences as well. 
 
-\textit{G1b. Solar panel characteristics reliability (degradation).}\\ Degradation of solar panels should always be considered during mission development. Since this (should be) known upfront, the consequences are relatively low. The probability of this actually happening is nearly 100 percentage.
+\textit{G1b. Solar panel characteristics reliability (degradation).}\\ Degradation of solar panels should always be considered during mission development. Since this (should be) known upfront, the consequences are relatively low. The probability of this actually happening is nearly 100\%.
 
 \textit{G1c. Severe degradation (due to external phenomenon)}\\ 
-Atomic oxygen, hazardous radiation, debris collision and other external factors can influence the performance of the solar panels. Since these are not known from the start, it's difficult to cope with them. The probability of this happening is pretty small, but will have pretty severe consequences.
+Atomic oxygen, hazardous radiation, debris collision and other external factors can influence the performance of the solar panels. Since these are not known from the start, it is difficult to cope with them. The probability of this happening is pretty small, but will have pretty severe consequences.
 
 \textit{G2. Batteries}\\
 
 \textit{G2a. Initial internal failure}\\ 
-Considering a high level of technical readiness level, the internal reliability is high. The consequences do alter the functional capacity of the mission, since no energy can be stored if the energy capacity system would completely fail, meaning that during eclipse no energy should be used. 
+Considering a high level of technical readiness level, the internal reliability is high. The consequences do alter the functional capacity of the mission, since no energy can be stored if the energy capacity system would completely fail, meaning that during eclipse no energy can be used. 
 
 \textit{G2b. Decrease in capacity}\\ 
 Considering a high level of technical readiness level, the reliability is high. Consequences are low, because they are known and should be part of the mission analyses.
@@ -119,7 +119,7 @@ Since actual measurements are an important level zero requirement, the consequen
 \item[\textit{Measurement}]
 \end{description}
 	\item\textbf{\textit{Emitter}} \\\\
-\textit{H1. Laser pulses can't be sent/ no photon generation}\\ Considering a high level of technical readiness level, the reliability is high.
+\textit{H1. Laser pulses cannot be sent/ no photon generation}\\ Considering a high level of technical readiness level, the reliability is high.
 
 \textit{H2. Pointing towards nadir}\\
 This is dependent on ADCS risks.
@@ -131,10 +131,12 @@ Considering a high level of technical readiness level, the reliability is high.
 Laser degradation is dependent on multiple parameters: thermal properties, input power interval, external factors and internal mechanical errors (manufacturing or design errors). However, due to extensive research and development concerning laser technology, the probability of severe laser degradation within the lifetime is relatively low. 
 
 	\item\textbf{\textit{Receiver}} \\\\
-\textit{I1. Point towards target} 
+\textit{I1. Point towards target} \\
 This is dependent on ADCS risks.
+
 \textit{I2. Receive and detect photons}\\ 
-Considering multiple satellite receivers, the probability of total failure to receive and detect photons using advanced single photon receiving devices (like SILAT, Glass or photon-receiving modules) is negligible. 
+Considering multiple satellite receivers, the probability of total failure to receive and detect photons using advanced single photon receiving devices (like SILAT, \ac{GLAS} or photon-receiving modules) is negligible. 
+
 \textit{I3. Turn photon into electrical signal}\\ 
 Considering a high level of technical readiness level, the reliability is high.
 
@@ -143,10 +145,10 @@ Considering a high level of technical readiness level, the reliability is high.
 \end{description}
 	\item\textbf{\textit{Inter satellite communication}} \\\\
 \textit{J1. Determine relative position receiver and emitter}\\ 
-Considering a high level of technical readiness level, the reliability is high.
+Considering a high technical readiness level, the reliability is high.
 
 \textit{J2. Time differences}\\ 
-Considering a high level of technical readiness level, the reliability is high.
+Considering a high technical readiness level, the reliability is high.
 
 	\item\textbf{\textit{Data handling}} \\\\
 \textit{K1. Store data/ make data package}\\ 
@@ -176,13 +178,16 @@ Considering a high level of technical readiness level, the reliability is high.
 Considering a high level of technical readiness level, the reliability is high.
 
 \textit{M3. Thermal limits}\\ 
-Thermal limits will alter the characteristics of pretty much all subsystems. However, thermal will be excluded in this analysis.
+Thermal limits will alter the characteristics of pretty much all subsystems. However, thermal will be excluded in this analysis, because this is not a part of the project. 
 
 \textit{M4. Fatigue}\\ 
 High-cycle loading is usually not present (except for momentum wheels) and should therefore only play a minor role. The probability is low. The consequences are medium to high if high-cycle loading will lead to fatigue and hence partial failure.
 
 \textit{M5. Electrical overlay failure}\\ 
-See EPS.
+This event is dependent on the reliability of the EPS.
+
+\textit{M6. Launch loads} \\
+Due to large forces and vibrations during launch the structure of the satellite can fail. Since the launch loads are well known the reliability is low, the consequences can be severe.
 
 	\item\textbf{\textit{External}} \\\\
 \textit{N1. Debris collision}\\ 
@@ -204,10 +209,14 @@ Some parts of the measurement are classified information, for example military g
 \label{blTRAPm}
 	\item\textbf{\textit{Satellite decommission}} \\\\
 \textit{O1. Decommission LEO}\\ 
-At the end of life the satellites have to be decommissioned to allow new mission to take their place. To decommission satellites in low Earth orbit one could just wait a couple of years and air drag will cause the satellites orbit to degrade to the point they burn up in the atmosphere, so the consequences are low. However, it is desirable to have the satellites burn up faster, so as to remove the risks like satellite collision. The probability to no longer be able to eject the satellite from orbit depends on whether or not its propulsion is still working; as such this probability is low.
+At the end of life the satellites have to be decommissioned to allow new mission to take their place. To decommission satellites in \ac{LEO} one could just wait a couple of years and air drag will cause the satellites orbit to degrade to the point they burn up in the atmosphere, so the consequences are low. However, it is desirable to have the satellites burn up faster, so as to remove the risks like satellite collision. The probability to no longer be able to eject the satellite from orbit depends on whether or not its propulsion is still working; as such this probability is low.
 
 \textit{O2. Decommission GEO}\\ 
 Satellites in GEO can not be placed in an orbit that will cause them to burn up in the atmosphere because they will cross paths with too many other satellites. Because risk is so high these satellites are instead decommissioned by ejected them from orbit further into space. This way, new GEO satellites can take the place of the swarm. If this in the dead satellites will continue orbiting the Earth, wasting space that can be used by other satellites, as a result the consequence of failure is high. Being able to reposition a satellite depends on the ADCS systems, as such the probability of this event is low.
+
+\section{Risk control}
+\label{blTRAC}
+Sometimes it is possible to decrease the failure probability. For example, A1, F1a and H4 could be the top 3 risk segment. Failure probability of A1 can be pull down by doing detailed market analysis. In case of F1a, safe combustion performance can be tested and modified in laboratory as well as fuel consumption to increase the thrusters' reliability. Laser degradation as H4 is crucial in the system, and reliable energy source should be used to prevent failure. Meanwhile, thermal control can be performed to achieve high reliability of the laser emitter.  
 
 \begin{figure} [h]
 	\begin{center}
