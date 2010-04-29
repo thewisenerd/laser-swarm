@@ -57,7 +57,7 @@ public class plotHeightDistribution {
 		double hMax = Double.MIN_VALUE;
 		double hMin = Double.MAX_VALUE;
 		for (SimVars aSim : sims) {
-			Point3d sphere = Convert.sphere(aSim.pR);
+			Point3d sphere = Convert.toSphere(aSim.pR);
 			double rp = sphere.x;
 			double hFound = rp - Configuration.R0;
 			theta.add(sphere.y); // longitude

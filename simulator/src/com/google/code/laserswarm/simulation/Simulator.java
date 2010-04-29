@@ -118,7 +118,7 @@ public class Simulator implements Runnable {
 			Point3d sphere = null;
 			try {
 				sphere = earth.getIntersecion(new Vector3d(simVals.p0), simVals.p0);
-				simVals.pR = Convert.xyz(sphere);
+				simVals.pR = Convert.toXYZ(sphere);
 			} catch (PointOutsideEnvelopeException e) {
 				// if (i % 100 == 0)
 				// logger.wrn(e, "Point at t=%s is out of the dem grid", simVals.t0);

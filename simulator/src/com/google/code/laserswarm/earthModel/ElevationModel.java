@@ -152,7 +152,7 @@ public class ElevationModel implements IElevationModel {
 		}
 
 		/* Find is spherical coordinates */
-		Point3d sphere = Convert.sphere(p);
+		Point3d sphere = Convert.toSphere(p);
 		double rp = sphere.x;
 		double theta = sphere.y;
 		double phi = sphere.z;

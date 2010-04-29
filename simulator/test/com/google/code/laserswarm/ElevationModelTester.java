@@ -12,8 +12,8 @@ import org.geotools.referencing.operation.projection.PointOutsideEnvelopeExcepti
 
 import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.earthModel.Convert;
+import com.google.code.laserswarm.earthModel.EarthModel;
 import com.google.code.laserswarm.earthModel.ElevationModel;
-import com.google.code.laserswarm.earthModel.IElevationModel;
 import com.google.code.laserswarm.util.demReader.DemCreationException;
 import com.google.code.laserswarm.util.demReader.DemReader;
 import com.lyndir.lhunath.lib.system.logging.Logger;
@@ -23,54 +23,52 @@ public class ElevationModelTester extends TestCase {
 	private static final Logger	logger	= Logger.get(ElevationModelTester.class);
 
 	public static void main(String[] args) throws Exception {
-		new ElevationModelTester().testGeoTiffRead();
+		new ElevationModelTester().testDemIntersection();
 	}
 
 	public void testDemIntersection() {
-		ElevationModel dem = null;
+		EarthModel earth = new EarthModel();
 		try {
-			dem = DemReader.parseDem(new File("DEM/ASTGTM_N48E000_dem.asc"));
-		} catch (DemCreationException e1) {
-			fail("Cannot load the DEM");
+			ElevationModel dem = DemReader
+					.parseDem(new File(Configuration.demDir, "srtm_37_02-red.asc"));
+			earth.add(dem);
+		} catch (DemCreationException e) {
+			logger.err(e, "");
 		}
+		earth.loadCoef(); // Stretch refl coef
 
-		double lon = (Math.PI / 180) * dem.getCoverage().getEnvelope2D().getCenterX();
-		double lat = (Math.PI / 180) * dem.getCoverage().getEnvelope2D().getCenterY();
+		double lon = (Math.PI / 180) * earth.getCompleteEnvelope2D().getCenterX();
+		double lat = (Math.PI / 180) * earth.getCompleteEnvelope2D().getCenterY();
 
 		double r = 7000000;
-		Point3d testPoint = Convert.sphere(new Point3d(r, lon, lat));
+		Point3d testPoint = Convert.toXYZ(new Point3d(r, lon, lat));
 
 		Vector3d dir = new Vector3d(testPoint);
 		dir.normalize();
 		logger.inf("Testing pnt long: %s lat: %s", lon, lat);
 		logger.inf("Testing with pnt %s", testPoint);
 		logger.inf("Testing with direction %s", dir);
-		logger.inf("Testing pnt surface h: %s", Configuration.R0 + dem.getElevation(//
+		logger.inf("Testing pnt surface h: %s", Configuration.R0 + earth.getElevation(//
 				new DirectPosition2D((180 / Math.PI) * lon, (180 / Math.PI) * lat)));
 
 		Point3d onSurfPoint = null;
 		try {
-			onSurfPoint = dem.getIntersecion(dir, testPoint);
+			onSurfPoint = earth.getIntersecion(dir, testPoint);
 		} catch (PointOutsideEnvelopeException e) {
 			logger.err(e, "");
 		}
 
 		double rp = onSurfPoint.x;
-		double phi = onSurfPoint.y;
-		double theta = onSurfPoint.z;
+		double theta = onSurfPoint.y;
+		double phi = onSurfPoint.z;
 
 		logger.inf("The found point was %s", onSurfPoint);
 		logger.inf("The found point oint long: %s lat: %s", theta, phi);
 
-		logger.inf("The surface normal is %s", dem.getSurfaceNormal(new DirectPosition2D(theta
+		logger.inf("The surface normal is %s", earth.getSurfaceNormal(new DirectPosition2D(theta
 				* (180 / Math.PI), phi * (180 / Math.PI))));
 
 		assertEquals(phi, lat, 1E-6);
 		assertEquals(theta, lon, 1E-6);
-	}
-
-	public void testGeoTiffRead() throws DemCreationException {
-		IElevationModel dem = DemReader.parseDem(new File(
-				"C:/Documents and Settings/simon/Desktop/ASTER GDEM BE/ASTGTM_N48E000_dem.tif"));
 	}
 }

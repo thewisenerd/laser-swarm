@@ -37,7 +37,7 @@ public class Testorbit {
 		double t = T0;
 		while (t < TE) {
 			Point3d p = orb.ECI_point();
-			data.add(Convert.xyz(p));
+			data.add(Convert.toXYZ(p));
 
 			t += dt;
 			orb.propogate(dt);
