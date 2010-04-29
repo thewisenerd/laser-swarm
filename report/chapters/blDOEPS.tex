@@ -6,13 +6,13 @@ The electrical power system (EPS) is divided in to four parts: the power source,
 \subsection{The power source}
 \label{blDOsource}
 
-Launch vehicles use primary batteries as power source because launches are quite short and thus can be kept fairly small. 
-For missions lasting from weeks to years, however, batteries would be too large to be useful.
+Launch vehicles use primarily batteries as power source, because launch durations are quite short and thus batteries can be kept fairly small. 
+For missions lasting from weeks to years however, batteries would be too large for the mission to be useful.
 Typically, there are four types of power sources for longer missions: static power sources, dynamic power sources, fuel cells and photovoltaic solar cells.
 
 Static power sources use a heat source for thermal-to-electric conversion. This conversion can be done by either a thermoelectric or a thermionic
 concept. The thermoelectric converter uses the fact that the radioactive source (typically plutonium-238 or uranium-235) has a slow rate of decay.
-Because of this, there exists a temperature gradient between the p-n junction of individual cells which is used to provide the desired direct current electrical output. The efficiency of such a system is about 5 tot 8\%.
+Because of this, there exists a temperature gradient between the p-n junction of individual cells which is used to provide the desired direct current electrical output. The efficiency of such a system is about 5-8\%.
 Thermionic energy conversion, on the other hand, uses a hot electrode facing a cooler electrode to convert thermal energy to electrical.
 These electrodes are sealed in a chamber containing an ionized gas. The hotter electrode can be seen as the emitter: it emits electrons that flow
 across the inter-electrode gap towards the receiver (the cooler electrode). Once arrived, these electrons condense and return to the emitter through an electrical load connected externally between the two electrodes. Typical system efficiency is about 10 - 20\%.
@@ -33,7 +33,7 @@ A comparative table for the different power sources can be found in table 11-35 
 \subsection{Power storage}
 \label{blDOstorage}
 
-Power storage is the second subdivision of the EPS. They can either provide all the power for short missions (primary batteries) or they provide back-up power for longer mission(secondary batteries).
+Power storage is the second subdivision of the \ac{EPS}. They can either provide all the power for short missions (primary batteries), during eclipse or they provide back-up power for longer mission(secondary batteries).
 
 Batteries can be both a power source and a power storage system. The following design options apply for both uses.
 
@@ -64,9 +64,9 @@ A DET system uses a shunt regulator to shunt away the excess power from the subs
 \subsection{Power distribution}
 \label{blDOdistribution}
 
-A power distribution system (PDS) consists of the electrical load profile, the control options and fault protection.
+A \ac{PDS} consists of the electrical load profile, the control options and fault protection.
 After the load profile has been determined, the first choice to make is the type of current of the distribution system. Mostly direct current is used because spacecraft generate direct current. An AC/DC converter would need more electronics, resulting in more parts and a higher mass. 
-But systems working with alternating current can be single phase or multiple phases\cite{kuphaldt}. THe main difference is that in a single phase system all voltages from the source vary in unison, whereas the different currents of the multi-phase system reach their peak value at different times. Each mode has its advantages and disadvantages. Single phase systems are simpler and thus cheaper but when higher loads are required multi-phase system are more useful. They can help to reduce vibrations, for example.
+But systems working with alternating current can be single phase or multiple phases\cite{kuphaldt}. The main difference is that in a single phase system all voltages from the source vary in unison, whereas the different currents of the multi-phase system reach their peak value at different times. Each mode has its advantages and disadvantages. Single phase systems are simpler and thus cheaper but when higher loads are required multi-phase system are more useful. They can help to reduce vibrations, for example.
 
 The PDS can either be centralized or decentralized. The decentralized option requires a converter at each individual load, resulting in an unregulated bus. The centralized option regulates power to all loads from the main bus. The advantage here is that the EPS does not have to be tailor-designed. 
 
