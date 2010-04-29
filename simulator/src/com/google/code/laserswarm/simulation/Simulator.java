@@ -35,8 +35,8 @@ public class Simulator implements Runnable {
 	private Thread				thread;
 	private EarthModel			earth;
 
-	private double				T0		= 525442.25;
-	private double				TE		= 525455.50;
+	private double				T0		= 579267.5;
+	private double				TE		= 579341.4;
 
 	private List<SimVars>		dataPoints;
 

@@ -39,7 +39,7 @@ public class SimulationTester extends TestCase {
 				(float) (8.5 * Math.PI / 180), 0f, 0f);
 		LinkedList<Satellite> r = Lists.newLinkedList();
 		r.add(emittor);
-		return new Constellation(10, 50, emittor, r);
+		return new Constellation(10, 5, emittor, r);
 	}
 
 	public static HashMap<SimTemplate, Simulator> sim() {
@@ -86,8 +86,7 @@ public class SimulationTester extends TestCase {
 			int nP = 0;
 			List<SimVars> pnts = sim.getDataPoints();
 			for (SimVars simVar : pnts) {
-				System.out.println(simVar.photonsE);
-				System.out.println(simVar.scatter);
+				// System.out.println(simVar.photonsE);
 				for (Satellite sat : simVar.photonsE.keySet()) {
 					nP += simVar.photonsE.get(sat);
 				}
@@ -95,7 +94,6 @@ public class SimulationTester extends TestCase {
 			try {
 				System.out.println(SimVarUtil.getField("photonsE", pnts));
 			} catch (RetrievalExecption e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			logger.inf("Received %s photons in total (%s pulses)", nP, pnts.size());
