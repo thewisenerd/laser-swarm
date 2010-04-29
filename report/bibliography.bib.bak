@@ -44,6 +44,17 @@
   timestamp = {2010.04.27}
 }
 
+@BOOK{Space2B,
+  title = {Space Engineering \& Techonlogy II Part B: Space Vehicle Engineering},
+  publisher = {Delft University of Technology},
+  year = {2003},
+  author = {W. Jongkind and Q.P. Chu and J.J. Wijker and A. Kamp and B.T.C. Zandbergen},
+  month = {September},
+  note = {Lecture Notes},
+  owner = {Lieuwe},
+  timestamp = {2010.04.28}
+}
+
 @ARTICLE{lithium1,
   author = {Jusef Hassoun, Stefania Panero, Priscilla Reale, and Bruno Scrosati},
   title = {A New, Safe, High-Rate and High-Energy Polymer
@@ -59,6 +70,7 @@
 
 @ELECTRONIC{kuphaldt,
   author = {Tony R. Kuphaldt},
+  title = {All About Circuits},
   owner = {Sean},
   timestamp = {2010.04.28}
 }
@@ -74,6 +86,17 @@
   timestamp = {2010.04.23}
 }
 
+@ELECTRONIC{lasertech,
+  author = {Dr. Rüdiger Paschotta},
+  year = {2008},
+  title = {Photonics: Laser and Optical Physics},
+  language = {English},
+  organization = {RP Photonics},
+  url = {http://www.rp-photonics.com/lasers.html},
+  owner = {Tim},
+  timestamp = {2010.04.28}
+}
+
 @BOOK{rees,
   title = {Physical Principles of Remote Sensing},
   publisher = {Cambridge University Press},
@@ -84,10 +107,34 @@
   isbn = {9780521669481}
 }
 
+@ELECTRONIC{tuscmass,
+  author = {SSE},
+  month = {November},
+  year = {2007},
+  title = {Spacecraft (SC) preliminary mass estimation \& allocation },
+  language = {English},
+  organization = {Delft University of Technology},
+  url = {http://www.citg.tudelft.nl/live/pagina.jsp?id=10d9b8b2-e85b-48e7-94f2-462356f1d730&lang=en},
+  owner = {Lieuwe},
+  timestamp = {2010.04.28}
+}
+
 @ELECTRONIC{fresnel2,
   author = {Thayer Watkins},
   title = {Fresnel equations},
   url = {http://www.inyourfacefotos.com/fresnel.htm}
+}
+
+@BOOK{quantumoptics,
+  title = {Frontiers of laser physics and quantum optics:},
+  publisher = {Springer},
+  year = {2000},
+  editor = {Shengwu Xie},
+  author = {Zhizhan Xu},
+  keywords = {Optical physics, laser, quantum mechanics, condensed matter, particle
+	physics},
+  owner = {Tim},
+  timestamp = {2010.04.28}
 }
 
 @BOOK{sse,
@@ -126,5 +173,16 @@
 @ELECTRONIC{refractiveIndices,
   title = {List of refractive indices},
   url = {http://en.wikipedia.org/wiki/List_of_refractive_indices}
+}
+
+@ELECTRONIC{Market,
+  month = {Jul},
+  year = {2008},
+  title = {Ocean Surface Topography From Space},
+  language = {English},
+  organization = {NASA},
+  url = {http://sealevel.jpl.nasa.gov/overview/benefits.html},
+  owner = {Zhuan},
+  timestamp = {2010.04.28}
 }
 
