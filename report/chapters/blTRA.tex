@@ -1,5 +1,5 @@
 The main objective of the technical risk assessment is to determine the reliability compared to the possible (functional or financial) consequences per specific event. To be able to determine any of these reliabilities, a definition of reliability should be stated. In this case, reliability is formulated as:
-"The probability that a specific (part of a) subsystem will function without endangering the level zero requirements over the expected lifetime". 
+"The probability that a specific (part of a) subsystem will function without endangering the top level requirements over the expected lifetime". 
 
 Next to formulating the definition of reliability, it should be noted that the determined reliabilities in this section are relative reliabilities, i.e. the probability that a particular subsystem outperforms another subsystem with the same core function in terms of reliability. Hence, no absolute values of reliability are determined in this section. The relative reliabilities allow for comparison material during the trade-off between multiple design options. 
 The risk assessment analysis is divided into four main sections: 
@@ -16,21 +16,21 @@ The possible events, with their respective reliability, are outlined in these se
 \begin{enumerate}[A]
 	\item  \textbf{\textit{Financial}} \\\\
 \textit{A1. Insufficient funds or low market-demand}\\
-The approximate costs are determined in the cost budget. The mission data and the final results can be very interesting for a vast number of commercial companies and research or educational facilities. Every space mission is created for at least one specific (user-demanded) requirement. This third party is responsible for covering the cost. Since the space mission is developed after this request is set, the probability that there will be insufficient funds is low (especially when more than one company can be considered as the user). However, the consequence can be severe if the funds are not enough to start or continue the development. 
+The approximate costs are determined in the cost budget. The mission data and the final results can be very interesting for a vast number of commercial companies and research or educational facilities. Every space mission is created for at least one specific (user-demanded) requirement set by an user. This third party is responsible for covering the cost. Since the space mission is developed after this request is set, the probability that there will be insufficient funds is low (especially when more than one company can be considered as the user). However, the consequence can be severe if the funds are not enough to start or continue the development. 
 
 	\item  \textbf{\textit{Technological readiness}} \\\\
 \textit{B1. Technology for level zero requirements are not available}\\
-If the technology for measuring, detecting or processing the level zero requirements is 	not available at present, the requirements can't be met and alternatives should be revised 	(or the mission should be terminated). In our case, the technical readiness level of the 	payload is relatively high and hence has a high reliability. If, however, the specific 	payload would have a low technical readiness level, the mission should be terminated or 	delayed. Therefore, it has important consequences to the mission.
+If the technology for measuring, detecting or processing the level zero requirements is 	not available at present, the requirements cannot be met and alternatives should be devised (or the mission should be terminated). In our case, the technical readiness level of the 	payload is relatively high and hence has a high reliability. If, however, the specific 	payload would have a low technical readiness level, the mission should be terminated or 	delayed. Therefore, it has important consequences to the mission.
 
 	\item  \textbf{\textit{Launch}} \\\\
 \textit{C1. Total launch failure}\\
-Total failure indicates complete failure of launch vehicle and all laser swarm 	constellation components. Needless to say, the reliability is relatively low; however, the consequences of this event are catastrophic.
+Total failure indicates complete failure of the launch vehicle and all laser swarm 	constellation components. Needless to say, the reliability is relatively low; however, the consequences of this event are catastrophic.
 
 \textit{C2. Partial launch failure}\\
-Partial launch failure indicates non-complete failure of laser swarm constellation components, i.e. some of the satellites (emitters or the receiver) can still perform core tasks. Considering historical launch data, the reliability that no partial failure will occur during launch is relatively high. The consequence can be very different, depending on which part (or what fraction) of the constellation can't perform its core task. If one of the receivers will be destroyed, the level zero requirements might still be achievable. However, if the emitter is (partially) destroyed, the mission will surely be endangered. 
+Partial launch failure indicates non-complete failure of laser swarm constellation components, i.e. some of the satellites (more receivers and one emitter) can still perform core tasks. Considering historical launch data, the reliability that no partial failure will occur during launch is relatively high. The consequence can be very different, depending on which part (or what fraction) of the constellation cannot perform its core task. If one of the receivers will be destroyed, the level zero requirements might still be achievable. However, if the emitter is (partially) destroyed, the mission will surely be endangered. 
 
 \textit{C3. Delayed vehicle launch}\\
-Delaying the vehicle launch isn't particularly a problem from the technological side of the mission; however, it will affect the financial situation. Next to the fact that the data and results are delayed, extra costs will be imposed due to an increase in launch vehicle pad costs, extra personnel costs and others. The reliability of this event is actual not that high, since it is dependent on a lot of criteria like third-party companies, the weather, and atmospheric properties. The consequences are mainly financial.
+Delaying the vehicle launch is not particularly a problem from the technological side of the mission; however, it will affect the financial situation. Next to the fact that the data and results are delayed, extra costs will be imposed due to an increase in launch vehicle pad costs, extra personnel costs and others. The reliability of this event is actual not that high, since it is dependent on a lot of criteria like third-party companies, the weather, and atmospheric properties. The consequences are mainly financial.
 
 \section{During mission}
 \label{blTRADm}
@@ -70,7 +70,7 @@ Spin stabilization can be achieved using rotation about one principal axis (sing
 \textit{F1. Actuator}\\
 
 \textit{F1a. Thrusters (hot and cold gas).}\\ 
-Multiple-axes thruster systems are very efficient ways for determination and controlling altitude and stability. The system is dependent on fuel consumption, combustion and mechanical properties. Each of these dependencies decreases the reliability. 
+Multiple-axes thruster systems are very efficient ways for controlling attitude and stability. The system is dependent on fuel consumption, combustion and mechanical properties. Each of these dependencies decreases the reliability. 
 
 \textit{F1b. Reaction and momentum wheels.}\\ 
 Mechanical reliability is an import aspect for using active reaction and momentum wheels. 
