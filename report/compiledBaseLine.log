@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (MiKTeX 2.8) (preloaded format=pdflatex 2010.4.20)  28 APR 2010 16:43
+This is pdfTeX, Version 3.1415926-1.40.10 (MiKTeX 2.8) (preloaded format=pdflatex 2010.4.20)  29 APR 2010 10:32
 entering extended mode
 **C:/Users/Alex/Desktop/Laser*Swarm/laser-swarm/report/compiledBaseLine.tex
 ("C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/report/compiledBaseLine.tex"
@@ -210,10 +210,28 @@ Chapter 3.
 x" <chapters/img/lifetime.jpg, id=218, 481.04718pt x 213.79875pt>
 File: chapters/img/lifetime.jpg Graphic file (type jpg)
 
-<use chapters/img/lifetime.jpg>) [10
+<use chapters/img/lifetime.jpg>
+Package acronym Info: Label `acro:RDTE' newly defined as it shall be overridden
+
+although it is yet undefined on input line 22.
+Package acronym Info: Label `acro:TFU' newly defined as it shall be overridden
+although it is yet undefined on input line 22.
+Package acronym Info: Label `acro:OM' newly defined as it shall be overridden
+although it is yet undefined on input line 24.
+ [10
 
  <C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/report/chapters/img/lifetime.jp
 g>]
+<chapters/img/costbreakdown.jpg, id=222, 711.4078pt x 548.0475pt>
+File: chapters/img/costbreakdown.jpg Graphic file (type jpg)
+
+<use chapters/img/costbreakdown.jpg>
+Overfull \hbox (28.07523pt too wide) in paragraph at lines 45--122
+ [][] 
+ []
+
+) [11] [12] [13 <C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/report/chapters/
+img/costbreakdown.jpg>]
 Chapter 4.
 ("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\chapters/blTRA.tex"
 Underfull \hbox (badness 10000) in paragraph at lines 17--20
@@ -225,7 +243,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 21--24
 
  []
 
-[11
+[14
 
 ]
 Underfull \hbox (badness 10000) in paragraph at lines 25--28
@@ -247,7 +265,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 43--45
 
  []
 
-[12] <chapters/img/TRA_ADCS_P.png, id=230, 592.01175pt x 309.5565pt>
+[15] <chapters/img/TRA_ADCS_P.png, id=240, 592.01175pt x 309.5565pt>
 File: chapters/img/TRA_ADCS_P.png Graphic file (type png)
 
 <use chapters/img/TRA_ADCS_P.png>
@@ -260,9 +278,9 @@ Underfull \hbox (badness 10000) in paragraph at lines 69--71
 
  []
 
-[13 <C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/report/chapters/img/TRA_ADCS
+[16 <C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/report/chapters/img/TRA_ADCS
 _P.png (PNG copy)>]
-<chapters/img/TRA_ADCS_A.png, id=234, 592.01175pt x 314.97675pt>
+<chapters/img/TRA_ADCS_A.png, id=244, 592.01175pt x 314.97675pt>
 File: chapters/img/TRA_ADCS_A.png Graphic file (type png)
 
 <use chapters/img/TRA_ADCS_A.png>
@@ -275,7 +293,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 95--97
 
  []
 
-[14 <C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/report/chapters/img/TRA_ADCS
+[17 <C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/report/chapters/img/TRA_ADCS
 _A.png (PNG copy)>]
 Underfull \hbox (badness 10000) in paragraph at lines 106--107
 
@@ -301,7 +319,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 151--154
 
  []
 
-[15]
+[18]
 Underfull \hbox (badness 10000) in paragraph at lines 164--167
 
  []
@@ -316,65 +334,90 @@ Underfull \hbox (badness 10000) in paragraph at lines 187--190
 
  []
 
-[16]
+[19]
 Underfull \hbox (badness 10000) in paragraph at lines 205--208
 
  []
 
-<chapters/img/TRA_RM.png, id=244, 683.55376pt x 709.4505pt>
+<chapters/img/TRA_RM.png, id=255, 683.55376pt x 709.4505pt>
 File: chapters/img/TRA_RM.png Graphic file (type png)
 
 <use chapters/img/TRA_RM.png>
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-) [17] [18 <C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/report/chapters/img/T
+) [20] [21 <C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/report/chapters/img/T
 RA_RM.png (PNG copy)>]
 Chapter 5.
-[19
+("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\chapters/blDOadcs.tex"
+Package acronym Info: Label `acro:GPS' newly defined as it shall be overridden
+although it is yet undefined on input line 7.
 
-]
+
+Package acronym Warning: Acronym `GPS' is not defined on input line 7.
+
+
+Package acronym Warning: Acronym `GPS' is not defined on input line 7.
+
+Package acronym Info: Label `acro:CMG' newly defined as it shall be overridden
+although it is yet undefined on input line 10.
+<chapters/img/DOTadcs.png, id=264, 5167.305pt x 3576.61218pt>
+File: chapters/img/DOTadcs.png Graphic file (type png)
+
+<use chapters/img/DOTadcs.png> [22
+
+])
+("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\chapters/blDOEPS.tex"
+Package acronym Info: Label `acro:EPS' newly defined as it shall be overridden
+although it is yet undefined on input line 4.
+
+[23] [24 <C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/report/chapters/img/DOT
+adcs.png>]
+Package acronym Info: Label `acro:PPT' newly defined as it shall be overridden
+although it is yet undefined on input line 43.
+Package acronym Info: Label `acro:DET' newly defined as it shall be overridden
+although it is yet undefined on input line 43.
+ [25]
+Package acronym Info: Label `acro:PDS' newly defined as it shall be overridden
+although it is yet undefined on input line 51.
+) [26]
 Chapter 6.
 ("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\chapters/blSSPRO.tex")
 ("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\chapters/blSSOPE.tex")
 ("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\chapters/blSSEOL.tex")
-[20
+[27
 
-] [21]
+] [28]
 Chapter 7.
-[22
+[29
 
 ]
 Chapter 8.
 ("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\chapters/blRAMS.tex"
-<chapters/img/subsystem_reliability_analysis.png, id=266, 359.54324pt x 318.590
+<chapters/img/subsystem_reliability_analysis.png, id=291, 359.54324pt x 318.590
 26pt>
 File: chapters/img/subsystem_reliability_analysis.png Graphic file (type png)
- <use chapters/img/subsystem_reliability_analysis.png> [23
+ <use chapters/img/subsystem_reliability_analysis.png> [30
 
 ])
 ("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\compiledBaseLine.bbl"
-[24] [25 <C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/report/chapters/img/sub
-system_reliability_analysis.png (PNG copy)>]) [26
+[31] [32 <C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/report/chapters/img/sub
+system_reliability_analysis.png (PNG copy)>]) [33
 
 ]
 Appendix A.
-[27
+[34
 
 ] ("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\compiledBaseLine.aux")
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
  ) 
 Here is how much of TeX's memory you used:
- 1482 strings out of 495285
- 21386 string characters out of 3179881
- 70763 words of memory out of 3000000
- 4650 multiletter control sequences out of 15000+200000
+ 1585 strings out of 495285
+ 22813 string characters out of 3179881
+ 75746 words of memory out of 3000000
+ 4745 multiletter control sequences out of 15000+200000
  12614 words of font info for 43 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
- 25i,8n,21p,1001b,388s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 25i,9n,21p,1437b,388s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmbx10.pfb>
 <C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C
 :/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmbxti10.pfb><C
@@ -384,9 +427,9 @@ ogram Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><C:/Pr
 ogram Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Prog
 ram Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Progra
 m Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on compiledBaseLine.pdf (29 pages, 1243535 bytes).
+Output written on compiledBaseLine.pdf (36 pages, 2763325 bytes).
 PDF statistics:
- 312 PDF objects out of 1000 (max. 8388607)
+ 336 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 53 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 63 words of extra memory for PDF output out of 10000 (max. 10000000)
 
