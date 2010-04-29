@@ -11,12 +11,15 @@ Warning--entry type for "lasertech" isn't style-file defined
 --line 98 of file bibliography.bib
 Warning--entry type for "jerOrbit" isn't style-file defined
 --line 191 of file bibliography.bib
+Warning--entry type for "Market" isn't style-file defined
+--line 204 of file bibliography.bib
 Warning--entry type for "nasaOrbit" isn't style-file defined
 --line 215 of file bibliography.bib
 Name 1 in "Jusef Hassoun, Stefania Panero, Priscilla Reale, and Bruno Scrosati" has a comma at the end for entry lithium1
 while executing---line 1049 of file plain.bst
 Warning--to sort, need author or key in nasaOrbit
 Warning--to sort, need author or key in jerOrbit
+Warning--to sort, need author or key in Market
 Name 1 in "Jusef Hassoun, Stefania Panero, Priscilla Reale, and Bruno Scrosati" has a comma at the end for entry lithium1
 while executing---line 1090 of file plain.bst
 Warning--can't use both author and editor fields in quantumoptics
