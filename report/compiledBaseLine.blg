@@ -1,4 +1,4 @@
-This is BibTeX, Version 0.99cThe top-level auxiliary file: C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\report\compiledBaseLine.aux
+This is BibTeX, Version 0.99cThe top-level auxiliary file: I:\Users\Alex & Ramune\Desktop\DSE\laser-swarm\report\compiledbaseline.aux
 The style file: plain.bst
 Database file #1: bibliography.bib
 Warning--entry type for "doody1" isn't style-file defined
@@ -22,5 +22,6 @@ Warning--to sort, need author or key in jerOrbit
 Warning--to sort, need author or key in Market
 Name 1 in "Jusef Hassoun, Stefania Panero, Priscilla Reale, and Bruno Scrosati" has a comma at the end for entry lithium1
 while executing---line 1090 of file plain.bst
+Warning--empty year in quantumcomputers
 Warning--can't use both author and editor fields in quantumoptics
 (There were 2 error messages)

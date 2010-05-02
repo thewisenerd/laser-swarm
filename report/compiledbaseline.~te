@@ -1,0 +1,167 @@
+\documentclass[11pt]{report}
+%\usepackage{graphicx}
+
+\usepackage{multirow}
+\usepackage{enumerate}
+\usepackage[printonlyused]{acronym}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{amsmath}
+\usepackage{url}
+
+\topmargin -1.5cm
+\oddsidemargin -0.04cm
+\evensidemargin -0.04cm
+\textwidth 16.59cm
+\textheight 21.94cm
+\parskip 7.2pt
+
+\begin{document}
+%%%%%%%%%%%%%
+%
+%       TOP MATTER
+%
+%%%%%%%%%%%%%
+
+\input{chapters/titlePageBL.tex}
+
+%%%%%%%%%%%%%
+%
+%       ABSTRACT
+%
+%%%%%%%%%%%%%
+
+\input{chapters/abstractBL.tex}
+
+%%%%%%%%%%%%%
+%
+%       TOC
+%
+%%%%%%%%%%%%%
+
+\tableofcontents
+
+%%%%%%%%%%%%%
+%
+%       List of symbols 
+%
+%%%%%%%%%%%%%
+
+\newpage
+\Large{\textbf{List of Acronyms}}
+\small
+\input{chapters/acronyms.tex}
+
+%%%%%%%%%%%%%
+%
+%       INTRODUCTION
+%
+%%%%%%%%%%%%%
+
+\chapter{Introduction}
+\label{blIntro}
+%Intro
+\input{chapters/blIn.tex}
+
+%%%%%%%%%%%%%
+%
+%       Functions and requirements
+%
+%%%%%%%%%%%%%
+
+\chapter{Functions and Requirements}
+\label{blFuncChapter}
+\input{chapters/blFUNFlows.tex}
+\input{chapters/blFRReqDisc.tex}
+
+%%%%%%%%%%%%%
+%
+%       Budget Breakdown
+%
+%%%%%%%%%%%%%
+
+\chapter{Budget Breakdown}
+\label{blBudgets}
+\input{chapters/blBUDmass.tex}
+\input{chapters/blBudgetCost.tex}
+\input{chapters/blBudgetPower.tex}
+
+%%%%%%%%%%%%%
+%
+%       Technical Risk Asessement
+%
+%%%%%%%%%%%%%
+
+\chapter{Technical Risk Assessment}
+\label{blRisk}
+\input{chapters/blTRA.tex}
+
+%%%%%%%%%%%%%
+%
+%       Design Options
+%
+%%%%%%%%%%%%%
+
+\chapter{Design Options}
+\label{blDesignOptions}
+\input{chapters/blDOadcs.tex}
+\input{chapters/blDOEPS.tex}
+
+\input{chapters/blDOOrb.tex}
+\input{chapters/blDOLSR.tex}
+\input{chapters/blDOreceiver.tex}
+
+%%%%%%%%%%%%%
+%
+%       SUSTAINABLE
+%
+%%%%%%%%%%%%%
+
+\chapter{Approach with respect to sustainable development}
+\label{blSustainable}
+\input{chapters/blSSPRO.tex}
+\input{chapters/blSSOPE.tex}
+\input{chapters/blSSEOL.tex}
+
+
+%%%%%%%%%%%%%
+%
+%       Return on investment
+%
+%%%%%%%%%%%%%
+
+\chapter{Return on Investment and Operational Profit}
+\label{blInvestment}
+\input{chapters/blMA.tex}
+
+%%%%%%%%%%%%%
+%
+%       RAMS
+%
+%%%%%%%%%%%%%
+
+\chapter{R.A.M.S.}
+\label{blRAMS1}
+\input{chapters/blRAMS.tex}
+
+%%%%%%%%%%%%%
+%
+%       BIBLIOGRAPHY
+%
+%%%%%%%%%%%%%
+
+\bibliographystyle{plain}
+\bibliography{bibliography}
+
+%%%%%%%%%%%%%
+%
+%       APPENDICIES
+%
+%%%%%%%%%%%%%
+
+\appendix
+\chapter{Requirement Discovery Trees}
+\label{reqdisctree}
+
+\end{document}

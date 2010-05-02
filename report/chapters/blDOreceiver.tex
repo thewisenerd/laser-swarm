@@ -3,7 +3,7 @@
 		\subsection{Introduction}
 A large fraction of the photons emitted by the \acs{laser} are not suitable for detection since they are redirected by the atmosphere, spread due to surface scattering or they are simply absorbed by either of them. The decrease in photon quantity is really severe considering these factors. Since the number of photons actually reaching the perimeter of the \ac{ORD} is usually only in the order of one to ten, the \acs{ORD} has to be able to detect and analyze individual small energy packets, preferably single photons. 
 
-The main objective of the \acs{ORD} in that sense is to detect the individual energy quanta. An obvious way of achieving this is to increase the \acs{ORD} receiving surface area. In this case, more photons can be detected which normally, with a relative small optical receiving area, would go past the receiver. The main disadvantage is the increase in noise, which decreases the quality of your measurements. The \acs{laser} used in this altimetry mission is not the only electromagnetic radiation source in the neighborhood of the satellite constellation. Next to thermal radiation from Earth, electromagnetic radiation from other celestial objects and other spacecraft, the Sun is also a major contributor of electromagnetic radiation. All of these sources are considered irrelevant to the altimetry mission and therefore, can be categorized as noise. Increasing the \acs{ORD} receiving area consequently increases the detection of noise. An optimal receiving-surface-area to noise-detection ratio should be determined.
+The main objective of the \acs{ORD}, in that sense, is to detect the individual energy quanta. An obvious way of achieving this is to increase the \acs{ORD} receiving surface area. In this case, more photons can be detected which normally, with a relative small optical receiving area, would go past the receiver. The main disadvantage is the increase in noise, which decreases the quality of your measurements. The \acs{laser} used in this altimetry mission is not the only electromagnetic radiation source in the neighborhood of the satellite constellation. Next to thermal radiation from Earth, electromagnetic radiation from other celestial objects and other spacecraft, the Sun is also a major contributor of electromagnetic radiation. All of these sources are considered irrelevant to the altimetry mission and therefore, can be categorized as noise. Increasing the \acs{ORD} receiving area consequently increases the detection of noise. An optimal receiving-surface-area to noise-detection ratio should be determined.
 
 \subsection{Types of Optical Receiving Devices}
 	\label{blDOtypesORD}
@@ -18,7 +18,7 @@ The main advantage of \acs{CCD}s is the high level of technical readiness and th
 
 \item Photomultiplier Tubes (Avalanche Processes). Photomultiplier tubes are photon detectors that are useful in low intensity applications. A photomultiplier tube is a vacuum tube consisting of an input window, a photocathode, focusing electrodes, an electron multiplier and an anode.
 Figure \ref{Photomultiplier} on page \pageref{Photomultiplier} gives a clear view of photomultiplier tube configuration and working mechanism.
-\begin{figure} [h]
+\begin{figure} [ht]
 	\begin{center}
 \includegraphics[scale=3]{chapters/img/DO_receiver1.jpg}	
 \caption{Photomultiplier tube configuration and working mechanism}
@@ -35,9 +35,9 @@ The main disadvantage is that a single tube measures one photon at a specific ti
 Quantum dots can be used to detect single photons. The \ac{QDRD} is based upon a transistor structure in which the conducting channel is closely spaced from a layer of quantum dots. If the separation of the quantum dots and the channel is just several nanometers, the resistance of the transistor is sensitive to a change in the occupancy of a single quantum dot by just a single electron. This attribute allows the device to act as a detector of single photons, since the absorption of a photon creates a carrier in the semiconductor, which after capture by a quantum dot, produce a detectable change in the resistance of the channel of the resistor.
 \cite{quantumdots}
 
-MPS's single-photon detection modules (see Design Option Tree) uses quantum dots.
+MPS's single-photon detection modules (see design option tree on page \pageref{DOS_receiver}) uses quantum dots.
 Figure \ref{quantumdot} on page \pageref{quantumdot} gives a clear view of single photon detection using quantum dot configuration.
-\begin{figure} [h]
+\begin{figure} [ht]
 	\begin{center}
 \includegraphics[scale=1]{chapters/img/blDOreceiverQDRD.png}	
 \caption{Single photon detection using quantum dot configuration}
@@ -45,10 +45,10 @@ Figure \ref{quantumdot} on page \pageref{quantumdot} gives a clear view of singl
 \end{center}
 \end{figure}
 
-\item Quantum Computers. Quantum computers use, in contrary to regular computers, no semiconducting chips for processing. Although this technology is very interesting with myriad possibilities, the technology behind it is not understood very well at this point. Scientist are mainly focusing on the theory behind it, without actually building a (theoretical first) model. Although futuristic, many scientists predict a bright future for quantum computers in the field of optics.
+\item Quantum Computers. Quantum computers use, in contrary to regular computers, no semiconducting chips for processing. Although this technology is very interesting with myriad of possibilities, the technology behind it is not understood very well at this point. Scientist are mainly focusing on the theory behind it, without actually building a (theoretical first) model. Although futuristic, many scientists predict a bright future for quantum computers in the field of optics.
 
-Basically, the theory behind quantum computers relies on intrinsic properties of fermions. Fermions are elementary particles with a specific value of intrinsic spin (not angular momentum about principal axis). Fermions, like electrons, have a specific intrinsic spin of 1/2. This spin can be spin up (+1/2) or spin down (-1/2). Pauli's exclusion principle states that no identical fermion can exhibit the same energy level, i.e. two electrons can occupy one energy orbit (spin-up and spin-down). Electromagnetic radiation can alter spin configurations. By evaluating spin characteristics, a binary code could be written. Using this binary code, basic computational processes could be extracted.
-\cite{quantumcomputers}
+The theory behind quantum computers relies on intrinsic properties of fermions. Fermions are elementary particles with a specific value of intrinsic spin (not angular momentum about principal axis). Fermions, like electrons, have a specific intrinsic spin of 1/2. This spin can be spin up (+1/2) or spin down (-1/2). Pauli's exclusion principle states that no identical fermion can exhibit the same energy level, i.e. two electrons can occupy one energy orbit (spin-up and spin-down). Electromagnetic radiation can alter spin configurations. By evaluating spin characteristics, a binary code could be written. Using this binary code, basic computational processes could be extracted \cite{quantumcomputers}.
+
 	
 \end{enumerate}
 
@@ -58,11 +58,11 @@ Obviously, the mass and the average power usage are important aspects for choosi
 
 Considering the fact that you want to detect as much photons as possible, another important characteristic is the \ac{OFOV}. The \acs{OFOV} (also field of vision) is the (angular or linear) extent to which the \acs{ORD} is able to observe photons at any given moment. As mentioned earlier, the problem of noise increases if the \acs{OFOV} becomes too large. However, since the \acs{OFOV} is in the order of 0.001 radians, it can be stated that a higher values increases the amount of detectable photons.
 
-The last aspect to consider when determining the \acs{ORD}, is the detector quantum efficiency. Basically it is defined as the efficiency that an incoming photon induces an exciton. It is an accurate measurement of the device's electrical sensitivity to light. 
+The last aspect to consider when determining the \acs{ORD}, is the detector quantum efficiency. It is defined as the efficiency that an incoming photon induces an exciton. It is an accurate measurement of the device's electrical sensitivity to light. 
 Figure \ref{DOS_receiver} on page \pageref{DOS_receiver} gives the final design option tree of the laser receiver.
-\begin{figure} [h]
+\begin{figure} [ht]
 	\begin{center} \includegraphics[width=1\textwidth,angle=90]{chapters/img/DOStree_receiver.jpg}	
-	\caption{Design option tree of laser receiver}
+	\caption{Design option tree for laser receiver. Numbers represent typical values.}
 	\label{DOS_receiver}
 	\end{center}
 \end{figure}

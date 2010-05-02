@@ -18,6 +18,11 @@ ICESat Anomaly~Review Board.
 Dave Doody.
 \newblock The basics of space flight., February 2001.
 
+\bibitem{quantumdots}
+M.S.~Shur E.~Borovitskaya.
+\newblock {\em Quantums Dots}.
+\newblock World Scientific Publishig, 2003.
+
 \bibitem{sse}
 Peter~Fortescue {et al.}, editor.
 \newblock {\em Spacecraft Systems Engineering}.
@@ -59,6 +64,11 @@ W.~G. Rees.
 \newblock {\em Physical Principles of Remote Sensing}.
 \newblock Cambridge University Press, Cambridge, second edition, sixth printing
   edition, 2001.
+
+\bibitem{quantumcomputers}
+R.~LaFlamme T.D.~Ladd, F.~Jelezko.
+\newblock Quantum computers.
+\newblock {\em Nature}.
 
 \bibitem{larson}
 Wiley J. Larson \& James~R. Wertz, editor.

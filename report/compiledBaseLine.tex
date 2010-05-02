@@ -1,26 +1,31 @@
+
 \documentclass[11pt]{report}
-%\usepackage{graphicx}
+\pagestyle{myheadings}
+\markright{Group 13\hfill Laser Swarm\hfill}
+\usepackage{pdflscape}
 
 \usepackage{multirow}
 \usepackage{enumerate}
 \usepackage[printonlyused]{acronym}
 \usepackage{multirow}
-\usepackage[pdftex]{graphicx}
+\usepackage{graphicx}
 \usepackage{wrapfig}
 \usepackage{amsmath}
 \usepackage{url}
+\usepackage{fixltx2e}
 
 \topmargin -1.5cm
-\oddsidemargin -0.04cm
-\evensidemargin -0.04cm
-\textwidth 16.59cm
-\textheight 21.94cm
-\parskip 7.2pt
+\oddsidemargin -0.04cm 
+\evensidemargin -0.04cm 
+\textwidth 16.59cm 
+\textheight 21.94cm 
+\parskip 7.2pt 
 
 \begin{document}
+
 %%%%%%%%%%%%%
 %
-%	TOP MATTER
+%       TOP MATTER
 %
 %%%%%%%%%%%%%
 
@@ -28,7 +33,7 @@
 
 %%%%%%%%%%%%%
 %
-%	ABSTRACT
+%       ABSTRACT
 %
 %%%%%%%%%%%%%
 
@@ -36,7 +41,7 @@
 
 %%%%%%%%%%%%%
 %
-%	TOC
+%       TOC
 %
 %%%%%%%%%%%%%
 
@@ -44,7 +49,7 @@
 
 %%%%%%%%%%%%%
 %
-%	List of symbols 
+%       List of symbols 
 %
 %%%%%%%%%%%%%
 
@@ -55,7 +60,7 @@
 
 %%%%%%%%%%%%%
 %
-%	INTRODUCTION
+%       INTRODUCTION
 %
 %%%%%%%%%%%%%
 
@@ -66,7 +71,7 @@
 
 %%%%%%%%%%%%%
 %
-%	Functions and requirements
+%       Functions and requirements
 %
 %%%%%%%%%%%%%
 
@@ -77,19 +82,21 @@
 
 %%%%%%%%%%%%%
 %
-%	Budget Breakdown
+%       Budget Breakdown
 %
 %%%%%%%%%%%%%
 
 \chapter{Budget Breakdown}
 \label{blBudgets}
+\input{chapters/blHR.tex}
 \input{chapters/blBUDmass.tex}
 \input{chapters/blBudgetCost.tex}
 \input{chapters/blBudgetPower.tex}
+\input{chapters/blCont.tex}
 
 %%%%%%%%%%%%%
 %
-%	Technical Risk Asessement
+%       Technical Risk Asessement
 %
 %%%%%%%%%%%%%
 
@@ -99,7 +106,7 @@
 
 %%%%%%%%%%%%%
 %
-%	Design Options
+%       Design Options
 %
 %%%%%%%%%%%%%
 
@@ -107,18 +114,18 @@
 \label{blDesignOptions}
 \input{chapters/blDOadcs.tex}
 \input{chapters/blDOEPS.tex}
-
+\input{chapters/blDOCOM.tex}
 \input{chapters/blDOOrb.tex}
 \input{chapters/blDOLSR.tex}
 \input{chapters/blDOreceiver.tex}
 
 %%%%%%%%%%%%%
 %
-%	SUSTAINABLE
+%       SUSTAINABLE
 %
 %%%%%%%%%%%%%
 
-\chapter{Approach with respect to sustainable development}
+\chapter{Approach With Respect to Sustainable Development}
 \label{blSustainable}
 \input{chapters/blSSPRO.tex}
 \input{chapters/blSSOPE.tex}
@@ -127,7 +134,7 @@
 
 %%%%%%%%%%%%%
 %
-%	Return on investment
+%       Return on investment
 %
 %%%%%%%%%%%%%
 
@@ -137,7 +144,7 @@
 
 %%%%%%%%%%%%%
 %
-%	RAMS
+%       RAMS
 %
 %%%%%%%%%%%%%
 
@@ -147,7 +154,7 @@
 
 %%%%%%%%%%%%%
 %
-%	BIBLIOGRAPHY
+%       BIBLIOGRAPHY
 %
 %%%%%%%%%%%%%
 
@@ -156,7 +163,7 @@
 
 %%%%%%%%%%%%%
 %
-%	APPENDICIES
+%       APPENDICIES
 %
 %%%%%%%%%%%%%
 

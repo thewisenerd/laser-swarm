@@ -3,7 +3,7 @@ Type=TeXnicCenterProjectSessionInformation
 Version=2
 
 [SessionInfo]
-ActiveTab=0
+ActiveTab=2
 FrameCount=5
 ActiveFrame=0
 
@@ -24,17 +24,17 @@ Class=CLatexEdit
 Document=report\compiledProjectPlan.tex
 
 [Frame0_Row0]
-cyCur=391
+cyCur=743
 cyMin=10
 
 [Frame0_Col0]
-cxCur=1395
+cxCur=1619
 cxMin=10
 
 [Frame0_View0,0]
-Cursor.row=78
+Cursor.row=62
 Cursor.column=1
-TopSubLine=6
+TopSubLine=49
 
 [Frame1]
 Columns=1
@@ -61,8 +61,8 @@ cxCur=1427
 cxMin=10
 
 [Frame1_View0,0]
-Cursor.row=15
-Cursor.column=237
+Cursor.row=0
+Cursor.column=0
 TopSubLine=0
 
 [Frame2]
@@ -92,7 +92,7 @@ cxMin=10
 [Frame2_View0,0]
 Cursor.row=0
 Cursor.column=0
-TopSubLine=77
+TopSubLine=0
 
 [Frame3]
 Columns=1

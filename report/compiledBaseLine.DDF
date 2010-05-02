@@ -1,0 +1,7 @@
+[Settings]
+TCX=T1
+TeXFormat=LaTeX 2e
+TCXEnable=true
+[Info]
+InputEncoding=CP1252
+Source=compiledbaseline.tex
