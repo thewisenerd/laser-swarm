@@ -3,6 +3,7 @@ package com.google.code.laserswarm.simulation;
 import java.util.HashMap;
 
 import javax.vecmath.Point3d;
+import javax.vecmath.Vector3d;
 
 import com.google.code.laserswarm.conf.Satellite;
 import com.google.code.laserswarm.earthModel.ScatteringCharacteristics;
@@ -64,6 +65,15 @@ public class SimVars {
 	 * Scattering characteristics for this footprint.
 	 */
 	public ScatteringCharacteristics	scatter;
+
+	/**
+	 * Is the footprint illuminated by the sun ?
+	 */
+	public boolean						illuminated;
+	/**
+	 * If illuminated by the sun, this is the incidence angle of the sun
+	 */
+	public Vector3d						sunVector;
 
 	@Override
 	public String toString() {

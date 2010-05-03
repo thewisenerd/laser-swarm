@@ -1,53 +1,160 @@
 package com.google.code.laserswarm.process;
 
+import static com.google.code.laserswarm.math.VectorMath.avgVector;
+import static com.google.code.laserswarm.math.VectorMath.relative;
 import jat.cm.Constants;
 
-import java.util.Map;
+import java.util.List;
 import java.util.TreeMap;
 
-import org.apache.commons.math.distribution.Distribution;
+import javax.vecmath.Point3d;
+import javax.vecmath.Vector3d;
 
+import com.google.code.laserswarm.conf.Constellation;
+import com.google.code.laserswarm.conf.Satellite;
+import com.google.code.laserswarm.earthModel.ScatteringCharacteristics;
+import com.google.code.laserswarm.earthModel.ScatteringParam;
+import com.google.code.laserswarm.math.LookupTable;
+import com.google.code.laserswarm.simulation.SimVars;
 import com.google.common.collect.Maps;
 
 public class TimeLine {
 
-	private double						t0;
-	private double						tE;
+	private double						ePhoton;
 
-	private TreeMap<Double, Integer>	photons	= Maps.newTreeMap();
+	private TreeMap<Double, Integer>	photons			= Maps.newTreeMap();
+	private LookupTable					lookupPosition	= new LookupTable();
+	private LookupTable					lookupDirection	= new LookupTable();
 
-	public TimeLine(double t0, double tE) {
-		this.t0 = t0;
-		this.tE = tE;
+	private List<SimVars>				dataSet;
+	private Satellite					sat;
+	private Constellation				constellation;
+
+	public TimeLine(Satellite sat, Constellation constellation, List<SimVars> dataSet) {
+		this.constellation = constellation;
+		this.dataSet = dataSet;
+		this.sat = sat;
+
+		ePhoton = (Constants.c * 6.62606896E-34) / constellation.getLaserWaveLength();
+
+		makePhotons();
+		makeLookupTables();
 	}
 
-	public void addMeaserment(double t, int count) {
+	private void add(Double t, Integer nrPhotons) {
 		if (photons.containsKey(t))
-			photons.put(t, photons.get(t) + count);
+			photons.put(t, photons.get(t) + nrPhotons);
 		else
-			photons.put(t, count);
+			photons.put(t, nrPhotons);
 	}
 
-	public void addMeaserments(Map<Double, Integer> counts) {
-		for (Double t : counts.keySet()) {
-			addMeaserment(t, counts.get(t));
+	/**
+	 * <pre>
+	 * 	    * alpha
+	 * 	    | \
+	 * 	  c	 \	\  b
+	 *        |   \
+	 * 	beta   \    \ gamma
+	 *          -----
+	 * 			  a
+	 * </pre>
+	 * 
+	 * 
+	 * @param current
+	 * @return
+	 */
+	private double findA(SimVars current) {
+		// sin(gamma)/c = sin(alpha)/a => a
+		double alpha = getSatellite().getBeamDivergence();
+		Vector3d dR = new Vector3d(current.pE.get(getSatellite()));
+		dR.sub(current.pR);
+		double beta = Math.PI - new Vector3d(current.pE.get(getSatellite())).angle(dR);
+		double gamma = Math.PI - beta - alpha;
+		double c = dR.length();
+		double a = c * (Math.sin(alpha) / Math.sin(gamma)); // Semi-major axis
+
+		double minorAxis = c * Math.tan(alpha); // Semi-minor axis
+
+		double area = Math.PI * a * minorAxis; // Area ellipse
+		return area;
+	}
+
+	public LookupTable getLookupDirection() {
+		return lookupDirection;
+	}
+
+	public LookupTable getLookupPosition() {
+		return lookupPosition;
+	}
+
+	public Satellite getSatellite() {
+		return sat;
+	}
+
+	private void makeLookupTables() {
+		for (SimVars simVars : dataSet) {
+			double t = simVars.t0;
+			Point3d satPos = simVars.pE.get(getSatellite());
+			lookupPosition.put(t, satPos);
+
+			Vector3d dir = relative(satPos, simVars.pR);
+			dir.normalize();
+			lookupDirection.put(t, dir);
 		}
 	}
 
-	public void addNoise(double tStart, double tEnd, Distribution probability, double Pr, double lambda) {
-		double ePhoton = (Constants.c * 6.62606896E-34) / lambda;
-		double dT = 1E-3;
+	private void makePhotons() {
+		SimVars last = null;
+		double lastA = -1;
+		double lastT = -1;
+		for (SimVars current : dataSet) {
+			double t = current.t0 + current.tR + current.tE.get(sat);
+			/* Add measured photons */
+			Integer nrPhotons = current.photonsE.get(sat);
+			add(t, nrPhotons);
+			/* Introduce noise */
+			double currentA = findA(current);
+			if (last != null) {
+				double dT = t - lastT;
+				double averageA = (currentA + lastA) / 2;
+				Vector3d sunVector = avgVector(last.sunVector, current.sunVector);
 
-		double t = tStart;
-		while (t < tEnd) {
-			double energy = Pr * dT;
-			int nrP = (int) Math.floor(energy / ePhoton);
-			if (Math.random() < (energy / ePhoton) - nrP)
-				nrP++;
-			photons.put(t, nrP);
-			t += dT;
+				/* Find the average scattering characteristics */
+				ScatteringParam param = new ScatteringParam(current.scatter.getParam(), //
+						last.scatter.getParam());
+				ScatteringCharacteristics scatter = new ScatteringCharacteristics(sunVector, param);
+
+				/* Find the average satellite position */
+				Vector3d position = avgVector(last.pE.get(getSatellite()), //
+						current.pE.get(getSatellite()));
+				/* Find the average reflection position */
+				Vector3d reflection = avgVector(last.pR, current.pR);
+
+				/* Find the vector from the average location on the ground to the satellite */
+				Vector3d exittanceVector = new Vector3d(position);
+				exittanceVector.sub(reflection);
+
+				/* Find the power of the sun in the given frequency */
+				double powerIn = 0.5;
+				// http://springerlink.com/content/w03843u415122240/?p=b44b970f34e9480ba22f8850692c07c3&pi=1
+				// http://springerlink.com/content/w03843u415122240/fulltext.pdf
+				double totalReceivedPower = scatter.probability(exittanceVector) * (averageA * powerIn);
+
+				/* Find the number of photons */
+				int nrP = (int) Math.floor(totalReceivedPower / ePhoton);
+				if (Math.random() < (totalReceivedPower / ePhoton) - nrP)
+					nrP++;
+
+				/* Distribute noise photons evenly over the time interval */
+				for (int i = 0; i < nrP; i++) {
+					double tRand = Math.random() * dT + lastT;
+					photons.put(tRand, 1);
+				}
+			}
+			last = current;
+			lastA = currentA;
+			lastT = t;
 		}
-
 	}
 
 }

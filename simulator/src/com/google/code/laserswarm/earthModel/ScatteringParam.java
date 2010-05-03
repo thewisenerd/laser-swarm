@@ -21,6 +21,18 @@ public class ScatteringParam {
 		this.thetaHenyeyGreenstein = thetaHenyeyGreenstein;
 	}
 
+	/**
+	 * Make an average distribution of two given distributions
+	 * 
+	 * @param param
+	 * @param param2
+	 */
+	public ScatteringParam(ScatteringParam param, ScatteringParam param2) {
+		this((param.getIndexOfRefraction() + param2.getIndexOfRefraction()) / 2, //
+				(param.getKappaMinnaert() + param2.getKappaMinnaert()) / 2, //
+				(param.getThetaHenyeyGreenstein() + param2.getThetaHenyeyGreenstein()) / 2);
+	}
+
 	public double getIndexOfRefraction() {
 		return indexOfRefraction;
 	}

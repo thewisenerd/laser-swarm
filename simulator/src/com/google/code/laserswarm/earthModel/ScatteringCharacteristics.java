@@ -64,6 +64,10 @@ public class ScatteringCharacteristics implements Distribution {
 				.getThetaHenyeyGreenstein());
 	}
 
+	public ScatteringParam getParam() {
+		return new ScatteringParam(refrSurf, kappa, Theta);
+	}
+
 	@Override
 	/**
 	 * Find the percentage of incoming radiation (irradiation) that is emitted in the specified direction
