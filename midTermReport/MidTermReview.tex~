@@ -1,0 +1,174 @@
+
+\documentclass[11pt]{report}
+\pagestyle{myheadings}
+\markright{Group 13\hfill Laser Swarm\hfill}
+\usepackage{pdflscape}
+
+\usepackage{multirow}
+\usepackage{enumerate}
+\usepackage[printonlyused]{acronym}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{amsmath}
+\usepackage{url}
+\usepackage{fixltx2e}
+
+\topmargin -1.5cm
+\oddsidemargin -0.04cm 
+\evensidemargin -0.04cm 
+\textwidth 16.59cm 
+\textheight 21.94cm 
+\parskip 7.2pt 
+
+\begin{document}
+
+%%%%%%%%%%%%%
+%
+%       TOP MATTER
+%
+%%%%%%%%%%%%%
+
+\input{chapters/titlePage.tex}
+
+%%%%%%%%%%%%%
+%
+%       ABSTRACT
+%
+%%%%%%%%%%%%%
+
+\input{chapters/abstract.tex}
+
+%%%%%%%%%%%%%
+%
+%       TOC
+%
+%%%%%%%%%%%%%
+
+\tableofcontents
+
+%%%%%%%%%%%%%
+%
+%       List of symbols 
+%
+%%%%%%%%%%%%%
+
+\newpage
+\Large{\textbf{List of Acronyms}}
+\small
+\input{chapters/acronyms.tex}
+
+%%%%%%%%%%%%%
+%
+%       INTRODUCTION
+%
+%%%%%%%%%%%%%
+
+\chapter{Introduction}
+\label{intro}
+%Intro
+\input{chapters/introduction.tex}
+
+%%%%%%%%%%%%%
+%
+%       Functions and requirements
+%
+%%%%%%%%%%%%%
+
+% \chapter{Functions and Requirements}
+% \label{blFuncChapter}
+% \input{chapters/blFUNFlows.tex}
+% \input{chapters/blFRReqDisc.tex}
+
+%%%%%%%%%%%%%
+%
+%       Budget Breakdown
+%
+%%%%%%%%%%%%%
+
+% \chapter{Budget Breakdown}
+% \label{blBudgets}
+% \input{chapters/blHR.tex}
+% \input{chapters/blBUDmass.tex}
+% \input{chapters/blBudgetCost.tex}
+% \input{chapters/blBudgetPower.tex}
+% \input{chapters/blCont.tex}
+
+%%%%%%%%%%%%%
+%
+%       Technical Risk Asessement
+%
+%%%%%%%%%%%%%
+
+% \chapter{Technical Risk Assessment}
+% \label{blRisk}
+% \input{chapters/blTRA.tex}
+
+%%%%%%%%%%%%%
+%
+%       Design Options
+%
+%%%%%%%%%%%%%
+
+% \chapter{Design Options}
+% \label{blDesignOptions}
+% \input{chapters/blDOadcs.tex}
+% \input{chapters/blDOEPS.tex}
+% \input{chapters/blDOCOM.tex}
+% \input{chapters/blDOOrb.tex}
+% \input{chapters/blDOLSR.tex}
+% \input{chapters/blDOreceiver.tex}
+
+%%%%%%%%%%%%%
+%
+%       SUSTAINABLE
+%
+%%%%%%%%%%%%%
+
+\chapter{Approach With Respect to Sustainable Development}
+\label{blSustainable}
+\input{chapters/SSPRO.tex}
+\input{chapters/SSOPE.tex}
+\input{chapters/SSEOL.tex}
+
+
+%%%%%%%%%%%%%
+%
+%       Return on investment
+%
+%%%%%%%%%%%%%
+
+% \chapter{Return on Investment and Operational Profit}
+% \label{blInvestment}
+% \input{chapters/blMA.tex}
+
+%%%%%%%%%%%%%
+%
+%       RAMS
+%
+%%%%%%%%%%%%%
+
+% \chapter{R.A.M.S.}
+% \label{blRAMS1}
+% \input{chapters/blRAMS.tex}
+
+%%%%%%%%%%%%%
+%
+%       BIBLIOGRAPHY
+%
+%%%%%%%%%%%%%
+
+\bibliographystyle{plainnat}
+\bibliography{bibliography}
+
+%%%%%%%%%%%%%
+%
+%       APPENDICIES
+%
+%%%%%%%%%%%%%
+
+% \appendix
+% \chapter{Requirement Discovery Trees}
+% \label{reqdisctree}
+
+\end{document}

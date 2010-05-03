@@ -1,0 +1,10 @@
+\usepackage{longtable}
+
+\begin{center}
+	\begin{longtable}{| c | c | c | c | c | c | c | c |}\hline
+		\label{t:performance}
+		Constellation & P [W] & \lambda [nm] & f [Hz] & $p_{length}$ [s] & $#_{Receivers}$ & $A_{aperture}$ [$m^{2}$] & $\phi_{received}$ \\\hline
+		1 & 10.0 & 300.0 & 50.0 & 1.0E-10 & 1 & 0.0064 & 6894.0\\\hline
+		\caption{The constellation information.}
+	\end{longtable}
+\end{center}
