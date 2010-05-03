@@ -29,6 +29,9 @@ public class Satellite {
 	@Element
 	private double	aperatureArea				= (0.08 * 0.08);	// m²
 
+	@Element
+	private double	beamDivergence				= 2.3333E-4 / 2;	// rad for the half beam /|
+
 	public Satellite() {
 		trueAnomaly = semimajorAxis = rightAngleOfAscendingNode = inclination = eccentricity = argumentOfPerigee = 0f;
 	}
@@ -51,6 +54,10 @@ public class Satellite {
 
 	public float getArgumentOfPerigee() {
 		return argumentOfPerigee;
+	}
+
+	public double getBeamDivergence() {
+		return beamDivergence;
 	}
 
 	public float getEccentricity() {
