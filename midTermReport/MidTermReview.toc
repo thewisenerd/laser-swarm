@@ -1,0 +1,6 @@
+\contentsline {chapter}{\numberline {1}Introduction}{3}
+\contentsline {chapter}{\numberline {2}Preliminary Pruning of the Design Option Tree}{4}
+\contentsline {chapter}{\numberline {3}Approach With Respect to Sustainable Development}{5}
+\contentsline {section}{\numberline {3.1}Production and Logistics}{5}
+\contentsline {section}{\numberline {3.2}Operations}{5}
+\contentsline {section}{\numberline {3.3}End of Life}{6}
