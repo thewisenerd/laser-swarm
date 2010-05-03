@@ -71,6 +71,14 @@
 
 %%%%%%%%%%%%%
 %
+%       PRUNING
+%
+%%%%%%%%%%%%%
+
+\input{chapters/prune.tex}
+
+%%%%%%%%%%%%%
+%
 %       Functions and requirements
 %
 %%%%%%%%%%%%%
