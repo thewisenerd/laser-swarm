@@ -6,11 +6,16 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.vecmath.Point3d;
+
 import junit.framework.TestCase;
+
+import org.geotools.geometry.DirectPosition2D;
 
 import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.conf.Constellation;
 import com.google.code.laserswarm.conf.Satellite;
+import com.google.code.laserswarm.earthModel.Convert;
 import com.google.code.laserswarm.earthModel.EarthModel;
 import com.google.code.laserswarm.earthModel.ElevationModel;
 import com.google.code.laserswarm.simulation.SimTemplate;
@@ -91,14 +96,23 @@ public class SimulationTester extends TestCase {
 					nP += simVar.photonsE.get(sat);
 				}
 			}
+			List<HashMap<Satellite, Point3d>> groundPoints = null;
 			try {
 				System.out.println(SimVarUtil.getField("photonsE", pnts));
+				groundPoints = SimVarUtil.getField("photonsE", pnts);
 			} catch (RetrievalExecption e) {
 				e.printStackTrace();
 			}
+
+			LinkedList<DirectPosition2D> p = Lists.newLinkedList();
+			HashMap<Satellite, Point3d> pts = groundPoints.iterator().next();
+			for (Point3d groundP : pts.values()) {
+				Point3d sphere = Convert.toSphere(groundP);
+				p.add(new DirectPosition2D(sphere.y, sphere.z));
+			}
+			// Plot2D.make(grid, points)
 			logger.inf("Received %s photons in total (%s pulses)", nP, pnts.size());
 		}
 
 	}
-
 }

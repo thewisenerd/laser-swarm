@@ -5,12 +5,17 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.List;
 
 import javax.media.jai.PlanarImage;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import org.geotools.coverage.grid.GridCoordinates2D;
 import org.geotools.coverage.grid.GridCoverage2D;
+import org.geotools.coverage.grid.InvalidGridGeometryException;
+import org.geotools.geometry.DirectPosition2D;
+import org.opengis.referencing.operation.TransformException;
 import org.ujmp.core.Matrix;
 
 import com.google.code.laserswarm.earthModel.ElevationModel;
@@ -69,6 +74,31 @@ public class Plot2D extends JFrame {
 
 	public static void make(GridCoverage2D grid) {
 		new Plot2D(mkImage(grid));
+	}
+
+	public static void make(GridCoverage2D grid, List<DirectPosition2D> points) {
+		BufferedImage im = mkImage(grid);
+
+		Graphics2D g2 = Graphics2D.class.cast(im.getGraphics());
+		boolean first = true;
+		GridCoordinates2D p2 = null, p1 = null;
+		for (DirectPosition2D pos : points) {
+			p1 = p2;
+			try {
+				p2 = grid.getGridGeometry().worldToGrid(pos);
+			} catch (InvalidGridGeometryException e) {
+				e.printStackTrace();
+			} catch (TransformException e) {
+				e.printStackTrace();
+			}
+			if (first) {
+				first = false;
+				continue;
+			}
+			g2.drawLine(p1.x, p1.y, p2.x, p2.y);
+		}
+
+		new Plot2D(im);
 	}
 
 	public static void make(Matrix m) {

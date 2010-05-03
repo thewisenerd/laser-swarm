@@ -13,7 +13,7 @@
 	<classpathentry kind="lib" path="lib/simple-xml-2.3.3/jar/simple-xml-2.3.3.jar" sourcepath="lib/simple-xml-2.3.3/src"/>
 	<classpathentry kind="lib" path="lib/guava-r03/guava-r03.jar" sourcepath="lib/guava-r03/guava-src-r03.zip"/>
 	<classpathentry kind="lib" path="lib/geotools-2.6.3/geoapi-2.3-M1.jar"/>
-	<classpathentry kind="lib" path="lib/geotools-2.6.3/gt-arcgrid-2.6.3.jar">
+	<classpathentry kind="lib" path="lib/geotools-2.6.3/gt-arcgrid-2.6.3.jar" sourcepath="C:/Documents and Settings/simon/Desktop/geotools-2.6.3-project/geotools-2.6.3/modules/library/coverage/src">
 		<attributes>
 			<attribute name="javadoc_location" value="http://geoapi.sourceforge.net/snapshot/pending/"/>
 		</attributes>
@@ -30,6 +30,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="lib" path="lib/geotools-2.6.3/gt-geotiff-2.6.3.jar"/>
 	<classpathentry kind="lib" path="lib/Chart2D_1.9.6k.jar"/>
-	<classpathentry kind="lib" path="/media/DATA/coding/java/Laser SWARM/simulator/lib/Jat_fat.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Jat"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
