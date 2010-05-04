@@ -87,6 +87,10 @@ public class TimeLine {
 		return lookupPosition;
 	}
 
+	public TreeMap<Double, Integer> getPhotons() {
+		return photons;
+	}
+
 	public Satellite getSatellite() {
 		return sat;
 	}

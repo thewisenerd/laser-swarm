@@ -12,6 +12,7 @@ import com.google.code.laserswarm.conf.Constellation;
 import com.google.code.laserswarm.conf.Satellite;
 import com.google.code.laserswarm.earthModel.EarthModel;
 import com.google.code.laserswarm.earthModel.ElevationModel;
+import com.google.code.laserswarm.out.plot2D.Plot2D;
 import com.google.code.laserswarm.process.EmitterHistory;
 import com.google.code.laserswarm.process.TimeLine;
 import com.google.code.laserswarm.simulation.SimTemplate;
@@ -27,7 +28,7 @@ public class ProcessorTester {
 	public static final String	CfgName	= "unitTestConfig.xml";
 
 	public static void main(String[] args) {
-
+		new ProcessorTester().testProcessing();
 	}
 
 	public void testProcessing() {
@@ -64,6 +65,7 @@ public class ProcessorTester {
 			e.printStackTrace();
 		}
 		EarthModel earth = new EarthModel(dem);
+		Plot2D.make(dem.getCoverage());
 
 		SimulatorMaster mgr = new SimulatorMaster(earth);
 		mgr.addSimTemplate(new SimTemplate(Configuration.getInstance(), testConstallation));
