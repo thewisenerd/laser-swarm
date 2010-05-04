@@ -1,0 +1,102 @@
+
+\documentclass[11pt]{report}
+\pagestyle{myheadings}
+\markright{Group 13\hfill Laser Swarm\hfill}
+\usepackage{pdflscape}
+
+\usepackage{multirow}
+\usepackage{enumerate}
+\usepackage[printonlyused]{acronym}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{amsmath}
+\usepackage{url}
+\usepackage{fixltx2e}
+
+\topmargin -1.5cm
+\oddsidemargin -0.04cm 
+\evensidemargin -0.04cm 
+\textwidth 16.59cm 
+\textheight 21.94cm 
+\parskip 7.2pt 
+
+\begin{document}
+
+%%%%%%%%%%%%%
+%
+%       TOP MATTER
+%
+%%%%%%%%%%%%%
+
+\input{chapters/simTitlePage.tex}
+
+%%%%%%%%%%%%%
+%
+%       ABSTRACT
+%
+%%%%%%%%%%%%%
+
+\input{chapters/simAbstract.tex}
+
+%%%%%%%%%%%%%
+%
+%       TOC
+%
+%%%%%%%%%%%%%
+
+\tableofcontents
+
+%%%%%%%%%%%%%
+%
+%       List of symbols 
+%
+%%%%%%%%%%%%%
+
+\newpage
+\Large{\textbf{List of Acronyms}}
+\small
+\input{chapters/acronyms.tex}
+
+%%%%%%%%%%%%%
+%
+%       INTRODUCTION
+%
+%%%%%%%%%%%%%
+
+\input{chapters/simIntroduction.tex}
+
+%%%%%%%%%%%%%
+%
+%       SIMULATION PART
+%
+%%%%%%%%%%%%%
+
+\input{chapters/simulation.tex}
+\input{chapters/orbit.tex}
+\input{chapters/earthModel.tex}
+\input{chapters/DEM.tex}
+\input{chapters/scatter.tex}
+\input{chapters/noise.tex}
+\input{chapters/signPath.tex}
+
+%%%%%%%%%%%%%
+%
+%       DATA ANALYSIS PART
+%
+%%%%%%%%%%%%%
+
+\input{chapters/dataAnalysis.tex}
+\input{chapters/altDet.tex}
+\input{chapters/BRDFDet.tex}
+
+%%%%%%%%%%%%%
+%
+%       BIBLIOGRAPHY
+%
+%%%%%%%%%%%%%
+
+\bibliographystyle{plainnat}
+\bibliography{bibliography}
+
+\end{document}

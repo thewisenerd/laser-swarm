@@ -71,6 +71,25 @@
 
 %%%%%%%%%%%%%
 %
+%	PROJECT PLANNING STUFF
+%
+%%%%%%%%%%%%%
+
+% DSE WFD
+\input{chapters/dsePPWFD.tex}
+% DSE WBS
+\input{chapters/dsePPWBS.tex}
+% DSE Project Approach Description
+\input{chapters/dsePPProjectApproachDescription.tex}
+% DSE OBS
+\input{chapters/dsePPOBS.tex}
+% DSE Timeline
+\input{chapters/dsePPTimeline.tex}
+% DSE Risk Management Plan
+\input{chapters/dsePPRiskMP.tex}
+
+%%%%%%%%%%%%%
+%
 %       PRUNING
 %
 %%%%%%%%%%%%%
@@ -133,8 +152,7 @@
 %
 %%%%%%%%%%%%%
 
-\chapter{Approach With Respect to Sustainable Development}
-\label{blSustainable}
+\input{chapters/SS.tex}
 \input{chapters/SSPRO.tex}
 \input{chapters/SSOPE.tex}
 \input{chapters/SSEOL.tex}
