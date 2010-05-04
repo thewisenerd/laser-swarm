@@ -51,8 +51,8 @@ public class Configuration {
 		mode.add(Actions.TABULATE);
 	}
 
-	@Element
-	private int						simThreads						= 4;
+	public static int				simThreads						= 4;
+	public static int				demThreads						= 3;
 
 	@Attribute
 	private float					atmOpticalThickness				= 0.25f;
@@ -95,7 +95,7 @@ public class Configuration {
 		} catch (Exception e) {
 		}
 		logger.inf("Making a new cfg and saving");
-		getInstance().write(name);
+		write(name);
 	}
 
 	public static boolean read(String filename) {
@@ -175,10 +175,6 @@ public class Configuration {
 
 	public Set<Actions> getMode() {
 		return mode;
-	}
-
-	public int getSimThreads() {
-		return simThreads;
 	}
 
 	public boolean hasAction(Actions a) {

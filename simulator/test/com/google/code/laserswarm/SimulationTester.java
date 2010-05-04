@@ -2,6 +2,7 @@ package com.google.code.laserswarm;
 
 import java.io.File;
 import java.lang.reflect.Field;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -10,12 +11,9 @@ import javax.vecmath.Point3d;
 
 import junit.framework.TestCase;
 
-import org.geotools.geometry.DirectPosition2D;
-
 import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.conf.Constellation;
 import com.google.code.laserswarm.conf.Satellite;
-import com.google.code.laserswarm.earthModel.Convert;
 import com.google.code.laserswarm.earthModel.EarthModel;
 import com.google.code.laserswarm.earthModel.ElevationModel;
 import com.google.code.laserswarm.simulation.SimTemplate;
@@ -24,8 +22,8 @@ import com.google.code.laserswarm.simulation.SimVars;
 import com.google.code.laserswarm.simulation.Simulator;
 import com.google.code.laserswarm.simulation.SimulatorMaster;
 import com.google.code.laserswarm.util.RetrievalExecption;
-import com.google.code.laserswarm.util.demReader.DemCreationException;
 import com.google.code.laserswarm.util.demReader.DemReader;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
 import com.lyndir.lhunath.lib.system.logging.Logger;
 
@@ -68,14 +66,10 @@ public class SimulationTester extends TestCase {
 		EarthModel earth = new EarthModel();
 
 		File demFolder = new File("DEM");
-		for (File demF : demFolder.listFiles()) {
-			try {
-				ElevationModel dem = DemReader.parseDem(demF.getAbsoluteFile());
-				earth.add(dem);
-			} catch (DemCreationException e) {
-				logger.err(e, "");
-			}
-		}
+		ImmutableSet<ElevationModel> dems = DemReader.parseDem(Arrays.asList(demFolder.listFiles()));
+		for (ElevationModel elevationModel : dems)
+			earth.add(elevationModel);
+
 		earth.loadCoef(); // Stretch refl coef
 
 		SimulatorMaster mgr = new SimulatorMaster(earth);
@@ -104,13 +98,6 @@ public class SimulationTester extends TestCase {
 				e.printStackTrace();
 			}
 
-			LinkedList<DirectPosition2D> p = Lists.newLinkedList();
-			HashMap<Satellite, Point3d> pts = groundPoints.iterator().next();
-			for (Point3d groundP : pts.values()) {
-				Point3d sphere = Convert.toSphere(groundP);
-				p.add(new DirectPosition2D(sphere.y, sphere.z));
-			}
-			// Plot2D.make(grid, points)
 			logger.inf("Received %s photons in total (%s pulses)", nP, pnts.size());
 		}
 

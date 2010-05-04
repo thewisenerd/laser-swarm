@@ -65,7 +65,7 @@ public class SimulatorMaster {
 				} catch (InterruptedException e) {
 					logger.err(e, "INTERRUPTED while simulating");
 				}
-			} while (runningTemplates.size() >= Configuration.getInstance().getSimThreads());
+			} while (runningTemplates.size() >= Configuration.simThreads);
 
 		}
 		return doneTemplates;
