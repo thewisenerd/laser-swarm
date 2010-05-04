@@ -1,0 +1,111 @@
+\documentclass[11pt]{report}
+\usepackage{graphicx}
+
+\usepackage{multirow}
+
+\usepackage{multirow}
+%\usepackage{mathptmx}
+
+\topmargin -1.5cm
+\oddsidemargin -0.04cm
+\evensidemargin -0.04cm
+\textwidth 16.59cm
+\textheight 21.94cm
+\parskip 7.2pt
+
+\begin{document}
+%%%%%%%%%%%%%
+%
+%	TOP MATTER
+%
+%%%%%%%%%%%%%
+
+\input{chapters/titlePagePP.tex}
+
+%%%%%%%%%%%%%
+%
+%	ABSTRACT
+%
+%%%%%%%%%%%%%
+
+\input{chapters/abstract.tex}
+
+%%%%%%%%%%%%%
+%
+%	TOC
+%
+%%%%%%%%%%%%%
+
+\tableofcontents
+
+%%%%%%%%%%%%%
+%
+%	GENERAL SUMMARY
+%
+%%%%%%%%%%%%%
+
+\chapter{General Summary}
+\label{dseSummary}
+%Intro
+\input{chapters/dsePPIntro.tex}
+%MNS
+\input{chapters/dsePPMNS.tex}
+%POS
+\input{chapters/dsePPPOS.tex}
+%Requirements
+\input{chapters/dsePPRequirements.tex}
+%System Description
+\input{chapters/dsePPSystemDescription.tex}
+
+%%%%%%%%%%%%%
+%
+%	DSE PROJECT PLAN
+%
+%%%%%%%%%%%%%
+
+\chapter{Technical Design Development}
+\label{dse}
+% DSE WFD
+\input{chapters/dsePPWFD.tex}
+% DSE WBS
+\input{chapters/dsePPWBS.tex}
+% DSE Project Approach Description
+\input{chapters/dsePPProjectApproachDescription.tex}
+% DSE OBS
+\input{chapters/dsePPOBS.tex}
+% DSE Timeline
+\input{chapters/dsePPTimeline.tex}
+% DSE Risk Management Plan
+\input{chapters/dsePPRiskMP.tex}
+
+%%%%%%%%%%%%%
+%
+%	SUSTAINABLE
+%
+%%%%%%%%%%%%%
+
+\chapter{Approach with respect to sustainable development}
+\label{dseSustainable}
+% DSE Sustainable
+\input{chapters/dseSustainable.tex}
+
+%%%%%%%%%%%%%
+%
+%	BIBLIOGRAPHY
+%
+%%%%%%%%%%%%%
+
+\bibliographystyle{plain}
+\bibliography{bibliography}
+
+%%%%%%%%%%%%%
+%
+%	APPENDICIES
+%
+%%%%%%%%%%%%%
+
+\appendix
+\chapter{Gantt Chart}
+\label{ganttchart}
+
+\end{document}
