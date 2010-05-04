@@ -138,6 +138,11 @@ public class Simulator implements Runnable {
 				continue;
 			}
 
+			/* sun vector */
+			simVals.sunVector = emittorOrbit.sunvec_ECEF();
+			double sunAngle = simVals.sunVector.angle(new Vector3d(simVals.pR));
+			simVals.illuminated = (sunAngle > Math.PI / 2);
+
 			/* Make pulses (with downtravel) */
 			simVals.power0 = constellation.getPower();
 			double angle = Math.PI - dR.angle(new Vector3d(simVals.pR));
