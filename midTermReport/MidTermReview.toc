@@ -7,6 +7,10 @@
 \contentsline {chapter}{\numberline {3}Preliminary Pruning of the Design Option Tree}{6}
 \contentsline {section}{\numberline {3.1}\acl {ADCS}}{6}
 \contentsline {section}{\numberline {3.2}Orbit Characteristics}{6}
+\contentsline {section}{\numberline {3.3}\acl {EPS}}{6}
+\contentsline {subsection}{\numberline {3.3.1}Power Source}{8}
+\contentsline {subsection}{\numberline {3.3.2}Power Storage}{8}
+\contentsline {subsection}{\numberline {3.3.3}Power Distribution, Regulation and Control}{8}
 \contentsline {chapter}{\numberline {4}Sustainable Development Strategy}{9}
 \contentsline {section}{\numberline {4.1}Production and Logistics}{9}
 \contentsline {section}{\numberline {4.2}Operations}{9}
