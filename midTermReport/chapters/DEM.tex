@@ -1,17 +1,17 @@
 \subsection{\acl{DEM}}
 \label{DEM}
 
-A \acl{DEM} is the digital representation of the topographic surface. For the ground representation
-in the simulator, a few tiles of the ASTER \ac{GDEM} are used. This \ac{DEM} was created using the
-the complete history of the ASTER instrument launched on Terra satellite. This \ac{DEM} has a
-spatial resolution of one arc-second and a vertical accuracy of 7 $\sim$ 14m. The elevations of the
-intermediate point where obtained using nearest-neighbor interpolation.
+A \acl{DEM} is a digital representation of a topographic surface. For the ground representation
+in the simulator a few tiles of the \ac{ASTER} \ac{GDEM} were used. This \ac{DEM} was created using the
+complete history of the \ac{ASTER} instrument launched on the Terra satellite. This \ac{DEM} has a
+spatial resolution of one arc-second and a vertical accuracy of 7 $\sim$ 14 meters. The elevations of the
+intermediate points were obtained using nearest-neighbor interpolation.
 
-The ASTER \ac{GDEM} elevations are expressed with respect to the WGS84 ellipsoid. To simplify the
-internal simulator, the \ac{DEM} tiles were reprojected to a spheroid (EPSG:3857). The reprojection
+The \ac{ASTER} \ac{GDEM} elevations are expressed with respect to the \ac{WGS84} ellipsoid. To simplify the
+internal simulator, the \ac{DEM} tiles were projected to the EPSG:3857 spheroid. The projection
 is done using the GeoTools Java toolkit \cite{geotools}.
 
-The digital elevation is used to compute total distance (and thus time) that the laser pulse
-travels. Furthermore, because scattering is dependant on the terrain normal, also this normal is
+The digital elevation is used to compute the total distance (and thus the time) that the laser pulse
+travels. Because scattering is dependent on the terrain normal, this normal is
 derived form the \ac{DEM}. This normal is derived from the two perpendicular surface gradients that
-can extracted from the \ac{DEM}.
+can be extracted from the \ac{DEM}.
