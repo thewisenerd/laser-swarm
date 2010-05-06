@@ -1,4 +1,4 @@
-This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2010.3.30)  4 MAY 2010 10:58
+This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2010.3.30)  4 MAY 2010 15:01
 entering extended mode
  %&-line parsing enabled.
 **simOnly.tex
@@ -192,37 +192,49 @@ Chapter 1.
 ]
 Chapter 2.
 ) (./chapters/orbit.tex) (./chapters/earthModel.tex) (./chapters/DEM.tex)
-(./chapters/scatter.tex) (./chapters/noise.tex) (./chapters/signPath.tex)
-(./chapters/dataAnalysis.tex [4
+(./chapters/scatter.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--5
 
-]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 8--10
+
+ []
+
+[4
+
+] <chapters/img/scatter.png, id=29, 301.125pt x 250.9375pt>
+File: chapters/img/scatter.png Graphic file (type png)
+
+<use chapters/img/scatter.png>) (./chapters/noise.tex) (./chapters/signPath.tex
+) (./chapters/dataAnalysis.tex [5 <./chapters/img/scatter.png>]
 Chapter 3.
-) (./chapters/altDet.tex) (./chapters/BRDFDet.tex) (./simOnly.bbl [5
+) (./chapters/altDet.tex) (./chapters/BRDFDet.tex) (./simOnly.bbl [6
+
+]) [7
 
 ]
-
-LaTeX Warning: Empty `thebibliography' environment on input line 8.
-
-) [6
-
-] (./simOnly.aux) ) 
+(./simOnly.aux) ) 
 Here is how much of TeX's memory you used:
- 2044 strings out of 95086
- 24744 string characters out of 1183255
- 76163 words of memory out of 1500000
- 5162 multiletter control sequences out of 10000+50000
- 12936 words of font info for 45 fonts, out of 1200000 for 2000
+ 2060 strings out of 95086
+ 24983 string characters out of 1183255
+ 77281 words of memory out of 1500000
+ 5176 multiletter control sequences out of 10000+50000
+ 13736 words of font info for 48 fonts, out of 1200000 for 2000
  28 hyphenation exceptions out of 8191
- 32i,4n,21p,388b,251s stack positions out of 5000i,500n,6000p,200000b,5000s
-</usr/share/texmf-texlive/fonts/type1/bluesky/cm/cmbx10.pfb>
-</usr/share/texmf-texlive/fonts/type1/bluesky/cm/cmbx12.pfb></usr/share/texmf-t
-exlive/fonts/type1/bluesky/cm/cmcsc10.pfb></usr/share/texmf-texlive/fonts/type1
-/bluesky/cm/cmr10.pfb></usr/share/texmf-texlive/fonts/type1/bluesky/cm/cmsl10.p
-fb></usr/share/texmf-texlive/fonts/type1/bluesky/cm/cmti10.pfb></usr/share/texm
-f-texlive/fonts/type1/bluesky/cm/cmti12.pfb>
-Output written on simOnly.pdf (8 pages, 57722 bytes).
+ 32i,5n,21p,519b,251s stack positions out of 5000i,500n,6000p,200000b,5000s
+</usr/share/texmf-texlive/fonts/type1/bluesky/cm/cmbx10.pfb></
+usr/share/texmf-texlive/fonts/type1/bluesky/cm/cmbx12.pfb></usr/share/texmf-tex
+live/fonts/type1/bluesky/cm/cmcsc10.pfb></usr/share/texmf-texlive/fonts/type1/b
+luesky/cm/cmmi10.pfb></usr/share/texmf-texlive/fonts/type1/bluesky/cm/cmr10.pfb
+></usr/share/texmf-texlive/fonts/type1/bluesky/cm/cmsl10.pfb></usr/share/texmf-
+texlive/fonts/type1/bluesky/cm/cmssbx10.pfb></usr/share/texmf-texlive/fonts/typ
+e1/bluesky/cm/cmti10.pfb></usr/share/texmf-texlive/fonts/type1/bluesky/cm/cmti1
+2.pfb>
+Output written on simOnly.pdf (9 pages, 83507 bytes).
 PDF statistics:
- 57 PDF objects out of 1000 (max. 8388607)
+ 70 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 131072)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 6 words of extra memory for PDF output out of 10000 (max. 10000000)
 

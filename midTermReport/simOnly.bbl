@@ -1,8 +1,15 @@
-\begin{thebibliography}{0}
+\begin{thebibliography}{1}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Rees(2001)]{rees}
+W.~G. Rees.
+\newblock \emph{Physical Principles of Remote Sensing}.
+\newblock Cambridge University Press, Cambridge, second edition, sixth printing
+  edition, 2001.
+\newblock ISBN 9780521669481.
 
 \end{thebibliography}

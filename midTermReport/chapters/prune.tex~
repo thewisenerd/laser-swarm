@@ -1,2 +1,4 @@
 \chapter{Preliminary Pruning of the Design Option Tree}
 \label{prune}
+
+In this chapter the Design Option Tree is pruned. This means that all options that can be dismissed off-hand are removed so as to end up with a table of only serious design options. In section \ref{pruneADCS} the \ac{ADCS} is pruned, whereas orbit options are scrapped in section \ref{pruneOrbit}.

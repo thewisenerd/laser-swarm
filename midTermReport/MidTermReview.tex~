@@ -75,18 +75,19 @@
 %
 %%%%%%%%%%%%%
 
+\input{chapters/technDesignDev.tex}
 % DSE WFD
-\input{chapters/dsePPWFD.tex}
+% \input{chapters/dsePPWFD.tex}
 % DSE WBS
-\input{chapters/dsePPWBS.tex}
+% \input{chapters/dsePPWBS.tex}
 % DSE Project Approach Description
-\input{chapters/dsePPProjectApproachDescription.tex}
+\input{chapters/projectApproachDescription.tex}
 % DSE OBS
-\input{chapters/dsePPOBS.tex}
+% \input{chapters/dsePPOBS.tex}
 % DSE Timeline
-\input{chapters/dsePPTimeline.tex}
+% \input{chapters/dsePPTimeline.tex}
 % DSE Risk Management Plan
-\input{chapters/dsePPRiskMP.tex}
+% \input{chapters/dsePPRiskMP.tex}
 
 %%%%%%%%%%%%%
 %
@@ -95,6 +96,8 @@
 %%%%%%%%%%%%%
 
 \input{chapters/prune.tex}
+\input{chapters/pruneADCS.tex}
+\input{chapters/pruneOrbit.tex}
 
 %%%%%%%%%%%%%
 %

@@ -1,4 +1,4 @@
-This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2010.3.30)  4 MAY 2010 10:35
+This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2010.3.30)  6 MAY 2010 10:04
 entering extended mode
  %&-line parsing enabled.
 **MidTermReview.tex
@@ -219,18 +219,27 @@ Chapter 2.
 ]) (./chapters/prune.tex
 [5]
 Chapter 3.
-) (./chapters/SS.tex [6
+) (./chapters/pruneADCS.tex
+<chapters/img/prunedADCStree.png, id=33, 1012.78375pt x 632.3625pt>
+File: chapters/img/prunedADCStree.png Graphic file (type png)
 
-]
+<use chapters/img/prunedADCStree.png>) (./chapters/pruneOrbit.tex
+<chapters/img/PrunedOrbit.jpg, id=34, 548.80031pt x 278.54062pt>
+File: chapters/img/PrunedOrbit.jpg Graphic file (type jpg)
+
+<use chapters/img/PrunedOrbit.jpg>) (./chapters/SS.tex [6
+
+] [7 <./chapters/img/prunedADCStree.png (PNG copy)>] [8 <./chapters/img/PrunedO
+rbit.jpg>]
 Chapter 4.
-) (./chapters/SSPRO.tex) (./chapters/SSOPE.tex) (./chapters/SSEOL.tex) [7
+) (./chapters/SSPRO.tex) (./chapters/SSOPE.tex) (./chapters/SSEOL.tex) [9
 
 ]
-(./MidTermReview.bbl [8]
+(./MidTermReview.bbl [10]
 
 LaTeX Warning: Empty `thebibliography' environment on input line 8.
 
-) [9
+) [11
 
 ] (./MidTermReview.aux)
 
@@ -238,13 +247,13 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 2043 strings out of 95086
- 24807 string characters out of 1183255
- 77125 words of memory out of 1500000
- 5172 multiletter control sequences out of 10000+50000
+ 2073 strings out of 95086
+ 25355 string characters out of 1183255
+ 77262 words of memory out of 1500000
+ 5191 multiletter control sequences out of 10000+50000
  13390 words of font info for 47 fonts, out of 1200000 for 2000
  28 hyphenation exceptions out of 8191
- 32i,4n,21p,874b,251s stack positions out of 5000i,500n,6000p,200000b,5000s
+ 32i,7n,21p,874b,251s stack positions out of 5000i,500n,6000p,200000b,5000s
 </usr/share/texmf-texlive/fonts/type1/bluesky/cm/cmbx10.pfb></usr/share/texmf
 -texlive/fonts/type1/bluesky/cm/cmbx12.pfb></usr/share/texmf-texlive/fonts/type
 1/bluesky/cm/cmcsc10.pfb></usr/share/texmf-texlive/fonts/type1/bluesky/cm/cmr10
@@ -252,9 +261,9 @@ Here is how much of TeX's memory you used:
 f-texlive/fonts/type1/bluesky/cm/cmsl10.pfb></usr/share/texmf-texlive/fonts/typ
 e1/bluesky/cm/cmssbx10.pfb></usr/share/texmf-texlive/fonts/type1/bluesky/cm/cmt
 i10.pfb></usr/share/texmf-texlive/fonts/type1/bluesky/cm/cmti12.pfb>
-Output written on MidTermReview.pdf (11 pages, 77520 bytes).
+Output written on MidTermReview.pdf (13 pages, 153633 bytes).
 PDF statistics:
- 74 PDF objects out of 1000 (max. 8388607)
+ 84 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 131072)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 11 words of extra memory for PDF output out of 10000 (max. 10000000)
 
