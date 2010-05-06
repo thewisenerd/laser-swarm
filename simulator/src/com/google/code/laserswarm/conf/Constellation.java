@@ -10,19 +10,21 @@ import com.google.common.collect.Lists;
 
 public class Constellation {
 	@Attribute
-	private double			power			= 0f;
+	private double			power				= 0f;
 	@Element
-	private double			pulseFrequency	= 5000;
+	private double			pulseFrequency		= 5000;
 	@Element
-	private double			pulselength		= 100E-12;					// s
+	private double			pulselength			= 100E-12;					// s
 	@Element
-	private double			laserWaveLength	= 300E-9;
+	private double			laserWaveLength		= 300E-9;
+	@Element
+	private double			receiverBandWidth	= 10E-9;
 
 	@Element
 	private Satellite		emitter;
 
 	@ElementList
-	private List<Satellite>	receivers		= Lists.newLinkedList();
+	private List<Satellite>	receivers			= Lists.newLinkedList();
 
 	public Constellation() {
 		power = 0f;
@@ -36,6 +38,10 @@ public class Constellation {
 		emitter = emit;
 		receivers = recv;
 		this.pulseFrequency = pulseFrequency;
+	}
+
+	public double getReceiverBandWidth() {
+		return receiverBandWidth;
 	}
 
 	public Satellite getEmitter() {

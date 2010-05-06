@@ -10,8 +10,10 @@ import java.util.TreeMap;
 import javax.vecmath.Point3d;
 import javax.vecmath.Vector3d;
 
+import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.conf.Constellation;
 import com.google.code.laserswarm.conf.Satellite;
+import com.google.code.laserswarm.earthModel.Atmosphere;
 import com.google.code.laserswarm.earthModel.ScatteringCharacteristics;
 import com.google.code.laserswarm.earthModel.ScatteringParam;
 import com.google.code.laserswarm.math.LookupTable;
@@ -107,6 +109,31 @@ public class TimeLine {
 		}
 	}
 
+	/**
+	 * Gets the 'x' variable for the radiance approximation (see Rees, p 24-25).
+	 * 
+	 * @param lambda
+	 *            The wavelength that gives x.
+	 * @return Returns x.
+	 */
+	private double getX(double lambda) {
+		return Configuration.h * Configuration.c / lambda * Configuration.k * Configuration.TSun
+				* Configuration.epsSun;
+	}
+
+	/**
+	 * The radiance integration approximation (see Rees, p 26).
+	 * 
+	 * @param x
+	 *            The independent wavelength coordinate
+	 * @return Returns the integration approximation.
+	 */
+	private double f(double x) {
+		return 15
+				/ Math.pow(Math.PI, 4)
+				* (Math.pow(x, 3) / 3 - Math.pow(x, 4) / 8 + Math.pow(x, 5) / 60 - Math.pow(x, 7) / 5040);
+	}
+
 	private void makePhotons() {
 		SimVars last = null;
 		double lastA = -1;
@@ -139,10 +166,23 @@ public class TimeLine {
 				exittanceVector.sub(reflection);
 
 				/* Find the power of the sun in the given frequency */
-				double powerIn = 0.5;
+				double energyIn = 0;
+				if (current.illuminated) {
+					double lambda1 = constellation.getLaserWaveLength() - 0.5
+							* constellation.getReceiverBandWidth();
+					double lambda2 = constellation.getLaserWaveLength() + 0.5
+							* constellation.getReceiverBandWidth();
+					double solAngle = averageA * Math.cos(sunVector.angle(new Vector3d(current.pR)))
+							/ (4 * Math.PI * Configuration.R0);
+					double exoatmosphericRadiance = Configuration.sigma
+							* Math.pow(Configuration.TSun, 4) * (f(getX(lambda1)) - f(getX(lambda2)));
+					Atmosphere.getInstance().computeIntensity(exoatmosphericRadiance * solAngle,
+							sunVector.angle(new Vector3d(current.pR)));
+					energyIn = 0.5 * dT;
+				}
 				// http://springerlink.com/content/w03843u415122240/?p=b44b970f34e9480ba22f8850692c07c3&pi=1
 				// http://springerlink.com/content/w03843u415122240/fulltext.pdf
-				double totalReceivedPower = scatter.probability(exittanceVector) * (averageA * powerIn);
+				double totalReceivedPower = scatter.probability(exittanceVector) * energyIn;
 
 				/* Find the number of photons */
 				int nrP = (int) Math.floor(totalReceivedPower / ePhoton);
@@ -160,5 +200,4 @@ public class TimeLine {
 			lastT = t;
 		}
 	}
-
 }

@@ -33,13 +33,37 @@ public class Configuration {
 	 */
 	public static File				demDir							= new File("DEM");
 	/**
-	 * Earth radius based on EPSG:3785 ellipsoid (sphereoid)
+	 * Earth radius based on EPSG:3785 ellipsoid (spheroid)
 	 */
 	public static double			R0								= 6378137;
 	/**
 	 * Orbit epoch date
 	 */
 	public static final CalDate		epoch							= new CalDate(2000, 1, 1, 0, 0, 0);
+	/**
+	 * Stefan-Boltzmann constant
+	 */
+	public static double			sigma							= 5.67E-8;
+	/**
+	 * Planck's constant
+	 */
+	public static double			h								= 6.626068E-34;
+	/**
+	 * Light speed
+	 */
+	public static double			c								= 299792458;
+	/**
+	 * Boltzmann constant
+	 */
+	public static double			k								= 1.3806503E-23;
+	/**
+	 * Sun's grey body temperature
+	 */
+	public static double			TSun							= 5800;
+	/**
+	 * Sun's grey body emissivity
+	 */
+	public static double			epsSun							= 0.99;
 
 	@Attribute
 	private static Set<Actions>		mode;
@@ -88,7 +112,8 @@ public class Configuration {
 	 * Make a new config file
 	 */
 	public static void main(String[] args) {
-		String name = getInstance().configName;
+		getInstance();
+		String name = Configuration.configName;
 		logger.inf("Removing %s", name);
 		try {
 			(new File(name)).delete();

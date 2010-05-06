@@ -147,7 +147,7 @@ public class Simulator implements Runnable {
 			simVals.power0 = constellation.getPower();
 			double angle = Math.PI - dR.angle(new Vector3d(simVals.pR));
 			double rFootprint = dR.length() * Math.tan(constellation.getEmitter().getBeamDivergence());
-			simVals.powerR = Atmosphere.getInstance().computeIntesity(simVals.power0, angle)
+			simVals.powerR = Atmosphere.getInstance().computeIntensity(simVals.power0, angle)
 					/ (rFootprint * Math.PI * Math.PI);
 
 			/* Make scatter characteristics */
@@ -185,7 +185,7 @@ public class Simulator implements Runnable {
 				angle = dR.angle(new Vector3d(simVals.pR));
 				simVals.tE.put(sat, dR.length() / Constants.c);
 
-				simVals.powerE.put(sat, Atmosphere.getInstance().computeIntesity(
+				simVals.powerE.put(sat, Atmosphere.getInstance().computeIntensity(
 						simVals.powerR_SC.get(sat), angle));
 			}
 
