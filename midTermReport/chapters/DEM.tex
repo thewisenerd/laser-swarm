@@ -1,2 +1,17 @@
-\subsection{Digital Elevation Model}
+\subsection{\acl{DEM}}
 \label{DEM}
+
+A \acl{DEM} is the digital representation of the topographic surface. For the ground representation
+in the simulator, a few tiles of the ASTER \ac{GDEM} are used. This \ac{DEM} was created using the
+the complete history of the ASTER instrument launched on Terra satellite. This \ac{DEM} has a
+spatial resolution of one arc-second and a vertical accuracy of 7 $\sim$ 14m. The elevations of the
+intermediate point where obtained using nearest-neighbor interpolation.
+
+The ASTER \ac{GDEM} elevations are expressed with respect to the WGS84 ellipsoid. To simplify the
+internal simulator, the \ac{DEM} tiles were reprojected to a spheroid (EPSG:3857). The reprojection
+is done using the GeoTools Java toolkit \cite{geotools}.
+
+The digital elevation is used to compute total distance (and thus time) that the laser pulse
+travels. Furthermore, because scattering is dependant on the terrain normal, also this normal is
+derived form the \ac{DEM}. This normal is derived from the two perpendicular surface gradients that
+can extracted from the \ac{DEM}.
