@@ -98,6 +98,7 @@
 \input{chapters/prune.tex}
 \input{chapters/pruneADCS.tex}
 \input{chapters/pruneOrbit.tex}
+\input{chapters/pruneEPS.tex}
 % SECTION pruneReceiver IS OF INSUFFICIENT QUALITY AS YET. PLEASE EDIT, ZHUAN. JPF.
 % \input{chapters/pruneReceiver.tex}
 
@@ -201,5 +202,9 @@
 % \appendix
 % \chapter{Requirement Discovery Trees}
 % \label{reqdisctree}
+
+\appendix
+\chapter{Gantt Chart}
+\label{ganttChart}
 
 \end{document}

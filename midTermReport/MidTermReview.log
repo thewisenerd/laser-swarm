@@ -1,4 +1,4 @@
-This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2010.3.30)  6 MAY 2010 15:22
+This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2010.3.30)  6 MAY 2010 16:45
 entering extended mode
  %&-line parsing enabled.
 **MidTermReview.tex
@@ -147,7 +147,11 @@ Package: fixltx2e 2006/03/24 v1.1n fixes to LaTeX
 LaTeX Info: Redefining \em on input line 420.
 LaTeX Info: The control sequence `\[' is already robust on input line 471.
 LaTeX Info: The control sequence `\]' is already robust on input line 472.
-) (./MidTermReview.aux)
+) (./MidTermReview.aux
+
+LaTeX Warning: Label `fig:WFfinal2' multiply defined.
+
+)
 \openout1 = `MidTermReview.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 24.
@@ -162,8 +166,7 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 24.
 LaTeX Font Info:    ... okay on input line 24.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 24.
 LaTeX Font Info:    ... okay on input line 24.
-
-(/usr/share/texmf/tex/context/base/supp-pdf.tex
+ (/usr/share/texmf/tex/context/base/supp-pdf.tex
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count102
 \scratchdimen=\dimen117
@@ -178,79 +181,147 @@ LaTeX Font Info:    ... okay on input line 24.
 ) (./chapters/titlePage.tex [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]) (./chapters/abstract.tex 
-[1]) (./MidTermReview.toc)
+[1]) (./MidTermReview.toc [1
+
+])
 \tf@toc=\write3
 \openout3 = `MidTermReview.toc'.
 
- [1
-
-]
-(./chapters/acronyms.tex) [2]
+ [2]
+(./chapters/acronyms.tex) [3]
 Chapter 1.
 (./chapters/introduction.tex
 
-LaTeX Warning: Reference `blFuncChapter' on page 3 undefined on input line 9.
+LaTeX Warning: Reference `blFuncChapter' on page 4 undefined on input line 9.
 
 
-LaTeX Warning: Reference `blBudgets' on page 3 undefined on input line 9.
+LaTeX Warning: Reference `blBudgets' on page 4 undefined on input line 9.
 
 
-LaTeX Warning: Reference `blRisk' on page 3 undefined on input line 9.
+LaTeX Warning: Reference `blRisk' on page 4 undefined on input line 9.
 
 
-LaTeX Warning: Reference `blDesignOptions' on page 3 undefined on input line 9.
+LaTeX Warning: Reference `blDesignOptions' on page 4 undefined on input line 9.
 
 
 
-LaTeX Warning: Reference `blSustainable' on page 3 undefined on input line 9.
+LaTeX Warning: Reference `blSustainable' on page 4 undefined on input line 9.
 
 
-LaTeX Warning: Reference `blInvestment' on page 3 undefined on input line 9.
+LaTeX Warning: Reference `blInvestment' on page 4 undefined on input line 9.
 
 
-LaTeX Warning: Reference `blRAMS1' on page 3 undefined on input line 9.
+LaTeX Warning: Reference `blRAMS1' on page 4 undefined on input line 9.
 
-) (./chapters/technDesignDev.tex [3
+) (./chapters/technDesignDev.tex [4
 
 ]
 Chapter 2.
-) (./chapters/projectApproachDescription.tex [4
+) (./chapters/projectApproachDescription.tex [5
 
-]) (./chapters/prune.tex
-[5]
+])
+(./chapters/projectPlanningReview.tex
+<chapters/img/Workflow_diagram_MTR_v2.png, id=33, 1111.15125pt x 743.77875pt>
+File: chapters/img/Workflow_diagram_MTR_v2.png Graphic file (type png)
+
+<use chapters/img/Workflow_diagram_MTR_v2.png>
+
+LaTeX Warning: Float too large for page by 25.72917pt on input line 12.
+
+<chapters/img/Workflow_diagram_FR_v2.png, id=34, 896.34875pt x 704.6325pt>
+File: chapters/img/Workflow_diagram_FR_v2.png Graphic file (type png)
+
+<use chapters/img/Workflow_diagram_FR_v2.png>
+Overfull \hbox (18.71387pt too wide) in paragraph at lines 21--22
+ [][] 
+ []
+
+
+LaTeX Warning: Float too large for page by 25.72917pt on input line 24.
+
+
+LaTeX Warning: Reference `fig:WBfinal2' on page 6 undefined on input line 30.
+
+
+<chapters/img/Workbreakdown_structure_MTR_v2.png, id=35, 1072.005pt x 753.81625
+pt>
+File: chapters/img/Workbreakdown_structure_MTR_v2.png Graphic file (type png)
+ <use chapters/img/Workbreakdown_structure_MTR_v2.png>
+
+LaTeX Warning: Float too large for page by 25.72917pt on input line 37.
+
+
+<chapters/img/Workbreakdown_structure_FR_v2.png, id=36, 1101.11375pt x 514.9237
+5pt>
+File: chapters/img/Workbreakdown_structure_FR_v2.png Graphic file (type png)
+ <use chapters/img/Workbreakdown_structure_FR_v2.png>
+
+LaTeX Warning: Float too large for page by 25.72917pt on input line 44.
+
+) [6] [7 <./chapters/img/Workflow_diagram_MTR_v2.png (PNG copy)>] [8 <./chapter
+s/img/Workflow_diagram_FR_v2.png (PNG copy)>] [9 <./chapters/img/Workbreakdown_
+structure_MTR_v2.png (PNG copy)>] [10 <./chapters/img/Workbreakdown_structure_F
+R_v2.png (PNG copy)>] (./chapters/prune.tex [11]
 Chapter 3.
 ) (./chapters/pruneADCS.tex
-<chapters/img/prunedADCStree.png, id=33, 1012.78375pt x 632.3625pt>
+<chapters/img/prunedADCStree.png, id=56, 1012.78375pt x 632.3625pt>
 File: chapters/img/prunedADCStree.png Graphic file (type png)
 
 <use chapters/img/prunedADCStree.png>) (./chapters/pruneOrbit.tex
-<chapters/img/PrunedOrbit.jpg, id=34, 548.80031pt x 278.54062pt>
+<chapters/img/PrunedOrbit.jpg, id=57, 548.80031pt x 278.54062pt>
 File: chapters/img/PrunedOrbit.jpg Graphic file (type jpg)
 
-<use chapters/img/PrunedOrbit.jpg>) (./chapters/pruneEPS.tex [6
+<use chapters/img/PrunedOrbit.jpg>) (./chapters/pruneEPS.tex [12
 
-] [7 <./chapters/img/prunedADCStree.png (PNG copy)>]) (./chapters/SS.tex [8 <./
-chapters/img/PrunedOrbit.jpg>]
+] [13 <./chapters/img/prunedADCStree.png (PNG copy)>]
+<chapters/img/DOTeps_sourcePruned.png, id=65, 1063.975pt x 446.66875pt>
+File: chapters/img/DOTeps_sourcePruned.png Graphic file (type png)
+
+<use chapters/img/DOTeps_sourcePruned.png>
+
+LaTeX Warning: Float too large for page by 25.72917pt on input line 17.
+
+<chapters/img/DOTeps_storagePruned.png, id=66, 324.21124pt x 380.42125pt>
+File: chapters/img/DOTeps_storagePruned.png Graphic file (type png)
+
+<use chapters/img/DOTeps_storagePruned.png>
+<chapters/img/DOTeps_reganddisPruned.png, id=67, 1081.03876pt x 575.14874pt>
+File: chapters/img/DOTeps_reganddisPruned.png Graphic file (type png)
+
+<use chapters/img/DOTeps_reganddisPruned.png>
+
+LaTeX Warning: Float too large for page by 25.72917pt on input line 44.
+
+) (./chapters/SS.tex [14 <./chapters/img/PrunedOrbit.jpg>] [15 <./chapters/img/
+DOTeps_sourcePruned.png (PNG copy)>] [16 <./chapters/img/DOTeps_storagePruned.p
+ng (PNG copy)>] [17 <./chapters/img/DOTeps_reganddisPruned.png (PNG copy)>]
 Chapter 4.
-) (./chapters/SSPRO.tex) (./chapters/SSOPE.tex) (./chapters/SSEOL.tex) [9
+) (./chapters/SSPRO.tex) (./chapters/SSOPE.tex) (./chapters/SSEOL.tex) [18
 
 ]
-(./MidTermReview.bbl [10]
+(./MidTermReview.bbl [19]
 
 LaTeX Warning: Empty `thebibliography' environment on input line 8.
 
-) [11
+) [20
+
+]
+Appendix A.
+[21
 
 ] (./MidTermReview.aux)
 
 LaTeX Warning: There were undefined references.
 
+
+LaTeX Warning: There were multiply-defined labels.
+
  ) 
 Here is how much of TeX's memory you used:
- 2089 strings out of 95086
- 25555 string characters out of 1183255
- 78527 words of memory out of 1500000
- 5204 multiletter control sequences out of 10000+50000
+ 2151 strings out of 95086
+ 27376 string characters out of 1183255
+ 79877 words of memory out of 1500000
+ 5256 multiletter control sequences out of 10000+50000
  13390 words of font info for 47 fonts, out of 1200000 for 2000
  28 hyphenation exceptions out of 8191
  32i,7n,21p,874b,251s stack positions out of 5000i,500n,6000p,200000b,5000s
@@ -261,9 +332,9 @@ Here is how much of TeX's memory you used:
 f-texlive/fonts/type1/bluesky/cm/cmsl10.pfb></usr/share/texmf-texlive/fonts/typ
 e1/bluesky/cm/cmssbx10.pfb></usr/share/texmf-texlive/fonts/type1/bluesky/cm/cmt
 i10.pfb></usr/share/texmf-texlive/fonts/type1/bluesky/cm/cmti12.pfb>
-Output written on MidTermReview.pdf (13 pages, 155643 bytes).
+Output written on MidTermReview.pdf (23 pages, 428758 bytes).
 PDF statistics:
- 84 PDF objects out of 1000 (max. 8388607)
+ 122 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 131072)
- 11 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 46 words of extra memory for PDF output out of 10000 (max. 10000000)
 

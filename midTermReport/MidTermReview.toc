@@ -1,17 +1,21 @@
-\contentsline {chapter}{\numberline {1}Introduction}{3}
-\contentsline {chapter}{\numberline {2}Technical Design Development}{4}
-\contentsline {section}{\numberline {2.1}Project Approach Description}{4}
-\contentsline {subsection}{\numberline {2.1.1}Group Procedures}{4}
-\contentsline {subsection}{\numberline {2.1.2}Reporting}{4}
-\contentsline {subsection}{\numberline {2.1.3}Project Outline}{5}
-\contentsline {chapter}{\numberline {3}Preliminary Pruning of the Design Option Tree}{6}
-\contentsline {section}{\numberline {3.1}\acl {ADCS}}{6}
-\contentsline {section}{\numberline {3.2}Orbit Characteristics}{6}
-\contentsline {section}{\numberline {3.3}\acl {EPS}}{6}
-\contentsline {subsection}{\numberline {3.3.1}Power Source}{8}
-\contentsline {subsection}{\numberline {3.3.2}Power Storage}{8}
-\contentsline {subsection}{\numberline {3.3.3}Power Distribution, Regulation and Control}{8}
-\contentsline {chapter}{\numberline {4}Sustainable Development Strategy}{9}
-\contentsline {section}{\numberline {4.1}Production and Logistics}{9}
-\contentsline {section}{\numberline {4.2}Operations}{9}
-\contentsline {section}{\numberline {4.3}End of Life}{10}
+\contentsline {chapter}{\numberline {1}Introduction}{4}
+\contentsline {chapter}{\numberline {2}Technical Design Development}{5}
+\contentsline {section}{\numberline {2.1}Project Approach Description}{5}
+\contentsline {subsection}{\numberline {2.1.1}Group Procedures}{5}
+\contentsline {subsection}{\numberline {2.1.2}Reporting}{5}
+\contentsline {subsection}{\numberline {2.1.3}Project Outline}{6}
+\contentsline {section}{\numberline {2.2}\acl {WFD}}{6}
+\contentsline {section}{\numberline {2.3}\acl {WBS}}{6}
+\contentsline {section}{\numberline {2.4}Gantt chart}{6}
+\contentsline {chapter}{\numberline {3}Preliminary Pruning of the Design Option Tree}{12}
+\contentsline {section}{\numberline {3.1}\acl {ADCS}}{12}
+\contentsline {section}{\numberline {3.2}Orbit Characteristics}{12}
+\contentsline {section}{\numberline {3.3}\acl {EPS}}{12}
+\contentsline {subsection}{\numberline {3.3.1}Power Source}{14}
+\contentsline {subsection}{\numberline {3.3.2}Power Storage}{14}
+\contentsline {subsection}{\numberline {3.3.3}Power Distribution, Regulation and Control}{14}
+\contentsline {chapter}{\numberline {4}Sustainable Development Strategy}{18}
+\contentsline {section}{\numberline {4.1}Production and Logistics}{18}
+\contentsline {section}{\numberline {4.2}Operations}{18}
+\contentsline {section}{\numberline {4.3}End of Life}{19}
+\contentsline {chapter}{\numberline {A}Gantt Chart}{21}
