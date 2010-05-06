@@ -43,6 +43,7 @@ public class Simulator implements Runnable {
 	public Simulator(SimTemplate templ, EarthModel earth) {
 		this.template = templ;
 		this.earth = earth;
+		setTime(templ.getT0(), templ.getTE());
 	}
 
 	public Simulator(SimTemplate templ, EarthModel earth, double T0, double TE) {
@@ -141,7 +142,7 @@ public class Simulator implements Runnable {
 			/* sun vector */
 			simVals.sunVector = emittorOrbit.sunvec_ECEF();
 			double sunAngle = simVals.sunVector.angle(new Vector3d(simVals.pR));
-			simVals.illuminated = (sunAngle > Math.PI / 2);
+			simVals.illuminated = (sunAngle < Math.PI / 2);
 
 			/* Make pulses (with downtravel) */
 			simVals.power0 = constellation.getPower();

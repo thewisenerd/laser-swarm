@@ -75,7 +75,7 @@ public class LaserSwarm {
 		SimulatorMaster simMaster = new SimulatorMaster(earth);
 
 		for (Constellation constellation : config.getConstellations()) {
-			simMaster.addSimTemplate(new SimTemplate(null, constellation));
+			simMaster.addSimTemplate(new SimTemplate(constellation));
 		}
 
 		simulations = simMaster.runSim();

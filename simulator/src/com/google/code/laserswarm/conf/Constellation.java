@@ -18,7 +18,7 @@ public class Constellation {
 	@Element
 	private double			laserWaveLength		= 300E-9;
 	@Element
-	private double			receiverBandWidth	= 10E-9;
+	private double			receiverBandWidth	= 300E-9;
 
 	@Element
 	private Satellite		emitter;
@@ -40,10 +40,6 @@ public class Constellation {
 		this.pulseFrequency = pulseFrequency;
 	}
 
-	public double getReceiverBandWidth() {
-		return receiverBandWidth;
-	}
-
 	public Satellite getEmitter() {
 		return emitter;
 	}
@@ -62,6 +58,10 @@ public class Constellation {
 
 	public double getPulselength() {
 		return pulselength;
+	}
+
+	public double getReceiverBandWidth() {
+		return receiverBandWidth;
 	}
 
 	public List<Satellite> getReceivers() {

@@ -19,6 +19,7 @@ import com.google.code.laserswarm.earthModel.ScatteringParam;
 import com.google.code.laserswarm.math.LookupTable;
 import com.google.code.laserswarm.simulation.SimVars;
 import com.google.common.collect.Maps;
+import com.lyndir.lhunath.lib.system.logging.Logger;
 
 public class TimeLine {
 
@@ -31,6 +32,8 @@ public class TimeLine {
 	private List<SimVars>				dataSet;
 	private Satellite					sat;
 	private Constellation				constellation;
+
+	private static final Logger			logger			= Logger.get(TimeLine.class);
 
 	public TimeLine(Satellite sat, Constellation constellation, List<SimVars> dataSet) {
 		this.constellation = constellation;
@@ -51,6 +54,19 @@ public class TimeLine {
 	}
 
 	/**
+	 * The radiance integration approximation (see Rees, p 26).
+	 * 
+	 * @param x
+	 *            The independent wavelength coordinate
+	 * @return Returns the integration approximation.
+	 */
+	private double f(double x) {
+		return 15
+				/ Math.pow(Math.PI, 4)
+				* (Math.pow(x, 3) / 3 - Math.pow(x, 4) / 8 + Math.pow(x, 5) / 60 - Math.pow(x, 7) / 5040);
+	}
+
+	/**
 	 * <pre>
 	 * 	    * alpha
 	 * 	    | \
@@ -68,10 +84,11 @@ public class TimeLine {
 	private double findA(SimVars current) {
 		// sin(gamma)/c = sin(alpha)/a => a
 		double alpha = getSatellite().getBeamDivergence();
-		Vector3d dR = new Vector3d(current.pE.get(getSatellite()));
-		dR.sub(current.pR);
+		Vector3d dR = relative(current.pR, current.pE.get(getSatellite()));
 		double beta = Math.PI - new Vector3d(current.pE.get(getSatellite())).angle(dR);
 		double gamma = Math.PI - beta - alpha;
+		if (gamma <= 0) // circle
+			return Math.PI * Math.pow(dR.length() * Math.tan(alpha), 2);
 		double c = dR.length();
 		double a = c * (Math.sin(alpha) / Math.sin(gamma)); // Semi-major axis
 
@@ -97,18 +114,6 @@ public class TimeLine {
 		return sat;
 	}
 
-	private void makeLookupTables() {
-		for (SimVars simVars : dataSet) {
-			double t = simVars.t0;
-			Point3d satPos = simVars.pE.get(getSatellite());
-			lookupPosition.put(t, satPos);
-
-			Vector3d dir = relative(satPos, simVars.pR);
-			dir.normalize();
-			lookupDirection.put(t, dir);
-		}
-	}
-
 	/**
 	 * Gets the 'x' variable for the radiance approximation (see Rees, p 24-25).
 	 * 
@@ -121,17 +126,16 @@ public class TimeLine {
 				* Configuration.epsSun;
 	}
 
-	/**
-	 * The radiance integration approximation (see Rees, p 26).
-	 * 
-	 * @param x
-	 *            The independent wavelength coordinate
-	 * @return Returns the integration approximation.
-	 */
-	private double f(double x) {
-		return 15
-				/ Math.pow(Math.PI, 4)
-				* (Math.pow(x, 3) / 3 - Math.pow(x, 4) / 8 + Math.pow(x, 5) / 60 - Math.pow(x, 7) / 5040);
+	private void makeLookupTables() {
+		for (SimVars simVars : dataSet) {
+			double t = simVars.t0;
+			Point3d satPos = simVars.pE.get(getSatellite());
+			lookupPosition.put(t, satPos);
+
+			Vector3d dir = relative(satPos, simVars.pR);
+			dir.normalize();
+			lookupDirection.put(t, dir);
+		}
 	}
 
 	private void makePhotons() {
@@ -176,9 +180,10 @@ public class TimeLine {
 							/ (4 * Math.PI * Configuration.R0);
 					double exoatmosphericRadiance = Configuration.sigma
 							* Math.pow(Configuration.TSun, 4) * (f(getX(lambda1)) - f(getX(lambda2)));
-					Atmosphere.getInstance().computeIntensity(exoatmosphericRadiance * solAngle,
-							sunVector.angle(new Vector3d(current.pR)));
-					energyIn = 0.5 * dT;
+					energyIn = Atmosphere.getInstance()
+							.computeIntensity(exoatmosphericRadiance * solAngle,
+									sunVector.angle(new Vector3d(current.pR)))
+							* dT;
 				}
 				// http://springerlink.com/content/w03843u415122240/?p=b44b970f34e9480ba22f8850692c07c3&pi=1
 				// http://springerlink.com/content/w03843u415122240/fulltext.pdf
@@ -188,6 +193,8 @@ public class TimeLine {
 				int nrP = (int) Math.floor(totalReceivedPower / ePhoton);
 				if (Math.random() < (totalReceivedPower / ePhoton) - nrP)
 					nrP++;
+
+				logger.dbg("Number ph (%s) @ t=%S J=%s", nrP, t, energyIn);
 
 				/* Distribute noise photons evenly over the time interval */
 				for (int i = 0; i < nrP; i++) {

@@ -12,7 +12,6 @@ import com.google.code.laserswarm.conf.Constellation;
 import com.google.code.laserswarm.conf.Satellite;
 import com.google.code.laserswarm.earthModel.EarthModel;
 import com.google.code.laserswarm.earthModel.ElevationModel;
-import com.google.code.laserswarm.out.plot2D.Plot2D;
 import com.google.code.laserswarm.process.EmitterHistory;
 import com.google.code.laserswarm.process.TimeLine;
 import com.google.code.laserswarm.simulation.SimTemplate;
@@ -22,13 +21,25 @@ import com.google.code.laserswarm.simulation.SimulatorMaster;
 import com.google.code.laserswarm.util.demReader.DemCreationException;
 import com.google.code.laserswarm.util.demReader.DemReader;
 import com.google.common.collect.Maps;
+import com.lyndir.lhunath.lib.system.logging.Logger;
 
 public class ProcessorTester {
 
 	public static final String	CfgName	= "unitTestConfig.xml";
 
+	private static final Logger	logger	= Logger.get(ProcessorTester.class);
+
 	public static void main(String[] args) {
 		new ProcessorTester().testProcessing();
+	}
+
+	private void displayData(Map<Satellite, TimeLine> satData) {
+		for (TimeLine timeLine : satData.values()) {
+			logger.dbg("sat: %s ", timeLine.getSatellite());
+			for (Double time : timeLine.getPhotons().keySet()) {
+				logger.dbg("t: %s\tn: %s", time, timeLine.getPhotons().get(time));
+			}
+		}
 	}
 
 	public void testProcessing() {
@@ -65,10 +76,12 @@ public class ProcessorTester {
 			e.printStackTrace();
 		}
 		EarthModel earth = new EarthModel(dem);
-		Plot2D.make(dem.getCoverage());
+		// Plot2D.make(dem.getCoverage());
 
 		SimulatorMaster mgr = new SimulatorMaster(earth);
-		mgr.addSimTemplate(new SimTemplate(Configuration.getInstance(), testConstallation));
+		SimTemplate template = new SimTemplate(testConstallation);
+		template.setTime(template.getT0(), 700000);
+		mgr.addSimTemplate(template);
 
 		HashMap<SimTemplate, Simulator> points = mgr.runSim();
 		for (SimTemplate templ : points.keySet()) {
@@ -80,6 +93,7 @@ public class ProcessorTester {
 			for (Satellite sat : templ.getConstellation().getReceivers()) {
 				satData.put(sat, new TimeLine(sat, templ.getConstellation(), dataPoints));
 			}
+			displayData(satData);
 
 		}
 
