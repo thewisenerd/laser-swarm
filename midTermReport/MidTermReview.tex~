@@ -76,18 +76,8 @@
 %%%%%%%%%%%%%
 
 \input{chapters/technDesignDev.tex}
-% DSE WFD
-% \input{chapters/dsePPWFD.tex}
-% DSE WBS
-% \input{chapters/dsePPWBS.tex}
-% DSE Project Approach Description
 \input{chapters/projectApproachDescription.tex}
-% DSE OBS
-% \input{chapters/dsePPOBS.tex}
-% DSE Timeline
-% \input{chapters/dsePPTimeline.tex}
-% DSE Risk Management Plan
-% \input{chapters/dsePPRiskMP.tex}
+\input{chapters/projectPlanningReview.tex}
 
 %%%%%%%%%%%%%
 %

@@ -4,7 +4,7 @@
 A \acl{DEM} is a digital representation of a topographic surface. For the ground representation
 in the simulator a few tiles of the \ac{ASTER} \ac{GDEM} were used. This \ac{DEM} was created using the
 complete history of the \ac{ASTER} instrument launched on the Terra satellite. This \ac{DEM} has a
-spatial resolution of one arc-second and a vertical accuracy of 7 $\sim$ 14 meters. The elevations of the
+spatial resolution of one arc-second and a vertical accuracy of 7 -- 14 meters. The elevations of the
 intermediate points were obtained using nearest-neighbor interpolation.
 
 The \ac{ASTER} \ac{GDEM} elevations are expressed with respect to the \ac{WGS84} ellipsoid. To simplify the
@@ -13,5 +13,5 @@ is done using the GeoTools Java toolkit \cite{geotools}.
 
 The digital elevation is used to compute the total distance (and thus the time) that the laser pulse
 travels. Because scattering is dependent on the terrain normal, this normal is
-derived form the \ac{DEM}. This normal is derived from the two perpendicular surface gradients that
+derived form the \ac{DEM}, using the two perpendicular surface gradients that
 can be extracted from the \ac{DEM}.
