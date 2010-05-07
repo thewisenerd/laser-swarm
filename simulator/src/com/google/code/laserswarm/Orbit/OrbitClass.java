@@ -25,8 +25,8 @@ public class OrbitClass {
 		OrbitClass or2 = new OrbitClass(now.plus(TimeUtils.days2sec * 365), kep);
 		for (int i=0; i< 360; i++){
 		//	or1.sunvec_ECI();
-			or1.propogate(240);
-			System.out.print(or1.sunvec_ECEF()+ "\n");
+			or1.propogate(84500);
+			System.out.print(or1.sunvec_ECI()+ "\n");
 		}
 /*		for (int i = 0; i < 365; i++) {
 			or1.t_cur.step_seconds(3600);
@@ -100,7 +100,10 @@ public class OrbitClass {
 */   
 /*public void sunvec_ECEF(){
 	   return defref.eci2ecef(t_cur).times(this.ECI());
-   }*/
+}*/
+	
+
+
 	private double calc_E(KeplerElements a) {
 		// determine initial E and M
 		double sqrome2 = Math.sqrt(1.0 - a.e * a.e);
