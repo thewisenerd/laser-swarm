@@ -1,8 +1,12 @@
 \relax 
+\reset@newl@bel
+\undonewlabel{acro:LiDAR}
+\newlabel{acro:LiDAR}{{}{1}}
 \acronymused{LiDAR}
 \acronymused{LiDAR}
 \acronymused{WFD}
 \acronymused{WBS}
+\acronymused{DEM}
 \acronymused{ADCS}
 \acronymused{EPS}
 \newacro{ADCS}[\AC@hyperlink{ADCS}{ADCS}]{Attitude Determination and Control Subsystem}
@@ -49,6 +53,7 @@
 \newacro{POS}[\AC@hyperlink{POS}{POS}]{Project Objective Statement}
 \newacro{PPT}[\AC@hyperlink{PPT}{PPT}]{Peak-power tracker}
 \newacro{QDRD}[\AC@hyperlink{QDRD}{QDRD}]{Quantum Dot Receiving Device}
+\newacro{RAAN}[\AC@hyperlink{RAAN}{RAAN}]{Right Ascension of the Ascending Node}
 \newacro{RAMS}[\AC@hyperlink{RAMS}{RAMS}]{Reliability, Availability, Maintainability and Safety}
 \newacro{RDTE}[\AC@hyperlink{RDTE}{RDTE}]{Research, Development, Test and Evaluation}
 \newacro{ROI}[\AC@hyperlink{ROI}{ROI}]{Return On Investment}
@@ -67,8 +72,12 @@
 \@writefile{lot}{\addvspace {10\p@ }}
 \newlabel{intro}{{1}{4}}
 \acronymused{LiDAR}
+\undonewlabel{acro:GLAS}
+\newlabel{acro:GLAS}{{1}{4}}
 \acronymused{GLAS}
 \acronymused{LiDAR}
+\undonewlabel{acro:RAMS}
+\newlabel{acro:RAMS}{{1}{4}}
 \acronymused{RAMS}
 \@writefile{toc}{\contentsline {chapter}{\numberline {2}Technical Design Development}{5}}
 \@writefile{lof}{\addvspace {10\p@ }}
@@ -84,7 +93,11 @@
 \acronymused{WFD}
 \@writefile{toc}{\contentsline {section}{\numberline {2.2}\acl {WFD}}{6}}
 \newlabel{WFD}{{2.2}{6}}
+\undonewlabel{acro:WFD}
+\newlabel{acro:WFD}{{2.2}{6}}
 \acronymused{WFD}
+\undonewlabel{acro:MTR}
+\newlabel{acro:MTR}{{2.2}{6}}
 \acronymused{MTR}
 \acronymused{WFD}
 \acronymused{MTR}
@@ -95,6 +108,8 @@
 \acronymused{WBS}
 \@writefile{toc}{\contentsline {section}{\numberline {2.3}\acl {WBS}}{6}}
 \newlabel{WBS}{{2.3}{6}}
+\undonewlabel{acro:WBS}
+\newlabel{acro:WBS}{{2.3}{6}}
 \acronymused{WBS}
 \acronymused{WFD}
 \acronymused{WBS}
@@ -113,52 +128,157 @@
 \newlabel{fig:WFfinal2}{{2.4}{10}}
 \acronymused{WFD}
 \acronymused{WBS}
-\@writefile{toc}{\contentsline {chapter}{\numberline {3}Preliminary Pruning of the Design Option Tree}{12}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {3}Simulation}{12}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{prune}{{3}{12}}
+\newlabel{simulation}{{3}{12}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.1}Orbit}{12}}
+\newlabel{orbit}{{3.1}{12}}
+\undonewlabel{acro:TOD}
+\newlabel{acro:TOD}{{3.1}{12}}
+\acronymused{TOD}
+\acronymused{TOD}
+\undonewlabel{acro:ECEF}
+\newlabel{acro:ECEF}{{3.1}{12}}
+\acronymused{ECEF}
+\acronymused{TOD}
+\citation{geotools}
+\citation{rees}
+\citation{rees}
+\citation{rees}
+\citation{rees}
+\undonewlabel{acro:JAT}
+\newlabel{acro:JAT}{{3.1}{13}}
+\acronymused{JAT}
+\@writefile{toc}{\contentsline {section}{\numberline {3.2}Earth Model}{13}}
+\newlabel{earthModel}{{3.2}{13}}
+\undonewlabel{acro:DEM}
+\newlabel{acro:DEM}{{3.2}{13}}
+\acronymused{DEM}
+\acronymused{DEM}
+\acronymused{DEM}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.1}\acl {DEM}}{13}}
+\newlabel{DEM}{{3.2.1}{13}}
+\acronymused{DEM}
+\undonewlabel{acro:ASTER}
+\newlabel{acro:ASTER}{{3.2.1}{13}}
+\acronymused{ASTER}
+\undonewlabel{acro:GDEM}
+\newlabel{acro:GDEM}{{3.2.1}{13}}
+\acronymused{GDEM}
+\acronymused{DEM}
+\acronymused{ASTER}
+\acronymused{DEM}
+\acronymused{ASTER}
+\acronymused{GDEM}
+\undonewlabel{acro:WGS84}
+\newlabel{acro:WGS84}{{3.2.1}{13}}
+\acronymused{WGS84}
+\acronymused{DEM}
+\acronymused{DEM}
+\acronymused{DEM}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.2}Scattering Model}{13}}
+\newlabel{scatter}{{3.2.2}{13}}
+\undonewlabel{acro:BRDF}
+\newlabel{acro:BRDF}{{3.2.2}{13}}
+\acronymused{BRDF}
+\acronymused{BRDF}
+\acronymused{BRDF}
+\acronymused{BRDF}
+\acronymused{BRDF}
+\citation{rees}
+\acronymused{BRDF}
+\acronymused{BRDF}
+\newlabel{fig:scatter}{{3.2.2}{14}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces Example of a \ac {BRDF}}}{14}}
+\acronymused{BRDF}
+\@writefile{toc}{\contentsline {section}{\numberline {3.3}Signal Path}{14}}
+\newlabel{signPath}{{3.3}{14}}
+\undonewlabel{acro:laser}
+\newlabel{acro:laser}{{3.3}{14}}
+\acronymused{laser}
+\acronymused{DEM}
+\acronymused{DEM}
+\acronymused{DEM}
+\newlabel{fig:signalPath}{{3.3}{15}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces Signal path representation}}{15}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.4}Noise Introduction}{15}}
+\newlabel{noise}{{3.4}{15}}
+\acronymused{DEM}
+\@writefile{toc}{\contentsline {chapter}{\numberline {4}Data Analysis}{16}}
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{dataAnalysis}{{4}{16}}
+\acronymused{BRDF}
+\@writefile{toc}{\contentsline {section}{\numberline {4.1}Altitude Determination}{16}}
+\newlabel{altDet}{{4.1}{16}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.2}Bidirectional Reflection Density Function Determination}{16}}
+\newlabel{BRDFDet}{{4.2}{16}}
+\acronymused{BRDF}
+\acronymused{BRDF}
+\acronymused{BRDF}
+\acronymused{BRDF}
+\@writefile{toc}{\contentsline {chapter}{\numberline {5}Preliminary Pruning of the Design Option Tree}{18}}
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{prune}{{5}{18}}
+\undonewlabel{acro:ADCS}
+\newlabel{acro:ADCS}{{5}{18}}
 \acronymused{ADCS}
 \acronymused{ADCS}
-\@writefile{toc}{\contentsline {section}{\numberline {3.1}\acl {ADCS}}{12}}
-\newlabel{pruneADCS}{{3.1}{12}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.1}\acl {ADCS}}{18}}
+\newlabel{pruneADCS}{{5.1}{18}}
+\undonewlabel{acro:CMG}
+\newlabel{acro:CMG}{{5.1}{18}}
 \acronymused{CMG}
-\@writefile{toc}{\contentsline {section}{\numberline {3.2}Orbit Characteristics}{12}}
-\newlabel{pruneOrbit}{{3.2}{12}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.2}Orbit Characteristics}{18}}
+\newlabel{pruneOrbit}{{5.2}{18}}
+\undonewlabel{acro:LEO}
+\newlabel{acro:LEO}{{5.2}{18}}
 \acronymused{LEO}
 \acronymused{EPS}
-\@writefile{toc}{\contentsline {section}{\numberline {3.3}\acl {EPS}}{12}}
-\newlabel{pruneEPS}{{3.3}{12}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.3}\acl {EPS}}{18}}
+\newlabel{pruneEPS}{{5.3}{18}}
+\undonewlabel{acro:EPS}
+\newlabel{acro:EPS}{{5.3}{18}}
 \acronymused{EPS}
-\newlabel{fig:pruneADCS}{{3.1}{13}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces Pruned design option tree for the \ac {ADCS}}}{13}}
+\newlabel{fig:pruneADCS}{{5.1}{19}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.1}{\ignorespaces Pruned design option tree for the \ac {ADCS}}}{19}}
 \acronymused{ADCS}
-\newlabel{fig:pruneOrbit}{{3.2}{14}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces Pruned design option tree for the orbit characteristics}}{14}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.1}Power Source}{14}}
-\newlabel{pruneEPS:Source}{{3.3.1}{14}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.2}Power Storage}{14}}
-\newlabel{pruneEPS:Storage}{{3.3.2}{14}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.3}Power Distribution, Regulation and Control}{14}}
-\newlabel{pruneEPS:Distribution}{{3.3.3}{14}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.3}{\ignorespaces The pruned design option tree for the power source}}{15}}
-\newlabel{fig:DOTeps_sourcePruned}{{3.3}{15}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.4}{\ignorespaces The pruned design option tree for the power storage}}{16}}
-\newlabel{fig:DOTeps_storagePruned}{{3.4}{16}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.5}{\ignorespaces The design option tree for the power distribution and regulation and control}}{17}}
-\newlabel{fig:DOTeps_reganddisPruned}{{3.5}{17}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {4}Sustainable Development Strategy}{18}}
+\newlabel{fig:pruneOrbit}{{5.2}{20}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.2}{\ignorespaces Pruned design option tree for the orbit characteristics}}{20}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.1}Power Source}{20}}
+\newlabel{pruneEPS:Source}{{5.3.1}{20}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.2}Power Storage}{20}}
+\newlabel{pruneEPS:Storage}{{5.3.2}{20}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.3}Power Distribution, Regulation and Control}{20}}
+\newlabel{pruneEPS:Distribution}{{5.3.3}{20}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.3}{\ignorespaces The pruned design option tree for the power source}}{21}}
+\newlabel{fig:DOTeps_sourcePruned}{{5.3}{21}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.4}{\ignorespaces The pruned design option tree for the power storage}}{22}}
+\newlabel{fig:DOTeps_storagePruned}{{5.4}{22}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.4}Receiver Eliminate}{22}}
+\newlabel{pruneReceiver}{{5.4}{22}}
+\undonewlabel{acro:MPD}
+\newlabel{acro:MPD}{{5.4}{22}}
+\acronymused{MPD}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.5}{\ignorespaces The design option tree for the power distribution and regulation and control}}{23}}
+\newlabel{fig:DOTeps_reganddisPruned}{{5.5}{23}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.6}{\ignorespaces The pruned design option tree for the Laser receivers}}{24}}
+\newlabel{fig:DOTreceiverPruned}{{5.6}{24}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {6}Sustainable Development Strategy}{25}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{SS}{{4}{18}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.1}Production and Logistics}{18}}
-\newlabel{SSPRO}{{4.1}{18}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.2}Operations}{18}}
-\newlabel{SSOPE}{{4.2}{18}}
+\newlabel{SS}{{6}{25}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.1}Production and Logistics}{25}}
+\newlabel{SSPRO}{{6.1}{25}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.2}Operations}{25}}
+\newlabel{SSOPE}{{6.2}{25}}
 \bibstyle{plainnat}
 \bibdata{bibliography}
-\@writefile{toc}{\contentsline {section}{\numberline {4.3}End of Life}{19}}
-\newlabel{SSEOL}{{4.3}{19}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {A}Gantt Chart}{21}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.3}End of Life}{26}}
+\newlabel{SSEOL}{{6.3}{26}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {A}Gantt Chart}{27}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{ganttChart}{{A}{21}}
+\newlabel{ganttChart}{{A}{27}}
