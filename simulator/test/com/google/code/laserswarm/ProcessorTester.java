@@ -41,15 +41,21 @@ public class ProcessorTester {
 	private class RandData {
 		Map<Satellite, TimeLine>	rec;
 		Map<Satellite, TimeLine>	em;
+		EmitterHistory				emHist;
 
-		public RandData(Map<Satellite, TimeLine> rec, Map<Satellite, TimeLine> em) {
+		public RandData(Map<Satellite, TimeLine> rec, Map<Satellite, TimeLine> em,EmitterHistory	emHist) {
 			super();
 			this.rec = rec;
 			this.em = em;
+			this.emHist =emHist;
 		}
 
 		public Map<Satellite, TimeLine> getEm() {
 			return em;
+		}
+		
+		public EmitterHistory getEmHist() {
+			return emHist;
 		}
 
 		public Map<Satellite, TimeLine> getRec() {
@@ -143,7 +149,7 @@ public class ProcessorTester {
 
 		}
 
-		return new RandData(satData, emData);
+		return new RandData(satData, emData, emittorHistory);
 
 	}
 }
