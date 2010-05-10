@@ -17,6 +17,10 @@ import javax.vecmath.Vector3d;
 import org.apache.commons.math.stat.*;
 
 import com.google.code.laserswarm.conf.Satellite;
+import com.google.code.laserswarm.process.EmitterHistory;
+import com.google.code.laserswarm.process.MeasermentSample;
+import com.google.code.laserswarm.process.TimeLine;
+import com.google.code.laserswarm.simulation.SimVars;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
@@ -166,10 +170,91 @@ public class AntiSimulator {
 
 	}
 
+	public double[] desim(Map<Satellite, TimeLine> rec, Map<Satellite, TimeLine> em, EmitterHistory hist) {
+		// TODO Auto-generated method stub
+		// 
+		// double talt = alt/c; //time radius for search
+		
+		Satellite emit = hist.getEm();	//satellite emitter  
+		double[] ret = new double[hist.time.size()];
+		int frequency = 5000;
+		//Map<Dob>altPoints
+		//double tinc = 1 / em.get(Emit).getCons().getPulseFrequency(); // time between pulses
+		//double[] t;
+
+		for (int i = 0; i < hist.time.size(); i++) { //iterate over all the time instances. 
+
+			// em = emData.get(Emit).getLookupPosition().find(tr) ; //position of the emitter at a time t
+			Map<Satellite, Vector<Double>> altData = Maps.newHashMap();
+
+			for (Map.Entry<Satellite, TimeLine> iterat : rec.entrySet()) { // Iterate over all the satellites in the swarm
+				Vector<Double> altPoints = new Vector<Double>();														// satellites within the
+				Map<Double, Integer> tphoton = Maps.newHashMap();
+				
+				Map<Double, Integer> tmpMap = Maps.newHashMap();
+				try{
+					
+				while(iterat.getValue().getIterator(frequency).hasNext()){	
+					MeasermentSample tmp = iterat.getValue().getIterator(frequency).next();
+					tmpMap.put(new Double(tmp.getTime()), new Integer(tmp.getPhotons()));
+				  }
+				}
+				catch(Exception e){
+				System.out.print("math exception has occured :(");	
+				}
+				
+
+				/*
+				 * for(int j = 0; j< 34; j++){ double tim = emittorHistory.getPulseClosesTo(tinc*j);
+				 * Double key = emData.get(Emit).getPhotons().ceilingKey(new Double(tim-tinc)); Double
+				 * key2 = emData.get(Emit).getPhotons().floorKey(new Double(tim+tinc)); }
+				 */
+				// REG data
+				// Double[] timeregs = (Double[])
+				// satData.get(iterat.getKey()).getPhotons().keySet().toArray(); //time when the pulses
+				// were registered
+
+				tphoton = AntiSimulator.findspikes(tmpMap); // list of spike photons
+																					// that are not noise
+																					// for this satellite
+
+				for (Double d : tphoton.keySet()) { // iterate over the spikes 
+
+					double t1 = hist.getPulseBeforePulse(d.doubleValue()); // the time of the
+					// sent pulse
+					altPoints.add(Double.valueOf(AntiSimulator.calcalt((Point3d) em.get(emit) // add
+																									// an
+																									// altitude
+																									// point
+							.getLookupPosition().find(t1), (Point3d) em.get(emit)
+							.getLookupPosition().find(d.doubleValue()), d.doubleValue() - t1)));
+				}
+				altData.put(iterat.getKey(), altPoints); // Store the satellite, altitude points relation
+				
+				
+				// Iterator<Double> hi = emittorHistory.time.iterator();
+
+				// re = satData.get(iterat.getKey()).getLookupPosition().find(trd); //position of the
+				// satellites at a time t
+
+				// satData.get(iterat.getKey()).getPhotons().keySet();
+				// filter();
+
+				// calcalt(em,re,time);
+			}
+			ret[i]= extractpath(altData);
+		}
+		
+		return ret;
+		
+		
+	}
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		// 
-
+		SimVars hi = new SimVars();
+	    
 		/*
 		 * Point3d em = new Point3d(); Point3d rem = new Point3d(); double xdist = 7000000; double r =
 		 * IERS_1996.R_Earth; double km = 1 / IERS_1996.c * 1000; double ns = 1E-9; double t = 1200 * km;
