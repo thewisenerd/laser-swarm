@@ -54,10 +54,6 @@ public class TimeLine {
 		makeLookupTables();
 	}
 
-	private double clamp(double value, double min, double max) {
-		return Math.min(Math.max(value, min), max);
-	}
-
 	/**
 	 * The radiance integration approximation (see Rees, p 26).
 	 * 
@@ -118,6 +114,14 @@ public class TimeLine {
 		return area;
 	}
 
+	/**
+	 * Iterator to loop over the measerments
+	 * 
+	 * @param binFreqency
+	 *            Sample frequency of the receiver
+	 * @return An iterator of the data
+	 * @throws MathException
+	 */
 	public SampleIterator getIterator(int binFreqency) throws MathException {
 		final double binTime = 1. / binFreqency;
 		logger.inf("Bin f=%s\tBin t=%s", binFreqency, binTime);
@@ -138,7 +142,6 @@ public class TimeLine {
 			i++;
 		}
 		final PolynomialSplineFunction noise = new LoessInterpolator().interpolate(x, y);
-
 		return new SampleIterator(binFreqency, laserPhotons, noise);
 	}
 
@@ -161,9 +164,8 @@ public class TimeLine {
 	 *            The wavelength that gives x.
 	 * @return Returns x.
 	 */
-	private double getX(double lambda) {
-		double x = Configuration.h * Configuration.c
-				/ (lambda * Configuration.k * Configuration.TSun * Configuration.epsSun);
+	private double getX(double lambda, double temp, double eps) {
+		double x = Configuration.h * Configuration.c / (lambda * Configuration.k * temp * eps);
 		return x;
 	}
 
@@ -206,17 +208,19 @@ public class TimeLine {
 
 			/* Find the power of the sun in the given frequency */
 			double powerIn = 0;
-			if (current.illuminated) {
-				double lambda1 = constellation.getLaserWaveLength() - 0.5
-						* constellation.getReceiverBandWidth();
-				double lambda2 = constellation.getLaserWaveLength() + 0.5
-						* constellation.getReceiverBandWidth();
+			if (!current.illuminated) {
 				double solAngle = area * Math.cos(current.sunVector.angle(new Vector3d(current.pR)))
 						/ (4 * Math.PI * Configuration.R0);
-				double exoatmosphericRadiance = Configuration.sigma * Math.pow(Configuration.TSun, 4)
-						* (f(getX(lambda1)) - f(getX(lambda2)));
+				double exoatmosphericRadiance = radiatedPower(constellation.getLaserWaveLength(),
+						constellation.getReceiverBandWidth(), solAngle, // 
+						Configuration.TSun, Configuration.epsSun);
 				powerIn = Atmosphere.getInstance().computeIntensity(exoatmosphericRadiance * solAngle,
 						current.sunVector.angle(new Vector3d(current.pR)));
+			} else {
+				double solAngle = area / (4 * Math.PI * Configuration.R0);
+				powerIn = radiatedPower(constellation.getLaserWaveLength(), constellation
+						.getReceiverBandWidth(), solAngle, // 
+						Configuration.TEarth, Configuration.epsEarth);
 			}
 
 			angle = Math.acos(((position.dot(reflection)) / (position.length() * reflection.length())));
@@ -231,8 +235,20 @@ public class TimeLine {
 
 			/* Find the number of photons */
 			double nrP = (totalReceivedPower / ePhoton); // # per second
+			if (nrP == 0)
+				System.out.println("NOO");
 			noisePhotons.put(t, nrP);
 		}
 		logger.dbg("Done making noise");
+	}
+
+	private double radiatedPower(double centerWaveLength, double waveLengthBandwidth, double solAngle,
+			double temp, double eps) {
+		double lambda1 = centerWaveLength - 0.5 * waveLengthBandwidth;
+		double lambda2 = centerWaveLength + 0.5 * waveLengthBandwidth;
+
+		double power = Configuration.sigma * Math.pow(temp, 4)
+				* (f(getX(lambda1, temp, eps)) - f(getX(lambda2, temp, eps)));
+		return power;
 	}
 }

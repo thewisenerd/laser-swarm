@@ -64,6 +64,14 @@ public class Configuration {
 	 * Sun's grey body emissivity
 	 */
 	public static double			epsSun							= 0.99;
+	/**
+	 * Earth's grey body temperature
+	 */
+	public static double			TEarth							= 254.356;
+	/**
+	 * Earth's grey body emissivity
+	 */
+	public static double			epsEarth						= 1;
 
 	@Attribute
 	private static Set<Actions>		mode;

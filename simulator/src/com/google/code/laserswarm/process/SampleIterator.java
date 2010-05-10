@@ -47,7 +47,10 @@ public class SampleIterator implements Iterator<MeasermentSample> {
 			} else
 				found = false;
 
-			int noisePhotons = (int) noise.value(time);
+			double t = noise.value(time);
+			int noisePhotons = (int) t;
+			if (Math.random() <= Math.round(t) - noisePhotons)
+				noisePhotons++;
 			return new MeasermentSample(time, photons + noisePhotons);
 		} catch (ArgumentOutsideDomainException e) {
 			return null;
