@@ -6,9 +6,14 @@ import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
+
+import javax.vecmath.Point3d;
 
 import org.apache.commons.math.MathException;
+import org.opengis.metadata.spatial.VectorSpatialRepresentation;
 
+import com.google.code.laserswarm.Orbit.AntiSimulator;
 import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.conf.Constellation;
 import com.google.code.laserswarm.conf.Satellite;
@@ -33,6 +38,26 @@ public class ProcessorTester {
 
 	private static final Logger	logger	= Logger.get(ProcessorTester.class);
 
+	private class RandData {
+		Map<Satellite, TimeLine>	rec;
+		Map<Satellite, TimeLine>	em;
+
+		public RandData(Map<Satellite, TimeLine> rec, Map<Satellite, TimeLine> em) {
+			super();
+			this.rec = rec;
+			this.em = em;
+		}
+
+		public Map<Satellite, TimeLine> getEm() {
+			return em;
+		}
+
+		public Map<Satellite, TimeLine> getRec() {
+			return rec;
+		}
+
+	}
+
 	public static void main(String[] args) {
 		new ProcessorTester().testProcessing();
 	}
@@ -53,7 +78,7 @@ public class ProcessorTester {
 		}
 	}
 
-	public void testProcessing() {
+	public RandData testProcessing() {
 		Configuration cfg = new Configuration();
 		Configuration.write(CfgName, cfg);
 		Configuration.read(CfgName);
@@ -92,21 +117,33 @@ public class ProcessorTester {
 		SimulatorMaster mgr = new SimulatorMaster(earth);
 		SimTemplate template = new SimTemplate(testConstallation);
 		template.setTime(template.getT0(), 700000);
-		mgr.addSimTemplate(template);
+		mgr.addSimTemplate(template); // only one template
+		EmitterHistory emittorHistory = null;
+		Map<Satellite, TimeLine> satData = Maps.newHashMap();
+		Map<Satellite, TimeLine> emData = Maps.newHashMap();
 
+		Vector<Map<Satellite, TimeLine>> res = new Vector<Map<Satellite, TimeLine>>();
+		Satellite Emit = new Satellite();
 		HashMap<SimTemplate, Simulator> points = mgr.runSim();
-		for (SimTemplate templ : points.keySet()) {
+
+		for (SimTemplate templ : points.keySet()) { // assuming only one template
 			List<SimVars> dataPoints = points.get(templ).getDataPoints();
 
-			EmitterHistory emittorHistory = new EmitterHistory( //
+			emittorHistory = new EmitterHistory( //
 					templ.getConstellation(), dataPoints);
-			Map<Satellite, TimeLine> satData = Maps.newHashMap();
+
+			Emit = templ.getConstellation().getEmitter();
+			emData.put(Emit, new TimeLine(Emit, templ.getConstellation(), dataPoints));
+
 			for (Satellite sat : templ.getConstellation().getReceivers()) {
 				satData.put(sat, new TimeLine(sat, templ.getConstellation(), dataPoints));
+
 			}
 			displayData(satData);
 
 		}
+
+		return new RandData(satData, emData);
 
 	}
 }
