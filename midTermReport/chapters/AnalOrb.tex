@@ -1,0 +1,102 @@
+\documentclass{article}
+\usepackage{amsmath}
+\begin{document}
+
+\subsection{Analysis of the remaining options}
+\label{OrbAnal}
+
+In subsection \ref{pruneOrbit} the design option tree was pruned by comparing the orbit altitudes \ac{LEO} to \ac{HEO} with the altitude requirement that follows from the payload. As a result the \acs{MEO}, \acs{GEO} and \acs{HEO} were eliminated. Now the remaining options will be analyzed.
+
+The analysis will begin with listing the advantages and disadvantages of the special orbits and the ''other`` options, and compare them with the mission requirements. After that they will be given a figure of Merit and a trade-off is made.
+
+\subsubsection{Advantages \& disadvantages of the design options}
+
+
+
+\subsubsection{Assigning the figures of Merit}
+
+
+% CONSTANTS
+
+% Mean motion
+\begin{equation}
+n = \sqrt {\frac{\mu }
+{{a^3 }}} 
+\end{equation}
+
+% God bless America, the orbital rate of the Earth
+\begin{equation}
+\dot \lambda  = 360\left( {1 - \frac{{sidereal\ day}}
+{{mean\ solar\ day}}} \right) [deg/day]
+\end{equation}
+
+% REPEAT ORBIT
+
+% Main design equation for a repeat orbit
+\begin{equation}
+\frac{{\frac{K}
+{N}}}
+{{\omega _e  - \dot \Omega }} - \frac{1}
+{{\dot \omega  + \dot M}} = 0
+\end{equation}
+
+% Constraint equation for the rate of change of the argument of perigee.
+\begin{equation}
+\dot \omega  = \frac{3}
+{4}\frac{{J_2 R_e^2 }}
+{{p^2 }}n\left( {5\cos ^2 i - 1} \right)
+\end{equation}
+
+% God bless the US, the time rate of change of the right ascension of the ascending node
+\begin{equation}
+\dot \Omega  = \left( { - 3\pi J_2 \left( {\frac{{R_e }}
+{p}} \right)^2 \cos i} \right)\left( {\frac{1}
+{{2\pi }}\sqrt {\frac{\mu }
+{{a^3 }}} } \right)
+\end{equation}
+
+% God bless the US of A, the time rate of change of the mean anomaly
+\begin{equation}
+\dot M = \tilde n = n\left( {1 + \frac{3}
+{4}J_2 \left( {\frac{{R_e }}
+{p}} \right)^2 \sqrt {1 - e^2 } \left( {3\cos ^2 i - 1} \right)} \right)
+\end{equation}
+
+% SUN SYNCHRONOUS ORBIT
+
+% God bless the United St-[BANG]..., the only contraint equation for a sun synchronous orbit
+\begin{equation}
+\cos i + \frac{{2\dot \lambda a^{{\raise0.7ex\hbox{$7$} \!\mathord{\left/
+ {\vphantom {7 2}}\right.\kern-\nulldelimiterspace}
+\!\lower0.7ex\hbox{$2$}}} \left( {1 - e^2 } \right)^2 }}
+{{3J_2 R_e ^2 \sqrt \mu  }} = 0
+\end{equation}
+
+% FROZEN ORBIT
+
+% ..., the constraint equation for the time rate of change of the eccentricity for a frozen orbit
+\begin{equation}
+\dot e = \frac{3}
+{2}\frac{{J_3 r_{eq}^3 }}
+{{p^3 }}\left( {1 - e^2 } \right)n\sin i \cdot \cos \omega \left( {\frac{5}
+{4}\sin ^2 i - 1} \right) = 0
+\end{equation}
+
+% The constraint equation for the time rate of change of the argument of perigee for a frozen orbit, notice the presence of the J3 term
+\begin{equation}
+\dot \omega  = \frac{3}
+{4}\frac{{J_2 R_e^2 }}
+{{p^2 }}n\left( {5\cos ^2 i - 1} \right) - \frac{3}
+{2}\frac{{J_3 R_e^3 \sin \omega }}
+{{p^3 e\sin i}}n\left\{ \begin{gathered}
+  \left( {\frac{5}
+{4}\sin ^2 i - 1} \right)\sin ^2 i +  \hfill \\
+  e^2 \left( {1 - \frac{{35}}
+{4}\sin ^2 i \cdot \cos ^2 i} \right) \hfill \\ 
+\end{gathered}  \right\} = 0
+\end{equation}
+
+
+
+
+\end{document}
