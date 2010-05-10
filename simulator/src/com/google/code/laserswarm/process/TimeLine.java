@@ -208,7 +208,7 @@ public class TimeLine {
 
 			/* Find the power of the sun in the given frequency */
 			double powerIn = 0;
-			if (!current.illuminated) {
+			if (current.illuminated) {
 				double solAngle = area * Math.cos(current.sunVector.angle(new Vector3d(current.pR)))
 						/ (4 * Math.PI * Configuration.R0);
 				double exoatmosphericRadiance = radiatedPower(constellation.getLaserWaveLength(),

@@ -77,6 +77,11 @@ public class Simulator implements Runnable {
 		logger.dbg("f: %s, dt:%s", f, dt);
 		double ePhoton = (Constants.c * 6.62606896E-34) / constellation.getLaserWaveLength();
 
+		if (constellation.getPulselength() * constellation.getPulseFrequency() > 1)
+			throw new RuntimeException("Cannot have a duty cycle of over 100% (of the laser)");
+		double powerPerPulse = constellation.getPower()
+				/ (constellation.getPulselength() * constellation.getPulseFrequency());
+
 		int samples = (int) Math.ceil((TE - T0) / dt);
 
 		KeplerElements k = constellation.getEmitter().getKeplerElements();
@@ -125,7 +130,7 @@ public class Simulator implements Runnable {
 				// logger.wrn(e, "Point at t=%s is out of the dem grid", simVals.t0);
 				continue;
 			}
-			logger.dbg("Yey over point (s:%s |t:%s)", i, T0 + i * dt);
+			// logger.dbg("Yey over point (s:%s |t:%s)", i, T0 + i * dt);
 			Vector3d dR = new Vector3d(simVals.pR);
 			dR.sub(simVals.p0);
 			simVals.tR = dR.length() / Constants.c;
@@ -145,7 +150,7 @@ public class Simulator implements Runnable {
 			simVals.illuminated = (sunAngle < Math.PI / 2);
 
 			/* Make pulses (with downtravel) */
-			simVals.power0 = constellation.getPower();
+			simVals.power0 = powerPerPulse;
 			double angle = Math.PI - dR.angle(new Vector3d(simVals.pR));
 			double rFootprint = dR.length() * Math.tan(constellation.getEmitter().getBeamDivergence());
 			simVals.powerR = Atmosphere.getInstance().computeIntensity(simVals.power0, angle)
@@ -199,8 +204,8 @@ public class Simulator implements Runnable {
 				double energy = powerReceived * constellation.getPulselength();
 				simVals.photonDensity.put(sat, energy / ePhoton);
 				energy = energy * sat.getAperatureArea();
-				int nrP = (int) Math.floor(energy / ePhoton);
-				if (Math.random() < (energy / ePhoton) - nrP)
+				int nrP = (int) Math.floor(constellation.getReceiverEfficiency() * energy / ePhoton);
+				if (Math.random() < (constellation.getReceiverEfficiency() * energy / ePhoton) - nrP)
 					nrP++;
 				simVals.photonsE.put(sat, nrP);
 			}
