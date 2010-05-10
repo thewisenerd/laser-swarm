@@ -236,7 +236,7 @@ public class TimeLine {
 			/* Find the number of photons */
 			double nrP = (totalReceivedPower / ePhoton); // # per second
 			if (nrP == 0)
-				System.out.println("NOO");
+				System.out.println("NOO (nr photons == 0)");
 			noisePhotons.put(t, nrP);
 		}
 		logger.dbg("Done making noise");

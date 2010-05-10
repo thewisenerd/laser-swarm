@@ -1,8 +1,8 @@
 package com.google.code.laserswarm.process;
 
 import java.util.Iterator;
+import java.util.SortedMap;
 import java.util.TreeMap;
-import java.util.Map.Entry;
 
 import org.apache.commons.math.ArgumentOutsideDomainException;
 import org.apache.commons.math.analysis.polynomials.PolynomialSplineFunction;
@@ -39,13 +39,11 @@ public class SampleIterator implements Iterator<MeasermentSample> {
 		time += binTime;
 		try {
 			Integer photons = 0;
-			Entry<Double, Integer> closest = laserPhotons.floorEntry(time);
-			if (timeToBlock(time) == timeToBlock(closest.getKey())) {
-				photons = closest.getValue();
+			SortedMap<Double, Integer> values = laserPhotons.subMap(time, time + binTime);
+			for (Integer photonsSample : values.values()) {
 				c++;
-				found = true;
-			} else
-				found = false;
+				photons += photonsSample;
+			}
 
 			double t = noise.value(time);
 			int noisePhotons = (int) t;
