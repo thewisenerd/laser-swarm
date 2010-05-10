@@ -19,6 +19,7 @@ import com.google.code.laserswarm.conf.Constellation;
 import com.google.code.laserswarm.conf.Satellite;
 import com.google.code.laserswarm.earthModel.EarthModel;
 import com.google.code.laserswarm.earthModel.ElevationModel;
+import com.google.code.laserswarm.out.plot1D.plotHeightDistribution;
 import com.google.code.laserswarm.process.EmitterHistory;
 import com.google.code.laserswarm.process.MeasermentSample;
 import com.google.code.laserswarm.process.SampleIterator;
@@ -122,16 +123,22 @@ public class ProcessorTester {
 
 		SimulatorMaster mgr = new SimulatorMaster(earth);
 		SimTemplate template = new SimTemplate(testConstallation);
+		// template.setTime(4542935, 4542935.1);
+		template.setTime(4542935, 4542937.0);
+		mgr.addSimTemplate(template);
+		
+	/*	SimulatorMaster mgr = new SimulatorMaster(earth);
+		SimTemplate template = new SimTemplate(testConstallation);
 		template.setTime(template.getT0(), 700000);
 		mgr.addSimTemplate(template); // only one template
-		EmitterHistory emittorHistory = null;
+*/		EmitterHistory emittorHistory = null;
 		Map<Satellite, TimeLine> satData = Maps.newHashMap();
 		Map<Satellite, TimeLine> emData = Maps.newHashMap();
 
-		Vector<Map<Satellite, TimeLine>> res = new Vector<Map<Satellite, TimeLine>>();
 		Satellite Emit = new Satellite();
 		HashMap<SimTemplate, Simulator> points = mgr.runSim();
-
+		plotHeightDistribution plotter = new plotHeightDistribution();
+		plotter.plot(points.get(template).getDataPoints(), 3, "out.png");
 		for (SimTemplate templ : points.keySet()) { // assuming only one template
 			List<SimVars> dataPoints = points.get(templ).getDataPoints();
 
