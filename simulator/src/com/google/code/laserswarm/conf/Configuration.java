@@ -39,7 +39,7 @@ public class Configuration {
 	/**
 	 * Orbit epoch date
 	 */
-	public static final CalDate		epoch							= new CalDate(2000, 1, 1, 0, 0, 0);
+	public static final CalDate		epoch							= new CalDate(2000, 7, 1, 0, 0, 0);
 	/**
 	 * Stefan-Boltzmann constant
 	 */

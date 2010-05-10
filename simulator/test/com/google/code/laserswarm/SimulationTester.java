@@ -42,7 +42,7 @@ public class SimulationTester extends TestCase {
 				(float) (8.5 * Math.PI / 180), 0f, 0f);
 		LinkedList<Satellite> r = Lists.newLinkedList();
 		r.add(emittor);
-		return new Constellation(10, 0.2, emittor, r);
+		return new Constellation(10, 5000, emittor, r);
 	}
 
 	public static HashMap<SimTemplate, Simulator> sim() {

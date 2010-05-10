@@ -3,7 +3,6 @@ package com.google.code.laserswarm.simulation;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 
-import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.earthModel.EarthModel;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Maps;
@@ -17,6 +16,8 @@ import com.lyndir.lhunath.lib.system.logging.Logger;
  * 
  */
 public class SimulatorMaster {
+
+	public static short					freeThreads	= 4;
 
 	private EarthModel					earth;
 	private LinkedHashSet<SimTemplate>	templates	= Sets.newLinkedHashSet();
@@ -45,27 +46,30 @@ public class SimulatorMaster {
 				sim.start();
 				templates.remove(templ);
 				runningTemplates.put(templ, sim);
-			}
 
-			/* Remove any template that is done simulating */
-			ImmutableSet<SimTemplate> runningTemplatesCopy = ImmutableSet.copyOf(runningTemplates
-					.keySet());
-			for (SimTemplate templ : runningTemplatesCopy) {
-				Simulator sim = runningTemplates.get(templ);
-				if (!sim.getThread().isAlive()) {
-					runningTemplates.remove(templ);
-					doneTemplates.put(templ, sim);
-				}
+				freeThreads--;
 			}
 
 			/* Make sure we don't have more then the max amount of threads running */
 			do {
+				/* Remove any template that is done simulating */
+				ImmutableSet<SimTemplate> runningTemplatesCopy = ImmutableSet.copyOf(runningTemplates
+						.keySet());
+				for (SimTemplate templ : runningTemplatesCopy) {
+					Simulator sim = runningTemplates.get(templ);
+					if (!sim.getThread().isAlive()) {
+						runningTemplates.remove(templ);
+						doneTemplates.put(templ, sim);
+						freeThreads++;
+					}
+				}
+
 				try {
 					Thread.sleep(50);
 				} catch (InterruptedException e) {
 					logger.err(e, "INTERRUPTED while simulating");
 				}
-			} while (runningTemplates.size() >= Configuration.simThreads);
+			} while (freeThreads <= 0);
 
 		}
 		return doneTemplates;

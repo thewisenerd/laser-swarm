@@ -1,6 +1,5 @@
 package com.google.code.laserswarm.process;
 
-import static com.google.code.laserswarm.math.VectorMath.avgVector;
 import static com.google.code.laserswarm.math.VectorMath.relative;
 import jat.cm.Constants;
 
@@ -9,6 +8,10 @@ import java.util.TreeMap;
 
 import javax.vecmath.Point3d;
 import javax.vecmath.Vector3d;
+
+import org.apache.commons.math.MathException;
+import org.apache.commons.math.analysis.interpolation.LoessInterpolator;
+import org.apache.commons.math.analysis.polynomials.PolynomialSplineFunction;
 
 import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.conf.Constellation;
@@ -23,9 +26,14 @@ import com.lyndir.lhunath.lib.system.logging.Logger;
 
 public class TimeLine {
 
+	public static int					noiseFreq		= (int) 1E4;
+
 	private double						ePhoton;
 
-	private TreeMap<Double, Integer>	photons			= Maps.newTreeMap();
+	// time, nrPhotons
+	private TreeMap<Double, Integer>	laserPhotons	= Maps.newTreeMap();
+	// time, nrPhotons/s
+	private TreeMap<Double, Double>		noisePhotons	= Maps.newTreeMap();
 	private LookupTable					lookupPosition	= new LookupTable();
 	private LookupTable					lookupDirection	= new LookupTable();
 
@@ -46,11 +54,8 @@ public class TimeLine {
 		makeLookupTables();
 	}
 
-	private void add(Double t, Integer nrPhotons) {
-		if (photons.containsKey(t))
-			photons.put(t, photons.get(t) + nrPhotons);
-		else
-			photons.put(t, nrPhotons);
+	private double clamp(double value, double min, double max) {
+		return Math.min(Math.max(value, min), max);
 	}
 
 	/**
@@ -61,9 +66,24 @@ public class TimeLine {
 	 * @return Returns the integration approximation.
 	 */
 	private double f(double x) {
-		return 15
-				/ Math.pow(Math.PI, 4)
-				* (Math.pow(x, 3) / 3 - Math.pow(x, 4) / 8 + Math.pow(x, 5) / 60 - Math.pow(x, 7) / 5040);
+		double f = -1;
+		if (x <= 0.5) {
+			f = 15
+					/ Math.pow(Math.PI, 4)
+					* (Math.pow(x, 3) / 3 - Math.pow(x, 4) / 8 + Math.pow(x, 5) / 60 - Math.pow(x, 7) / 5040);
+		} else {
+			double sum = 0;
+			for (int m = 1; m < 3; m++) {
+				sum += Math.exp(-m * x) * // 
+						(+(Math.pow(x, 3) / m)//
+								+ (3 * x * x) / (m * m)//
+								+ (6 * x) / (m * m * m) //
+						+ 6 / (m * m * m * m));
+			}
+			f = 1 - (15 / Math.pow(Math.PI, 4) * sum);
+		}
+
+		return f;
 	}
 
 	/**
@@ -98,16 +118,36 @@ public class TimeLine {
 		return area;
 	}
 
+	public SampleIterator getIterator(int binFreqency) throws MathException {
+		final double binTime = 1. / binFreqency;
+		logger.inf("Bin f=%s\tBin t=%s", binFreqency, binTime);
+
+		final TreeMap<Double, Integer> laserPhotons = Maps.newTreeMap(this.laserPhotons);
+
+		double[] x = new double[noisePhotons.size()];
+		double[] y = new double[noisePhotons.size()];
+		int i = 0;
+		for (Double t : noisePhotons.keySet()) {
+			x[i] = t;
+			y[i] = noisePhotons.get(t) * binTime;
+			y[i] += (Math.random() <= y[i] - Math.round(y[i]) ? 1 : 0);
+
+			if (Double.isNaN(y[i]))
+				y[i] = 0;
+
+			i++;
+		}
+		final PolynomialSplineFunction noise = new LoessInterpolator().interpolate(x, y);
+
+		return new SampleIterator(binFreqency, laserPhotons, noise);
+	}
+
 	public LookupTable getLookupDirection() {
 		return lookupDirection;
 	}
 
 	public LookupTable getLookupPosition() {
 		return lookupPosition;
-	}
-
-	public TreeMap<Double, Integer> getPhotons() {
-		return photons;
 	}
 
 	public Satellite getSatellite() {
@@ -122,8 +162,9 @@ public class TimeLine {
 	 * @return Returns x.
 	 */
 	private double getX(double lambda) {
-		return Configuration.h * Configuration.c / lambda * Configuration.k * Configuration.TSun
-				* Configuration.epsSun;
+		double x = Configuration.h * Configuration.c
+				/ (lambda * Configuration.k * Configuration.TSun * Configuration.epsSun);
+		return x;
 	}
 
 	private void makeLookupTables() {
@@ -139,72 +180,59 @@ public class TimeLine {
 	}
 
 	private void makePhotons() {
-		SimVars last = null;
-		double lastA = -1;
-		double lastT = -1;
 		for (SimVars current : dataSet) {
 			double t = current.t0 + current.tR + current.tE.get(sat);
 			/* Add measured photons */
 			Integer nrPhotons = current.photonsE.get(sat);
-			add(t, nrPhotons);
+			laserPhotons.put(t, nrPhotons);
 			/* Introduce noise */
-			double currentA = findA(current);
-			if (last != null) {
-				double dT = t - lastT;
-				double averageA = (currentA + lastA) / 2;
-				Vector3d sunVector = avgVector(last.sunVector, current.sunVector);
+			double area = findA(current);
 
-				/* Find the average scattering characteristics */
-				ScatteringParam param = new ScatteringParam(current.scatter.getParam(), //
-						last.scatter.getParam());
-				ScatteringCharacteristics scatter = new ScatteringCharacteristics(sunVector, param);
+			/* Find the average scattering characteristics */
+			ScatteringParam param = current.scatter.getParam();
 
-				/* Find the average satellite position */
-				Vector3d position = avgVector(last.pE.get(getSatellite()), //
-						current.pE.get(getSatellite()));
-				/* Find the average reflection position */
-				Vector3d reflection = avgVector(last.pR, current.pR);
+			/* Find the average satellite position */
+			Vector3d position = new Vector3d(current.pE.get(getSatellite()));
+			/* Find the average reflection position */
+			Vector3d reflection = new Vector3d(current.pR);
 
-				/* Find the vector from the average location on the ground to the satellite */
-				Vector3d exittanceVector = new Vector3d(position);
-				exittanceVector.sub(reflection);
+			/* Make scatterer */
+			double angle = Math.acos((current.sunVector.dot(position))
+					/ (current.sunVector.length() * position.length()));
+			double z = Math.cos(angle);
+			double x = Math.sin(angle);
+			Vector3d incidence = new Vector3d(-x, 0, -z);
+			ScatteringCharacteristics scatter = new ScatteringCharacteristics(incidence, param);
 
-				/* Find the power of the sun in the given frequency */
-				double energyIn = 0;
-				if (current.illuminated) {
-					double lambda1 = constellation.getLaserWaveLength() - 0.5
-							* constellation.getReceiverBandWidth();
-					double lambda2 = constellation.getLaserWaveLength() + 0.5
-							* constellation.getReceiverBandWidth();
-					double solAngle = averageA * Math.cos(sunVector.angle(new Vector3d(current.pR)))
-							/ (4 * Math.PI * Configuration.R0);
-					double exoatmosphericRadiance = Configuration.sigma
-							* Math.pow(Configuration.TSun, 4) * (f(getX(lambda1)) - f(getX(lambda2)));
-					energyIn = Atmosphere.getInstance()
-							.computeIntensity(exoatmosphericRadiance * solAngle,
-									sunVector.angle(new Vector3d(current.pR)))
-							* dT;
-				}
-				// http://springerlink.com/content/w03843u415122240/?p=b44b970f34e9480ba22f8850692c07c3&pi=1
-				// http://springerlink.com/content/w03843u415122240/fulltext.pdf
-				double totalReceivedPower = scatter.probability(exittanceVector) * energyIn;
-
-				/* Find the number of photons */
-				int nrP = (int) Math.floor(totalReceivedPower / ePhoton);
-				if (Math.random() < (totalReceivedPower / ePhoton) - nrP)
-					nrP++;
-
-				logger.dbg("Number ph (%s) @ t=%S J=%s", nrP, t, energyIn);
-
-				/* Distribute noise photons evenly over the time interval */
-				for (int i = 0; i < nrP; i++) {
-					double tRand = Math.random() * dT + lastT;
-					photons.put(tRand, 1);
-				}
+			/* Find the power of the sun in the given frequency */
+			double powerIn = 0;
+			if (current.illuminated) {
+				double lambda1 = constellation.getLaserWaveLength() - 0.5
+						* constellation.getReceiverBandWidth();
+				double lambda2 = constellation.getLaserWaveLength() + 0.5
+						* constellation.getReceiverBandWidth();
+				double solAngle = area * Math.cos(current.sunVector.angle(new Vector3d(current.pR)))
+						/ (4 * Math.PI * Configuration.R0);
+				double exoatmosphericRadiance = Configuration.sigma * Math.pow(Configuration.TSun, 4)
+						* (f(getX(lambda1)) - f(getX(lambda2)));
+				powerIn = Atmosphere.getInstance().computeIntensity(exoatmosphericRadiance * solAngle,
+						current.sunVector.angle(new Vector3d(current.pR)));
 			}
-			last = current;
-			lastA = currentA;
-			lastT = t;
+
+			angle = Math.acos(((position.dot(reflection)) / (position.length() * reflection.length())));
+			z = position.length() * Math.cos(angle);
+			x = position.length() * Math.sin(angle);
+			Vector3d exittanceVector = new Vector3d(x, 0, z);
+			// exittanceVector.negate();
+			double scatteredPower = scatter.probability(exittanceVector) * powerIn;
+
+			double totalReceivedPower = Atmosphere.getInstance().computeIntensity( //
+					scatteredPower, position.angle(reflection)) * getSatellite().getAperatureArea();
+
+			/* Find the number of photons */
+			double nrP = (totalReceivedPower / ePhoton); // # per second
+			noisePhotons.put(t, nrP);
 		}
+		logger.dbg("Done making noise");
 	}
 }

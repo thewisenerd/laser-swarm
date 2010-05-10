@@ -85,6 +85,8 @@ public class ScatteringCharacteristics implements Distribution {
 		Vector3d projExittance = new Vector3d(exittanceVector.x, exittanceVector.y, 0);
 		// phi_1 - phi_0 = dPhi. Used in the Henyey-Greenstein correction
 		double dPhi = projIncidence.angle(projExittance);
+		if (projExittance.lengthSquared() == 0)
+			dPhi = 0;
 		// Apply Minnaert correction. Rees, p50
 		double R_Minnaert = R_Lambertian * (Math.pow(Math.cos(theta0) * Math.cos(theta1), kappa - 1));
 		// Apply Henyey-Greenstein correction. Rees, p51

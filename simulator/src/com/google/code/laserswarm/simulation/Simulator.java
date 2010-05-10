@@ -94,8 +94,8 @@ public class Simulator implements Runnable {
 		dataPoints = Lists.newLinkedList();
 
 		for (int i = 0; i < samples; i++) {
-			// if (i % 1000 == 0)
-			// logger.dbg("Running sample %s of %s", i, samples);
+			if (i % 5000 == 0)
+				logger.dbg("Running sample %s of %s", i, samples);
 			SimVars simVals = new SimVars();
 
 			/* Start time */

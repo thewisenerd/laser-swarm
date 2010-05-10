@@ -18,7 +18,7 @@ public class Constellation {
 	@Element
 	private double			laserWaveLength		= 300E-9;
 	@Element
-	private double			receiverBandWidth	= 300E-9;
+	private double			receiverBandWidth	= 1E-9;
 
 	@Element
 	private Satellite		emitter;
