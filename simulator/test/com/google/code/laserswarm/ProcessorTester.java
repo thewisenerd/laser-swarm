@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.math.MathException;
+
 import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.conf.Constellation;
 import com.google.code.laserswarm.conf.Satellite;
@@ -14,6 +16,7 @@ import com.google.code.laserswarm.earthModel.EarthModel;
 import com.google.code.laserswarm.earthModel.ElevationModel;
 import com.google.code.laserswarm.process.EmitterHistory;
 import com.google.code.laserswarm.process.MeasermentSample;
+import com.google.code.laserswarm.process.SampleIterator;
 import com.google.code.laserswarm.process.TimeLine;
 import com.google.code.laserswarm.simulation.SimTemplate;
 import com.google.code.laserswarm.simulation.SimVars;
@@ -37,10 +40,15 @@ public class ProcessorTester {
 	private void displayData(Map<Satellite, TimeLine> satData) {
 		for (TimeLine timeLine : satData.values()) {
 			logger.dbg("sat: %s ", timeLine.getSatellite());
-			iterator = timeLine.getIterator((int) 1E9);
+			SampleIterator iterator = null;
+			try {
+				iterator = timeLine.getIterator((int) 1E9);
+			} catch (MathException e) {
+				e.printStackTrace();
+			}
 			while (iterator.hasNext()) {
 				MeasermentSample sample = iterator.next();
-				logger.dbg("t: %s\tn: %s", time, timeLine.getPhotons().get(time));
+				logger.dbg("t: %s\tn: %s", sample.getTime(), sample.getPhotons());
 			}
 		}
 	}
