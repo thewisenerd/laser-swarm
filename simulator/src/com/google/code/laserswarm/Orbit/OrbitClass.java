@@ -1,7 +1,6 @@
 package com.google.code.laserswarm.Orbit;
 
 import jat.cm.Constants;
-import jat.cm.GroundTrack;
 import jat.cm.KeplerElements;
 import jat.cm.TwoBody;
 import jat.cm.cm;
@@ -10,10 +9,8 @@ import jat.matvec.data.VectorN;
 import jat.spacetime.EarthRef;
 import jat.spacetime.Time;
 
-import jat.spacetime.TimeUtils;
-import jat.traj.Trajectory;
-import javax.vecmath.Vector3d;
 import javax.vecmath.Point3d;
+import javax.vecmath.Vector3d;
 
 public class OrbitClass {
 
@@ -22,30 +19,26 @@ public class OrbitClass {
 		double pi = Math.PI;
 		KeplerElements kep = new KeplerElements(6725, 1 / 13.0, 30 * pi / 180, 0.0, 0, 0);
 		OrbitClass or1 = new OrbitClass(now, kep);
-		OrbitClass or2 = new OrbitClass(now.plus(TimeUtils.days2sec * 365), kep);
-		for (int i=0; i< 360; i++){
-		//	or1.sunvec_ECI();
+		// OrbitClass or2 = new OrbitClass(now.plus(TimeUtils.days2sec * 365), kep);
+		for (int i = 0; i < 360; i++) {
+			// or1.sunvec_ECI();
 			or1.propogate(84500);
-			System.out.print(or1.sunvec_ECI()+ "\n");
+			System.out.print(or1.sunvec_ECI() + "\n");
 		}
-/*		for (int i = 0; i < 365; i++) {
-			or1.t_cur.step_seconds(3600);
-			double lat = Math.asin((or1.ECEF().get(2, 0)) / (or1.ECEF().getColumnVector(0).mag()))
-					* Constants.rad2deg;
-			double lon = Math.atan2(or1.ECEF().get(1, 0), or1.ECEF().get(0, 0)) * Constants.rad2deg;
-            
-			if (lon > 180.0)
-				lon = lon - 360.0;
-			if (lon < -180.0)
-				lon = lon + 360.0;
+		/*
+		 * for (int i = 0; i < 365; i++) { or1.t_cur.step_seconds(3600); double lat =
+		 * Math.asin((or1.ECEF().get(2, 0)) / (or1.ECEF().getColumnVector(0).mag())) Constants.rad2deg;
+		 * double lon = Math.atan2(or1.ECEF().get(1, 0), or1.ECEF().get(0, 0)) * Constants.rad2deg;
+		 * 
+		 * if (lon > 180.0) lon = lon - 360.0; if (lon < -180.0) lon = lon + 360.0;
+		 * 
+		 * System.out.print("@" + or1.t_cur.get_sim_time() / 3600 + "\n" + or1.ECEF() + " " + "\n " +
+		 * or1.ECI() + "\n"); or1.propogate(3);
+		 */
 
-			System.out.print("@" + or1.t_cur.get_sim_time() / 3600 + "\n" + or1.ECEF() + " " + "\n "
-					+ or1.ECI() + "\n");
-         or1.propogate(3);*/
-		
-	//}
+		// }
 		// GroundTrack.main(kep);
-	
+
 	}
 
 	public Time				epoch0, t_cur;	// in MJD to determine earth position
@@ -63,46 +56,11 @@ public class OrbitClass {
 		defref = new EarthRef(epoch);
 		ke = elm;
 		epoch0 = t_cur = epoch;
-//		defref.initializeSunEphem(t_cur.mjd_tt());
+		// defref.initializeSunEphem(t_cur.mjd_tt());
 
 		// draw_orbit(5000);
 
-
-		
 	}
-	private Matrix sunvec(){
-		VectorN vec = EarthRef.sunVector(t_cur.mjd_tt()).unitVector();
-		Matrix res = new Matrix(vec);
-		return res.diag();
-	}
-	public Vector3d sunvec_ECI(){
-		Matrix hi = this.sunvec();
-//		System.out.print("**"+hi+"**");
-		return ( new Vector3d(hi.get(0, 0),hi.get(1, 0),hi.get(2, 0)));
-	}
-	public Vector3d sunvec_ECEF(){ 
-//		System.out.print("**"+sunvec()+"**\n");
-		Matrix hi = defref.eci2ecef(t_cur).times(this.sunvec());
-		return ( new Vector3d(hi.get(0, 0),hi.get(1, 0),hi.get(2, 0)));
-	}
-/*   public  void  sunvec_ECI(){
-	    double year2day  = 365.25;
-	    double dayspassed = t_cur.mjd_tt() - t_cur.vafli(); 
-	    double radsturned = 2* Math.PI / year2day * dayspassed;
-	    double inc  = 23.4 * Math.PI/180;
-	    Matrix natnox = new Matrix(new VectorN(-1,0,0)); 
-	    Matrix rotx = cm.Rot1(inc);
-	    Matrix rotz = cm.Rot3(-1*radsturned);
-	    Matrix sunvec = rotz.times(rotx.times(natnox));
-	    
-	    
-   }
-*/   
-/*public void sunvec_ECEF(){
-	   return defref.eci2ecef(t_cur).times(this.ECI());
-}*/
-	
-
 
 	private double calc_E(KeplerElements a) {
 		// determine initial E and M
@@ -121,8 +79,7 @@ public class OrbitClass {
 
 	}
 
-	private void draw_orbit(int steps) {
-
+	public void draw_orbit(int steps) {
 		x = new double[steps];
 		y = new double[steps];
 		z = new double[steps];
@@ -135,7 +92,7 @@ public class OrbitClass {
 
 		double e0 = calc_E(ke);
 		double ma = calc_M(e0);
-		double q = Math.sqrt((1.0 + ke.e) / (1.0 - ke.e));
+		// double q = Math.sqrt((1.0 + ke.e) / (1.0 - ke.e));
 		double sqrome2 = Math.sqrt(1.0 - ke.e * ke.e);
 		double[] temp = new double[3];
 
@@ -163,9 +120,7 @@ public class OrbitClass {
 			}
 
 			tloc = tloc + dt;
-
 		}
-
 	}
 
 	/**
@@ -194,7 +149,6 @@ public class OrbitClass {
 		Matrix m = ECI();
 		return new Point3d(m.get(0, 0), m.get(1, 0), m.get(2, 0));
 	}
-	
 
 	public Matrix PQW() {
 		Matrix r_pqw = new Matrix(3, 1);
@@ -210,13 +164,13 @@ public class OrbitClass {
 		// Determine step size
 		double acubed = ke.a * ke.a * ke.a;
 		double n = Math.sqrt(Constants.mu / acubed);
-		double period = 2.0 * Constants.pi / n;
+		// double period = 2 * Constants.pi / n;
 
 		double e0 = calc_E(ke);
 		double ma = calc_M(e0);
 		double sqrome2 = Math.sqrt(1.0 - ke.e * ke.e);
 
-		double q = Math.sqrt((1.0 + ke.e) / (1.0 - ke.e));
+		// double q = Math.sqrt((1.0 + ke.e) / (1.0 - ke.e));
 
 		ma = ma + n * dt;
 		double ea = TwoBody.solveKepler(ma, ke.e);
@@ -234,5 +188,36 @@ public class OrbitClass {
 		}
 		t_cur.update(t_cur.get_sim_time() + dt);
 
+	}
+
+	private Matrix sunvec() {
+		VectorN vec = EarthRef.sunVector(t_cur.mjd_tt()).unitVector();
+		Matrix res = new Matrix(vec);
+		return res.diag();
+	}
+
+	public Vector3d sunvec_ECEF() {
+		// System.out.print("**"+sunvec()+"**\n");
+		Matrix hi = defref.eci2ecef(t_cur).times(this.sunvec());
+		return (new Vector3d(hi.get(0, 0), hi.get(1, 0), hi.get(2, 0)));
+	}
+
+	/*
+	 * public void sunvec_ECI(){ double year2day = 365.25; double dayspassed = t_cur.mjd_tt() -
+	 * t_cur.vafli(); double radsturned = 2* Math.PI / year2day * dayspassed; double inc = 23.4 *
+	 * Math.PI/180; Matrix natnox = new Matrix(new VectorN(-1,0,0)); Matrix rotx = cm.Rot1(inc); Matrix
+	 * rotz = cm.Rot3(-1*radsturned); Matrix sunvec = rotz.times(rotx.times(natnox));
+	 * 
+	 * 
+	 * }
+	 */
+	/*
+	 * public void sunvec_ECEF(){ return defref.eci2ecef(t_cur).times(this.ECI()); }
+	 */
+
+	public Vector3d sunvec_ECI() {
+		Matrix hi = this.sunvec();
+		// System.out.print("**"+hi+"**");
+		return (new Vector3d(hi.get(0, 0), hi.get(1, 0), hi.get(2, 0)));
 	}
 }

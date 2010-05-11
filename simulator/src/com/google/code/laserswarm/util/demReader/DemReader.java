@@ -16,9 +16,8 @@ public abstract class DemReader {
 	private static final Logger	logger	= Logger.get(DemReader.class);
 
 	public static void main(String[] args) {
-		IElevationModel dem = null;
 		try {
-			dem = DemReader.parseDem(new File("DEM/ASTGTM_N48E000_dem.asc"));
+			DemReader.parseDem(new File("DEM/ASTGTM_N48E000_dem.asc"));
 		} catch (DemCreationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

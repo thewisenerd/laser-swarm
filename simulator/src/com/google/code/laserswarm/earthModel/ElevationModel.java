@@ -14,16 +14,13 @@ import org.ujmp.core.Matrix;
 
 import com.google.code.laserswarm.conf.Configuration;
 import com.google.common.base.Preconditions;
-import com.lyndir.lhunath.lib.system.logging.Logger;
 
 public class ElevationModel implements IElevationModel {
 
-	private Matrix				elevationData;
-	private GridCoverage2D		coverage;
+	private Matrix			elevationData;
+	private GridCoverage2D	coverage;
 
-	private Double				averageHeight;
-
-	private static final Logger	logger	= Logger.get(ElevationModel.class);
+	private Double			averageHeight;
 
 	public ElevationModel(Matrix matrix, GridCoverage2D coverage) {
 		setElevationData(matrix);
@@ -153,7 +150,7 @@ public class ElevationModel implements IElevationModel {
 
 		/* Find is spherical coordinates */
 		Point3d sphere = Convert.toSphere(p);
-		double rp = sphere.x;
+		// double rp = sphere.x;
 		double theta = sphere.y;
 		double phi = sphere.z;
 

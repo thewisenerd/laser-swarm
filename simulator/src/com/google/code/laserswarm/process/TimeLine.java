@@ -21,6 +21,7 @@ import com.google.code.laserswarm.earthModel.ScatteringCharacteristics;
 import com.google.code.laserswarm.earthModel.ScatteringParam;
 import com.google.code.laserswarm.math.LookupTable;
 import com.google.code.laserswarm.simulation.SimVars;
+import com.google.code.laserswarm.simulation.postSimulation.RadiatedNoise;
 import com.google.common.collect.Maps;
 import com.lyndir.lhunath.lib.system.logging.Logger;
 
@@ -52,34 +53,6 @@ public class TimeLine {
 
 		makePhotons();
 		makeLookupTables();
-	}
-
-	/**
-	 * The radiance integration approximation (see Rees, p 26).
-	 * 
-	 * @param x
-	 *            The independent wavelength coordinate
-	 * @return Returns the integration approximation.
-	 */
-	private double f(double x) {
-		double f = -1;
-		if (x <= 0.5) {
-			f = 15
-					/ Math.pow(Math.PI, 4)
-					* (Math.pow(x, 3) / 3 - Math.pow(x, 4) / 8 + Math.pow(x, 5) / 60 - Math.pow(x, 7) / 5040);
-		} else {
-			double sum = 0;
-			for (int m = 1; m < 3; m++) {
-				sum += Math.exp(-m * x) * // 
-						(+(Math.pow(x, 3) / m)//
-								+ (3 * x * x) / (m * m)//
-								+ (6 * x) / (m * m * m) //
-						+ 6 / (m * m * m * m));
-			}
-			f = 1 - (15 / Math.pow(Math.PI, 4) * sum);
-		}
-
-		return f;
 	}
 
 	/**
@@ -157,18 +130,6 @@ public class TimeLine {
 		return sat;
 	}
 
-	/**
-	 * Gets the 'x' variable for the radiance approximation (see Rees, p 24-25).
-	 * 
-	 * @param lambda
-	 *            The wavelength that gives x.
-	 * @return Returns x.
-	 */
-	private double getX(double lambda, double temp, double eps) {
-		double x = Configuration.h * Configuration.c / (lambda * Configuration.k * temp * eps);
-		return x;
-	}
-
 	private void makeLookupTables() {
 		for (SimVars simVars : dataSet) {
 			double t = simVars.t0;
@@ -184,10 +145,12 @@ public class TimeLine {
 	private void makePhotons() {
 		for (SimVars current : dataSet) {
 			double t = current.t0 + current.tR + current.tE.get(sat);
+
 			/* Add measured photons */
 			Integer nrPhotons = current.photonsE.get(sat);
 			laserPhotons.put(t, nrPhotons);
-			/* Introduce noise */
+
+			/* Find the footprint area */
 			double area = findA(current);
 
 			/* Find the average scattering characteristics */
@@ -199,8 +162,7 @@ public class TimeLine {
 			Vector3d reflection = new Vector3d(current.pR);
 
 			/* Make scatterer */
-			double angle = Math.acos((current.sunVector.dot(position))
-					/ (current.sunVector.length() * position.length()));
+			double angle = current.sunVector.angle(position);
 			double z = Math.cos(angle);
 			double x = Math.sin(angle);
 			Vector3d incidence = new Vector3d(-x, 0, -z);
@@ -211,23 +173,21 @@ public class TimeLine {
 			if (current.illuminated) {
 				double solAngle = area * Math.cos(current.sunVector.angle(new Vector3d(current.pR)))
 						/ (4 * Math.PI * Configuration.R0);
-				double exoatmosphericRadiance = radiatedPower(constellation.getLaserWaveLength(),
-						constellation.getReceiverBandWidth(), solAngle, // 
+				double exoAtmosphericRadiance = RadiatedNoise.radiatedPower(constellation
+						.getLaserWaveLength(), constellation.getReceiverBandWidth(), solAngle,
 						Configuration.TSun, Configuration.epsSun);
-				powerIn = Atmosphere.getInstance().computeIntensity(exoatmosphericRadiance * solAngle,
+				powerIn = Atmosphere.getInstance().computeIntensity(exoAtmosphericRadiance,
 						current.sunVector.angle(new Vector3d(current.pR)));
 			} else {
 				double solAngle = area / (4 * Math.PI * Configuration.R0);
-				powerIn = radiatedPower(constellation.getLaserWaveLength(), constellation
-						.getReceiverBandWidth(), solAngle, // 
-						Configuration.TEarth, Configuration.epsEarth);
+				powerIn = RadiatedNoise.radiatedPower(constellation.getLaserWaveLength(), constellation
+						.getReceiverBandWidth(), solAngle, Configuration.TEarth, Configuration.epsEarth);
 			}
 
-			angle = Math.acos(((position.dot(reflection)) / (position.length() * reflection.length())));
+			angle = position.angle(reflection);
 			z = position.length() * Math.cos(angle);
 			x = position.length() * Math.sin(angle);
 			Vector3d exittanceVector = new Vector3d(x, 0, z);
-			// exittanceVector.negate();
 			double scatteredPower = scatter.probability(exittanceVector) * powerIn;
 
 			double totalReceivedPower = Atmosphere.getInstance().computeIntensity( //
@@ -242,13 +202,4 @@ public class TimeLine {
 		logger.dbg("Done making noise");
 	}
 
-	private double radiatedPower(double centerWaveLength, double waveLengthBandwidth, double solAngle,
-			double temp, double eps) {
-		double lambda1 = centerWaveLength - 0.5 * waveLengthBandwidth;
-		double lambda2 = centerWaveLength + 0.5 * waveLengthBandwidth;
-
-		double power = Configuration.sigma * Math.pow(temp, 4)
-				* (f(getX(lambda1, temp, eps)) - f(getX(lambda2, temp, eps)));
-		return power;
-	}
 }

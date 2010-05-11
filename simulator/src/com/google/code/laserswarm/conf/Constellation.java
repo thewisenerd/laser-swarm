@@ -9,18 +9,40 @@ import org.simpleframework.xml.ElementList;
 import com.google.common.collect.Lists;
 
 public class Constellation {
+
+	/**
+	 * Power that the emmitor has [W] (of the laser beam)
+	 */
 	@Attribute
 	private double			power				= 0f;
+	/**
+	 * Frequency of the laser pulses that are send out
+	 */
 	@Element
 	private double			pulseFrequency		= 5000;
+	/**
+	 * Pulse length time [s]
+	 */
 	@Element
-	private double			pulselength			= 3E-9;					// s
+	private double			pulselength			= 3E-9;
+	/**
+	 * Laser wave length [m]
+	 */
 	@Element
 	private double			laserWaveLength		= 300E-9;
+	/**
+	 * Receiver sensitivity wavelength band [m]
+	 */
 	@Element
 	private double			receiverBandWidth	= 1E-9;
+	/**
+	 * Efficiency of the receiver [-]
+	 * <p>
+	 * (Receiver chip efficency) x (optical filter efficency)
+	 * </p>
+	 */
 	@Element
-	private double			receiverEfficiency	= 0.4;
+	private double			receiverEfficiency	= 0.4 * 0.75;
 
 	@Element
 	private Satellite		emitter;

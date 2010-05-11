@@ -19,15 +19,6 @@ public class ArcInfoASCII_2 extends DemReader {
 
 	private static final Logger	logger	= Logger.get(ArcInfoASCII_2.class);
 
-	public static void main(String[] args) {
-		try {
-			IElevationModel dem = new ArcInfoASCII_2(new File("DEM/srtm_37_02-red.asc")).parse();
-		} catch (DemCreationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
 	public static Image toImage(BufferedImage bufferedImage) {
 		return Toolkit.getDefaultToolkit().createImage(bufferedImage.getSource());
 	}

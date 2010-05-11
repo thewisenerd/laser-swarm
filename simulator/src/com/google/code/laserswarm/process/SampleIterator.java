@@ -8,20 +8,21 @@ import org.apache.commons.math.ArgumentOutsideDomainException;
 import org.apache.commons.math.analysis.polynomials.PolynomialSplineFunction;
 
 public class SampleIterator implements Iterator<MeasermentSample> {
-	private double						binFreqency;
+
 	private double						binTime;
 
 	private TreeMap<Double, Integer>	laserPhotons;
 	PolynomialSplineFunction			noise;
 	private double						time;
 
+	@Deprecated
 	public int							c		= 0;
+	@Deprecated
 	public boolean						found	= false;
 
 	public SampleIterator(double binFreqency, TreeMap<Double, Integer> laser,
 			PolynomialSplineFunction noise) {
 		super();
-		this.binFreqency = binFreqency;
 		this.binTime = 1 / binFreqency;
 		this.laserPhotons = laser;
 		this.noise = noise;
@@ -62,11 +63,6 @@ public class SampleIterator implements Iterator<MeasermentSample> {
 
 	private double timeBlock(double time) {
 		return Math.round(time / binTime) * binTime;
-	}
-
-	private long timeToBlock(double time) {
-		long block = Math.round((time) / binTime);
-		return block;
 	}
 
 }

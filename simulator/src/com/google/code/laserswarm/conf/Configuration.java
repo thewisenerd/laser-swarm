@@ -101,6 +101,7 @@ public class Configuration {
 	@Element
 	private String					fileNameScatterModel			= " ";
 
+	@Deprecated
 	@ElementList
 	private List<Constellation>		constellations					= Lists.newLinkedList();
 
@@ -186,6 +187,7 @@ public class Configuration {
 		return atmOpticalThickness;
 	}
 
+	@Deprecated
 	public List<Constellation> getConstellations() {
 		return constellations;
 	}

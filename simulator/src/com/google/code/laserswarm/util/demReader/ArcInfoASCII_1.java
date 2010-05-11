@@ -31,9 +31,9 @@ public class ArcInfoASCII_1 extends DemReader {
 
 	@Override
 	public ElevationModel parse() throws DemCreationException {
-		String fileName = getDemFile().getName();
-		File projectionFile = new File(getDemFile().getParentFile(), // 
-				fileName.substring(0, fileName.lastIndexOf(".")) + "prj");
+		// String fileName = getDemFile().getName();
+		// File projectionFile = new File(getDemFile().getParentFile(), //
+		// fileName.substring(0, fileName.lastIndexOf(".")) + "prj");
 		/* Use projection file ? */
 		/* Load the elevation matrix */
 
@@ -45,6 +45,7 @@ public class ArcInfoASCII_1 extends DemReader {
 				return i;
 			}
 
+			@SuppressWarnings("static-access")
 			@Override
 			public boolean processLine(String arg0) throws IOException {
 				Iterable<String> res = Splitter.on("\t").on(" ").trimResults().omitEmptyStrings() //
@@ -64,7 +65,6 @@ public class ArcInfoASCII_1 extends DemReader {
 		Double NODATA_value = -9999d;
 		try {
 			BufferedReader reader = Files.newReader(getDemFile(), Charsets.UTF_8);
-			String line;
 			lastDouble.processLine(reader.readLine());
 			final int nCols = lastDouble.getResult().intValue();
 			lastDouble.processLine(reader.readLine());
