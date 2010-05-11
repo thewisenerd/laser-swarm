@@ -1,0 +1,56 @@
+\subsection{\ac{AODCS}}
+The \ac{ADCS} is used for determining and controlling the attitude and orbit of the satellites. In most cases the subsystems can be split up into four parts, attitude determination (section \ref{ss:ads}), attitude control (section \ref{ss:acs}), orbit determination (section \ref{ss:ods}) and orbit control (section \ref{ss:ocs}). 
+\subsubsection{\ac{ADS}}
+\label{ss:ads}
+The \ac{ADS} consists for a collection of sensors to determine the roll, pitch and yaw angles and rates of the satellites. The design options left after the pruning in section \ref{pruneADCS} are \ac{GPS}, Sun sensors, Star trackers and Horizon sensors. 
+\ac{GPS} uses one receiver and multiple antennas, by measuring the relative positions of the different antennas the attitude of the satellite can be calculated. Most modern \ac{LEO} satellites are already carry a \ac{GPS} receiver, but a long baseline between antennas is needed for a high accuracy. 
+Sun sensors use the angle towards the Sun for making their attitude measurements. The technology behind Sun sensors has been around for a long time and several micro Sun sensors are available on the market, the \ac{FOV} of a typical Sun sensor is about 120${}^{\circ}$. 
+Star trackers look at a portion of the sky and uses familiar stars to determine the attitude of the satellites the system can work autonomously, but the optics required are usually quite bulky. 
+Horizon sensors use the limb of the Earth, i.e. the transition of the solid Earth to cold space, to determine the attitude of the satellite. The system only works on the roll and pitch axis.
+
+Another option is to use a complete \ac{COTS} \ac{ADCS} system like the
+\subsubsection{\ac{ACS}}
+\label{ss:acs}
+
+\subsubsection{\ac{ODS}}
+\label{ss:ods}
+
+\subsubsection{\ac{OCS}}
+\label{ss:ocs}
+Because the orbit considered for the satellites is very low (for satellite orbits), therefore the drag of the atmosphere has to be taken into account. The equation for acceleration due to drag on the satellite is
+
+\begin{equation}
+a_D=-\frac{1}{2}\rho \left(C_DA/m\right)V^2
+\label{eqn:atmosdrag}
+\end{equation}
+where $\rho$ is the density of the atmosphere, $C_D$ is the drag coefficient for the satellite (typically between 2-4), $m$ is the mass of the satellite and $V$ is the satellite's velocity with respect to the atmosphere. The orbital velocity of a circular orbit is
+
+\begin{equation}
+V_c=\sqrt{\frac{\mu}{a}}
+\label{eqn:orbitalvel}
+\end{equation}
+
+where $\mu$ is the standard gravitational parameter of the Earth, $398,600.4 \,km^3/s^2$. For circular orbits the equation for $\Delta V$ per revolution can be simplified to
+
+\begin{equation}
+\Delta V_{rev}=\pi \left(C_DA/m\right)\rho a V
+\label{eqn:deltaVrev}
+\end{equation}
+
+where $a$ is the orbit semi-major axis \cite{larson}.\\
+
+Station keeping for an orbit between 400 and 500 kilometers requires a maximum $\Delta V$ of 100 m/s or on average 25 m/s \cite{deltavtu}.\\
+
+The $\Delta V$ a propulsion system can produce is quantified by Tsiolkovsky's rocket equation
+
+\begin{equation}
+\Delta V = g I_{sp} \ln{\left(\frac{m_0}{m_0-m_p}\right)}\equiv g I_{sp} \ln{\left(\frac{m_0}{m_f}\right)} \equiv g I_{sp} \ln{\left(R\right)}
+\label{eqn:tsiolkovsky}
+\end{equation}
+
+where $g$ is the Earth's gravity constant, $I_{sp}$ is the specific impulse of the engine, $m_0$ is the starting mass, $m_p$ is the mass of the fuel used, $m_f = m_0-m_p$ and the mass ratio $R$ is  ${m_0}/\left({m_0-m_p}\right)$. From this the ratio of fuel to the total mass can be derived to be
+
+\begin{equation}
+\frac{m_p}{m_0} = 1-e^{-\left(\Delta V/I_{sp}g\right)}
+\label{eqn:fuelratio}
+\end{equation} 
