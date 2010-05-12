@@ -28,7 +28,7 @@ public interface IElevationModel {
 	 * @throws PointOutsideEnvelopeException
 	 *             When it does not intersect;
 	 */
-	public abstract Point3d getIntersecion(Vector3d direction, Point3d origin)
+	public abstract Point3d getIntersection(Vector3d direction, Point3d origin)
 			throws PointOutsideEnvelopeException;
 
 	/**

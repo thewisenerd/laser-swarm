@@ -99,11 +99,11 @@ public class EarthModel implements IElevationModel {
 	}
 
 	@Override
-	public Point3d getIntersecion(Vector3d direction, Point3d origin)
+	public Point3d getIntersection(Vector3d direction, Point3d origin)
 			throws PointOutsideEnvelopeException {
 		for (ElevationModel dem : dems) {
 			try {
-				Point3d i = dem.getIntersecion(direction, origin);
+				Point3d i = dem.getIntersection(direction, origin);
 				return i;
 			} catch (PointOutsideEnvelopeException e) {
 			}

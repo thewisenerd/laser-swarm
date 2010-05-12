@@ -120,7 +120,7 @@ public class ElevationModel implements IElevationModel {
 	 * @see com.google.code.laserswarm.earthModel.IElevationModel#getIntersecion(javax.vecmath.Vector3d,
 	 * javax.vecmath.Point3d)
 	 */
-	public Point3d getIntersecion(Vector3d direction, Point3d origin)
+	public Point3d getIntersection(Vector3d direction, Point3d origin)
 			throws PointOutsideEnvelopeException {
 		/* Find the intersection with the sphere (r = r(EPSG:3785) + average height) */
 		double r = Configuration.R0 + getAverageHeight();

@@ -21,57 +21,57 @@ import com.lyndir.lhunath.lib.system.logging.Logger;
 public class Configuration {
 
 	public enum Actions {
-		SIMULATE, PROCESS, TABULATE, PLOT_DISK, PLOT_SCREEN, SLEEP;
+		SIMULATE, PROCESS, TABULATE, PLOT_DISK, PLOT_SCREEN, SLEEP, PROSPECT;
 	}
 
 	private static Configuration	instance;
 
-	private static final String		configName						= "configuration.xml";
+	private static final String		configName	= "configuration.xml";
 
 	/**
 	 * Location of the DEMs
 	 */
-	public static File				demDir							= new File("DEM");
+	public static File				demDir		= new File("DEM");
 	/**
 	 * Earth radius based on EPSG:3785 ellipsoid (spheroid)
 	 */
-	public static double			R0								= 6378137;
+	public static double			R0			= 6378137;
 	/**
 	 * Orbit epoch date
 	 */
-	public static final CalDate		epoch							= new CalDate(2000, 7, 1, 0, 0, 0);
+	public static final CalDate		epoch		= new CalDate(2000, 7, 1, 0, 0, 0);
 	/**
 	 * Stefan-Boltzmann constant
 	 */
-	public static double			sigma							= 5.67E-8;
+	public static double			sigma		= 5.67E-8;
 	/**
 	 * Planck's constant
 	 */
-	public static double			h								= 6.626068E-34;
+	public static double			h			= 6.626068E-34;
 	/**
 	 * Light speed
 	 */
-	public static double			c								= 299792458;
+	public static double			c			= 299792458;
 	/**
 	 * Boltzmann constant
 	 */
-	public static double			k								= 1.3806503E-23;
+	public static double			k			= 1.3806503E-23;
 	/**
 	 * Sun's grey body temperature
 	 */
-	public static double			TSun							= 5800;
+	public static double			TSun		= 5800;
 	/**
 	 * Sun's grey body emissivity
 	 */
-	public static double			epsSun							= 0.99;
+	public static double			epsSun		= 0.99;
 	/**
 	 * Earth's grey body temperature
 	 */
-	public static double			TEarth							= 254.356;
+	public static double			TEarth		= 254.356;
 	/**
 	 * Earth's grey body emissivity
 	 */
-	public static double			epsEarth						= 1;
+	public static double			epsEarth	= 1;
 
 	@Attribute
 	private static Set<Actions>		mode;
@@ -83,29 +83,33 @@ public class Configuration {
 		mode.add(Actions.TABULATE);
 	}
 
-	public static int				simThreads						= 4;
-	public static int				demThreads						= 3;
+	public static int				simThreads	= 4;
+	public static int				demThreads	= 3;
+
+	public static void setMode(Set<Actions> mode) {
+		Configuration.mode = mode;
+	}
 
 	@Attribute
-	private float					atmOpticalThickness				= 0.25f;
+	private float				atmOpticalThickness				= 0.25f;
 
 	@Element
-	private String					filePrefixReport				= " ";
+	private String				filePrefixReport				= "";
 
 	@Element
-	private String					filePathReport					= " ";
+	private String				filePathReport					= "./";
 
 	@Element
-	private String					fileNameDigitalElevationModel	= " ";
+	private String				fileNameDigitalElevationModel	= "";
 
 	@Element
-	private String					fileNameScatterModel			= " ";
+	private String				fileNameScatterModel			= "";
 
 	@Deprecated
 	@ElementList
-	private List<Constellation>		constellations					= Lists.newLinkedList();
+	private List<Constellation>	constellations					= Lists.newLinkedList();
 
-	private static final Logger		logger							= Logger.get(Configuration.class);
+	private static final Logger	logger							= Logger.get(Configuration.class);
 
 	public static Configuration getInstance() {
 		if (instance == null) {

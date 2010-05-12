@@ -20,6 +20,7 @@ import com.google.code.laserswarm.earthModel.Atmosphere;
 import com.google.code.laserswarm.earthModel.ScatteringCharacteristics;
 import com.google.code.laserswarm.earthModel.ScatteringParam;
 import com.google.code.laserswarm.math.LookupTable;
+import com.google.code.laserswarm.math.VectorMath;
 import com.google.code.laserswarm.simulation.SimVars;
 import com.google.code.laserswarm.simulation.postSimulation.RadiatedNoise;
 import com.google.common.collect.Maps;
@@ -184,11 +185,12 @@ public class TimeLine {
 						.getReceiverBandWidth(), solAngle, Configuration.TEarth, Configuration.epsEarth);
 			}
 
+			Vector3d dR = VectorMath.relative(position, reflection);
 			angle = position.angle(reflection);
 			z = position.length() * Math.cos(angle);
 			x = position.length() * Math.sin(angle);
 			Vector3d exittanceVector = new Vector3d(x, 0, z);
-			double scatteredPower = scatter.probability(exittanceVector) * powerIn;
+			double scatteredPower = scatter.probability(exittanceVector) * powerIn / dR.lengthSquared();
 
 			double totalReceivedPower = Atmosphere.getInstance().computeIntensity( //
 					scatteredPower, position.angle(reflection)) * getSatellite().getAperatureArea();

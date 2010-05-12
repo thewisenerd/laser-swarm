@@ -39,11 +39,13 @@ public class SampleIterator implements Iterator<MeasermentSample> {
 	public MeasermentSample next() {
 		time += binTime;
 		try {
+			found = false;
 			Integer photons = 0;
 			SortedMap<Double, Integer> values = laserPhotons.subMap(time, time + binTime);
 			for (Integer photonsSample : values.values()) {
 				c++;
 				photons += photonsSample;
+				found = true;
 			}
 
 			double t = noise.value(time);

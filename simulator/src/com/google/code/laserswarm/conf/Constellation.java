@@ -24,12 +24,12 @@ public class Constellation {
 	 * Pulse length time [s]
 	 */
 	@Element
-	private double			pulselength			= 3E-9;
+	private double			pulselength			= 1E-9;
 	/**
 	 * Laser wave length [m]
 	 */
 	@Element
-	private double			laserWaveLength		= 300E-9;
+	private double			laserWaveLength		= 500E-9;
 	/**
 	 * Receiver sensitivity wavelength band [m]
 	 */
@@ -42,7 +42,7 @@ public class Constellation {
 	 * </p>
 	 */
 	@Element
-	private double			receiverEfficiency	= 0.4 * 0.75;
+	private double			receiverEfficiency	= 1;						// 0.4 * 0.75;
 
 	@Element
 	private Satellite		emitter;

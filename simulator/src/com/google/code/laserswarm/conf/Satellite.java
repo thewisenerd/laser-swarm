@@ -27,7 +27,7 @@ public class Satellite {
 	private String	name						= "SAT";
 
 	@Element
-	private double	aperatureArea				= (0.08 * 0.08);	// m²
+	private double	aperatureArea				= 1;				// (0.08 * 0.08); // m²
 
 	@Element
 	private double	beamDivergence				= 2.3333E-4 / 2;	// rad for the half beam /|
