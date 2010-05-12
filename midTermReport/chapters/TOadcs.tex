@@ -1,6 +1,21 @@
-\subsection{\ac{AODCS}}
-The \ac{AODCS} is used for determining and controlling the attitude and orbit of the satellites. In most cases the subsystems can be split up into four parts, attitude determination (section \ref{ss:ads}), attitude control (section \ref{ss:acs}), orbit determination (section \ref{ss:ods}) and orbit control (section \ref{ss:ocs}). 
-\subsubsection{\ac{ADS}}
+\section{\ac{AODCS}}
+The \ac{AODCS} is used for determining and controlling the attitude and orbit of the satellites. In this section first the \ac{ADCS} design option tree is pruned in section \ref{pruneADCS}. The subsystem can be split up into four smaller parts; attitude determination (discussed in section \ref{ss:ads}), attitude control (section \ref{ss:acs}), orbit determination (section \ref{ss:ods}) and orbit control (section \ref{ss:ocs}). 
+
+\subsection{Pruning the \acs{ADCS} design option tree}
+\label{pruneADCS}
+The gravity-gradient stabilisation and passive magnetic options are eliminated because they provide insufficient accuracy and do not allow pointing to a any target other than the mass or magnetic centre of the Earth. The spin stabilisation option is pruned because the satellite needs to be able to make measurements continuously. Double gimbal \acp{CMG} are also not a viable option, because they are too complex and heavy compared to the other systems.
+For the attitude determination the initial measurements and magnetometers options are eliminated because of their low accuracy over time.
+The pruned design option tree can be found in figure \ref{fig:pruneADCS} on page \pageref{fig:pruneADCS}.
+
+\begin{figure}
+\centering
+\includegraphics[width=1.0\textwidth, angle=90, bb =0 0 1009px 630px]{img/prunedADCStree.png}
+\label{fig:pruneADCS}
+\caption{Pruned design option tree for the \ac{ADCS}}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{\ac{ADS}}
 \label{ss:ads}
 The \ac{ADS} consists for a collection of sensors to determine the roll, pitch and yaw angles and rates of the satellites. The design options left after the pruning in section \ref{pruneADCS} are \ac{GPS}, Sun sensors, Star trackers and Horizon sensors. 
 
@@ -11,18 +26,39 @@ Horizon sensors use the limb of the Earth, i.e. the transition of the solid Eart
 
 Another option is to use a complete \ac{COTS} \ac{ADCS} system like the one from Maryland Aerospace Inc. \cite{maryland}. Their IMI-100 ADACS contains everything needed for complete \ac{ADCS} with an accuracy of 1${}^\circ$. For attitude determination it uses 3 magnetometers, by adding additional sensors e.g. a ring laser gyro and a miniaturised star sensor the accuracy can reach 1-3 arcsec \cite{imi100}.
 
+\subsubsection{Trade method}
+\subsubsection{Trade criteria}
+\subsubsection{Weight factors}
+\subsubsection{Trade-off}
+
 %choose three concepts, trade off
-\subsubsection{\ac{ACS}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{\ac{ACS}}
 \label{ss:acs}
-The satellites in the constellation all need to point accurately to the Earth, a passive \ac{ACS} will therefore not be sufficient for the control of the attitude of the satellites. For active attitude control actuators are needed. After the pruning again four options remain for the attitude control. Reaction wheels, \acp{CMG}, Thusters and Magnetic torquers.
+The satellites in the constellation all need to point accurately to the Earth, a passive \ac{ACS} will therefore not be sufficient for the control of the attitude of the satellites. For active attitude control actuators are needed. After the pruning again four options remain for the attitude control. Reaction and momentum wheels, \acp{CMG}, Thusters and Magnetic torquers.
 
-Reaction wheels are yadda yadda.
-\acp{CMG} have a constant rotation speed yadda.
-Thusters exert gas to induce velocity or a momentum to the satellite. The velocity can be used for keeping the orbit and will be discussed in section \ref{ss:ocs}. To be able to induce a momentum to a satellite multiple thrusters with an offset to the center of mass of the satellite. 
-\subsubsection{\ac{ODS}}
+Reaction wheels are basically torque rotors with a high-inertia wheel attached to it, they can provide single axis control to a spacecraft. Momentum wheels are reaction wheels with a nominal spin rate, adding gyroscopic stiffness to two axis of the spacecraft. Chancing the spin rate gives control over the third axis.
+\acp{CMG} consist of a wheel with a constant rotation speed and one or two gimbals to rotate them, pointing the direction of the momentum. This way very accurate attitude manoeuvres can be made, but complex control algorithms are needed. Usually the weight and cost of \acp{CMG} are quite high.
+Thusters expel mass to induce velocity or a momentum to the satellite. The velocity can be used for keeping the orbit and will be discussed in section \ref{ss:ocs}. To be able to induce a momentum to a satellite multiple thrusters with an offset to the center of mass of the satellite. Thrusters are split up into hot gas types, which require a chemical reaction of the propellent, and cold gas types that rely on latent heat and phase change in the propellent. The power which can be generated by thrusters is high, but the fuel required will limit the lifetime of the satellite.
+Magnetic torquers are magnetic coils or electromagnets generating dipole moments on the satellite. They can be used for both manoevering and desaturation of e.g. reaction wheels. Because they rely on the magnetic field of the Earth they are less useful in higher orbits.
+
+The IMI-100 ADACS contains three miniature reaction wheels and three magnetic coils for desaturating the wheels. For a 2 kg, 2U cubesat it can provide a slew rate of $8.4^\circ/s$ \cite{imi100}.
+
+\subsubsection{Trade method}
+\subsubsection{Trade criteria}
+\subsubsection{Weight factors}
+\subsubsection{Trade-off}
+
+%choose three concepts, trade off
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{\ac{ODS}}
 \label{ss:ods}
+The determination of the orbit will be discussed in section \ref{TOcommTA}.
 
-\subsubsection{\ac{OCS}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{\ac{OCS}}
 \label{ss:ocs}
 The orbit considered for the satellites is very low (for satellite orbits), therefore the drag of the atmosphere has to be taken into account. The equation for acceleration due to drag on the satellite is
 
