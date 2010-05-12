@@ -7,14 +7,23 @@
 
 In subsection \ref{pruneOrbit} the design option tree was pruned by comparing the orbit altitudes \ac{LEO} to \ac{HEO} with the altitude requirement that follows from the payload. As a result the \acs{MEO}, \acs{GEO} and \acs{HEO} were eliminated. Now the remaining options will be analyzed.
 
-The analysis will begin with listing the advantages and disadvantages of the special orbits and the ''other`` options, and compare them with the mission requirements. After that they will be given a figure of Merit and a trade-off is made.
+?????????????????????????????
 
-\subsubsection{Advantages \& disadvantages of the design options}
+\subsubsection{Trade Criteria}
 
+In order to perform the trade-off the trade criteria are derived from the \ac{RDT} made during the baseline report. 
 
+\subsubsection{????????????????????????????????????????????}
 
-\subsubsection{Assigning the figures of Merit}
+Polar
 
+Sun Synchronous
+
+Repeating ground track orbits
+
+Frozen orbit
+
+''The other ones``
 
 % CONSTANTS
 
@@ -22,12 +31,14 @@ The analysis will begin with listing the advantages and disadvantages of the spe
 \begin{equation}
 n = \sqrt {\frac{\mu }
 {{a^3 }}} 
+\label{meanMotion}
 \end{equation}
 
 % God bless America, the orbital rate of the Earth
 \begin{equation}
 \dot \lambda  = 360\left( {1 - \frac{{sidereal\ day}}
 {{mean\ solar\ day}}} \right) [deg/day]
+\label{lambdaDot}
 \end{equation}
 
 % REPEAT ORBIT
@@ -38,6 +49,7 @@ n = \sqrt {\frac{\mu }
 {N}}}
 {{\omega _e  - \dot \Omega }} - \frac{1}
 {{\dot \omega  + \dot M}} = 0
+\label{repeat}
 \end{equation}
 
 % Constraint equation for the rate of change of the argument of perigee.
@@ -45,6 +57,7 @@ n = \sqrt {\frac{\mu }
 \dot \omega  = \frac{3}
 {4}\frac{{J_2 R_e^2 }}
 {{p^2 }}n\left( {5\cos ^2 i - 1} \right)
+\label{Argument}
 \end{equation}
 
 % God bless the US, the time rate of change of the right ascension of the ascending node
@@ -53,6 +66,7 @@ n = \sqrt {\frac{\mu }
 {p}} \right)^2 \cos i} \right)\left( {\frac{1}
 {{2\pi }}\sqrt {\frac{\mu }
 {{a^3 }}} } \right)
+\label{RAAN}
 \end{equation}
 
 % God bless the US of A, the time rate of change of the mean anomaly
@@ -60,17 +74,28 @@ n = \sqrt {\frac{\mu }
 \dot M = \tilde n = n\left( {1 + \frac{3}
 {4}J_2 \left( {\frac{{R_e }}
 {p}} \right)^2 \sqrt {1 - e^2 } \left( {3\cos ^2 i - 1} \right)} \right)
+\label{MDot}
 \end{equation}
 
 % SUN SYNCHRONOUS ORBIT
 
 % God bless the United St-[BANG]..., the only contraint equation for a sun synchronous orbit
 \begin{equation}
-\cos i + \frac{{2\dot \lambda a^{{\raise0.7ex\hbox{$7$} \!\mathord{\left/
+\cos i + \frac{{2n_E a^{{\raise0.7ex\hbox{$7$} \!\mathord{\left/
  {\vphantom {7 2}}\right.\kern-\nulldelimiterspace}
 \!\lower0.7ex\hbox{$2$}}} \left( {1 - e^2 } \right)^2 }}
 {{3J_2 R_e ^2 \sqrt \mu  }} = 0
+\label{SunSynch}
 \end{equation}
+
+% Initial mean anomaly
+\begin{equation}
+\dot M_0  = \frac{3}
+{4}J_2 \left( {\frac{{R_e }}
+{p}} \right)^2 \sqrt {1 - e^2 } \left( {3\cos ^2 i - 1} \right)
+\label{SunSynchMean}
+\end{equation}
+
 
 % FROZEN ORBIT
 
@@ -80,22 +105,38 @@ n = \sqrt {\frac{\mu }
 {2}\frac{{J_3 r_{eq}^3 }}
 {{p^3 }}\left( {1 - e^2 } \right)n\sin i \cdot \cos \omega \left( {\frac{5}
 {4}\sin ^2 i - 1} \right) = 0
+\label{FrozenEcc}
 \end{equation}
 
-% The constraint equation for the time rate of change of the argument of perigee for a frozen orbit, notice the presence of the J3 term
+% Frozen orbit inclination thing.
 \begin{equation}
-\dot \omega  = \frac{3}
-{4}\frac{{J_2 R_e^2 }}
-{{p^2 }}n\left( {5\cos ^2 i - 1} \right) - \frac{3}
-{2}\frac{{J_3 R_e^3 \sin \omega }}
-{{p^3 e\sin i}}n\left\{ \begin{gathered}
-  \left( {\frac{5}
-{4}\sin ^2 i - 1} \right)\sin ^2 i +  \hfill \\
-  e^2 \left( {1 - \frac{{35}}
-{4}\sin ^2 i \cdot \cos ^2 i} \right) \hfill \\ 
-\end{gathered}  \right\} = 0
+\frac{{di}}
+{{dt}} = \frac{3}
+{2}\frac{{J_3 n}}
+{{\left( {1 - e^2 } \right)^3 }}\left( {\frac{{R_e }}
+{a}} \right)^3 e\cos i \cdot \cos \omega \left( {\frac{5}
+{4}\sin ^2 i - 1} \right) = 0
+\label{FrozenInc}
 \end{equation}
 
+% The constraint equation for the time rate of change of the argument of perigee for a frozen orbit, notice the presence of the J3 term in F
+\begin{equation}
+\dot \omega  = \frac{{3J_2 n}}
+{{\left( {1 - e^2 } \right)^2 }}\left( {\frac{{R_e }}
+{a}} \right)^2 \left( {1 - \frac{5}
+{4}\sin ^2 i} \right)F
+\label{FrozenArg}
+\end{equation}
+
+% Arg continued
+\begin{equation}
+F = 1 + \frac{{J_3 }}
+{{2J_2 \left( {1 - e^2 } \right)}}\left( {\frac{{R_e }}
+{a}} \right)\left( {\frac{{\sin ^2 i - e^2 \cos ^2 i}}
+{{\sin i}}} \right)\frac{{\sin \omega }}
+{e}
+\label{FrozenF}
+\end{equation}
 
 
 
