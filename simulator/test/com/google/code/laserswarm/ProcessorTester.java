@@ -39,7 +39,7 @@ public class ProcessorTester {
 
 	private static final Logger	logger	= Logger.get(ProcessorTester.class);
 
-	private class RandData {
+	public class RandData {
 		Map<Satellite, TimeLine>	rec;
 		Map<Satellite, TimeLine>	em;
 		EmitterHistory				emHist;
@@ -143,7 +143,7 @@ public class ProcessorTester {
 			List<SimVars> dataPoints = points.get(templ).getDataPoints();
 
 			emittorHistory = new EmitterHistory( //
-					templ.getConstellation(), dataPoints);
+			templ.getConstellation(), dataPoints);
 
 			Emit = templ.getConstellation().getEmitter();
 			emData.put(Emit, new TimeLine(Emit, templ.getConstellation(), dataPoints));
