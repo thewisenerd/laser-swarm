@@ -1,0 +1,284 @@
+% This file was created with JabRef 2.6.
+% Encoding: Cp1252
+
+@BOOK{constDesign,
+  title = {Mission Geometry; Orbit and Constellation Design and Management},
+  publisher = {Microcosm Press and Kluwer Academic Publishers},
+  year = {2001},
+  editor = {James R. Wertz},
+  author = {James R. Wertz et al.},
+  owner = {Alex},
+  timestamp = {2010.05.10}
+}
+
+@MISC{glasreview,
+  author = {ICESat Anomaly Review Board},
+  title = {Independent GLAS Anomaly Review Board Executive Summary},
+  howpublished = {Electronic},
+  year = {2003},
+  owner = {Alex},
+  timestamp = {2010.04.28},
+  url = {http://icesat.gsfc.nasa.gov/docs/IGARB.pdf}
+}
+
+@ARTICLE{SPAD,
+  author = {Cristiano Niclass, Marek Gersbach, Robert Henderson, Lindsay Grant
+	and Edoardo Charbon},
+  title = {A Single Photon Avalanche Diode Implemented in 130-nm CMOS Technology},
+  journal = {IEEE Journal of selected topics in quantum electronics},
+  year = {2007},
+  volume = {13},
+  pages = {863-869},
+  owner = {Zhuan},
+  timestamp = {2010.05.12}
+}
+
+@ELECTRONIC{doody1,
+  author = {Dave Doody},
+  month = {February},
+  year = {2001},
+  title = {The Basics of Space Flight.},
+  language = {English},
+  organization = {Jet Propulsion Laboratory, California Institute of Technology},
+  url = {http://www2.jpl.nasa.gov/basics/bsf11-3.php},
+  owner = {Sean},
+  timestamp = {2010.04.26}
+}
+
+@BOOK{quantumdots,
+  title = {Quantums Dots},
+  publisher = {World Scientific Publishig},
+  year = {2003},
+  author = {E. Borovitskaya, M.S. Shur},
+  owner = {Tim},
+  timestamp = {2010.04.28}
+}
+
+@ELECTRONIC{icesatc98a,
+  author = {Douglas Isbell},
+  title = {ICESat Press Release C98-a},
+  organization = {NASA},
+  url = {http://icesat.gsfc.nasa.gov/press_release/c98-a.html},
+  owner = {Alex},
+  timestamp = {2010.04.28}
+}
+
+@ARTICLE{reliability,
+  author = {Jean-Francois Castet, Joseph H.Saleh},
+  title = {Satellite and satellite subsystems reliability: Statistical data
+	analysis and modeling},
+  journal = {Reliability Engineering and System Safety},
+  year = {2009},
+  volume = {94},
+  pages = {1718-1728},
+  owner = {Zhou},
+  timestamp = {2010.04.27}
+}
+
+@BOOK{Space2B,
+  title = {Space Engineering \& Techonlogy II Part B: Space Vehicle Engineering},
+  publisher = {Delft University of Technology},
+  year = {2003},
+  author = {W. Jongkind and Q.P. Chu and J.J. Wijker and A. Kamp and B.T.C. Zandbergen},
+  month = {September},
+  note = {Lecture Notes},
+  owner = {Lieuwe},
+  timestamp = {2010.04.28}
+}
+
+@ARTICLE{lithium1,
+  author = {Jusef Hassoun, Stefania Panero, Priscilla Reale, and Bruno Scrosati},
+  title = {A New, Safe, High-Rate and High-Energy Polymer
+	
+	Lithium-Ion Battery},
+  journal = {Advanced Materials},
+  year = {2009},
+  volume = {21},
+  pages = {4807 - 4810},
+  owner = {Sean},
+  timestamp = {2010.04.27}
+}
+
+@ELECTRONIC{kuphaldt,
+  author = {Tony R. Kuphaldt},
+  title = {All About Circuits},
+  owner = {Sean},
+  timestamp = {2010.04.28}
+}
+
+@ELECTRONIC{Owen1999,
+  author = {G. Scott Owen},
+  month = {June},
+  year = {1999},
+  title = {Ray-Sphere Intersection},
+  language = {EN},
+  url = {http://www.siggraph.org/education/materials/HyperGraph/raytrace/rtinter1.htm},
+  owner = {simon},
+  timestamp = {2010.04.23}
+}
+
+@ELECTRONIC{lasertech,
+  author = {Dr. Rüdiger Paschotta},
+  year = {2008},
+  title = {Photonics: Laser and Optical Physics},
+  language = {English},
+  organization = {RP Photonics},
+  url = {http://www.rp-photonics.com/lasers.html},
+  owner = {Tim},
+  timestamp = {2010.04.28}
+}
+
+@BOOK{rees,
+  title = {Physical Principles of Remote Sensing},
+  publisher = {Cambridge University Press},
+  year = {2001},
+  author = {W. G. Rees},
+  address = {Cambridge},
+  edition = {second edition, sixth printing},
+  isbn = {9780521669481}
+}
+
+@ELECTRONIC{tuscmass,
+  author = {SSE},
+  month = {November},
+  year = {2007},
+  title = {Spacecraft (SC) preliminary mass estimation \& allocation},
+  language = {English},
+  organization = {Delft University of Technology},
+  url = {http://www.citg.tudelft.nl/live/pagina.jsp?id=10d9b8b2-e85b-48e7-94f2-462356f1d730&lang=en},
+  owner = {Lieuwe},
+  timestamp = {2010.04.28}
+}
+
+@ARTICLE{quantumcomputers,
+  author = {T.D. Ladd, F. Jelezko, R. LaFlamme},
+  title = {Quantum Computers},
+  journal = {Nature},
+  keywords = {quantum optics, qubits},
+  owner = {Tim},
+  timestamp = {2010.04.28}
+}
+
+@ELECTRONIC{fresnel2,
+  author = {Thayer Watkins},
+  title = {Fresnel equations},
+  url = {http://www.inyourfacefotos.com/fresnel.htm}
+}
+
+@BOOK{quantumoptics,
+  title = {Frontiers of laser physics and quantum optics},
+  publisher = {Springer},
+  year = {2000},
+  editor = {Shengwu Xie},
+  author = {Zhizhan Xu},
+  keywords = {Optical physics, laser, quantum mechanics, condensed matter, particle
+	physics},
+  owner = {Tim},
+  timestamp = {2010.04.28}
+}
+
+@MISC{deltavtu,
+  author = {B.T.C. Zandbergen},
+  title = {Delta-v (velocity increment) budget},
+  howpublished = {online},
+  month = {November},
+  year = {2009},
+  note = {http://www.lr.tudelft.nl/live/pagina.jsp?id=140fb8a8-0bfa-43dc-8ff9-02c923a2a8cb\&lang=en},
+  owner = {Lieuwe},
+  timestamp = {2010.05.11}
+}
+
+@BOOK{sse,
+  title = {Spacecraft Systems Engineering},
+  publisher = {John Wiley \& Sons Ltd.},
+  year = {2007},
+  editor = {Peter Fortescue {et al.}},
+  address = {Chichester, West Sussex, England},
+  edition = {3},
+  month = {January},
+  owner = {Alex},
+  timestamp = {2010.04.27}
+}
+
+@BOOK{larson,
+  title = {Space Mission Analysis And Design},
+  publisher = {Microcosm Press and Springer},
+  year = {2006},
+  editor = {Wiley J. Larson \& James R. Wertz},
+  address = {El Segundo, CA (Microcosm Press) \& New York, NY (Springer)},
+  edition = {3},
+  owner = {Alex},
+  timestamp = {2010.04.26}
+}
+
+@ELECTRONIC{fresnel1,
+  title = {Fresnel equations},
+  url = {http://www.economicexpert.com/a/Fresnel:equations.html}
+}
+
+@ELECTRONIC{fresnel3,
+  title = {Fresnel equations},
+  url = {http://en.wikipedia.org/wiki/Fresnel_equations}
+}
+
+@ELECTRONIC{jerOrbit,
+  title = {Lecture 6: Orbits},
+  organization = {University of Oregon},
+  url = {http://jersey.uoregon.edu/~js/space/lectures/lec06.html},
+  owner = {Gert-Jan},
+  timestamp = {2010.04.29}
+}
+
+@ELECTRONIC{refractiveIndices,
+  title = {List of refractive indices},
+  url = {http://en.wikipedia.org/wiki/List_of_refractive_indices}
+}
+
+@ELECTRONIC{geotools,
+  month = {May},
+  year = {2010},
+  title = {GeoTools},
+  url = {http://www.geotools.org/},
+  owner = {simon},
+  timestamp = {2010.05.06}
+}
+
+@ELECTRONIC{imi100,
+  month = {April},
+  year = {2010},
+  title = {Miniature 3-Axis Reaction Wheel \& Attitude Determination and Control
+	System for CubeSat Kit™ Nanosatellites},
+  url = {http://www.cubesatkit.com/docs/datasheet/DS_CSK_ADACS_634-00412-A.pdf},
+  owner = {Lieuwe},
+  timestamp = {2010.05.11}
+}
+
+@MISC{maryland,
+  title = {Maryland Aerospace Inc.},
+  month = {April},
+  year = {2010},
+  owner = {Lieuwe},
+  timestamp = {2010.05.11},
+  url = {http://www.miniadacs.com}
+}
+
+@ELECTRONIC{Market,
+  month = {Jul},
+  year = {2008},
+  title = {Ocean Surface Topography From Space},
+  language = {English},
+  organization = {NASA},
+  url = {http://sealevel.jpl.nasa.gov/overview/benefits.html},
+  owner = {Zhuan},
+  timestamp = {2010.04.28}
+}
+
+@ELECTRONIC{nasaOrbit,
+  year = {2008},
+  title = {Ancillary Description Writer's Guide. Global Change Master Directory.},
+  organization = {National Aeronautics and Space Administration},
+  url = {http://gcmd.nasa.gov/User/suppguide/platforms/orbit.html},
+  owner = {Gert-Jan},
+  timestamp = {2010.04.28}
+}
+
