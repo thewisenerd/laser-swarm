@@ -39,6 +39,7 @@ import com.lyndir.lhunath.lib.system.logging.Logger;
 public class Simulator implements Runnable {
 
 	private static final Logger	logger	= Logger.get(Simulator.class);
+	public static long			timeOut	= (15 * 60000);				// ms
 
 	private SimTemplate			template;
 	private Thread				thread;
@@ -81,13 +82,13 @@ public class Simulator implements Runnable {
 		return thread;
 	}
 
-	private SimVars mkSimPoint(int sample, double timeStep, OrbitClass emittorOrbit,
+	private SimVars mkSimPoint(long i, double timeStep, OrbitClass emittorOrbit,
 			HashMap<Satellite, OrbitClass> receiverOrbits) {
 		SimVars simVals = new SimVars();
 		Constellation constellation = template.getConstellation();
 
 		/* Start time */
-		simVals.t0 = (sample * timeStep + T0);
+		simVals.t0 = (i * timeStep + T0);
 
 		/* Find the position of the constelation at that time */
 		Point3d pos = emittorOrbit.ECEF_point();
@@ -124,7 +125,7 @@ public class Simulator implements Runnable {
 			surfNormal = earth.getSurfaceNormal(reflectionPoint);
 		} catch (PointOutsideCoverageException e) {
 			logger.wrn(e, // 
-					"Cannot find surf normal of sample %s (prolly border case) :", sample, simVals);
+					"Cannot find surf normal of sample %s (prolly border case) :", i, simVals);
 			return null;
 		}
 
@@ -148,7 +149,7 @@ public class Simulator implements Runnable {
 			simVals.scatter = new ScatteringCharacteristics(incidence, earth
 					.getScatteringParam(reflectionPoint));
 		} catch (CannotEvaluateException e) {
-			logger.wrn(e, "Cannot find Scattering param of sample %s:", sample, simVals);
+			logger.wrn(e, "Cannot find Scattering param of sample %s:", i, simVals);
 			return null;
 		}
 
@@ -162,7 +163,7 @@ public class Simulator implements Runnable {
 			Vector3d exittanceVector = new Vector3d(x, 0, z);
 			simVals.powerR_SC.put(sat, simVals.scatter.probability(exittanceVector) // 
 					* simVals.powerR / dR.lengthSquared());
-			System.out.println(dR.lengthSquared());
+			// System.out.println(dR.lengthSquared());
 		}
 
 		/* Travel up through atm */
@@ -188,7 +189,7 @@ public class Simulator implements Runnable {
 			simVals.photonDensity.put(sat, energy / ePhoton);
 			energy = energy * sat.getAperatureArea();
 			int nrP = (int) Math.floor(constellation.getReceiverEfficiency() * energy / ePhoton);
-			logger.dbg("test: %s", (constellation.getReceiverEfficiency() * energy / ePhoton) - nrP);
+			// logger.dbg("test: %s", (constellation.getReceiverEfficiency() * energy / ePhoton) - nrP);
 			if (Math.random() < (constellation.getReceiverEfficiency() * energy / ePhoton) - nrP)
 				nrP++;
 			simVals.photonsE.put(sat, nrP);
@@ -199,6 +200,8 @@ public class Simulator implements Runnable {
 
 	@Override
 	public void run() {
+		long tStart = System.currentTimeMillis();
+
 		Constellation constellation = template.getConstellation();
 		double f = constellation.getPulseFrequency();
 		double dt = (1 / f);
@@ -210,7 +213,7 @@ public class Simulator implements Runnable {
 		powerPerPulse = constellation.getPower()
 				/ (constellation.getPulselength() * constellation.getPulseFrequency());
 
-		int samples = (int) Math.ceil((TE - T0) / dt);
+		long samples = (long) Math.ceil((TE - T0) / dt);
 
 		KeplerElements k = constellation.getEmitter().getKeplerElements();
 
@@ -226,20 +229,25 @@ public class Simulator implements Runnable {
 
 		dataPoints = Lists.newLinkedList();
 
-		int i = 0;
+		long i = 0;
 		while (i < samples) {
 			if (i % 5000 == 0)
 				logger.dbg("Running sample %s of %s", i, samples);
 			SimVars simVal = mkSimPoint(i, dt, emittorOrbit, receiverOrbits);
-			if (simVal != null) {
-				dataPoints.add(simVal);
-				i++;
-			} else {
+			if (simVal == null) {
 				if (Configuration.getInstance().hasAction(Actions.PROSPECT)) {
 					/* Find timestep to next flight-over */
-					i += Prospector.prospect(i, samples, dt, emittorOrbit, receiverOrbits);
+					i += Prospector.prospect(i, samples, dt, emittorOrbit, receiverOrbits, earth);
 				} else
 					i++;
+			} else {
+				dataPoints.add(simVal);
+				i++;
+			}
+
+			if (System.currentTimeMillis() - tStart > timeOut) {
+				logger.inf("Timout forced quit %s ms", System.currentTimeMillis() - tStart);
+				break;
 			}
 		}
 		logger.inf("Found %s points", dataPoints.size());
@@ -251,7 +259,7 @@ public class Simulator implements Runnable {
 	}
 
 	public Thread start() {
-		thread = new Thread(this, "Simulator");
+		thread = new Thread(this, "Sim - " + template.getConstellation());
 		thread.start();
 		return thread;
 	}

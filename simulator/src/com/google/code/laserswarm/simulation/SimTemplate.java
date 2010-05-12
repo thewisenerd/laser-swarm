@@ -30,4 +30,9 @@ public class SimTemplate {
 		this.TE = TE;
 	}
 
+	@Override
+	public String toString() {
+		return "Template - " + constellation.toString();
+	}
+
 }

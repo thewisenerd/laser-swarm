@@ -15,6 +15,7 @@ import com.google.code.laserswarm.earthModel.EarthModel;
 import com.google.code.laserswarm.earthModel.ElevationModel;
 import com.google.code.laserswarm.out.Report;
 import com.google.code.laserswarm.simulation.SimTemplate;
+import com.google.code.laserswarm.simulation.SimVars;
 import com.google.code.laserswarm.simulation.Simulator;
 import com.google.code.laserswarm.simulation.SimulatorMaster;
 import com.google.code.laserswarm.util.demReader.DemReader;
@@ -28,7 +29,7 @@ public class LaserSwarm {
 
 	public static void main(String[] args) {
 		Configuration config = Configuration.getInstance();
-		Configuration.setMode(Sets.newHashSet(Actions.SIMULATE, Actions.TABULATE));
+		Configuration.setMode(Sets.newHashSet(Actions.SIMULATE, Actions.TABULATE, Actions.PROSPECT));
 		new LaserSwarm();
 	}
 
@@ -45,7 +46,9 @@ public class LaserSwarm {
 				(float) (8.5 * Math.PI / 180), 0f, 0f);
 		LinkedList<Satellite> r = Lists.newLinkedList();
 		r.add(emittor);
-		return new Constellation(30 * (1. / 3), 5000, emittor, r);
+		Constellation c = new Constellation(30 * (1. / 3), 5000, emittor, r);
+		c.setName(String.format("Constellation %s km", alt));
+		return c;
 	}
 
 	public LaserSwarm() {
@@ -104,10 +107,19 @@ public class LaserSwarm {
 
 		for (Constellation constellation : constellations) {
 			SimTemplate template = new SimTemplate(constellation);
-			template.setTime(0, 100);
+			template.setTime(0, 500000);
 			simMaster.addSimTemplate(template);
 		}
 
 		simulations = simMaster.runSim();
+
+		for (SimTemplate tmpl : simulations.keySet()) {
+			long nrP = 0;
+			for (Satellite sat : tmpl.getConstellation().getReceivers()) {
+				for (SimVars var : simulations.get(tmpl).getDataPoints())
+					nrP += var.photonsE.get(sat);
+			}
+			logger.inf(tmpl + " nr photons = " + nrP);
+		}
 	}
 }

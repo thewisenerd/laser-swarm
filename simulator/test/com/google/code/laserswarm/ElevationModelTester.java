@@ -53,7 +53,7 @@ public class ElevationModelTester extends TestCase {
 
 		Point3d onSurfPoint = null;
 		try {
-			onSurfPoint = earth.getIntersecion(dir, testPoint);
+			onSurfPoint = earth.getIntersection(dir, testPoint);
 		} catch (PointOutsideEnvelopeException e) {
 			logger.err(e, "");
 		}

@@ -15,6 +15,7 @@ public class Constellation {
 	 */
 	@Attribute
 	private double			power				= 0f;
+
 	/**
 	 * Frequency of the laser pulses that are send out
 	 */
@@ -43,10 +44,11 @@ public class Constellation {
 	 */
 	@Element
 	private double			receiverEfficiency	= 1;						// 0.4 * 0.75;
-
 	@Element
 	private Satellite		emitter;
 
+	@Element
+	private String			name				= "Constellation";
 	@ElementList
 	private List<Satellite>	receivers			= Lists.newLinkedList();
 
@@ -72,6 +74,10 @@ public class Constellation {
 		return laserWaveLength;
 	}
 
+	public String getName() {
+		return name;
+	}
+
 	public double getPower() {
 		return power;
 	}
@@ -94,5 +100,14 @@ public class Constellation {
 
 	public List<Satellite> getReceivers() {
 		return receivers;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	@Override
+	public String toString() {
+		return name;
 	}
 }
