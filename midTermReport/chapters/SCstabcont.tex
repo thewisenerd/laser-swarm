@@ -1,0 +1,26 @@
+In this chapter the techniques required for calculating the stability and control for the satellites.
+
+\section{Stability}
+A satellite is considered in a circular orbit around the Earth. When small rotations are assumed the equations of motion can be linearised. The linearised combined dynamic and kinematic equations are
+
+\begin{eqnarray}
+&J_{11} \ddot{\theta}_1 - n\left(J_{11}-J_{22}+J_{33}\right) \dot{\theta}_3+ 4n^2\left(J_{22}-J_{33}\right)\theta _1= 0 \label{eqroll} \\
+&J_{22} \ddot{\theta}_2 + 3n^2\left(J_{11}-J_{33}\right)\theta_2= 0 \label{eqpitch} \\
+&J_{33} \ddot{\theta}_3 + n\left(J_{11}-J_{22}+J_{33}\right) \dot{\theta}_1 + n^2\left(J_{22}-J_{11}\right)\theta _3= 0 \label{eqyaw}
+\end{eqnarray}
+
+where $J_{nn}$ is the inertia tensor, $\theta_n$ are the rotation axis (roll, pitch and yaw) and $n$ is the orbital rate defined as 
+
+\begin{equation}
+n=\sqrt{\frac{\mu}{|R_c|^3}}
+\label{orbrate}
+\end{equation}
+where $\mu$ is the Earth's gravitational constant and $R_c$ the radius of the orbit of the satellite center of mass. As can be seen in equation \ref{eqpitch} the rotation around the pitch axis is independent of the rotation rates about the other two axis. By taking the Laplace transform of this equation the characteristic equation is found to be
+
+\begin{equation}
+s^2+\frac{3n^2\left(J_{11}-J_{33}\right)}{J_{22}} = 0 
+\label{lappitch}
+\end{equation}
+
+Stability requires that the characteristic roots are purely imaginary. This is only true if $J_{11}>J_{33}$.\\
+For simplification $k_1 = (J_{22}-J_{33})/J_{11}$ and $k_3 = (J_{22}-J_{11})/J_{33}$
