@@ -35,72 +35,27 @@ import com.lyndir.lhunath.lib.system.logging.Logger;
 public class ProcessorTester {
 
 	@Root
-	public class RandData {
-		@ElementMap
-		Map<Satellite, TimeLine>	rec;
-		@ElementMap
-		Map<Satellite, TimeLine>	em;
-		@ElementMap
-		EmitterHistory				emHist;
-
-		public RandData(Map<Satellite, TimeLine> rec, Map<Satellite, TimeLine> em, EmitterHistory emHist) {
-			super();
-			this.rec = rec;
-			this.em = em;
-			this.emHist = emHist;
-		}
-
-		public Map<Satellite, TimeLine> getEm() {
-			return em;
-		}
-
-		public EmitterHistory getEmHist() {
-			return emHist;
-		}
-
-		public Map<Satellite, TimeLine> getRec() {
-			return rec;
-		}
-
-	}
+	
+		
 
 	public static final String	CfgName	= "unitTestConfig.xml";
 
 	private static final Logger	logger	= Logger.get(ProcessorTester.class);
 
-	public static RandData load(String name) {
-		Serializer serializer = new Persister();
-		File source = new File(name);
-
-		try {
-			return serializer.read(RandData.class, source);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
+	
 
 	public static void main(String[] args) {
 		new ProcessorTester().testProcessing();
 	}
 
-	public static void save(String name, RandData data) {
-		Serializer serializer = new Persister();
-		File result = new File(name);
 
-		try {
-			serializer.write(data, result);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
 	private void displayData(Map<Satellite, TimeLine> satData) {
 		for (TimeLine timeLine : satData.values()) {
 			logger.dbg("sat: %s ", timeLine.getSatellite());
 			SampleIterator iterator = null;
 			try {
-				iterator = timeLine.getIterator((int) 1E9);
+				iterator = timeLine.getIterator((int) 1E5);
 			} catch (MathException e) {
 				e.printStackTrace();
 			}
