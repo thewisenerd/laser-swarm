@@ -1,7 +1,7 @@
 clear all;
 clc;
-%function dV=deltaVrev(h, CDAM)
-%Oribt perturbations calculations and graphs
+close all;
+
 
 %J2
 J2 = 0.00108263;
@@ -79,11 +79,9 @@ figure3 = figure('Color',[1 1 1]); %varMass
 % Create axes
 axes('Parent',figure3);
 box('on');
-hold on;
+%hold on;
 
-plot(densityMin,alt,'r-.');
-plot(densityMax,alt,'k:');
-plot(densityMean,alt);
+semilogy(alt,densityMin,'r-.',alt,densityMax,'k:',alt,densityMean,'b-');
 xlabel({'Altitude [km]'});
 ylabel({'Air Density [kg/m^3]'});
 h = legend('Solar Minimum','Solar Maximum', 'Time Average',3);
