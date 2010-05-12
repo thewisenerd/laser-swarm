@@ -91,20 +91,12 @@ print -dpng 'C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\midTermReport\chapter
 % Drag Calculations
 
 Cd = 4;
-Area = 0.01; %[m^2]
-Mass = 2.2; %[kg]
+Area = 2.7; %[m^2]
+Mass = 550; %[kg]
 CDAM = Cd*Area/Mass;
 h = 300;
 
 [revArray3,altitudeArray3]=orbitDecay(h,CDAM);
-
-h = 400;
-
-[revArray4,altitudeArray4]=orbitDecay(h,CDAM);
-
-h = 500;
-
-[revArray5,altitudeArray5]=orbitDecay(h,CDAM);
 
 figure4 = figure('Color',[1 1 1]); %varMass
 
@@ -114,10 +106,9 @@ axes('Parent',figure4);
 box('on');
 
 %hold on;
-plot(revArray3,altitudeArray3,'b-',revArray4,altitudeArray4,'r:',revArray5,altitudeArray5,'k-.');
-axis([0 1825 200 600]);
+plot(revArray3,altitudeArray3,'b-',);
 ylabel({'Altitude [km]'});
-xlabel({'Days After Launch'});
+xlabel({'Revolutions'});
 % hf = legend('Solar Minimum','Solar Maximum', 'Time Average',3);
 % set(hf,'Interpreter','none','Location','NorthEast')
 hold off;
