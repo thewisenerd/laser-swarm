@@ -6,14 +6,13 @@ import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
-
-import javax.vecmath.Point3d;
 
 import org.apache.commons.math.MathException;
-import org.opengis.metadata.spatial.VectorSpatialRepresentation;
+import org.simpleframework.xml.ElementMap;
+import org.simpleframework.xml.Root;
+import org.simpleframework.xml.Serializer;
+import org.simpleframework.xml.core.Persister;
 
-import com.google.code.laserswarm.Orbit.AntiSimulator;
 import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.conf.Constellation;
 import com.google.code.laserswarm.conf.Satellite;
@@ -35,26 +34,26 @@ import com.lyndir.lhunath.lib.system.logging.Logger;
 
 public class ProcessorTester {
 
-	public static final String	CfgName	= "unitTestConfig.xml";
-
-	private static final Logger	logger	= Logger.get(ProcessorTester.class);
-
+	@Root
 	public class RandData {
+		@ElementMap
 		Map<Satellite, TimeLine>	rec;
+		@ElementMap
 		Map<Satellite, TimeLine>	em;
+		@ElementMap
 		EmitterHistory				emHist;
 
-		public RandData(Map<Satellite, TimeLine> rec, Map<Satellite, TimeLine> em,EmitterHistory	emHist) {
+		public RandData(Map<Satellite, TimeLine> rec, Map<Satellite, TimeLine> em, EmitterHistory emHist) {
 			super();
 			this.rec = rec;
 			this.em = em;
-			this.emHist =emHist;
+			this.emHist = emHist;
 		}
 
 		public Map<Satellite, TimeLine> getEm() {
 			return em;
 		}
-		
+
 		public EmitterHistory getEmHist() {
 			return emHist;
 		}
@@ -65,8 +64,35 @@ public class ProcessorTester {
 
 	}
 
+	public static final String	CfgName	= "unitTestConfig.xml";
+
+	private static final Logger	logger	= Logger.get(ProcessorTester.class);
+
+	public static RandData load(String name) {
+		Serializer serializer = new Persister();
+		File source = new File(name);
+
+		try {
+			return serializer.read(RandData.class, source);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 	public static void main(String[] args) {
 		new ProcessorTester().testProcessing();
+	}
+
+	public static void save(String name, RandData data) {
+		Serializer serializer = new Persister();
+		File result = new File(name);
+
+		try {
+			serializer.write(data, result);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	private void displayData(Map<Satellite, TimeLine> satData) {
@@ -115,7 +141,6 @@ public class ProcessorTester {
 		try {
 			dem = DemReader.parseDem(dems[0]);
 		} catch (DemCreationException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		EarthModel earth = new EarthModel(dem);
@@ -126,12 +151,12 @@ public class ProcessorTester {
 		// template.setTime(4542935, 4542935.1);
 		template.setTime(4542935, 4542937.0);
 		mgr.addSimTemplate(template);
-		
-	/*	SimulatorMaster mgr = new SimulatorMaster(earth);
-		SimTemplate template = new SimTemplate(testConstallation);
-		template.setTime(template.getT0(), 700000);
-		mgr.addSimTemplate(template); // only one template
-*/		EmitterHistory emittorHistory = null;
+
+		/*
+		 * SimulatorMaster mgr = new SimulatorMaster(earth); SimTemplate template = new
+		 * SimTemplate(testConstallation); template.setTime(template.getT0(), 700000);
+		 * mgr.addSimTemplate(template); // only one template
+		 */EmitterHistory emittorHistory = null;
 		Map<Satellite, TimeLine> satData = Maps.newHashMap();
 		Map<Satellite, TimeLine> emData = Maps.newHashMap();
 
@@ -143,7 +168,7 @@ public class ProcessorTester {
 			List<SimVars> dataPoints = points.get(templ).getDataPoints();
 
 			emittorHistory = new EmitterHistory( //
-			templ.getConstellation(), dataPoints);
+					templ.getConstellation(), dataPoints);
 
 			Emit = templ.getConstellation().getEmitter();
 			emData.put(Emit, new TimeLine(Emit, templ.getConstellation(), dataPoints));
