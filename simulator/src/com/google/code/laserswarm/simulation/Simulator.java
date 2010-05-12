@@ -229,6 +229,8 @@ public class Simulator implements Runnable {
 
 		dataPoints = Lists.newLinkedList();
 
+		Prospector prospector = new Prospector(emittorOrbit, receiverOrbits, earth, samples, dt);
+
 		long i = 0;
 		while (i < samples) {
 			if (i % 5000 == 0)
@@ -237,7 +239,7 @@ public class Simulator implements Runnable {
 			if (simVal == null) {
 				if (Configuration.getInstance().hasAction(Actions.PROSPECT)) {
 					/* Find timestep to next flight-over */
-					i += Prospector.prospect(i, samples, dt, emittorOrbit, receiverOrbits, earth);
+					i += prospector.prospect(i);
 				} else
 					i++;
 			} else {

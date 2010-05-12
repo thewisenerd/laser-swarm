@@ -193,7 +193,9 @@ public class TimeLine {
 			double scatteredPower = scatter.probability(exittanceVector) * powerIn / dR.lengthSquared();
 
 			double totalReceivedPower = Atmosphere.getInstance().computeIntensity( //
-					scatteredPower, position.angle(reflection)) * getSatellite().getAperatureArea();
+					scatteredPower, position.angle(reflection));
+
+			totalReceivedPower *= sat.getAperatureArea();
 
 			/* Find the number of photons */
 			double nrP = (totalReceivedPower / ePhoton); // # per second

@@ -37,7 +37,7 @@ public class LaserSwarm {
 	private static List<Constellation>		constellations;
 	static {
 		constellations = Lists.newLinkedList();
-		for (float alt = 300; alt < 700; alt += 50)
+		for (float alt = 300; alt <= 450; alt += 25)
 			constellations.add(mkConstellation(alt));
 	}
 
@@ -109,17 +109,31 @@ public class LaserSwarm {
 			SimTemplate template = new SimTemplate(constellation);
 			template.setTime(0, 500000);
 			simMaster.addSimTemplate(template);
+			template = new SimTemplate(constellation);
+			template.setTime(500000, 1000000);
+			simMaster.addSimTemplate(template);
+			// template = new SimTemplate(constellation);
+			// template.setTime(1000000, 1500000);
+			// simMaster.addSimTemplate(template);
+			// template = new SimTemplate(constellation);
+			// template.setTime(1500000, 2000000);
+			// simMaster.addSimTemplate(template);
 		}
 
 		simulations = simMaster.runSim();
 
 		for (SimTemplate tmpl : simulations.keySet()) {
 			long nrP = 0;
+			long samples = 0;
 			for (Satellite sat : tmpl.getConstellation().getReceivers()) {
-				for (SimVars var : simulations.get(tmpl).getDataPoints())
+				samples += simulations.get(tmpl).getDataPoints().size();
+				for (SimVars var : simulations.get(tmpl).getDataPoints()) {
 					nrP += var.photonsE.get(sat);
+					// logger.dbg("p=%s", var.photonsE.get(sat));
+				}
+
 			}
-			logger.inf(tmpl + " nr photons = " + nrP);
+			logger.inf(tmpl + " nr photons = " + nrP + " of " + samples + " samples");
 		}
 	}
 }

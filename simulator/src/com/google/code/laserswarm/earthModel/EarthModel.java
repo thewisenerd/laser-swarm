@@ -103,8 +103,7 @@ public class EarthModel implements IElevationModel {
 			throws PointOutsideEnvelopeException {
 		for (ElevationModel dem : dems) {
 			try {
-				Point3d i = dem.getIntersection(direction, origin);
-				return i;
+				return dem.getIntersection(direction, origin);
 			} catch (PointOutsideEnvelopeException e) {
 			}
 		}
