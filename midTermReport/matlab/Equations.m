@@ -3,7 +3,7 @@ clear all;
 clc;
 
 %Constants
-e = 0.0000325;
+e = 0.0000;
 J2 = 0.001082645;
 J3 = -0.000002546;
 YearSid = 365.256363004;
@@ -13,7 +13,7 @@ omegaEarth = (2*pi)/DaySid;
 nEarth = (2*pi)/(DaySid*YearSid);
 mu = 398600.4418;
 
-omega = 0;
+omega = 90*(pi/180);
 
 %Define mean motion
 n = @(a) sqrt(mu./a.^3);
@@ -89,7 +89,7 @@ plot(a,eDot(a,i5,omega)*DaySid,'c');
 plot(a,eDot(a,i6,omega)*DaySid,'m');
 plot(a,eDot(a,i7,omega)*DaySid,'y');
 plot(a,eDot(a,i8,omega)*DaySid,'b--');
-plot(a,eDot(a,i8,omega)*DaySid,'g--');
+plot(a,eDot(a,i9,omega)*DaySid,'g--');
 xlabel('Semimajor axis [km]');
 ylabel('Eccentricity [-/day]');
 legend('i=0','i=15','i=30','i=45','i=60','i=75','i=90','i=105','i=120');
@@ -107,7 +107,7 @@ plot(a,(180/pi)*iDot(a,i5,omega)*DaySid,'c');
 plot(a,(180/pi)*iDot(a,i6,omega)*DaySid,'m');
 plot(a,(180/pi)*iDot(a,i7,omega)*DaySid,'y');
 plot(a,(180/pi)*iDot(a,i8,omega)*DaySid,'b--');
-plot(a,(180/pi)*iDot(a,i8,omega)*DaySid,'g--');
+plot(a,(180/pi)*iDot(a,i9,omega)*DaySid,'g--');
 xlabel('Semimajor axis [km]');
 ylabel('Inclination [deg/day]');
 legend('i=0','i=15','i=30','i=45','i=60','i=75','i=90','i=105','i=120');
@@ -117,12 +117,22 @@ print -dpng 'D:\My Documents\Courses\AE3-001\Shared stuff\midTermReport\chapters
 %a;ldsjf;
 omegaDot = @(a,i,omega) ((3*J2.*n(a))/(1-e^2)^2).* (rEarth./a).^2.* (1-(5/4).*sin(i).^2);
 
+i1 = 0 *(pi/180);
+i2 = 15 *(pi/180);
+i3 = 30 *(pi/180);
+i4 = 45 *(pi/180);
+i5 = 60 *(pi/180);
+i6 = 75 *(pi/180);
+i7 = 80 *(pi/180);
+i8 = 85 *(pi/180);
+i9 = 90 *(pi/180);
+
 figure4 = figure('Color',[1 1 1]);
 axes('Parent',figure4);
 box('on');
 hold on;
 plot(a,(180/pi)*omegaDot(a,i1,omega)*DaySid,'b');
-omegaDot = @(a,i,omega) ((3*J2.*n(a))/(1-e^2)^2).* (rEarth./a).^2.* (1-(5/4).*sin(i).^2).* (1 + (J3/(2*J2*(1-e^2))).* (rEarth./a).* ((sin(i).^2-(e*cos(i)).^2)./sin(i))* (sin(omega)/e));
+%omegaDot = @(a,i,omega) ((3*J2.*n(a))/(1-e^2)^2).* (rEarth./a).^2.* (1-(5/4).*sin(i).^2).* (1 + (J3/(2*J2*(1-e^2))).* (rEarth./a).* ((sin(i).^2-(e*cos(i)).^2)./sin(i))* (sin(omega)/e));
 plot(a,(180/pi)*omegaDot(a,i2,omega)*DaySid,'g');
 plot(a,(180/pi)*omegaDot(a,i3,omega)*DaySid,'r');
 plot(a,(180/pi)*omegaDot(a,i4,omega)*DaySid,'k');
@@ -130,9 +140,9 @@ plot(a,(180/pi)*omegaDot(a,i5,omega)*DaySid,'c');
 plot(a,(180/pi)*omegaDot(a,i6,omega)*DaySid,'m');
 plot(a,(180/pi)*omegaDot(a,i7,omega)*DaySid,'y');
 plot(a,(180/pi)*omegaDot(a,i8,omega)*DaySid,'b--');
-plot(a,(180/pi)*omegaDot(a,i8,omega)*DaySid,'g--');
+plot(a,(180/pi)*omegaDot(a,i9,omega)*DaySid,'g--');
 xlabel('Semimajor axis [km]');
 ylabel('Argument of perigee [deg/day]');
-legend('i=0','i=15','i=30','i=45','i=60','i=75','i=90','i=105','i=120');
+legend('i=0','i=15','i=30','i=45','i=60','i=75','i=80','i=85','i=90');
 
 print -dpng 'D:\My Documents\Courses\AE3-001\Shared stuff\midTermReport\chapters\img\AltVsOmdot';
