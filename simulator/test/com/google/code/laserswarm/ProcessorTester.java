@@ -2,16 +2,13 @@ package com.google.code.laserswarm;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.io.FileNotFoundException;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.math.MathException;
-import org.simpleframework.xml.ElementMap;
-import org.simpleframework.xml.Root;
-import org.simpleframework.xml.Serializer;
-import org.simpleframework.xml.core.Persister;
 
 import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.conf.Constellation;
@@ -34,21 +31,13 @@ import com.lyndir.lhunath.lib.system.logging.Logger;
 
 public class ProcessorTester {
 
-	@Root
-	
-		
-
 	public static final String	CfgName	= "unitTestConfig.xml";
 
 	private static final Logger	logger	= Logger.get(ProcessorTester.class);
 
-	
-
 	public static void main(String[] args) {
 		new ProcessorTester().testProcessing();
 	}
-
-
 
 	private void displayData(Map<Satellite, TimeLine> satData) {
 		for (TimeLine timeLine : satData.values()) {
@@ -69,7 +58,11 @@ public class ProcessorTester {
 	public RandData testProcessing() {
 		Configuration cfg = new Configuration();
 		Configuration.write(CfgName, cfg);
-		Configuration.read(CfgName);
+		try {
+			Configuration.read(CfgName);
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		}
 		Constellation testConstallation = SimulationTester.mkTestConstilation();
 		try {
 			Field f;

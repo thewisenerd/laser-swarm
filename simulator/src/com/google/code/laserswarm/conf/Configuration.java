@@ -3,78 +3,73 @@ package com.google.code.laserswarm.conf;
 import jat.spacetime.CalDate;
 
 import java.io.File;
-import java.util.List;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Set;
 
-import org.simpleframework.xml.Attribute;
-import org.simpleframework.xml.Element;
-import org.simpleframework.xml.ElementList;
-import org.simpleframework.xml.Root;
-import org.simpleframework.xml.Serializer;
-import org.simpleframework.xml.core.Persister;
-
-import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.lyndir.lhunath.lib.system.logging.Logger;
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.json.JsonHierarchicalStreamDriver;
 
-@Root
 public class Configuration {
 
 	public enum Actions {
 		SIMULATE, PROCESS, TABULATE, PLOT_DISK, PLOT_SCREEN, SLEEP, PROSPECT;
 	}
 
-	private static Configuration	instance;
+	private transient static Configuration	instance;
 
-	private static final String		configName	= "configuration.xml";
+	private transient static final String	configName	= "configuration.xml";
 
 	/**
 	 * Location of the DEMs
 	 */
-	public static File				demDir		= new File("DEM");
+	public transient static File			demDir		= new File("DEM");
 	/**
 	 * Earth radius based on EPSG:3785 ellipsoid (spheroid)
 	 */
-	public static double			R0			= 6378137;
+	public transient static double			R0			= 6378137;
 	/**
 	 * Orbit epoch date
 	 */
-	public static final CalDate		epoch		= new CalDate(2000, 7, 1, 0, 0, 0);
+	public transient static final CalDate	epoch		= new CalDate(2000, 7, 1, 0, 0, 0);
 	/**
 	 * Stefan-Boltzmann constant
 	 */
-	public static double			sigma		= 5.67E-8;
+	public transient static double			sigma		= 5.67E-8;
 	/**
 	 * Planck's constant
 	 */
-	public static double			h			= 6.626068E-34;
+	public transient static double			h			= 6.626068E-34;
 	/**
 	 * Light speed
 	 */
-	public static double			c			= 299792458;
+	public transient static double			c			= 299792458;
 	/**
 	 * Boltzmann constant
 	 */
-	public static double			k			= 1.3806503E-23;
+	public transient static double			k			= 1.3806503E-23;
 	/**
 	 * Sun's grey body temperature
 	 */
-	public static double			TSun		= 5800;
+	public transient static double			TSun		= 5800;
 	/**
 	 * Sun's grey body emissivity
 	 */
-	public static double			epsSun		= 0.99;
+	public transient static double			epsSun		= 0.99;
 	/**
 	 * Earth's grey body temperature
 	 */
-	public static double			TEarth		= 254.356;
+	public transient static double			TEarth		= 254.356;
 	/**
 	 * Earth's grey body emissivity
 	 */
-	public static double			epsEarth	= 1;
+	public transient static double			epsEarth	= 1;
 
-	@Attribute
-	private static Set<Actions>		mode;
+	private static Set<Actions>				mode;
 	static {
 		mode = Sets.newHashSet();
 		mode.add(Actions.SIMULATE);
@@ -83,43 +78,8 @@ public class Configuration {
 		mode.add(Actions.TABULATE);
 	}
 
-	public static int				simThreads	= 4;
-	public static int				demThreads	= 3;
-
-	public static void setMode(Set<Actions> mode) {
-		Configuration.mode = mode;
-	}
-
-	@Attribute
-	private float				atmOpticalThickness				= 0.25f;
-
-	@Element
-	private String				filePrefixReport				= "";
-
-	@Element
-	private String				filePathReport					= "./";
-
-	@Element
-	private String				fileNameDigitalElevationModel	= "";
-
-	@Element
-	private String				fileNameScatterModel			= "";
-
-	@Deprecated
-	@ElementList
-	private List<Constellation>	constellations					= Lists.newLinkedList();
-
-	private static final Logger	logger							= Logger.get(Configuration.class);
-
-	public static Configuration getInstance() {
-		if (instance == null) {
-			boolean success = Configuration.read(configName);
-			if (!success) {
-				instance = new Configuration();
-			}
-		}
-		return instance;
-	}
+	public static int						simThreads	= 4;
+	public static int						demThreads	= 3;
 
 	/**
 	 * Make a new config file
@@ -136,64 +96,125 @@ public class Configuration {
 		write(name);
 	}
 
-	public static boolean read(String filename) {
-		boolean success = true;
-		Serializer serializer = new Persister();
-		File source = new File(filename);
+	private static void setInstance(Configuration instance) {
+		Configuration.instance = instance;
+	}
+
+	public static void setMode(Set<Actions> mode) {
+		Configuration.mode = mode;
+	}
+
+	public static void write() {
+		write(configName);
+	}
+
+	public static void write(String filename) {
+		write(filename, getInstance());
+	}
+
+	/**
+	 * Serialize a given object
+	 * 
+	 * @param <T>
+	 *            Type of the object
+	 * @param filename
+	 *            File to save to
+	 * @param object
+	 *            Object to save
+	 */
+	public static <T> void write(String filename, T object) {
+		logger.dbg("Trying to save the configuration");
 		try {
-			instance = serializer.read(Configuration.class, source);
-		} catch (Exception e) {
-			success = false;
-			logger.inf(e, "Configuration file reading failed(%s)", configName);
+			File file = new File(filename);
+			FileWriter writer = new FileWriter(file);
+			XStream xstream = getDefaultSerializer(filename);
+			xstream.toXML(object, writer);
+			writer.close();
+		} catch (IOException e) {
+			logger.err(e, "IO Exeption, DID NOT SAVE CONFIG");
 		}
-		return success;
 	}
 
-	public static boolean write() {
-		return write(configName);
+	private float				atmOpticalThickness				= 0.25f;
+
+	private String				filePrefixReport				= "";
+
+	private String				filePathReport					= "./";
+
+	private String				fileNameDigitalElevationModel	= "";
+
+	private String				fileNameScatterModel			= "";
+
+	private static final Logger	logger							= Logger.get(Configuration.class);
+
+	public static XStream getDefaultSerializer(String name) {
+		XStream xstream;
+		if (name.endsWith(".json")) {
+			logger.inf("Loading from %s as JSON", name);
+			xstream = new XStream(new JsonHierarchicalStreamDriver());
+		} else {
+			logger.inf("Loading from %s as XML", name);
+			xstream = new XStream();
+		}
+		return xstream;
 	}
 
-	public static boolean write(String filename) {
-		return write(filename, getInstance());
+	public static Configuration getInstance() {
+		if (instance == null) {
+			Configuration cfg;
+			try {
+				cfg = Configuration.read();
+			} catch (Exception e) {
+				logger.inf(e, "Loading default config");
+				cfg = new Configuration();
+			}
+			setInstance(cfg);
+		}
+		return instance;
 	}
 
-	public static boolean write(String filename, Configuration cfg) {
-		boolean success = true;
-		Serializer serializer = new Persister();
-		File result = new File(filename);
+	public static Configuration read() throws FileNotFoundException {
+		return read(configName);
+	}
+
+	public static Configuration read(String cfgname) throws FileNotFoundException {
+		Configuration cfg = read(cfgname, getDefaultSerializer(cfgname));
+		setInstance(cfg);
+		return cfg;
+	}
+
+	public static <T> T read(String name, XStream xstream) throws FileNotFoundException {
+		T obj = null;
 		try {
-			serializer.write(cfg, result);
-			logger.inf("Configuration file written (%s)", filename);
-		} catch (Exception e) {
-			success = false;
-			logger.inf(e, "Configuration file writing failed (%s)", filename);
+			File file = new File(name);
+			FileReader reader = new FileReader(file);
+			obj = (T) xstream.fromXML(reader);
+			reader.close();
+		} catch (FileNotFoundException e) {
+			logger.wrn(e, "File %s not found; Configuration not loaded", name);
+			throw e;
+		} catch (IOException e) {
+			logger.err(e, "Read problem while loading from: %s", name);
 		}
-		return success;
+		return obj;
 	}
 
 	public Configuration() {
-		constellations.add(new Constellation());
-		constellations.add(new Constellation());
+		// TODO Auto-generated constructor stub
 	}
 
 	public Configuration(float atmAtt, Set<Actions> mod, String DEM, String prefix, String path,
-			String model, List<Constellation> consts) {
+			String model) {
 		atmOpticalThickness = atmAtt;
 		mode = mod;
 		fileNameDigitalElevationModel = DEM;
 		filePrefixReport = prefix;
 		filePathReport = path;
 		fileNameScatterModel = model;
-		constellations = consts;
 	}
 
 	public float getAtmOpticalThickness() {
 		return atmOpticalThickness;
-	}
-
-	@Deprecated
-	public List<Constellation> getConstellations() {
-		return constellations;
 	}
 
 	public String getFileNameDigitalElevationModel() {

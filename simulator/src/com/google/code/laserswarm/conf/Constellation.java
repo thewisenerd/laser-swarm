@@ -2,10 +2,6 @@ package com.google.code.laserswarm.conf;
 
 import java.util.List;
 
-import org.simpleframework.xml.Attribute;
-import org.simpleframework.xml.Element;
-import org.simpleframework.xml.ElementList;
-
 import com.google.common.collect.Lists;
 
 public class Constellation {
@@ -13,28 +9,23 @@ public class Constellation {
 	/**
 	 * Power that the emmitor has [W] (of the laser beam)
 	 */
-	@Attribute
 	private double			power				= 0f;
 
 	/**
 	 * Frequency of the laser pulses that are send out
 	 */
-	@Element
 	private double			pulseFrequency		= 5000;
 	/**
 	 * Pulse length time [s]
 	 */
-	@Element
 	private double			pulselength			= 1E-9;
 	/**
 	 * Laser wave length [m]
 	 */
-	@Element
 	private double			laserWaveLength		= 500E-9;
 	/**
 	 * Receiver sensitivity wavelength band [m]
 	 */
-	@Element
 	private double			receiverBandWidth	= 1E-9;
 	/**
 	 * Efficiency of the receiver [-]
@@ -42,14 +33,10 @@ public class Constellation {
 	 * (Receiver chip efficency) x (optical filter efficency)
 	 * </p>
 	 */
-	@Element
 	private double			receiverEfficiency	= 1;						// 0.4 * 0.75;
-	@Element
 	private Satellite		emitter;
 
-	@Element
 	private String			name				= "Constellation";
-	@ElementList
 	private List<Satellite>	receivers			= Lists.newLinkedList();
 
 	public Constellation() {

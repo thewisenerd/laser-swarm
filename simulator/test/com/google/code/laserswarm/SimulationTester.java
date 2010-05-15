@@ -1,6 +1,7 @@
 package com.google.code.laserswarm;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -48,7 +49,11 @@ public class SimulationTester extends TestCase {
 	public static HashMap<SimTemplate, Simulator> sim() {
 		Configuration cfg = new Configuration();
 		Configuration.write(CfgName, cfg);
-		Configuration.read(CfgName);
+		try {
+			Configuration.read(CfgName);
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		}
 		Constellation testConstallation = mkTestConstilation();
 		try {
 			Field f;

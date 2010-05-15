@@ -2,34 +2,15 @@ package com.google.code.laserswarm.conf;
 
 import jat.cm.KeplerElements;
 
-import org.simpleframework.xml.Element;
-
 public class Satellite {
-	@Element
 	private float	semimajorAxis				= 0f;
-
-	@Element
 	private float	eccentricity				= 0f;
-
-	@Element
 	private float	inclination					= 0f;
-
-	@Element
 	private float	rightAngleOfAscendingNode	= 0f;
-
-	@Element
 	private float	trueAnomaly					= 0f;
-
-	@Element
 	private float	argumentOfPerigee			= 0f;
-
-	@Element
 	private String	name						= "SAT";
-
-	@Element
 	private double	aperatureArea				= 1;				// (0.08 * 0.08); // m²
-
-	@Element
 	private double	beamDivergence				= 2.3333E-4 / 2;	// rad for the half beam /|
 
 	public Satellite() {

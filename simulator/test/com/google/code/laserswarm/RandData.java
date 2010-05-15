@@ -1,22 +1,25 @@
 package com.google.code.laserswarm;
 
-import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Map;
 
-import org.simpleframework.xml.ElementMap;
-import org.simpleframework.xml.Serializer;
-import org.simpleframework.xml.core.Persister;
-
+import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.conf.Satellite;
 import com.google.code.laserswarm.process.EmitterHistory;
 import com.google.code.laserswarm.process.TimeLine;
+import com.lyndir.lhunath.lib.system.logging.Logger;
 
 public class RandData {
-	@ElementMap
+
+	private static final Logger	logger	= Logger.get(RandData.class);
+
+	public static RandData read(String name) throws FileNotFoundException {
+		return Configuration.read(name, Configuration.getDefaultSerializer(name));
+	}
+
 	Map<Satellite, TimeLine>	rec;
-	@ElementMap
+
 	Map<Satellite, TimeLine>	em;
-	@ElementMap
 	EmitterHistory				emHist;
 
 	public RandData(Map<Satellite, TimeLine> rec, Map<Satellite, TimeLine> em, EmitterHistory emHist) {
@@ -38,30 +41,7 @@ public class RandData {
 		return rec;
 	}
 
-
-	
-	
-	public static RandData load(String name) {
-		Serializer serializer = new Persister();
-		File source = new File(name);
-
-		try {
-			return serializer.read(RandData.class, source);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
-	
-	
-	public static void save(String name, RandData data) {
-		Serializer serializer = new Persister();
-		File result = new File(name);
-
-		try {
-			serializer.write(data, result);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public void write(String filename) {
+		Configuration.write(filename, this);
 	}
 }

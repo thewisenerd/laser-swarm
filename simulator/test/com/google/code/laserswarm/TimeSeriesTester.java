@@ -2,6 +2,7 @@ package com.google.code.laserswarm;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.io.FileNotFoundException;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.List;
@@ -61,7 +62,11 @@ public class TimeSeriesTester {
 	public void testProcessing() {
 		Configuration cfg = new Configuration();
 		Configuration.write(CfgName, cfg);
-		Configuration.read(CfgName);
+		try {
+			Configuration.read(CfgName);
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		}
 		Constellation testConstallation = SimulationTester.mkTestConstilation();
 		try {
 			Field f;

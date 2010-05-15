@@ -1,5 +1,6 @@
 package com.google.code.laserswarm;
 
+import java.io.FileNotFoundException;
 import java.lang.reflect.Field;
 
 import junit.framework.TestCase;
@@ -13,7 +14,11 @@ public class ConfigTest extends TestCase {
 	public void testConfiguration() {
 		Configuration cfg = new Configuration();
 		Configuration.write(CfgName, cfg);
-		Configuration.read(CfgName);
+		try {
+			Configuration.read(CfgName);
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		}
 		Configuration cfg2 = Configuration.getInstance();
 
 		Field[] f = cfg.getClass().getFields();

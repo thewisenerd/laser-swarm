@@ -137,7 +137,7 @@ public class Simulator implements Runnable {
 		/* Make pulses (with downtravel) */
 		simVals.power0 = powerPerPulse;
 		double angle = Math.PI - dR.angle(new Vector3d(simVals.pR));
-		double rFootprint = dR.length() * Math.tan(constellation.getEmitter().getBeamDivergence());
+		// double rFootprint = dR.length() * Math.tan(constellation.getEmitter().getBeamDivergence());
 		simVals.powerR = Atmosphere.getInstance().computeIntensity(simVals.power0, angle);
 
 		/* Make scatter characteristics */
