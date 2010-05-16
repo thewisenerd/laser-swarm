@@ -3,6 +3,7 @@ package com.google.code.laserswarm.simulation;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 
+import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.earthModel.EarthModel;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Maps;
@@ -17,7 +18,7 @@ import com.lyndir.lhunath.lib.system.logging.Logger;
  */
 public class SimulatorMaster {
 
-	public static short					freeThreads	= 4;
+	public static short					freeThreads	= (short) Configuration.simThreads;
 
 	private EarthModel					earth;
 	private LinkedHashSet<SimTemplate>	templates	= Sets.newLinkedHashSet();

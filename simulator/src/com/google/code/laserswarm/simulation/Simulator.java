@@ -25,6 +25,7 @@ import com.google.code.laserswarm.earthModel.Atmosphere;
 import com.google.code.laserswarm.earthModel.Convert;
 import com.google.code.laserswarm.earthModel.EarthModel;
 import com.google.code.laserswarm.earthModel.ScatteringCharacteristics;
+import com.google.code.laserswarm.earthModel.ScatteringParam;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.lyndir.lhunath.lib.system.logging.Logger;
@@ -39,7 +40,7 @@ import com.lyndir.lhunath.lib.system.logging.Logger;
 public class Simulator implements Runnable {
 
 	private static final Logger	logger	= Logger.get(Simulator.class);
-	public static long			timeOut	= (15 * 60000);				// ms
+	public static long			timeOut	= (6 * 60 * 60000);			// ms
 
 	private SimTemplate			template;
 	private Thread				thread;
@@ -146,8 +147,9 @@ public class Simulator implements Runnable {
 		double x = dR.length() * Math.sin(angle);
 		Vector3d incidence = new Vector3d(x, 0, z);
 		try {
-			simVals.scatter = new ScatteringCharacteristics(incidence, earth
-					.getScatteringParam(reflectionPoint));
+			ScatteringParam param = earth.getScatteringParam(reflectionPoint);
+			param = new ScatteringParam(1.5, 1.3, -0.5);
+			simVals.scatter = new ScatteringCharacteristics(incidence, param);
 		} catch (CannotEvaluateException e) {
 			logger.wrn(e, "Cannot find Scattering param of sample %s:", i, simVals);
 			return null;
@@ -243,6 +245,8 @@ public class Simulator implements Runnable {
 				} else
 					i++;
 			} else {
+				if (Configuration.getInstance().hasAction(Actions.COUNT_ONLY))
+					simVal.reduce();
 				dataPoints.add(simVal);
 				i++;
 			}

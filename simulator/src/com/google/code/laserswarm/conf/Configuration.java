@@ -17,7 +17,7 @@ import com.thoughtworks.xstream.io.json.JsonHierarchicalStreamDriver;
 public class Configuration {
 
 	public enum Actions {
-		SIMULATE, PROCESS, TABULATE, PLOT_DISK, PLOT_SCREEN, SLEEP, PROSPECT;
+		SIMULATE, PROCESS, TABULATE, PLOT_DISK, PLOT_SCREEN, SLEEP, PROSPECT, COUNT_ONLY, FORCE_FLAT;
 	}
 
 	private transient static Configuration	instance;
@@ -78,8 +78,8 @@ public class Configuration {
 		mode.add(Actions.TABULATE);
 	}
 
-	public static int						simThreads	= 4;
-	public static int						demThreads	= 3;
+	public static int						simThreads	= 7;
+	public static int						demThreads	= 4;
 
 	/**
 	 * Make a new config file

@@ -1,5 +1,6 @@
 package com.google.code.laserswarm.simulation;
 
+import java.lang.reflect.Field;
 import java.util.HashMap;
 
 import javax.vecmath.Point3d;
@@ -74,6 +75,18 @@ public class SimVars {
 	 * If illuminated by the sun, this is the incidence angle of the sun
 	 */
 	public Vector3d						sunVector;
+
+	public void reduce() {
+		for (Field field : getClass().getDeclaredFields()) {
+			if (field.getType().isPrimitive())
+				continue;
+			else if (!field.getName().equals("photonsE"))
+				try {
+					field.set(this, null);
+				} catch (IllegalAccessException e) {
+				}
+		}
+	}
 
 	@Override
 	public String toString() {

@@ -13,6 +13,8 @@ import org.ujmp.core.Matrix;
 import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.calculation.Calculation.Ret;
 
+import com.google.code.laserswarm.conf.Configuration;
+import com.google.code.laserswarm.conf.Configuration.Actions;
 import com.google.code.laserswarm.earthModel.ElevationModel;
 import com.google.code.laserswarm.util.DebugUtil;
 import com.google.common.base.Charsets;
@@ -90,35 +92,39 @@ public class ArcInfoASCII_1 extends DemReader {
 					Runtime.getRuntime().maxMemory(),// 
 					Runtime.getRuntime().totalMemory());
 
-			LineProcessor<Matrix> matrixRowParser = new LineProcessor<Matrix>() {
-				Matrix	m	= MatrixFactory.dense(nRows, nCols);
-				int		row	= 0;
+			if (Configuration.getInstance().hasAction(Actions.FORCE_FLAT)) {
+				matrix = MatrixFactory.zeros(nRows, nCols);
+			} else {
+				LineProcessor<Matrix> matrixRowParser = new LineProcessor<Matrix>() {
+					Matrix	m	= MatrixFactory.dense(nRows, nCols);
+					int		row	= 0;
 
-				@Override
-				public Matrix getResult() {
-					return m;
-				}
-
-				@Override
-				public boolean processLine(String line) throws IOException {
-					Iterable<String> cols = Splitter.on(" ").trimResults().omitEmptyStrings()
-							.split(line);
-					int col = 0;
-					for (String string : cols) {
-						double val = Double.parseDouble(string);
-						m.setAsDouble(val, row, col);
-						col++;
+					@Override
+					public Matrix getResult() {
+						return m;
 					}
-					row++;
-					return false;
+
+					@Override
+					public boolean processLine(String line) throws IOException {
+						Iterable<String> cols = Splitter.on(" ").trimResults().omitEmptyStrings().split(
+								line);
+						int col = 0;
+						for (String string : cols) {
+							double val = Double.parseDouble(string);
+							m.setAsDouble(val, row, col);
+							col++;
+						}
+						row++;
+						return false;
+					}
+				};
+
+				for (int lineNr = 1; lineNr < nRows; lineNr++) {
+					matrixRowParser.processLine(reader.readLine());
 				}
-			};
 
-			for (int lineNr = 1; lineNr < nRows; lineNr++) {
-				matrixRowParser.processLine(reader.readLine());
+				matrix = matrixRowParser.getResult();
 			}
-
-			matrix = matrixRowParser.getResult();
 		} catch (IOException e) {
 			logger.err(e, "IOExecption while parsing the DEM using ASCII parser");
 		}

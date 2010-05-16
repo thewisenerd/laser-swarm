@@ -29,7 +29,8 @@ public class LaserSwarm {
 
 	public static void main(String[] args) {
 		Configuration config = Configuration.getInstance();
-		Configuration.setMode(Sets.newHashSet(Actions.SIMULATE, Actions.TABULATE, Actions.PROSPECT));
+		Configuration.setMode(Sets.newHashSet( //
+				Actions.SIMULATE, Actions.PROSPECT, Actions.COUNT_ONLY, Actions.FORCE_FLAT));
 		new LaserSwarm();
 	}
 
@@ -105,25 +106,22 @@ public class LaserSwarm {
 		earth.loadCoef();
 		SimulatorMaster simMaster = new SimulatorMaster(earth);
 
+		double[][] timeSteps = { // 
+		{ 0, 2000000 }, // 
+		// { 500000, 1000000 }, //
+		};
 		for (Constellation constellation : constellations) {
-			SimTemplate template = new SimTemplate(constellation);
-			template.setTime(0, 500000);
-			simMaster.addSimTemplate(template);
-			template = new SimTemplate(constellation);
-			template.setTime(500000, 1000000);
-			simMaster.addSimTemplate(template);
-			// template = new SimTemplate(constellation);
-			// template.setTime(1000000, 1500000);
-			// simMaster.addSimTemplate(template);
-			// template = new SimTemplate(constellation);
-			// template.setTime(1500000, 2000000);
-			// simMaster.addSimTemplate(template);
+			for (double[] timeRange : timeSteps) {
+				SimTemplate template = new SimTemplate(constellation);
+				template.setTime(timeRange[0], timeRange[1]);
+				simMaster.addSimTemplate(template);
+			}
 		}
 
 		simulations = simMaster.runSim();
 
 		for (SimTemplate tmpl : simulations.keySet()) {
-			long nrP = 0;
+			double nrP = 0;
 			long samples = 0;
 			for (Satellite sat : tmpl.getConstellation().getReceivers()) {
 				samples += simulations.get(tmpl).getDataPoints().size();
@@ -133,7 +131,8 @@ public class LaserSwarm {
 				}
 
 			}
-			logger.inf(tmpl + " nr photons = " + nrP + " of " + samples + " samples");
+			logger.inf(tmpl + " nr photons = " + nrP + " of " + samples + " samples\t=> avg: " + nrP
+					/ samples);
 		}
 	}
 }
