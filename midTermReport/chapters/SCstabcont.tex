@@ -1,7 +1,8 @@
-In this chapter the techniques required for calculating the stability and control for the satellites.
+In this chapter the requirements for stability and a short general introduction to the control of the satellites. Conditions for stability are derived in section \ref{sec:SCstab}, the control of the satellite is discussed in section \ref{sec:SCcont}.
 
 \section{Stability}
-A satellite is considered in a circular orbit around the Earth. When small rotations are assumed the equations of motion can be linearised. The linearised combined dynamic and kinematic equations are
+\label{sec:SCstab}
+A satellite is considered in a nadir pointing, circular orbit around the Earth. When small rotations are assumed the equations of motion can be linearised. The linearised combined dynamic and kinematic equations are
 
 \begin{eqnarray}
 &J_{11} \ddot{\theta}_1 - n\left(J_{11}-J_{22}+J_{33}\right) \dot{\theta}_3+ 4n^2\left(J_{22}-J_{33}\right)\theta _1= 0 \label{eqroll} \\
@@ -22,5 +23,69 @@ s^2+\frac{3n^2\left(J_{11}-J_{33}\right)}{J_{22}} = 0
 \label{lappitch}
 \end{equation}
 
-Stability requires that the characteristic roots are purely imaginary. This is only true if $J_{11}>J_{33}$.\\
-For simplification $k_1 = (J_{22}-J_{33})/J_{11}$ and $k_3 = (J_{22}-J_{11})/J_{33}$
+Stability requires that the characteristic roots are purely imaginary. This is only true if 
+
+\begin{equation}
+J_{11}>J_{33}
+\label{Js1}
+\end{equation}
+
+For simplification of equations \ref{eqroll} and \ref{eqyaw} the parameters $k_1 = (J_{22}-J_{33})/J_{11}$ and $k_3 = (J_{22}-J_{11})/J_{33}$ are defined. The linearised equations of motion for roll and yaw then become
+
+\begin{eqnarray}
+&\ddot{\theta}_1 + \left(k_1-1\right)n\dot{\theta}_3 + 4n^2k_1\theta_1 = 0 \label{eqroll2}\\
+&\ddot{\theta}_3 + \left(1 - k_3\right)n\dot{\theta}_1 + n^2k_1\theta_1 = 0 \label{eqyaw2}
+\end{eqnarray}
+
+Laplace transforming equations \ref{eqroll2} and \ref{eqyaw2} gives
+
+\begin{equation}
+\begin{bmatrix}
+s^2+4n^2k_1 & (k_1-1)ns \\ 
+(1-k_3)ns & s^2+n^2k_3
+\end{bmatrix} \begin{bmatrix}\theta_1 \\ \theta_3 \end{bmatrix} = \begin{bmatrix}0 \\ 0 \end{bmatrix}
+\label{laprollyaw}
+\end{equation}
+
+To find the non-trivial solution the determinant of the matrix in \ref{laprollyaw} needs to be zero.
+
+\begin{equation}
+s^4 +(1+3k_1 + k_1k_3)n^2s^2 + 4k_1k_3n^4 = 0
+\label{detmatr}
+\end{equation}
+
+This equation is true when
+
+\begin{equation}
+\frac{s^2}{n^2} = \frac{-(1+3k_1 + k_1k_3) \pm \sqrt{(1-3k_1+k_1k_3)^2 - 4^2k_1k_3}}{2}
+\label{detmatrsol}
+\end{equation}
+
+For the roots to be imaginary the following equations should hold
+
+\begin{eqnarray}
+1+3k_1+k_1k_3 &>& 0 \label{ks1} \\
+1+3k_1+k_1k_3 &>& 4\sqrt{k_1k_3} \label{ks2} \\
+k_1k_3 &>& 0 \label{ks3}
+\end{eqnarray}
+
+The satellite is stable around all three axis when conditions \ref{Js1}, \ref{ks1}, \ref{ks2} and \ref{ks3} are all met \cite{chu13}.
+
+\section{Control}
+\label{sec:SCcont}
+The fact that there is no or little friction in space is both an advantage as a disadvantage for spacecraft. The advantage is that less power is required for the spacecraft to move, the disadvantage is that there is nothing to stop the spacecraft from moving when it does. Every torque which is imposed on the satellite, both by external and internal sources, has to be countered to stop the spacecraft from rotating. The simplified control equations of motion for the satellite are
+
+\begin{eqnarray}
+M_{c1} = J_{11}\ddot{\theta}_1 \\
+M_{c2} = J_{22}\ddot{\theta}_2 \\
+M_{c3} = J_{33}\ddot{\theta}_3 
+\end{eqnarray}
+
+If the satellite needs to make a manoeuvre with an angle of $\theta_{man}$ two torques need to be exerted on the satellite with a magnitude of
+
+\begin{equation}
+M_{c} = 4\theta_{man}J/(t^2)
+\label{reqtorque}
+\end{equation}
+
+where $t$ is half the time required for making the total manoeuvre. The torques first need to be in one direction for half the time, then in the opposite direction for the other half of the time \cite{chu22}. 

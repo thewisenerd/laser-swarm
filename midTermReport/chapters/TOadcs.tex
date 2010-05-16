@@ -28,9 +28,25 @@ Another option is to use a complete \ac{COTS} \ac{ADCS} system like the one from
 
 \subsubsection{Trade method}
 \subsubsection{Trade criteria}
+The concepts for \ac{ADS} are traded in terms of attitude determination accuracy, purchasing price, power required, size and the amount of additional development required for implementing the concept. 
 \subsubsection{Weight factors}
+The accuracy of the \ac{ADS} is the main driver for the choice of the system so it is given a weight factor of 9. Because the volume and power for satellites are limited they are also important with a given weight factor of 7. Although the total cost of the system is relevant, if a better performance can be achieved at a higher cost can be acceptable, weight factor 3. If a lot of work still is required to implement the system in the satellite the mission can be delayed, development gets a weight factor of 5.
 \subsubsection{Trade-off}
 
+\begin{table} [h]
+\centering
+\begin{tabular}{p{3cm} | c | c c c}
+\textbf{Criteria} & \textbf{Weight Factor} & \textbf{Concept 1} & \textbf{Concept 2} & \textbf{Concept 3} \\ \hline \hline
+Accuracy    & 9 & & & \\
+Size        & 7 & & & \\
+Power       & 7 & & & \\
+Price       & 3 & & & \\
+Development & 5 & & & \\ \hline
+Weighted total    &    &  &  & 
+\end{tabular} 
+\caption[Trade-off attitude determination]{Trade-off graph for the attitude determination system. The weight factor signifies the importance of the criterion. Grades are given on a scale of 1 to 10, 1 being the worst, 10 the best}
+\label{tab:adstradeoff}
+\end{table}
 %choose three concepts, trade off
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -47,9 +63,26 @@ The IMI-100 ADACS contains three miniature reaction wheels and three magnetic co
 
 \subsubsection{Trade method}
 \subsubsection{Trade criteria}
+The concepts for \ac{ACS} are traded in terms of the rate the concepts are able to adjust the attitude, attitude control accuracy, purchasing price, power required, size and the amount of additional development required for implementing the concept. 
 \subsubsection{Weight factors}
+A high rate in which the satellite can be controlled is convenient, but not driving, weight factor 5. Since attitude control will be used for the pointing of the instrument the accuracy is very important for the choice so it is given a weight factor of 8. Because the volume and power for satellites are limited they are also important with a given weight factor of 7. Although the total cost of the system is relevant, if a better performance can be achieved at a higher cost can be acceptable, weight factor 3. If a lot of work still is required to implement the system in the satellite the mission can be delayed, development gets a weight factor of 5.
 \subsubsection{Trade-off}
 
+\begin{table} [h]
+\centering
+\begin{tabular}{p{3cm} | c | c c c}
+\textbf{Criteria} & \textbf{Weight Factor} & \textbf{Concept 1} & \textbf{Concept 2} & \textbf{Concept 3} \\ \hline \hline
+Rate 	    & 5 & & & \\
+Accuracy    & 8 & & & \\
+Size        & 7 & & & \\
+Power       & 7 & & & \\
+Price       & 3 & & & \\
+Development & 5 & & & \\ \hline
+Weighted total    &    &  &  & 
+\end{tabular} 
+\caption[Trade-off attitude control]{Trade-off graph for the attitude control system. The weight factor signifies the importance of the criterion. Grades are given on a scale of 1 to 10, 1 being the worst, 10 the best}
+\label{tab:acstradeoff}
+\end{table}
 %choose three concepts, trade off
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
