@@ -6,11 +6,11 @@
 Solving the time-dependent Schrodinger equation for free electrons (represented as harmonic oscillators) shows the presence of certain energy gaps, i.e. the existence of quantisized energy states, according to quantum mechanics. In a more mathematical view, the quantum particles in a particular system share the same eigenfunction, but have different eigenvalues. Among energy states, the states with the lowest energy is the most stable one. If they are \textit{excited} by thermal energy, light or electron beams, the electrons absorb these energies and transit to a higher energy state. These transitions of the electrons from low energy states to high energy states are called \textit{excitations}. Higher energy states, however, are unstable. As a result, the electrons in higher energy states transit to lower energy states in certain \textit{lifetimes}. These transitions of the excited electrons from high energy states to low energy states are referred to as \textit{relaxations}. In the recombination of negatively charged electron and positively charged holes (exciton pairs) there are radiative (emission of photons) and non-radiative (phonon emission through crystal lattice) recombinations.
 
 	\subsubsection{Exciton Dynamics}   
-Figure XX schematically shows the possible radiations and absorption. In the radiations, there are spontaneous emission and stimulated emission. Spontaneous emission is a radiative process in which an excited electron decays in a certain lifetime and a photon is emitted. In contrast, with stimulated emission, an incident photon induces a radiative transition of an excited electron. The emitted photon due to stimulated emission has the same wavelength, phase, \textbf{k}-vector, polarization and direction. Therefore, the light generated is highly monochromatic, coherent and directional. As a result of the two photons generated from this process, the electromagnetic radiation is amplified. These quantum particles can on their turn start the same procedure on different electrons. 
+Figure \ref{fig:laser} on page \ref{fig:laser} schematically shows the possible radiations and absorption. In the radiations, there are spontaneous emission and stimulated emission. Spontaneous emission is a radiative process in which an excited electron decays in a certain lifetime and a photon is emitted. In contrast, with stimulated emission, an incident photon induces a radiative transition of an excited electron. The emitted photon due to stimulated emission has the same wavelength, phase, \textbf{k}-vector, polarization and direction. Therefore, the light generated is highly monochromatic, coherent and directional. As a result of the two photons generated from this process, the electromagnetic radiation is amplified. These quantum particles can on their turn start the same procedure on different electrons. 
 
 \begin{figure}
 \centering
-\includegraphics[scale=1]{chapters/img/laser.png}
+\includegraphics[scale=0.4]{chapters/img/laser.png}
 \caption{laser}
 \label{fig:laser}
 \end{figure}
@@ -23,7 +23,7 @@ The \acs{laser} oscillator uses fractions of the spontaneous emission as the opt
 
 \begin{figure}
 \centering
-\includegraphics[scale=1]{chapters/img/laser cavity.png}
+\includegraphics[scale=0.6]{chapters/img/laser cavity.png}
 \caption{laser cavity}
 \label{fig:laser_cavity}
 \end{figure}
@@ -50,7 +50,7 @@ In the baseline report, a number of \acs{laser}s was listed. Considering the fac
 
 The analysis of the chosen wavelength is determined in chapter wavelength estimation.
 
-The receiver characteristics show that the laser should have a wavelength in the interval of 425 - 500 nm (within visible spectrum designated as 'blue'). Hence, every \acs{laser} with different wavelengths is not viable for this analysis. 
+The receiver characteristics show that the laser should have a wavelength in the interval of 425 - 500 nm (within visible spectrum designated as 'blue'). Hence, every \acs{laser} with different wavelengths is not viable for this analysis.
 
 Potential \acs{laser} types for this altimetry mission:
 
@@ -67,7 +67,7 @@ Wavelength: 454.6 [nm]\\
 Gain medium type: Gas
 
 \textit{\acs{laser} diode sytems}\\
-wavelength interval 400 - 480 [nm] (tunable). The wavelength interval of this kind of \acs{laser} is excellent, but they are difficult to produce for high output power and long (> year) lifetimes. Since the determined lifetime in this mission exceeds this \acs{laser} lifetime, this \acs{laser} is not part of the trade-off.
+Wavelength interval 400 - 480 [nm] (tunable). The wavelength interval of this kind of \acs{laser} is excellent, but they are difficult to produce for high output power and long (> year) lifetimes. Since the determined lifetime in this mission exceeds this \acs{laser} lifetime, this \acs{laser} is not part of the trade-off.
 	
 	\subsubsection{Trade-off}
 \begin{figure}
@@ -103,8 +103,8 @@ Minimum Pump Power [mW]: 75
 
 \textit{Argon}
 Pumping efficiency: 0.82\\
-Upper \acs{laser} level lifetime: $1.0\cdot10^{-8}$
-Round trip power losses:  2.787
+Upper \acs{laser} level lifetime: $1.0\cdot10^{-8}$\\
+Round trip power losses:  2.787\\
 Stimulated emission cross section [$m^{2}$]: $2.6\cdot10^{-16}$\\
 Minimum Pump Power [mW]: 50
 
@@ -136,21 +136,21 @@ From an electron point of view, a change in temperature (or any change in state 
 		\label{mtLSRthermaloverload}	
 Thermal overloading can be divided to the temperature interval at which electron excitation is impossible and the interval at which permanent crystal lattice deformation occurs.
 
-\textit{Short term temperature increase (T < 323.15K)}
+\textit{Short term temperature increase (T $<$ 323.15K)}
 To begin with the first phenomenon, in order to excite any electron, the conduction band should not be completely filled in thermal equilibrium. Any excitation, so also stimulated excitation, would be impossible and hence no lasing action would occur. In the real world, a small part of the electrons will give rise to stimulated emission since not all electrons would occupy the highest energy bands, considering the temperature to increase. However, population inversion would not be present. If the temperature is decreased afterwards, the gain material would be able to provide lasing action, making it an short-term problem with no permanent significance. 
 
-\textit{Long term temperature increase (T > 323.15K)}
+\textit{Long term temperature increase (T $>$ 323.15K)}
 However, if the induced (thermal) energy is increased even further, the crystal lattice can eventually alter in time. This crystal lattice deformation not only implies the gain material, but all optical subparts, causing possible lasing failure. Recrystallization of the material can occur if the upper limit of the temperature interval is reached, giving birth to long-term (partial) failure. Another longterm effect is thermal fatigue for parts within the laser.
 
 	\subsubsection{Thermal Lensing}
 		\label{mtLSRthermallensing}
 		
-\textit{Long term temperature increase (T > 303.15K)}
+\textit{Long term temperature increase (T $>$ 303.15K)}
 Particularly in high-power lasers, the appearance of a temperature-gradient in the gain medium often causes a significant 'thermal lens'. The gain medium has higher internal energy on the beam axis, typically causing some transverse gradient of the refractive index according to the temperature-dependent Sellmeier equation. 
 
 \begin{figure} [ht]
 	\begin{center}
-\includegraphics[scale=1]{chapters/img/TISE.png}	
+\includegraphics[scale=0.5]{chapters/img/TISE.png}	
 \caption{Refractive index as function of radial position, where the Sellmeier coefficients A, B, C, D, E, and F are constants dependent on gain material, c and b are temperature dependent, T is the temperature in degrees centigrade, and l is the wavelength in micrometers.}
 \label{thermal_lensing}
 \end{center}
@@ -162,7 +162,7 @@ The Sellmeiser equation could also be used for the change in refractive index fo
 
 \begin{figure} [ht]
 	\begin{center}
-\includegraphics[scale=1]{chapters/img/thermal_lensing.png}	
+\includegraphics[scale=0.5]{chapters/img/thermal_lensing.png}	
 \caption{Transverse pump intensity distribution (red) and thermal profile (blue). The temperature profile is approximately parabolic only near the center of the crystal.}
 \label{thermal_lensing}
 \end{center}
@@ -172,20 +172,20 @@ External induced thermal energy can therefor cause the formation of a thermal le
 			
 	\subsubsection{Multi-Phonon Transitions}
 		\label{mtLSRphonon}
-\textit{Long term temperature increase (T > 353.15K)}
+\textit{Long term temperature increase (T $>$ 353.15K)}
 The upper-state lifetime (the lifetime of the population of the upper laser level) can be strongly reduced by decay processes which involve the simultaneous emission of multiple phonons. Multiple phonons are typically required for such transitions because the energy of a single phonon is not sufficient to match the difference in level energies. The rate of multi-phonon transitions decreases with the increasing number of phonons required. Temperature-gradients can influence the phonon transition and hence influence the the upper-state lifetime, decreasing the beam quality. 
 
 	\subsubsection{Dielectric Transmission}
 		\label{mtLSRditrans}
-\textit{Long term temperature increase (T > 313.15K)}
+\textit{Long term temperature increase (T $>$ 313.15K)}
 Optically absorbing layers (dielectric transmission decrease) can form on the exit face of the fully reflective mirror and on the doubling crystal, resulting in a decay of output power. The absorbed optical energy creates thermal gradients with which affects phase matching and hence lowering the beam quality. 
 
 	\subsubsection{Limit in Electron Movement}
 		\label{mtLSRelecmovement}
-\textit{Long term temperature decrease (T < 273.15K)}
+\textit{Long term temperature decrease (T $<$ 273.15K)}
 If the internal energy decreases to much, the exciton dynamics would alter, i.e. electrons will not be able to be excited to higher energy levels. This temperature dependent tendency is caused by the Boltzmann distribution, giving rise to an increase of potential energy at the lowest energy level. 
 
 \subsection{Thermal Control}
 	\label{mtLSRthermalcontrol}
-As seen in the previous paragraphs, the temperature interval for proper lasing action roughly equals 273.15 < T [K] < 313.15. Since the thermal environmnent is extremely harsh (extremely cold background temperature, intense solar radiation, sudden loss of temperature in shadow and the presence of vacuum), thermal control considerations should be taken into account. 
+As seen in the previous paragraphs, the temperature interval for proper lasing action roughly equals 273.15 $<$ T [K] $<$ 313.15. Since the thermal environmnent is extremely harsh (extremely cold background temperature, intense solar radiation, sudden loss of temperature in shadow and the presence of vacuum), thermal control considerations should be taken into account. 
 
