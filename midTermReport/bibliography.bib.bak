@@ -21,6 +21,36 @@
   url = {http://icesat.gsfc.nasa.gov/docs/IGARB.pdf}
 }
 
+@MISC{chu13,
+  author = {Dr. Q.P. Chu},
+  title = {Spacecraft Attitude Dynamics and Control, Course notes No. 1 Part
+	3},
+  year = {2009},
+  organization = {Delft University of Technology},
+  owner = {Lieuwe},
+  timestamp = {2010.05.16}
+}
+
+@MISC{chu21,
+  author = {Dr. Q.P. Chu},
+  title = {Spacecraft Attitude Dynamics and Control, Course notes No. 2 Part
+	1},
+  year = {2009},
+  organization = {Delft University of Technology},
+  owner = {Lieuwe},
+  timestamp = {2010.05.16}
+}
+
+@MISC{chu22,
+  author = {Dr. Q.P. Chu},
+  title = {Spacecraft Attitude Dynamics and Control, Course notes No. 2 Part
+	2},
+  year = {2009},
+  organization = {Delft University of Technology},
+  owner = {Lieuwe},
+  timestamp = {2010.05.16}
+}
+
 @ARTICLE{SPAD,
   author = {Cristiano Niclass, Marek Gersbach, Robert Henderson, Lindsay Grant
 	and Edoardo Charbon},
@@ -138,6 +168,19 @@
   isbn = {9780521669481}
 }
 
+@ELECTRONIC{SPAD_intro,
+  author = {S.Cova, M.Ghioni, A.Lacaita, C.Samori, and F.Zappa},
+  year = {1996},
+  title = {Avalanche photo diodes and quenching circuits for single-photon detection},
+  language = {English},
+  organization = {Optical Society of America},
+  url = {http://en.wikipedia.org/wiki/Single-photon_avalanche_diode},
+  keywords = {Photon counting, photon timing , avalanche photo diodes, quenching
+	circuits.},
+  owner = {Zhuan},
+  timestamp = {2010.05.17}
+}
+
 @ELECTRONIC{tuscmass,
   author = {SSE},
   month = {November},
@@ -177,12 +220,12 @@
   timestamp = {2010.04.28}
 }
 
-@MISC{deltavtu,
+@ELECTRONIC{deltavtu,
   author = {B.T.C. Zandbergen},
-  title = {Delta-v (velocity increment) budget},
-  howpublished = {online},
   month = {November},
   year = {2009},
+  title = {Delta-v (velocity increment) budget},
+  howpublished = {online},
   note = {http://www.lr.tudelft.nl/live/pagina.jsp?id=140fb8a8-0bfa-43dc-8ff9-02c923a2a8cb\&lang=en},
   owner = {Lieuwe},
   timestamp = {2010.05.11}
@@ -198,6 +241,15 @@
   month = {January},
   owner = {Alex},
   timestamp = {2010.04.27}
+}
+
+@BOOK{photogrammetry,
+  title = {Manual of Photogrammetry Fifth edition},
+  publisher = {American Society for Photogrammetry and Remote Sensing},
+  year = {2004},
+  editor = {J.Chris McGlone},
+  owner = {Zhuan},
+  timestamp = {2010.05.12}
 }
 
 @BOOK{larson,
@@ -234,6 +286,25 @@
   url = {http://en.wikipedia.org/wiki/List_of_refractive_indices}
 }
 
+@MISC{cubesatshop,
+  title = {CubeSatShop.com},
+  howpublished = {online},
+  year = {2010},
+  note = {http://www.cubesatshop.com},
+  owner = {Lieuwe},
+  timestamp = {2010.05.17}
+}
+
+@ELECTRONIC{delfispace,
+  year = {2010},
+  title = {{DelfiSpace, the nanosatellite programme of the Delft University
+	of Technology}},
+  organization = {Delft University of Technology},
+  note = {http://www.delfispace.nl},
+  owner = {Lieuwe},
+  timestamp = {2010.05.17}
+}
+
 @ELECTRONIC{geotools,
   month = {May},
   year = {2010},
@@ -247,8 +318,8 @@
   month = {April},
   year = {2010},
   title = {Miniature 3-Axis Reaction Wheel \& Attitude Determination and Control
-	System for CubeSat Kit™ Nanosatellites},
-  url = {http://www.cubesatkit.com/docs/datasheet/DS_CSK_ADACS_634-00412-A.pdf},
+	System for CubeSat KitTM Nanosatellites},
+  note = {http://www.cubesatkit.com/docs/datasheet/DS\_CSK\_ADACS\_634-00412-A.pdf},
   owner = {Lieuwe},
   timestamp = {2010.05.11}
 }
@@ -257,9 +328,26 @@
   title = {Maryland Aerospace Inc.},
   month = {April},
   year = {2010},
+  note = {http://www.miniadacs.com},
   owner = {Lieuwe},
-  timestamp = {2010.05.11},
-  url = {http://www.miniadacs.com}
+  timestamp = {2010.05.11}
+}
+
+@MISC{spacequest,
+  title = {SpaceQuest, Ltd.},
+  year = {2010},
+  note = {http://www.spacequest.com/},
+  owner = {Lieuwe},
+  timestamp = {2010.05.17}
+}
+
+@ELECTRONIC{tnoweb,
+  year = {2010},
+  title = {{TNO}},
+  howpublished = {website},
+  note = {http://www.tno.nl},
+  owner = {Lieuwe},
+  timestamp = {2010.05.17}
 }
 
 @ELECTRONIC{Market,
