@@ -78,7 +78,7 @@ public class Configuration {
 		mode.add(Actions.TABULATE);
 	}
 
-	public static int						simThreads	= 7;
+	public static int						simThreads	= 9;
 	public static int						demThreads	= 4;
 
 	/**
