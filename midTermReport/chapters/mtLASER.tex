@@ -1,0 +1,160 @@
+\section{Optical Emitting Payload}
+	\label{mtDOLSR}
+\acs{LIDAR} altimetry missions are dependent on electromagnetic or acoustic radiation transmission. In order to make a multi-angular \acs{DEM}, a \ac{LASER} system is chosen. Since there are myriad types of \acs{laser}s, it is crucial to understand the basics behind this technology.  
+
+	\subsubsection{Optical Transition}
+Solving the time-dependent Schrodinger equation for free electrons (represented as harmonic oscillators) shows the presence of certain energy gaps, i.e. the existence of quantisized energy states, according to quantum mechanics. In a more mathematical view, the quantum particles in a particular system share the same eigenfunction, but have different eigenvalues. Among energy states, the states with the lowest energy is the most stable one. If they are \itshape{excited} by thermal energy, light or electron beams, the electrons absorb these energies and transit to a higher energy state. These transitions of the electrons from low energy states to high energy states are called \itshape{excitations}. Higher energy states, however, are unstable. As a result, the electrons in higher energy states transit to lower energy states in certain \itshape{lifetimes}. These transitions of the excited electrons from high energy states to low energy states are referred to as \itshape{relaxations}. In the recombination of negatively charged electron and positively charged holes (exciton pairs) there are radiative (emission of photons) and non-radiative (phonon emission through crystal lattice) recombinations.
+
+	\subsubsection{Exciton Dynamics}   
+Figure XX schematically shows the possible radiations and absorption. In the radiations, there are spontaneous emission and stimulated emission. Spontaneous emission is a radiative process in which an excited electron decays in a certain lifetime and a photon is emitted. In contrast, with stimulated emission, an incident photon induces a radiative transition of an excited electron. The emitted photon due to stimulated emission has the same wavelength, phase, \bfseries{k}-vector, polarization and direction. Therefore, the light generated is highly monochromatic, coherent and directional. As a result of the two photons generated from this process, the electromagnetic radiation is amplified. These quantum particles can on their turn start the same procedure on different electrons. 
+
+%%picture of quantum states
+ 
+When a light is incident on a material, the stimulated emission and the absorption simultaneously take place. In thermal equilibrium, there are more electrons in a lower energy state than in a higher one, because the lower energy state is more stable. In order to obtain a net optical gain, the number of electrons in a higher energy state should exceed the number of electrons in a (relative) lower energy level. This condition is referred to as \itshape{population inversion}, because the electron population is inverted compared with that in thermal equilibrium. 
+ 
+ 	
+	\subsubsection{Laser Geometry}
+The \acs{laser} oscillator uses fractions of the spontaneous emission as the optical input and amplifies the fractions by the stimulated emission under population inversion. Once the optical gain exceeds the optical losses, laser oscillations take place. An oscillator has a gain and amplifies an input. To feed back light, \itshape{optical resonators} or \itshape{optical cavities}, which are composed of reflectors or mirrors, are adopted. Due to this configuration (which is used by pretty much all \acs{laser} types), characteristics of \acs{laser}s are affected by the optical gains and optical resonators. 
+
+%% laser cavity picture
+
+	\subsubsection{Efficiency}
+Unfortunately, the induced power (pump power) cannot be perfectly transmitted to the electromagnetic radiation, i.e. the efficiency of the \acs{laser} cavity and \acs{laser} resonator are not equal to 100 percent. A number of mechanisms cause this decrease in efficiency:
+	\start{enumerate}
+		\item{Cavity Losses}
+		\item{Optic Misalignment}
+		\item{Optical Transition}
+	\end{enumarate} 
+
+	\subsubsection{Pulsed vs Continuous Waves}
+Without any alterations of the electromagnetic radiation created by the stimulated emission within the \acs{laser} cavity, the radiation, once in equilibrium, behaves like a continuous wave. The energy within this wave is equal to the pumper power minus the \itshape{round-trip inter cavity power losses}. However, the wave can also be pulsed. The pulse energy Ep is simply the total optical energy content of a pulse. For regular pulse trains, the pulse energy is often calculated by dividing the average power (measured e.g. with a powermeter) by the pulse repetition rate [Hz]. However, this is a valid procedure only if the energy emitted between the pulses is negligible. There are cases where, e.g., a mode-locked laser emits a pulse train together with a low-level background emission. Even if the background power level is far below the peak power, the background can significantly contribute to the average power. 
+
+The pulse energy together with the pulse duration is often used to estimate the peak power of pulses. Conversely, temporal integration of the optical power results in the pulse energy.
+
+Typical pulse energies from Q-switched lasers range from microjoules to millijoules, and for large systems to multiple joules or even kilojoules. Mode-locked lasers achieve much lower pulse energies (picojoules, nanojoules or sometimes several microjoules) due to their high pulse repetition rates and sometimes due to limiting nonlinear effects in the laser resonator. Much higher energies of ultrashort pulses can be achieved by amplifying pulses at a lower repetition rate.
+
+The pulsed configuration can be beneficial in \acs{laser} altimetry missions, since individual pulses can be detected and analyzed. Hence, the footprint can be subdivided and the analyses of the incoming photons (energy packages) can result into a more detailed \acs{DEM}.  
+
+	\subsubsection{Blue Laser Types}
+In the baseline report, a number of \acs{laser}s was listed. Considering the fact that the receiver should be able to detect single photons, the actual \acs{OED} characteristics are dependent on the receiver. Since the receiver efficiency is a function of wavelength, the appropriate wavelength should be transmitted. Since \acs{laser}s show discrete wavelength characteristics, the type of \acs{laser} should be determined from this criteria.
+
+& The analysis in chaper >>>> reference 
+
+to receiver shows that the laser should have a wavelength in the interval of 425 - 500 nm (within visible spectrum designated as 'blue'). Hence, every \acs{laser} with different wavelengths are not viable for this analysis. 
+
+Potential \acs{laser} types for this altimetry mission:
+
+\itshape{Helium-Cadmium (He-Cd) \acs{laser}}
+Wavelength: 441.6 [nm]
+Gain medium type: Gas
+
+\itshape{Neodymium-doped Yttrium Aluminium (Nd-YAG) \acs{laser}}
+Wavelength: 946 [nm] (473 [nm] with frequency doubling)
+Gain medium type: Solid-State
+
+\itshape{Argon (Ar) \acs{laser}}	
+Wavelength: 454.6 [nm]
+Gain medium type: Gas
+
+\itshape{\acs{laser} diode sytems
+wavelength interval 400 - 480 [nm] (tunable). The wavelength interval of this kind of \acs{laser} is excellent, but they are difficult to produce for high output power and long (> year) lifetimes. Since the determined lifetime in this mission exceeds this \acs{laser} lifetime, this \acs{laser} is not part of the trade-off.
+	
+	\subsubsection{Trade-off}
+Table &reference shows the trade-off for the different \acs{laser}s. The most important  criteria and the ones that clearly need some explanation, are discussed in more detail in this section for the different gain media. 
+	
+\textbf{Wavelength ratio}. The emitted wavelength is an important factor for the possibility of photon detection as function of atmospheric absorption and receiver efficiency. Considering the wavelength dependency of these last two terms, the laser types have a different wavelength ratio (see: chapter receiver).
+
+\textbf{Cost}. Gas \acs{laser}s in general are relatively cheap , because of the high \acs{TRL} and the relatively simple optical subsystems within the \acs{laser} cavity. The costs of the optical emitting payload is considered to have a low weight factor. The typical cost estimation for a gas \acs{laser} equals \$20,000 and \$30,000, whereas the solid-state \acs{laser} can cost almost double (\$45,000 - \%50,000). However, since the total cost of the mission are in the order of 200 M\$, this difference is negligible.
+ 
+\textbf{Minimum Pump Power}. The threshold pump power of a laser is the value of the pump power at which the laser threshold is just reached, usually assuming steady-state conditions. At this point, the small-signal gain equals the losses of the laser resonator. For an optically pumped laser, the definition of threshold pump power may be based either on the incident or absorbed pump power. A low threshold power requires low resonator losses and a high gain efficiency.
+
+
+%treshold power equation
+
+
+
+
+\textbf{Repetition Rate Manupilation}. To be able to create short pulses, the electromagnetic radiation present due to stimulated emission should be altered. This can be done with multiple mechanisms, like Q-switching, mode-locking or mechanical interference. However, only two of these (Q-switching and mechanical interference) can be used with gas \acs{laser}s, giving rise to only moderately short pulses. Mode-locking, which is possible for solid-state \acs{laser}s, allows the user to creates shorter pulses and next to that, if active mode-locking is considered, the pulses can actually have a temporal deviation. 
+ 
+\textbf{Volume and mass}. 
+The mass and volume are particularly dependent on the \acs{laser} cavity length, which equals 0.1 - 0.15 [m] for the solid state-laser and 0.25 - 1.5 [m] for a particular gas \acs{laser}. However, the solid-state \acs{laser} usually exhibits more optical components, increasing the weight.  
+
+\textbf{Chemical Stability}.
+
+ 
+\textbf{Thermal Control}.
+
+
+\textbf{Efficiency}.
+
+ 
+	
+	\subsubsection{Thermal Control Solid-State \acs{laser}}
+\section{Laser Thermal Control}
+	\label{mtLSRthermal}
+The functioning of the optical payload is dependent on a specific temperature interval, so in order to be able to meet the top level requirements, thermal control considerations for the emitter and receiver should be taken into account. 
+
+\subsection{Thermal Physics}
+	\label{mtLSRthermalphysics}
+Two important mechanisms of thermal conductivity are (free) electron translation (crystal momentum) and phonon states. A phonon (state) is a quantum of acoustic energy, analogous to the quantum of electromagnetic radiation, the photon. Thermal excitations in a crystal or in an elastic medium can be described as a population of phonons. Basically, phonons represent a mode of vibration occurring in a rigid crystal lattice. Since, on one side, individual electrons in a crystal lattice are bound in terms of quantisized energy levels and on the other side they are interconnected to neighboring particles by electric force (attraction or repulsion) as a function of distance, in most solids the energy given to lattice vibrations is the dominant contribution to the heat capacity, i.e. induced thermal energy is converted to a change in rate of crystal momentum or phonon state, which can be represented by a difference in internal energy. In this light, the terms 'thermal energy' and 'internal energy' represent the same quantity. 
+
+From an electron point of view, a change in temperature (or any change in state variable) represents the quest for a new thermal equilibrium situation. Since electrons are fermions, their orbit population is described by the temperature dependent Fermi-Dirac distribution. Fermions show the tendency to occupy the lowest energy levels and since they are limited due to Pauli's exclusion principle, which states no identical fermion with equal intrinsic spin can occupy the same energetic orbit, not every electron can be in the ground state. Increasing the internal energy will therefor represent thermal excitation.  
+
+\subsection{Theoretical Thermal Limits For Lasers}
+	\subsubsection{Gain Medium Thermal Overloading}
+		\label{mtLSRthermaloverload}	
+Thermal overloading can be divided to the temperature interval at which electron excitation is impossible and the interval at which permanent crystal lattice deformation occurs.
+
+\textit{Short term temperature increase (T < 323.15K)}
+To begin with the first phenomenon, in order to excite any electron, the conduction band should not be completely filled in thermal equilibrium. Any excitation, so also stimulated excitation, would be impossible and hence no lasing action would occur. In the real world, a small part of the electrons will give rise to stimulated emission since not all electrons would occupy the highest energy bands, considering the temperature to increase. However, population inversion would not be present. If the temperature is decreased afterwards, the gain material would be able to provide lasing action, making it an short-term problem with no permanent significance. 
+
+\textit{Long term temperature increase (T > 323.15K)}
+However, if the induced (thermal) energy is increased even further, the crystal lattice can eventually alter in time. This crystal lattice deformation not only implies the gain material, but all optical subparts, causing possible lasing failure. Recrystallization of the material can occur if the upper limit of the temperature interval is reached, giving birth to long-term (partial) failure. Another longterm effect is thermal fatigue for parts within the laser.
+
+	\subsubsection{Thermal Lensing}
+		\label{mtLSRthermallensing}
+		
+\textit{Long term temperature increase (T > 303.15K)}
+Particularly in high-power lasers, the appearance of a temperature-gradient in the gain medium often causes a significant 'thermal lens'. The gain medium has higher internal energy on the beam axis, typically causing some transverse gradient of the refractive index according to the temperature-dependent Sellmeier equation. 
+
+\begin{figure} [ht]
+	\begin{center}
+\includegraphics[scale=1]{chapters/img/TISE.png}	
+\caption{Refractive index as function of radial position, where the Sellmeier coefficients A, B, C, D, E, and F are constants dependent on gain material, c and b are temperature dependent, T is the temperature in degrees centigrade, and l is the wavelength in micrometers.}
+\label{thermal_lensing}
+\end{center}
+\end{figure}
+
+Thermal lensing occurs due to the combined effect of the thermal expansion and thermally induced refractive index change. The magnitude of the thermal lensing scales proportional to the power absorbed by the gain medium and the thermo-optic coefficient of the material, and inversely proportional to the thermal conductivity of the material. 
+
+The Sellmeiser equation could also be used for the change in refractive index for all other optical subparts in the laser, like the lenses. Since the refractive index will change due to the change in temperature, this has to be taken into account.   
+
+\begin{figure} [ht]
+	\begin{center}
+\includegraphics[scale=1]{chapters/img/thermal_lensing.png}	
+\caption{Transverse pump intensity distribution (red) and thermal profile (blue). The temperature profile is approximately parabolic only near the center of the crystal.}
+\label{thermal_lensing}
+\end{center}
+\end{figure}
+
+External induced thermal energy can therefor cause the formation of a thermal lens, causing the beam quality to alter. Especially beam divergence tends to decrease by the formation of a thermal lens, i.e. the change in refractive index change per unit temperature (dn/dT) should be kept within limits. The absence of thermal control can even lead to non-localized thermal lensing, since temperature-gradients can be localized away from the principal axes. 
+			
+	\subsubsection{Multi-Phonon Transitions}
+		\label{mtLSRphonon}
+\textit{Long term temperature increase (T > 353.15K)}
+The upper-state lifetime (the lifetime of the population of the upper laser level) can be strongly reduced by decay processes which involve the simultaneous emission of multiple phonons. Multiple phonons are typically required for such transitions because the energy of a single phonon is not sufficient to match the difference in level energies. The rate of multi-phonon transitions decreases with the increasing number of phonons required. Temperature-gradients can influence the phonon transition and hence influence the the upper-state lifetime, decreasing the beam quality. 
+
+	\subsubsection{Dielectric Transmission}
+		\label{mtLSRditrans}
+\textit{Long term temperature increase (T > 313.15K)}
+Optically absorbing layers (dielectric transmission decrease) can form on the exit face of the fully reflective mirror and on the doubling crystal, resulting in a decay of output power. The absorbed optical energy creates thermal gradients with which affects phase matching and hence lowering the beam quality. 
+
+	\subsubsection{Limit in Electron Movement}
+		\label{mtLSRelecmovement}
+\textit{Long term temperature decrease (T < 273.15K)}
+If the internal energy decreases to much, the exciton dynamics would alter, i.e. electrons will not be able to be excited to higher energy levels. This temperature dependent tendency is caused by the Boltzmann distribution, giving rise to an increase of potential energy at the lowest energy level. 
+
+\subsection{Thermal Control}
+	\label{mtLSRthermalcontrol}
+As seen in the previous paragraphs, the temperature interval for proper lasing action roughly equals 273.15 < T [K] < 313.15. Since the thermal environmnent is extremely harsh (extremely cold background temperature, intense solar radiation, sudden loss of temperature in shadow and the presence of vacuum), thermal control considerations should be taken into account. 
+
