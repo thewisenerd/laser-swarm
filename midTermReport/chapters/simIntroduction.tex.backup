@@ -1,6 +1,0 @@
-\chapter{Introduction}
-\label{intro}
-This report preliminarily discusses the design and workings of a simulator tool developed with the purpose of guiding and validating the results of the tradeoff done in the main laser swarm project, as well as demonstrating the feasibility of the concept of the laser swarm.
-
-Generally speaking, the simulator program is divided into two parts. The first part is the simulation of the physical path of the photons in the laser pulse up to the point were they are received by the receiving satellites. This part has been documented in chpater \ref{sim
-

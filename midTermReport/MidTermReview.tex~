@@ -85,6 +85,7 @@
 %
 %%%%%%%%%%%%%
 
+\input{chapters/simIntroduction.tex}
 \input{chapters/simulation.tex}
 \input{chapters/orbit.tex}
 \input{chapters/earthModel.tex}

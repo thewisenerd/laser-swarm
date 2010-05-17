@@ -1,4 +1,4 @@
-This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2010.5.7)  17 MAY 2010 09:22
+This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2010.5.7)  17 MAY 2010 13:07
 entering extended mode
  %&-line parsing enabled.
 **MidTermReview.tex
@@ -148,209 +148,11 @@ LaTeX Info: Redefining \em on input line 420.
 LaTeX Info: The control sequence `\[' is already robust on input line 471.
 LaTeX Info: The control sequence `\]' is already robust on input line 472.
 ) (./MidTermReview.aux
-! Undefined control sequence.
-l.2 \reset@newl@bel
-                   
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.3 \undonewlabel
-                 {acro:LiDAR}
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-
-! LaTeX Error: Missing \begin{document}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.3 \undonewlabel{a
-                   cro:LiDAR}
-You're in trouble here.  Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-! Undefined control sequence.
-l.75 \undonewlabel
-                  {acro:GLAS}
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.79 \undonewlabel
-                  {acro:RAMS}
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.96 \undonewlabel
-                  {acro:WFD}
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.99 \undonewlabel
-                  {acro:MTR}
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.111 \undonewlabel
-                   {acro:WBS}
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
 
 LaTeX Warning: Label `fig:WFfinal2' multiply defined.
 
-! Undefined control sequence.
-l.137 \undonewlabel
-                   {acro:TOD}
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
 
-! Undefined control sequence.
-l.141 \undonewlabel
-                   {acro:ECEF}
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.150 \undonewlabel
-                   {acro:JAT}
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.155 \undonewlabel
-                   {acro:DEM}
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.163 \undonewlabel
-                   {acro:ASTER}
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.166 \undonewlabel
-                   {acro:GDEM}
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.174 \undonewlabel
-                   {acro:WGS84}
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.182 \undonewlabel
-                   {acro:BRDF}
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.197 \undonewlabel
-                   {acro:laser}
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.225 \undonewlabel
-                   {acro:ADCS}
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.231 \undonewlabel
-                   {acro:CMG}
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.236 \undonewlabel
-                   {acro:LEO}
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.242 \undonewlabel
-                   {acro:EPS}
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.262 \undonewlabel
-                   {acro:MPD}
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
+LaTeX Warning: Label `sim' multiply defined.
 
 )
 \openout1 = `MidTermReview.aux'.
@@ -379,10 +181,10 @@ LaTeX Font Info:    ... okay on input line 24.
 \MPscratchDim=\dimen118
 \MPnumerator=\count106
 \everyMPtoPDFconversion=\toks24
-) (./chapters/titlePage.tex [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
-p}
+) (./chapters/titlePage.tex [1
 
-] [1]) (./chapters/abstract.tex [1]) (./MidTermReview.toc [1
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]) (./chapters/abstract.tex 
+[1]) (./MidTermReview.toc [1
 
 ])
 \tf@toc=\write3
@@ -391,30 +193,7 @@ p}
  [2]
 (./chapters/acronyms.tex) [3]
 Chapter 1.
-(./chapters/introduction.tex
-
-LaTeX Warning: Reference `blFuncChapter' on page 4 undefined on input line 9.
-
-
-LaTeX Warning: Reference `blBudgets' on page 4 undefined on input line 9.
-
-
-LaTeX Warning: Reference `blRisk' on page 4 undefined on input line 9.
-
-
-LaTeX Warning: Reference `blDesignOptions' on page 4 undefined on input line 9.
-
-
-
-LaTeX Warning: Reference `blSustainable' on page 4 undefined on input line 9.
-
-
-LaTeX Warning: Reference `blInvestment' on page 4 undefined on input line 9.
-
-
-LaTeX Warning: Reference `blRAMS1' on page 4 undefined on input line 9.
-
-) (./chapters/technDesignDev.tex [4
+(./chapters/introduction.tex) (./chapters/technDesignDev.tex [4
 
 ]
 Chapter 2.
@@ -422,23 +201,14 @@ Chapter 2.
 
 ])
 (./chapters/projectPlanningReview.tex
-! Undefined control sequence.
-l.1 ...rts. In sections \ref{WFD} the revised \alc
-                                                  {WFD} will be shown. This ...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-<chapters/img/Workflow_diagram_MTR_v2.png, id=36, 1112.155pt x 740.7675pt>
+<chapters/img/Workflow_diagram_MTR_v2.png, id=33, 1112.155pt x 740.7675pt>
 File: chapters/img/Workflow_diagram_MTR_v2.png Graphic file (type png)
 
 <use chapters/img/Workflow_diagram_MTR_v2.png>
 
 LaTeX Warning: Float too large for page by 25.72917pt on input line 14.
 
-<chapters/img/Workflow_diagram_FR_v2.png, id=37, 896.34875pt x 704.6325pt>
+<chapters/img/Workflow_diagram_FR_v2.png, id=34, 896.34875pt x 704.6325pt>
 File: chapters/img/Workflow_diagram_FR_v2.png Graphic file (type png)
 
 <use chapters/img/Workflow_diagram_FR_v2.png>
@@ -450,7 +220,7 @@ Overfull \hbox (18.71387pt too wide) in paragraph at lines 23--24
 LaTeX Warning: Float too large for page by 25.72917pt on input line 26.
 
 
-<chapters/img/Workbreakdown_structure_MTR_v2.png, id=38, 1071.00125pt x 752.812
+<chapters/img/Workbreakdown_structure_MTR_v2.png, id=35, 1071.00125pt x 752.812
 5pt>
 File: chapters/img/Workbreakdown_structure_MTR_v2.png Graphic file (type png)
  <use chapters/img/Workbreakdown_structure_MTR_v2.png>
@@ -458,7 +228,7 @@ File: chapters/img/Workbreakdown_structure_MTR_v2.png Graphic file (type png)
 LaTeX Warning: Float too large for page by 25.72917pt on input line 39.
 
 
-<chapters/img/Workbreakdown_structure_FR_v2.png, id=39, 905.3825pt x 514.92375p
+<chapters/img/Workbreakdown_structure_FR_v2.png, id=36, 905.3825pt x 514.92375p
 t>
 File: chapters/img/Workbreakdown_structure_FR_v2.png Graphic file (type png)
  <use chapters/img/Workbreakdown_structure_FR_v2.png>
@@ -468,21 +238,24 @@ LaTeX Warning: Float too large for page by 25.72917pt on input line 46.
 ) [6] [7 <./chapters/img/Workflow_diagram_MTR_v2.png (PNG copy)>] [8 <./chapter
 s/img/Workflow_diagram_FR_v2.png (PNG copy)>] [9 <./chapters/img/Workbreakdown_
 structure_MTR_v2.png (PNG copy)>] [10 <./chapters/img/Workbreakdown_structure_F
-R_v2.png (PNG copy)>] (./chapters/simulation.tex [11]
+R_v2.png (PNG copy)>] (./chapters/simIntroduction.tex [11]
 Chapter 3.
-) (./chapters/orbit.tex
+
+LaTeX Warning: Reference `simulation' on page 12 undefined on input line 7.
+
+) (./chapters/simulation.tex) (./chapters/orbit.tex
 Underfull \hbox (badness 10000) in paragraph at lines 3--5
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 12--14
 
  []
 
 [12
 
-]) (./chapters/earthModel.tex) (./chapters/DEM.tex
+]
+Underfull \hbox (badness 10000) in paragraph at lines 12--14
+
+ []
+
+) (./chapters/earthModel.tex) (./chapters/DEM.tex
 
 LaTeX Warning: Citation `geotools' on page 13 undefined on input line 12.
 
@@ -498,58 +271,70 @@ Underfull \hbox (badness 10000) in paragraph at lines 3--5
 
  []
 
+[13]
 
-LaTeX Warning: Citation `rees' on page 13 undefined on input line 6.
+LaTeX Warning: Citation `rees' on page 14 undefined on input line 6.
 
 
-LaTeX Warning: Citation `rees' on page 13 undefined on input line 8.
+LaTeX Warning: Citation `rees' on page 14 undefined on input line 8.
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 8--10
 
  []
 
-[13]
 
 LaTeX Warning: Citation `rees' on page 14 undefined on input line 11.
 
-<chapters/img/scatter.png, id=67, 301.125pt x 250.9375pt>
+<chapters/img/scatter.png, id=63, 301.125pt x 250.9375pt>
 File: chapters/img/scatter.png Graphic file (type png)
 
 <use chapters/img/scatter.png>) (./chapters/signPath.tex [14 <./chapters/img/sc
-atter.png>] <chapters/img/signalPath.png, id=72, 767.86874pt x 512.91624pt>
+atter.png>] <chapters/img/signalPath.png, id=69, 767.86874pt x 512.91624pt>
 File: chapters/img/signalPath.png Graphic file (type png)
 
-<use chapters/img/signalPath.png>) (./chapters/noise.tex)
-(./chapters/dataAnalysis.tex [15 <./chapters/img/signalPath.png>]
+<use chapters/img/signalPath.png>) (./chapters/noise.tex [15 <./chapters/img/si
+gnalPath.png>]) (./chapters/dataAnalysis.tex) (./chapters/altDet.tex)
+(./chapters/BRDFDet.tex) (./chapters/SS.tex [16]
 Chapter 4.
-) (./chapters/altDet.tex) (./chapters/BRDFDet.tex) [16
+) (./chapters/SSPRO.tex) (./chapters/SSOPE.tex) (./chapters/SSEOL.tex) [17
 
-] (./chapters/prune.tex
-[17]
-Chapter 5.
-)
+]
+(./MidTermReview.bbl [18]) [19
 
-! LaTeX Error: File `chapters/pruneADCS.tex' not found.
+]
+Appendix A.
+[20
 
-Type X to quit or <RETURN> to proceed,
-or enter new name. (Default extension: tex)
+] (./MidTermReview.aux)
 
-Enter file name: 
-! Emergency stop.
-<read *> 
-         
-l.113 \input{chapters/pruneADCS.tex}
-                                    ^^M
-*** (cannot \read from terminal in nonstop modes)
+LaTeX Warning: There were undefined references.
 
- 
+
+LaTeX Warning: There were multiply-defined labels.
+
+ ) 
 Here is how much of TeX's memory you used:
- 2200 strings out of 95086
- 27490 string characters out of 1183256
- 80474 words of memory out of 1500000
- 5304 multiletter control sequences out of 10000+50000
- 13390 words of font info for 47 fonts, out of 1200000 for 2000
+ 2202 strings out of 95086
+ 27396 string characters out of 1183256
+ 80896 words of memory out of 1500000
+ 5290 multiletter control sequences out of 10000+50000
+ 13904 words of font info for 49 fonts, out of 1200000 for 2000
  28 hyphenation exceptions out of 8191
  32i,7n,21p,874b,251s stack positions out of 5000i,500n,6000p,200000b,5000s
-!  ==> Fatal error occurred, no output PDF file produced!
+</usr/share/texmf-texlive/fonts/type1/bluesky/cm/cmbx10.pfb></usr/share/texmf
+-texlive/fonts/type1/bluesky/cm/cmbx12.pfb></usr/share/texmf-texlive/fonts/type
+1/bluesky/cm/cmcsc10.pfb></usr/share/texmf-texlive/fonts/type1/bluesky/cm/cmmi1
+0.pfb></usr/share/texmf-texlive/fonts/type1/bluesky/cm/cmr10.pfb></usr/share/te
+xmf-texlive/fonts/type1/bluesky/cm/cmr7.pfb></usr/share/texmf-texlive/fonts/typ
+e1/bluesky/cm/cmsl10.pfb></usr/share/texmf-texlive/fonts/type1/bluesky/cm/cmssb
+x10.pfb></usr/share/texmf-texlive/fonts/type1/bluesky/cm/cmsy7.pfb></usr/share/
+texmf-texlive/fonts/type1/bluesky/cm/cmti10.pfb></usr/share/texmf-texlive/fonts
+/type1/bluesky/cm/cmti12.pfb></usr/share/texmf-texlive/fonts/type1/bluesky/cm/c
+mtt10.pfb>
+Output written on MidTermReview.pdf (22 pages, 382136 bytes).
+PDF statistics:
+ 129 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 131072)
+ 31 words of extra memory for PDF output out of 10000 (max. 10000000)
+
