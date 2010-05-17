@@ -10,6 +10,7 @@
 \usepackage{multirow}
 \usepackage{graphicx}
 \usepackage{wrapfig}
+\usepackage{subfig}
 \usepackage{amsmath}
 \usepackage{url}
 \usepackage{fixltx2e}
@@ -20,6 +21,9 @@
 \textwidth 16.59cm 
 \textheight 21.94cm 
 \parskip 7.2pt 
+
+\setcounter{secnumdepth}{5}
+\setcounter{tocdepth}{5}
 
 \begin{document}
 
@@ -41,6 +45,14 @@
 
 %%%%%%%%%%%%%
 %
+%       PREFACE
+%
+%%%%%%%%%%%%%
+
+\input{chapters/preface.tex}
+
+%%%%%%%%%%%%%
+%
 %       TOC
 %
 %%%%%%%%%%%%%
@@ -49,7 +61,7 @@
 
 %%%%%%%%%%%%%
 %
-%       List of symbols 
+%       ACRONYMS 
 %
 %%%%%%%%%%%%%
 
@@ -81,29 +93,12 @@
 
 %%%%%%%%%%%%%
 %
-%       SIMULATION CHAPTER
-%
-%%%%%%%%%%%%%
-
-\input{chapters/simIntroduction.tex}
-\input{chapters/simulation.tex}
-\input{chapters/orbit.tex}
-\input{chapters/earthModel.tex}
-\input{chapters/DEM.tex}
-\input{chapters/scatter.tex}
-\input{chapters/signPath.tex}
-\input{chapters/noise.tex}
-\input{chapters/dataAnalysis.tex}
-\input{chapters/altDet.tex}
-\input{chapters/BRDFDet.tex}
-
-%%%%%%%%%%%%%
-%
 %       RISK MANAGEMENT
 %
 %%%%%%%%%%%%%
 
-\chapter{Risk Management}
+\input{chapters/rmIntro.tex}
+\input{chapters/markanal.tex}
 \input{chapters/contingency.tex}
 \input{chapters/riskmap.tex}
 
@@ -126,11 +121,22 @@
 %
 %%%%%%%%%%%%%
 
+\input{chapters/INTn2diag}
+
 %%%%%%%%%%%%%
 %
 %       TRADEOFF
 %
 %%%%%%%%%%%%%
+
+\chapter{Tradeoff}
+\input{chapters/TOadcs.tex}
+\input{chapters/TOeps.tex}
+\input{chapters/OrbAltitude.tex}
+\input{chapters/deltaVtable.tex}
+\input{chapters/OrbAltitude2.tex}
+% \input{chapters/mtOpS.tex}
+% \input{chapters/MTROpsLog.tex}
 
 %%%%%%%%%%%%%
 %
@@ -138,11 +144,15 @@
 %
 %%%%%%%%%%%%%
 
+\input{chapters/MTROpsLog.tex}
+
 %%%%%%%%%%%%%
 %
 %       STABILITY & CONTROL
 %
 %%%%%%%%%%%%%
+
+\input{chapters/SCstabcont.tex}
 
 %%%%%%%%%%%%%
 %
@@ -154,6 +164,27 @@
 \input{chapters/SSPRO.tex}
 \input{chapters/SSOPE.tex}
 \input{chapters/SSEOL.tex}
+
+%%%%%%%%%%%%%
+%
+%       SIMULATION CHAPTER
+%
+%%%%%%%%%%%%%
+
+\input{chapters/simIntroduction.tex}
+\input{chapters/simulation.tex}
+\input{chapters/orbit.tex}
+\input{chapters/earthModel.tex}
+\input{chapters/DEM.tex}
+\input{chapters/scatter.tex}
+\input{chapters/signPath.tex}
+\input{chapters/noise.tex}
+\input{chapters/dataAnalysis.tex}
+\input{chapters/altDet.tex}
+\input{chapters/BRDFDet.tex}
+\input{chapters/Simulations.tex}
+\input{chapters/VariationOfPhotonDensity.tex}
+\input{chapters/SolarPhotonsFraction.tex}
 
 %%%%%%%%%%%%%
 %
@@ -169,10 +200,6 @@
 %       APPENDICIES
 %
 %%%%%%%%%%%%%
-
-% \appendix
-% \chapter{Requirement Discovery Trees}
-% \label{reqdisctree}
 
 \appendix
 \input{chapters/designOptionsDiagrams}
