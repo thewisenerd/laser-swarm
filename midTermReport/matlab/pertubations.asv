@@ -11,12 +11,12 @@ J2 = 0.00108263;
 
 %Solar radiation pressure
 
-Areaarray = 0.1:0.1:20;
-Area1 = 1;
-Area2 = 10;
-Area3 = 20;
-Massarray = 1:1:150;
-Mass1 = 75;
+Areaarray = 0.01:0.1:10;
+Area1 = 0.01;
+Area2 = 2;
+Area3 = 10;
+Massarray = 5:1:500;
+Mass1 = 5;
 Mass2 = 250;
 Mass3 = 500;
 
@@ -29,19 +29,22 @@ accelVarMass1 = -4.5e-8*Area1./Massarray;
 accelVarMass2 = -4.5e-8*Area2./Massarray;
 accelVarMass3 = -4.5e-8*Area3./Massarray;
 
+ratio = 1e-10:1e-6:5;
+accelVarRatio = -4.5e-8.*ratio;
+
 figure1 = figure('Color',[1 1 1]); %varArea
 
 
 % Create axes
 axes('Parent',figure1);
 box('on');
-hold on;
+%hold on;
 
-plot(Areaarray,accelVarArea1,'b-',Areaarray,accelVarArea2,'r-.',Areaarray,accelVarArea3,'k:');
+semilogy(Areaarray,accelVarArea1,'b-',Areaarray,accelVarArea2,'r-.',Areaarray,accelVarArea3,'k:');
 xlabel({'Area normal to the Sun [m^2]'});
 ylabel({'Acceleration [m/s^2]'});
-h = legend('75 kg','250 kg', '500 kg',3);
-set(h,'Interpreter','none')
+h = legend('5 kg','250 kg', '500 kg',3);
+set(h,'Interpreter','none','Location','SouthEast')
 hold off;
 
 print -dpng 'C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\midTermReport\chapters\img\solPressureVarArea.png'
@@ -50,16 +53,29 @@ figure2 = figure('Color',[1 1 1]); %varMass
 % Create axes
 axes('Parent',figure2);
 box('on');
-hold on;
+%hold on;
 
-plot(Massarray,accelVarMass1,'b-',Massarray,accelVarMass2,'r-.',Massarray,accelVarMass3,'k:');
+semilogy(Massarray,accelVarMass1,'b-',Massarray,accelVarMass2,'r-.',Massarray,accelVarMass3,'k:');
 xlabel({'Mass [kg]'});
 ylabel({'Acceleration [m/s^2]'});
-h = legend('1 m^2','10 m^2', '20 m^2',3);
-set(h,'Interpreter','none')
+h = legend('0.01 m^2','2 m^2', '10 m^2',3);
+set(h,'Interpreter','none','Location','SouthEast')
 hold off;
 
 print -dpng 'C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\midTermReport\chapters\img\solPressureVarMass.png'
+
+figure21 = figure('Color',[1 1 1]); %varMass
+% Create axes
+axes('Parent',figure21);
+box('on');
+%hold on;
+
+loglog(ratio,accelVarRatio);
+xlabel({'Area/Mass ratio [-]'});
+ylabel({'Acceleration [m/s^2]'});
+hold off;
+
+print -dpng 'C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\midTermReport\chapters\img\solPressureVarRatio.png'
 
 %%
 
@@ -86,17 +102,41 @@ set(hf,'Interpreter','none','Location','NorthEast')
 hold off;
 
 print -dpng 'C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\midTermReport\chapters\img\densityAltitude.png'
-%%
+
+%% Receiver
 
 % Drag Calculations
 
 Cd = 4;
-Area = 2.7; %[m^2]
-Mass = 550; %[kg]
+Area = 0.01+0.2; %[m^2]
+Mass = 10; %[kg]
 CDAM = Cd*Area/Mass;
+
 h = 300;
 
-[revArray3,altitudeArray3]=orbitDecay(h,CDAM);
+[revArray3,altitudeArray3]=orbitDecay(h,CDAM,1);
+[revArray31,altitudeArray31]=orbitDecay(h,CDAM,2);
+[revArray32,altitudeArray32]=orbitDecay(h,CDAM,3);
+
+h = 400;
+
+[revArray4,altitudeArray4]=orbitDecay(h,CDAM,1);
+[revArray41,altitudeArray41]=orbitDecay(h,CDAM,2);
+[revArray42,altitudeArray42]=orbitDecay(h,CDAM,3);
+
+h = 500;
+
+[revArray5,altitudeArray5]=orbitDecay(h,CDAM,1);
+[revArray51,altitudeArray51]=orbitDecay(h,CDAM,2);
+[revArray52,altitudeArray52]=orbitDecay(h,CDAM,3);
+
+[altVmin,deltaVmin]= deltaV(CDAM,1);
+[altVmean,deltaVmean]= deltaV(CDAM,2);
+[altVmax,deltaVmax]= deltaV(CDAM,3);
+
+deltaVtabMinRec = deltaVtab(CDAM,1);
+deltaVtabMeanRec = deltaVtab(CDAM,2);
+deltaVtabMaxRec = deltaVtab(CDAM,3);
 
 figure4 = figure('Color',[1 1 1]); %varMass
 
@@ -105,14 +145,143 @@ figure4 = figure('Color',[1 1 1]); %varMass
 axes('Parent',figure4);
 box('on');
 
-%hold on;
-plot(revArray3,altitudeArray3,'b-',);
+hold on;
+grid on;
+plot(revArray3,altitudeArray3,'b-');
+plot(revArray4,altitudeArray4,'b-');
+plot(revArray5,altitudeArray5,'b-');
+plot(revArray31,altitudeArray31,'r-.');
+plot(revArray41,altitudeArray41,'r-.');
+plot(revArray51,altitudeArray51,'r-.');
+plot(revArray32,altitudeArray32,'--k');
+plot(revArray42,altitudeArray42,'--k');
+plot(revArray52,altitudeArray52,'--k');
+hold off;
+axis([0 1825 200 575]);
 ylabel({'Altitude [km]'});
-xlabel({'Revolutions'});
+xlabel({'Days After Launch'});
 % hf = legend('Solar Minimum','Solar Maximum', 'Time Average',3);
 % set(hf,'Interpreter','none','Location','NorthEast')
+
+
+print -dpng 'C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\midTermReport\chapters\img\orbitDecayRecieverMin.png'
+
+figure41 = figure('Color',[1 1 1]); %varMass
+
+% Create axes
+
+axes('Parent',figure41);
+box('on');
+
+hold on;
+grid on;
+plot(altVmin,deltaVmin,'b-');
+plot(altVmean,deltaVmean,'r-.');
+plot(altVmax,deltaVmax,'--k');
 hold off;
+ylabel({'\DeltaV [m/s]'});
+xlabel({'Altitude [km]'});
+ hf = legend('Solar Minimum','Time Average', 'Solar Maximum',3);
+ set(hf,'Interpreter','none','Location','NorthEast')
 
-print -dpng 'C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\midTermReport\chapters\img\orbitDecay50Min.png'
+
+print -dpng 'C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\midTermReport\chapters\img\deltaVReceiver.png'
+
+%% Emitter
+Cd = 4;
+Area = 0.1+6; %[m^2]
+Mass = 200; %[kg]
+CDAM = Cd*Area/Mass;
+
+h = 300;
+
+[revArray3,altitudeArray3]=orbitDecay(h,CDAM,1);
+[revArray31,altitudeArray31]=orbitDecay(h,CDAM,2);
+[revArray32,altitudeArray32]=orbitDecay(h,CDAM,3);
+
+h = 400;
+
+[revArray4,altitudeArray4]=orbitDecay(h,CDAM,1);
+[revArray41,altitudeArray41]=orbitDecay(h,CDAM,2);
+[revArray42,altitudeArray42]=orbitDecay(h,CDAM,3);
+
+h = 500;
+
+[revArray5,altitudeArray5]=orbitDecay(h,CDAM,1);
+[revArray51,altitudeArray51]=orbitDecay(h,CDAM,2);
+[revArray52,altitudeArray52]=orbitDecay(h,CDAM,3);
+
+[altVmin,deltaVmin]= deltaV(CDAM,1);
+[altVmean,deltaVmean]= deltaV(CDAM,2);
+[altVmax,deltaVmax]= deltaV(CDAM,3);
+
+deltaVtabMinEmit = deltaVtab(CDAM,1);
+deltaVtabMeanEmit = deltaVtab(CDAM,2);
+deltaVtabMaxEmit = deltaVtab(CDAM,3);
+
+figure4 = figure('Color',[1 1 1]); %varMass
+
+% Create axes
+
+axes('Parent',figure4);
+box('on');
+
+hold on;
+grid on;
+plot(revArray3,altitudeArray3,'b-');
+plot(revArray4,altitudeArray4,'b-');
+plot(revArray5,altitudeArray5,'b-');
+plot(revArray31,altitudeArray31,'r-.');
+plot(revArray41,altitudeArray41,'r-.');
+plot(revArray51,altitudeArray51,'r-.');
+plot(revArray32,altitudeArray32,'--k');
+plot(revArray42,altitudeArray42,'--k');
+plot(revArray52,altitudeArray52,'--k');
+hold off;
+axis([0 1825 200 575]);
+ylabel({'Altitude [km]'});
+xlabel({'Days After Launch'});
+% hf = legend('Solar Minimum','Solar Maximum', 'Time Average',3);
+% set(hf,'Interpreter','none','Location','NorthEast')
 
 
+print -dpng 'C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\midTermReport\chapters\img\orbitDecayEmitter.png'
+
+figure51 = figure('Color',[1 1 1]); %varMass
+
+% Create axes
+
+axes('Parent',figure51);
+box('on');
+
+hold on;
+grid on;
+plot(altVmin,deltaVmin,'b-');
+plot(altVmean,deltaVmean,'r-.');
+plot(altVmax,deltaVmax,'--k');
+hold off;
+ylabel({'\DeltaV [m/s]'});
+xlabel({'Altitude [km]'});
+ hf = legend('Solar Minimum','Time Average', 'Solar Maximum',3);
+ set(hf,'Interpreter','none','Location','NorthEast')
+
+
+print -dpng 'C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\midTermReport\chapters\img\deltaVEmitter.png'
+
+%% deltaV table
+handle = fopen('C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\midTermReport\chapters\deltaVtable.tex', 'w');
+fprintf(handle, '\\begin{table}\n\\centering\n');
+fprintf(handle, '\\begin{tabular}{ c | c | c | c | c | c | c | c | c | c }\n');
+fprintf(handle, '& \\multicolumn{3}{|c|}{SOLAR MIN}&\\multicolumn{3}{|c|}{TIME AVERAGE}&\\multicolumn{3}{|c}{SOLAR MAX} \\\\ \\cline{2-10}\n');
+fprintf(handle, 'Altitude & 300 & 400 & 500 & 300 & 400 & 500 & 300 & 400 & 500 \\\\ \\hline \\hline\n');
+fprintf(handle, 'EMITTER & %.2f & %.2f & %.2f & %.2f & %.2f & %.2f & %.2f & %.2f & %.2f \\\\\n', deltaVtabMinEmit(1), deltaVtabMinEmit(2), deltaVtabMinEmit(3),deltaVtabMeanEmit(1), deltaVtabMeanEmit(2), deltaVtabMeanEmit(3), deltaVtabMaxEmit(1), deltaVtabMaxEmit(2), deltaVtabMaxEmit(3));
+fprintf(handle, 'RECEIVER& %.2f & %.2f & %.2f & %.2f & %.2f & %.2f & %.2f & %.2f & %.2f \\\\\n', deltaVtabMinRec(1), deltaVtabMinRec(2), deltaVtabMinRec(3),deltaVtabMeanRec(1), deltaVtabMeanRec(2), deltaVtabMeanRec(3), deltaVtabMaxRec(1), deltaVtabMaxRec(2), deltaVtabMaxRec(3));
+
+fprintf(handle, '\\end{tabular}\n\\caption{Required $\\Delta$V for various orbit altitudes. In $m/s$.}\n\\label{table:deltaVTable}\n\\end{table}\n');
+fclose(handle);
+
+%% Earth radii
+Re = 6378;
+altid300 = (Re+300)/Re;
+altid400 = (Re+400)/Re;
+altid500 = (Re+500)/Re;

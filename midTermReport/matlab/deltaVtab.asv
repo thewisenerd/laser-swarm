@@ -1,4 +1,4 @@
-function [revArray,altitudeArray] = orbitDecay(h,CDAM,activity)
+function [delta] = deltaVtab(CDAM,activity)
 
 alt = [200:50:1000];
 densityMin = [1.78e-10 3.35e-11 8.19e-12 2.34e-12 7.32e-13 2.47e-13 8.98e-14 3.63e-14 1.68e-14 9.14e-15 5.74e-15 3.99e-15 2.96e-15 2.28e-15 1.8e-15 1.44e-15 1.17e-15];
@@ -16,27 +16,18 @@ else
 end
     
 
-GM = 398600.4;
+GM = 398600.5;
 Re = 6378;
-A0=(Re+h);
-V0 = sqrt(GM/A0);
-P0 = 2*pi*sqrt(A0^3/GM); %[s]
+
 year = 3600*24*365.25;
 day = 3600*24;
-revs = year/P0;
+
 lifetime = 5; %[years]
 
 %reset Initial Values
+delta = [];
 
-a = A0;
-V = V0;
-P = P0;
-cutoff = 200 + Re;
-rev = 0;
-altitudeArray = [a-Re];
-revArray = [rev];
-
-while ( a > cutoff ),
+for(h=300:100:500),
     dens=find(alt==h);
     if (isempty(dens))
          up = ceil(h/50)*50;
@@ -47,25 +38,12 @@ while ( a > cutoff ),
     else
          rho = density(dens);
     end
-
-    dVrev = pi*CDAM*rho*a*1000*V;
-    dPrev = -6*pi*CDAM*rho*a*a/V*1000;
-    darev = -2*pi*CDAM*rho*a*a*1000;
-
+    V = sqrt(GM/(h+Re));
+    P0 = 2*pi*sqrt((h+Re)^3/GM)/year; %[s]
+    revs = year/P0;
+    dVrev = pi*CDAM*rho*(h+Re)*1000*V;
+    dV = dVrev*revs*lifetime;
     %update values
-
-    a = a+darev;
-    P = P+dPrev;
-    V = V-dVrev;
-    h = h+darev;
     
-    rev = rev + 1;
-    revDay = rev/(day/P);
-    revArray(end+1) = revDay;
-    altitudeArray(end+1)= a-Re;
-    
-%     if (rev==5000)
-%         break
-%     end
-   
+    delta(end+1) = dV;   
 end
