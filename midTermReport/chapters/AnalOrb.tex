@@ -1,26 +1,23 @@
-\documentclass{article}
-\usepackage{amsmath}
-\begin{document}
-
-\section{Orbit Characteristics}
-\label{pruneOrbit}
+This section concerns the trade-off for the orbit characteristics. First the orbit design options are compared with the killer requirements. After that the section is split into two major pieces, one containing special orbits and the altitude of the orbit, and another one that considers the swarm in greater detail.
+\label{AnalOrb}
 
 \subsection{Eliminating the obvious losers}
-The orbits are determined depending on the characteristics of the payload. Because the payload uses a low power laser this means that the orbits will have to be \ac{LEO} in order for the laser to get any photons to the receivers. The resulting design option tree can be found in figure \ref{fig:pruneOrbit}, page \pageref{fig:pruneOrbit}. Further pruning is not possible without a detailed analysis of the remaining options --- which will take place in the tradeoff.
+\label{pruneOrbit}
+The orbits of the satellites are determined by the characteristics of the emitter and receivers. Because the payload uses a low power laser this means that the orbits will have to be \ac{LEO} in order for the receivers to receive enough, or any, photons. The resulting design option tree can be found in figure \ref{fig:pruneOrbit}, on page \pageref{fig:pruneOrbit}. Further pruning is not possible without a detailed analysis of the remaining options, which is done in the following section.
 
-\begin{figure}
+\begin{figure}[b]
 \centering
-\includegraphics[width=0.8\textwidth, angle=0]{chapters/img/PrunedOrbit.jpg}
+\includegraphics[width=1.0\textwidth, angle=0]{chapters/img/PrunedOrbit.jpg}
 \label{fig:pruneOrbit}
 \caption{Pruned design option tree for the orbit characteristics}
 \end{figure}
 
 \subsection{Analysis of the remaining options}
-\label{OrbAnal}
+\label{AnalSpOrb}
 
-In subsection \ref{pruneOrbit} the design option tree was pruned by comparing the orbit altitudes \ac{LEO} to \ac{HEO} with the altitude requirement that follows from the payload. As a result the \acs{MEO}, \acs{GEO} and \acs{HEO} were eliminated. Now the remaining options will be analyzed.
+In subsection \ref{pruneOrbit} the design option tree was pruned by comparing the orbit altitudes with the altitude requirement that follows from the payload. As a result the \acs{MEO}, \acs{GEO} and \acs{HEO} were eliminated. The remaining options will now be analyzed.
 
-No trade-off table will be made for the next section. Instead the four basic types of orbits will be compared with the mission requirements and eliminated on that basis. The four orbit types are polar orbit, sun synchronous orbit, repeating ground track orbit and frozen orbit. After that another section will investigate preliminary parameter values for the final design option.
+No trade-off table will be made for this section. Instead the four special types of orbits seen in figure \ref{fig:pruneOrbit} will be compared with the mission requirements and eliminated separately. The four orbit types are polar orbit, sun synchronous orbit, repeating ground track orbit and frozen orbit. After that another section will investigate preliminary parameter values for the final design option.
 
 \subsubsection{Polar orbit}
 
@@ -29,31 +26,31 @@ An orbit is a polar orbit if the orbit inclination is exactly 90 degrees. Howeve
 The laser swarm should be able to observe any region on Earth, including the poles. As such the final orbit design option has to be a polar orbit.
 
 \subsubsection{Sun Synchronous orbit}
-A sun synchronous orbit is an orbit that uses the fact the Earth is not a perfect sphere, thus allowing a satellite to orbit the planet in such a way that the plane of the orbit rotates around the Earth's polar axis exactly ones a year. Thus fixing the satellite's orbital plane with respect to the sun vector.
+A sun synchronous orbit is an orbit that uses the fact the Earth is not a perfect sphere, thus allowing a satellite to orbit the planet in such a way that the plane of the orbit rotates around the Earth's polar axis exactly once a year. Thus fixing the satellite's orbital plane with respect to the sun vector.
 
-While useful, it is not required for the swarm to use this kind of orbit unless certain power or lighting requirements have to be met. As such the final orbit design will not be sun synchronous.
+While providing useful conditions, it is not required for the swarm to use this kind of orbit unless certain power or lighting requirements have to be met, as the simulation has shown this to be unnecessary the final orbit design will not be sun synchronous.
 
 \subsubsection{Repeating ground track orbit}
-Repeating ground track orbits, or repeat orbits in short, are orbits that repeat for a given time after the satellite has traveled a certain amount of revolutions. This type of orbit is useful as it allows one to revisit the same area, thus making it possible to view an area at different times. Which may provide useful information for processes that happen over time.
-To see if it is an option for the laser swarm, a calculation is made to check whether the constellation can actually see the entire Earth in five years.
+Repeating ground track orbits, or in short repeat orbits, are orbits that repeat after a predefined amount of time after the satellite has traveled an integral amount of revolutions. This type of orbit is useful as it allows one to revisit the same area, thus making it possible to view an area at different times. Which may provide useful information on variables that change over time.
+To determine if it is an option for the laser swarm, a calculation is made to check whether the constellation can actually see the entire Earth in five years.
 
-The Earth circumference is 40.000 [km], now assuming a footprint of 100 [m] this means that it will take $40.000.000/(2*100)=200.000$ revolutions to see this 40.000 [km]. Note that the factor 2 arises from the Earth being a sphere. Assuming a very low orbit of 300 [km] with a period of 90 [minutes] \ref{SMAD} the time taken for these 200.000 revolutions is $200.000*90=1.800.000$ [minutes]. Which is equal to approximately 34 years.
+The Earth circumference is 40.000 [km], now assuming a footprint of 100 [m] this means that it will take $40.000.000/(2*100)=200.000$ revolutions to see all of this 40.000 [km]. Note that the factor 2 arises from the Earth being a sphere, thus the satellite sees the equator twice during a single revolution. Assuming a very low orbit of 300 [km] with a period of 90 [minutes] \ref{SMAD} the time taken for these 200.000 revolutions is $200.000*90=1.800.000$ [minutes]. Which is equal to approximately 34 years.
 
-From the previous calculation it is clear that a repeat orbit is undesirable as it would mean even less of the Earth surface is covered in the 5 year lifetime. Also the type of sensor used, a ?????, actually oversamples an area after viewing it just once.
+From the previous calculation it is clear that a repeat orbit is undesirable as it would mean even less of the Earth surface is covered in the 5 year lifetime. Also the type of sensor used, a ?????, actually oversamples an area when viewing it.
 
 \subsubsection{Frozen orbit}
-A frozen orbit is an orbit for which the time rate of change of the inclination, eccentricity and argument of perigee is equal - or close - to zero. These conditions are favorable as they reduce the amount of stationkeeping required, thus reducing the need for attitude control. This in turn means less fuel which makes the structure lighter.
-This setup is very advantageous to the laser swarm as the formation has to remain the same, as such the frozen orbit is also a design option.
+A frozen orbit is an orbit for which the time rate of change of the inclination, eccentricity and argument of perigee is equal or close to zero. These conditions are favorable as they reduce the amount of stationkeeping, thus reducing the need for attitude control. This in turn means less fuel which makes the structure lighter, etc.
+This setup is very advantageous to the laser swarm as the formation has to remain the same, and because many satellites have to be launched even a small weigh reduction will have significant effect on the total weight. For these reasons the frozen orbit is also a design option.
 
 \subsection{Preliminary Orbit Parameters}
-The resulting design option for the laser swarm is a frozen polar orbit. In this section some preliminary values for the six orbital elements will be determined, using the constraints given by \ref{constraints}.
+The resulting design option for the laser swarm is a frozen polar orbit. In this section some of preliminary values for the six orbital elements will be determined, using the constraints given by \ref{constraints}.
 
 \begin{equation}
 \frac{{d\omega }}{{dt}} = 0,\quad \frac{{di }}{{dt}} = 0,\quad \frac{{de }}{{dt}} = 0,\quad 80\ [deg] \leq i \leq 100\ [deg]
 \label{constraints}
 \end{equation}
 
-The equation used to make an orbit frozen are given by \ref{FrozenEcc} for the time derivative of the eccentricity, \ref{FrozenInc} for the time rate of change of the eccentricity and finally \ref{FrozenArg} for the time rate of change of the argument of perigee. Note that \ref{FrozenF} is a continuation of \ref{FrozenArg}. The terms n and p in these equations represent the mean motion and semiparameter respectively, and are given by equations \ref{meanMotion} and \ref{p}.
+The equations used to make an orbit a frozen orbit are given by \ref{FrozenEcc} for the time derivative of the eccentricity, \ref{FrozenInc} for the time rate of change of the eccentricity and finally \ref{FrozenArg} for the time rate of change of the argument of perigee. Note that \ref{FrozenF} is a continuation of \ref{FrozenArg}. The terms n and p in these equations represent the mean motion and semiparameter respectively, and are given by equations \ref{meanMotion} and \ref{p}.
 
 % FROZEN ORBIT
 
@@ -109,20 +106,18 @@ p = a\left( {1 - e^2 } \right)
 \label{p}
 \end{equation}
 
-Before investigating these equations the eccentricity is set equal to zero, this is because it will mean the mirrors or lenses on the satellites do not have to refocus and allow for easier data handling.
-The result of this assumption is that equation \ref{FrozenInc} is automatically satisfied for any inclination, eccentricity, argument of perigee and semimajor axis. So the orbit is frozen w.r.t. the inclination.
+Before investigating these equations the eccentricity is set equal to zero, the reason for this is that the mirrors or lenses on the satellites do not have to refocus and it allows for easier data handling.
+The result is that equation \ref{FrozenInc} is automatically satisfied for any inclination, eccentricity, argument of perigee and semimajor axis. So the orbit is frozen w.r.t. the inclination.
 
-Another effect caused by setting the eccentricity to zero is that the argument of perigee can not be distinguished from another point in the orbit. It can no longer indicate the location of the perigee, because there orbit is circular. As such the argument of perigee is set equal to 90 degrees, resulting in $de/dt$ to become equal to zero for any inlination and altitude.
+Another effect caused by setting the eccentricity to zero is that the argument of perigee can not be distinguished from another point in the orbit. While it would still indicates the perigee, it is meaningless because the orbit is circular. As such the argument of perigee assumed to be able to take any value and so is set equal to 90 degrees, resulting in $de/dt$ to become equal to zero for any inclination and altitude.
 
 \begin{figure}
 \centering
-\includegraphics[width=0.8\textwidth, angle=0]{chapters/img/AltVsOmega.jpg}
-\label{fig:AltVsOmega}
-\caption{$d\omega/dt$ for several altitudes.}
+\includegraphics[width=0.8\textwidth, angle=0]{chapters/img/AltVsOmdot.png}
+\label{fig:AltVsOmdot}
+\caption{$d\omega/dt$ for a range of altitudes and several different inclinations.}
 \end{figure}
 
-Figures \ref{AltVsEdot} shows the only remaining condition for a frozen orbit for several values of the inclination. From this figure and equation \ref{FrozenArg} it can be seen that $d\omega/dt$ is equal to zero if the inclination is equal to 63.43 [deg]. However the constraints \ref{constraints} indicate this is not a possibility. Figure \ref{AltVsEdot} shows that $d\omega/dt$ is maximal at 90 degrees inclination, however the difference between i=80 [deg] and i=90[deg] is only 0.5 [deg/day]. As a result the extra 0.5 [deg/day] is considered an acceptable loss compared to the increased coverage provided by the increased inclination.
+Figures \ref{fig:AltVsOmdot} shows the only remaining condition for a frozen orbit for several values of inclination. From this figure and equation \ref{FrozenArg} it can be seen that $d\omega/dt$ is equal to zero if the inclination is equal to 63.43 [deg]. However the constraints (\ref{constraints}) indicate this is not a possibility. Figure \ref{fig:AltVsOmdot} shows that $d\omega/dt$ is maximal at 90 degrees inclination, however the difference between i=80 [deg] and i=90[deg] is only 0.5 [deg/day]. As a result the extra 0.5 [deg/day] is considered an acceptable loss compared to the increased coverage provided by the increased inclination. However an inclination of 90 [deg] creates problems with collision avoidance for the swarm, so instead an inclination of 85 [deg] is chosen. This allows for an almost complete coverage and a small degrees in the value of $d\omega/dt$, as seen in figure \ref{fig:AltVsOmdot}. Note that an inclination of 85 [deg] is chosen instead of an inclination of 95 [deg] is that 85 [deg] inclination means the orbit is prograde, which reduces the required $\Delta$V. Equation \ref{FrozenArg} indicates that the rate of change for the argument of perigee is the same.
 
-Summarizing this means that the inclination is equal to 90 [deg], the eccentricity is equal to 0 [-], and the argument of perigee is equal to 90 [deg].
-
-\end{document}
+Summarizing the results so far yields that the inclination is equal to 85 [deg], the eccentricity is equal to 0 [-], and the argument of perigee is equal to 90 [deg].
