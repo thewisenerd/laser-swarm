@@ -1,6 +1,6 @@
 \subsection{Optical Receiver Device}
 \label{TOORD}
-The main objective of the \ac{ORD} is to detect the individual energy quanta. A large fraction of the photons emitted by the \acs{laser} are not that easy for detection since they are redirected by the atmosphere, spread due to surface scattering or they are simply absorbed partly by either of them(more detail about atmospheric absorption on appendix ?). The decrease in photon quantity is really severe considering these factors and that is why a photon detector with comparable high quantum efficiency is required. Since the number of photons actually reaching the perimeter of the \ac{ORD} is usually only in the order of one to ten, the \acs{ORD} has to be able to detect and analyze individual small energy packets, preferably single photons. In this section, design option tree is pruned firstly, and there are new approaches after deeply research. After that, trade off is performed which is split up into trade method, trade criteria and weight factor. Finally, trade off summary is drawn.
+The main objective of the \ac{ORD} is to detect the individual energy quanta. A large fraction of the photons emitted by the \acs{laser} are not that easy for detection since they are redirected by the atmosphere, spread due to surface scattering or they are simply absorbed partly by either of them(more detail about atmospheric absorption on appendix ?). The decrease in photon quantity is really severe considering these factors and that is why a photon detector with comparable high quantum efficiency is required. Since the number of photons actually reaching the perimeter of the \ac{ORD} is usually only in the order of one to ten, the \acs{ORD} has to be able to detect and analyze individual small energy packets, preferably single photons. In this section, general introduction about photon detection is drawn first, then the \acs{laser} wavelength estimation is performed to narrow down wavelength range.After that design option tree is pruned according to the wavelength requirement and technology availability, and there are new approaches after deeply research. Finally the trade off is performed which is split up into trade method, trade criteria and weight factor, followed by trade off summary. The design selection for the optical receiver device is done at the end of the section.
 
 \subsubsection{General Introduction to Photon Detection}
 \label{introReceiver}
@@ -10,7 +10,7 @@ Additional factors include the detector material \textit{sensitivity} and the de
 
 \subsubsection{Solide-State Photon Detection}
 \label{ssphotonsensing}
-Solid-state imaging is based on the physical principle of converting light (photons) into a measurable quantity (electrical voltage, electrical current). Photons falling onto and penetrating into a semiconductor substrate can transfer part of their energy to the substrate by generating electron-hole pairs. For an n-type semiconductor, if the energy content of the photons is high enough, electrons can be released from the valence band and swept into the conduction band, leaving behind a hole in the valence band. To generate an electron-hole pair, the energy of the photons has to be larger than the bandgap of the semicondector substrate.
+Solid-state imaging is based on the physical principle of converting light (photons) into a measurable quantity (electrical voltage, electrical current). Photons falling onto and penetrating into a semiconductor substrate can transfer part of their energy to the substrate by generating electron-hole pairs. For an n-type semiconductor, if the energy content of the photons is high enough, electrons can be released from the valence band and swept into the conduction band, leaving behind a hole in the valence band. To generate an electron-hole pair, the energy of the photons has to be larger than the bandgap of the semicondector substrate.\cite{photogrammetry}
 
 For reasons of cost and miniaturization, a solid state solution for single photon detection is highly desirable. Figure \ref{fig:intro_receiver1} on page \ref{fig:intro_receiver1} shows a classification that covers the current state-of-the-art on optical solid-state 3D image sensors. 
 
@@ -21,11 +21,24 @@ For reasons of cost and miniaturization, a solid state solution for single photo
 \label{fig:intro_receiver1}
 \end{figure}
 
+\subsubsection{\acs{SPAD}}
+\label{SPAD}
+\ac{SPAD} are solid-state semiconductor devices based on a p-n junction reversed biased at a voltage $V_{a}$ higher than $V_{B}$.
+
+\begin{figure}
+\centering
+\includegraphics[scale = 1]{chapters/img/SPAD_Cross-section.png}
+\caption{\acs{SPAD} cross-section diagram.}
+\label{fig:SPAD_cross-section}
+\end{figure}
+
+At this bias, the electric field is so high (higher than 3¡Á105 V/cm) that a single charge carrier injected in the depletion layer can trigger a self-sustaining avalanche. The current rises swiftly (sub nanosecond rise-time) to a macroscopic steady level, in the milliampere range. If the primary carrier is photo-generated, the leading edge of the avalanche pulse marks (with picoseconds time jitter) the arrival time of the detected photon. The current continues until the avalanche is quenched by lowering the bias voltage VD down to or below $V_{B}$: the lower electric field is not able any more to accelerate the carriers to impact-ionize with lattice atoms, therefore current ceases. In order to be able to detect another photon, the bias voltage must be raised again above breakdown.\cite{SPAD_wiki}
+
 \subsubsection{Wavelength estimation}
 \label{introReceiver}
 Laser wavelength is one of the most important parameters influencing the whole design of photon detection device and \acs{laser} emitter choosing. Different emitter wavelengths have different photon detection efficiency or probability to photon receiver. To choose which type of \acs{laser} is feasible, it is best to start with which wavelength the receiver can detect.
 
-According to the photon detection probability distribution diagram for \acs{SPAD} and \acs{MPD} in figure \ref{fig:SPAD_efficiency} and \ref{fig:MPD_efficiency}, the general most sufficient wavelength range is between 400nm to 900nm. 
+According to the photon detection probability distribution diagram for \acs{SPAD} and \acs{MPD} in figure \ref{fig:SPAD_efficiency} and \ref{fig:MPD_efficiency} on page \ref{fig:SPAD_efficiency} and \ref{fig:MPD_efficiency}, the general most sufficient wavelength range is between 400nm to 900nm. 
 
 \begin{figure}
 \centering
@@ -41,7 +54,7 @@ According to the photon detection probability distribution diagram for \acs{SPAD
 \label{fig:MPD_efficiency}
 \end{figure}
 
-There are not much qualified \acs{laser}s can be considered below the wavelength 400nm, and the photon detection probability is insufficient if the wavelength go above 900nm. In order to narrow the wavelength range, the atmospheric transmittance versus photon detection efficiency ratio is introduced, which means that larger ratio indicates larger chance the receiver can detect photon. The actual formula to calculate the ratio is R = transmittance$^{2} \times$ photon efficiency. The transmittance is squared because the light go through the atmosphere twice. Calculate all ratio between wavelength 400nm to 900nm by interval 25nm, and plot the ratios in figure \ref{fig:wavelength_estimation} on page \ref{fig:wavelength_estimation}. From the graph, it is wise to narrow down the wavelength range to 425nm-475nm.  The following sections will give brief trade-offs between \acs{laser} emitters and receivers.
+There are not much qualified \acs{laser}s can be considered below the wavelength 400nm, and the photon detection probability is insufficient if the wavelength go above 900nm. In order to narrow the wavelength range, the atmospheric transmittance versus photon detection efficiency ratio is introduced, which means that larger ratio indicates larger chance the receiver can detect photon. The actual formula to calculate the ratio is R = transmittance$^{2} \times$ photon efficiency. The transmittance is squared because the light go through the atmosphere twice. Calculate all ratio between wavelength 400nm to 900nm by interval 25nm, and plot the ratios in figure \ref{fig:wavelength_estimation} on page \ref{fig:wavelength_estimation}. From the graph, it is easy to narrow down the wavelength range to 425nm-475nm.  The following sections will give brief trade-offs between \acs{laser} emitters and receivers.
 
 \begin{figure}
 \centering
