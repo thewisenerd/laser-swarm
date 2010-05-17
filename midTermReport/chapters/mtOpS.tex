@@ -297,19 +297,20 @@ The mass and volume are particularly dependent on the \acs{laser} cavity length,
  
 	
 	\subsubsection{Thermal Control Solid-State \acs{laser}}
-\section{Laser Thermal Control}
+\subsection{Laser Thermal Control}
 	\label{mtLSRthermal}
 The functioning of the optical payload is dependent on a specific temperature interval, so in order to be able to meet the top level requirements, thermal control considerations for the emitter and receiver should be taken into account. 
 
-\subsection{Thermal Physics}
+\subsubsection{Thermal Physics}
 	\label{mtLSRthermalphysics}
 Two important mechanisms of thermal conductivity are (free) electron translation (crystal momentum) and phonon states. A phonon (state) is a quantum of acoustic energy, analogous to the quantum of electromagnetic radiation, the photon. Thermal excitations in a crystal or in an elastic medium can be described as a population of phonons. Basically, phonons represent a mode of vibration occurring in a rigid crystal lattice. Since, on one side, individual electrons in a crystal lattice are bound in terms of quantisized energy levels and on the other side they are interconnected to neighboring particles by electric force (attraction or repulsion) as a function of distance, in most solids the energy given to lattice vibrations is the dominant contribution to the heat capacity, i.e. induced thermal energy is converted to a change in rate of crystal momentum or phonon state, which can be represented by a difference in internal energy. In this light, the terms 'thermal energy' and 'internal energy' represent the same quantity. 
 
 From an electron point of view, a change in temperature (or any change in state variable) represents the quest for a new thermal equilibrium situation. Since electrons are fermions, their orbit population is described by the temperature dependent Fermi-Dirac distribution. Fermions show the tendency to occupy the lowest energy levels and since they are limited due to Pauli's exclusion principle, which states no identical fermion with equal intrinsic spin can occupy the same energetic orbit, not every electron can be in the ground state. Increasing the internal energy will therefor represent thermal excitation.  
 
-\subsection{Theoretical Thermal Limits For Lasers}
-	\subsubsection{Gain Medium Thermal Overloading}
-		\label{mtLSRthermaloverload}	
+\subsubsection{Theoretical Thermal Limits For Lasers}
+	
+\begin{itemize}
+	\item Gain Medium Thermal Overloading
 Thermal overloading can be divided to the temperature interval at which electron excitation is impossible and the interval at which permanent crystal lattice deformation occurs.
 
 \textit{Short term temperature increase (T $<$ 323.15K)}
@@ -317,10 +318,8 @@ To begin with the first phenomenon, in order to excite any electron, the conduct
 
 \textit{Long term temperature increase (T $>$ 323.15K)}
 However, if the induced (thermal) energy is increased even further, the crystal lattice can eventually alter in time. This crystal lattice deformation not only implies the gain material, but all optical subparts, causing possible lasing failure. Recrystallization of the material can occur if the upper limit of the temperature interval is reached, giving birth to long-term (partial) failure. Another longterm effect is thermal fatigue for parts within the laser.
-
-	\subsubsection{Thermal Lensing}
-		\label{mtLSRthermallensing}
-		
+	
+\item Thermal Lensing
 \textit{Long term temperature increase (T $>$ 303.15K)}
 Particularly in high-power lasers, the appearance of a temperature-gradient in the gain medium often causes a significant 'thermal lens'. The gain medium has higher internal energy on the beam axis, typically causing some transverse gradient of the refractive index according to the temperature-dependent Sellmeier equation. 
 
@@ -345,23 +344,22 @@ The Sellmeiser equation could also be used for the change in refractive index fo
 \end{figure}
 
 External induced thermal energy can therefor cause the formation of a thermal lens, causing the beam quality to alter. Especially beam divergence tends to decrease by the formation of a thermal lens, i.e. the change in refractive index change per unit temperature (dn/dT) should be kept within limits. The absence of thermal control can even lead to non-localized thermal lensing, since temperature-gradients can be localized away from the principal axes. 
-			
-	\subsubsection{Multi-Phonon Transitions}
-		\label{mtLSRphonon}
+
+\item Multi-Phonon Transitions
 \textit{Long term temperature increase (T $>$ 353.15K)}
 The upper-state lifetime (the lifetime of the population of the upper laser level) can be strongly reduced by decay processes which involve the simultaneous emission of multiple phonons. Multiple phonons are typically required for such transitions because the energy of a single phonon is not sufficient to match the difference in level energies. The rate of multi-phonon transitions decreases with the increasing number of phonons required. Temperature-gradients can influence the phonon transition and hence influence the the upper-state lifetime, decreasing the beam quality. 
 
-	\subsubsection{Dielectric Transmission}
-		\label{mtLSRditrans}
+\item Dielectric Transmission
 \textit{Long term temperature increase (T $>$ 313.15K)}
 Optically absorbing layers (dielectric transmission decrease) can form on the exit face of the fully reflective mirror and on the doubling crystal, resulting in a decay of output power. The absorbed optical energy creates thermal gradients with which affects phase matching and hence lowering the beam quality. 
 
-	\subsubsection{Limit in Electron Movement}
-		\label{mtLSRelecmovement}
+\item Limit in Electron Movement
 \textit{Long term temperature decrease (T $<$ 273.15K)}
 If the internal energy decreases to much, the exciton dynamics would alter, i.e. electrons will not be able to be excited to higher energy levels. This temperature dependent tendency is caused by the Boltzmann distribution, giving rise to an increase of potential energy at the lowest energy level. 
+\end{itemize}	
 
-\subsection{Thermal Control}
+
+\subsubsection{Thermal Control}
 	\label{mtLSRthermalcontrol}
 As seen in the previous paragraphs, the temperature interval for proper lasing action roughly equals 273.15 $<$ T [K] $<$ 313.15. Since the thermal environmnent is extremely harsh (extremely cold background temperature, intense solar radiation, sudden loss of temperature in shadow and the presence of vacuum), thermal control considerations should be taken into account. 
 
