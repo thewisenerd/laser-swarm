@@ -1,0 +1,17 @@
+\section{Noise Introduction}
+\label{noise}
+
+The main source of noise in the system comes from the Earth's surface. This includes sources on
+the Earth such as lights along highways and reflected radiation, i.e. the Earth's albedo. The amount of
+radiation that is received by the receivers depends on the footprint of the  receivers. This is an
+ellipse created by the intersection of the cone originating from the receiver with the terrain. A
+simplification is made in that the \ac{DEM} is assumed to be a flat area with the elevation of the
+center point.
+ 
+The amount of power emitted per square meter is dependent on the illumination of the Earth by the Sun. If the Sun
+illuminates the footprint, the emitted power is the scattered power of the Sun in the receiver
+detection wavelength bandwidth. This power can be found by integrating Planck's law over the detection spectrum and the solid angle the Sun subtends to the receiver footprint on Earth. If the Sun does not
+illuminate the receiver footprint, the only contribution to noise is the Earth's greybody radiation, which is also taken into account.
+
+While noise propagates through the atmosphere it is also attenuated. This attenuation is
+computed in the same way the signal attenuation is; see section \ref{signPath}.
