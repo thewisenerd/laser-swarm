@@ -40,7 +40,7 @@ OmegaDot = @(a,i) (-3/2).*J2.*(rEarth./p(a)).^2.*cos(i(a)).*n(a);
 % deltaLambda = @(a,i,omega) (OmegaDot(a,i)-nEarth).*Tomega(a,i,omega);
 
 %Plot i for a given a
-a = 300+rEarth:1:2000+rEarth;
+a = 300+rEarth:1:500+rEarth;
 
 %% Sun synchronous orbit
 
@@ -61,15 +61,15 @@ print -dpng 'D:\My Documents\Courses\AE3-001\Shared stuff\midTermReport\chapters
 %Repeart orbit
 %KN = @(a,i,omega) (nEarth-omegaEarth)./(omegaDot(a,i(a),omega)+Mdot(a,i(a)));
 
-i1 = 0 *(pi/180);
-i2 = 15 *(pi/180);
-i3 = 30 *(pi/180);
-i4 = 45 *(pi/180);
-i5 = 60 *(pi/180);
-i6 = 75 *(pi/180);
+i1 = 60 *(pi/180);
+i2 = 65 *(pi/180);
+i3 = 70 *(pi/180);
+i4 = 75 *(pi/180);
+i5 = 80 *(pi/180);
+i6 = 85 *(pi/180);
 i7 = 90 *(pi/180);
-i8 = 105 *(pi/180);
-i9 = 120 *(pi/180);
+% i8 = 95 *(pi/180);
+% i9 = 100 *(pi/180);
 
 %asd;lf
 eDot = @(a,i,omega) (3/2)*((J3*rEarth^3)./p(a).^3)*(1-e^2).*n(a).*sin(i).*cos(omega).*((5/4)*sin(i)^2-1);
@@ -88,11 +88,11 @@ plot(a,eDot(a,i4,omega)*DaySid,'k');
 plot(a,eDot(a,i5,omega)*DaySid,'c');
 plot(a,eDot(a,i6,omega)*DaySid,'m');
 plot(a,eDot(a,i7,omega)*DaySid,'y');
-plot(a,eDot(a,i8,omega)*DaySid,'b--');
-plot(a,eDot(a,i9,omega)*DaySid,'g--');
-xlabel('Semimajor axis [km]');
-ylabel('Eccentricity [-/day]');
-legend('i=0','i=15','i=30','i=45','i=60','i=75','i=90','i=105','i=120');
+% plot(a,eDot(a,i8,omega)*DaySid,'b--');
+% plot(a,eDot(a,i9,omega)*DaySid,'g--');
+xlabel('Altitude [km]');
+ylabel('Time rate of change of the eccentricity [-/day]');
+legend('i=60','i=65','i=70','i=75','i=80','i=85','i=90');
 print -dpng 'D:\My Documents\Courses\AE3-001\Shared stuff\midTermReport\chapters\img\AltVsEdot';
 
 figure3 = figure('Color',[1 1 1]);
@@ -106,43 +106,33 @@ plot(a,(180/pi)*iDot(a,i4,omega)*DaySid,'k');
 plot(a,(180/pi)*iDot(a,i5,omega)*DaySid,'c');
 plot(a,(180/pi)*iDot(a,i6,omega)*DaySid,'m');
 plot(a,(180/pi)*iDot(a,i7,omega)*DaySid,'y');
-plot(a,(180/pi)*iDot(a,i8,omega)*DaySid,'b--');
-plot(a,(180/pi)*iDot(a,i9,omega)*DaySid,'g--');
-xlabel('Semimajor axis [km]');
-ylabel('Inclination [deg/day]');
-legend('i=0','i=15','i=30','i=45','i=60','i=75','i=90','i=105','i=120');
+% plot(a,(180/pi)*iDot(a,i8,omega)*DaySid,'b--');
+% plot(a,(180/pi)*iDot(a,i9,omega)*DaySid,'g--');
+xlabel('Altitude [km]');
+ylabel('Time rate of change of the inclination [deg/day]');
+legend('i=60','i=65','i=70','i=75','i=80','i=85','i=90');
 
 print -dpng 'D:\My Documents\Courses\AE3-001\Shared stuff\midTermReport\chapters\img\AltVsIdot';
 
 %a;ldsjf;
 omegaDot = @(a,i,omega) ((3*J2.*n(a))/(1-e^2)^2).* (rEarth./a).^2.* (1-(5/4).*sin(i).^2);
 
-i1 = 0 *(pi/180);
-i2 = 15 *(pi/180);
-i3 = 30 *(pi/180);
-i4 = 45 *(pi/180);
-i5 = 60 *(pi/180);
-i6 = 75 *(pi/180);
-i7 = 80 *(pi/180);
-i8 = 85 *(pi/180);
-i9 = 90 *(pi/180);
-
 figure4 = figure('Color',[1 1 1]);
 axes('Parent',figure4);
 box('on');
 hold on;
-plot(a,(180/pi)*omegaDot(a,i1,omega)*DaySid,'b');
+plot(a-rEarth,(180/pi)*omegaDot(a,i1,omega)*DaySid,'b');
 %omegaDot = @(a,i,omega) ((3*J2.*n(a))/(1-e^2)^2).* (rEarth./a).^2.* (1-(5/4).*sin(i).^2).* (1 + (J3/(2*J2*(1-e^2))).* (rEarth./a).* ((sin(i).^2-(e*cos(i)).^2)./sin(i))* (sin(omega)/e));
-plot(a,(180/pi)*omegaDot(a,i2,omega)*DaySid,'g');
-plot(a,(180/pi)*omegaDot(a,i3,omega)*DaySid,'r');
-plot(a,(180/pi)*omegaDot(a,i4,omega)*DaySid,'k');
-plot(a,(180/pi)*omegaDot(a,i5,omega)*DaySid,'c');
-plot(a,(180/pi)*omegaDot(a,i6,omega)*DaySid,'m');
-plot(a,(180/pi)*omegaDot(a,i7,omega)*DaySid,'y');
-plot(a,(180/pi)*omegaDot(a,i8,omega)*DaySid,'b--');
-plot(a,(180/pi)*omegaDot(a,i9,omega)*DaySid,'g--');
-xlabel('Semimajor axis [km]');
-ylabel('Argument of perigee [deg/day]');
-legend('i=0','i=15','i=30','i=45','i=60','i=75','i=80','i=85','i=90');
+plot(a-rEarth,(180/pi)*omegaDot(a,i2,omega)*DaySid,'g');
+plot(a-rEarth,(180/pi)*omegaDot(a,i3,omega)*DaySid,'r');
+plot(a-rEarth,(180/pi)*omegaDot(a,i4,omega)*DaySid,'k');
+plot(a-rEarth,(180/pi)*omegaDot(a,i5,omega)*DaySid,'c');
+plot(a-rEarth,(180/pi)*omegaDot(a,i6,omega)*DaySid,'m');
+plot(a-rEarth,(180/pi)*omegaDot(a,i7,omega)*DaySid,'y');
+% plot(a-rEarth,(180/pi)*omegaDot(a,i8,omega)*DaySid,'b--');
+% plot(a-rEarth,(180/pi)*omegaDot(a,i9,omega)*DaySid,'g--');
+xlabel('Altitude [km]');
+ylabel('Time rate of change of the argument of perigee [deg/day]');
+legend('i=60','i=65','i=70','i=75','i=80','i=85','i=90');
 
 print -dpng 'D:\My Documents\Courses\AE3-001\Shared stuff\midTermReport\chapters\img\AltVsOmdot';
