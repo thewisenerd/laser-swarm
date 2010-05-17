@@ -146,14 +146,17 @@ public class Simulator implements Runnable {
 		double z = dR.length() * Math.cos(angle);
 		double x = dR.length() * Math.sin(angle);
 		Vector3d incidence = new Vector3d(x, 0, z);
-		try {
-			ScatteringParam param = earth.getScatteringParam(reflectionPoint);
+		ScatteringParam param;
+		if (Configuration.getInstance().hasAction(Actions.CONSTANT_SCATTER))
 			param = new ScatteringParam(1.5, 1.3, -0.5);
-			simVals.scatter = new ScatteringCharacteristics(incidence, param);
-		} catch (CannotEvaluateException e) {
-			logger.wrn(e, "Cannot find Scattering param of sample %s:", i, simVals);
-			return null;
-		}
+		else
+			try {
+				param = earth.getScatteringParam(reflectionPoint);
+				simVals.scatter = new ScatteringCharacteristics(incidence, param);
+			} catch (CannotEvaluateException e) {
+				logger.wrn(e, "Cannot find Scattering param of sample %s:", i, simVals);
+				return null;
+			}
 
 		/* Compute scatter power per sat */
 		simVals.powerR_SC = Maps.newHashMap();

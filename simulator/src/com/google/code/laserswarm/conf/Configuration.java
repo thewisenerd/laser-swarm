@@ -17,7 +17,16 @@ import com.thoughtworks.xstream.io.json.JsonHierarchicalStreamDriver;
 public class Configuration {
 
 	public enum Actions {
-		SIMULATE, PROCESS, TABULATE, PLOT_DISK, PLOT_SCREEN, SLEEP, PROSPECT, COUNT_ONLY, FORCE_FLAT;
+		SIMULATE,
+		PROCESS,
+		TABULATE,
+		PLOT_DISK,
+		PLOT_SCREEN,
+		SLEEP,
+		PROSPECT,
+		COUNT_ONLY,
+		FORCE_FLAT,
+		CONSTANT_SCATTER;
 	}
 
 	private transient static Configuration	instance;
