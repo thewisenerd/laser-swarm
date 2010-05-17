@@ -1,26 +1,63 @@
-\contentsline {chapter}{\numberline {1}Introduction}{4}
-\contentsline {chapter}{\numberline {2}Technical Design Development}{5}
-\contentsline {section}{\numberline {2.1}Project Approach Description}{5}
-\contentsline {subsection}{\numberline {2.1.1}Group Procedures}{5}
-\contentsline {subsection}{\numberline {2.1.2}Reporting}{5}
-\contentsline {subsection}{\numberline {2.1.3}Project Outline}{6}
-\contentsline {section}{\numberline {2.2}\acl {WFD}}{6}
-\contentsline {section}{\numberline {2.3}\acl {WBS}}{6}
-\contentsline {section}{\numberline {2.4}Gantt chart}{11}
-\contentsline {chapter}{\numberline {3}Simulation}{12}
-\contentsline {section}{\numberline {3.1}Introduction}{12}
-\contentsline {section}{\numberline {3.2}Simulation}{12}
-\contentsline {subsection}{\numberline {3.2.1}Orbit}{12}
-\contentsline {subsection}{\numberline {3.2.2}Earth Model}{13}
-\contentsline {subsubsection}{\acl {DEM}}{13}
-\contentsline {subsubsection}{Scattering Model}{13}
-\contentsline {subsection}{\numberline {3.2.3}Signal Path}{14}
-\contentsline {subsection}{\numberline {3.2.4}Noise}{15}
-\contentsline {section}{\numberline {3.3}Data Analysis}{16}
-\contentsline {subsection}{\numberline {3.3.1}Altitude Determination}{16}
-\contentsline {subsection}{\numberline {3.3.2}\acl {BRDF} Determination}{16}
-\contentsline {chapter}{\numberline {4}Sustainable Development Strategy}{17}
-\contentsline {section}{\numberline {4.1}Production and Logistics}{17}
-\contentsline {section}{\numberline {4.2}Operations}{17}
-\contentsline {section}{\numberline {4.3}End of Life}{18}
-\contentsline {chapter}{\numberline {A}Gantt Chart}{20}
+\contentsline {chapter}{\numberline {1}Introduction}{5}
+\contentsline {chapter}{\numberline {2}Technical Design Development}{6}
+\contentsline {section}{\numberline {2.1}Project Approach Description}{6}
+\contentsline {subsection}{\numberline {2.1.1}Group Procedures}{6}
+\contentsline {subsection}{\numberline {2.1.2}Reporting}{6}
+\contentsline {subsection}{\numberline {2.1.3}Project Outline}{7}
+\contentsline {section}{\numberline {2.2}\acl {WFD}}{7}
+\contentsline {section}{\numberline {2.3}\acl {WBS}}{7}
+\contentsline {section}{\numberline {2.4}Gantt chart}{12}
+\contentsline {chapter}{\numberline {3}Simulation}{13}
+\contentsline {section}{\numberline {3.1}Introduction}{13}
+\contentsline {section}{\numberline {3.2}Simulation}{13}
+\contentsline {subsection}{\numberline {3.2.1}Orbit}{13}
+\contentsline {subsection}{\numberline {3.2.2}Earth Model}{14}
+\contentsline {subsubsection}{\acl {DEM}}{14}
+\contentsline {subsubsection}{Scattering Model}{14}
+\contentsline {subsection}{\numberline {3.2.3}Signal Path}{15}
+\contentsline {subsection}{\numberline {3.2.4}Noise}{16}
+\contentsline {section}{\numberline {3.3}Data Analysis}{17}
+\contentsline {subsection}{\numberline {3.3.1}Altitude Determination}{17}
+\contentsline {subsection}{\numberline {3.3.2}\acl {BRDF} Determination}{17}
+\contentsline {chapter}{\numberline {4}Risk Management}{18}
+\contentsline {section}{\numberline {4.1}Technical Resource Contingencies}{18}
+\contentsline {section}{\numberline {4.2}Technical Risk Assessment}{20}
+\contentsline {subsection}{\numberline {4.2.1}Ground Segment}{20}
+\contentsline {subsection}{\numberline {4.2.2}During Mission}{21}
+\contentsline {subsection}{\numberline {4.2.3}Measurement Protocol}{24}
+\contentsline {subsection}{\numberline {4.2.4}Post-Mission}{26}
+\contentsline {subsection}{\numberline {4.2.5}Risk Control}{26}
+\contentsline {chapter}{\numberline {5}Design Options}{28}
+\contentsline {section}{\numberline {5.1}\acl {ADCS}}{28}
+\contentsline {subsection}{\numberline {5.1.1}Attitude Determination}{28}
+\contentsline {subsection}{\numberline {5.1.2}Attitude Control}{28}
+\contentsline {subsection}{\numberline {5.1.3}Note on Receiver Pointing}{29}
+\contentsline {section}{\numberline {5.2}\acl {OEP}}{29}
+\contentsline {subsection}{\numberline {5.2.1}Introduction}{29}
+\contentsline {subsection}{\numberline {5.2.2}Laser Characteristics}{30}
+\contentsline {subsection}{\numberline {5.2.3}Laser Types}{30}
+\contentsline {section}{\numberline {5.3}\acl {EPS}}{31}
+\contentsline {subsection}{\numberline {5.3.1}The Power Source}{31}
+\contentsline {subsection}{\numberline {5.3.2}Power Storage}{32}
+\contentsline {subsection}{\numberline {5.3.3}Power Regulation and Control}{32}
+\contentsline {subsection}{\numberline {5.3.4}Power Distribution}{33}
+\contentsline {section}{\numberline {5.4}Communications}{33}
+\contentsline {subsection}{\numberline {5.4.1}Tracking}{34}
+\contentsline {subsection}{\numberline {5.4.2}Swarm Satellites Crosslink Frequency}{34}
+\contentsline {subsection}{\numberline {5.4.3}D/L and U/L Frequency}{35}
+\contentsline {subsection}{\numberline {5.4.4}Antenna Configuration}{35}
+\contentsline {subsection}{\numberline {5.4.5}Data Storage}{35}
+\contentsline {subsection}{\numberline {5.4.6}Communications Architecture}{35}
+\contentsline {section}{\numberline {5.5}Orbit Architecture}{36}
+\contentsline {subsection}{\numberline {5.5.1}Common Orbits}{36}
+\contentsline {subsection}{\numberline {5.5.2}Low Earth Orbit}{37}
+\contentsline {subsection}{\numberline {5.5.3}Medium Earth Orbit}{37}
+\contentsline {subsection}{\numberline {5.5.4}Geosynchronous Orbit}{37}
+\contentsline {subsection}{\numberline {5.5.5}High Earth Orbit}{38}
+\contentsline {subsubsection}{Highly Elliptical Orbit}{38}
+\contentsline {chapter}{\numberline {6}Sustainable Development Strategy}{39}
+\contentsline {section}{\numberline {6.1}Production and Logistics}{39}
+\contentsline {section}{\numberline {6.2}Operations}{39}
+\contentsline {section}{\numberline {6.3}End of Life}{40}
+\contentsline {chapter}{\numberline {A}Design Option Diagrams}{42}
+\contentsline {chapter}{\numberline {B}Gantt Chart}{54}

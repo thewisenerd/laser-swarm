@@ -93,66 +93,55 @@
 \input{chapters/scatter.tex}
 \input{chapters/signPath.tex}
 \input{chapters/noise.tex}
-
-%%%%%%%%%%%%%
-%
-%       DATA ANALYSIS CHAPTER
-%
-%%%%%%%%%%%%%
-
 \input{chapters/dataAnalysis.tex}
 \input{chapters/altDet.tex}
 \input{chapters/BRDFDet.tex}
 
 %%%%%%%%%%%%%
 %
-%       Functions and requirements
+%       RISK MANAGEMENT
 %
 %%%%%%%%%%%%%
 
-% \chapter{Functions and Requirements}
-% \label{blFuncChapter}
-% \input{chapters/blFUNFlows.tex}
-% \input{chapters/blFRReqDisc.tex}
+\input{chapters/contingency.tex}
+\input{chapters/riskmap.tex}
 
 %%%%%%%%%%%%%
 %
-%       Budget Breakdown
+%       DESIGN OPTIONS
 %
 %%%%%%%%%%%%%
 
-% \chapter{Budget Breakdown}
-% \label{blBudgets}
-% \input{chapters/blHR.tex}
-% \input{chapters/blBUDmass.tex}
-% \input{chapters/blBudgetCost.tex}
-% \input{chapters/blBudgetPower.tex}
-% \input{chapters/blCont.tex}
+\input{chapters/designOptionsIntro.tex}
+\input{chapters/designOptionsADCS.tex}
+\input{chapters/designOptionsEmitter.tex}
+\input{chapters/designOptionsPower.tex}
+\input{chapters/designOptionsCommunications.tex}
+\input{chapters/designOptionsOrbit.tex}
 
 %%%%%%%%%%%%%
 %
-%       Technical Risk Asessement
+%       INTERFACE
 %
 %%%%%%%%%%%%%
 
-% \chapter{Technical Risk Assessment}
-% \label{blRisk}
-% \input{chapters/blTRA.tex}
-
 %%%%%%%%%%%%%
 %
-%       Design Options
+%       TRADEOFF
 %
 %%%%%%%%%%%%%
 
-% \chapter{Design Options}
-% \label{blDesignOptions}
-% \input{chapters/blDOadcs.tex}
-% \input{chapters/blDOEPS.tex}
-% \input{chapters/blDOCOM.tex}
-% \input{chapters/blDOOrb.tex}
-% \input{chapters/blDOLSR.tex}
-% \input{chapters/blDOreceiver.tex}
+%%%%%%%%%%%%%
+%
+%       OPS & LOGISTICS
+%
+%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%
+%
+%       STABILITY & CONTROL
+%
+%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%
 %
@@ -164,27 +153,6 @@
 \input{chapters/SSPRO.tex}
 \input{chapters/SSOPE.tex}
 \input{chapters/SSEOL.tex}
-
-
-%%%%%%%%%%%%%
-%
-%       Return on investment
-%
-%%%%%%%%%%%%%
-
-% \chapter{Return on Investment and Operational Profit}
-% \label{blInvestment}
-% \input{chapters/blMA.tex}
-
-%%%%%%%%%%%%%
-%
-%       RAMS
-%
-%%%%%%%%%%%%%
-
-% \chapter{R.A.M.S.}
-% \label{blRAMS1}
-% \input{chapters/blRAMS.tex}
 
 %%%%%%%%%%%%%
 %
@@ -206,6 +174,7 @@
 % \label{reqdisctree}
 
 \appendix
+\input{chapters/designOptionsDiagrams}
 \chapter{Gantt Chart}
 \label{ganttChart}
 
