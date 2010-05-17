@@ -32,7 +32,7 @@ import org.apache.commons.math.MathException;
 import org.apache.commons.math.stat.*;
 
 import com.google.code.laserswarm.ProcessorTester;
-import com.google.code.laserswarm.ProcessorTester.RandData;
+import com.google.code.laserswarm.RandData;
 import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.conf.Satellite;
 import com.google.code.laserswarm.earthModel.Convert;
@@ -255,15 +255,15 @@ public class AntiSimulator {
 
 		Satellite emit = hist.getEm(); // satellite emitter
 		double[] ret = new double[hist.time.size()];
-		double t0 =  hist.time.first(); //initial time
-		double tf =  hist.time.last();	//final time
-		double timelim = t0;
+		//double t0 =  hist.time.first(); //initial time
+	//	double tf =  hist.time.last();	//final time
+		//double timelim = t0;
 		int i = 0;
 		double tcur = 0;
 		int bin_freq = (int) 1E5;
 		double timeframe = 5E5/Constants.c; //alt over speed of light //1.0/bin_freq;
 
-		System.out.println("first emitted : " + t0 + "s \n last emitted : " + tf);
+		//System.out.println("first emitted : " + t0 + "s \n last emitted : " + tf);
 		//double timeit = hist.time.iterator().;			//CHANGE
 		List<SimVars> retval = Lists.newLinkedList();
 		Vector3d pos =  new Vector3d(0,0,0);
@@ -285,7 +285,7 @@ public class AntiSimulator {
 		// double[] t;
 	
 		if(i % modi == 0)System.out.print("desimulating \n");
-		timeIt.next();
+		//timeIt.next();
 	//	for (int i = 0; i < hist.time.size(); i++) { // iterate over all the time instances.
 		while(timeIt.hasNext())	{			//iterate over all the Sent pulses
 			 //offset one
@@ -334,7 +334,7 @@ public class AntiSimulator {
 					double t1 = hist.getPulseBeforePulse(d.doubleValue());
 					// em.get(hist).getLookupPosition(); // the time of the
 					// sent pulse
-					Point3d emitp = new Point3d(em.get(emit).getLookupPosition().find(t1));
+					Point3d emitp = new Point3d(hist.getPosition().find(d.doubleValue()));
 					Point3d recp = new   Point3d(iter.getValue().getLookupPosition().find(d.doubleValue()));
 					
 					altPoints.add(new Double(AntiSimulator.calcalt( emitp, recp, d.doubleValue() - t1)));
@@ -466,16 +466,45 @@ public class AntiSimulator {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		// 
+/*		
 		double[] ter;
 		Map<Satellite, TimeLine> em;
 		Map<Satellite, TimeLine> rec;
 		EmitterHistory hist;
+		String flname = "ser_PT";
 		ProcessorTester tester = new ProcessorTester();
 		RandData ret;
-		ret = tester.testProcessing();
-
+		ret = RandData.load(flname);
+		 if(ret == null ){
+			 ret = tester.testProcessing();
+			 RandData.save(flname, ret);
+			 
+		 }
+		
 		Satellite emit;
-		int i = 0;
+		int i = 0;*/
+		Satellite sat1 = new Satellite();
+		Satellite sat2 = new Satellite();
+	Vector<Double> vec1 = new Vector<Double>();
+	Vector<Double> vec2 = new Vector<Double>();
+	vec1.add(new Double(2));
+	vec1.add(new Double(5));
+	vec1.add(new Double(10));
+	vec1.add(new Double(7));
+	vec1.add(new Double(3));
+	
+	vec2.add(new Double(2));
+	vec2.add(new Double(5));
+	vec2.add(new Double(10));
+	vec2.add(new Double(7));
+	vec2.add(new Double(3));
+	
+	
+	Map<Satellite, Vector<Double>> alda = Maps.newHashMap();
+	alda.put(sat1, vec1) ;
+	System.out.println(extractpath(alda));
+	 alda.put(sat2,vec2);
+	 System.out.println(extractpath(alda));
 		// List<SimVars> hi = Lists.newLinkedList();
 		// for(i = 0; i<ter.length-1; i++){
 		// SimVars tmpSim = new SimVars();
@@ -484,11 +513,11 @@ public class AntiSimulator {
 		// hi.add(tmpSim);
 		// //tmpSim.
 		// }
-		plotHeightDistribution plotter = new plotHeightDistribution();
+/*		plotHeightDistribution plotter = new plotHeightDistribution();
 		plotter.plot(desim(ret.getRec(),ret.getEm(),ret.getEmHist()),3,"vafli");
 		// for ( Map<Double,Integer> ter:
 		// ret.getEm().get(ret.getEm().keySet().iterator().next()).getIterator(3).next().) {
-		Vector<Integer> hi = new Vector<Integer>();
+		Vector<Integer> hi = new Vector<Integer>();*/
 		
 /*		try {
 
