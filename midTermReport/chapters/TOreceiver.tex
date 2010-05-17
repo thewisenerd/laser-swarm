@@ -1,10 +1,59 @@
-\section{Optical Receiver Device}
+\subsection{Optical Receiver Device}
 \label{TOORD}
 The main objective of the \ac{ORD} is to detect the individual energy quanta. A large fraction of the photons emitted by the \acs{laser} are not that easy for detection since they are redirected by the atmosphere, spread due to surface scattering or they are simply absorbed partly by either of them(more detail about atmospheric absorption on appendix ?). The decrease in photon quantity is really severe considering these factors and that is why a photon detector with comparable high quantum efficiency is required. Since the number of photons actually reaching the perimeter of the \ac{ORD} is usually only in the order of one to ten, the \acs{ORD} has to be able to detect and analyze individual small energy packets, preferably single photons. In this section, design option tree is pruned firstly, and there are new approaches after deeply research. After that, trade off is performed which is split up into trade method, trade criteria and weight factor. Finally, trade off summary is drawn.
 
-\subsection{Receiver Prune}
+\subsubsection{General Introduction to Photon Detection}
+\label{introReceiver}
+Photon detection typically occurs in a two-step process: the absorbed photon creates a measurable change in the detector's electrical properties, and the changes is registered in an external read-out integrated circuit (\acs{ROIC}). In general, the detector material responds either \textit{directly} to the incident photon by generating a free charge, with this charge then being responsible for producing the change in electrical properties, or \textit{indirectly}, with the absorbed optical power generating a temperature rise in the detector material, which is responsible for producing the change in electrical properties. In either case, this photon-induced analog signal is registered and amplified in the \acs{ROIC} digitization for further signal processing. 
+
+Additional factors include the detector material \textit{sensitivity} and the detector \textit{device speed of response}. Sensitivity is a measure of how few photons are required to raise the detector output above any background noise level present in the absence of incident light. Response speed is a measure of how faithfully the detector's electrical output responds to changes in the intensity of the input light signal.
+
+\subsubsection{Solide-State Photon Detection}
+\label{ssphotonsensing}
+Solid-state imaging is based on the physical principle of converting light (photons) into a measurable quantity (electrical voltage, electrical current). Photons falling onto and penetrating into a semiconductor substrate can transfer part of their energy to the substrate by generating electron-hole pairs. For an n-type semiconductor, if the energy content of the photons is high enough, electrons can be released from the valence band and swept into the conduction band, leaving behind a hole in the valence band. To generate an electron-hole pair, the energy of the photons has to be larger than the bandgap of the semicondector substrate.
+
+For reasons of cost and miniaturization, a solid state solution for single photon detection is highly desirable. Figure \ref{fig:intro_receiver1} on page \ref{fig:intro_receiver1} shows a classification that covers the current state-of-the-art on optical solid-state 3D image sensors. 
+
+\begin{figure}
+\centering
+\includegraphics[scale = 1]{chapters/img/intro_receiver1.png}
+\caption{Classification of state-of-the-art optical TOF image sensors.}
+\label{fig:intro_receiver1}
+\end{figure}
+
+\subsubsection{Wavelength estimation}
+\label{introReceiver}
+Laser wavelength is one of the most important parameters influencing the whole design of photon detection device and \acs{laser} emitter choosing. Different emitter wavelengths have different photon detection efficiency or probability to photon receiver. To choose which type of \acs{laser} is feasible, it is best to start with which wavelength the receiver can detect.
+
+According to the photon detection probability distribution diagram for \acs{SPAD} and \acs{MPD} in figure \ref{fig:SPAD_efficiency} and \ref{fig:MPD_efficiency}, the general most sufficient wavelength range is between 400nm to 900nm. 
+
+\begin{figure}
+\centering
+\includegraphics[scale=1]{chapters/img/SPAD_efficiency.png}
+\caption{\acs{SPAD} photon detection probability as a function of wavelength for two values of excess bias voltage}
+\label{fig:SPAD_efficiency}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[scale=1]{chapters/img/MPD_efficiency.png}
+\caption{\acs{MPD} photon detection probability as a function of wavelength}
+\label{fig:MPD_efficiency}
+\end{figure}
+
+There are not much qualified \acs{laser}s can be considered below the wavelength 400nm, and the photon detection probability is insufficient if the wavelength go above 900nm. In order to narrow the wavelength range, the atmospheric transmittance versus photon detection efficiency ratio is introduced, which means that larger ratio indicates larger chance the receiver can detect photon. The actual formula to calculate the ratio is R = transmittance$^{2} \times$ photon efficiency. The transmittance is squared because the light go through the atmosphere twice. Calculate all ratio between wavelength 400nm to 900nm by interval 25nm, and plot the ratios in figure \ref{fig:wavelength_estimation} on page \ref{fig:wavelength_estimation}. From the graph, it is wise to narrow down the wavelength range to 425nm-475nm.  The following sections will give brief trade-offs between \acs{laser} emitters and receivers.
+
+\begin{figure}
+\centering
+\includegraphics[scale=1]{chapters/img/wavelength_estimation.png}
+\caption{Ratio of atmospheric transmittance versus photon detection efficiency}
+\label{fig:wavelength_estimation}
+\end{figure}
+
+
+\subsubsection{Receiver Prune}
 \label{TOReceiverP}
-In the design option tree, the GLAS branch is obviously dropped out, since we are trying to improve the whole concept. Meanwhile, the \ac{MPD}'s single-photon detection modules branch has different quantum efficiency for different wavelength. Which means MPD can be a good option for the blue laser detector with 35\% efficiency. The \ac{SPAD} chip could be an approach since it has reasonable high quantum detect efficiency at laser wavelength 450nm. Both \acs{MPD} and \acs{SPAD} are not optimal for \acs{NIR} or \acs{IR} laser detect with low quantum efficiency around 1\%. 
+In the design option tree, the GLAS branch is obviously dropped out, since we are trying to improve the whole concept. Meanwhile, the \ac{MPD}'s single-photon detection modules branch has different quantum efficiency for different wavelength. Which means MPD can be a good option for the blue laser detector with 35\% efficiency. The \ac{SPAD} chip could be an approach since it has reasonable high quantum detect efficiency at laser wavelength 425nm to 475nm. Both \acs{MPD} and \acs{SPAD} are not optimal for \acs{NIR} or \acs{IR} laser detect with low quantum efficiency around 1\%. 
 
 The pruned design option tree for the laser detector can be seen in figure \ref{fig:PrunedReceiver} on page \ref{fig:PrunedReceiver}.
 
@@ -15,7 +64,7 @@ The pruned design option tree for the laser detector can be seen in figure \ref{
 \label{fig:PrunedReceiver}
 \end{figure}
 
-\subsection{Trade Method}
+\subsubsection{Trade Method}
 \label{TOReceiverM}
 There are mainly four options after pruning and each have different strong points or weak points. 
 
@@ -47,17 +96,18 @@ Another way to increase the receiving efficiency is using the faceted mirror suc
 \end{figure}
 
 
-\subsection{Trade Criteria}
+\subsubsection{Trade Criteria}
 \label{TOReceiverC}
 In the last paragraph, the general trade off method is elaborated but not in quantity way. It is more precise and clear to give some trade criteria to compare between options, which can be graded from 1-10 (worse to best) to indicate each criterion performance. Mass, power, volume are criteria considered as design of a constellation of micro or nano satellites. The criteria such as efficiency, reliability, resolution and \ac{FOV} are defined whether the receiver can detect photon or not and how precision it could be. Meanwhile, Cost, lifetime and availability need to be noticed generally in each subsystem.
 
-\subsection{Weight Factor}
+\subsubsection{Weight Factor}
 \label{TOReceiverWF}
 Weight factor is given differently to each criterion due to mission objective and instrument performance requirement. Lifetime is the top objective and efficiency determines the photons can be detect or not, so both are given as maximum 10. Power, mass, volume are important since micro or nano receivers are considered. Meanwhile resolution, reliability and \acs{FOV} are also important to perform continuous accurate measurements. The mission objective is about feasibility study, so cost and availability are not the essential part.
 
-\subsection{Trade summary}
+\subsubsection{Trade summary}
 \label{TOReceiverS}
-The trade off table is shown in figure \ref{fig:receiver_tradeoff} on page \ref{fig:receiver_tradeoff}. The \acs{SPAD} plus micro lenses and faceted mirror designs have the much higher grades than \acs{SILAT} or \acs{MPD}. The \acs{SPAD} with micro lenses has only one point for efficiencywhywhywhy?
+The trade off table is shown in figure \ref{fig:receiver_tradeoff} on page \ref{fig:receiver_tradeoff}. The \acs{SPAD} plus micro lenses and faceted mirror designs have the much higher grades than \acs{SILAT} or \acs{MPD}. The \acs{SPAD} with micro lenses has lowest grade for efficiency, because the lenses which is manufactured in scale of micro meters can only increase the efficiency by factor of 5. On the other hand, the faceted mirror can increase the fill field from 2\% to 80\%, that is why faceted mirror has much larger efficiency. The \acs{SPAD} with faceted mirror design has the large advantages on power comsuption(100$\mu$W), mass(tens of grams) and volume($5\times5\times3[mm^{3}]$) comparing to either \acs{SILAT} or \acs{MPD}, that is much more realistic and practical if the swarm of receiver satellites are in scale of micro or even nano. 
+
 \begin{figure}
 \centering
 \includegraphics[scale = 1]{chapters/img/Receiver_tradeoff.png}
