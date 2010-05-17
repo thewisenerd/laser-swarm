@@ -3,21 +3,21 @@ For the pointing of the receiver instrument three options are considered. The fi
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.8\textwidth, bb=0 0 895px 298px]{img/pointingsystemoptions.png} 
+\includegraphics[width=0.8\textwidth]{chapters/img/pointingsystemoptions.png} 
 \label{fig:pointeroptions}
 \caption[Design options for the pointing mechanism]{Design options for the pointing mechanism. The first option uses only the \ac{ACS}, the second option only mechanical actuators, the third option is a combination of both using the \ac{ACS} for the yaw-axis and a mechanical actuator for the other axis. The light grey box represents the instrument, one shade darker are reaction wheels and the dark boxes are actuators.}
 \end{figure}
 
-\subsubsection{Trade Method}
+\subsection{Trade Method}
 The trade-off is done by comparing the three concepts on a number of criteria. Each criterion is given a weight factor to show how important the criterion is compared to the others.
 
-\subsubsection{Trade Criteria}
+\subsection{Trade Criteria}
 The trade-off criteria used are pointing accuracy, pointing rate, added weight, reliability, power, influence on other subsystems and the system complexity.
 
-\subsubsection{Weight Factors}
+\subsection{Weight Factors}
 Because the instrument can not work if the satellite is not pointed towards the ground target the pointing accuracy and pointing rate are given a weight factor of 5. The complexity, reliability and influence on other subsystems are less important comparably since the swarm is used for redundancy in making measurements and other subsystems can be adapted to meet their requirements, a weight factor of 3 is given. The weight and power use of the system is given a factor of 2, because it is important for the satellite as a whole, but not the main driver for the mission.
 
-\subsubsection{Trade-off}
+\subsection{Trade-off}
 Table \ref{tab:pointingtradeoff} on page \pageref{tab:pointingtradeoff} shows the numerical values assigned to the different criteria. 
 Pointing with only stepper motors can be done the most precise, the combination with a reaction wheel for the yaw-axis the precision around that axis will be lower, using only the \ac{ACS} the accuracy will be the lowest. 
 Stepper motors are able to respond really quickly, the reaction wheel option takes a lot longer to respond, since it has to move the entire satellite, not just a part. The pointing speed for the hybrid system will be somewhere in between, but will be better than average given the change in ground elevation will be larger than the change in relative position of the emitter.

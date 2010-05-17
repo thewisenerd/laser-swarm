@@ -1,3 +1,4 @@
+\clearpage
 \section{Optical Sensing}
 \label{Optical_emitter_receiver}
 \subsection{Introduction}
@@ -13,7 +14,7 @@ The capacity of any instrument to be able to detect and emit electromagnetic rad
 \label{introAtmospheric}
 For optical signal propagation in the atmosphere, the physical processes dictating the choice of wavelength are summarized in figure \ref{fig:intro_atmosphere} on page \ref{fig:intro_atmosphere}, which illustrate show the effects of the strong absorption by atmospheric gases act to limit transmission to distinct wavelength regions, or spectral bands.
 
-\begin{figure}
+\begin{figure}[ht!]
 \centering
 \includegraphics[scale = 0.8]{chapters/img/intro_atmosphere.png}
 \caption{A schematic summary illustrating how absorption by various constituents in the atmosphere influences the propagation of light and divides the spectrum into distinct bands.}
@@ -22,7 +23,7 @@ For optical signal propagation in the atmosphere, the physical processes dictati
 
 With in these bands, the atmosphere is relatively transparent and imaging sensor systems can operate efficiently. For wavelengths longer than about one micro-meter, the dominant absorption is related to excitation of molecular vibrations in water vapor and carbon dioxide. When examined in detail, these processes three distinct transmission windows: the near or shortwave infrared bands (\acs{NIR} $\lambda$ ~ 0.7 to 1.1 $\mu$m and \acs{SWIR} 1.1 to 2.5 $\mu$m), the midwave IR band (\acs{MWIR} $\lambda$ ~ 3.3 to 5.0 $\mu$m), and the long-wave IR band (\acs{LWIR} $\lambda$ ~ 8 to 14 $\mu$m). Figure \ref{fig:intro_atmosphere_bands} on page \ref{fig:intro_atmosphere_bands} shows the absorption and scattering of direct light in the earth's atmosphere.
 
-\begin{figure}
+\begin{figure}[ht!]
 \centering
 \includegraphics[scale = 0.45]{chapters/img/intro_atmosphere_bands.png}
 \caption{Atmospheric Absorption Bands}
@@ -34,7 +35,7 @@ At the other extreme, for wavelengths much shorter than visible, the same proces
 \subsubsection{Ocean scattering}
 \label{introOcean}
 
-\begin{figure}
+\begin{figure}[ht!]
 \centering
 \includegraphics[scale = 0.7]{chapters/img/Ocean_absorption.jpg}
 \caption{Light penetrate ocean depth with different wavelength}
@@ -56,7 +57,7 @@ Solid-state imaging is based on the physical principle of converting light (phot
 
 For reasons of cost and miniaturization, a solid state solution for single photon detection is highly desirable. Figure \ref{fig:intro_receiver1} on page \ref{fig:intro_receiver1} shows a classification that covers the current state-of-the-art on optical solid-state 3D image sensors. 
 
-\begin{figure}
+\begin{figure}[ht!]
 \centering
 \includegraphics[scale = 1]{chapters/img/intro_receiver1.png}
 \caption{Classification of state-of-the-art optical \ac{TOF} image sensors.}
@@ -66,14 +67,14 @@ For reasons of cost and miniaturization, a solid state solution for single photo
 \item \acs{SPAD}
 \ac{SPAD} are solid-state semiconductor devices based on a p-n junction reversed biased at a voltage $V_{a}$ higher than $V_{B}$.
 
-\begin{figure}
+\begin{figure}[ht!]
 \centering
 \includegraphics[scale = 0.7]{chapters/img/SPAD_Cross-section.png}
 \caption{\acs{SPAD} cross-section diagram.}
 \label{fig:SPAD_cross-section}
 \end{figure}
 
-At this bias, the electric field is so high (higher than 3¡Á105 V/cm) that a single charge carrier injected in the depletion layer can trigger a self-sustaining avalanche. The current rises swiftly (sub nanosecond rise-time) to a macroscopic steady level, in the milliampere range. If the primary carrier is photo-generated, the leading edge of the avalanche pulse marks (with picoseconds time jitter) the arrival time of the detected photon. The current continues until the avalanche is quenched by lowering the bias voltage VD down to or below $V_{B}$: the lower electric field is not able any more to accelerate the carriers to impact-ionize with lattice atoms, therefore current ceases. In order to be able to detect another photon, the bias voltage must be raised again above breakdown.\cite{SPAD_intro}
+At this bias, the electric field is so high (higher than 3ï¿½ï¿½105 V/cm) that a single charge carrier injected in the depletion layer can trigger a self-sustaining avalanche. The current rises swiftly (sub nanosecond rise-time) to a macroscopic steady level, in the milliampere range. If the primary carrier is photo-generated, the leading edge of the avalanche pulse marks (with picoseconds time jitter) the arrival time of the detected photon. The current continues until the avalanche is quenched by lowering the bias voltage VD down to or below $V_{B}$: the lower electric field is not able any more to accelerate the carriers to impact-ionize with lattice atoms, therefore current ceases. In order to be able to detect another photon, the bias voltage must be raised again above breakdown.\cite{SPAD_intro}
 
 \end{itemize}
 
@@ -84,14 +85,14 @@ Laser wavelength is one of the most important parameters influencing the whole d
 
 According to the photon detection probability distribution diagram for \acs{SPAD} and \acs{MPD} in figure \ref{fig:SPAD_efficiency} and \ref{fig:MPD_efficiency} on page \ref{fig:SPAD_efficiency} and \ref{fig:MPD_efficiency}, the general most sufficient wavelength range is between 400nm to 900nm. 
 
-\begin{figure}
+\begin{figure}[ht!]
 \centering
 \includegraphics[scale=1]{chapters/img/SPAD_efficiency.png}
 \caption{\acs{SPAD} photon detection probability as a function of wavelength for two values of excess bias voltage}
 \label{fig:SPAD_efficiency}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[ht!]
 \centering
 \includegraphics[scale=1]{chapters/img/MPD_efficiency.png}
 \caption{\acs{MPD} photon detection probability as a function of wavelength}
@@ -100,7 +101,7 @@ According to the photon detection probability distribution diagram for \acs{SPAD
 
 There are not much qualified \acs{laser}s can be considered below the wavelength 400nm, and the photon detection probability is insufficient if the wavelength goes above 900nm. In order to narrow the wavelength range, the atmospheric transmittance versus photon detection efficiency ratio is introduced, which means that larger ratio indicates larger chance the receiver can detect photon. The actual formula to calculate the ratio is R = transmittance$^{2} \times$ photon efficiency. The transmittance is squared because the light go through the atmosphere twice. Calculate all ratio between wavelength 400nm to 900nm by interval 25nm, and plot the ratios in figure \ref{fig:wavelength_estimation} on page \ref{fig:wavelength_estimation}. From the graph, it is easy to narrow down the wavelength range to 425nm-500nm.  The following sections will give brief trade-offs between \acs{laser} emitters and receivers.
 
-\begin{figure}
+\begin{figure}[ht!]
 \centering
 \includegraphics[scale=1]{chapters/img/wavelength_estimation.png}
 \caption{Ratio of atmospheric transmittance versus photon detection efficiency}
@@ -113,7 +114,7 @@ In the design option tree, the GLAS branch is obviously dropped out, since we ar
 
 The pruned design option tree for the laser detector can be seen in figure \ref{fig:PrunedReceiver} on page \ref{fig:PrunedReceiver}.
 
-\begin{figure}
+\begin{figure}[ht!]
 \centering
 \includegraphics[scale=0.7, angle=90]{chapters/img/DOTreceiverPruned.jpg}
 \caption{The pruned design option tree for the Laser receivers}
@@ -130,7 +131,7 @@ The first option is \ac{SILAT}, which combines two optical cameras with a low-po
 
 The final option is use a 32$\times$32 pixel array with in-pixel photon counting, which also use \acs{SPAD} but in \ac{CMOS} technology \cite{SPAD}. It has the highest quantum efficiency for blue laser(425nm to 500nm), but only 2\% of the chip area can detect the quanta. In this case, micro lenses or faceted mirrors are used in order to collect most of the incoming quanta focus on such a small area. The solution draft design is shown in figure \ref{fig:diagram_Rgeneral} on page \ref{fig:diagram_Rgeneral}. Both designs use the parabolic mirror placed at certain position to the small \acs{SPAD} chip with a specified curvature, then the prism barrier is designed to filter other noise lights except wavelength about 425nm to 500nm blue light. After that, different receiver assemblys are designed.
 
-\begin{figure}
+\begin{figure}[ht!]
 \centering
 \includegraphics[scale = 0.6]{chapters/img/DiagramReceiverGeneral.png}
 \caption{The diagram of the parabolic mirror}
@@ -139,7 +140,7 @@ The final option is use a 32$\times$32 pixel array with in-pixel photon counting
 
 The draft design diagram of assembly micro lenses is shown on figure \ref{fig:diagram_Rmicrolenses} on page \ref{fig:diagram_Rmicrolenses}. The micro lenses are placed just above the \acs{SPAD} chip to focus light source on the specific pixel 2\% area. These lenses can increase the sensing area by factor of 5, which means 10\% area can be used for detection. On the other hand, the micro lenses could be very heavy due to the high density of the lens material, and it could also has the risk of falling off due to vibration during lunching and boosting. Since the micro lenses is manufacturing in scale of micro meters, it could be an extra problem to achieve the precision.
 
-\begin{figure}
+\begin{figure}[ht!]
 \centering
 \includegraphics[scale = 0.6]{chapters/img/DiagramReceiverAssemblyMicrolenses.png}
 \caption{The diagram receiver assembly micro lenses}
@@ -148,7 +149,7 @@ The draft design diagram of assembly micro lenses is shown on figure \ref{fig:di
 
 Another way to increase the receiving efficiency is using the faceted mirror such as the figure \ref{fig:diagram_Rfaceted mirror} on page \ref{fig:diagram_Rfaceted mirror} shown. Instead of the heavy micro lenses, the multi-faceted elliptical mirror can be placed to achieve the focusing. In this way, the sensing area can be increase enormously from 2\% to around 80\%. Meanwhile, faceted mirror is manufacturing in scale of mini meters, so fabrication precision can be achieved.
 
-\begin{figure}
+\begin{figure}[ht!]
 \centering
 \includegraphics[scale = 0.6]{chapters/img/DiagramReceiverAssemblyFacetedMirror.png}
 \caption{The diagram receiver assembly faceted mirror}
@@ -167,7 +168,7 @@ Weight factor is given differently to each criterion due to mission objective an
 \label{TOReceiverS}
 The trade off table is shown in figure \ref{fig:receiver_tradeoff} on page \ref{fig:receiver_tradeoff}. The \acs{SPAD} plus micro lenses and faceted mirror designs have the much higher grades than \acs{SILAT} or \acs{MPD}. The \acs{SPAD} with micro lenses has lowest grade for efficiency, which is mentioned in early chapters, because the lenses which is manufactured in scale of micro meters can only increase the efficiency by factor of 5. On the other hand, the faceted mirror can increase the fill field from 2\% to 80\%, that is why faceted mirror has much larger efficiency. The \acs{SPAD} with faceted mirror design has the large advantages on power comsuption(100$\mu$W), mass(tens of grams) and volume($5\times5\times3[mm^{3}]$) comparing to either \acs{SILAT} or \acs{MPD}, that is much more realistic and practical if the swarm of receiver satellites are in scale of micro or even nano. The \acs{SPAD} with faceted mirror turns to be the best option after all, and it should be further invested later on in detail design.
 
-\begin{figure}
+\begin{figure}[ht!]
 \centering
 \includegraphics[scale = 1]{chapters/img/Receiver_tradeoff.png}
 \caption{The receiver trade off table}
@@ -184,7 +185,7 @@ Solving the time-dependent Schrodinger equation for free electrons (represented 
 	\subsubsection{Exciton Dynamics}   
 Figure \ref{fig:laser} on page \ref{fig:laser} schematically shows the possible radiations and absorption. In the radiations, there are spontaneous emission and stimulated emission. Spontaneous emission is a radiative process in which an excited electron decays in a certain lifetime and a photon is emitted. In contrast, with stimulated emission, an incident photon induces a radiative transition of an excited electron. The emitted photon due to stimulated emission has the same wavelength, phase, \textbf{k}-vector, polarization and direction. Therefore, the light generated is highly monochromatic, coherent and directional. As a result of the two photons generated from this process, the electromagnetic radiation is amplified. These quantum particles can on their turn start the same procedure on different electrons. 
 
-\begin{figure}
+\begin{figure}[ht!]
 \centering
 \includegraphics[scale=0.4]{chapters/img/laser.png}
 \caption{laser}
@@ -197,7 +198,7 @@ When a light is incident on a material, the stimulated emission and the absorpti
 	\subsubsection{Laser Geometry}
 The \acs{laser} oscillator uses fractions of the spontaneous emission as the optical input and amplifies the fractions by the stimulated emission under population inversion. Once the optical gain exceeds the optical losses, laser oscillations take place. An oscillator has a gain and amplifies an input. To feed back light, \textit{optical resonators} or \textit{optical cavities}, which are composed of reflectors or mirrors, are adopted. Due to this configuration (which is used by pretty much all \acs{laser} types), characteristics of \acs{laser}s are affected by the optical gains and optical resonators. 
 
-\begin{figure}
+\begin{figure}[ht!]
 \centering
 \includegraphics[scale=0.6]{chapters/img/laser cavity.png}
 \caption{laser cavity}
@@ -246,7 +247,7 @@ Gain medium type: Gas
 Wavelength interval 400 - 480 [nm] (tunable). The wavelength interval of this kind of \acs{laser} is excellent, but they are difficult to produce for high output power and long (> year) lifetimes. Since the determined lifetime in this mission exceeds this \acs{laser} lifetime, this \acs{laser} is not part of the trade-off.
 	
 	\subsubsection{Trade-off}
-\begin{figure}
+\begin{figure}[ht!]
 \centering
 \includegraphics[scale=1]{chapters/img/laser_tradeoff.png}
 \caption{\acs{laser} trade off table}
@@ -323,7 +324,7 @@ However, if the induced (thermal) energy is increased even further, the crystal 
 \textit{Long term temperature increase (T $>$ 303.15K)}
 Particularly in high-power lasers, the appearance of a temperature-gradient in the gain medium often causes a significant 'thermal lens'. The gain medium has higher internal energy on the beam axis, typically causing some transverse gradient of the refractive index according to the temperature-dependent Sellmeier equation. 
 
-\begin{figure} [ht]
+\begin{figure}[ht!]
 	\begin{center}
 \includegraphics[scale=0.5]{chapters/img/TISE.png}	
 \caption{Refractive index as function of radial position, where the Sellmeier coefficients A, B, C, D, E, and F are constants dependent on gain material, c and b are temperature dependent, T is the temperature in degrees centigrade, and l is the wavelength in micrometers.}
@@ -335,7 +336,7 @@ Thermal lensing occurs due to the combined effect of the thermal expansion and t
 
 The Sellmeiser equation could also be used for the change in refractive index for all other optical subparts in the laser, like the lenses. Since the refractive index will change due to the change in temperature, this has to be taken into account.   
 
-\begin{figure} [ht]
+\begin{figure}[ht!]
 	\begin{center}
 \includegraphics[scale=0.7]{chapters/img/thermal_lensing.png}	
 \caption{Transverse pump intensity distribution (red) and thermal profile (blue). The temperature profile is approximately parabolic only near the center of the crystal.}

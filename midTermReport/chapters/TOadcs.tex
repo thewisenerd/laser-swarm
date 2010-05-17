@@ -3,8 +3,8 @@ The \ac{AODCS} is used for determining and controlling the attitude and orbit of
 
 \subsection{Pruning the \acs{ADCS} design option tree}
 \label{pruneADCS}
-The gravity-gradient stabilisation and passive magnetic options are eliminated because they provide insufficient accuracy and do not allow pointing to a any target other than the mass or magnetic centre of the Earth. The spin stabilisation option is pruned because the satellite needs to be able to make measurements continuously. Double gimbal \acp{CMG} are also not a viable option, because they are too complex and heavy compared to the other systems.
-For the attitude determination the initial measurements and magnetometers options are eliminated because of their low accuracy over time.
+The gravity-gradient stabilisation and passive magnetic options are eliminated because they provide insufficient accuracy and do not allow pointing to an any target other than the mass or magnetic centre of the Earth. The spin stabilisation option is pruned because the satellite needs to be able to make measurements continuously. Double gimbal \acp{CMG} are also not a viable option, because they are too complex and heavy compared to the other systems.
+For the attitude determination the initial measurements and magnetometers options are eliminated because of their deteriorating accuracy over time.
 The pruned design option tree can be found in figure \ref{fig:pruneADCS} on page \pageref{fig:pruneADCS}.
 
 \begin{figure}
@@ -19,7 +19,7 @@ The pruned design option tree can be found in figure \ref{fig:pruneADCS} on page
 \label{ss:ads}
 The \ac{ADS} consists for a collection of sensors to determine the roll, pitch and yaw angles and rates of the satellites. The design options left after the pruning in section \ref{pruneADCS} are \ac{GPS}, Sun sensors, Star trackers and Horizon sensors. 
 
-\ac{GPS} uses one receiver and multiple antennas, by measuring the relative positions of the different antennas the attitude of the satellite can be calculated. Most modern \ac{LEO} satellites are already carry a \ac{GPS} receiver, but a long baseline between antennas is needed for a high accuracy. 
+\ac{GPS} uses one receiver and multiple antennas, by measuring the relative positions of the different antennas the attitude of the satellite can be calculated. Most modern \ac{LEO} satellites are already carrying a \ac{GPS} receiver, but a long baseline between antennas is needed for a high accuracy. 
 Sun sensors use the angle towards the Sun for making their attitude measurements. The technology behind Sun sensors has been around for a long time and several micro Sun sensors are available on the market, the \ac{FOV} of a typical Sun sensor is about 120${}^{\circ}$. 
 Star trackers look at a portion of the sky and uses familiar stars to determine the attitude of the satellites the system can work autonomously, but the optics required are usually quite bulky. 
 Horizon sensors use the limb of the Earth, i.e. the transition of the solid Earth to cold space, to determine the attitude of the satellite. The system only works on the roll and pitch axis.
@@ -74,10 +74,10 @@ After the trade-off the best solution for the \ac{ADS} is to use Sun sensors and
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{\ac{ACS}}
 \label{ss:acs}
-The satellites in the constellation all need to point accurately to the Earth, a passive \ac{ACS} will therefore not be sufficient for the control of the attitude of the satellites. For active attitude control actuators are needed. After the pruning again four options remain for the attitude control. Reaction and momentum wheels, \acp{CMG}, Thusters and Magnetic torquers.
+The satellites in the constellation all need to point accurately to the Earth, a passive \ac{ACS} will therefore not be sufficient for the control of the attitude of the satellites. For active attitude control actuators are needed. After the pruning, four options remain for the attitude control. Reaction and momentum wheels, \acp{CMG}, Thusters and Magnetic torquers.
 
-Reaction wheels are basically torque rotors with a high-inertia wheel attached to it, they can provide single axis control to a spacecraft. Momentum wheels are reaction wheels with a nominal spin rate, adding gyroscopic stiffness to two axis of the spacecraft. Chancing the spin rate gives control over the third axis.
-\acp{CMG} consist of a wheel with a constant rotation speed and one or two gimbals to rotate them, pointing the direction of the momentum. This way very accurate attitude manoeuvres can be made, but complex control algorithms are needed. Usually the weight and cost of \acp{CMG} are quite high.
+Reaction wheels are basically torque rotors with a high-inertia wheel attached to it; they can provide single axis control to a spacecraft. Momentum wheels are reaction wheels with a nominal spin rate, adding gyroscopic stiffness to two axis of the spacecraft. Changing the spin rate gives control over the third axis.
+\acp{CMG} consist of a wheel with a constant rotation speed and one or two gimbals to rotate the wheel, determining the direction of the momentum. This way very accurate attitude manoeuvres can be made, but complex control algorithms are needed. Usually the weight and cost of \acp{CMG} are quite high.
 Thusters expel mass to induce velocity or a momentum to the satellite. The velocity can be used for keeping the orbit and will be discussed in section \ref{ss:ocs}. To be able to induce a momentum to a satellite multiple thrusters with an offset to the center of mass of the satellite. Thrusters are split up into hot gas types, which require a chemical reaction of the propellent, and cold gas types that rely on latent heat and phase change in the propellent. The power which can be generated by thrusters is high, but the fuel required will limit the lifetime of the satellite.
 Magnetic torquers are magnetic coils or electromagnets generating dipole moments on the satellite. They can be used for both manoevering and desaturation of e.g. reaction wheels. Because they rely on the magnetic field of the Earth they are less useful in higher orbits.
 
@@ -138,7 +138,31 @@ The determination of the orbit will be discussed in section \ref{TOcommTA}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{\ac{OCS}}
 \label{ss:ocs}
-The thruster needed for \ac{OCS} needs to be able to deliver the $\Delta V$ determined in section \ref{mtrOrbAltitude}. The $\Delta V$ a propulsion system can produce is quantified by Tsiolkovsky's rocket equation
+The orbit considered for the satellites is very low (for satellite orbits), therefore the drag of the atmosphere has to be taken into account. The equation for acceleration due to drag on the satellite is
+
+\begin{equation}
+a_D=-\frac{1}{2}\rho \left(C_DA/m\right)V^2
+\label{eqn:atmosdrag}
+\end{equation}
+where $\rho$ is the density of the atmosphere, $C_D$ is the drag coefficient for the satellite (typically between 2-4), $m$ is the mass of the satellite and $V$ is the satellite's velocity with respect to the atmosphere. The orbital velocity of a circular orbit is
+
+\begin{equation}
+V_c=\sqrt{\frac{\mu}{a}}
+\label{eqn:orbitalvel}
+\end{equation}
+
+where $\mu$ is the standard gravitational parameter of the Earth, $398,600.4 \,km^3/s^2$. For circular orbits the equation for $\Delta V$ per revolution can be simplified to
+
+\begin{equation}
+\Delta V_{rev}=\pi \left(C_DA/m\right)\rho a V
+\label{eqn:deltaVrev}
+\end{equation}
+
+where $a$ is the orbit semi-major axis \cite{larson}.\\
+
+Station keeping for an orbit between 400 and 500 kilometers requires a maximum $\Delta V$ of 100 m/s or on average 25 m/s \cite{deltavtu}.\\
+
+The $\Delta V$ a propulsion system can produce is quantified by Tsiolkovsky's rocket equation
 
 \begin{equation}
 \Delta V = g I_{sp} \ln{\left(\frac{m_0}{m_0-m_p}\right)}\equiv g I_{sp} \ln{\left(\frac{m_0}{m_f}\right)} \equiv g I_{sp} \ln{\left(R\right)}
@@ -152,4 +176,4 @@ where $g$ is the Earth's gravity constant, $I_{sp}$ is the specific impulse of t
 \label{eqn:fuelratio}
 \end{equation}
 
-Depending on the altitude of the satellite orbit a thruster for attitude keeping can be selected in a later stage of the design \cite{larson}.
+Depending on the altitude of the satellite orbit a thruster for attitude keeping can be selected in a later stage of the design.
