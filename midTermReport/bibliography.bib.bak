@@ -63,6 +63,21 @@
   timestamp = {2010.05.12}
 }
 
+@ARTICLE{SPAD3,
+  author = {David Stoppa, Fausto Borghetti, Justin Richardson, Richard Walker,
+	Lindsay Grant, Robert K. Henderson, Marek Gersbach and Edoardo Charbon},
+  title = {A 32x32-Pixel Array with In-Pixel Photon Counting and Arrival Time
+	Measurement in the Analog Domain},
+  year = {2009}
+}
+
+@ARTICLE{dhere,
+  author = {N. G. Dhere},
+  title = {Solar Energy Materials and Solar Cells},
+  owner = {Sean},
+  timestamp = {2010.05.17}
+}
+
 @ELECTRONIC{doody1,
   author = {Dave Doody},
   month = {February},
@@ -134,6 +149,32 @@
   title = {All About Circuits},
   owner = {Sean},
   timestamp = {2010.04.28}
+}
+
+@ARTICLE{SPAD2,
+  author = {M. Gersbach, Y. Maruyama, E. Labonne, J. Richardson, R. Walker, L.
+	Grant, R Henderson, F. Borghetti, D. Stoppa and E. Charbon},
+  title = {A Parallel 32x32 Time-To-Digital Converter Array Fabricated in a
+	130 nm Imaging CMOS Technology},
+  year = {2009}
+}
+
+@ARTICLE{yastrebova,
+  author = {N.V.Yastrebova},
+  title = {High-efficiency multi-junction solar cells : current status and future
+	potential},
+  journal = {Solar Energy},
+  year = {2007},
+  owner = {Sean},
+  timestamp = {2010.05.17}
+}
+
+@PHDTHESIS{SPADThesis,
+  author = {Cristiano L. Niclass},
+  title = {Single-Photon Image Sensors in CMOS: Picosecond Resolution for Three-Dimensional
+	Imaging},
+  school = {École Polytechnique Fédérale de Lausanne},
+  year = {2008}
 }
 
 @ELECTRONIC{Owen1999,
@@ -291,11 +332,6 @@
 @ELECTRONIC{refractiveIndices,
   title = {List of refractive indices},
   url = {http://en.wikipedia.org/wiki/List_of_refractive_indices}
-}
-
-@ELECTRONIC{,
-  owner = {Sean},
-  timestamp = {2010.05.17}
 }
 
 @MISC{cubesatshop,
