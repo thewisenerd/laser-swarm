@@ -12,13 +12,16 @@ The capacity of any instrument to be able to detect and emit electromagnetic rad
 \subsubsection{Atmospheric Transmission}
 \label{introAtmospheric}
 For optical signal propagation in the atmosphere, the physical processes dictating the choice of wavelength are summarized in figure \ref{fig:intro_atmosphere} on page \ref{fig:intro_atmosphere}, which illustrate show the effects of the strong absorption by atmospheric gases act to limit transmission to distinct wavelength regions, or spectral bands.
+
 \begin{figure}
 \centering
 \includegraphics[scale = 0.8]{chapters/img/intro_atmosphere.png}
 \caption{A schematic summary illustrating how absorption by various constituents in the atmosphere influences the propagation of light and divides the spectrum into distinct bands.}
 \label{fig:intro_atmosphere}
 \end{figure}
+
 With in these bands, the atmosphere is relatively transparent and imaging sensor systems can operate efficiently. For wavelengths longer than about one micro-meter, the dominant absorption is related to excitation of molecular vibrations in water vapor and carbon dioxide. When examined in detail, these processes three distinct transmission windows: the near or shortwave infrared bands (\acs{NIR} $\lambda$ ~ 0.7 to 1.1 $\mu$m and \acs{SWIR} 1.1 to 2.5 $\mu$m), the midwave IR band (\acs{MWIR} $\lambda$ ~ 3.3 to 5.0 $\mu$m), and the long-wave IR band (\acs{LWIR} $\lambda$ ~ 8 to 14 $\mu$m). Figure \ref{fig:intro_atmosphere_bands} on page \ref{fig:intro_atmosphere_bands} shows the absorption and scattering of direct light in the earth's atmosphere.
+
 \begin{figure}
 \centering
 \includegraphics[scale = 0.45]{chapters/img/intro_atmosphere_bands.png}
@@ -56,7 +59,7 @@ For reasons of cost and miniaturization, a solid state solution for single photo
 \begin{figure}
 \centering
 \includegraphics[scale = 1]{chapters/img/intro_receiver1.png}
-\caption{Classification of state-of-the-art optical TOF image sensors.}
+\caption{Classification of state-of-the-art optical \ac{TOF} image sensors.}
 \label{fig:intro_receiver1}
 \end{figure}
 
@@ -95,7 +98,7 @@ According to the photon detection probability distribution diagram for \acs{SPAD
 \label{fig:MPD_efficiency}
 \end{figure}
 
-There are not much qualified \acs{laser}s can be considered below the wavelength 400nm, and the photon detection probability is insufficient if the wavelength go above 900nm. In order to narrow the wavelength range, the atmospheric transmittance versus photon detection efficiency ratio is introduced, which means that larger ratio indicates larger chance the receiver can detect photon. The actual formula to calculate the ratio is R = transmittance$^{2} \times$ photon efficiency. The transmittance is squared because the light go through the atmosphere twice. Calculate all ratio between wavelength 400nm to 900nm by interval 25nm, and plot the ratios in figure \ref{fig:wavelength_estimation} on page \ref{fig:wavelength_estimation}. From the graph, it is easy to narrow down the wavelength range to 425nm-500nm.  The following sections will give brief trade-offs between \acs{laser} emitters and receivers.
+There are not much qualified \acs{laser}s can be considered below the wavelength 400nm, and the photon detection probability is insufficient if the wavelength goes above 900nm. In order to narrow the wavelength range, the atmospheric transmittance versus photon detection efficiency ratio is introduced, which means that larger ratio indicates larger chance the receiver can detect photon. The actual formula to calculate the ratio is R = transmittance$^{2} \times$ photon efficiency. The transmittance is squared because the light go through the atmosphere twice. Calculate all ratio between wavelength 400nm to 900nm by interval 25nm, and plot the ratios in figure \ref{fig:wavelength_estimation} on page \ref{fig:wavelength_estimation}. From the graph, it is easy to narrow down the wavelength range to 425nm-500nm.  The following sections will give brief trade-offs between \acs{laser} emitters and receivers.
 
 \begin{figure}
 \centering
@@ -104,10 +107,9 @@ There are not much qualified \acs{laser}s can be considered below the wavelength
 \label{fig:wavelength_estimation}
 \end{figure}
 
-
 \subsubsection{Receiver Prune}
 \label{TOReceiverP}
-In the design option tree, the GLAS branch is obviously dropped out, since we are trying to improve the whole concept. Meanwhile, the \ac{MPD}'s single-photon detection modules branch has different quantum efficiency for different wavelength. Which means MPD can be a good option for the blue laser detector with 35\% efficiency. The \ac{SPAD} chip could be an approach since it has reasonable high quantum detect efficiency at laser wavelength 425nm to 475nm. Both \acs{MPD} and \acs{SPAD} are not optimal for \acs{NIR} or \acs{IR} laser detect with low quantum efficiency around 1\%. 
+In the design option tree, the GLAS branch is obviously dropped out, since we are trying to improve the whole concept. Meanwhile, the \ac{MPD}'s single-photon detection modules branch has different quantum efficiency for different wavelength, which means MPD could be a good option for the blue laser detector with 35\% efficiency. The \ac{SPAD} chip could be a new approach since it has reasonable high quantum detect efficiency at laser wavelength 425nm to 500nm. Both \acs{MPD} and \acs{SPAD} are not optimal for \acs{NIR} or \acs{IR} laser detect with low quantum efficiency around 1\%, So it means the mission mainly focus on single wavelength.
 
 The pruned design option tree for the laser detector can be seen in figure \ref{fig:PrunedReceiver} on page \ref{fig:PrunedReceiver}.
 
@@ -120,27 +122,31 @@ The pruned design option tree for the laser detector can be seen in figure \ref{
 
 \subsubsection{Trade Method}
 \label{TOReceiverM}
-There are mainly four options after pruning and each have different strong points or weak points. 
+There are mainly four options after pruning and each has different strong points and weak points due to different configuration and structure. 
 
 The first option is \ac{SILAT}, which combines two optical cameras with a low-power photon-counting laser altimeter. It means that \acs{SILAT} operates both pulse laser and photon detector, and it need to be configured as only a photon detector(more information are needed about the configuration). The main strong point is that \acs{SILAT} should has relative higher reliability since it is designed suitable for space mission like spectral imagery and satellite topographic study. 
 
-\ac{MPD}'s photon detection efficiency is obtained through the use of epitaxial silicon \ac{SPAD} and patented \ac{IAQC}, which is specifically designed and optimized for photon counting. The main drawback is that it is difficult to achieve the precise ground resolution due to diffraction.
+\ac{MPD}'s photon detection efficiency is obtained through the use of epitaxial silicon \ac{SPAD} and patented \ac{IAQC}, which is specifically designed and optimized for photon counting. The main drawback is that it is difficult to achieve the precise ground resolution due to diffraction, and it also has large volume and power consumption.
 
-The final option is use a 32*32 pixel array with in-pixel photon counting, which also use \acs{SPAD} but in \ac{CMOS} technology. It has the highest quantum efficiency for blue laser(@450nm), but only 2\% of the chip area can detect the quanta. In this case, micro lenses or faceted mirrors are used in order to collect most of the incoming quanta focus on such a small area. The solution is shown in figure \ref{fig:diagram_Rgeneral} on page \ref{fig:diagram_Rgeneral}. The parabolic mirror is placed at certain position to the small \acs{SPAD} chip with specified curvature, then the prism barrier is designed to filter other noise lights except wavelength 450nm blue light. After that, different receiver assemblys are designed.
+The final option is use a 32$\times$32 pixel array with in-pixel photon counting, which also use \acs{SPAD} but in \ac{CMOS} technology \cite{SPAD}. It has the highest quantum efficiency for blue laser(425nm to 500nm), but only 2\% of the chip area can detect the quanta. In this case, micro lenses or faceted mirrors are used in order to collect most of the incoming quanta focus on such a small area. The solution draft design is shown in figure \ref{fig:diagram_Rgeneral} on page \ref{fig:diagram_Rgeneral}. Both designs use the parabolic mirror placed at certain position to the small \acs{SPAD} chip with a specified curvature, then the prism barrier is designed to filter other noise lights except wavelength about 425nm to 500nm blue light. After that, different receiver assemblys are designed.
+
 \begin{figure}
 \centering
 \includegraphics[scale = 0.6]{chapters/img/DiagramReceiverGeneral.png}
 \caption{The diagram of the parabolic mirror}
 \label{fig:diagram_Rgeneral}
 \end{figure}
-The draft design diagram of assembly micro lenses is shown on figure \ref{fig:diagram_Rmicrolenses} on page \ref{fig:diagram_Rmicrolenses}. The micro lenses are placed just above the \acs{SPAD} chip to focus light source on the specific pixel 2\% area. On the other hand, the micro lenses could be very heavy due to the high density of the lens material, and it also has high risk of falling off due to vibration during lunching and boosting.
+
+The draft design diagram of assembly micro lenses is shown on figure \ref{fig:diagram_Rmicrolenses} on page \ref{fig:diagram_Rmicrolenses}. The micro lenses are placed just above the \acs{SPAD} chip to focus light source on the specific pixel 2\% area. These lenses can increase the sensing area by factor of 5, which means 10\% area can be used for detection. On the other hand, the micro lenses could be very heavy due to the high density of the lens material, and it could also has the risk of falling off due to vibration during lunching and boosting. Since the micro lenses is manufacturing in scale of micro meters, it could be an extra problem to achieve the precision.
+
 \begin{figure}
 \centering
 \includegraphics[scale = 0.6]{chapters/img/DiagramReceiverAssemblyMicrolenses.png}
 \caption{The diagram receiver assembly micro lenses}
 \label{fig:diagram_Rmicrolenses}
 \end{figure}
-Another way to increase the receiving efficiency is using the faceted mirror such as the figure \ref{fig:diagram_Rfaceted mirror} on page \ref{fig:diagram_Rfaceted mirror} shown. Instead of the heavy micro lenses the multi-faceted elliptical mirror can be placed to achieve the focusing. Since the faceted mirror can reach the same purpose but lighter than micro lenses, it might be a better solution after all. 
+
+Another way to increase the receiving efficiency is using the faceted mirror such as the figure \ref{fig:diagram_Rfaceted mirror} on page \ref{fig:diagram_Rfaceted mirror} shown. Instead of the heavy micro lenses, the multi-faceted elliptical mirror can be placed to achieve the focusing. In this way, the sensing area can be increase enormously from 2\% to around 80\%. Meanwhile, faceted mirror is manufacturing in scale of mini meters, so fabrication precision can be achieved.
 
 \begin{figure}
 \centering
@@ -149,18 +155,17 @@ Another way to increase the receiving efficiency is using the faceted mirror suc
 \label{fig:diagram_Rfaceted mirror}
 \end{figure}
 
-
 \subsubsection{Trade Criteria}
 \label{TOReceiverC}
-In the last paragraph, the general trade off method is elaborated but not in quantity way. It is more precise and clear to give some trade criteria to compare between options, which can be graded from 1-10 (worse to best) to indicate each criterion performance. Mass, power, volume are criteria considered as design of a constellation of micro or nano satellites. The criteria such as efficiency, reliability, resolution and \ac{FOV} are defined whether the receiver can detect photon or not and how precision it could be. Meanwhile, Cost, lifetime and availability need to be noticed generally in each subsystem.
+In the last paragraph, the general trade off method is elaborated but not in quantity way. It is more precise and clear to give some trade criteria to compare between options, which can be graded from 1-10 (worse to best) to indicate each criterion performance. Mass, power, volume are criteria considered as design of a constellation of micro or nano satellites. The criteria such as efficiency, reliability, resolution and \ac{FOV} are defined whether the receiver can detect photon or not and how precision it could be. Last but not the least, Cost, lifetime and availability need to be noticed generally in each subsystem.
 
 \subsubsection{Weight Factor}
 \label{TOReceiverWF}
-Weight factor is given differently to each criterion due to mission objective and instrument performance requirement. Lifetime is the top objective and efficiency determines the photons can be detect or not, so both are given as maximum 10. Power, mass, volume are important since micro or nano receivers are considered. Meanwhile resolution, reliability and \acs{FOV} are also important to perform continuous accurate measurements. The mission objective is about feasibility study, so cost and availability are not the essential part.
+Weight factor is given differently to each criterion due to mission objective and instrument performance requirement. Lifetime is the top objective and the efficiency determines the photons can be detected or not, so both are given as maximum of 10. Power, mass, volume are important since micro or nano receivers are considered. Meanwhile resolution, reliability and \acs{FOV} are also important to ensure the system can perform continuous accurate measurements. The mission objective is mainly about feasibility study, so cost and availability should not be the essential part.
 
 \subsubsection{Trade summary}
 \label{TOReceiverS}
-The trade off table is shown in figure \ref{fig:receiver_tradeoff} on page \ref{fig:receiver_tradeoff}. The \acs{SPAD} plus micro lenses and faceted mirror designs have the much higher grades than \acs{SILAT} or \acs{MPD}. The \acs{SPAD} with micro lenses has lowest grade for efficiency, because the lenses which is manufactured in scale of micro meters can only increase the efficiency by factor of 5. On the other hand, the faceted mirror can increase the fill field from 2\% to 80\%, that is why faceted mirror has much larger efficiency. The \acs{SPAD} with faceted mirror design has the large advantages on power comsuption(100$\mu$W), mass(tens of grams) and volume($5\times5\times3[mm^{3}]$) comparing to either \acs{SILAT} or \acs{MPD}, that is much more realistic and practical if the swarm of receiver satellites are in scale of micro or even nano. 
+The trade off table is shown in figure \ref{fig:receiver_tradeoff} on page \ref{fig:receiver_tradeoff}. The \acs{SPAD} plus micro lenses and faceted mirror designs have the much higher grades than \acs{SILAT} or \acs{MPD}. The \acs{SPAD} with micro lenses has lowest grade for efficiency, which is mentioned in early chapters, because the lenses which is manufactured in scale of micro meters can only increase the efficiency by factor of 5. On the other hand, the faceted mirror can increase the fill field from 2\% to 80\%, that is why faceted mirror has much larger efficiency. The \acs{SPAD} with faceted mirror design has the large advantages on power comsuption(100$\mu$W), mass(tens of grams) and volume($5\times5\times3[mm^{3}]$) comparing to either \acs{SILAT} or \acs{MPD}, that is much more realistic and practical if the swarm of receiver satellites are in scale of micro or even nano. The \acs{SPAD} with faceted mirror turns to be the best option after all, and it should be further invested later on in detail design.
 
 \begin{figure}
 \centering
