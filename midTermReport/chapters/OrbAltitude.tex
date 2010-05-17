@@ -17,14 +17,14 @@ All orbiting bodies are affected by solar radiation pressure. The acceleration d
 
 \begin{figure}[ht!]
 \centering
-\includegraphics[width=0.8\textwidth, angle=0]{img/solPressureVarArea.png}
+\includegraphics[width=0.8\textwidth, angle=0]{chapters/img/solPressureVarArea.png}
 \label{fig:solarRadArea}
 \caption{Acceleration due to solar radiation pressure vs. area normal to the sun, for different satellite masses.}
 \end{figure}
 
 \begin{figure}[ht!]
 \centering
-\includegraphics[width=0.8\textwidth, angle=0]{img/solPressureVarMass.png}
+\includegraphics[width=0.8\textwidth, angle=0]{chapters/img/solPressureVarMass.png}
 \label{fig:solarRadMass}
 \caption{Acceleration due to solar radiation pressure vs. mass, for different areas.}
 \end{figure}
@@ -35,7 +35,7 @@ What is important to note is that if the ration of area to mass could be maintai
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width=0.8\textwidth, angle=0]{img/solPressureVarRatio.png}
+\includegraphics[width=0.8\textwidth, angle=0]{chapters/img/solPressureVarRatio.png}
 \label{fig:solarRadRatio}
 \caption{Acceleration due to solar radiation pressure vs. Area/Mass ratio.}
 \end{figure}
@@ -94,7 +94,7 @@ The second reason drag calculations are so unreliable, is because air density at
 
 \begin{figure}[ht!]
 \centering
-\includegraphics[width=0.9\textwidth, angle=0]{img/solarCycle.jpg}
+\includegraphics[width=0.9\textwidth, angle=0]{chapters/img/solarCycle.jpg}
 \label{fig:solarCycle}
 \caption{The solar cycle, clearly showing the solar maxima at 11 year intervals. Data after 2007 is projected. \emph{Source: NASA} }
 \end{figure}
@@ -103,7 +103,7 @@ The density difference during maxima and minima for different altitudes is shown
 
 \begin{figure}[ht!]
 \centering
-\includegraphics[width=0.9\textwidth, angle=0]{img/densityAltitude.png}
+\includegraphics[width=0.9\textwidth, angle=0]{chapters/img/densityAltitude.png}
 \label{fig:densityProfile}
 \caption{Air density vs. orbit altitude for different solar cycle stages.}
 \end{figure}
@@ -112,78 +112,17 @@ Orbit decay periods for the emitter and receiver satellites are shown in figures
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width=0.95\textheight, angle=90]{img/orbitDecayEmitter.png}
+\includegraphics[width=0.95\textheight, angle=90]{chapters/img/orbitDecayEmitter.png}
 \label{fig:decayEmitter}
 \caption{Orbit decay for a satellite with $C_D$ = 4, A = 6.1 $m^2$ and m = 200 kg. Estimates for initial orbital altitudes of 300, 400 and 500 km at solar maximum (- -), solar minimum (--) and time average (-.-) (CHECK MASS AND AREA).}
 \end{figure}
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width=0.95\textheight, angle=90]{img/orbitDecayRecieverMin.png}
+\includegraphics[width=0.95\textheight, angle=90]{chapters/img/orbitDecayRecieverMin.png}
 \label{fig:decayReceiver}
 \caption{Orbit decay for a satellite with $C_D$ = 4, A = 0.21 $m^2$ and m = 10 kg. Estimates for initial orbital altitudes of 300, 400 and 500 km at solar maximum (- -), solar minimum (--) and time average (-.-) (CHECK MASS AND AREA).}
 \end{figure}
 
 From the analysis of the orbit decay it is strikingly obvious how important the solar activity is during mission lifetime. Even at an altitude of 500 km neither satellite would be able to maintain its orbit for more then a 100 days (REVISE WITHE AREA NUMBERS). From this analysis it is clear that substantial orbit maintenance is required as the satellites will most probably not have refocusing equipment for the optical instruments. A more comprehensive idea of the orbit maintenance can be gathered from total $\Delta$V estimations shown in figures \ref{fig:deltaVGraph1} and \ref{fig:deltaVGraph2} (pages \pageref{fig:deltaVGraph1} and \pageref{fig:deltaVGraph2}) and tabulated in table \ref{table:deltaVTable} on page \pageref{table:deltaVTable}(CHECK TABLE). This is the total velocity change required to keep the satellites in a certain circular orbit. The calculations are based on equation \ref{deltaV}.
 
-\input{deltaVtable.tex}
-
-It can be clearly seen that $\Delta$V budget is almost five times (CHECK) larger at low altitude at solar maximum when compared to the solar minimum. Overall the values for $\Delta$V at high altitudes, at solar minimum and time average look very favorable. 
-
-\begin{figure}[h!]
-\centering
-\includegraphics[width=0.95\textheight, angle=90]{img/deltaVEmitter.png}
-\label{fig:deltaVGraph1}
-\caption{Total $\Delta V$ for a satellite with $C_D$ = 4, A = 6.1 $m^2$ and m = 200 kg. Estimates for a range of orbit altitudes and different solar cycle stages. (CHECK MASS AND AREA).}
-\end{figure}
-
-\begin{figure}[h!]
-\centering
-\includegraphics[width=0.95\textheight, angle=90]{img/deltaVReceiver.png}
-\label{fig:deltaVGraph2}
-\caption{Total $\Delta V$ for a satellite with $C_D$ = 4, A = 0.21 $m^2$ and m = 10 kg. Estimates for a range of orbit altitudes and different solar cycle stages. (CHECK MASS AND AREA).}
-\end{figure}   
-
-Three important conclusions can be drawn from the preceding analysis:
-\begin{itemize}
-	\item In order to avoid fast orbit degradation, and in turn greater mass due to propellant necessary to maintain orbit, the satellites should be placed as high as it is allowable by optical instruments. Based on drag analysis it is recommended to inject at 500 $\pm$ 25 km.
-	\item The launch timeframe should be designed in such a way that the mission halftime falls under the solar minimum to reduce drag. This will also allow for a reduction in mass.
-	\item The area/mass ratio for the emitter and receiver satellites should be designed as equivalent as possible. This will allow for slower constellation decay and for generally better stationkeeping.  
-\end{itemize}
-  
-
-\subsection{Exposure to Particle Radiation}
-\label{mtrRadiation}
-
-In space, satellites are exposed to streams of highly energetic charged particles coming from the sun. Radiation from these particles can cause severe damage to satellite subsystems, including the payload. The main particle radiation source encountered by the swarm in the \ac{LEO} comes from the Van Allen Belts. These are regions around the Earth where charged particles (protons, electrons and ions) are trapped inside the magnetic field of the planet.
-
-The total radiation dose consists of three components: proton dose, electron dose and the so-called Brehmsstrahlung X-Ray dose produced by the interaction between the electrons and the shielding material of the satellite. In \ac{LEO}, energetic protons in the inner radiation belt contribute most to the total radiation dose. This total is also strongly linked to the orbital altitude and below 1000 km will increase at approximately by the 5\textsuperscript{th} power of the altitude. Furthermore, just like with atmospheric drag, the solar activity plays a major role, thus all cases will be examined.
-
-The number of particles trapped in the Van Allen belts in the vicinity of the orbit under question can be modeled using The Space Environment Information System (SPENVIS) that can be located at the following address: \emph{http://www.spenvis.oma.be/}. SPENVIS contains a large array of NASA and ESA (as well as other) tools and models for complex orbit analysis. For the purposes of this evaluation two models are used: AP-8 and AE-8. The first model predicts proton flux with energy levels above 100 MeV. The latter estimates the flux of electrons with energy of 0.5 MeV or above.
-
-Figure \ref{fig:protFlux} on page \pageref{fig:protFlux} illustrates the trapped proton flux for solar minimum and maximum as a function of distance from Earth Center. It is evident that in \ac{LEO}, the proton flux stays relatively static w.r.t. solar activity. For the considered altitudes of 300 to 500 km (1.047 to 1.078 Earth radii) the satellites would encounter relatively the same order of magnitude of proton radiation. It is also evident that any higher altitude would mean a substantial increase in bombardment and hence reduction in the reliability of the subsystems.   
-
-\begin{figure}
-  \centering
-  \subfloat[]{\label{fig:protMax}\includegraphics[width=0.7\textwidth]{img/protFluxMax.png}}\\                
-  \subfloat[]{\label{fig:protMin}\includegraphics[width=0.7\textwidth]{img/protFluxMin.png}}
-  \caption{AP-8 Proton Flux Model (energy $>$ 100 MeV) at solar maximum (a) and solar minimum (b) as a function of distance in mean Earth radii.}
-  \label{fig:protFlux}
-\end{figure}
-
-Figure \ref{fig:elecFlux} on page \pageref{fig:elecFlux} illustrates the trapped electron flux for solar minimum and maximum as a function of distance from Earth Center. It is evident from this figure that lower altitudes would considerably reduce the radiation flux (up to one order of magnitude).
-
-\begin{figure}
-  \centering
-  \subfloat[]{\label{fig:elecMax}\includegraphics[width=0.7\textwidth]{img/elecFluxMax.png}}\\                
-  \subfloat[]{\label{fig:elecMin}\includegraphics[width=0.7\textwidth]{img/elecFluxMin.png}}
-  \caption{AE-8 Electron Flux Model (energy $>$ 0.5 MeV) at solar maximum (a) and solar minimum (b) as a function of distance in mean Earth radii.}
-  \label{fig:elecFlux}
-\end{figure}
-
-Based on this data, the following conclusion emerges: while altitudes of around 500 km remain relatively safe, a lower orbit will result in a lower particle radiation flux, increasing reliability. Altitudes above 500 km become more and more dangerous for the mission.
-
-\subsection{Conclusion}
-\label{mtrAltConclusion}
-
-ADD ALTITUDE CONCLUSION
