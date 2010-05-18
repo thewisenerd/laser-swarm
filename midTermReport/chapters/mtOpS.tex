@@ -54,7 +54,7 @@ Photon detection typically occurs in a two-step process: the absorbed photon cre
 
 Additional factors include the detector material \textit{sensitivity} and the detector \textit{device speed of response}. Sensitivity is a measure of how few photons are required to raise the detector output above any background noise level present in the absence of incident light. Response speed is a measure of how faithfully the detector's electrical output responds to changes in the intensity of the input light signal.
 \begin{itemize}
-	\item Solide-State Photon Detection
+	\item Solid-State Photon Detection
 Solid-state imaging is based on the physical principle of converting light (photons) into a measurable quantity (electrical voltage, electrical current). Photons falling onto and penetrating into a semiconductor substrate can transfer part of their energy to the substrate by generating electron-hole pairs. For an n-type semiconductor, if the energy content of the photons is high enough, electrons can be released from the valence band and swept into the conduction band, leaving behind a hole in the valence band. To generate an electron-hole pair, the energy of the photons has to be larger than the bandgap of the semiconductor substrate.\cite{photogrammetry}
 
 For reasons of cost and miniaturization, a solid state solution for single photon detection is highly desirable. Figure \ref{fig:intro_receiver1} on page \pageref{fig:intro_receiver1} shows a classification that covers the current state-of-the-art on optical solid-state 3D image sensors. 
@@ -260,11 +260,17 @@ Table \ref{table:laser_tradeoff} on page \pageref{table:laser_tradeoff} shows th
 	
 \textbf{Wavelength ratio}. The emitted wavelength is an important factor for the possibility of photon detection as function of atmospheric absorption and receiver efficiency. Considering the wavelength dependency of these last two terms, the laser types have a different wavelength ratio (see: chapter receiver).
 
-\textbf{Cost}. Gas \acs{laser}s in general are relatively cheap , because of the high \acs{TRL} and the relatively simple optical subsystems within the \acs{laser} cavity. The costs of the optical emitting payload is considered to have a low weight factor. The typical cost estimation for a gas \acs{laser} equals \$20,000 and \$30,000, whereas the solid-state \acs{laser} can cost almost double (\$45,000 - \%50,000). However, since the total cost of the mission are in the order of 200 M\$, this difference is negligible.
+\textbf{Cost}. Gas \acs{laser}s in general are relatively cheap , because of the high \acs{TRL} and the relatively simple optical subsystems within the \acs{laser} cavity. The costs of the optical emitting payload is considered to have a low weight factor. The typical cost estimation for a gas \acs{laser} equals \$20,000 and \$30,000, whereas the solid-state \acs{laser} can cost almost double (\$45,000 - \$50,000). However, since the total cost of the mission are in the order of 200 M\$, this difference is negligible.
  
 \textbf{Minimum Pump Power}. The threshold pump power of a laser is the value of the pump power at which the laser threshold is just reached, usually assuming steady-state conditions. At this point, the small-signal gain equals the losses of the laser resonator. For an optically pumped laser, the definition of threshold pump power may be based either on the incident or absorbed pump power. A low threshold power requires low resonator losses and a high gain efficiency.
 
 Calculation for the \acs{laser} types:
+
+\begin{center}
+$p_{p.th} = \frac{I_{rt}}{\eta_{p}\tau_{2}\sigma_{em}}$
+\end{center}
+
+P: Threshold power [W], I: Round-trip intercavity power loss [W], $\eta$: Pump efficiency, $\tau$: Upper laser level lifetime, $\sigma$: Stimulated emission cross section
 
 \textit{Helium-Cadmium}
 Pumping efficiency: 0.82\\
