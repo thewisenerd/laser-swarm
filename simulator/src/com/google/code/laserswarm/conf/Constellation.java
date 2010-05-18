@@ -33,7 +33,7 @@ public class Constellation {
 	 * (Receiver chip efficency) x (optical filter efficency)
 	 * </p>
 	 */
-	private double			receiverEfficiency	= 1;						// 0.4 * 0.75;
+	private double			receiverEfficiency	= 0.4 * .9;
 	private Satellite		emitter;
 
 	private String			name				= "Constellation";

@@ -66,6 +66,10 @@ public class Satellite {
 		return trueAnomaly;
 	}
 
+	public void setAperatureArea(double aperatureArea) {
+		this.aperatureArea = aperatureArea;
+	}
+
 	@Override
 	public String toString() {
 		return name;

@@ -152,11 +152,11 @@ public class Simulator implements Runnable {
 		else
 			try {
 				param = earth.getScatteringParam(reflectionPoint);
-				simVals.scatter = new ScatteringCharacteristics(incidence, param);
 			} catch (CannotEvaluateException e) {
 				logger.wrn(e, "Cannot find Scattering param of sample %s:", i, simVals);
 				return null;
 			}
+		simVals.scatter = new ScatteringCharacteristics(incidence, param);
 
 		/* Compute scatter power per sat */
 		simVals.powerR_SC = Maps.newHashMap();

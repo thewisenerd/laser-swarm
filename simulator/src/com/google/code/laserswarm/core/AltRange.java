@@ -18,7 +18,7 @@ public class AltRange extends LaserSwarm {
 	private static final Logger	logger	= Logger.get(AltRange.class);
 
 	public static void main(String[] args) {
-		Configuration config = Configuration.getInstance();
+		Configuration.getInstance();
 		Configuration.setMode(Sets.newHashSet( //
 				Actions.SIMULATE, Actions.PROSPECT, Actions.COUNT_ONLY, Actions.FORCE_FLAT));
 		new AltRange();
@@ -35,10 +35,7 @@ public class AltRange extends LaserSwarm {
 	}
 
 	public AltRange() {
-		timeSteps = new double[][] { // 
-		{ 0, 4000000 }, // 
-		// { 500000, 1000000 }, //
-		};
+		timeSteps = new double[][] { { 0, 4000000 } };
 	}
 
 	@Override
@@ -62,7 +59,6 @@ public class AltRange extends LaserSwarm {
 					nrP += var.photonsE.get(sat);
 					// logger.dbg("p=%s", var.photonsE.get(sat));
 				}
-
 			}
 			logger.inf(tmpl + " nr photons = " + nrP + " of " + samples + " samples\t=> avg: " + nrP
 					/ samples);

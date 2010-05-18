@@ -29,7 +29,9 @@ public class ScatteringCharacteristics implements Distribution {
 	public ScatteringCharacteristics(Vector3d incidenceVector, double indexOfRefraction,
 			double kappaMinnaert, double thetaHenyeyGreenstein) {
 		// find angle between incidence and surface normal
-		theta0 = incidenceVector.angle(new Vector3d(0, 0, -1));
+		theta0 = incidenceVector.angle(new Vector3d(0, 0, 1));
+		if (theta0 > Math.PI / 2)
+			theta0 -= Math.PI / 2;
 		refrSurf = indexOfRefraction;
 		kappa = kappaMinnaert;
 		Theta = thetaHenyeyGreenstein;
@@ -80,6 +82,8 @@ public class ScatteringCharacteristics implements Distribution {
 	public double probability(Vector3d exittanceVector) {
 		// find angle between exittance and surface normal
 		double theta1 = exittanceVector.angle(new Vector3d(0, 0, 1));
+		if (theta1 > Math.PI / 2)
+			theta1 -= Math.PI / 2;
 		// incidence and exittance projected to surface
 		Vector3d projIncidence = new Vector3d(incidenceVector.x, incidenceVector.y, 0);
 		Vector3d projExittance = new Vector3d(exittanceVector.x, exittanceVector.y, 0);

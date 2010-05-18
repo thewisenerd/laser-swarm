@@ -7,6 +7,8 @@ import java.util.TreeMap;
 import org.apache.commons.math.ArgumentOutsideDomainException;
 import org.apache.commons.math.analysis.polynomials.PolynomialSplineFunction;
 
+import com.lyndir.lhunath.lib.system.logging.Logger;
+
 public class SampleIterator implements Iterator<MeasermentSample> {
 
 	private double						binTime;
@@ -20,6 +22,8 @@ public class SampleIterator implements Iterator<MeasermentSample> {
 	@Deprecated
 	public boolean						found	= false;
 
+	private static final Logger			logger	= Logger.get(SampleIterator.class);
+
 	public SampleIterator(double binFreqency, TreeMap<Double, Integer> laser,
 			PolynomialSplineFunction noise) {
 		super();
@@ -28,6 +32,10 @@ public class SampleIterator implements Iterator<MeasermentSample> {
 		this.noise = noise;
 
 		time = timeBlock(laserPhotons.firstKey() + binTime);
+	}
+
+	public double endTime() {
+		return laserPhotons.lastKey();
 	}
 
 	@Override
@@ -50,7 +58,7 @@ public class SampleIterator implements Iterator<MeasermentSample> {
 
 			double t = noise.value(time);
 			int noisePhotons = (int) t;
-			if (Math.random() <= Math.round(t) - noisePhotons)
+			if (Math.random() <= t - noisePhotons)
 				noisePhotons++;
 			return new MeasermentSample(time, photons + noisePhotons);
 		} catch (ArgumentOutsideDomainException e) {
@@ -61,6 +69,10 @@ public class SampleIterator implements Iterator<MeasermentSample> {
 	@Override
 	public void remove() {
 		throw new UnsupportedOperationException();
+	}
+
+	public double startTime() {
+		return laserPhotons.firstKey();
 	}
 
 	private double timeBlock(double time) {

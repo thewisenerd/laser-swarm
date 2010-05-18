@@ -39,11 +39,12 @@ public class SimulationTester extends TestCase {
 	}
 
 	static Constellation mkTestConstilation() {
-		Satellite emittor = new Satellite("SAT01", (0.08 * 0.08), 6370f, 0f, (float) Math.PI / 2,
-				(float) (8.5 * Math.PI / 180), 0f, 0f);
+		Satellite emittor = new Satellite("SAT01", (0.2 * 0.2),
+				(float) ((Configuration.R0 / 1E3) + 450), // 
+				0f, (float) Math.PI / 2, (float) (8.5 * Math.PI / 180), 0f, 0f);
 		LinkedList<Satellite> r = Lists.newLinkedList();
 		r.add(emittor);
-		return new Constellation(30 * (1. / 3), 5000, emittor, r);
+		return new Constellation(100 * (1. / 3), 5000, emittor, r);
 	}
 
 	public static HashMap<SimTemplate, Simulator> sim() {
@@ -86,6 +87,7 @@ public class SimulationTester extends TestCase {
 
 	public void testSim() {
 		HashMap<SimTemplate, Simulator> points = sim();
+
 		for (Simulator sim : points.values()) {
 			int nP = 0;
 			List<SimVars> pnts = sim.getDataPoints();
