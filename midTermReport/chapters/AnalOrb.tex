@@ -2,7 +2,7 @@
 This section is about the trade-off for the orbit characteristics. First the orbit design options are compared with the killer requirements. After that the section is split into two major pieces, one containing special orbits and the altitude of the orbit, and another one that considers the swarm in greater detail.
 \label{AnalOrb}
 
-\subsection{Eliminating the obvious losers}
+\subsection{Orbit Pruning}
 \label{pruneOrbit}
 The orbits of the satellites are determined by the characteristics of the emitter and receivers. Because the payload uses a low power laser this means that the orbits will have to be \ac{LEO} in order for the receivers to receive enough, or any, photons. The resulting design option tree can be found in figure \ref{fig:pruneOrbit}, on page \pageref{fig:pruneOrbit}. Further pruning is not possible without a detailed analysis of the remaining options, which is done in the following section.
 
@@ -13,24 +13,24 @@ The orbits of the satellites are determined by the characteristics of the emitte
 \caption{Pruned design option tree for the orbit characteristics}
 \end{figure}
 
-\subsection{Analysis of the remaining options}
+\subsection{Analysis of the Remaining Options}
 \label{AnalSpOrb}
 
 In subsection \ref{pruneOrbit} the design option tree was pruned by comparing the orbit altitudes with the altitude requirement that follows from the payload. As a result the \acs{MEO}, \acs{GEO} and \acs{HEO} were eliminated. The remaining options will now be analyzed.
 
 No trade-off table will be made for this section. Instead the four special types of orbits seen in figure \ref{fig:pruneOrbit} will be compared with the mission requirements and eliminated separately. The four orbit types are polar orbit, sun synchronous orbit, repeating ground track orbit and frozen orbit. After that another section will investigate preliminary parameter values for the final design option.
 
-\subsubsection{Polar orbit}
+\subsubsection{Polar Orbit}
 An orbit is a polar orbit if the orbit inclination is exactly 90 degrees. However, it is not uncommon for an orbit to be classified as a polar orbit if the inclination is close to 90 degrees. For the case of the laser swarm it is assumed that an orbit is a polar orbit if the inclination is between 80 and 100 degrees.
 
 The laser swarm should be able to observe any region on Earth, including the poles. As such the final orbit design option has to be a polar orbit.
 
-\subsubsection{Sun Synchronous orbit}
+\subsubsection{Sun Synchronous Orbit}
 A sun synchronous orbit is an orbit that uses the fact the Earth is not a perfect sphere, thus allowing a satellite to orbit the planet in such a way that the plane of the orbit rotates around the Earth's polar axis exactly once a year. Thus fixing the satellite's orbital plane with respect to the sun vector.
 
 While providing useful conditions, it is not required for the swarm to use this kind of orbit unless certain power or lighting requirements have to be met, as the simulation has shown this to be unnecessary the final orbit design will not be sun synchronous.
 
-\subsubsection{Repeating ground track orbit}
+\subsubsection{Repeating Ground Track Orbit}
 Repeating ground track orbits, or in short repeat orbits, are orbits that repeat after a predefined amount of time after the satellite has traveled an integral amount of revolutions. This type of orbit is useful as it allows one to revisit the same area, thus making it possible to view an area at different times. Which may provide useful information on variables that change over time.
 To determine if it is an option for the laser swarm, a calculation is made to check whether the constellation can actually see the entire Earth in five years.
 
