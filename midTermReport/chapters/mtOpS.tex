@@ -167,14 +167,28 @@ Weight factor is given differently to each criterion due to mission objective an
 
 \subsubsection{Trade summary}
 \label{TOReceiverS}
-The trade off table is shown in figure \ref{fig:receiver_tradeoff} on page \pageref{fig:receiver_tradeoff}. The \acs{SPAD} plus micro lenses and faceted mirror designs have the much higher grades than \acs{SILAT} or \acs{MPD}. The \acs{SPAD} with micro lenses has lowest grade for efficiency, which is mentioned in early chapters, because the lenses which is manufactured in scale of micro meters can only increase the efficiency by factor of 5. On the other hand, the faceted mirror can increase the fill field from 2\% to 80\%, that is why faceted mirror has much larger efficiency. The \acs{SPAD} with faceted mirror design has the large advantages on power comsuption(100$\mu$W), mass(tens of grams) and volume($5\times5\times3[mm^{3}]$) comparing to either \acs{SILAT} or \acs{MPD}, that is much more realistic and practical if the swarm of receiver satellites are in scale of micro or even nano. The \acs{SPAD} with faceted mirror turns to be the best option after all, and it should be further invested later on in detail design.
+The trade off table is shown in figure \ref{table:receiverTradeTable} on page \pageref{table:receiverTradeTable}. The \acs{SPAD} plus micro lenses and faceted mirror designs have the much higher grades than \acs{SILAT} or \acs{MPD}. The \acs{SPAD} with micro lenses has lowest grade for efficiency, which is mentioned in early chapters, because the lenses which is manufactured in scale of micro meters can only increase the efficiency by factor of 5. On the other hand, the faceted mirror can increase the fill field from 2\% to 80\%, that is why faceted mirror has much larger efficiency. The \acs{SPAD} with faceted mirror design has the large advantages on power comsuption(100$\mu$W), mass(tens of grams) and volume($5\times5\times3[mm^{3}]$) comparing to either \acs{SILAT} or \acs{MPD}, that is much more realistic and practical if the swarm of receiver satellites are in scale of micro or even nano. The \acs{SPAD} with faceted mirror turns to be the best option after all, and it should be further invested later on in detail design.
 
-\begin{figure}[ht!]
-\centering
-\includegraphics[scale = 1]{chapters/img/Receiver_tradeoff.png}
-\caption{The receiver trade off table}
-\label{fig:receiver_tradeoff}
-\end{figure}
+\begin{table*}[h]
+	\centering
+		\begin{tabular}{c|c|c|c|c|c}
+		 \textbf{Criteria} & \textbf{Weight Factor} & \textbf{MPD} & \textbf{SILAT} & \textbf{SPAD + microlenses} & \textbf{SPAD + mirrors} \\ \hline \hline
+		 Power & 7 & 6 & 6 & 9 & 9 \\ 
+		 Mass & 8 & 5 & 5 & 9 & 8 \\
+		 Volume & 8 & 4 & 3 & 8 & 8 \\
+		 Reliability & 7 & 8 & 8 & 6 & 5 \\
+		 Efficiency & 10 & 7 & 6 & 1 & 5 \\
+		 Cost & 5 & 4 & 3 & 7 & 5 \\
+		 Availability & 3 & 10 & 8 & 5 & 3 \\
+		 Lifetime & 10 & 8 & 8 & 6 & 6 \\
+		 Resolution & 8 & 7 & 7 & 10 & 10 \\
+		 FOV & 6 & 6 & 6 & 9 & 9 \\ \hline
+		 Weighted total &   & 462 & 433 & 495 & 504 \\
+			
+		\end{tabular}
+	\caption{Receiver tradeoff table.}
+	\label{table:receiverTradeTable}
+\end{table*}
 
 \subsection{Optical Emitting Payload}
 	\label{mtDOLSR}
