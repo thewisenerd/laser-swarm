@@ -98,24 +98,27 @@ $\begin{array}{c c c}
 & \includegraphics[height = 120px]{chapters/img/reactionattitude.png} 
 & \includegraphics[height = 120px]{chapters/img/imi100attitude.png} 
 \end{array}$
-\caption[\acs{ADS} design concepts]{The three concepts for the design of the \ac{ADS}. From left to right: Concept 1 uses thrusters \cite{tnoweb}, Concept 2 uses reaction wheels and magneto torquers \cite{cubesatshop}, Concept 3 uses IMI-100 system from Maryland Inc. \cite{imi100}.}
+\caption[\acs{ADS} design concepts]{The three concepts for the design of the \ac{ADS}. From left to right: Concept 1 uses thrusters \cite{tnoweb}, concept 2 uses reaction wheels and magneto torquers \cite{cubesatshop}, concept 3 uses IMI-100 system from Maryland Inc. \cite{imi100}.}
 \label{fig:acsconcepts}
 \end{figure}
-
-%, bb =0 0 826px 514px          , bb=0 0 203px 211px            , bb=0 0 730px 713px
 
 \subsubsection{Trade criteria}
 The concepts for \ac{ACS} are traded in terms of the rate the concepts are able to adjust the attitude, attitude control accuracy, purchasing price, power required, size and the amount of additional development required for implementing the concept. 
 \subsubsection{Weight factors}
-A high rate in which the satellite can be controlled is convenient, but not driving, weight factor 5. Since attitude control will be used for the pointing of the instrument the accuracy is very important for the choice so it is given a weight factor of 8. Because the volume and power for satellites are limited they are also important with a given weight factor of 7. Although the total cost of the system is relevant, if a better performance can be achieved at a higher cost can be acceptable, weight factor 3. If a lot of work still is required to implement the system in the satellite the mission can be delayed, development gets a weight factor of 5.
+A high rate in which the satellite can be controlled is convenient, but not driving: weight factor 5. Since attitude control will be used for the pointing of the instrument the accuracy is very important, so it is given a weight factor of 8. Because the volume and power for satellites are limited they are also important with a given weight factor of 7. Although the total cost of the system is relevant, if a better performance can be achieved at a higher cost that can be acceptable, weight factor 3. If a lot of work still is required to implement the system in the satellite the mission can be delayed, development gets a weight factor of 5.
 \subsubsection{Trade-off}
 The results of the trade-off can be found in table \ref{tab:acstradeoff} on page \pageref{tab:acstradeoff}.
 Thrusters are able to make attitude adjustments with a high rate, both concept 2 and concept 3 use reaction wheels for attitude adjustments, so they will have comparable performance.
+
 Attitude adjustments done by thrusters are really coarse, so they have a low accuracy. With a custom designed system the accuracy of concept 2 the performance will be better than a \ac{COTS} system.
-For the use of thrusters also other components are required like e.g. fuel tanks, fuel lines and pumps. Reaction wheels and magneto torquers all take up space in the satellite, but can be made relatively small The IMI-100 system is encased in a separate box, so it will take more room.
-For its power the thruster system needs fuel, which all has to be taken along for the entire mission. The reaction wheels in concept 2 and 3 require only power when the motors are running, as do the magneto torquers.
-Combined with the fuel, tanks and other extra material the thruster system needs to bring it will be a very expensive option. Especially for the small kind of satellites being considered for the mission. Not many micro propulsion systems are yet on the market. Developing the system with reaction wheels can be a much cheaper option. Buying the system as \ac{COTS} will save working costs, but in the end be a little more expensive than a in house development.
-Thruster systems for small satellites are rare, so a lot of development is still required. Some research has already been done on an active \ac{ACS} for the student satellite Delfi-n3Xt \cite{delfispace}, this research can be extended for the Laser Swarm mission. The IMI-100 system is already build and just has to be integrated. 
+
+For the use of thrusters also other components are required like e.g. fuel tanks, fuel lines and pumps. Reaction wheels and magneto torquers all take up space in the satellite, but can be made relatively small. The IMI-100 system is encased in a separate box, so it will take more room.
+
+To work the thruster system needs fuel, which has to be taken along for the entire mission. The reaction wheels in concept 2 and 3 require only power when the motors are running, as do the magneto torquers.
+
+Combined with the fuel, tanks and other extra material the thruster system needs to bring it will be a very expensive option, especially for the small kind of satellites being considered for the mission. Not many micro propulsion systems are yet on the market. Developing the system with reaction wheels can be a much cheaper option. Buying the system as \ac{COTS} will save working costs, but in the end will be a little more expensive than in house development.
+
+Thruster systems for small satellites are rare, so a lot of development is still required. Some research has already been done on an active \ac{ACS} for the student satellite Delfi-n3Xt \cite{delfispace}, this research can be extended for the Laser Swarm mission. The IMI-100 system is ready and just has to be integrated. 
 
 \begin{table} [h]
 \centering
@@ -133,25 +136,25 @@ Weighted total    &    & 133 & 232 & 224
 \label{tab:acstradeoff}
 \end{table}
 
-After the trade-off the best solution for the \ac{ACS} is to use reaction wheels and magneto torquers. Although the scores are close to concept 3, the more dedicated design improves the performance of the \ac{COTS} system.
+After the trade-off the best solution for the \ac{ACS} is to use reaction wheels and magneto torquers. Although the scores are close to concept 3, the more dedicated design improves on the performance of the \ac{COTS} system.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{\ac{ODS}}
+\subsection{\acl{ODS}}
 \label{ss:ods}
 The determination of the orbit will be discussed in section \ref{TOcommTA}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{\ac{OCS}}
+\subsection{\acl{OCS}}
 \label{ss:ocs}
 
-The \ac{OCS} needs to counter the atmospheric drag forces with the $\Delta V$ calculated in section \ref{mtrOrbAltitude}. The $\Delta V$ a propulsion system can produce is quantified by Tsiolkovsky's rocket equation
+The \ac{OCS} needs to counter the atmospheric drag forces with the $\Delta V$ calculated in section \ref{mtrOrbAltitude}. The $\Delta V$ a propulsion system can produce is quantified by Tsiolkovsky's rocket equation:
 
 \begin{equation}
 \Delta V = g I_{sp} \ln{\left(\frac{m_0}{m_0-m_p}\right)}\equiv g I_{sp} \ln{\left(\frac{m_0}{m_f}\right)} \equiv g I_{sp} \ln{\left(R\right)}
 \label{eqn:tsiolkovsky}
 \end{equation}
 
-where $g$ is the Earth's gravity constant, $I_{sp}$ is the specific impulse of the engine, $m_0$ is the starting mass, $m_p$ is the mass of the fuel used, $m_f = m_0-m_p$ and the mass ratio $R$ is  ${m_0}/\left({m_0-m_p}\right)$. From this the ratio of fuel to the total mass can be derived to be
+In this equation, $g$ is the Earth's gravity constant, $I_{sp}$ is the specific impulse of the engine, $m_0$ is the starting mass, $m_p$ is the mass of the fuel used, $m_f = m_0-m_p$ and the mass ratio $R$ is  ${m_0}/\left({m_0-m_p}\right)$. From this the ratio of fuel to the total mass can be derived to be:
 
 \begin{equation}
 \frac{m_p}{m_0} = 1-e^{-\left(\Delta V/I_{sp}g\right)}
