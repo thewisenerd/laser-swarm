@@ -31,7 +31,7 @@ Horizon sensors use the limb of the Earth, i.e. the transition of the solid Eart
 Another option is to use a complete \ac{COTS} \ac{ADCS} system like the one from Maryland Aerospace Inc. \cite{maryland}. Their IMI-100 ADACS contains everything needed for complete \ac{ADCS} with an accuracy of 1${}^\circ$. For attitude determination it uses 3 magnetometers, by adding additional sensors e.g. a ring laser gyro and a miniaturised star sensor the accuracy can reach 1-3 arcsec \cite{imi100}.
 
 \subsubsection{Trade method}
-The trade-off is made by comparing three concepts for attitude determination. The first concept uses the Maryland Aerospace IMI-100, the second concept uses Sun sensors by day and a star tracker by night, the third concept uses \ac{GPS} for attitude determination (see figure \ref{fig:adsconcepts} on page \pageref{fig:adsconcepts}. Scores are awarded to the performance on a number of criteria. The best weighted overall score wins the trade-off.
+The trade-off is made by comparing three concepts for attitude determination. The first concept uses the Maryland Aerospace IMI-100, the second concept uses Sun sensors by day and a star tracker by night, the third concept uses \ac{GPS} for attitude determination (see figure \ref{fig:adsconcepts} on page \pageref{fig:adsconcepts}. Scores are awarded to the performance on a number of criteria. The best weighed overall score wins the trade-off.
 
 \begin{figure}[h]
 \centering
@@ -40,16 +40,14 @@ $\begin{array}{c c c}
 & \includegraphics[height = 120px]{chapters/img/sunsensorattitude.png} 
 & \includegraphics[height = 120px]{chapters/img/gpsattitude.png} 
 \end{array}$
-\caption[\acs{ADS} design concepts]{The three concepts for the design of the \ac{ADS}. From left to right: Concept 1 uses the IMI-100 system from Maryland Inc. \cite{imi100}, Concept 2 uses Sun sensors and star trackers \cite{chu21}, Concept 3 uses \ac{GPS} for attitude determination \cite{chu21}}
+\caption[\acs{ADS} design concepts]{The three concepts for the design of the \ac{ADS}. From left to right: Concept 1 uses the IMI-100 system from Maryland Inc. \cite{imi100}, concept 2 uses Sun sensors and star trackers \cite{chu21}, concept 3 uses \ac{GPS} for attitude determination \cite{chu21}}
 \label{fig:adsconcepts}
 \end{figure}
-
-%, bb =0 0 730px 713px    , bb=0 0 478px 321px        , bb=0 0 517px 388px
 
 \subsubsection{Trade criteria}
 The concepts for \ac{ADS} are traded in terms of attitude determination accuracy, purchasing price, power required, size and the amount of additional development required for implementing the concept. 
 \subsubsection{Weight factors}
-The accuracy of the \ac{ADS} is the main driver for the choice of the system so it is given a weight factor of 9. Because the volume and power for satellites are limited they are also important with a given weight factor of 7. Although the total cost of the system is relevant, if a better performance can be achieved at a higher cost can be acceptable, weight factor 3. If a lot of work still is required to implement the system in the satellite the mission can be delayed, development gets a weight factor of 5.
+The accuracy of the \ac{ADS} is the main driver for the choice of the system so it is given a weight factor of 9. Because the volume and power for satellites are limited they are also important with a given weight factor of 7. Although the total cost of the system is relevant, if a better performance can be achieved at a higher cost that can be acceptable, wherefore it is given a weight factor 3. If a lot of work still is required to implement the system in the satellite the mission can be delayed, development gets a weight factor of 5.
 \subsubsection{Trade-off}
 The results of the trade-off can be found in table \ref{tab:adstradeoff} on page \pageref{tab:adstradeoff}. 
 The attitude determination accuracy of concept 1 and concept 3 are both around $1^\circ$ for micro satellites, the performance of concept 2 is much better with an estimated accuracy of $0.01^\circ$. 
