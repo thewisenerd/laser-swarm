@@ -1,11 +1,11 @@
-\section{Trade-off for the electrical power system}
+\section{Trade-off for the \acl{EPS}}
 \label{TO_EPS}
-This section will be about the trade-off for the electrical power system (EPS). First the design option structure will be pruned
+This section is about the trade-off for the \ac{EPS}. First the design option structure will be pruned
 with the obvious non-candidates eliminated so only the viable options remain for the trade-off.
 When this is done, the preparation of the trade-off can be done. First the method and rationale will be discussed.
 Afterwards the different criteria of the trade-off will be discussed. The important characteristics of the candidates are going to be
 determined and these will be the base on which the trade-off will be performed. In section \ref{TO_weight} the importance of each criteria
-will be determined. The last section will give a summary of the whole trade-off with the corresponding results.
+will be determined. The last section will give a summary of the entire trade-off with the corresponding results.
 
 \subsection{Pruning of the EPS design option structure}
 \label{pruneEPS}
@@ -13,7 +13,7 @@ In the next section the design option tree for the \ac{EPS} will be pruned. The 
 
 \subsubsection{Power Source}
 \label{pruneEPS:Source}
-Fuel cells have a high specific energy density but were not taken into account as a feasible power source because the amount of reactant they would have to bring for long term mission is too large for microsatellites. Primary batteries were equally unfeasible because of their limited lifetime, which is in the order of minutes to months. Radio isotopes and nuclear fission reactors were discarded because of their high cost and low specific power, as were thermionic and thermoelectric conversion for static power sources.
+Fuel cells have a high specific energy density but were not taken into account as a feasible power source because the amount of reactant they would have to bring for a long term mission is too large for microsatellites. Primary batteries were equally unfeasible because of their limited lifetime, which is in the order of minutes to months. Radio isotopes and nuclear fission reactors were discarded because of their high cost and low specific power, as were thermionic and thermoelectric conversion for static power sources.
 This leaves photovoltaics and concentrated solar radiation together with an engine in a thermodynamic power cycle.
 
 The pruned design option tree for the powersource can be seen in figure \ref{fig:DOTeps_sourcePruned}
@@ -30,7 +30,7 @@ The pruned design option tree for the powersource can be seen in figure \ref{fig
 The only obvious candidate for power storage was secondary batteries because, as mentioned before, the lifetime of primary batteries is too short.
 Of the most common secondary batteries, sodium-sulfur batteries are not an option for us because their operating temperature at 350 degrees Celsius is too high.
 
-The pruned design option tree for the powersource can be seen in figure \ref{fig:DOTeps_storagePruned}
+The pruned design option tree for the power source can be seen in figure \ref{fig:DOTeps_storagePruned}
 
 \begin{figure}
 \centering
@@ -55,21 +55,21 @@ The design option tree for the powersource can be seen in figure \ref{fig:DOTeps
 
 
 \subsection{Trade method rationale and organization}
-In this section the question of how the trade-off is done will be answered. First some additional information of the two options for the trade-off
-are given and afterwards the method and organization itself will be discussed.
+In this section the question of how the trade-off is done will be answered. First some additional information of the two options for the trade-off are given and afterwards the method and organization itself will be discussed.
 After the pruning of the design option structure the only candidates left were photovoltaics and concentrated solar radiation together with an engine in a thermodynamic power cycle. 
 After some further research the option of using concentrated solar radiation was also discarded. Almost no information was found about that
 kind of powersource for use in space. Therefore it was decided to abandon this kind of power source because without any data or information 
 it will not be possible to determine if that option is feasible. So that leaves only photovoltaics. 
-Solar cells come in a lot of different types. The most common are crystalline solar cells, multijunction cells and thin film solar cells but with lower efficiency. Soon it was clear that crystalline would not be a good option. Multijunction cells have a higher efficiency while thin film cells have a lower mass and production cost. Because the efficiency, mass and production cost are the most important characteristics and crystalline solar cells do not excell in any of these areas (compared to multijunction and thin film cells), they will not be considered as an option for the power source.
- 
+Solar cells come in a lot of different types. The most common are crystalline solar cells, multijunction cells and thin film solar cells. Soon it was clear that crystalline would not be a good option. Multijunction cells have a higher efficiency while thin film cells have a lower mass and production cost. Because the efficiency, mass and production cost are the most important characteristics and crystalline solar cells do not excell in any of these areas (compared to multijunction and thin film cells), they will not be considered as an option for the power source.
+
+\clearpage
 \subsubsection{Multijunction solar cells}
 A solar cell converts solar energy to electrical energy. When a photon hits the surface of a solar cell it is either reflected or transmitted.
 If it is transmitted the energy it contains will excite an electron from the valence band to the conduction band. In the conduction band they have a higher energy than in the valence band, which allows them to move around. This happens in a so called pn-junction. Single crystalline solar cells have only one pn-junction whereas multijunction ones have more than one. Each pn-junction has a certain bandgap, depending on the material of the junction. The bandgap is the difference between the valence band and the conduction band.
 
-This means that if a certain material has a bandgap of one electronvolt, one electronvolt of power needs to be given to an electron for it to be able to go from the valance band to the conduction band. From this it follows that one pn-junction will only be able to use part of the solar spectrum. Multijunction cells use several pn-junctions connected in series so that a larger part of the solar spectrum can be used.
+This means that if a certain material has a bandgap of one electronvolt, one electronvolt of power needs to be given to an electron for it to be able to go from the valence band to the conduction band. From this it follows that one pn-junction will be able to use only part of the solar spectrum. Multijunction cells use several pn-junctions connected in series so that a larger part of the solar spectrum can be used.
 
-Figure \ref{fig:multij_cell} gives a schematic representation of a triple-junction solar cell \cite{spectrolab}. The (metallic contacts) in aluminium are low resistivity electrodes that transfer the current from the solar panel to the power grid. They are disposed on the two sides of the structure but mainly on the backwards face so that the shadowing on the lightning surface is reduced.
+Figure \ref{fig:multij_cell} gives a schematic representation of a triple-junction solar cell \cite{spectrolab}. The metallic contacts in aluminium are low resistivity electrodes that transfer the current from the solar panel to the power grid. They are present on the two sides of the structure but mainly on the backwards face so that the shadowing on the lit surface is reduced.
 
 The anti-reflective coatings are primarily used to increase the transmission of the photons and correspondingly decrease the reflectance at the wavelengths that will be used.
 
@@ -93,9 +93,10 @@ Figure \ref{multi_irradiance} \cite{yastrebova} shows the range of wavelengths t
 \label{multi_irradiance}
 \end{figure}
 
+\clearpage
 \subsubsection{Thin film solar cells}
 Thin film solar cells are created by depositing one or more thin layers of photovoltaic material on a substrate. The thickness range of such a layer is wide and varies from a few nanometers to tens of micrometers. An example of a thin film solar cell shown in figure 
-\ref{fig:thinfilm_cell}. Here the CIGS cell is shown. Glass is commonly used as a substrate. A molybdenum layer is deposited which serves as the back contact and to reflect most unabsorbed light back into the absorber. The absorberlayer is a p-type layer. The most efficient absorber is a so called CIGS absorber. It is a direct bandgap semiconductor with the highest absoprtance coefficient of all solar cells. CIGS stands for Copper-Indium-Gallium-Selenide and these are the materials of the four thin layers of which it consists. A thin n-type buffer layer is added on top of the absorber. The buffer is overlaid with a thin, intrinsic Zinc-Oxide layer which is capped by a thicker, Aluminum doped Zinc-Oxide layer. Despite increasing the series resistance, the Zinc-Oxide layer is beneficial to cell performance. The Aluminum doped Zinc-Oxide serves as a transparent conducting oxide to collect and move electrons out of the cell while absorbing as little light as possible \cite{dhere}.
+\ref{fig:thinfilm_cell}. Here the \ac{CIGS} cell is shown. Glass is commonly used as a substrate. A molybdenum layer is deposited which serves as the back contact and to reflect most unabsorbed light back into the absorber. The absorberlayer is a p-type layer. The most efficient absorber is a so called \ac{CIGS} absorber. It is a direct bandgap semiconductor with the highest absoprtance coefficient of all solar cells. \ac{CIGS} and these are the materials of the four thin layers of which it consists. A thin n-type buffer layer is added on top of the absorber. The buffer is overlaid with a thin, intrinsic Zinc-Oxide layer which is capped by a thicker, Aluminum doped Zinc-Oxide layer. Despite increasing the series resistance, the Zinc-Oxide layer is beneficial to cell performance. The Aluminum doped Zinc-Oxide serves as a transparent conducting oxide to collect and move electrons out of the cell while absorbing as little light as possible \cite{dhere}.
 
 \begin{figure}
 \includegraphics{chapters/img/thinfilm_solar_cell.png}
