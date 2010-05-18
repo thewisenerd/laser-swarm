@@ -4,6 +4,7 @@
 \markright{Group 13\hfill Laser Swarm\hfill}
 \usepackage{pdflscape}
 
+\usepackage{longtable}
 \usepackage{multirow}
 \usepackage{enumerate}
 \usepackage[printonlyused]{acronym}
@@ -59,6 +60,18 @@
 \newpage
 \addcontentsline{toc}{chapter}{List of Tables}
 \listoftables
+
+%%%%%%%%%%%%%
+%
+%       SYMBOLS
+%
+%%%%%%%%%%%%%
+
+\newpage
+\addcontentsline{toc}{chapter}{List of Symbols}
+\Large{\textbf{List of Symbols}}
+\small
+\input{chapters/SymbList.tex}
 
 %%%%%%%%%%%%%
 %
@@ -143,6 +156,7 @@
 %%%%%%%%%%%%%
 
 \chapter{Tradeoff}
+\input{chapters/IntroTradeOff.tex}
 \input{chapters/TOadcs.tex}
 \input{chapters/mtrTOCOM.tex}
 \input{chapters/TOeps.tex}
