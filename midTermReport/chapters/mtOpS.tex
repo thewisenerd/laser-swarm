@@ -37,7 +37,7 @@ To be able to make any oceanographic elevation model, the incident photons shoul
 
 \begin{figure}[ht!]
 \centering
-\includegraphics[width=0.75\textwidth]{chapters/img/Ocean_absorption.jpg}
+\includegraphics[width=0.45\textwidth]{chapters/img/Ocean_absorption.jpg}
 \caption{Light penetration ocean depth with different wavelengths}
 \label{fig:intro_ocean_penetrate}
 \end{figure}
@@ -98,7 +98,7 @@ According to the photon detection probability distribution diagram for \acs{SPAD
 \label{fig:MPD_efficiency}
 \end{figure}
 
-There are not many qualified \acs{laser}s that can be considered below the wavelength of 400 [nm], and the photon detection probability is insufficient if the wavelength goes above 900 [nm]. In order to narrow the wavelength range, the atmospheric transmittance versus photon detection efficiency ratio is introduced, which means that larger ratio indicates larger chance the receiver can detect photon. The actual formula to calculate the ratio is R = transmittance$^{2} \times$ photon efficiency. The transmittance is squared because the light goes through the atmosphere twice. Calculating all ratio between wavelength 400 to 900 [nm] by interval 25 [nm], and plot the ratios in figure \ref{fig:wavelength_estimation} on page \pageref{fig:wavelength_estimation}. From the graph, it is easy to narrow down the wavelength range to 425 - 500 [nm].  The following sections will give brief trade-offs between \acs{laser} emitters and receivers.
+There are not many qualified \acs{laser}s that can be considered below the wavelength of 400 [nm], and the photon detection probability is insufficient if the wavelength goes above 900 [nm]. In order to narrow the wavelength range, the atmospheric transmittance versus photon detection efficiency ratio is introduced, which means that larger ratio indicates larger chance the receiver can detect photon. The actual formula to calculate the ratio is R = transmittance$^{2} \times$ photon efficiency. The transmittance is squared because the light goes through the atmosphere twice. Calculating all ratios between wavelength 400 to 900 [nm] with an interval of 25 [nm], and plotting the ratios in figure \ref{fig:wavelength_estimation} on page \pageref{fig:wavelength_estimation}. From the graph, it is easy to narrow down the wavelength range to 425 - 500 [nm].  The following sections will give a brief trade-off between \acs{laser} emitters and receivers.
 
 \begin{figure}[ht!]
 \centering
@@ -107,37 +107,37 @@ There are not many qualified \acs{laser}s that can be considered below the wavel
 \label{fig:wavelength_estimation}
 \end{figure}
 
-\subsubsection{Receiver Prune}
+\subsubsection{Receiver Pruning}
 \label{TOReceiverP}
-In the design option tree, the GLAS branch is obviously dropped out, since we are trying to improve the whole concept. Meanwhile, the \ac{MPD}'s single-photon detection modules branch has different quantum efficiency for different wavelength, which means MPD could be a good option for the blue laser detector with 35\% efficiency. The \ac{SPAD} chip could be a new approach since it has reasonable high quantum detect efficiency at laser wavelength 425nm to 500nm. Both \acs{MPD} and \acs{SPAD} are not optimal for \acs{NIR} or \acs{IR} laser detect with low quantum efficiency around 1\%, So it means the mission mainly focus on single wavelength.
+In the design option tree, the GLAS branch is obviously dropped out, since we are trying to improve on this concept. Meanwhile, the \ac{MPD}'s single-photon detection modules branch has different quantum efficiency for different wavelength, which means MPD could be a good option for the blue laser detector with 35\% efficiency. The \ac{SPAD} chip could be a new approach since it has reasonably high quantum detection efficiency at laser wavelength 425nm to 500nm. Both \acs{MPD} and \acs{SPAD} are not optimal for \acs{NIR} or \acs{IR} laser detect with low quantum efficiency around 1\%, So it means the mission mainly focuses on a single wavelength.
 
 The pruned design option tree for the laser detector can be seen in figure \ref{fig:PrunedReceiver} on page \pageref{fig:PrunedReceiver}.
 
 \begin{figure}[ht!]
 \centering
-\includegraphics[scale=0.7, angle=90]{chapters/img/DOTreceiverPruned.jpg}
+\includegraphics[width=0.75\textheight, angle=90]{chapters/img/DOTreceiverPruned.jpg}
 \caption{The pruned design option tree for the laser receivers}
 \label{fig:PrunedReceiver}
 \end{figure}
 
 \subsubsection{Tradeoff Method}
 \label{TOReceiverM}
-There are mainly four options after pruning and each has different strong points and weak points due to different configuration and structure. 
+There are mainly four options after pruning and each has different strong points and weak points due to a different configuration and structure. 
 
-The first option is \ac{SILAT}, which combines two optical cameras with a low-power photon-counting laser altimeter. It means that \acs{SILAT} operates both pulse laser and photon detector, and it need to be configured as only a photon detector (more information is needed about the configuration). The main strong point is that \acs{SILAT} should has relative higher reliability since it is designed suitable for space missions, like spectral imagery and satellite topographic study. 
+The first option is \ac{SILAT}, which combines two optical cameras with a low-power photon-counting laser altimeter. It means that \acs{SILAT} operates both as a pulse laser and photon detector, and it needs to be configured as a photon detector only (more information is needed about the configuration). The main strong point is that \acs{SILAT} can have a higher reliability since it is designed to be suitable for space missions, like spectral imagery and satellite topographic study.
 
-\ac{MPD}'s photon detection efficiency is obtained through the use of epitaxial silicon \ac{SPAD} and patented \ac{IAQC}, which is specifically designed and optimized for photon counting. The main drawback is that it is difficult to achieve the precise ground resolution due to diffraction, and it also has large volume and power consumption.
+The \ac{MPD}'s photon detection efficiency is obtained through the use of epitaxial silicon \ac{SPAD} and patented \ac{IAQC}, which is specifically designed and optimized for photon counting. The main drawback is that it is difficult to achieve the precise ground resolution due to diffraction, and it also has large volume and power consumption.
 
-The final option is use a 32$\times$32 pixel array with in-pixel photon counting, which also use \acs{SPAD} but in \ac{CMOS} technology \cite{SPAD}. It has the highest quantum efficiency for blue laser(425nm to 500nm), but only 2\% of the chip area can detect the quanta. In this case, micro lenses or faceted mirrors are used in order to collect most of the incoming quanta focus on such a small area. The solution draft design is shown in figure \ref{fig:diagram_Rgeneral} on page \pageref{fig:diagram_Rgeneral}. Both designs use the parabolic mirror placed at certain position to the small \acs{SPAD} chip with a specified curvature, then the prism barrier is designed to filter other noise lights except wavelength about 425nm to 500nm blue light. After that, different receiver assemblys are designed.
+The final option is use a 32$\times$32 pixel array with in-pixel photon counting, which also use \acs{SPAD} but in \ac{CMOS} technology \cite{SPAD}. It has the highest quantum efficiency for blue laser(425nm to 500nm), but only 2\% of the chip area can detect the quanta. In this case, micro lenses or faceted mirrors are used in order to collect most of the incoming quanta focus on such a small area. The solution draft design is shown in figure \ref{fig:diagram_Rgeneral} on page \pageref{fig:diagram_Rgeneral}. Both designs use the parabolic mirror placed at certain position to the small \acs{SPAD} chip with a specified curvature. Then the prism is designed to filter out light except for wavelengths about the laser wavelength. After that, different receiver assemblies are designed.
 
 \begin{figure}[ht!]
 \centering
-\includegraphics[scale = 0.6]{chapters/img/DiagramReceiverGeneral.png}
+\includegraphics[width=0.75\textwidth]{chapters/img/DiagramReceiverGeneral.png}
 \caption{The diagram of the parabolic mirror}
 \label{fig:diagram_Rgeneral}
 \end{figure}
 
-The draft design diagram of assembly micro lenses is shown on figure \ref{fig:diagram_Rmicrolenses} on page \pageref{fig:diagram_Rmicrolenses}. The micro lenses are placed just above the \acs{SPAD} chip to focus light source on the specific pixel 2\% area. These lenses can increase the sensing area by factor of 5, which means 10\% area can be used for detection. On the other hand, the micro lenses could be very heavy due to the high density of the lens material, and it could also has the risk of falling off due to vibration during lunching and boosting. Since the micro lenses is manufacturing in scale of micro meters, it could be an extra problem to achieve the precision.
+The draft design diagram of assembly microlenses is shown on figure \ref{fig:diagram_Rmicrolenses} on page \pageref{fig:diagram_Rmicrolenses}. The microlenses are placed just above the \acs{SPAD} chip to focus light source on the specific pixel 2\% area. These lenses can increase the sensing area by factor of 5, which means 10\% of the area can be used for detection. The microlenses risk falling off due to vibration during launching and boosting. Since the microlenses are manufactured in the scale of micrometers, it could be an extra problem to achieve the required precision.
 
 \begin{figure}[ht!]
 \centering
@@ -146,7 +146,7 @@ The draft design diagram of assembly micro lenses is shown on figure \ref{fig:di
 \label{fig:diagram_Rmicrolenses}
 \end{figure}
 
-Another way to increase the receiving efficiency is using the faceted mirror such as the figure \ref{fig:diagram_Rfaceted mirror} on page \pageref{fig:diagram_Rfaceted mirror} shown. Instead of the heavy micro lenses, the multi-faceted elliptical mirror can be placed to achieve the focusing. In this way, the sensing area can be increase enormously from 2\% to around 80\%. Meanwhile, faceted mirror is manufacturing in scale of mini meters, so fabrication precision can be achieved.
+Another way to increase the receiving efficiency is using the faceted mirror such as the figure \ref{fig:diagram_Rfaceted mirror} on page \pageref{fig:diagram_Rfaceted mirror} shown. Instead of the heavy micro lenses, the multi-faceted elliptical mirror can be placed to achieve the focusing. In this way, the sensing area can be increased enormously from 2\% to around 80\%. Meanwhile, the faceted mirror is manufactured on the scale of millimeters, a fabrication precision which can easily be achieved.
 
 \begin{figure}[ht!]
 \centering
@@ -157,7 +157,7 @@ Another way to increase the receiving efficiency is using the faceted mirror suc
 
 \subsubsection{Trade Criteria}
 \label{TOReceiverC}
-In the last paragraph, the general trade off method is elaborated, but not in a quantitative way. It is more precise and clear to give some trade criteria to compare between options, which can be graded from 1-10 (worse to best) to indicate each criterion performance. Mass, power, volume are criteria considered as design of a constellation of micro- or nanosatellites. The criteria such as efficiency, reliability, resolution and \ac{FOV} are defined whether the receiver can detect photon or not and the precision it could be done with. Last but not the least, cost, lifetime and availability need to be noticed generally in each subsystem.
+In the last paragraph, the general trade off method is elaborated, but not in a quantitative way. It is more precise and clear to give some trade criteria to compare between options, which can be graded from 1-10 (worst to best) to indicate each criterion performance. Mass, power and volume are criteria considered in the design of a constellation of micro- or nanosatellites. Criteria such as efficiency, reliability, resolution and \ac{FOV} are defined based on whether the receiver can detect any photons or not and the precision this can be done with. Last but not least, cost, lifetime and availability need to be noticed generally in each subsystem.
 
 \subsubsection{Weight Factor}
 \label{TOReceiverWF}
@@ -165,7 +165,7 @@ Weight factor is given differently to each criterion due to mission objective an
 
 \subsubsection{Trade summary}
 \label{TOReceiverS}
-The trade off table is shown in figure \ref{table:receiverTradeTable} on page \pageref{table:receiverTradeTable}. The \acs{SPAD} plus micro lenses and faceted mirror designs have the much higher grades than \acs{SILAT} or \acs{MPD}. The \acs{SPAD} with micro lenses has lowest grade for efficiency, which is mentioned in early chapters, because the lenses which is manufactured in scale of micro meters can only increase the efficiency by factor of 5. On the other hand, the faceted mirror can increase the fill field from 2\% to 80\%, that is why faceted mirror has much larger efficiency. The \acs{SPAD} with faceted mirror design has the large advantages on power comsuption(100$\mu$W), mass(tens of grams) and volume($5\times5\times3[mm^{3}]$) comparing to either \acs{SILAT} or \acs{MPD}, that is much more realistic and practical if the swarm of receiver satellites are in scale of micro or even nano. The \acs{SPAD} with faceted mirror turns to be the best option after all, and it should be further invested later on in detail design.
+The trade off table is shown in figure \ref{table:receiverTradeTable} on page \pageref{table:receiverTradeTable}. The \acs{SPAD} plus micro lenses and faceted mirror designs have much higher grades than \acs{SILAT} or \acs{MPD}. The \acs{SPAD} with microlenses has the lowest grade for efficiency, which is mentioned in early chapters, because the lenses which are manufactured on the scale of micrometers can only increase the efficiency by factor of 5. On the other hand, the faceted mirror can increase the fill factor from 2\% to 80\%, that is why faceted mirror has much larger efficiency. Either \acs{SPAD} design has large advantages on power comsuption(100$\mu$W), mass (tens of grams) and volume($5\times5\times3[mm^{3}]$) comparing to either \acs{SILAT} or \acs{MPD}. This means the \ac{SPAD} is a much more realistic and practical choice if the swarm of receiver satellites are micro- or even nanosatellites. The \acs{SPAD} with faceted mirror turns out to be the best option when all is considered, and it should be further investigated later on in the detailed design.
 
 \begin{table*}[h]
 	\centering
@@ -181,7 +181,7 @@ The trade off table is shown in figure \ref{table:receiverTradeTable} on page \p
 		 Lifetime & 10 & 8 & 8 & 6 & 6 \\
 		 Resolution & 8 & 7 & 7 & 10 & 10 \\
 		 FOV & 6 & 6 & 6 & 9 & 9 \\ \hline
-		 Weighted total &   & 462 & 433 & 495 & 504 \\
+		 Weighed total &   & 462 & 433 & 495 & 504 \\
 			
 		\end{tabular}
 	\caption{Receiver tradeoff table.}
@@ -193,44 +193,43 @@ The trade off table is shown in figure \ref{table:receiverTradeTable} on page \p
 \acs{LiDAR} altimetry missions are dependent on electromagnetic or acoustic radiation transmission. In order to make a multi-angular \acs{DEM}, a \ac{laser} system is chosen. Since there are myriad types of \acs{laser}s, it is crucial to understand the basics behind this technology.  
 
 	\subsubsection{Optical Transition}
-\cite{laser_fundamental}Solving the time-dependent Schr$\ddot{o}$dinger equation for free electrons (represented as harmonic oscillators) shows the presence of certain energy gaps, i.e. the existence of quantisized energy states, according to quantum mechanics. In a more mathematical view, the quantum particles in a particular system share the same eigenfunction, but have different eigenvalues. Among energy states, the state with the lowest energy is the most stable one. If they are \textit{excited} by thermal energy, light or electron beams, the electrons absorb these energies and transit to a higher energy state. These transitions of the electrons from low energy states to high energy states are called \textit{excitations}. Higher energy states, however, are unstable. As a result, the electrons in higher energy states transit to lower energy states in certain \textit{lifetimes}. These transitions of the excited electrons from high energy states to low energy states are referred to as \textit{relaxations}. In the recombination of negatively charged electron and positively charged holes (exciton pairs) there are radiative (emission of photons) and non-radiative (phonon emission through crystal lattice) recombinations.
+\cite{laser_fundamental}Solving the time-dependent Schr$\ddot{o}$dinger equation for free electrons (represented as harmonic oscillators) shows the presence of certain energy gaps, i.e. the existence of quantisized energy states, according to quantum mechanics. In a more mathematical view, the quantum particles in a particular system share the same eigenfunction, but have different eigenvalues. Among energy states, the state with the lowest energy is the most stable one. If they are \textit{excited} by thermal energy, light or electron beams, the electrons absorb these energies and transit to a higher energy state. These transitions of the electrons from low energy states to high energy states are called \textit{excitations}. Higher energy states, however, are unstable. As a result, the electrons in higher energy states transit to lower energy states in certain \textit{lifetimes}. These transitions of the excited electrons from high energy states to low energy states are referred to as \textit{relaxations}. In the recombination of negatively charged electron and positively charged holes (exciton pairs) there are radiative (emission of photons) and non-radiative (photon emission through crystal lattice) recombinations.
 
 	\subsubsection{Exciton Dynamics}   
-Figure \ref{fig:laser} on page \pageref{fig:laser} schematically shows the possible radiations and absorption. In the radiations, there are spontaneous emission and stimulated emission. Spontaneous emission is a radiative process in which an excited electron decays in a certain lifetime and a photon is emitted. In contrast, with stimulated emission, an incident photon induces a radiative transition of an excited electron. The emitted photon due to stimulated emission has the same wavelength, phase, \textbf{k}-vector, polarization and direction. Therefore, the light generated is highly monochromatic, coherent and directional. As a result of the two photons generated from this process, the electromagnetic radiation is amplified. These quantum particles can on their turn start the same procedure on different electrons. 
+Figure \ref{fig:laser} on page \pageref{fig:laser} schematically shows the possible radiation and absorption. In radiations, there are spontaneous emissions and stimulated emissions. Spontaneous emission is a radiative process in which an excited electron decays in a certain lifetime and a photon is emitted. In contrast, with stimulated emission, an incident photon induces a radiative transition of an excited electron. The emitted photon due to stimulated emission has the same wavelength, phase, \textbf{k}-vector, polarization and direction. Therefore, the light generated is highly monochromatic, coherent and directional. As a result of the two photons generated from this process, the electromagnetic radiation is amplified. These quantum particles can on their turn start the same procedure on different electrons. 
 
 \begin{figure}[ht!]
 \centering
-\includegraphics[scale=0.4]{chapters/img/laser.png}
+\includegraphics[width=0.75\textwidth]{chapters/img/laser.png}
 \caption{Left: individual energy quantum energy levels occupied with individual wave equation. Optical transitions given in random electron orbit; emission and absorption could take place at any energy level. Right: Einstein coefficients for optical transmission. 'J' represents the photon density in \textbf{k}-space. Spontaneous emission is independent on photon density.}
 \label{fig:laser}
 \end{figure}
  
 When a light is incident on a material, the stimulated emission and the absorption simultaneously take place. In thermal equilibrium, there are more electrons in a lower energy state than in a higher one, because the lower energy state is more stable. In order to obtain a net optical gain, the number of electrons in a higher energy state should exceed the number of electrons in a (relative) lower energy level. This condition is referred to as \textit{population inversion}, because the electron population is inverted compared with that in thermal equilibrium. 
- 
  	
 	\subsubsection{Laser Geometry}
 The \acs{laser} oscillator uses fractions of the spontaneous emission as the optical input and amplifies the fractions by the stimulated emission under population inversion. Once the optical gain exceeds the optical losses, laser oscillations take place. An oscillator has a gain and amplifies an input. To feed back light, \textit{optical resonators} or \textit{optical cavities}, which are composed of reflectors or mirrors, are adopted. Due to this configuration (which is used by pretty much all \acs{laser} types), characteristics of \acs{laser}s are affected by the optical gains and optical resonators. 
 
 \begin{figure}[ht!]
 \centering
-\includegraphics[scale=0.6]{chapters/img/laser_cavity.PNG}
+\includegraphics[width=0.75\textwidth]{chapters/img/laser_cavity.PNG}
 \caption{General layout of a \acs{laser}. Laser cavity with fully reflecting mirror (left) and partially reflected mirror (right). Under the stimulation of population inversion lasing action occurs due to optical reflection.}
 \label{fig:laser_cavity}
 \end{figure}
 
 	\subsubsection{Efficiency}
-Unfortunately, the induced power (pump power) cannot be perfectly transmitted to the electromagnetic radiation, i.e. the efficiency of the \acs{laser} cavity and \acs{laser} resonator are not equal to 100 percent. A number of mechanisms cause this decrease in efficiency:
+Unfortunately, the induced power (or pump power) cannot be perfectly transmitted to the electromagnetic radiation, i.e. the efficiency of the \acs{laser} cavity and \acs{laser} resonator are not equal to 100 percent. A number of mechanisms cause this decrease in efficiency:
 	\begin{enumerate}
 		\item{Cavity Losses}\\
-Intercavity \acs{laser} power losses are always presence, depending on the configuration. Next to the fact that the optical components will absorb some of the radiation (dependent on wavelength), some photon excitation will actually be lost (since the cavity only 'uses' a single direction of electromagnetic radiation). Hence, the energy pumped in the cavity cannot be used optimally. 
+Intercavity \acs{laser} power losses are always present, depending on the configuration. Next to the fact that the optical components will absorb some of the radiation (dependent on wavelength), some photon excitation will actually be lost (since the cavity only 'uses' a single direction of electromagnetic radiation). Hence, the energy pumped in the cavity cannot be used optimally. 
 		\item{Optic Misalignment}\\
-The radiated \acs{laser} emission has a highly divergent-limited character. Considering the fact that the radiation is reflected through multiple optical components, small deviations and the low value of divergence can ultimately decrease the effective power.
+The radiated \acs{laser} emission has a highly divergence-limited character. Considering the fact that the radiation is reflected through multiple optical components, small deviations and the low value of divergence can ultimately decrease the effective power.
 		\item{Optical Transition}\\
 By theory, two-level energy systems can be used for lasing action. However, normal ('real') electron configurations show multiple-level characteristics. This principle is shown in figure \ref{fig:4_level_system} on page \pageref{fig:4_level_system}.
 
 \begin{figure}[ht!]
 \centering
-\includegraphics[scale=0.5]{chapters/img/4_level_system.png}
+\includegraphics[width=0.75\textwidth]{chapters/img/4_level_system.png}
 \caption{Three possible laser level systems. Left: Three-level system. Middle and right: Four-level system with equal pump power level. The difference is the bandgap between energy level one and two. Hence, the efficiency of the four-level system in the middle is higher, since the effective lasing action energy quantity is higher with equal pump power}
 \label{fig:4_level_system}
 \end{figure}
@@ -238,7 +237,7 @@ By theory, two-level energy systems can be used for lasing action. However, norm
 	\end{enumerate} 
 
 	\subsubsection{Pulsed vs Continuous Waves}
-Without any alterations of the electromagnetic radiation created by the stimulated emission within the \acs{laser} cavity, the radiation, once in equilibrium, behaves like a continuous wave. The energy within this wave is equal to the pumper power minus the \textit{round-trip inter cavity power losses}. However, the wave can also be pulsed. The pulse energy $E_{p}$ is simply the total optical energy content of a pulse. For regular pulse trains, the pulse energy is often calculated by dividing the average power (measured e.g. with a powermeter) by the pulse repetition rate [Hz]. However, this is a valid procedure only if the energy emitted between the pulses is negligible. There are cases where, e.g., a mode-locked laser emits a pulse train together with a low-level background emission. Even if the background power level is far below the peak power, the background can significantly contribute to the average power. 
+Without any alterations of the electromagnetic radiation created by the stimulated emission within the \acs{laser} cavity, the radiation, once in equilibrium, behaves like a continuous wave. The energy within this wave is equal to the pump power minus the \textit{round-trip intercavity power losses}. However, the wave can also be pulsed. The pulse energy $E_{p}$ is simply the total optical energy content of a pulse. For regular pulse trains, the pulse energy is often calculated by dividing the average power (measured e.g. with a powermeter) by the pulse repetition rate [Hz]. However, this is a valid procedure only if the energy emitted between the pulses is negligible. There are cases where, e.g., a mode-locked laser emits a pulse train together with a low-level background emission. Even if the background power level is far below the peak power, the background can significantly contribute to the average power. 
 
 The pulse energy together with the pulse duration is often used to estimate the peak power of pulses. Conversely, temporal integration of the optical power results in the pulse energy.
 
@@ -251,7 +250,7 @@ In the baseline report, a number of \acs{laser}s was listed. Considering the fac
 
 The analysis of the chosen wavelength is determined in chapter wavelength estimation.
 
-The receiver characteristics show that the laser should have a wavelength in the interval of 425 - 500 [nm] (within visible spectrum designated as 'blue'). Hence, every \acs{laser} with different wavelengths is not viable for this analysis.
+The receiver characteristics show that the laser should have a wavelength in the interval of 425 - 500 [nm] (within the visible spectrum designated as 'blue'). Hence, every \acs{laser} with different wavelengths is not viable for this analysis.
 
 Potential \acs{laser} types for this altimetry mission:
 
@@ -259,7 +258,7 @@ Potential \acs{laser} types for this altimetry mission:
 Wavelength: 441.6 [nm]\\
 Gain medium type: Gas
 
-\textit{Neodymium-doped Yttrium Aluminium (Nd-YAG) \acs{laser}}\\
+\textit{Neodymium-doped Yttrium Aluminium Garnet (Nd-YAG) \acs{laser}}\\
 Wavelength: 946 [nm] (473 [nm] with frequency doubling)\\
 Gain medium type: Solid-State
 
@@ -286,14 +285,14 @@ Wavelength interval 400 - 480 [nm] (tunable). The wavelength interval of this ki
 		 Chemical Stability & 4 & 8 & 6 & 4 \\
 		 Thermal Control & 4 & 8 & 6 & 5 \\
 		 Efficiency & 8 & 7 & 1 & 7 \\ \hline
-		 Weighted total &   & 532 & 338 & 359
+		 Weighed total &   & 532 & 338 & 359
 			
 		\end{tabular}
 	\caption{Emitter tradeoff table.}
 	\label{table:emitterTradeTable}
 \end{table*}
 
-Table \ref{table:emitterTradeTable} on page \pageref{table:emitterTradeTable} shows the trade-off for the different \acs{laser}s. The most important  criteria and the ones that clearly need some explanation, are discussed in more detail in this section for the different gain media. 
+Table \ref{table:emitterTradeTable} on page \pageref{table:emitterTradeTable} shows the trade-off for the different \acp{laser}. The most important  criteria and the ones that clearly need some explanation, are discussed in more detail in this section for the different gain media. 
 	
 \textbf{Wavelength ratio}. The emitted wavelength is an important factor for the possibility of photon detection as function of atmospheric absorption and receiver efficiency. Considering the wavelength dependency of these last two terms, the laser types have a different wavelength ratio (see: chapter receiver).
 
