@@ -7,7 +7,7 @@ Afterwards the different criteria of the trade-off will be discussed. The import
 determined and these will be the base on which the trade-off will be performed. In section \ref{TO_weight} the importance of each criteria
 will be determined. The last section will give a summary of the entire trade-off with the corresponding results.
 
-\subsection{Pruning of the EPS design option structure}
+\subsection{Pruning of the EPS Design Option Structure}
 \label{pruneEPS}
 In the next section the design option tree for the \ac{EPS} will be pruned. The design option trees for the power source, storage, distribution and regulation and control will be dealt with individually in sections \ref{pruneEPS:Source}, \ref{pruneEPS:Storage} and \ref{pruneEPS:Distribution} respectively.
 
@@ -52,7 +52,7 @@ The design option tree for the powersource can be seen in figure \ref{fig:DOTeps
 \label{fig:DOTeps_reganddisPruned}
 \end{figure}
 
-\subsection{Trade method rationale and organization}
+\subsection{Trade Method Rationale and Organization}
 In this section the question of how the trade-off is done will be answered. First some additional information of the two options for the trade-off are given and afterwards the method and organization itself will be discussed.
 After the pruning of the design option structure the only candidates left were photovoltaics and concentrated solar radiation together with an engine in a thermodynamic power cycle. 
 After some further research the option of using concentrated solar radiation was also discarded. Almost no information was found about that
@@ -61,7 +61,7 @@ it will not be possible to determine if that option is feasible. So that leaves 
 Solar cells come in a lot of different types. The most common are crystalline solar cells, multijunction cells and thin film solar cells. Soon it was clear that crystalline would not be a good option. Multijunction cells have a higher efficiency while thin film cells have a lower mass and production cost. Because the efficiency, mass and production cost are the most important characteristics and crystalline solar cells do not excell in any of these areas (compared to multijunction and thin film cells), they will not be considered as an option for the power source.
 
 \clearpage
-\subsubsection{Multijunction solar cells}
+\subsubsection{Multijunction Solar Cells}
 A solar cell converts solar energy to electrical energy. When a photon hits the surface of a solar cell it is either reflected or transmitted.
 If it is transmitted the energy it contains will excite an electron from the valence band to the conduction band. In the conduction band they have a higher energy than in the valence band, which allows them to move around. This happens in a so called pn-junction. Single crystalline solar cells have only one pn-junction whereas multijunction ones have more than one. Each pn-junction has a certain bandgap, depending on the material of the junction. The bandgap is the difference between the valence band and the conduction band.
 
@@ -92,7 +92,7 @@ Figure \ref{multi_irradiance} \cite{yastrebova} shows the range of wavelengths t
 \end{figure}
 
 \clearpage
-\subsubsection{Thin film solar cells}
+\subsubsection{Thin Film Solar Cells}
 Thin film solar cells are created by depositing one or more thin layers of photovoltaic material on a substrate. The thickness range of such a layer is wide and varies from a few nanometers to tens of micrometers. An example of a thin film solar cell shown in figure 
 \ref{fig:thinfilm_cell}. Here the \ac{CIGS} cell is shown. Glass is commonly used as a substrate. A molybdenum layer is deposited which serves as the back contact and to reflect most unabsorbed light back into the absorber. The absorberlayer is a p-type layer. The most efficient absorber is a so called \ac{CIGS} absorber. It is a direct bandgap semiconductor with the highest absoprtance coefficient of all solar cells. \acl{CIGS} are the materials of the four thin layers of which it consists. A thin n-type buffer layer is added on top of the absorber. The buffer is overlaid with a thin, intrinsic Zinc-Oxide layer which is capped by a thicker, Aluminum doped Zinc-Oxide layer. Despite increasing the series resistance, the Zinc-Oxide layer is beneficial to cell performance. The Aluminum doped Zinc-Oxide serves as a transparent conducting oxide to collect and move electrons out of the cell while absorbing as little light as possible \cite{dhere}.
 
@@ -104,7 +104,7 @@ Thin film solar cells are created by depositing one or more thin layers of photo
 \end{figure}
 
 \clearpage
-\subsubsection{Trade off method and rationale}
+\subsubsection{Tradeoff Method and Rationale}
 \label{TO_weight}
 Now that the two candidates are known, the preparation of the trade-off can begin. Thin film \ac{CIGS} cells and triple-junction cells will be compared with each other with respect to certain criteria (i.e. cost, mass,...). For every criterium each candidate will receive points on a scale from one to ten, with ten being the highest. Each criterium will get a weight factor, depending on how important it is. To determine which solar cell type is the best, their points for each criterium will be multiplied with that criteriums weight factor. All these results will be added and the candidate with the highest total of points will be the best candidate for the mission. 
 The first thing to do is to determine which criteria will be used. Efficiency, mass and cost are the three most important characteristics for the solar cells. They are also the ones that can deviate the most between different types of solar cells. Furthermore also the packing factor, degradation, solar cell height and resistance to vibrational noise during launch are trade-off criteria. 
@@ -115,7 +115,7 @@ When considering a solar panel, not the whole panel is filled with solar cells. 
 
 During take-off, the launcher and its payload experience large vibrational loads. The solar panels of the satellites need to be able to resist these loads. If they are affected too much by it some cells might be damaged, resulting in less power generation. The weight factor in this case is five. This is on the low side, because these vibrational loads will not be really destructive. 
 
-\subsection{Trade-off summary}
+\subsection{Tradeoff Summary}
 In this section the summary of the trade-off process and the results will be discussed. For all the trade-off criteria, except for the resistance to vibrational loads, the marks each option receives are based on hard numbers. The candidate with the best characteristics will receive a ten and the other candidates marks are a fraction of that ten, based on the actual data. For example, if option 1 has a cost of 100 euros per watt, and option 2 costs 250 euros per watt, example 1 will receive a 10 for the criteia cost and example 2 will receive a four.
 
 Table \ref{tab:TO_summary} lists the marks both candidates received and also their totals. From this it is obvious that the thin film \ac{CIGS} is the better candidate for our mission.
