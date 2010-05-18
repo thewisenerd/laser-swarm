@@ -12,18 +12,18 @@ The scattering coefficients values used where 1.5 for the index of refraction, 1
 	\item Right ascension of ascending node: 8.5$^\circ$,
 	\item Argument of perigee: 0$^\circ$,
 	\item True anomaly: 0$^\circ$.
-\end{itemize}1
+\end{itemize}
 
-The results are shown in table \ref{table:simulationHeight} and visualized in figure \ref{fig:simulationHeight}. The datapoints show a clear exponential decaying trend. This trend can be approximated with the mathematical function $y=e^{-0.0052 \cdot x + 0.6558}$. The function shows a high decay rate with increasing altitude. For example moving from altitude of 500km to 350km halves the number of received photons. To compensate for this effect, one would have to design the \ac{laser} to have double the power, or the receiver double the aperture. This is because both of these parameters directly effect the number of received photons. 
+The results are shown in table \ref{table:simulationHeight} and visualized in figure \ref{fig:simulationHeight}. The datapoints show a clear exponential decaying trend. This trend can be approximated with the mathematical function $y=e^{-0.0052 \cdot x + 0.6558}$. The function shows a high decay rate with increasing altitude. For example moving from altitude of 500 km to 350 km doubles the number of received photons. To compensate for this effect, one would have to design the \ac{laser} to have double the power, or the receiver double the aperture. This is because both of these parameters directly effect the number of received photons. 
 
 \small
 \begin{table}[ht!]
 \begin{tabular}{| l | c | c | c | c | c | c | c |c | c |}
+
+		\textbf{Altitude [km]} &        300 &     325 &      350 &      375 &     400 &     425 &     450 &     475 &      500 \\
 	\hline
-		Altitude [km] &        300 &     325 &      350 &      375 &     400 &     425 &     450 &     475 &      500 \\
-	\hline
-		Average \# photons &  0.4249 &  0.3613 &   0.2991 &   0.2692 &  0.2483 &  0.2054 &  0.1843 &  0.1641 &   0.1483 \\
-	\hline
+		\textbf{Average \# photons }&  0.4249 &  0.3613 &   0.2991 &   0.2692 &  0.2483 &  0.2054 &  0.1843 &  0.1641 &   0.1483 \\
+
 \end{tabular}
 \caption{Simulation results for varying altitude}
 \label{table:simulationHeight}
@@ -32,8 +32,9 @@ The results are shown in table \ref{table:simulationHeight} and visualized in fi
 \begin{figure}[ht!]
 	\centering
 		\includegraphics[width=0.8\textwidth]{chapters/img/simulationHeight.png}
-	\label{fig:simulationHeight}
+	
 	\caption{Height variation effect in the \# received photons}
+	\label{fig:simulationHeight}
 \end{figure}
 
 From this simulation, one can conclude that purely on the bases of received photons, a lower altitude is better. This is in direct contradiction to the drag analysis. However higher altitudes are possible, with increased \ac{laser} power and/or receiver aperture area.
