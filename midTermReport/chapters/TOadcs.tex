@@ -47,13 +47,16 @@ $\begin{array}{c c c}
 \subsubsection{Trade criteria}
 The concepts for \ac{ADS} are traded in terms of attitude determination accuracy, purchasing price, power required, size and the amount of additional development required for implementing the concept. 
 \subsubsection{Weight factors}
-The accuracy of the \ac{ADS} is the main driver for the choice of the system so it is given a weight factor of 9. Because the volume and power for satellites are limited they are also important with a given weight factor of 7. Although the total cost of the system is relevant, if a better performance can be achieved at a higher cost that can be acceptable, wherefore it is given a weight factor 3. If a lot of work still is required to implement the system in the satellite the mission can be delayed, development gets a weight factor of 5.
+The accuracy of the \ac{ADS} is the main driver for the choice of the system so it is given a weight factor of 9. Because the volume and power for satellites are limited they are also important with a given weight factor of 7. Although the total cost of the system is relevant, if a better performance can be achieved at a higher cost that can be acceptable, wherefore it is given a weight factor 3. If a lot of work still is required to implement the system in the satellite the mission can be delayed, so development gets a weight factor of 5.
 \subsubsection{Trade-off}
 The results of the trade-off can be found in table \ref{tab:adstradeoff} on page \pageref{tab:adstradeoff}. 
-The attitude determination accuracy of concept 1 and concept 3 are both around $1^\circ$ for micro satellites, the performance of concept 2 is much better with an estimated accuracy of $0.01^\circ$. 
+The attitude determination accuracy of concept 1 and concept 3 are both around $1^\circ$ for micro satellites, the performance of concept 2 is much better with an estimated accuracy of $0.01^\circ$.
+
 In the \ac{ISIS}' webshop \cite{cubesatshop} concept 1 costs about EUR 45000, the development costs of concept 2 are estimated to be about EUR 15000, a space qualified \ac{GPS} receiver will cost about EUR 25000 \cite{spacequest}.
+
 The first concept will use about 1.5 W on attitude determination, concept 2 uses a power of about 2 W, a \ac{GPS} receiver takes about 1 W.
 The size of the IMI-100 is 100x100x79 mm, the Sun sensors can be as small as 30x30x14.5 mm \cite{tnoweb} and \ac{ISIS} is currently developing a star sensor with a size of 50x50x100 mm, a space qualified \ac{GPS} receiver is about 100x70x25 mm. 
+
 The IMI-100 system is completely developed and can just be build in, for a system with Sun sensors and a star tracker still some design needs to be done in for example locations on the satellite, for a \ac{GPS} system the antenna positions need to be chosen for optimal accuracy.
 
 \begin{table} [h]
@@ -65,16 +68,16 @@ Size        & 7 & 2 & 6 & 4\\
 Power       & 7 & 6 & 5 & 7\\
 Price       & 3 & 3 & 5 & 4\\
 Development & 5 & 8 & 4 & 5\\ \hline
-Weighted total    &    & 141 & 184 & 150
+Weighed total    &    & 141 & 184 & 150
 \end{tabular} 
 \caption[Trade-off attitude determination]{Trade-off graph for the attitude determination system. The weight factor signifies the importance of the criterion. Grades are given on a scale of 1 to 10, 1 being the worst, 10 the best}
 \label{tab:adstradeoff}
 \end{table}
 
-After the trade-off the best solution for the \ac{ADS} is to use Sun sensors and a star tracker. Although the most design work is needed, it is able to give the best accuracy for the lowest price.  
+After the trade-off the best solution for the \ac{ADS} is to use Sun sensors and a star tracker. Although this option requires most design work, it is able to give the best accuracy for the lowest price.  
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{\ac{ACS}}
+\subsection{\acl{ACS}}
 \label{ss:acs}
 The satellites in the constellation all need to point accurately to the Earth, a passive \ac{ACS} will therefore not be sufficient for the control of the attitude of the satellites. For active attitude control actuators are needed. After the pruning, four options remain for the attitude control. Reaction and momentum wheels, \acp{CMG}, Thusters and Magnetic torquers.
 
