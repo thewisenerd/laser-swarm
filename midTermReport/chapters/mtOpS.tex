@@ -273,14 +273,29 @@ Gain medium type: Gas
 Wavelength interval 400 - 480 [nm] (tunable). The wavelength interval of this kind of \acs{laser} is excellent, but they are difficult to produce for high output power and long ($>$ one year) lifetimes. Since the determined lifetime in this mission exceeds this \acs{laser} lifetime, this \acs{laser} is not part of the trade-off.
 	
 	\subsubsection{Trade-off Criteria}
-\begin{figure}[ht!]
-\centering
-\includegraphics[scale=1]{chapters/img/laser_tradeoff.png}
-\caption{\acs{laser} trade off table}
-\label{table:laser_tradeoff}
-\end{figure}
 
-Table \ref{table:laser_tradeoff} on page \pageref{table:laser_tradeoff} shows the trade-off for the different \acs{laser}s. The most important  criteria and the ones that clearly need some explanation, are discussed in more detail in this section for the different gain media. 
+\begin{table*}[h]
+	\centering
+		\begin{tabular}{c|c|c|c|c}
+		 \textbf{Criteria} & \textbf{Weight Factor} & \textbf{Nd-YAG} & \textbf{Ar} & \textbf{He-Cd} \\ \hline \hline
+		 Wavelength Ratio & 9 & 9 & 7 & 5 \\
+		 Technical Readiness Level & 6 & 8 & 8 & 10 \\
+		 Cost & 5 & 5 & 9 & 10 \\ 
+		 Minimum Pump Power & 8 & 6 & 7 & 7 \\
+		 Repetition Rate Manipulation & 7 & 10 & 2 & 2 \\ 
+		 Volume & 7 & 10 & 4 & 3 \\ 
+		 Mass & 7 & 10 & 4 & 3  \\
+		 Chemical Stability & 4 & 8 & 6 & 4 \\
+		 Thermal Control & 4 & 8 & 6 & 5 \\
+		 Efficiency & 8 & 7 & 1 & 7 \\ \hline
+		 Weighted total &   & 532 & 338 & 359
+			
+		\end{tabular}
+	\caption{Emitter tradeoff table.}
+	\label{table:emitterTradeTable}
+\end{table*}
+
+Table \ref{table:emitterTradeTable} on page \pageref{table:emitterTradeTable} shows the trade-off for the different \acs{laser}s. The most important  criteria and the ones that clearly need some explanation, are discussed in more detail in this section for the different gain media. 
 	
 \textbf{Wavelength ratio}. The emitted wavelength is an important factor for the possibility of photon detection as function of atmospheric absorption and receiver efficiency. Considering the wavelength dependency of these last two terms, the laser types have a different wavelength ratio (see: chapter receiver).
 
