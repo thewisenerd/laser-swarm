@@ -17,7 +17,7 @@ The trade-off criteria used are pointing accuracy, pointing rate, added weight, 
 \subsection{Weight Factors}
 Because the instrument can not work if the satellite is not pointed towards the ground target the pointing accuracy and pointing rate are given a weight factor of 5. The complexity, reliability and influence on other subsystems are less important comparably since the swarm is used for redundancy in making measurements and other subsystems can be adapted to meet their requirements, a weight factor of 3 is given. The weight and power use of the system is given a factor of 2, because it is important for the satellite as a whole, but not the main driver for the mission.
 
-\subsection{Trade-off}
+\subsection{Tradeoff}
 Table \ref{tab:pointingtradeoff} on page \pageref{tab:pointingtradeoff} shows the numerical values assigned to the different criteria. 
 Pointing with only stepper motors can be done the most precise, the combination with a reaction wheel for the yaw-axis the precision around that axis will be lower, using only the \ac{ACS} the accuracy will be the lowest. 
 Stepper motors are able to respond really quickly, the reaction wheel option takes a lot longer to respond, since it has to move the entire satellite, not just a part. The pointing speed for the hybrid system will be somewhere in between, but will be better than average given the change in ground elevation will be larger than the change in relative position of the emitter.
