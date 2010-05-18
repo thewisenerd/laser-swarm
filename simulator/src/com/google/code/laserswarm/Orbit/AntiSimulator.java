@@ -10,6 +10,7 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -35,6 +36,7 @@ import com.google.code.laserswarm.ProcessorTester;
 import com.google.code.laserswarm.RandData;
 import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.conf.Satellite;
+import com.google.code.laserswarm.conf.Configuration.Actions;
 import com.google.code.laserswarm.earthModel.Convert;
 import com.google.code.laserswarm.out.plot1D.plotHeightDistribution;
 import com.google.code.laserswarm.process.EmitterHistory;
@@ -73,50 +75,68 @@ public class AntiSimulator {
 		Vector<Vector<Double>> vertVec = new Vector<Vector<Double>>();// verticle vectors vector
 		// containing the path
 		if(callcnt%modi ==  0) System.out.print("extracting path... \n");
+		
 		int loc = 0;
+		
 		for (Satellite a : altData.keySet()) { // find max Vector length
+					//calculate pathLength, pathNum
 			pathLength++;
 			if (pathNum < altData.get(a).size()) {
 				maxSat = a; // remember the satellite;
 				pathNum = altData.get(a).size();
 			}
 		}
-
+		System.out.println("path num:" + pathNum);
+		System.out.println("path len:" + pathLength);
+		
 		TreeSet<Double> distSet = Sets.newTreeSet();
 		initVec = altData.get(maxSat);
 		// Double[] arr = (Double[]) initVec.toArray();
  
-		for (int i = 0; i < pathNum-1; i++) {
-			Double tmp = initVec.get(i);
+		for (int i = 0; i < pathNum; i++) {
+			Double tmp = initVec.get(i);	//initial vector
 			vertVec.add(new Vector<Double>());
 			vertVec.get(i).add(tmp);
-			for (Satellite eh : altData.keySet()) { // iterate over all the satellites
+
+			for (Satellite eh : altData.keySet()) { // iterate over all the satellites and find closest value to the tmp for each satellite
 				if (eh == maxSat)
 					continue; // ignore the root element
-
+				distSet.clear();
 				distSet.addAll(altData.get(eh)); // set of distances to iterate for a specific satellite
-				double ceil = distSet.ceiling(tmp);
-				double floor = distSet.floor(tmp);
-				if ((ceil - tmp) > (tmp - floor)) // find closest value in the array
-				{
-					tmp = floor;
-				} else {
-					tmp = ceil;
-				}
+				System.out.println("dist set: " + distSet);
+				Double ceilD = distSet.ceiling(tmp);
+				Double floorD = distSet.floor(tmp);
 
+				if(ceilD == null){
+					tmp = floorD;
+				}else if(floorD == null){
+					tmp = ceilD;
+				}else if(tmp == null){
+					tmp = new Double(0);
+				}
+				else {
+					if ((ceilD.doubleValue() - tmp.doubleValue()) > (tmp.doubleValue() - floorD.doubleValue())) // find closest value in the array
+					{
+						tmp = floorD;
+					} else {
+						tmp = ceilD;
+					}
+				}
+			System.out.println("path num:" + i);
 				vertVec.get(i).add(tmp); // add the value;
 			}
 		}
-
+		
+		System.out.println("verVec = " + vertVec);
 		double var = 0; // variance
 		double[] resul = null;
 		//resul[0] = 0;		// result array
 		Vector<Double> selPath = new Vector<Double>(); // selected path
-		for (int i = 0; i < pathNum-1; i++) {
+		for (int i = 0; i < pathNum; i++) {
 			Object[] ar1 = vertVec.get(i).toArray();
 			double[] ar2 = new double[ar1.length];
 
-			for (int j = 0; j < ar1.length-1; j++) {
+			for (int j = 0; j < ar1.length; j++) {
 				ar2[j] = ((Double) ar1[j]).doubleValue();
 			}
 			double hm = StatUtils.variance(ar2);
@@ -190,9 +210,11 @@ public class AntiSimulator {
 		Iterator<MeasermentSample> iter = sampls.iterator();
 		while (iter.hasNext()) {
 			MeasermentSample tempms = iter.next();
-
+			
 			if (tempms.getPhotons() > average) { // comparator
+				
 				hi.put(new Double(tempms.getTime()), new Integer(tempms.getPhotons()));
+				
 			}
 
 		}
@@ -388,10 +410,10 @@ public class AntiSimulator {
 	}
 
 	public static void myplot(Vector<Integer> sims, double lineThickness, String plotFile) {
-		int width = 1600;
-		int height = 200;
+		int width = 160;
+		int height = 150;
 		int hOffset = 50;
-		int wOffset = 60;
+		int wOffset = 30; // 60;
 		BufferedImage bimg = new BufferedImage(width + wOffset, height + hOffset,
 				BufferedImage.TYPE_INT_RGB); // New BufferedImage used for writing
 		Graphics2D g = bimg.createGraphics(); // create Graphics context and map Graphics context to new
@@ -426,9 +448,9 @@ public class AntiSimulator {
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		for (int n = 0; n < size - 1; n++) {
 			for (int l = 0; l < lineThickness; l++) {
-				int x1 = wOffset + (int) (((double) n) / ((double) size) * width);
+				int x1 = wOffset +(int) (((double) n) / ((double) size) * width);
 				int y1 = height - (int) ((h.get(n) - hMin) / hDiff * height * scaleFactor) - l;
-				int x2 = wOffset + (int) (((double) n + 1) / (size) * width);
+				int x2 = wOffset +(int) (((double) n + 1) / (size) * width);
 				int y2 = height - (int) ((h.get(n + 1) - hMin) / hDiff * height * scaleFactor) - l;
 				g.drawLine(x1, y1, x2, y2);
 			}
@@ -450,11 +472,11 @@ public class AntiSimulator {
 			g.drawString(Integer.toString((int) ((1 - i * 0.25) * hMax)), 5, (int) (i * 0.25 * height
 					* scaleFactor + plotOffset + fontSize));
 		}
-		for (int i = 0; i < 8; i++) {
+/*		for (int i = 0; i < 8; i++) {
 			g.drawString("(" + Math.floor(1000 * 180 / Math.PI * theta.get((int) (i * 0.125 * size)))
 					/ 1000 + "," + Math.floor(1000 * 180 / Math.PI * phi.get((int) (i * 0.125 * size)))
 					/ 1000 + ")", wOffset + (int) (i * 0.125 * width), height + hOffset - 5);
-		}
+		}*/
 
 		try {
 			ImageIO.write(bimg, "png", new File(plotFile + ".png"));
@@ -466,45 +488,67 @@ public class AntiSimulator {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		// 
-/*		
+		
+		Configuration.getInstance();
+		Configuration.setMode(Sets.newHashSet( //
+				Actions.SIMULATE, Actions.PROSPECT));
+		
 		double[] ter;
 		Map<Satellite, TimeLine> em;
 		Map<Satellite, TimeLine> rec;
 		EmitterHistory hist;
-		String flname = "ser_PT";
+		String flname = "ser_PT2";
 		ProcessorTester tester = new ProcessorTester();
-		RandData ret;
-		ret = RandData.load(flname);
-		 if(ret == null ){
-			 ret = tester.testProcessing();
-			 RandData.save(flname, ret);
-			 
-		 }
-		
+		RandData ret ;
+		try { 
+			 ret = RandData.read(flname);
+		}catch (FileNotFoundException e){
+			 ret = tester.testProcessing();	
+			ret.write(flname);
+		}
+		 
+	
 		Satellite emit;
-		int i = 0;*/
-		Satellite sat1 = new Satellite();
-		Satellite sat2 = new Satellite();
+		int i = 0;
+/*		Satellite sat1 = new Satellite("eh",4.5,4.5f,4.0f,0.5f,4.5f,4.5f,3.2f);
+		Satellite sat2 = new Satellite("eh2",4.5,4.5f,4.0f,0.5f,4.5f,4.5f,3.2f);
+		Satellite sat3 = new Satellite("eh3",4.5,4.5f,4.0f,0.5f,4.5f,4.5f,3.2f);
 	Vector<Double> vec1 = new Vector<Double>();
 	Vector<Double> vec2 = new Vector<Double>();
-	vec1.add(new Double(2));
+	Vector<Double> vec3 = new Vector<Double>();
+	Vector<Integer> hi  = new Vector<Integer>();
+	hi.add(new Integer(3));
+	hi.add(new Integer(8));
+	hi.add(new Integer(7));
+	hi.add(new Integer(5));
+	
+	//vec1.add(new Double(12));
 	vec1.add(new Double(5));
 	vec1.add(new Double(10));
 	vec1.add(new Double(7));
 	vec1.add(new Double(3));
 	
-	vec2.add(new Double(2));
-	vec2.add(new Double(5));
-	vec2.add(new Double(10));
-	vec2.add(new Double(7));
-	vec2.add(new Double(3));
+	vec2.add(new Double(30));
+	vec2.add(new Double(40));
+	vec2.add(new Double(70));
+	vec2.add(new Double(4));
+	vec2.add(new Double(90));
 	
-	
+	vec3.add(new Double(1));
+	vec3.add(new Double(6));
+	vec3.add(new Double(9));
+	vec3.add(new Double(12));
+	vec3.add(new Double(20));
+	 
 	Map<Satellite, Vector<Double>> alda = Maps.newHashMap();
-	alda.put(sat1, vec1) ;
-	System.out.println(extractpath(alda));
-	 alda.put(sat2,vec2);
 	 System.out.println(extractpath(alda));
+	alda.put(sat1, vec1) ;
+	//System.out.println(extractpath(alda));
+	 
+	alda.put(sat2,vec2);
+	alda.put(sat3,vec3);
+	 
+	 System.out.println(extractpath(alda));*/
 		// List<SimVars> hi = Lists.newLinkedList();
 		// for(i = 0; i<ter.length-1; i++){
 		// SimVars tmpSim = new SimVars();
@@ -513,11 +557,11 @@ public class AntiSimulator {
 		// hi.add(tmpSim);
 		// //tmpSim.
 		// }
-/*		plotHeightDistribution plotter = new plotHeightDistribution();
+		plotHeightDistribution plotter = new plotHeightDistribution();
 		plotter.plot(desim(ret.getRec(),ret.getEm(),ret.getEmHist()),3,"vafli");
 		// for ( Map<Double,Integer> ter:
 		// ret.getEm().get(ret.getEm().keySet().iterator().next()).getIterator(3).next().) {
-		Vector<Integer> hi = new Vector<Integer>();*/
+		//Vector<Integer> hi = new Vector<Integer>();*/
 		
 /*		try {
 
