@@ -2,15 +2,23 @@
 \label{mtrOrbAltitude}
 During the design of the orbit, very careful attention has to be given to the choice of the mission altitude for the entire formation. This parameter is vital for the lifetime requirement.
 
-Initially it was apparent that the choice of the emitting payload would give a hard altitude constraint, however as described in section (ADD REF TO OPTICAL EMITTING PAYLOAD TRADEOFF HERE), with the use of complex optical instruments it was possible to open a wider range of altitudes for selection. The governing properties of the orbit for altitude selection have now become the orbit perturbations.
+Initially it was apparent that the choice of the emitting payload would give a hard altitude constraint, however as described in section \ref{mtDOLSR}, with the use of complex optical instruments it was possible to open a wider range of altitudes for selection. The governing properties of the orbit for altitude selection have now become the orbit perturbations.
 
 This section details the considerations in regards to these properties. A separate radiation exposure analysis is also done. Finally a suitable altitude is chosen based on this analysis.
 \subsection{Earth Oblateness}
 \label{mtrOrbJ2}
-ADD J2 PARAGRAP
+The perturbation sensed by the satellite due to Earth's oblateness effect only influences the rate of precession of the orbit which is given in the following equation:
+
+\begin{equation}
+\dot{\Omega _{J_2}} = -1.5nJ_2 ( R_E / a )^2 ( cos i ) ( 1-e^2 )^{-2}
+\label{j2eq}
+\end{equation}
+
+The rate of precession is a function of the semi-major axis, however $\dot{\Omega _{J_2}}$ does not affect altitude directly.
+
 \subsection{Perturbations due to Other Celestial Bodies}
 \label{mtrOrbSelestialBodies}
-ADD MOON PARAGRAPH HERE
+The gravitational forced of other celestial bodies like the Sun and the moon  cause periodic variations in all orbital elements, however in \ac{LEO} these perturbations are very minor (and above all are constant for formations) relative to atmospheric drag, thus will not be considered in this report.
 \subsection{Solar Radiation Pressure}
 \label{mtrOrbSolRadiation}
 All orbiting bodies are affected by solar radiation pressure. The acceleration due to this phenomenon can potentially affect stationkeeping of the swarm if all satellites have different cross-sectional areas normal to the sun. This perturbation is not directly related to orbit altitude, however it is an important step in orbit analysis. In figure \ref{fig:solarRadArea} on page \pageref{fig:solarRadArea}, the relationship between the acceleration and the normal area to the sun for different satellite masses is shown. Similarly, a graph relating the mass to the acceleration for different cross-sectional areas is shown in figure \ref{fig:solarRadMass} on page \pageref{fig:solarRadMass}.
@@ -44,15 +52,15 @@ What is important to note is that if the ration of area to mass could be maintai
 	\centering
 		\begin{tabular}{c|c|c}
 		 & Total Mass & Max. Area \\ \hline \hline
-		 Emitter & 250 & 10 \\ 
-		 Receiver & 50 & 2 
+		 Emitter & 119 & 2.5 \\ 
+		 Receiver & 10.7 & 0.2 
 			
 		\end{tabular}
-	\caption{Mass and area estimates(REVISE)}
+	\caption{Mass and area estimates}
 	\label{table:solarEstimates}
 \end{table*}
 
-Based on preliminary mass and area estimates shown in table \ref{table:solarEstimates} on page \pageref{table:solarEstimates}, it is estimated that the both the emitter and the receiver platforms will experience a decceleration in the order between 10\textsuperscript{-9} and 10\textsuperscript{-10} (CHECK THIS!!). While these values might not seem significant at first, especially relative to atmospheric drag (see section \ref{mtrAtmDrag}), they will become relevant for stationkeeping as explained earlier.
+Based on preliminary mass and area estimates shown in table \ref{table:solarEstimates} on page \pageref{table:solarEstimates}, it is estimated that the both the emitter and the receiver platforms will experience a decceleration in the order between 10\textsuperscript{-9} and 10\textsuperscript{-10}. While these values might not seem significant at first, especially relative to atmospheric drag (see section \ref{mtrAtmDrag}), they will become relevant for stationkeeping as explained earlier.
 
 \subsection{Atmospheric Drag}
 \label{mtrAtmDrag}
@@ -88,7 +96,7 @@ The fundamental problem with accurately predicting effects due to atmospheric dr
 \label{ball}
 \end{equation}
 
-Even with a well known mass to area ratio, the coefficient of drag can be highly variable, highly dependent on the shape of the satellite and its orientation with respect to the velocity vector. Throughout the following analysis a $C_D$ of 4 has been used as a worst-case scenario. This value is representative of a flat plate traveling with its normal vector pointing in the direction of velocity. In reality this drag coefficient changes. The cross-sectional area normal to the velocity vector can also vary for the swarm satellites if the whole platform is reoriented for instrument pointing. The whole ballistic coefficient ranges from about 25 kgm\textsuperscript{-2} to 100 kgm\textsuperscript{-2}. The satellites being considered in this document are at the lower range of these values.
+Even with a well known mass to area ratio, the coefficient of drag can be highly variable, highly dependent on the shape of the satellite and its orientation with respect to the velocity vector. Throughout the following analysis a $C_D$ of 4 has been used as a worst-case scenario. This value is representative of a flat plate traveling with its normal vector pointing in the direction of velocity. In reality this drag coefficient changes. The cross-sectional area normal to the velocity vector can also vary for the swarm satellites if the whole platform is reoriented for instrument pointing. The whole ballistic coefficient typically ranges from about 25 kgm\textsuperscript{-2} to 100 kgm\textsuperscript{-2}. The satellites being considered, at this early stage in the design process, have a much lower coefficient - in the range of 10 kgm\textsuperscript{-2}.
 
 The second reason drag calculations are so unreliable, is because air density at any altitude is highly variable. Raising air density is primarily connected with solar activity. As solar activity increases every 11 years (see figure \ref{fig:solarCycle} for recorded and predicted solar activity), the atmosphere heats up. Contrary to conventional gas laws that would dictate a fall in density as the gas expands, the atmosphere simply rises, increasing density at higher altitudes.
 
@@ -108,21 +116,21 @@ The density difference during maxima and minima for different altitudes is shown
 \label{fig:densityProfile}
 \end{figure}
 
-Orbit decay periods for the emitter and receiver satellites are shown in figures \ref{fig:decayEmitter} and \ref{fig:decayReceiver} respectively. The Orbit decay is calculated using equations \ref{deltaSMA} - \ref{deltaV}. Orbit maintenance is not taken into account. The time range considered is a 5 year mission lifetime. The basis for the receiving satellite sizing was taken to be the frontal area of a Delfi-C3 satellite (10x10 cm) plus an initialy estimated solar array area of 0.2 $m^2$. The mass of the said satellite was the same as in table \ref{table:solarEstimates} on page \pageref{table:solarEstimates}. The emitter satellite is sized to be about 0.1 $m^2$ frontal area and an additional 6 $m*2$ of solar array area. The mass is again taken from table \ref{table:solarEstimates} (REVISE!).
+Orbit decay periods for the emitter and receiver satellites are shown in figures \ref{fig:decayEmitter} and \ref{fig:decayReceiver} respectively. The Orbit decay is calculated using equations \ref{deltaSMA} - \ref{deltaV}. Orbit maintenance is not taken into account. The time range considered is a 5 year mission lifetime. The basis for the receiving satellite sizing was taken to be around 0.2 m$^2$ (based on preliminary sizing) . The mass of the said satellite was the same as in table \ref{table:solarEstimates} on page \pageref{table:solarEstimates}. The emitter satellite is sized to be about 2.5 $m^2$ frontal area (including solar panels and communications arrays). The mass is again taken from table \ref{table:solarEstimates}.
 
 \begin{figure}[h!]
 \centering
 \includegraphics[width=0.95\textheight, angle=90]{chapters/img/orbitDecayEmitter.png}
-\caption{Orbit decay for a satellite with $C_D$ = 4, A = 6.1 $m^2$ and m = 200 kg. Estimates for initial orbital altitudes of 300, 400 and 500 km at solar maximum (- -), solar minimum (--) and time average (-.-) (CHECK MASS AND AREA).}
+\caption{Orbit decay for a satellite with $C_D$ = 4, A = 2.5 $m^2$ and m = 119 kg. Estimates for initial orbital altitudes of 300, 400 and 500 km at solar maximum (- -), solar minimum (--) and time average (-.-).}
 \label{fig:decayEmitter}
 \end{figure}
 
 \begin{figure}[h!]
 \centering
 \includegraphics[width=0.95\textheight, angle=90]{chapters/img/orbitDecayRecieverMin.png}
-\caption{Orbit decay for a satellite with $C_D$ = 4, A = 0.21 $m^2$ and m = 10 kg. Estimates for initial orbital altitudes of 300, 400 and 500 km at solar maximum (- -), solar minimum (--) and time average (-.-) (CHECK MASS AND AREA).}
+\caption{Orbit decay for a satellite with $C_D$ = 4, A = 0.2 $m^2$ and m = 10.7 kg. Estimates for initial orbital altitudes of 300, 400 and 500 km at solar maximum (- -), solar minimum (--) and time average (-.-).}
 \label{fig:decayReceiver}
 \end{figure}
 
-From the analysis of the orbit decay it is strikingly obvious how important the solar activity is during mission lifetime. Even at an altitude of 500 km neither satellite would be able to maintain its orbit for more then a 100 days (REVISE WITHE AREA NUMBERS). From this analysis it is clear that substantial orbit maintenance is required as the satellites will most probably not have refocusing equipment for the optical instruments. A more comprehensive idea of the orbit maintenance can be gathered from total $\Delta$V estimations shown in figures \ref{fig:deltaVGraph1} and \ref{fig:deltaVGraph2} (pages \pageref{fig:deltaVGraph1} and \pageref{fig:deltaVGraph2}) and tabulated in table \ref{table:deltaVTable} on page \pageref{table:deltaVTable}(CHECK TABLE). This is the total velocity change required to keep the satellites in a certain circular orbit. The calculations are based on equation \ref{deltaV}.
+From the analysis of the orbit decay it is strikingly obvious how important the solar activity is during mission lifetime. Even at an altitude of 500 km neither satellite would be able to maintain its orbit for more then a 100 days. From this analysis it is clear that substantial orbit maintenance is required as the satellites will most probably not have refocusing equipment for the optical instruments. A more comprehensive idea of the orbit maintenance can be gathered from total $\Delta$V estimations shown in figures \ref{fig:deltaVGraph1} and \ref{fig:deltaVGraph2} (pages \pageref{fig:deltaVGraph1} and \pageref{fig:deltaVGraph2}) and tabulated in table \ref{table:deltaVTable} on page \pageref{table:deltaVTable}. This is the total velocity change required to keep the satellites in a certain circular orbit. The calculations are based on equation \ref{deltaV}.
 

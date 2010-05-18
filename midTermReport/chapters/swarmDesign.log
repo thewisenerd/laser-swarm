@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (MiKTeX 2.8) (preloaded format=pdflatex 2010.4.20)  17 MAY 2010 17:27
+This is pdfTeX, Version 3.1415926-1.40.10 (MiKTeX 2.8) (preloaded format=pdflatex 2010.4.20)  18 MAY 2010 02:04
 entering extended mode
 **C:/Users/Alex/Desktop/Laser*Swarm/laser-swarm/midTermReport/chapters/swarmDes
 ign.tex
@@ -190,7 +190,14 @@ Package caption Info: wrapfig package is loaded.
 \sf@bottom=\skip50
 )
 ("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\midTermReport\chapters\swarmDes
-ign.aux")
+ign.aux"
+
+LaTeX Warning: Label `fig:elecMin' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:elecMin' multiply defined.
+
+)
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 25.
 LaTeX Font Info:    ... okay on input line 25.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 25.
@@ -225,19 +232,11 @@ Chapter 1.
 
 LaTeX Warning: Citation `constDesign' on page 1 undefined on input line 31.
 
-
-Package caption Warning: \label before \caption on input line 46.
-See the caption package documentation for explanation.
-
-
-LaTeX Warning: Reference `fig:relativeMotion' on page 1 undefined on input line
- 41.
-
 [1
 
 
 {C:/ProgramData/MiKTeX/2.8/pdftex/config/pdftex.map}]
-<img/relativeMotion.png, id=8, 901.86937pt x 615.80063pt>
+<img/relativeMotion.png, id=10, 901.86937pt x 615.80063pt>
 File: img/relativeMotion.png Graphic file (type png)
 
 <use img/relativeMotion.png>
@@ -247,52 +246,36 @@ LaTeX Warning: Citation `constDesign' on page 2 undefined on input line 47.
 
 LaTeX Warning: Citation `constDesign' on page 2 undefined on input line 47.
 
-
-Package caption Warning: \label before \caption on input line 62.
-See the caption package documentation for explanation.
-
-
-LaTeX Warning: Reference `fig:intersection' on page 2 undefined on input line 5
-7.
-
-<img/intersection.png, id=9, 901.86937pt x 615.80063pt>
+<img/intersection.png, id=11, 901.86937pt x 615.80063pt>
 File: img/intersection.png Graphic file (type png)
 
 <use img/intersection.png>
 
-LaTeX Warning: Citation `constDesign' on page 2 undefined on input line 63.
+LaTeX Warning: Citation `constDesign' on page 2 undefined on input line 64.
 
 
-LaTeX Warning: Citation `constDesign' on page 2 undefined on input line 63.
+LaTeX Warning: Citation `constDesign' on page 2 undefined on input line 64.
 
 [2 <C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/midTermReport/chapters/img/re
 lativeMotion.png (PNG copy)>]
 Package acronym Info: Label `acro:ADCS' newly defined as it shall be overridden
 
-although it is yet undefined on input line 98.
+although it is yet undefined on input line 100.
 
 
-Package acronym Warning: Acronym `ADCS' is not defined on input line 98.
+Package acronym Warning: Acronym `ADCS' is not defined on input line 100.
 
 
-Package acronym Warning: Acronym `ADCS' is not defined on input line 98.
-
-
-Package caption Warning: \label before \caption on input line 103.
-See the caption package documentation for explanation.
-
-
-LaTeX Warning: Reference `fig:earthangle' on page 3 undefined on input line 98.
-
+Package acronym Warning: Acronym `ADCS' is not defined on input line 100.
 
 <img/geometry.png, id=19, 901.86937pt x 615.80063pt>
 File: img/geometry.png Graphic file (type png)
  <use img/geometry.png>
 
-LaTeX Warning: Citation `constDesign' on page 3 undefined on input line 104.
+LaTeX Warning: Citation `constDesign' on page 3 undefined on input line 106.
 
 
-LaTeX Warning: Citation `constDesign' on page 3 undefined on input line 104.
+LaTeX Warning: Citation `constDesign' on page 3 undefined on input line 106.
 
 <img/relativeInc.png, id=20, 578.6418pt x 434.1018pt>
 File: img/relativeInc.png Graphic file (type png)
@@ -301,31 +284,8 @@ File: img/relativeInc.png Graphic file (type png)
 <img/angularSeperation.png, id=21, 578.6418pt x 434.1018pt>
 File: img/angularSeperation.png Graphic file (type png)
 
-<use img/angularSeperation.png>
-
-Package caption Warning: \label before \caption on input line 112.
-See the caption package documentation for explanation.
-
-
-LaTeX Warning: Reference `fig:relativeI' on page 3 undefined on input line 123.
-
-
-
-Package caption Warning: \label before \caption on input line 119.
-See the caption package documentation for explanation.
-
-
-LaTeX Warning: Reference `fig:relativeSep' on page 3 undefined on input line 12
-3.
-
-
-Overfull \hbox (17.63959pt too wide) in paragraph at lines 125--126
-[]\OT1/cmr/m/n/10.95 WRITE ABOUT IN-CLI-NA-TION, AN-GU-LAR SEPER-A-TION, PHASE,
- ALONG TRACK, CROSS-
- []
-
-[3 <C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/midTermReport/chapters/img/in
-tersection.png (PNG copy)>]
+<use img/angularSeperation.png> [3 <C:/Users/Alex/Desktop/Laser Swarm/laser-swa
+rm/midTermReport/chapters/img/intersection.png (PNG copy)>]
 
 LaTeX Warning: Text page 4 contains only floats.
 
@@ -335,35 +295,92 @@ Overfull \vbox (1.0938pt too high) has occurred while \output is active []
 
 [4 <C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/midTermReport/chapters/img/ge
 ometry.png (PNG copy)> <C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/midTermRe
-port/chapters/img/relativeInc.png (PNG copy)>] [5 <C:/Users/Alex/Desktop/Laser 
-Swarm/laser-swarm/midTermReport/chapters/img/angularSeperation.png (PNG copy)>]
+port/chapters/img/relativeInc.png (PNG copy)>]
+<img/seperation.png, id=28, 552.56438pt x 386.19281pt>
+File: img/seperation.png Graphic file (type png)
 
+<use img/seperation.png> [5 <C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/midT
+ermReport/chapters/img/angularSeperation.png (PNG copy)>]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 163.
+
+
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\base\omscmr.fd"
+File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 163.
+
+
+LaTeX Warning: Reference `mtrAtmDrag' on page 6 undefined on input line 163.
+
+[6 <C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/midTermReport/chapters/img/se
+peration.png (PNG copy)>]
+Underfull \hbox (badness 2478) in paragraph at lines 186--186
+[]\OT1/cmr/m/n/10.95 Secular drift in in-cli-na-tion
+ []
+
+
+LaTeX Warning: Citation `constDesign' on page 7 undefined on input line 190.
+
+
+LaTeX Warning: Citation `constDesign' on page 7 undefined on input line 190.
+
+[7] <img/collA.png, id=40, 552.56438pt x 386.19281pt>
+File: img/collA.png Graphic file (type png)
+ <use img/collA.png>
+<img/collB.png, id=41, 552.56438pt x 386.19281pt>
+File: img/collB.png Graphic file (type png)
+ <use img/collB.png>
+<img/collC.png, id=42, 552.56438pt x 386.19281pt>
+File: img/collC.png Graphic file (type png)
+ <use img/collC.png>
+
+LaTeX Warning: Citation `constDesign' on page 8 undefined on input line 219.
+
+
+LaTeX Warning: Citation `constDesign' on page 8 undefined on input line 219.
+
+
+LaTeX Warning: Citation `constDesign' on page 8 undefined on input line 244.
+
+
+LaTeX Warning: Citation `constDesign' on page 8 undefined on input line 244.
+
+[8] [9 <C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/midTermReport/chapters/im
+g/collA.png (PNG copy)> <C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/midTermR
+eport/chapters/img/collB.png (PNG copy)> <C:/Users/Alex/Desktop/Laser Swarm/las
+er-swarm/midTermReport/chapters/img/collC.png (PNG copy)>] [10]
 ("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\midTermReport\chapters\swarmDes
 ign.aux")
 
 LaTeX Warning: There were undefined references.
 
+
+LaTeX Warning: There were multiply-defined labels.
+
  ) 
 Here is how much of TeX's memory you used:
- 3096 strings out of 495285
- 45517 string characters out of 3179881
- 111275 words of memory out of 3000000
- 6268 multiletter control sequences out of 15000+200000
- 10183 words of font info for 36 fonts, out of 3000000 for 9000
+ 3153 strings out of 495285
+ 46470 string characters out of 3179881
+ 118275 words of memory out of 3000000
+ 6317 multiletter control sequences out of 15000+200000
+ 10482 words of font info for 37 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
- 44i,7n,42p,634b,315s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 44i,11n,45p,1210b,352s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmbx10.pfb>
 <C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C
 :/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/
 Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Pro
 gram Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Progra
 m Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Fi
-les (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmsl10.pfb><C:/Program File
-s (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files 
-(x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on swarmDesign.pdf (5 pages, 299728 bytes).
+les (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Program Files 
+(x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmsl10.pfb><C:/Program Files (x
+86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86
+)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files (x86)/M
+iKTeX 2.8/fonts/type1/public/amsfonts/cm/cmti10.pfb>
+Output written on swarmDesign.pdf (10 pages, 464910 bytes).
 PDF statistics:
- 59 PDF objects out of 1000 (max. 8388607)
+ 88 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 26 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 46 words of extra memory for PDF output out of 10000 (max. 10000000)
 

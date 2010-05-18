@@ -1,16 +1,16 @@
-It can be clearly seen that $\Delta$V budget is almost five times (CHECK) larger at low altitude at solar maximum when compared to the solar minimum. Overall the values for $\Delta$V at high altitudes, at solar minimum and time average look very favorable. 
+It can be clearly seen that $\Delta$V budget is almost five times larger at low altitude at solar maximum when compared to the solar minimum. Overall the values for $\Delta$V at high altitudes, at solar minimum and time average look very favorable. 
 
 \begin{figure}[h!]
 \centering
 \includegraphics[width=0.95\textheight, angle=90]{chapters/img/deltaVEmitter.png}
-\caption{Total $\Delta V$ for a satellite with $C_D$ = 4, A = 6.1 $m^2$ and m = 200 kg. Estimates for a range of orbit altitudes and different solar cycle stages. (CHECK MASS AND AREA).}
+\caption{Total $\Delta V$ for a satellite with $C_D$ = 4, A = 2.5 $m^2$ and m = 119 kg. Estimates for a range of orbit altitudes and different solar cycle stages.}
 \label{fig:deltaVGraph1}
 \end{figure}
 
 \begin{figure}[h!]
 \centering
 \includegraphics[width=0.95\textheight, angle=90]{chapters/img/deltaVReceiver.png}
-\caption{Total $\Delta V$ for a satellite with $C_D$ = 4, A = 0.21 $m^2$ and m = 10 kg. Estimates for a range of orbit altitudes and different solar cycle stages. (CHECK MASS AND AREA).}
+\caption{Total $\Delta V$ for a satellite with $C_D$ = 4, A = 0.2 $m^2$ and m = 10.7 kg. Estimates for a range of orbit altitudes and different solar cycle stages.}
 \label{fig:deltaVGraph2}
 \end{figure}   
 
@@ -21,6 +21,7 @@ Three important conclusions can be drawn from the preceding analysis:
 	\item The area/mass ratio for the emitter and receiver satellites should be designed as equivalent as possible. This will allow for slower constellation decay and for generally better stationkeeping.  
 \end{itemize}
   
+Simulations of photon returns at different altitudes can be found in the Simulation chapter.
 
 \subsection{Exposure to Particle Radiation}
 \label{mtrRadiation}
@@ -53,7 +54,47 @@ Figure \ref{fig:elecFlux} on page \pageref{fig:elecFlux} illustrates the trapped
 
 Based on this data, the following conclusion emerges: while altitudes of around 500 km remain relatively safe, a lower orbit will result in a lower particle radiation flux, increasing reliability. Altitudes above 500 km become more and more dangerous for the mission.
 
-\subsection{Conclusion}
+\subsection{Final Orbit Parameters}
 \label{mtrAltConclusion}
 
-ADD ALTITUDE CONCLUSION
+From the above sections it is possible to compile a list of orbit parameters for the base emitter orbit. All other orbits will be designed relative to this one. Figures \ref{fig:finalOrbit} and \ref{fig:finalTrack} display the look of the orbit in 3D and a representative ground track, respectively. The images were generated using the AGI Satellite Tool Kit (STK).
+
+\begin{table}
+	\centering
+		\begin{tabular}{p{5cm}|c}
+		\textbf{PARAMETER} & \textbf{VALUE} \\ \hline \hline
+		Apogee [km] & 500 \\
+		Perigee [km] & 500 \\
+		Inclination [deg] & 85.00 \\
+		R.A.A.N. [deg] & 0.00 \\
+		Argument of Perigee [deg] & 90.00 \\
+		True Anomaly [deg] & 0.00 \\
+		Period [hrs] & 1.57 \\
+		Revolutions per day & 15.18 \\
+		Maximum eclipse [min] & 35.75 \\
+		Semi-major axis [km] & 6871 \\
+		Eccentricity [-] & 0.00 \\
+		Mean motion [rad/day] & 95.78 \\
+		Integration step [deg] & 0.50 \\
+		Node spacing [deg] & 23.72 \\
+		Circular velocity [km/s] & 7.613 \\
+		Angular velocity [deg/min] & 3.805 \\
+		$\Delta$V required to deorbit [m/s] & -129.8 
+		\end{tabular}
+		\caption{Parameters of the base orbit for the emitter satellite.}
+		\label{table:orbitParams}
+\end{table}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.95\textheight, angle=90]{chapters/img/finalOrbit.png}
+\caption{3D view of the base orbit.}
+\label{fig:finalOrbit}
+\end{figure}  
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.95\textheight, angle=90]{chapters/img/finalTrack.jpg}
+\caption{Ground track of the base orbit.}
+\label{fig:finalTrack}
+\end{figure}  
