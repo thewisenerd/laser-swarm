@@ -1,10 +1,11 @@
-\section{\ac{AODCS}}
+\section{\acl{AODCS}}
 The \ac{AODCS} is used for determining and controlling the attitude and orbit of the satellites. In this section first the \ac{ADCS} design option tree is pruned in section \ref{pruneADCS}. The subsystem can be split up into four smaller parts; attitude determination (discussed in section \ref{ss:ads}), attitude control (section \ref{ss:acs}), orbit determination (section \ref{ss:ods}) and orbit control (section \ref{ss:ocs}). 
 
-\subsection{Pruning the \acs{ADCS} design option tree}
+\subsection{Pruning the \acl{ADCS} design option tree}
 \label{pruneADCS}
-The gravity-gradient stabilisation and passive magnetic options are eliminated because they provide insufficient accuracy and do not allow pointing to an any target other than the mass or magnetic centre of the Earth. The spin stabilisation option is pruned because the satellite needs to be able to make measurements continuously. Double gimbal \acp{CMG} are also not a viable option, because they are too complex and heavy compared to the other systems.
+The gravity-gradient stabilisation and passive magnetic options are eliminated because they provide insufficient accuracy and do not allow pointing to an any target other than the mass or magnetic centre of the Earth. The spin stabilisation option is pruned because the satellite needs to be able to make measurements continuously. Double gimbal \acp{CMG} are also not a viable option, because they are too complex and heavy compared to other systems.
 For the attitude determination the initial measurements and magnetometers options are eliminated because of their deteriorating accuracy over time.
+
 The pruned design option tree can be found in figure \ref{fig:pruneADCS} on page \pageref{fig:pruneADCS}.
 
 \begin{figure}
@@ -15,14 +16,17 @@ The pruned design option tree can be found in figure \ref{fig:pruneADCS} on page
 \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{\ac{ADS}}
+\subsection{\acl{ADS}}
 \label{ss:ads}
-The \ac{ADS} consists for a collection of sensors to determine the roll, pitch and yaw angles and rates of the satellites. The design options left after the pruning in section \ref{pruneADCS} are \ac{GPS}, Sun sensors, Star trackers and Horizon sensors. 
+The \ac{ADS} consists for a collection of sensors to determine the roll, pitch and yaw angles and rates of the satellites. The design options left after the pruning in section \ref{pruneADCS} are \ac{GPS}, Sun sensors, Star trackers and horizon sensors. 
 
-\ac{GPS} uses one receiver and multiple antennas, by measuring the relative positions of the different antennas the attitude of the satellite can be calculated. Most modern \ac{LEO} satellites are already carrying a \ac{GPS} receiver, but a long baseline between antennas is needed for a high accuracy. 
-Sun sensors use the angle towards the Sun for making their attitude measurements. The technology behind Sun sensors has been around for a long time and several micro Sun sensors are available on the market, the \ac{FOV} of a typical Sun sensor is about 120${}^{\circ}$. 
-Star trackers look at a portion of the sky and uses familiar stars to determine the attitude of the satellites the system can work autonomously, but the optics required are usually quite bulky. 
-Horizon sensors use the limb of the Earth, i.e. the transition of the solid Earth to cold space, to determine the attitude of the satellite. The system only works on the roll and pitch axis.
+\ac{GPS} uses one receiver and multiple antennas. By measuring the relative positions of the different antennas the attitude of the satellite can be calculated. Most modern \ac{LEO} satellites are already carrying a \ac{GPS} receiver, but a long baseline between antennas is needed for a high accuracy. 
+
+Sun sensors use the angle towards the Sun for making their attitude measurements. The technology behind Sun sensors has been around for a long time and several micro Sun sensors are available on the market. The \ac{FOV} of a typical Sun sensor is about 120${}^{\circ}$.
+
+Star trackers look at a portion of the sky and use familiar stars to determine the attitude of the satellites. This system can work autonomously, but the optics required are usually quite bulky.
+
+Horizon sensors use the limb of the Earth, i.e. the transition of the solid Earth to cold space, to determine the attitude of the satellite. The system only works on the roll and pitch axes.
 
 Another option is to use a complete \ac{COTS} \ac{ADCS} system like the one from Maryland Aerospace Inc. \cite{maryland}. Their IMI-100 ADACS contains everything needed for complete \ac{ADCS} with an accuracy of 1${}^\circ$. For attitude determination it uses 3 magnetometers, by adding additional sensors e.g. a ring laser gyro and a miniaturised star sensor the accuracy can reach 1-3 arcsec \cite{imi100}.
 
