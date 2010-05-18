@@ -8,26 +8,24 @@ Three communication architectures were presented in the baseline review:
 \item Decentralized architecture
 \item Extremely decentralized architecture
 \end{itemize}
-
 The advantages and disadvantages of each architecture will be discussed in the following paragraphs.\\\\
 In a centralized architecture all communication flows through the emitter satellite, which means the receiver satellites do not require an independent link to the ground.
 
 The main advantage is that this allows the receiver satellite to have a small and lightweight communications subsystem because there is only free space loss. Another advantage is that all scientific data can be partly processed in space and thus can be more efficiently compressed before being transmitted to Earth. Also because communication links exist between the satellites, they can be used for tracking.
 
 The main disadvantage is that the receiver satellites completely depend on the emitter satellite, making the system not very robust. The communications subsystem of the emitter satellite is large since it has to handle all communications. In case too many receivers are required, multiple frequencies are required for intersatellite communication.\\\\
-
 In a decentralized architecture each satellite has its own communication link to the ground, although communications between the satellites is also still possible.
 
 The main advantage is that each receiver satellite can transmit its own scientific data in its own contact time with the ground station, reducing the data rate significantly. The communication links within the swarm can be used as a backup or to send commands from the emitter satellite to the receiver satellites. The links can also be used for tracking.
 
-The main disadvantage is that all satellites require relatively large communication subsystems. In case too many receivers are required, multiple frequencies are required for ground-space communication and intersatellite communication.
-
+The main disadvantage is that all satellites require relatively large communication subsystems. In case too many receivers are required, multiple frequencies are required for ground-space communication and intersatellite communication.\\\\
 In an extremely decentralized architecture each satellite has a communication link with the ground but no intersatellite links exist.
 The advantages and disadvantages are similar to those of a decentralized architecture, only the there is no backup for the ground-space communications and tracking which makes use of intersatellite links is also impossible.
-The main advantage is that no frequency has to be acquired for intersatellite communication but the disadvantage is that if the swarm is not well synchronized, the receiver satellites will not be aimed correctly.
 
+The main advantage is that no frequency has to be acquired for intersatellite communication but the disadvantage is that if the swarm is not well synchronized, the receiver satellites will not be aimed correctly.\\\\
 When comparing the architectures, the extremely decentralized architecture has a serious disadvantage, namely that it can get desynchronized resulting in useless scientific data, which is why the decentralized architecture will not be used.
-This leaves only the decentralized and centralized architecture, both have communication links between the satellites, but the decentralized requires extra communication links while the centralized not. Since the difference between an intersatellite link for only command data and an intersatellite link for all data is small, while the difference in mass is very large the centralized architecture was the architecture finally chosen.
+
+This leaves only the decentralized and centralized architecture. Both have communication links between the satellites, but the decentralized architecture requires extra communication links while the centralized one does not. Since the difference between an intersatellite link for only command data and an intersatellite link for all data is small, whereas the difference in mass is very large, the centralized architecture was the architecture that was finally chosen.
 
 \subsection{Trade off D/L and U/L frequency}
 Since a large data stream is necessary between the emitter satellite and the ground, a frequency in the X-band will be used since it allows the largest data stream and is also most commonly used by Earth observation satellites at present \cite{icesattech} \cite{landsatcom}. A frequency in the S-band will be used for housekeeping data.
@@ -39,8 +37,8 @@ However other microwave frequencies can still be used, with X-band and S-band ex
 \subsection{Trade off antenna configuration}
 The antenna for ground-space link could be a parabolic reflector or a phased array. The main advantage of a parabolic reflector is its low mass but has a high volume as a disadvantage while a phased array has a high mass but lower volume. Since the ballistic coefficient of the satellite is already low, the phased array was chosen.
 
-The antenna for the intersatellite link a simple horn antenna can be used, since the frequency lies below 4 GHz and only a low gain is required since there is no atmospheric loss.
+As the antenna for the intersatellite link a simple horn antenna can be used: the frequency is below 4 GHz and a low gain is required because there is no atmospheric loss.
 
 \subsection{Trade off tracking method}
 \label{TOcommTA}
-The quality of the scientific data depends on how accurately the orbits of all satellites are known, which is why GPS is the preferred choice since it is the most precise method. However it possible to combine GPS tracking and tracking based on the satellite crosslinks. Both methods are precise, but crosslink based method gives only a relative position to the other satellite. By placing a GPS only on the emitter satellite, its absolute position is known and consequently the absolute positions of the receiver satellites as well.
+The quality of the scientific data depends on how accurately the orbits of all satellites are known. This is why GPS is the preferred choice since it is the most precise method. It is however possible to combine GPS tracking and tracking based on the satellite crosslinks. Both methods are precise, but crosslink based method give only a relative position to the other satellite. By placing a GPS only on the emitter satellite, its absolute position is known and consequently the absolute positions of the receiver satellites is known as well.
