@@ -138,31 +138,8 @@ The determination of the orbit will be discussed in section \ref{TOcommTA}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{\ac{OCS}}
 \label{ss:ocs}
-The orbit considered for the satellites is very low (for satellite orbits), therefore the drag of the atmosphere has to be taken into account. The equation for acceleration due to drag on the satellite is
 
-\begin{equation}
-a_D=-\frac{1}{2}\rho \left(C_DA/m\right)V^2
-\label{eqn:atmosdrag}
-\end{equation}
-where $\rho$ is the density of the atmosphere, $C_D$ is the drag coefficient for the satellite (typically between 2-4), $m$ is the mass of the satellite and $V$ is the satellite's velocity with respect to the atmosphere. The orbital velocity of a circular orbit is
-
-\begin{equation}
-V_c=\sqrt{\frac{\mu}{a}}
-\label{eqn:orbitalvel}
-\end{equation}
-
-where $\mu$ is the standard gravitational parameter of the Earth, $398,600.4 \,km^3/s^2$. For circular orbits the equation for $\Delta V$ per revolution can be simplified to
-
-\begin{equation}
-\Delta V_{rev}=\pi \left(C_DA/m\right)\rho a V
-\label{eqn:deltaVrev}
-\end{equation}
-
-where $a$ is the orbit semi-major axis \cite{larson}.\\
-
-Station keeping for an orbit between 400 and 500 kilometers requires a maximum $\Delta V$ of 100 m/s or on average 25 m/s \cite{deltavtu}.\\
-
-The $\Delta V$ a propulsion system can produce is quantified by Tsiolkovsky's rocket equation
+The \ac{OCS} needs to counter the atmospheric drag forces with the $\Delta V$ calculated in section \ref{mtrOrbAltitude}. The $\Delta V$ a propulsion system can produce is quantified by Tsiolkovsky's rocket equation
 
 \begin{equation}
 \Delta V = g I_{sp} \ln{\left(\frac{m_0}{m_0-m_p}\right)}\equiv g I_{sp} \ln{\left(\frac{m_0}{m_f}\right)} \equiv g I_{sp} \ln{\left(R\right)}
