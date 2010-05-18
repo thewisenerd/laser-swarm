@@ -38,11 +38,10 @@ for(h=200:50:1000),
     else
          rho = density(dens);
     end
-    V = sqrt(GM/(h+Re));
-    P0 = 2*pi*sqrt((h+Re)^3/GM); %[s]
-    revs = year/P0;
-    dVrev = pi*CDAM*rho*(h+Re)*1000*V;
-    dV = dVrev*revs*lifetime;
+    V = sqrt(GM/(h+Re));%[km/s]
+    P0 = 2*pi*sqrt((h+Re)^3/GM)/year; %[years]
+    dVrev = pi*CDAM*rho*(h+Re)*1e6*V/P0;
+    dV = dVrev*lifetime;
     %update values
     
     deltaVa(end+1) = dV;   

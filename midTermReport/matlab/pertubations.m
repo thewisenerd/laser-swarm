@@ -108,8 +108,8 @@ print -dpng 'C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\midTermReport\chapter
 % Drag Calculations
 
 Cd = 4;
-Area = 0.01+0.2; %[m^2]
-Mass = 10; %[kg]
+Area = 0.2; %[m^2]
+Mass = 10.7; %[kg]
 CDAM = Cd*Area/Mass;
 
 h = 300;
@@ -189,10 +189,9 @@ print -dpng 'C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\midTermReport\chapter
 
 %% Emitter
 Cd = 4;
-Area = 0.58+2; %[m^2]
-Mass = 32; %[kg]
-%CDAM = Cd*Area/Mass;
-CDAM = 0.02;
+Area = 2.5; %[m^2]
+Mass = 119; %[kg]
+CDAM = Cd*Area/Mass;
 h = 300;
 
 [revArray3,altitudeArray3]=orbitDecay(h,CDAM,1);
@@ -277,7 +276,7 @@ fprintf(handle, 'Altitude & 300 & 400 & 500 & 300 & 400 & 500 & 300 & 400 & 500 
 fprintf(handle, 'EMITTER & %.2f & %.2f & %.2f & %.2f & %.2f & %.2f & %.2f & %.2f & %.2f \\\\\n', deltaVtabMinEmit(1), deltaVtabMinEmit(2), deltaVtabMinEmit(3),deltaVtabMeanEmit(1), deltaVtabMeanEmit(2), deltaVtabMeanEmit(3), deltaVtabMaxEmit(1), deltaVtabMaxEmit(2), deltaVtabMaxEmit(3));
 fprintf(handle, 'RECEIVER& %.2f & %.2f & %.2f & %.2f & %.2f & %.2f & %.2f & %.2f & %.2f \\\\\n', deltaVtabMinRec(1), deltaVtabMinRec(2), deltaVtabMinRec(3),deltaVtabMeanRec(1), deltaVtabMeanRec(2), deltaVtabMeanRec(3), deltaVtabMaxRec(1), deltaVtabMaxRec(2), deltaVtabMaxRec(3));
 
-fprintf(handle, '\\end{tabular}\n\\caption{Required $\\Delta$V for various orbit altitudes. In $m/s$.}\n\\label{table:deltaVTable}\n\\end{table}\n');
+fprintf(handle, '\\end{tabular}\n\\caption{Required $\\Delta$V for various orbit altitudes for a 5 year mission. In $m/s$.}\n\\label{table:deltaVTable}\n\\end{table}\n');
 fclose(handle);
 
 %% Earth radii
