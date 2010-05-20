@@ -183,7 +183,7 @@ public class AntiSimulator {
 		return hi;
 	}
 
-	public static Map<Double, Integer> findspikes(SampleIterator data, double time) {
+	public static Map<Double, Integer> findspikes(final SampleIterator data, double time) {
 		// TODO Auto-generated method stub
 		// Integer sum = new Integer(0);
 		int sum = 0;
@@ -211,7 +211,7 @@ public class AntiSimulator {
 		while (iter.hasNext()) {
 			MeasermentSample tempms = iter.next();
 			
-			if (tempms.getPhotons() > average) { // comparator
+			if (tempms.getPhotons() > 20*average) { // comparator
 				
 				hi.put(new Double(tempms.getTime()), new Integer(tempms.getPhotons()));
 				
@@ -250,6 +250,7 @@ public class AntiSimulator {
 		Vector3d dif = new Vector3d();
 		dif.sub(em, re);
 		double theta = dif.angle(em);
+		//if(theta == Double.NaN)  theta = 0;
 		double H = a * (1 - eps_2) / (1 - eps * Math.cos(theta)); // distance to the ground from the
 		// emitter
 		if(callcnt%modi == 0){
@@ -276,6 +277,7 @@ public class AntiSimulator {
 		// double talt = alt/c; //time radius for search
 
 		Satellite emit = hist.getEm(); // satellite emitter
+		double del = 1E-7;
 		double[] ret = new double[hist.time.size()];
 		//double t0 =  hist.time.first(); //initial time
 	//	double tf =  hist.time.last();	//final time
@@ -321,7 +323,7 @@ public class AntiSimulator {
 			Map<Satellite, Vector<Double>> altData = Maps.newHashMap();
 
 			for (Map.Entry<Satellite, TimeLine> iter : rec.entrySet()) { // Iterate over all the receiver 
-
+				altData.clear();
 				
 				if(i%modi == 0)System.out.print("desimulating satellites \n");
 				
@@ -352,12 +354,13 @@ public class AntiSimulator {
 				// for this satellite
 
 				for (Double d : tphoton.keySet()) { // iterate over the spikes
+					altPoints.clear();
 					if(i%modi == 0) System.out.print(tphoton.get(d) + " photons at time " + d.toString() + " s \n");
 					double t1 = hist.getPulseBeforePulse(d.doubleValue());
 					// em.get(hist).getLookupPosition(); // the time of the
 					// sent pulse
 					Point3d emitp = new Point3d(hist.getPosition().find(d.doubleValue()));
-					Point3d recp = new   Point3d(iter.getValue().getLookupPosition().find(d.doubleValue()));
+					Point3d recp = new   Point3d(iter.getValue().getLookupPosition().find(d.doubleValue()-del));
 					
 					altPoints.add(new Double(AntiSimulator.calcalt( emitp, recp, d.doubleValue() - t1)));
 					if(i%20 == 0)	{
@@ -402,7 +405,7 @@ public class AntiSimulator {
 			retval.add(res);
 			i++;
 			callcnt++;
-			if(i > 200) break;
+			if(i > 4500) break;
 		}
 
 		return retval;
@@ -497,7 +500,7 @@ public class AntiSimulator {
 		Map<Satellite, TimeLine> em;
 		Map<Satellite, TimeLine> rec;
 		EmitterHistory hist;
-		String flname = "ser_PT2";
+		String flname = "ser_PT33";
 		ProcessorTester tester = new ProcessorTester();
 		RandData ret ;
 		try { 
@@ -558,7 +561,14 @@ public class AntiSimulator {
 		// //tmpSim.
 		// }
 		plotHeightDistribution plotter = new plotHeightDistribution();
-		plotter.plot(desim(ret.getRec(),ret.getEm(),ret.getEmHist()),3,"vafli");
+		List<SimVars> abcd =  Lists.newLinkedList();
+		abcd = desim(ret.getRec(),ret.getEm(),ret.getEmHist());
+		
+		for (int j = 0; j < abcd.size(); j++) {
+			if(abcd.get(j).pR.x < 0 ) abcd.remove(j);
+			System.out.println(abcd.get(j).pR);
+		}
+		plotter.plot(abcd,3,"vafli");
 		// for ( Map<Double,Integer> ter:
 		// ret.getEm().get(ret.getEm().keySet().iterator().next()).getIterator(3).next().) {
 		//Vector<Integer> hi = new Vector<Integer>();*/
