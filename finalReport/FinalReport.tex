@@ -1,0 +1,241 @@
+
+\documentclass[11pt]{report}
+\pagestyle{myheadings}
+\markright{Group 13\hfill Laser Swarm\hfill}
+\usepackage{pdflscape}
+
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{enumerate}
+\usepackage[printonlyused]{acronym}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{subfig}
+\usepackage{amsmath}
+\usepackage{url}
+\usepackage{fixltx2e}
+
+\topmargin -1.5cm
+\oddsidemargin -0.04cm 
+\evensidemargin -0.04cm 
+\textwidth 16.59cm 
+\textheight 21.94cm 
+\parskip 7.2pt 
+
+\setcounter{secnumdepth}{5}
+\setcounter{tocdepth}{2}
+\pagenumbering{roman}
+
+\begin{document}
+
+%%%%%%%%%%%%%
+%
+%       TOP MATTER
+%
+%%%%%%%%%%%%%
+
+\input{chapters/titlePage.tex}
+
+%%%%%%%%%%%%%
+%
+%       PREFACE
+%
+%%%%%%%%%%%%%
+
+\input{chapters/preface.tex}
+
+%%%%%%%%%%%%%
+%
+%       TOC
+%
+%%%%%%%%%%%%%
+
+\newpage
+\addcontentsline{toc}{chapter}{Contents}
+\tableofcontents
+\newpage
+\addcontentsline{toc}{chapter}{List of Figures}
+\listoffigures
+\newpage
+\addcontentsline{toc}{chapter}{List of Tables}
+\listoftables
+
+%%%%%%%%%%%%%
+%
+%       SYMBOLS
+%
+%%%%%%%%%%%%%
+
+\newpage
+\addcontentsline{toc}{chapter}{List of Symbols}
+\Large{\textbf{List of Symbols}}
+\small
+\input{chapters/SymbList.tex}
+
+%%%%%%%%%%%%%
+%
+%       ACRONYMS 
+%
+%%%%%%%%%%%%%
+
+\newpage
+\addcontentsline{toc}{chapter}{List of Acronyms}
+\Large{\textbf{List of Acronyms}}
+\small
+\input{chapters/acronyms.tex}
+
+%%%%%%%%%%%%%
+%
+%       ABSTRACT
+%
+%%%%%%%%%%%%%
+
+\input{chapters/abstract.tex}
+
+%%%%%%%%%%%%%
+%
+%       INTRODUCTION
+%
+%%%%%%%%%%%%%
+
+
+\chapter{Introduction}
+\label{intro}
+\pagenumbering{arabic}
+\input{chapters/introduction.tex}
+
+%%%%%%%%%%%%%
+%
+%	PROJECT PLANNING STUFF
+%
+%%%%%%%%%%%%%
+
+\input{chapters/technDesignDev.tex}
+\input{chapters/projectApproachDescription.tex}
+\input{chapters/projectPlanningReview.tex}
+
+%%%%%%%%%%%%%
+%
+%       RISK MANAGEMENT
+%
+%%%%%%%%%%%%%
+
+\input{chapters/rmIntro.tex}
+\input{chapters/markanal.tex}
+\input{chapters/contingency.tex}
+\input{chapters/riskmap.tex}
+
+%%%%%%%%%%%%%
+%
+%       DESIGN OPTIONS
+%
+%%%%%%%%%%%%%
+
+\input{chapters/designOptionsIntro.tex}
+\input{chapters/designOptionsADCS.tex}
+\input{chapters/designOptionsCommunications.tex}
+\input{chapters/designOptionsPower.tex}
+\input{chapters/designOptionsOrbit.tex}
+\input{chapters/designOptionsEmitter.tex}
+\input{chapters/designOptionsReceiver.tex}
+
+
+%%%%%%%%%%%%%
+%
+%       INTERFACE
+%
+%%%%%%%%%%%%%
+
+\input{chapters/INTn2diag}
+
+%%%%%%%%%%%%%
+%
+%       TRADEOFF
+%
+%%%%%%%%%%%%%
+
+\chapter{Tradeoff}
+\input{chapters/IntroTradeOff.tex}
+\input{chapters/TOadcs.tex}
+\input{chapters/mtrTOCOM.tex}
+\input{chapters/TOeps.tex}
+\input{chapters/AnalOrb.tex}
+\input{chapters/OrbAltitude.tex}
+\input{chapters/deltaVtable.tex}
+\input{chapters/OrbAltitude2.tex}
+\input{chapters/swarmDesign.tex}
+\input{chapters/mtOpS.tex}
+\input{chapters/TOpointing.tex}
+\input{chapters/TOsummery.tex}
+
+%%%%%%%%%%%%%
+%
+%       OPS & LOGISTICS
+%
+%%%%%%%%%%%%%
+
+\input{chapters/MTROpsLog.tex}
+
+%%%%%%%%%%%%%
+%
+%       STABILITY & CONTROL
+%
+%%%%%%%%%%%%%
+
+\input{chapters/SCstabcont.tex}
+
+%%%%%%%%%%%%%
+%
+%       SUSTAINABLE
+%
+%%%%%%%%%%%%%
+
+\input{chapters/SS.tex}
+\input{chapters/SSPRO.tex}
+\input{chapters/SSOPE.tex}
+\input{chapters/SSEOL.tex}
+
+%%%%%%%%%%%%%
+%
+%       SIMULATION CHAPTER
+%
+%%%%%%%%%%%%%
+
+\input{chapters/simIntroduction.tex}
+\input{chapters/simulation.tex}
+\input{chapters/orbit.tex}
+\input{chapters/earthModel.tex}
+\input{chapters/DEM.tex}
+\input{chapters/scatter.tex}
+\input{chapters/signPath.tex}
+\input{chapters/noise.tex}
+\input{chapters/dataAnalysis.tex}
+\input{chapters/altDet.tex}
+\input{chapters/BRDFDet.tex}
+\input{chapters/Simulations.tex}
+\input{chapters/VariationOfPhotonDensity.tex}
+\input{chapters/SolarPhotonsFraction.tex}
+
+%%%%%%%%%%%%%
+%
+%       BIBLIOGRAPHY
+%
+%%%%%%%%%%%%%
+
+\bibliographystyle{plainnat}
+\bibliography{bibliography}
+
+%%%%%%%%%%%%%
+%
+%       APPENDICIES
+%
+%%%%%%%%%%%%%
+
+\appendix
+\input{chapters/designOptionsDiagrams}
+\input{chapters/budgetOverview.tex}
+\chapter{Gantt Chart}
+\label{ganttChart}
+
+\end{document}
