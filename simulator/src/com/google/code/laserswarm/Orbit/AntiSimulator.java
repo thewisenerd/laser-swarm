@@ -211,7 +211,7 @@ public class AntiSimulator {
 		while (iter.hasNext()) {
 			MeasermentSample tempms = iter.next();
 			
-			if (tempms.getPhotons() > 20*average) { // comparator
+			if (tempms.getPhotons() > 2*average) { // comparator
 				
 				hi.put(new Double(tempms.getTime()), new Integer(tempms.getPhotons()));
 				
@@ -277,16 +277,16 @@ public class AntiSimulator {
 		// double talt = alt/c; //time radius for search
 
 		Satellite emit = hist.getEm(); // satellite emitter
-		double del = 1E-7;
+		double del = 1E-5;
 		double[] ret = new double[hist.time.size()];
 		//double t0 =  hist.time.first(); //initial time
 	//	double tf =  hist.time.last();	//final time
 		//double timelim = t0;
 		int i = 0;
 		double tcur = 0;
-		int bin_freq = (int) 1E5;
-		double timeframe = 5E5/Constants.c; //alt over speed of light //1.0/bin_freq;
-
+		int  bin_freq = (int) 1E7;
+		double timeoffset = 2*5E5/Constants.c; //alt over speed of light //1.0/bin_freq;
+		double timeframe = 1/5000; //seconds
 		//System.out.println("first emitted : " + t0 + "s \n last emitted : " + tf);
 		//double timeit = hist.time.iterator().;			//CHANGE
 		List<SimVars> retval = Lists.newLinkedList();
@@ -318,16 +318,16 @@ public class AntiSimulator {
 			if(i%100== 0) System.out.print("Current Time: " + tcur + "\n");
 			SimVars res = new SimVars();
 			
-			System.out.print("desimulating sample " + i + " out of " + hist.time.size() + "\n");
+			System.out.print("desimulating pulse " + i + " out of " + hist.time.size() + "\n");
 			// em = emData.get(Emit).getLookupPosition().find(tr) ; //position of the emitter at a time t
 			Map<Satellite, Vector<Double>> altData = Maps.newHashMap();
 
 			for (Map.Entry<Satellite, TimeLine> iter : rec.entrySet()) { // Iterate over all the receiver 
 				altData.clear();
 				
-				if(i%modi == 0)System.out.print("desimulating satellites \n");
+				if(i%modi == 0)System.out.print("desimulating satellite \n");
 				
-				Map<Double, Integer> tphoton = Maps.newHashMap();
+				Map<Double, Integer> tphoton = Maps.newHashMap();	//photon peaks
 
 				/*
 				 * try{
@@ -349,18 +349,19 @@ public class AntiSimulator {
 				// satData.get(iterat.getKey()).getPhotons().keySet().toArray(); //time when the pulses
 				// were registered
 
-				tphoton = AntiSimulator.findspikes(satSampIterators.get(iter.getKey()), tcur+timeframe); // list of spike photons
+				tphoton = AntiSimulator.findspikes(satSampIterators.get(iter.getKey()), tcur+timeoffset - timeframe/2); // list of spike photons
 				// that are not noise
 				// for this satellite
 
 				for (Double d : tphoton.keySet()) { // iterate over the spikes
 					altPoints.clear();
 					if(i%modi == 0) System.out.print(tphoton.get(d) + " photons at time " + d.toString() + " s \n");
-					double t1 = hist.getPulseBeforePulse(d.doubleValue());
+					double t1 = hist.getPulseClosesTo(tcur);
+					//double t1 = hist.getPulseBeforePulse(d.doubleValue());
 					// em.get(hist).getLookupPosition(); // the time of the
 					// sent pulse
-					Point3d emitp = new Point3d(hist.getPosition().find(d.doubleValue()));
-					Point3d recp = new   Point3d(iter.getValue().getLookupPosition().find(d.doubleValue()-del));
+					Point3d emitp = new Point3d(hist.getPosition().find(tcur));
+					Point3d recp = new   Point3d(iter.getValue().getLookupPosition().find(d.doubleValue()));
 					
 					altPoints.add(new Double(AntiSimulator.calcalt( emitp, recp, d.doubleValue() - t1)));
 					if(i%20 == 0)	{
@@ -564,10 +565,16 @@ public class AntiSimulator {
 		List<SimVars> abcd =  Lists.newLinkedList();
 		abcd = desim(ret.getRec(),ret.getEm(),ret.getEmHist());
 		
-		for (int j = 0; j < abcd.size(); j++) {
+		for (int j = 0; j < abcd.size()-1; j++) {
 			if(abcd.get(j).pR.x < 0 ) abcd.remove(j);
-			System.out.println(abcd.get(j).pR);
+			//System.out.println(abcd.get(j).pR);
 		}
+		for (int j = 0; j < abcd.size()-1; j++) {
+			//if(abcd.get(j).pR.x < 0 ) abcd.remove(j);
+			if(Math.abs(abcd.get(j).pR.distance(new Point3d(0,0,0)))-6400000+21863 == Double.NaN) abcd.remove(j);
+			System.out.println(1E10*(Math.abs(abcd.get(j).pR.distance(new Point3d(0,0,0)))-6400000+21863+0.51) );
+		}
+		
 		plotter.plot(abcd,3,"vafli");
 		// for ( Map<Double,Integer> ter:
 		// ret.getEm().get(ret.getEm().keySet().iterator().next()).getIterator(3).next().) {
