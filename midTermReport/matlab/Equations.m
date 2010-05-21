@@ -3,7 +3,6 @@ clear all;
 clc;
 
 %Constants
-e = 0.0000;
 J2 = 0.001082645;
 J3 = -0.000002546;
 YearSid = 365.256363004;
@@ -14,12 +13,13 @@ nEarth = (2*pi)/(DaySid*YearSid);
 mu = 398600.4418;
 
 omega = 90*(pi/180);
+e=-0.5*(J3/J2)*(rEarth/500)*sin(85*(pi/180))*sin(omega)
 
 %Define mean motion
 n = @(a) sqrt(mu./a.^3);
 
 %Define p
-p = @(a) a*(1-e^2);
+p = @(a) a*(1-e.^2);
 
 %Initial mean anomaly
 M0 = @(a,i) 0.75*J2*(rEarth./p(a)).^2*sqrt(1-e^2).*(3*cos(i(a)).^2-1);
@@ -115,20 +115,21 @@ legend('i=60','i=65','i=70','i=75','i=80','i=85','i=90');
 print -dpng 'D:\My Documents\Courses\AE3-001\Shared stuff\midTermReport\chapters\img\AltVsIdot';
 
 %a;ldsjf;
-omegaDot = @(a,i,omega) ((3*J2.*n(a))/(1-e^2)^2).* (rEarth./a).^2.* (1-(5/4).*sin(i).^2);
+e = @(a,i,omega) -0.5*(J3/J2).*(rEarth./a).*sin(i).*sin(omega);
+p = @(a) a*(1-e.^2);
+omegaDot = @(a,i,omega,e) ((3*J2.*n(a))./(1-e.^2).^2).* (rEarth./a).^2.* (1-(5/4).*sin(i).^2).*(1 + (J3./(2*J2*(1-e.^2))).* (rEarth./a).* ((sin(i).^2-(e.*cos(i)).^2)./sin(i)).* (sin(omega)./e));
 
 figure4 = figure('Color',[1 1 1]);
 axes('Parent',figure4);
 box('on');
 hold on;
-plot(a-rEarth,(180/pi)*omegaDot(a,i1,omega)*DaySid,'b');
-%omegaDot = @(a,i,omega) ((3*J2.*n(a))/(1-e^2)^2).* (rEarth./a).^2.* (1-(5/4).*sin(i).^2).* (1 + (J3/(2*J2*(1-e^2))).* (rEarth./a).* ((sin(i).^2-(e*cos(i)).^2)./sin(i))* (sin(omega)/e));
-plot(a-rEarth,(180/pi)*omegaDot(a,i2,omega)*DaySid,'g');
-plot(a-rEarth,(180/pi)*omegaDot(a,i3,omega)*DaySid,'r');
-plot(a-rEarth,(180/pi)*omegaDot(a,i4,omega)*DaySid,'k');
-plot(a-rEarth,(180/pi)*omegaDot(a,i5,omega)*DaySid,'c');
-plot(a-rEarth,(180/pi)*omegaDot(a,i6,omega)*DaySid,'m');
-plot(a-rEarth,(180/pi)*omegaDot(a,i7,omega)*DaySid,'y');
+plot(a-rEarth,(180/pi)*omegaDot(a,i1,omega,e(a,i1,omega))*DaySid,'b');
+plot(a-rEarth,(180/pi)*omegaDot(a,i2,omega,e(a,i2,omega))*DaySid,'g');
+plot(a-rEarth,(180/pi)*omegaDot(a,i3,omega,e(a,i3,omega))*DaySid,'r');
+plot(a-rEarth,(180/pi)*omegaDot(a,i4,omega,e(a,i4,omega))*DaySid,'k');
+plot(a-rEarth,(180/pi)*omegaDot(a,i5,omega,e(a,i5,omega))*DaySid,'c');
+plot(a-rEarth,(180/pi)*omegaDot(a,i6,omega,e(a,i6,omega))*DaySid,'m');
+plot(a-rEarth,(180/pi)*omegaDot(a,i7,omega,e(a,i7,omega))*DaySid,'y');
 % plot(a-rEarth,(180/pi)*omegaDot(a,i8,omega)*DaySid,'b--');
 % plot(a-rEarth,(180/pi)*omegaDot(a,i9,omega)*DaySid,'g--');
 xlabel('Altitude [km]');
