@@ -18,6 +18,7 @@ public class LookupTable extends TreeMap<Double, Tuple3d> {
 		dv.scale(1 / dt);
 
 		dv.scale(t - tf);
+		dv.add(vf);
 		return dv;
 	}
 
