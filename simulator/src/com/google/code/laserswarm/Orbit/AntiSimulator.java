@@ -19,6 +19,7 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.Vector;
 
@@ -29,7 +30,10 @@ import javax.imageio.ImageIO;
 import javax.vecmath.Point3d;
 import javax.vecmath.Vector3d;
 
+import org.apache.commons.math.ArgumentOutsideDomainException;
 import org.apache.commons.math.MathException;
+import org.apache.commons.math.analysis.polynomials.PolynomialFunction;
+import org.apache.commons.math.analysis.polynomials.PolynomialSplineFunction;
 import org.apache.commons.math.stat.*;
 
 import com.google.code.laserswarm.ProcessorTester;
@@ -197,21 +201,23 @@ public class AntiSimulator {
 		while (data.hasNext()) { // Compute size, sum
 			MeasermentSample hii = data.next();
 			size++;
-			if (hii.getTime() > time)
-				break;
+
 			sum = sum + hii.getPhotons();
 			sampls.add(hii);
+			if (hii.getTime() > time)
+				break;
 		}
 		if(size==0){
 		average = 0;	
 		}else{
 		average = sum / size; // average
 		}
+		System.out.println("average " +average );
 		Iterator<MeasermentSample> iter = sampls.iterator();
 		while (iter.hasNext()) {
 			MeasermentSample tempms = iter.next();
 			
-			if (tempms.getPhotons() > 2*average) { // comparator
+			if (tempms.getPhotons() > 1.3*average) { // comparator
 				
 				hi.put(new Double(tempms.getTime()), new Integer(tempms.getPhotons()));
 				
@@ -228,7 +234,7 @@ public class AntiSimulator {
 	 *            in sec.
 	 */
 
-	public static double calcalt(Point3d emit, Point3d rec1, double trav1) {
+	public static double calcalt(Point3d emit, Point3d rec1, double trav1) throws MathException {
 		
 		// Assumed: Location of the satellite is known to high precission
 		// Earth is a perfect sphere
@@ -240,6 +246,7 @@ public class AntiSimulator {
 		double f = emit.distance(rec1); // focal distance
 		double c = IERS_1996.c; // speed of light
 		double dist = Math.abs(trav1) * c;
+		if(dist < f) throw new MathException("Distance Traveled is shorter than Focal length");
 		double a = dist / 2; // semimajor axis
 
 		double b_2 = Math.pow(dist / 2, 2) - Math.pow(f / 2.0, 2.0); // b^2
@@ -289,7 +296,7 @@ public class AntiSimulator {
 		double timeframe = 1/5000; //seconds
 		//System.out.println("first emitted : " + t0 + "s \n last emitted : " + tf);
 		//double timeit = hist.time.iterator().;			//CHANGE
-		List<SimVars> retval = Lists.newLinkedList();
+		List<SimVars> retval = Lists.newLinkedList();	
 		Vector3d pos =  new Vector3d(0,0,0);
 		Vector<Double> altPoints = new Vector<Double>();
 		Iterator<Double> timeIt = hist.time.iterator(); //time iterator over the samples
@@ -360,10 +367,16 @@ public class AntiSimulator {
 					//double t1 = hist.getPulseBeforePulse(d.doubleValue());
 					// em.get(hist).getLookupPosition(); // the time of the
 					// sent pulse
-					Point3d emitp = new Point3d(hist.getPosition().find(tcur));
+					Point3d emitp = new Point3d(hist.getPosition().find(t1));
 					Point3d recp = new   Point3d(iter.getValue().getLookupPosition().find(d.doubleValue()));
-					
+				
+					try{
 					altPoints.add(new Double(AntiSimulator.calcalt( emitp, recp, d.doubleValue() - t1)));
+					}catch(MathException e){
+						System.out.println("Error occured at " + tcur + "s pulse. \n --> On the spike at time " + d );
+						break;
+					}
+					
 					if(i%20 == 0)	{
 						System.out.println("dT for distance: " + (d.doubleValue() - t1));
 						System.out.println("distance between points: " + emitp.distance(recp));
@@ -511,8 +524,8 @@ public class AntiSimulator {
 			ret.write(flname);
 		}
 		 
-	
 		Satellite emit;
+		
 		int i = 0;
 /*		Satellite sat1 = new Satellite("eh",4.5,4.5f,4.0f,0.5f,4.5f,4.5f,3.2f);
 		Satellite sat2 = new Satellite("eh2",4.5,4.5f,4.0f,0.5f,4.5f,4.5f,3.2f);
@@ -561,7 +574,7 @@ public class AntiSimulator {
 		// hi.add(tmpSim);
 		// //tmpSim.
 		// }
-		plotHeightDistribution plotter = new plotHeightDistribution();
+/*		plotHeightDistribution plotter = new plotHeightDistribution();
 		List<SimVars> abcd =  Lists.newLinkedList();
 		abcd = desim(ret.getRec(),ret.getEm(),ret.getEmHist());
 		
@@ -575,11 +588,60 @@ public class AntiSimulator {
 			System.out.println(1E10*(Math.abs(abcd.get(j).pR.distance(new Point3d(0,0,0)))-6400000+21863+0.51) );
 		}
 		
-		plotter.plot(abcd,3,"vafli");
+		plotter.plot(abcd,3,"vafli");*/
+		for (Map.Entry<Satellite, TimeLine> tmp: ret.getRec().entrySet()) {
+		Satellite sat =tmp.getKey();
+		TimeLine tim = tmp.getValue();
+		SampleIterator sampiter= null;
+		try {
+			sampiter = tim.getIterator(5000000);		//60 meters resolution //window 200 microsecs long mm thick
+		} catch (MathException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		while(sampiter.hasNext()){
+			MeasermentSample hm=  sampiter.next();
+			System.out.println(hm.getTime() + "\t | \t" + hm.getPhotons()
+					);
+		}
+		}
+		//ret.getRec().get(emit).getIterator(2).
+		/*TreeMap<Double, Integer> laser = Maps.newTreeMap();
+		laser.put(2.4d, 15);
+		laser.put(3.4d,17);
+		PolynomialFunction polyfunc[] = new PolynomialFunction[3];
+		polyfunc[0]= new PolynomialFunction(new double[]{2d,3d,4d});
+		polyfunc[1]= new PolynomialFunction(new double[]{2d,3d,4d});
+		polyfunc[2]= new PolynomialFunction(new double[]{2d,3d,4d});
+		
+		PolynomialSplineFunction noisepoly = new PolynomialSplineFunction(new double[]{1d, 2d, 3d, 4d }, polyfunc);
+		for (int j = 0; j < 200; j++) {
+			try {
+				System.out.println(noisepoly.value(j/45.0) + " noise for " + j/45.0);
+			} catch (ArgumentOutsideDomainException e) {
+				// TODO Auto-generated catch block
+				//e.printStackTrace();
+				System.out.println("Outside domain for " + j/45.0);
+			}	
+		}
+		
+		SampleIterator samTest = new SampleIterator(20, laser, noisepoly);
+		for (int j = 0; j < 4; j++) {
+			
+			System.out.println(findspikes(samTest,2.0*j));
+		}
+		for (int j = 0; j < 40; j++) {
+			MeasermentSample tmp;
+			tmp = samTest.next();
+				System.out.println(tmp.getPhotons() + " \t | \t " + tmp.getTime() + " " +j);
+			
+		}
+		*/
 		// for ( Map<Double,Integer> ter:
 		// ret.getEm().get(ret.getEm().keySet().iterator().next()).getIterator(3).next().) {
 		//Vector<Integer> hi = new Vector<Integer>();*/
-		
+		 
 /*		try {
 
 			System.out.print(findspikes(ret.getEm().values().iterator().next().getIterator((int) 10),
