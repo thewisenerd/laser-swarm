@@ -235,8 +235,8 @@ public class Simulator implements Runnable {
 		}
 
 		try {
-			dataPoints = new NonVolatileList(new File(template.toString() + "-" + template.hashCode()
-					+ ".db"));
+			dataPoints = new NonVolatileList(new File(Configuration.volitileCache, // 
+					template.toString() + "-" + template.hashCode() + ".db"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

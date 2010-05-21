@@ -31,52 +31,62 @@ public class Configuration {
 
 	private transient static Configuration	instance;
 
-	private transient static final String	configName	= "configuration.xml";
+	private transient static final String	configName			= "configuration.xml";
 
 	/**
 	 * Location of the DEMs
 	 */
-	public transient static File			demDir		= new File("DEM");
+	public transient static File			demDir				= new File("DEM");
+	public transient static File			volitileCache		= new File("cache/volitile");
+	static {
+		volitileCache.mkdirs();
+		for (File subFile : volitileCache.listFiles())
+			subFile.delete();
+	}
+	public transient static File			nonVolitileCache	= new File("cache/nonVolitile");
+	static {
+		nonVolitileCache.mkdirs();
+	}
 	/**
 	 * Earth radius based on EPSG:3785 ellipsoid (spheroid)
 	 */
-	public transient static double			R0			= 6378137;
+	public transient static double			R0					= 6378137;
 	/**
 	 * Orbit epoch date
 	 */
-	public transient static final CalDate	epoch		= new CalDate(2000, 7, 1, 0, 0, 0);
+	public transient static final CalDate	epoch				= new CalDate(2000, 7, 1, 0, 0, 0);
 	/**
 	 * Stefan-Boltzmann constant
 	 */
-	public transient static double			sigma		= 5.67E-8;
+	public transient static double			sigma				= 5.67E-8;
 	/**
 	 * Planck's constant
 	 */
-	public transient static double			h			= 6.626068E-34;
+	public transient static double			h					= 6.626068E-34;
 	/**
 	 * Light speed
 	 */
-	public transient static double			c			= 299792458;
+	public transient static double			c					= 299792458;
 	/**
 	 * Boltzmann constant
 	 */
-	public transient static double			k			= 1.3806503E-23;
+	public transient static double			k					= 1.3806503E-23;
 	/**
 	 * Sun's grey body temperature
 	 */
-	public transient static double			TSun		= 5800;
+	public transient static double			TSun				= 5800;
 	/**
 	 * Sun's grey body emissivity
 	 */
-	public transient static double			epsSun		= 0.99;
+	public transient static double			epsSun				= 0.99;
 	/**
 	 * Earth's grey body temperature
 	 */
-	public transient static double			TEarth		= 254.356;
+	public transient static double			TEarth				= 254.356;
 	/**
 	 * Earth's grey body emissivity
 	 */
-	public transient static double			epsEarth	= 1;
+	public transient static double			epsEarth			= 1;
 
 	private static Set<Actions>				mode;
 	static {
@@ -87,8 +97,8 @@ public class Configuration {
 		mode.add(Actions.TABULATE);
 	}
 
-	public static int						simThreads	= 9;
-	public static int						demThreads	= 4;
+	public static int						simThreads			= 9;
+	public static int						demThreads			= 4;
 
 	/**
 	 * Make a new config file
