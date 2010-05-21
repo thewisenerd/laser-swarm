@@ -21,7 +21,8 @@ public class AltRange extends LaserSwarm {
 		Configuration.getInstance();
 		Configuration.setMode(Sets.newHashSet( //
 				Actions.SIMULATE, Actions.PROSPECT, Actions.COUNT_ONLY, Actions.FORCE_FLAT));
-		new AltRange();
+		AltRange sim = new AltRange();
+		sim.run();
 	}
 
 	private static Constellation mkConstellation(float alt) {
@@ -41,7 +42,7 @@ public class AltRange extends LaserSwarm {
 	@Override
 	protected List<Constellation> mkConstellations() {
 		List<Constellation> constellations = Lists.newLinkedList();
-		for (int i = 3000; i <= 501; i += 25) {
+		for (int i = 300; i <= 501; i += 25) {
 			constellations.add(mkConstellation(i));
 		}
 		return constellations;

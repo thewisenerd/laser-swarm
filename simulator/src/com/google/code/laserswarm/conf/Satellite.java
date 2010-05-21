@@ -3,6 +3,7 @@ package com.google.code.laserswarm.conf;
 import jat.cm.KeplerElements;
 
 public class Satellite {
+	
 	private float	semimajorAxis				= 0f;
 	private float	eccentricity				= 0f;
 	private float	inclination					= 0f;

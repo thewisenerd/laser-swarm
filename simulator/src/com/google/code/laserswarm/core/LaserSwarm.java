@@ -27,7 +27,7 @@ public abstract class LaserSwarm {
 
 	protected double[][]						timeSteps		= { { 0, 500000 } };
 
-	public LaserSwarm() {
+	public void run() {
 		Configuration config = Configuration.getInstance();
 
 		if (config.hasAction(Actions.SLEEP)) {

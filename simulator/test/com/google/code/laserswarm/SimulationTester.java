@@ -2,7 +2,6 @@ package com.google.code.laserswarm;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -15,6 +14,7 @@ import junit.framework.TestCase;
 import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.conf.Constellation;
 import com.google.code.laserswarm.conf.Satellite;
+import com.google.code.laserswarm.conf.Configuration.Actions;
 import com.google.code.laserswarm.earthModel.EarthModel;
 import com.google.code.laserswarm.earthModel.ElevationModel;
 import com.google.code.laserswarm.simulation.SimTemplate;
@@ -26,6 +26,7 @@ import com.google.code.laserswarm.util.RetrievalExecption;
 import com.google.code.laserswarm.util.demReader.DemReader;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import com.lyndir.lhunath.lib.system.logging.Logger;
 
 public class SimulationTester extends TestCase {
@@ -35,6 +36,9 @@ public class SimulationTester extends TestCase {
 	private static final Logger	logger	= Logger.get(SimulationTester.class);
 
 	public static void main(String[] args) {
+		Configuration.getInstance();
+		Configuration.setMode(Sets.newHashSet( //
+				Actions.SIMULATE, Actions.PROSPECT));
 		new SimulationTester().testSim();
 	}
 
@@ -56,19 +60,6 @@ public class SimulationTester extends TestCase {
 			e1.printStackTrace();
 		}
 		Constellation testConstallation = mkTestConstilation();
-		try {
-			Field f;
-			f = Configuration.class.getDeclaredField("constellations");
-			f.setAccessible(true);
-			f.set(Configuration.getInstance(), null);
-		} catch (SecurityException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (NoSuchFieldException e) {
-			e.printStackTrace();
-		}
-
 		EarthModel earth = new EarthModel();
 
 		File demFolder = new File("DEM");
@@ -79,7 +70,9 @@ public class SimulationTester extends TestCase {
 		earth.loadCoef(); // Stretch refl coef
 
 		SimulatorMaster mgr = new SimulatorMaster(earth);
-		mgr.addSimTemplate(new SimTemplate(testConstallation));
+		SimTemplate tmpl = new SimTemplate(testConstallation);
+		tmpl.setTime(0, 191675.2);
+		mgr.addSimTemplate(tmpl);
 
 		HashMap<SimTemplate, Simulator> points = mgr.runSim();
 		return points;

@@ -5,6 +5,8 @@ import jat.cm.Constants;
 import jat.cm.KeplerElements;
 import jat.spacetime.Time;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -26,7 +28,7 @@ import com.google.code.laserswarm.earthModel.Convert;
 import com.google.code.laserswarm.earthModel.EarthModel;
 import com.google.code.laserswarm.earthModel.ScatteringCharacteristics;
 import com.google.code.laserswarm.earthModel.ScatteringParam;
-import com.google.common.collect.Lists;
+import com.google.code.laserswarm.util.NonVolatileList;
 import com.google.common.collect.Maps;
 import com.lyndir.lhunath.lib.system.logging.Logger;
 
@@ -232,7 +234,12 @@ public class Simulator implements Runnable {
 			receiverOrbits.put(sat, o);
 		}
 
-		dataPoints = Lists.newLinkedList();
+		try {
+			dataPoints = new NonVolatileList(new File(template.toString() + "-" + template.hashCode()
+					+ ".db"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 		Prospector prospector = new Prospector(emittorOrbit, receiverOrbits, earth, samples, dt);
 

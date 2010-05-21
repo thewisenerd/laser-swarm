@@ -1,5 +1,6 @@
 package com.google.code.laserswarm.simulation;
 
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 
@@ -8,73 +9,98 @@ import javax.vecmath.Vector3d;
 
 import com.google.code.laserswarm.conf.Satellite;
 import com.google.code.laserswarm.earthModel.ScatteringCharacteristics;
+import com.google.common.io.LineProcessor;
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.json.JettisonMappedXmlDriver;
+import com.thoughtworks.xstream.io.json.JsonHierarchicalStreamDriver;
 
 public class SimVars {
+
+	public static transient LineProcessor<SimVars>	DESERIALIZER;
+	static {
+		DESERIALIZER = new LineProcessor<SimVars>() {
+			private SimVars	last;
+
+			@Override
+			public SimVars getResult() {
+				return last;
+			}
+
+			@Override
+			public boolean processLine(String line) throws IOException {
+				//XStream xstream = new XStream(new JettisonMappedXmlDriver());
+				XStream xstream = new XStream();
+				last = (SimVars) xstream.fromXML(line);
+				return true;
+			}
+		};
+	}
 
 	/**
 	 * Time of origin.
 	 */
-	public double						t0;			// added
+	public double									t0;
 	/**
 	 * Time from origin to reflection.
 	 */
-	public double						tR;			// added
+	public double									tR;
 	/**
 	 * Time from reflection to endpoint.
 	 */
-	public HashMap<Satellite, Double>	tE;			// added
+	public HashMap<Satellite, Double>				tE;
 
 	/**
 	 * Point of origin.
 	 */
-	public Point3d						p0;			// added
+	public Point3d									p0;
 	/**
 	 * Point of reflection.
 	 */
-	public Point3d						pR;			// added
+	public Point3d									pR;
 	/**
 	 * Endpoints.
 	 */
-	public HashMap<Satellite, Point3d>	pE;			// added
+	public HashMap<Satellite, Point3d>				pE;
 
 	/**
 	 * Original power.
 	 */
-	public double						power0;		// added
+	public double									power0;
 	/**
 	 * Power reflected.
 	 */
-	public double						powerR;		// added
+	public double									powerR;
 	/**
 	 * Power reflected after scatter.
 	 */
-	public HashMap<Satellite, Double>	powerR_SC;
+	public HashMap<Satellite, Double>				powerR_SC;
 	/**
 	 * Power reaching endpoints.
 	 */
-	public HashMap<Satellite, Double>	powerE;		// added
+	public HashMap<Satellite, Double>				powerE;
 
 	/**
 	 * Photons per square meter.
 	 */
-	public HashMap<Satellite, Double>	photonDensity;	// added
+	public HashMap<Satellite, Double>				photonDensity;
 	/**
 	 * Photons received at the endpoint.
 	 */
-	public HashMap<Satellite, Integer>	photonsE;		// added
+	public HashMap<Satellite, Integer>				photonsE;
 	/**
 	 * Scattering characteristics for this footprint.
 	 */
-	public ScatteringCharacteristics	scatter;
+	public ScatteringCharacteristics				scatter;
 
 	/**
 	 * Is the footprint illuminated by the sun ?
 	 */
-	public boolean						illuminated;
+	public boolean									illuminated;
+
 	/**
 	 * If illuminated by the sun, this is the incidence angle of the sun
 	 */
-	public Vector3d						sunVector;
+	public Vector3d									sunVector;
 
 	public void reduce() {
 		for (Field field : getClass().getDeclaredFields()) {
@@ -86,6 +112,16 @@ public class SimVars {
 				} catch (IllegalAccessException e) {
 				}
 		}
+	}
+
+	public String serialize() {
+//		XStream xstream = new XStream(new JsonHierarchicalStreamDriver());
+		XStream xstream = new XStream();
+		//xstream.setMode(XStream.NO_REFERENCES);
+		String str = xstream.toXML(this);
+		//str = str.replaceAll("\\n", "");
+		//str = str.replaceAll("\\r", "");		
+		return str;
 	}
 
 	@Override
