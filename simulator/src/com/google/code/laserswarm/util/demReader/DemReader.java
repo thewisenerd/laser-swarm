@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.google.code.laserswarm.conf.Configuration;
+import com.google.code.laserswarm.conf.Configuration.Actions;
 import com.google.code.laserswarm.earthModel.ElevationModel;
 import com.google.code.laserswarm.earthModel.IElevationModel;
 import com.google.common.collect.ImmutableSet;
@@ -42,7 +43,7 @@ public abstract class DemReader {
 		File cf = cacheFile(demFile);
 		File ef = envelopeFile(demFile);
 		ElevationModel dem;
-		if (cf.exists() && ef.exists()) {
+		if (Configuration.hasAction(Actions.DEM_CACHE) && cf.exists() && ef.exists()) {
 			logger.inf("Loading %s from cache (%s,%s)", fileName, cf, ef);
 			dem = new ElevationModel(cf, ef);
 		} else {
@@ -55,9 +56,10 @@ public abstract class DemReader {
 			} else {
 				throw new DemFormatException();
 			}
-			dem.toCache(cf, ef);
-			dem.shrink();
+			if (Configuration.hasAction(Actions.DEM_CACHE))
+				dem.toCache(cf, ef);
 		}
+		dem.shrink();
 		return dem;
 	}
 

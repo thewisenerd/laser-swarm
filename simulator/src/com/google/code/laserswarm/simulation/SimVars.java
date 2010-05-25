@@ -11,8 +11,6 @@ import com.google.code.laserswarm.conf.Satellite;
 import com.google.code.laserswarm.earthModel.ScatteringCharacteristics;
 import com.google.common.io.LineProcessor;
 import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.io.json.JettisonMappedXmlDriver;
-import com.thoughtworks.xstream.io.json.JsonHierarchicalStreamDriver;
 
 public class SimVars {
 
@@ -28,7 +26,7 @@ public class SimVars {
 
 			@Override
 			public boolean processLine(String line) throws IOException {
-				//XStream xstream = new XStream(new JettisonMappedXmlDriver());
+				// XStream xstream = new XStream(new JettisonMappedXmlDriver());
 				XStream xstream = new XStream();
 				last = (SimVars) xstream.fromXML(line);
 				return true;
@@ -115,12 +113,11 @@ public class SimVars {
 	}
 
 	public String serialize() {
-//		XStream xstream = new XStream(new JsonHierarchicalStreamDriver());
+		// XStream xstream = new XStream(new JsonHierarchicalStreamDriver());
 		XStream xstream = new XStream();
-		//xstream.setMode(XStream.NO_REFERENCES);
 		String str = xstream.toXML(this);
-		//str = str.replaceAll("\\n", "");
-		//str = str.replaceAll("\\r", "");		
+		str = str.replaceAll("\\r", "");
+		str = str.replaceAll("\\n", "\\\\n");
 		return str;
 	}
 

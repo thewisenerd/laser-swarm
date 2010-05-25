@@ -121,14 +121,15 @@ public class NonVolatileList implements List<SimVars> {
 				@Override
 				public SimVars next() {
 					try {
-						StringBuffer line = new StringBuffer(reader.readLine());
-						String str;
-						do {
-							str = reader.readLine();
-							line.append(str);
-						} while (!str.contains("com.google.code.laserswarm.simulation.SimVars"));
+						// StringBuffer line = new StringBuffer(reader.readLine());
+						// String str;
+						// do {
+						// str = reader.readLine();
+						// line.append(str);
+						// } while (!str.contains("com.google.code.laserswarm.simulation.SimVars"));
 
-						SimVars.DESERIALIZER.processLine(line.toString());
+						String line = reader.readLine();
+						SimVars.DESERIALIZER.processLine(line.replaceAll("\\\\n", "\n"));
 						current++;
 						return SimVars.DESERIALIZER.getResult();
 					} catch (IOException e) {

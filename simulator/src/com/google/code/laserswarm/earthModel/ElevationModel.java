@@ -270,7 +270,8 @@ public class ElevationModel implements IElevationModel {
 	}
 
 	public void fromCache(File cacheFile, File envelope) throws IOException {
-		elevationData = MatrixFactory.importFromFile(FileFormat.FILE, cacheFile, "\t");
+		elevationData = MatrixFactory.importFromFile(FileFormat.CSV, cacheFile);
+		// elevationData = new CSVMatrix(cacheFile);
 		Envelope2D env = importEnvelope(envelope);
 		coverage = new GridCoverageFactory().create("DEM", elevationData.toFloatArray(), env);
 	}
@@ -281,7 +282,7 @@ public class ElevationModel implements IElevationModel {
 		if (envelope.exists())
 			envelope.delete();
 		try {
-			elevationData.exportToFile(FileFormat.FILE, cacheFile, elevationData, "\t");
+			elevationData.exportToFile(FileFormat.CSV, cacheFile, elevationData);
 			exportEnvelope(envelope);
 		} catch (MatrixException e) {
 			// TODO Auto-generated catch block

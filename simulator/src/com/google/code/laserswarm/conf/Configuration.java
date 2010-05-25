@@ -26,6 +26,7 @@ public class Configuration {
 		PROSPECT,
 		COUNT_ONLY,
 		FORCE_FLAT,
+		DEM_CACHE,
 		CONSTANT_SCATTER;
 	}
 
@@ -95,10 +96,12 @@ public class Configuration {
 		mode.add(Actions.PROCESS);
 		mode.add(Actions.PLOT_DISK);
 		mode.add(Actions.TABULATE);
+		mode.add(Actions.PROSPECT);
+		mode.add(Actions.DEM_CACHE);
 	}
 
 	public static int						simThreads			= 9;
-	public static int						demThreads			= 4;
+	public static int						demThreads			= 2;
 
 	/**
 	 * Make a new config file
@@ -256,7 +259,7 @@ public class Configuration {
 		return mode;
 	}
 
-	public boolean hasAction(Actions a) {
+	public static boolean hasAction(Actions a) {
 		return mode.contains(a);
 	}
 
