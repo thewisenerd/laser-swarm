@@ -93,7 +93,7 @@ public class Simulator implements Runnable {
 		/* Start time */
 		simVals.t0 = (i * timeStep + T0);
 
-		/* Find the position of the constelation at that time */
+		/* Find the position of the constellation at that time */
 		Point3d pos = emittorOrbit.ECEF_point();
 		pos.scale(1E3);
 		simVals.p0 = pos;
@@ -149,7 +149,7 @@ public class Simulator implements Runnable {
 		double x = dR.length() * Math.sin(angle);
 		Vector3d incidence = new Vector3d(x, 0, z);
 		ScatteringParam param;
-		if (Configuration.getInstance().hasAction(Actions.CONSTANT_SCATTER))
+		if (Configuration.hasAction(Actions.CONSTANT_SCATTER))
 			param = new ScatteringParam(1.5, 1.3, -0.5);
 		else
 			try {
@@ -212,7 +212,6 @@ public class Simulator implements Runnable {
 		Constellation constellation = template.getConstellation();
 		double f = constellation.getPulseFrequency();
 		double dt = (1 / f);
-		logger.dbg("f: %s, dt:%s", f, dt);
 		ePhoton = (Constants.c * 6.62606896E-34) / constellation.getLaserWaveLength();
 
 		if (constellation.getPulselength() * constellation.getPulseFrequency() > 1)
@@ -221,6 +220,15 @@ public class Simulator implements Runnable {
 				/ (constellation.getPulselength() * constellation.getPulseFrequency());
 
 		long samples = (long) Math.ceil((TE - T0) / dt);
+
+		logger.inf("Simulator info for constellation: %s \n"
+				+ "Emitter\t| %s, lasing power: %s W \n"
+				+ "Laser\t| waveLength: %s m, f: %s Hz, pulse interval: %s s\n"
+				+ "\t| pulse time: %s s, pulse energy: %s µJ",//
+				constellation,//
+				constellation.getEmitter(), constellation.getPower(),//
+				constellation.getLaserWaveLength(), f, dt,//
+				constellation.getPulselength(), powerPerPulse * constellation.getPulselength() * 1E6);
 
 		KeplerElements k = constellation.getEmitter().getKeplerElements();
 
@@ -249,13 +257,13 @@ public class Simulator implements Runnable {
 				logger.dbg("Running sample %s of %s", i, samples);
 			SimVars simVal = mkSimPoint(i, dt, emittorOrbit, receiverOrbits);
 			if (simVal == null) {
-				if (Configuration.getInstance().hasAction(Actions.PROSPECT)) {
+				if (Configuration.hasAction(Actions.PROSPECT)) {
 					/* Find timestep to next flight-over */
 					i += prospector.prospect(i);
 				} else
 					i++;
 			} else {
-				if (Configuration.getInstance().hasAction(Actions.COUNT_ONLY))
+				if (Configuration.hasAction(Actions.COUNT_ONLY))
 					simVal.reduce();
 				dataPoints.add(simVal);
 				i++;
