@@ -15,6 +15,18 @@ public abstract class DemReader {
 
 	private static final Logger	logger	= Logger.get(DemReader.class);
 
+	public static File cacheFile(String fileName) {
+		return new File(Configuration.nonVolitileCache, fileName + ".cache");
+	}
+
+	private static File envelopeFile(File file) {
+		return new File(Configuration.nonVolitileCache, file.getName() + ".env.cache");
+	}
+
+	public static File cacheFile(File file) {
+		return new File(Configuration.nonVolitileCache, file.getName() + ".dem.cache");
+	}
+
 	public static void main(String[] args) {
 		try {
 			DemReader.parseDem(new File("DEM/ASTGTM_N48E000_dem.asc"));
@@ -26,15 +38,27 @@ public abstract class DemReader {
 
 	public static ElevationModel parseDem(File demFile) throws DemCreationException {
 		String fileName = demFile.getName();
-		String type = fileName.substring(fileName.lastIndexOf(".") + 1);
-		if (type.equals("asc") || type.equals("AGR")) {
-			logger.inf("Using ASCII DEM PARSER");
-			return new ArcInfoASCII_1(demFile).parse();
-		} else if (type.equals("tif")) {
-			return new GeoTiffParser(demFile).parse();
+
+		File cf = cacheFile(demFile);
+		File ef = envelopeFile(demFile);
+		ElevationModel dem;
+		if (cf.exists() && ef.exists()) {
+			logger.inf("Loading %s from cache (%s,%s)", fileName, cf, ef);
+			dem = new ElevationModel(cf, ef);
 		} else {
-			throw new DemFormatException();
+			String type = fileName.substring(fileName.lastIndexOf(".") + 1);
+			if (type.equals("asc") || type.equals("AGR")) {
+				logger.inf("Using ASCII DEM PARSER");
+				dem = new ArcInfoASCII_1(demFile).parse();
+			} else if (type.equals("tif")) {
+				dem = new GeoTiffParser(demFile).parse();
+			} else {
+				throw new DemFormatException();
+			}
+			dem.toCache(cf, ef);
+			dem.shrink();
 		}
+		return dem;
 	}
 
 	public static ImmutableSet<ElevationModel> parseDem(List<File> demFiles) {

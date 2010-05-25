@@ -1,5 +1,9 @@
 package com.google.code.laserswarm.earthModel;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,13 +11,25 @@ import javax.vecmath.Point3d;
 import javax.vecmath.Vector3d;
 
 import org.geotools.coverage.grid.GridCoverage2D;
+import org.geotools.coverage.grid.GridCoverageFactory;
 import org.geotools.geometry.DirectPosition2D;
+import org.geotools.geometry.Envelope2D;
+import org.geotools.referencing.CRS;
 import org.geotools.referencing.operation.projection.PointOutsideEnvelopeException;
 import org.opengis.geometry.DirectPosition;
+import org.opengis.referencing.FactoryException;
+import org.opengis.referencing.NoSuchAuthorityCodeException;
 import org.ujmp.core.Matrix;
+import org.ujmp.core.MatrixFactory;
+import org.ujmp.core.enums.FileFormat;
+import org.ujmp.core.exceptions.MatrixException;
 
 import com.google.code.laserswarm.conf.Configuration;
+import com.google.code.laserswarm.util.Readers;
+import com.google.common.base.Charsets;
 import com.google.common.base.Preconditions;
+import com.google.common.io.Files;
+import com.google.common.io.LineProcessor;
 
 public class ElevationModel implements IElevationModel {
 
@@ -26,7 +42,14 @@ public class ElevationModel implements IElevationModel {
 		setElevationData(matrix);
 		this.setCoverage(coverage);
 		getAverageHeight();
-		elevationData = null;
+	}
+
+	public ElevationModel(File cacheFile, File envelopeFile) {
+		try {
+			fromCache(cacheFile, envelopeFile);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -205,6 +228,72 @@ public class ElevationModel implements IElevationModel {
 
 	public void setElevationData(Matrix elevationData) {
 		this.elevationData = Preconditions.checkNotNull(elevationData);
+	}
+
+	public static Envelope2D importEnvelope(File envelopeFile) throws IOException {
+		LineProcessor<Double> lastDouble = Readers.lastDoubleReader();
+		BufferedReader reader = Files.newReader(envelopeFile, Charsets.UTF_8);
+		lastDouble.processLine(reader.readLine());
+		final int nCols = lastDouble.getResult().intValue();
+		lastDouble.processLine(reader.readLine());
+		final int nRows = lastDouble.getResult().intValue();
+		lastDouble.processLine(reader.readLine());
+		double xllcorner = lastDouble.getResult();
+		lastDouble.processLine(reader.readLine());
+		double yllcorner = lastDouble.getResult();
+		lastDouble.processLine(reader.readLine());
+		double cellsize = lastDouble.getResult();
+		lastDouble.processLine(reader.readLine());
+		try {
+			return new Envelope2D(CRS.decode("EPSG:3785"), xllcorner, yllcorner, // 
+					nCols * cellsize, nRows * cellsize);
+		} catch (NoSuchAuthorityCodeException e) {
+			e.printStackTrace();
+		} catch (FactoryException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public void exportEnvelope(File envelopeFile) throws IOException {
+		Envelope2D env = coverage.getEnvelope2D();
+
+		if (!envelopeFile.exists())
+			envelopeFile.createNewFile();
+
+		BufferedWriter writer = Files.newWriter(envelopeFile, Charsets.UTF_8);
+		String str = String.format("ncols        %s\n" + "nrows        %s\n" + "xllcorner    %s\n"
+				+ "yllcorner    %s\n" + "cellsize     0.00027777777777778\n" + "nodata_value -9999\n",
+				elevationData.getColumnCount(), elevationData.getRowCount(), env.x, env.y);
+		writer.write(str);
+		writer.close();
+	}
+
+	public void fromCache(File cacheFile, File envelope) throws IOException {
+		elevationData = MatrixFactory.importFromFile(FileFormat.FILE, cacheFile, "\t");
+		Envelope2D env = importEnvelope(envelope);
+		coverage = new GridCoverageFactory().create("DEM", elevationData.toFloatArray(), env);
+	}
+
+	public void toCache(File cacheFile, File envelope) {
+		if (cacheFile.exists())
+			cacheFile.delete();
+		if (envelope.exists())
+			envelope.delete();
+		try {
+			elevationData.exportToFile(FileFormat.FILE, cacheFile, elevationData, "\t");
+			exportEnvelope(envelope);
+		} catch (MatrixException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public void shrink() {
+		elevationData = null;
 	}
 
 }

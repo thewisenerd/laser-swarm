@@ -17,8 +17,8 @@ import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.conf.Configuration.Actions;
 import com.google.code.laserswarm.earthModel.ElevationModel;
 import com.google.code.laserswarm.util.DebugUtil;
+import com.google.code.laserswarm.util.Readers;
 import com.google.common.base.Charsets;
-import com.google.common.base.Splitter;
 import com.google.common.io.Files;
 import com.google.common.io.LineProcessor;
 import com.lyndir.lhunath.lib.system.logging.Logger;
@@ -39,33 +39,11 @@ public class ArcInfoASCII_1 extends DemReader {
 		/* Use projection file ? */
 		/* Load the elevation matrix */
 
-		LineProcessor<Double> lastDouble = new LineProcessor<Double>() {
-			Double	i;
-
-			@Override
-			public Double getResult() {
-				return i;
-			}
-
-			@SuppressWarnings("static-access")
-			@Override
-			public boolean processLine(String arg0) throws IOException {
-				Iterable<String> res = Splitter.on("\t").on(" ").trimResults().omitEmptyStrings() //
-						.split(arg0);
-				for (String string : res) {
-					try {
-						i = Double.parseDouble(string);
-					} catch (NumberFormatException e) {
-					}
-				}
-				return true;
-			}
-		};
-
 		Envelope2D envelope = null;
 		Matrix matrix = null;
 		Double NODATA_value = -9999d;
 		try {
+			LineProcessor<Double> lastDouble = Readers.lastDoubleReader();
 			BufferedReader reader = Files.newReader(getDemFile(), Charsets.UTF_8);
 			lastDouble.processLine(reader.readLine());
 			final int nCols = lastDouble.getResult().intValue();
@@ -95,30 +73,8 @@ public class ArcInfoASCII_1 extends DemReader {
 			if (Configuration.getInstance().hasAction(Actions.FORCE_FLAT)) {
 				matrix = MatrixFactory.zeros(nRows, nCols);
 			} else {
-				LineProcessor<Matrix> matrixRowParser = new LineProcessor<Matrix>() {
-					Matrix	m	= MatrixFactory.dense(nRows, nCols);
-					int		row	= 0;
 
-					@Override
-					public Matrix getResult() {
-						return m;
-					}
-
-					@Override
-					public boolean processLine(String line) throws IOException {
-						Iterable<String> cols = Splitter.on(" ").trimResults().omitEmptyStrings().split(
-								line);
-						int col = 0;
-						for (String string : cols) {
-							double val = Double.parseDouble(string);
-							m.setAsDouble(val, row, col);
-							col++;
-						}
-						row++;
-						return false;
-					}
-				};
-
+				LineProcessor<Matrix> matrixRowParser = Readers.matrixRowReader(nRows, nCols);
 				for (int lineNr = 1; lineNr < nRows; lineNr++) {
 					matrixRowParser.processLine(reader.readLine());
 				}
