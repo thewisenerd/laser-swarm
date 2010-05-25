@@ -64,7 +64,7 @@ public class ProcessorTester {
 			e1.printStackTrace();
 		}
 		Constellation testConstallation = SimulationTester.mkTestConstilation();
-		try {
+/*		try {
 			Field f;
 			f = Configuration.class.getDeclaredField("constellations");
 			f.setAccessible(true);
@@ -75,7 +75,7 @@ public class ProcessorTester {
 			e.printStackTrace();
 		} catch (NoSuchFieldException e) {
 			e.printStackTrace();
-		}
+		}*/
 
 		File demFolder = new File("DEM");
 		File[] dems = demFolder.listFiles(new FileFilter() {
@@ -97,7 +97,7 @@ public class ProcessorTester {
 		SimulatorMaster mgr = new SimulatorMaster(earth);
 		SimTemplate template = new SimTemplate(testConstallation);
 		// template.setTime(4542935, 4542935.1);
-		template.setTime(4542935, 4542937.0);
+		template.setTime(191675, 191676);
 		mgr.addSimTemplate(template);
 
 		/*
