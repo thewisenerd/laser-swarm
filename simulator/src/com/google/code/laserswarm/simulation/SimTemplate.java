@@ -32,7 +32,7 @@ public class SimTemplate {
 
 	@Override
 	public String toString() {
-		return "Template - " + constellation.toString();
+		return "Template-" + constellation.toString();
 	}
 
 }

@@ -42,7 +42,7 @@ public class AltRange extends LaserSwarm {
 	@Override
 	protected List<Constellation> mkConstellations() {
 		List<Constellation> constellations = Lists.newLinkedList();
-		for (int i = 300; i <= 501; i += 25) {
+		for (int i = 300; i <= 376; i += 25) {
 			constellations.add(mkConstellation(i));
 		}
 		return constellations;

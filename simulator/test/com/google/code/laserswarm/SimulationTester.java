@@ -38,7 +38,7 @@ public class SimulationTester extends TestCase {
 	public static void main(String[] args) {
 		Configuration.getInstance();
 		Configuration.setMode(Sets.newHashSet( //
-				Actions.SIMULATE, Actions.PROSPECT));
+				Actions.SIMULATE, Actions.PROSPECT, Actions.CONSTANT_SCATTER));
 		new SimulationTester().testSim();
 	}
 
@@ -48,7 +48,7 @@ public class SimulationTester extends TestCase {
 				0f, (float) Math.PI / 2, (float) (8.5 * Math.PI / 180), 0f, 0f);
 		LinkedList<Satellite> r = Lists.newLinkedList();
 		r.add(emittor);
-		return new Constellation(100 * (1. / 3), 5000, emittor, r);
+		return new Constellation(5, 5000, emittor, r);
 	}
 
 	public static HashMap<SimTemplate, Simulator> sim() {

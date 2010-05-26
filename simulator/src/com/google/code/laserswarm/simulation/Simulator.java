@@ -18,6 +18,10 @@ import org.geotools.referencing.operation.projection.PointOutsideEnvelopeExcepti
 import org.opengis.coverage.CannotEvaluateException;
 import org.opengis.coverage.PointOutsideCoverageException;
 
+import com.db4o.Db4oEmbedded;
+import com.db4o.ObjectContainer;
+import com.db4o.ObjectSet;
+import com.db4o.query.Query;
 import com.google.code.laserswarm.Orbit.OrbitClass;
 import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.conf.Constellation;
@@ -34,7 +38,18 @@ import com.lyndir.lhunath.lib.system.logging.Logger;
 
 /**
  * 
- * Run the simulation based pn a simulation template
+ * Run the simulation based on a simulation template
+ * <p>
+ * Computes the actual signal propagation in multiple steps.
+ * <ul>
+ * <li>Creation at the emittor</li>
+ * <li>Downtravel trough the atmosphere</li>
+ * <li>Reflection in the footprint area</li>
+ * <li>Uptravel trough the atmosphere</li>
+ * <li>Detection by the receiver</li>
+ * </ul>
+ * <p/>
+ * 
  * 
  * @author simon
  * 
@@ -42,43 +57,62 @@ import com.lyndir.lhunath.lib.system.logging.Logger;
 public class Simulator implements Runnable {
 
 	private static final Logger	logger	= Logger.get(Simulator.class);
+
 	public static long			timeOut	= (6 * 60 * 60000);			// ms
+	private static boolean		usedDB	= true;
 
 	private SimTemplate			template;
 	private Thread				thread;
 	private EarthModel			earth;
-
-	private double				T0		= 579267.5;
-	private double				TE		= 579341.4;
 
 	private List<SimVars>		dataPoints;
 
 	private double				powerPerPulse;
 
 	private double				ePhoton;
+	private ObjectContainer		db;
+	private String				databaseFile;
 
+	/**
+	 * Make a new simulation from a given template over the given model of the earth
+	 * <p>
+	 * Simulates a given start time T0 to the end time TE in [s] (in the template)
+	 * </p>
+	 * 
+	 * @param templ
+	 *            Template that contains the basic simulation info
+	 * @param earth
+	 *            Earth model to use
+	 */
 	public Simulator(SimTemplate templ, EarthModel earth) {
 		this.template = templ;
 		this.earth = earth;
-		setTime(templ.getT0(), templ.getTE());
+
+		File dbFile = new File(Configuration.volitileCache, toString() + "-" + hashCode() + ".db4o");
+		if (!dbFile.exists())
+			try {
+				dbFile.createNewFile();
+			} catch (IOException e) {
+				logger.err(e, "Could not create the simvals db");
+			}
+		databaseFile = dbFile.getAbsolutePath();
+
+		open();
 	}
 
-	public Simulator(SimTemplate templ, EarthModel earth, double T0, double TE) {
-		this.template = templ;
-		this.earth = earth;
-		setTime(T0, TE);
+	public ObjectContainer getDataPointsDB() {
+		return db;
 	}
 
 	public List<SimVars> getDataPoints() {
-		return dataPoints;
-	}
-
-	public double getT0() {
-		return T0;
-	}
-
-	public double getTE() {
-		return TE;
+		if (usedDB) {
+			Query query = db.query();
+			query.constrain(SimVars.class);
+			query.descend("t0").orderAscending();
+			ObjectSet<SimVars> result = query.execute();
+			return result;
+		} else
+			return dataPoints;
 	}
 
 	public Thread getThread() {
@@ -91,7 +125,7 @@ public class Simulator implements Runnable {
 		Constellation constellation = template.getConstellation();
 
 		/* Start time */
-		simVals.t0 = (i * timeStep + T0);
+		simVals.t0 = (i * timeStep + template.getT0());
 
 		/* Find the position of the constellation at that time */
 		Point3d pos = emittorOrbit.ECEF_point();
@@ -219,7 +253,7 @@ public class Simulator implements Runnable {
 		powerPerPulse = constellation.getPower()
 				/ (constellation.getPulselength() * constellation.getPulseFrequency());
 
-		long samples = (long) Math.ceil((TE - T0) / dt);
+		long samples = (long) Math.ceil((template.getTE() - template.getT0()) / dt);
 
 		logger.inf("Simulator info for constellation: %s \n"
 				+ "Emitter\t| %s, lasing power: %s W \n"
@@ -233,28 +267,34 @@ public class Simulator implements Runnable {
 		KeplerElements k = constellation.getEmitter().getKeplerElements();
 
 		OrbitClass emittorOrbit = new OrbitClass(new Time(Configuration.epoch), k);
-		emittorOrbit.propogate(T0);
+		emittorOrbit.propogate(template.getT0());
 		HashMap<Satellite, OrbitClass> receiverOrbits = Maps.newHashMap();
 		for (Satellite sat : constellation.getReceivers()) {
 			k = sat.getKeplerElements();
 			OrbitClass o = new OrbitClass(new Time(Configuration.epoch), k);
-			o.propogate(T0);
+			o.propogate(template.getT0());
 			receiverOrbits.put(sat, o);
 		}
 
-		try {
-			dataPoints = new NonVolatileList(new File(Configuration.volitileCache, // 
-					template.toString() + "-" + template.hashCode() + ".db"));
-		} catch (IOException e) {
-			e.printStackTrace();
+		if (usedDB)
+			cleanDb();
+		else {
+			try {
+				dataPoints = new NonVolatileList(new File(Configuration.volitileCache, //
+						template.toString() + "-" + template.hashCode() + ".db"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 
 		Prospector prospector = new Prospector(emittorOrbit, receiverOrbits, earth, samples, dt);
 
 		long i = 0;
 		while (i < samples) {
-			if (i % 5000 == 0)
+			if (i % 5000 == 0) {
+				db.commit();
 				logger.dbg("Running sample %s of %s", i, samples);
+			}
 			SimVars simVal = mkSimPoint(i, dt, emittorOrbit, receiverOrbits);
 			if (simVal == null) {
 				if (Configuration.hasAction(Actions.PROSPECT)) {
@@ -265,26 +305,52 @@ public class Simulator implements Runnable {
 			} else {
 				if (Configuration.hasAction(Actions.COUNT_ONLY))
 					simVal.reduce();
-				dataPoints.add(simVal);
+				if (usedDB)
+					db.store(simVal);
+				else
+					dataPoints.add(simVal);
 				i++;
 			}
 
 			if (System.currentTimeMillis() - tStart > timeOut) {
+				db.commit();
 				logger.inf("Timout forced quit %s ms", System.currentTimeMillis() - tStart);
 				break;
 			}
 		}
-		logger.inf("Found %s points", dataPoints.size());
-	}
 
-	private void setTime(double T0, double TE) {
-		this.T0 = T0;
-		this.TE = TE;
+		if (usedDB) {
+			db.commit();
+			logger.inf("Found %s points", db.query(SimVars.class).size());
+		} else
+			logger.inf("Found %s points", dataPoints.size());
 	}
 
 	public Thread start() {
 		thread = new Thread(this, "Sim - " + template.getConstellation());
 		thread.start();
 		return thread;
+	}
+
+	private void cleanDb() {
+		ObjectSet<SimVars> result = db.query(SimVars.class);
+		while (result.hasNext())
+			db.delete(result.next());
+	}
+
+	private void open() {
+		if (db == null)
+			db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), databaseFile);
+	}
+
+	public void close() {
+		if (db != null)
+			db.close();
+		db = null;
+	}
+
+	@Override
+	public String toString() {
+		return "Sim-" + template.toString();
 	}
 }
