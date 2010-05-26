@@ -14,6 +14,7 @@ public class LookupTable extends TreeMap<Double, Tuple3d> {
 		Tuple3d vc = get(tc);
 
 		double dt = tc - tf;
+		if(dt==0) return  vf;
 		Vector3d dv = VectorMath.relative(vf, vc);
 		dv.scale(1 / dt);
 
