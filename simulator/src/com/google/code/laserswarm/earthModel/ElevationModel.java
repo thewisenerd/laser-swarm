@@ -1,12 +1,12 @@
 package com.google.code.laserswarm.earthModel;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
+import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.vecmath.Point3d;
 import javax.vecmath.Vector3d;
 
@@ -14,37 +14,36 @@ import org.geotools.coverage.grid.GridCoverage2D;
 import org.geotools.coverage.grid.GridCoverageFactory;
 import org.geotools.geometry.DirectPosition2D;
 import org.geotools.geometry.Envelope2D;
-import org.geotools.referencing.CRS;
 import org.geotools.referencing.operation.projection.PointOutsideEnvelopeException;
 import org.opengis.geometry.DirectPosition;
-import org.opengis.referencing.FactoryException;
-import org.opengis.referencing.NoSuchAuthorityCodeException;
 import org.ujmp.core.Matrix;
-import org.ujmp.core.MatrixFactory;
-import org.ujmp.core.enums.FileFormat;
-import org.ujmp.core.exceptions.MatrixException;
 
 import com.google.code.laserswarm.conf.Configuration;
-import com.google.code.laserswarm.util.Readers;
-import com.google.common.base.Charsets;
 import com.google.common.base.Preconditions;
-import com.google.common.io.Files;
-import com.google.common.io.LineProcessor;
 
 public class ElevationModel implements IElevationModel {
 
+	private File			demFile;
+
+	@Deprecated
 	private Matrix			elevationData;
 	private GridCoverage2D	coverage;
 
 	private Double			averageHeight;
 
-	public ElevationModel(Matrix matrix, GridCoverage2D coverage) {
+	public File getDemFile() {
+		return demFile;
+	}
+
+	public ElevationModel(File demFile, Matrix matrix, GridCoverage2D coverage) {
+		this.demFile = demFile;
 		setElevationData(matrix);
 		this.setCoverage(coverage);
 		getAverageHeight();
 	}
 
 	public ElevationModel(File cacheFile, File envelopeFile) {
+		this.demFile = cacheFile;
 		try {
 			fromCache(cacheFile, envelopeFile);
 		} catch (IOException e) {
@@ -112,7 +111,10 @@ public class ElevationModel implements IElevationModel {
 	private Double getAverageHeight() {
 		if (averageHeight == null) {
 			/* Compute the avg height of the coverage */
-			averageHeight = elevationData.getAbsoluteValueMean();
+			if (elevationData == null)
+				averageHeight = 0d;
+			else
+				averageHeight = elevationData.getAbsoluteValueMean();
 		}
 		return averageHeight;
 	}
@@ -133,6 +135,7 @@ public class ElevationModel implements IElevationModel {
 		return dest[0];
 	}
 
+	@Deprecated
 	public Matrix getElevationData() {
 		return elevationData;
 	}
@@ -203,10 +206,14 @@ public class ElevationModel implements IElevationModel {
 		// q = (z3 - z1) + (z5 - z4) + (z8 - z6)/6g
 		double dAngle = 0.001;
 
-		float[] z2 = (float[]) coverage.evaluate(new DirectPosition2D(pos.x, pos.y + dAngle));
-		float[] z7 = (float[]) coverage.evaluate(new DirectPosition2D(pos.x, pos.y - dAngle));
-		float[] z5 = (float[]) coverage.evaluate(new DirectPosition2D(pos.x + dAngle, pos.y));
-		float[] z4 = (float[]) coverage.evaluate(new DirectPosition2D(pos.x - dAngle, pos.y));
+		double[] z2 = coverage.evaluate(
+				(DirectPosition) new DirectPosition2D(pos.x, pos.y + dAngle), new double[1]);
+		double[] z7 = coverage.evaluate(
+				(DirectPosition) new DirectPosition2D(pos.x, pos.y - dAngle), new double[1]);
+		double[] z5 = coverage.evaluate(
+				(DirectPosition) new DirectPosition2D(pos.x + dAngle, pos.y), new double[1]);
+		double[] z4 = coverage.evaluate(
+				(DirectPosition) new DirectPosition2D(pos.x - dAngle, pos.y), new double[1]);
 
 		double g = dAngle * Configuration.R0;
 		double dx = (z5[0] - z4[0]) / (2 * g); // dz/d(lat)
@@ -227,53 +234,24 @@ public class ElevationModel implements IElevationModel {
 	}
 
 	public void setElevationData(Matrix elevationData) {
-		this.elevationData = Preconditions.checkNotNull(elevationData);
+		this.elevationData = (elevationData);
 	}
 
 	public static Envelope2D importEnvelope(File envelopeFile) throws IOException {
-		LineProcessor<Double> lastDouble = Readers.lastDoubleReader();
-		BufferedReader reader = Files.newReader(envelopeFile, Charsets.UTF_8);
-		lastDouble.processLine(reader.readLine());
-		final int nCols = lastDouble.getResult().intValue();
-		lastDouble.processLine(reader.readLine());
-		final int nRows = lastDouble.getResult().intValue();
-		lastDouble.processLine(reader.readLine());
-		double xllcorner = lastDouble.getResult();
-		lastDouble.processLine(reader.readLine());
-		double yllcorner = lastDouble.getResult();
-		lastDouble.processLine(reader.readLine());
-		double cellsize = lastDouble.getResult();
-		lastDouble.processLine(reader.readLine());
-		try {
-			return new Envelope2D(CRS.decode("EPSG:3785"), xllcorner, yllcorner, // 
-					nCols * cellsize, nRows * cellsize);
-		} catch (NoSuchAuthorityCodeException e) {
-			e.printStackTrace();
-		} catch (FactoryException e) {
-			e.printStackTrace();
-		}
-		return null;
+		return Configuration.read(envelopeFile.getAbsolutePath(), Configuration
+				.getDefaultSerializer(envelopeFile.getAbsolutePath()));
 	}
 
 	public void exportEnvelope(File envelopeFile) throws IOException {
 		Envelope2D env = coverage.getEnvelope2D();
 
-		if (!envelopeFile.exists())
-			envelopeFile.createNewFile();
-
-		BufferedWriter writer = Files.newWriter(envelopeFile, Charsets.UTF_8);
-		String str = String.format("ncols        %s\n" + "nrows        %s\n" + "xllcorner    %s\n"
-				+ "yllcorner    %s\n" + "cellsize     0.00027777777777778\n" + "nodata_value -9999\n",
-				elevationData.getColumnCount(), elevationData.getRowCount(), env.x, env.y);
-		writer.write(str);
-		writer.close();
+		Configuration.write(envelopeFile.getAbsolutePath(), env);
 	}
 
 	public void fromCache(File cacheFile, File envelope) throws IOException {
-		elevationData = MatrixFactory.importFromFile(FileFormat.CSV, cacheFile);
-		// elevationData = new CSVMatrix(cacheFile);
+		RenderedImage im = ImageIO.read(cacheFile);
 		Envelope2D env = importEnvelope(envelope);
-		coverage = new GridCoverageFactory().create("DEM", elevationData.toFloatArray(), env);
+		coverage = new GridCoverageFactory().create("DEM", im, env);
 	}
 
 	public void toCache(File cacheFile, File envelope) {
@@ -281,14 +259,11 @@ public class ElevationModel implements IElevationModel {
 			cacheFile.delete();
 		if (envelope.exists())
 			envelope.delete();
+
 		try {
-			elevationData.exportToFile(FileFormat.CSV, cacheFile, elevationData);
+			ImageIO.write(getCoverage().getRenderedImage(), "TIFF", cacheFile);
 			exportEnvelope(envelope);
-		} catch (MatrixException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

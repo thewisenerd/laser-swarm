@@ -16,32 +16,11 @@ public abstract class DemReader {
 
 	private static final Logger	logger	= Logger.get(DemReader.class);
 
-	public static File cacheFile(String fileName) {
-		return new File(Configuration.nonVolitileCache, fileName + ".cache");
-	}
-
-	private static File envelopeFile(File file) {
-		return new File(Configuration.nonVolitileCache, file.getName() + ".env.cache");
-	}
-
-	public static File cacheFile(File file) {
-		return new File(Configuration.nonVolitileCache, file.getName() + ".dem.cache");
-	}
-
-	public static void main(String[] args) {
-		try {
-			DemReader.parseDem(new File("DEM/ASTGTM_N48E000_dem.asc"));
-		} catch (DemCreationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
 	public static ElevationModel parseDem(File demFile) throws DemCreationException {
 		String fileName = demFile.getName();
 
-		File cf = cacheFile(demFile);
-		File ef = envelopeFile(demFile);
+		File cf = new File(Configuration.nonVolitileCache, demFile.getName() + ".cache.tiff");
+		File ef = new File(Configuration.nonVolitileCache, demFile.getName() + ".env.xml");
 		ElevationModel dem;
 		if (Configuration.hasAction(Actions.DEM_CACHE) && cf.exists() && ef.exists()) {
 			logger.inf("Loading %s from cache (%s,%s)", fileName, cf, ef);

@@ -1,6 +1,5 @@
 package com.google.code.laserswarm.util.demReader;
 
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -11,16 +10,15 @@ import org.geotools.coverage.grid.GridCoverage2D;
 import org.geotools.data.DataSourceException;
 import org.geotools.factory.Hints;
 import org.geotools.gce.geotiff.GeoTiffReader;
-import org.ujmp.core.doublematrix.impl.ImageMatrix;
 
 import com.google.code.laserswarm.earthModel.ElevationModel;
-import com.google.code.laserswarm.out.plot2D.Plot2D;
 
 public class GeoTiffParser extends DemReader {
 
 	public static void main(String[] args) {
 		try {
-			new GeoTiffParser(new File("DEM/ASTGTM_N48E000_dem.tif")).parse();
+			new GeoTiffParser(new File("C:/Users/simon/Desktop/ASTER GDEM BE/ASTGTM_N48E000_dem.tif"))
+					.parse();
 		} catch (DemCreationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -57,24 +55,32 @@ public class GeoTiffParser extends DemReader {
 		}
 
 		// Get the image properties
-		GridCoverage2D coverage;
+		GridCoverage2D coverage = null;
 		try {
 			coverage = reader.read(null);
-		} catch (IOException ex) {
-			ex.printStackTrace();
-			return null;
-		}
-
-		BufferedImage bufferedIm = Plot2D.mkImage(coverage);
-		ImageMatrix m;
-		try {
-			m = new ImageMatrix(bufferedIm);
-			m.showGUI();
-			Plot2D.make(m);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+
+		// StyleBuilder styleBuilder = new StyleBuilder();
+		// RasterSymbolizer rastSymbolizer = styleBuilder.createRasterSymbolizer();
+		// Style style = styleBuilder.createStyle(rastSymbolizer);
+
+		// try {
+		// MapContext context = new DefaultMapContext();
+		// context.addLayer(coverage, style);
+		//
+		// JMapPane pane = new JMapPane(new StreamingRenderer(), context);
+		//
+		// JFrame fr = new JFrame();
+		// fr.setSize(800, 600);
+		// fr.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		// fr.add(pane);
+		// fr.setVisible(true);
+		// } catch (FactoryRegistryException e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
+		return new ElevationModel(getDemFile(), null, coverage);
 	}
 }

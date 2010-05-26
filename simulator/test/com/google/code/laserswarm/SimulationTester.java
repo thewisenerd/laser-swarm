@@ -38,7 +38,7 @@ public class SimulationTester extends TestCase {
 	public static void main(String[] args) {
 		Configuration.getInstance();
 		Configuration.setMode(Sets.newHashSet( //
-				Actions.SIMULATE, Actions.PROSPECT, Actions.CONSTANT_SCATTER));
+				Actions.SIMULATE, Actions.PROSPECT, Actions.CONSTANT_SCATTER, Actions.DEM_CACHE));
 		new SimulationTester().testSim();
 	}
 

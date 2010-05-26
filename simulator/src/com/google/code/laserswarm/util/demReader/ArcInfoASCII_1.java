@@ -91,7 +91,7 @@ public class ArcInfoASCII_1 extends DemReader {
 
 		GridCoverage2D coverage = new GridCoverageFactory().create("DEM", matrix.toFloatArray(),
 				envelope);
-		return new ElevationModel(matrix, coverage);
+		return new ElevationModel(getDemFile(), matrix, coverage);
 
 	}
 }
