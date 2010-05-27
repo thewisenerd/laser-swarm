@@ -12,8 +12,11 @@ import org.geotools.factory.Hints;
 import org.geotools.gce.geotiff.GeoTiffReader;
 
 import com.google.code.laserswarm.earthModel.ElevationModel;
+import com.lyndir.lhunath.lib.system.logging.Logger;
 
 public class GeoTiffParser extends DemReader {
+
+	private static final Logger	logger	= Logger.get(GeoTiffParser.class);
 
 	public static void main(String[] args) {
 		try {
@@ -46,12 +49,13 @@ public class GeoTiffParser extends DemReader {
 		try {
 			// This function always allocates about 23Mb, both for 2Mb and 225Mb
 			System.out.println("Start reading");
-			reader = new GeoTiffReader(fc, new Hints(Hints.FORCE_LONGITUDE_FIRST_AXIS_ORDER,
-					Boolean.TRUE));
+			reader = new GeoTiffReader(
+					fc, new Hints(Hints.FORCE_LONGITUDE_FIRST_AXIS_ORDER,
+							Boolean.TRUE));
 			System.out.println("Done reading");
-		} catch (DataSourceException ex) {
-			ex.printStackTrace();
-			return null;
+		} catch (DataSourceException e) {
+			logger.inf(e, "Could not read in GeoTiff, most likly no memory mappings left");
+			throw new DemCreationException(e);
 		}
 
 		// Get the image properties
@@ -59,7 +63,8 @@ public class GeoTiffParser extends DemReader {
 		try {
 			coverage = reader.read(null);
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.inf(e, "Could not read in GeoTiff, most likly no memory mappings left");
+			throw new DemCreationException(e);
 		}
 
 		// StyleBuilder styleBuilder = new StyleBuilder();

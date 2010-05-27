@@ -1,6 +1,7 @@
 package com.google.code.laserswarm.util.demReader;
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
@@ -16,28 +17,57 @@ public abstract class DemReader {
 
 	private static final Logger	logger	= Logger.get(DemReader.class);
 
+	public static ImmutableSet<ElevationModel> getDefaultDems() {
+		ImmutableSet<ElevationModel> dems;
+
+		File asterGdemBe = new File(Configuration.demDir, "ASTER_GDEM_BE");
+		if (asterGdemBe.exists()) {
+			dems = parseDem(asterGdemBe.listFiles());
+		} else {
+			dems = parseDem(Configuration.demDir.listFiles());
+		}
+
+		return dems;
+	}
+
+	private static ImmutableSet<ElevationModel> parseDem(File[] listFiles) {
+		return parseDem(Arrays.asList(listFiles));
+	}
+
 	public static ElevationModel parseDem(File demFile) throws DemCreationException {
 		String fileName = demFile.getName();
 
 		File cf = new File(Configuration.nonVolitileCache, demFile.getName() + ".cache.tiff");
 		File ef = new File(Configuration.nonVolitileCache, demFile.getName() + ".env.xml");
+		boolean cached = cf.exists() && ef.exists();
 		ElevationModel dem;
-		if (Configuration.hasAction(Actions.DEM_CACHE) && cf.exists() && ef.exists()) {
-			logger.inf("Loading %s from cache (%s,%s)", fileName, cf, ef);
-			dem = new ElevationModel(cf, ef);
-		} else {
-			String type = fileName.substring(fileName.lastIndexOf(".") + 1);
-			if (type.equals("asc") || type.equals("AGR")) {
+
+		String type = fileName.substring(fileName.lastIndexOf(".") + 1);
+		if (type.equals("asc") || type.equals("AGR")) {
+			if (Configuration.hasAction(Actions.DEM_CACHE) && cached) {
+				logger.inf("Loading %s from cache (%s,%s)", fileName, cf, ef);
+				dem = new ElevationModel(cf, ef);
+			} else {
 				logger.inf("Using ASCII DEM PARSER");
 				dem = new ArcInfoASCII_1(demFile).parse();
-			} else if (type.equals("tif")) {
-				dem = new GeoTiffParser(demFile).parse();
-			} else {
-				throw new DemFormatException();
 			}
-			if (Configuration.hasAction(Actions.DEM_CACHE))
-				dem.toCache(cf, ef);
+		} else if (type.equals("tif")) {
+			try {
+				dem = new GeoTiffParser(demFile).parse();
+			} catch (DemCreationException e) {
+				if (Configuration.hasAction(Actions.DEM_CACHE) && cached) {
+					logger.inf("Loading %s from cache (%s,%s)", fileName, cf, ef);
+					dem = new ElevationModel(cf, ef);
+				} else
+					throw new DemFormatException();
+			}
+		} else {
+			throw new DemFormatException();
 		}
+
+		if (!cached && Configuration.hasAction(Actions.DEM_CACHE))
+			dem.toCache(cf, ef);
+
 		dem.shrink();
 		return dem;
 	}
@@ -50,7 +80,7 @@ public abstract class DemReader {
 		Set<Thread> waiting = Sets.newHashSet();
 		for (int i = 0; i < demFiles.size(); i++) {
 			final File demFile = demFiles.get(i);
-			Thread tr = new Thread(String.format("Parser %s", demFile)) {
+			Thread tr = new Thread(String.format("Parser %s", demFile.getName())) {
 				@Override
 				public void run() {
 					try {
@@ -71,6 +101,7 @@ public abstract class DemReader {
 				waiting.remove(tr);
 				running.add(tr);
 				tr.start();
+				logger.inf("Sarting %s (waiting:%s, running: %s)", tr, waiting.size(), running.size());
 			}
 			do {
 				// logger.dbg("%d threads alive", running.size());
@@ -80,7 +111,7 @@ public abstract class DemReader {
 					}
 
 				try {
-					Thread.sleep(10);
+					Thread.sleep(100);
 				} catch (InterruptedException e) {
 					logger.wrn("Interrupted while sleeping");
 				}

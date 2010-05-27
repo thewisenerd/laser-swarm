@@ -14,8 +14,10 @@ import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.earthModel.Convert;
 import com.google.code.laserswarm.earthModel.EarthModel;
 import com.google.code.laserswarm.earthModel.ElevationModel;
+import com.google.code.laserswarm.out.plot2D.Plot2D;
 import com.google.code.laserswarm.util.demReader.DemCreationException;
 import com.google.code.laserswarm.util.demReader.DemReader;
+import com.google.common.collect.ImmutableSet;
 import com.lyndir.lhunath.lib.system.logging.Logger;
 
 public class ElevationModelTester extends TestCase {
@@ -23,7 +25,13 @@ public class ElevationModelTester extends TestCase {
 	private static final Logger	logger	= Logger.get(ElevationModelTester.class);
 
 	public static void main(String[] args) throws Exception {
-		new ElevationModelTester().testDemIntersection();
+		new ElevationModelTester().showDems();
+	}
+
+	public void showDems() {
+		ImmutableSet<ElevationModel> dems = DemReader.getDefaultDems();
+		EarthModel earth = new EarthModel(dems);
+		Plot2D.make(earth);
 	}
 
 	public void testDemIntersection() {

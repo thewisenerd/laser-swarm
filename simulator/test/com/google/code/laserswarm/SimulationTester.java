@@ -1,8 +1,6 @@
 package com.google.code.laserswarm;
 
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -62,8 +60,7 @@ public class SimulationTester extends TestCase {
 		Constellation testConstallation = mkTestConstilation();
 		EarthModel earth = new EarthModel();
 
-		File demFolder = new File("DEM");
-		ImmutableSet<ElevationModel> dems = DemReader.parseDem(Arrays.asList(demFolder.listFiles()));
+		ImmutableSet<ElevationModel> dems = DemReader.getDefaultDems();
 		for (ElevationModel elevationModel : dems)
 			earth.add(elevationModel);
 

@@ -15,9 +15,17 @@ import org.geotools.coverage.grid.GridCoordinates2D;
 import org.geotools.coverage.grid.GridCoverage2D;
 import org.geotools.coverage.grid.InvalidGridGeometryException;
 import org.geotools.geometry.DirectPosition2D;
+import org.geotools.map.DefaultMapContext;
+import org.geotools.map.MapContext;
+import org.geotools.renderer.lite.StreamingRenderer;
+import org.geotools.styling.RasterSymbolizer;
+import org.geotools.styling.Style;
+import org.geotools.styling.StyleBuilder;
+import org.geotools.swing.JMapPane;
 import org.opengis.referencing.operation.TransformException;
 import org.ujmp.core.Matrix;
 
+import com.google.code.laserswarm.earthModel.EarthModel;
 import com.google.code.laserswarm.earthModel.ElevationModel;
 import com.google.code.laserswarm.util.demReader.DemCreationException;
 import com.google.code.laserswarm.util.demReader.DemReader;
@@ -70,6 +78,23 @@ public class Plot2D extends JFrame {
 
 	public static void make(BufferedImage img) {
 		new Plot2D(img);
+	}
+
+	public static void make(EarthModel earth) {
+		StyleBuilder styleBuilder = new StyleBuilder();
+		RasterSymbolizer rastSymbolizer = styleBuilder.createRasterSymbolizer();
+		Style style = styleBuilder.createStyle(rastSymbolizer);
+
+		MapContext context = new DefaultMapContext();
+		for (ElevationModel model : earth.getDem())
+			context.addLayer(model.getCoverage(), style);
+
+		JMapPane pane = new JMapPane(new StreamingRenderer(), context);
+		JFrame fr = new JFrame();
+		fr.setSize(800, 600);
+		fr.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		fr.add(pane);
+		fr.setVisible(true);
 	}
 
 	public static void make(GridCoverage2D grid) {
