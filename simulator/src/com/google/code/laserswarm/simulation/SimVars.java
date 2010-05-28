@@ -99,6 +99,10 @@ public class SimVars {
 	 * If illuminated by the sun, this is the incidence angle of the sun
 	 */
 	public Vector3d									sunVector;
+	/**
+	 * Surface normal
+	 */
+	public Vector3d									surfNormal;
 
 	public void reduce() {
 		for (Field field : getClass().getDeclaredFields()) {
