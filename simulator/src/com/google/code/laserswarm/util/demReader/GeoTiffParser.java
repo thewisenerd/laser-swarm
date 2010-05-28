@@ -54,7 +54,7 @@ public class GeoTiffParser extends DemReader {
 							Boolean.TRUE));
 			System.out.println("Done reading");
 		} catch (DataSourceException e) {
-			logger.inf(e, "Could not read in GeoTiff, most likly no memory mappings left");
+			logger.dbg(e, "Could not read in GeoTiff, most likly no memory mappings left");
 			throw new DemCreationException(e);
 		}
 
@@ -63,7 +63,7 @@ public class GeoTiffParser extends DemReader {
 		try {
 			coverage = reader.read(null);
 		} catch (IOException e) {
-			logger.inf(e, "Could not read in GeoTiff, most likly no memory mappings left");
+			logger.dbg(e, "Could not read in GeoTiff, most likly no memory mappings left");
 			throw new DemCreationException(e);
 		}
 

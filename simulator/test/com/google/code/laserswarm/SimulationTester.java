@@ -14,15 +14,12 @@ import com.google.code.laserswarm.conf.Constellation;
 import com.google.code.laserswarm.conf.Satellite;
 import com.google.code.laserswarm.conf.Configuration.Actions;
 import com.google.code.laserswarm.earthModel.EarthModel;
-import com.google.code.laserswarm.earthModel.ElevationModel;
 import com.google.code.laserswarm.simulation.SimTemplate;
 import com.google.code.laserswarm.simulation.SimVarUtil;
 import com.google.code.laserswarm.simulation.SimVars;
 import com.google.code.laserswarm.simulation.Simulator;
 import com.google.code.laserswarm.simulation.SimulatorMaster;
 import com.google.code.laserswarm.util.RetrievalExecption;
-import com.google.code.laserswarm.util.demReader.DemReader;
-import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.lyndir.lhunath.lib.system.logging.Logger;
@@ -58,13 +55,8 @@ public class SimulationTester extends TestCase {
 			e1.printStackTrace();
 		}
 		Constellation testConstallation = mkTestConstilation();
-		EarthModel earth = new EarthModel();
 
-		ImmutableSet<ElevationModel> dems = DemReader.getDefaultDems();
-		for (ElevationModel elevationModel : dems)
-			earth.add(elevationModel);
-
-		earth.loadCoef(); // Stretch refl coef
+		EarthModel earth = EarthModel.getDefaultModel();
 
 		SimulatorMaster mgr = new SimulatorMaster(earth);
 		SimTemplate tmpl = new SimTemplate(testConstallation);

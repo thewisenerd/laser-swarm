@@ -149,7 +149,7 @@ public class Simulator implements Runnable {
 			simVals.pR = Convert.toXYZ(sphere);
 		} catch (PointOutsideEnvelopeException e) {
 			// if (i % 100 == 0)
-			// logger.wrn(e, "Point at t=%s is out of the dem grid", simVals.t0);
+			// logger.dbg(e, "Point at t=%s is out of the dem grid", simVals.t0);
 			return null;
 		}
 		// logger.dbg("Yey over point (s:%s |t:%s)", i, T0 + i * dt);
@@ -161,7 +161,7 @@ public class Simulator implements Runnable {
 		try {
 			simVals.surfNormal = earth.getSurfaceNormal(reflectionPoint);
 		} catch (PointOutsideCoverageException e) {
-			logger.wrn(e, // 
+			logger.dbg(e, // 
 					"Cannot find surf normal of sample %s (prolly border case) :", i, simVals);
 			return null;
 		}
@@ -189,7 +189,7 @@ public class Simulator implements Runnable {
 			try {
 				param = earth.getScatteringParam(reflectionPoint);
 			} catch (CannotEvaluateException e) {
-				logger.wrn(e, "Cannot find Scattering param of sample %s:", i, simVals);
+				logger.dbg(e, "Cannot find Scattering param of sample %s:", i, simVals);
 				return null;
 			}
 		simVals.scatter = new ScatteringCharacteristics(incidence, param);
@@ -287,10 +287,15 @@ public class Simulator implements Runnable {
 			}
 		}
 
-		Prospector prospector = new Prospector(emittorOrbit, receiverOrbits, earth, samples, dt);
+		Prospector prospector;
+		if (template.useTime())
+			prospector = new Prospector(emittorOrbit, receiverOrbits, earth, samples, dt);
+		else
+			prospector = new Prospector(emittorOrbit, receiverOrbits, earth, Long.MAX_VALUE, dt);
 
 		long i = 0;
-		while (i < samples) {
+		boolean goalReached = false;
+		while (!goalReached) {
 			if (i % 5000 == 0) {
 				db.commit();
 				logger.dbg("Running sample %s of %s", i, samples);
@@ -312,18 +317,31 @@ public class Simulator implements Runnable {
 				i++;
 			}
 
+			/* Force quit after timeout */
 			if (System.currentTimeMillis() - tStart > timeOut) {
 				db.commit();
 				logger.inf("Timout forced quit %s ms", System.currentTimeMillis() - tStart);
-				break;
+				goalReached = true;
+			}
+
+			/* Check if the end of the loop conditions was reached */
+			if (template.useTime()) {
+				if (i >= samples)
+					goalReached = true;
+			} else {
+				if (usedDB) {
+					if (db.query(SimVars.class).size() >= template.getSamples())
+						goalReached = true;
+				} else if (dataPoints.size() >= template.getSamples())
+					goalReached = true;
 			}
 		}
-
 		if (usedDB) {
 			db.commit();
 			logger.inf("Found %s points", db.query(SimVars.class).size());
 		} else
 			logger.inf("Found %s points", dataPoints.size());
+
 	}
 
 	public Thread start() {

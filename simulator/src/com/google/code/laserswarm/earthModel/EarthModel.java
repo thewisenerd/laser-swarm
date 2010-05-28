@@ -19,6 +19,7 @@ import org.ujmp.core.Matrix;
 import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.exceptions.MatrixException;
 
+import com.google.code.laserswarm.util.demReader.DemReader;
 import com.google.common.collect.Sets;
 import com.lyndir.lhunath.lib.system.logging.Logger;
 
@@ -172,5 +173,11 @@ public class EarthModel implements IElevationModel {
 					.getInstance(Interpolation.INTERP_BICUBIC));
 		} catch (Exception e) {
 		}
+	}
+
+	public static EarthModel getDefaultModel() {
+		EarthModel earth = new EarthModel(DemReader.getDefaultDems());
+		earth.loadCoef();
+		return earth;
 	}
 }

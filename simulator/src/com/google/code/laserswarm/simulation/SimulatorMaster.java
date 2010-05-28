@@ -2,6 +2,7 @@ package com.google.code.laserswarm.simulation;
 
 import java.util.HashMap;
 import java.util.LinkedHashSet;
+import java.util.List;
 
 import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.earthModel.EarthModel;
@@ -74,5 +75,9 @@ public class SimulatorMaster {
 
 		}
 		return doneTemplates;
+	}
+
+	public void addSimTemplates(List<SimTemplate> tmpls) {
+		templates.addAll(tmpls);
 	}
 }

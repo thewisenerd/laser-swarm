@@ -40,7 +40,6 @@ public class Prospector {
 	}
 
 	public long prospect(long i) {
-
 		if (lastNulls.size() > 0)
 			if (i != lastNulls.getLast() + 1)
 				lastNulls.clear();
