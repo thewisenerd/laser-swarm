@@ -157,9 +157,9 @@ public class Simulator implements Runnable {
 		simVals.tR = dR.length() / Constants.c;
 		DirectPosition2D reflectionPoint = new DirectPosition2D(sphere.y * (180 / Math.PI), sphere.z
 				* (180 / Math.PI));
-		Vector3d surfNormal = null;
+		simVals.surfNormal = null;
 		try {
-			surfNormal = earth.getSurfaceNormal(reflectionPoint);
+			simVals.surfNormal = earth.getSurfaceNormal(reflectionPoint);
 		} catch (PointOutsideCoverageException e) {
 			logger.wrn(e, // 
 					"Cannot find surf normal of sample %s (prolly border case) :", i, simVals);
@@ -178,7 +178,7 @@ public class Simulator implements Runnable {
 		simVals.powerR = Atmosphere.getInstance().computeIntensity(simVals.power0, angle);
 
 		/* Make scatter characteristics */
-		angle = Math.acos((dR.dot(surfNormal)) / (dR.length() * surfNormal.length()));
+		angle = Math.acos((dR.dot(simVals.surfNormal)) / (dR.length() * simVals.surfNormal.length()));
 		double z = dR.length() * Math.cos(angle);
 		double x = dR.length() * Math.sin(angle);
 		Vector3d incidence = new Vector3d(x, 0, z);
@@ -198,7 +198,7 @@ public class Simulator implements Runnable {
 		simVals.powerR_SC = Maps.newHashMap();
 		for (Satellite sat : constellation.getReceivers()) {
 			dR = relative(simVals.pR, simVals.pE.get(sat));
-			angle = dR.angle(surfNormal);
+			angle = dR.angle(simVals.surfNormal);
 			z = dR.length() * Math.cos(angle);
 			x = dR.length() * Math.sin(angle);
 			Vector3d exittanceVector = new Vector3d(x, 0, z);
