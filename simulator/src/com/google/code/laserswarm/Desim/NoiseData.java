@@ -86,6 +86,11 @@ public class NoiseData {
 		
 	}
 	
+	@Override
+	public String toString() {
+		return "tDiff " + dataFrame.diff() + "\n" + "diffL, diff R: " + noiseFrameL.diff() + " \t" + noiseFrameR.diff();
+	}
+	
 	
 	
 	/**
