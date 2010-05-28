@@ -3,9 +3,11 @@
  */
 package com.google.code.laserswarm.Desim;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.TreeMap;
 
 import javax.vecmath.Point3d;
 import javax.vecmath.Vector3d;
@@ -17,6 +19,7 @@ import com.google.code.laserswarm.conf.Constellation;
 import com.google.code.laserswarm.conf.Satellite;
 import com.google.code.laserswarm.process.EmitterHistory;
 import com.google.code.laserswarm.process.TimeLine;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 /**
@@ -24,6 +27,7 @@ import com.google.common.collect.Maps;
  * 
  */
 public class FindElevation {
+	private static int	qLength	= 9;
 
 	/**
 	 * @param emit
@@ -33,9 +37,8 @@ public class FindElevation {
 	 * @param travTime
 	 *            The time in seconds it takes for the pulse to travel between emitter and receiver
 	 */
-	public double findNoisePercentage(final DataContainer data, TimePair timeRng) {
-		// data.getNoise(tFrame);
-		LinkedList<NoiseData> nsData = data.getRange(timeRng);
+	public static double findNoisePercentage(final DataContainer data) {
+		LinkedList<NoiseData> nsData = data.getData();
 		double noise = 0; // noise photons
 		double tNoise = 0; // time of the signal
 		double tSignal = 0; // time of the signal
@@ -95,15 +98,84 @@ public class FindElevation {
 
 	}
 
-	public static/* List<SimVars> */void run(Map<Satellite, TimeLine> rec, EmitterHistory hist,
-			Constellation con) {
+	public static double findAltitude(Map<Satellite, TimeLine> recTimes,
+			Map<Satellite, DataContainer> satsDatasets, double tPulse, Point3d pEmit)
+			throws MathException {
+		double prctNoise = 0;
+		LinkedList<Double> altitudes = Lists.newLinkedList();
+		double altCount = 0;
+		double altTot = 0;
+		for (Satellite tempSat : satsDatasets.keySet()) {
+			DataContainer data = satsDatasets.get(tempSat);
+			// Count the noise photons.
+			prctNoise += findNoisePercentage(data);
+			TreeMap<Double, Integer> middleDataWindow = data.getData().get(
+					(int) Math.ceil(0.5 * data.getQueueLength())).getData();
+			// Count the photons in the pulse data window; find the altitude for every photon.
+			for (Double time : middleDataWindow.keySet()) {
+				Integer nPhotons = middleDataWindow.get(time);
+				Double alt = calcAlt(pEmit, new Point3d(recTimes.get(tempSat).getLookupPosition().find(
+						time)), time - tPulse);
+				altCount += nPhotons;
+				altTot += nPhotons * alt;
+				altitudes.add(alt);
+			}
+		}
+		// Find the percentage of noise, the average altitude found, the number of noise photons.
+		prctNoise /= satsDatasets.size();
+		double altAv = altTot / altCount;
+		double altNoise = prctNoise * altCount;
+		// Remove the outlying altitudes.
+		Collections.sort(altitudes);
+		while (altNoise > 0) {
+			double altFirst = altitudes.getFirst();
+			double altLast = altitudes.getLast();
+			if (altAv - altFirst > altLast - altAv) {
+				altitudes.removeFirst();
+			} else {
+				altitudes.removeLast();
+			}
+			altNoise -= 1;
+		}
+		// Find the average altitude for the cleansed altitude set.
+		Iterator<Double> altIt = altitudes.iterator();
+		altTot = altCount = 0;
+		while (altIt.hasNext()) {
+			altCount++;
+			altTot += altIt.next();
+		}
+		return altTot / altCount;
+	}
+
+	public static/* List<SimVars> */void run(Map<Satellite, TimeLine> recTimes, EmitterHistory hist,
+			Constellation con) throws MathException {
 		Iterator<Double> timeIt = hist.time.iterator();
-		Map<Satellite, DataContainer> InterpulseWindows = Maps.newHashMap();
-		FindWindow emitRecPair = new FindWindow(hist, rec, con, (int) 1e6);
+		Map<Satellite, DataContainer> interpulseWindows = Maps.newHashMap();
+		for (DataContainer tempData : interpulseWindows.values()) {
+			tempData.setQueueLength(qLength);
+		}
+		FindWindow emitRecPair = new FindWindow(hist, recTimes, con, (int) 1e6);
+		int count = 0;
+		LinkedList<Double> timePulses = Lists.newLinkedList();
+		LinkedList<Point3d> posEmits = Lists.newLinkedList();
 		while (timeIt.hasNext()) {
+			count++;
+			// Copy over the values from FindWindow.
 			Map<Satellite, NoiseData> tempInterpulseWindow = emitRecPair.next();
 			for (Satellite tempSat : tempInterpulseWindow.keySet()) {
-				InterpulseWindows.get(tempSat).add(tempInterpulseWindow.get(tempSat));
+				interpulseWindows.get(tempSat).add(tempInterpulseWindow.get(tempSat));
+			}
+			// Store the emitter time and position.
+			timePulses.addLast(emitRecPair.tPulse);
+			posEmits.addLast(new Point3d(hist.getPosition().find(emitRecPair.tPulse)));
+			// Remove pulse data we do not care about any more.
+			if (timePulses.size() > (int) Math.ceil(0.5 * qLength)) {
+				timePulses.removeFirst();
+				posEmits.removeFirst();
+			}
+			// Do the actual data processing.
+			if (count > qLength) {
+				findAltitude(recTimes, interpulseWindows, timePulses.getLast(), posEmits.getLast());
 			}
 		}
 
