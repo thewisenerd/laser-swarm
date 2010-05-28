@@ -16,6 +16,7 @@ import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.conf.Satellite;
 import com.google.code.laserswarm.process.EmitterHistory;
 import com.google.code.laserswarm.process.TimeLine;
+import com.google.common.collect.Maps;
 
 /**
  * @author Administrator
@@ -86,10 +87,8 @@ public class FindElevation {
 
 		if (dif.length() == 0)
 			theta = Math.PI / 2; // if the receiver and emitter are the same
-
 		double distGrndEmit = a * (1 - ecc_2) / (1 - ecc * Math.cos(theta)); // distance to the ground
 		// from the emitter
-
 		return em.length() - Configuration.R0 - distGrndEmit; // altitude above the earth sphere in
 		// meters
 
@@ -100,10 +99,14 @@ public class FindElevation {
 		int count = 0;
 		int maxcount = 9;
 		double bigwindow = 2e-4;
-		DataContainer readyProc = new DataContainer();
-		FindWindow emitRecPair = new FindWindow(hist, rec, bigwindow, 1e6);
+		Map<Satellite, DataContainer> InterpulseWindows = Maps.newHashMap();
+		FindWindow emitRecPair = new FindWindow(hist, rec, bigwindow, (int) 1e6);
 		while (timeIt.hasNext()) {
-
+			Map<Satellite, NoiseData> tempInterpulseWindow = emitRecPair.next();
+			for (Satellite tempSat : tempInterpulseWindow.keySet()) {
+				DataContainer tempDataContainer = InterpulseWindows.get(tempSat);
+				tempDataContainer.add(tempInterpulseWindow.get(tempSat));
+			}
 		}
 
 	}

@@ -14,18 +14,26 @@ import com.google.common.collect.Maps;
  * 
  */
 public class DataContainer {
-	LinkedList<NoiseData>	Data	= Lists.newLinkedList();
+	LinkedList<NoiseData>	Data		= Lists.newLinkedList();
+	int						queueLength	= 9;
 
 	public LinkedList<NoiseData> getData() {
 		return Data;
 	}
 
-	public void setData(LinkedList<NoiseData> data) {
-		Data = data;
-	}
-
 	public void add(NoiseData nd) {
 		Data.add(nd);
+		if (Data.size() > queueLength) {
+			Data.removeFirst();
+		}
+	}
+
+	public void setQueueLength(int queueLength) {
+		this.queueLength = queueLength;
+	}
+
+	public int getQueueLength() {
+		return queueLength;
 	}
 
 	/**
