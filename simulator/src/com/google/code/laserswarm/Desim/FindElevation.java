@@ -158,6 +158,7 @@ public class FindElevation {
 		int count = 0;
 		LinkedList<Double> timePulses = Lists.newLinkedList();
 		LinkedList<Point3d> posEmits = Lists.newLinkedList();
+		LinkedList<Point3d> altitudes = Lists.newLinkedList();
 		while (timeIt.hasNext()) {
 			count++;
 			// Copy over the values from FindWindow.
@@ -175,7 +176,10 @@ public class FindElevation {
 			}
 			// Do the actual data processing.
 			if (count > qLength) {
-				findAltitude(recTimes, interpulseWindows, timePulses.getLast(), posEmits.getLast());
+				Point3d thisEmit = posEmits.getFirst();
+				altitudes.add(new Point3d(Configuration.R0
+						+ findAltitude(recTimes, interpulseWindows, timePulses.getFirst(), thisEmit),
+						thisEmit.y, thisEmit.z));
 			}
 		}
 
