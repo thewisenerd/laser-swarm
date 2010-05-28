@@ -3,7 +3,7 @@ package com.google.code.laserswarm.conf;
 import jat.cm.KeplerElements;
 
 public class Satellite {
-	
+
 	private float	semimajorAxis				= 0f;
 	private float	eccentricity				= 0f;
 	private float	inclination					= 0f;
@@ -16,6 +16,11 @@ public class Satellite {
 
 	public Satellite() {
 		trueAnomaly = semimajorAxis = rightAngleOfAscendingNode = inclination = eccentricity = argumentOfPerigee = 0f;
+	}
+
+	public Satellite(String name, Satellite s) {
+		this(name, s.aperatureArea, s.semimajorAxis, s.eccentricity, s.inclination,
+				s.rightAngleOfAscendingNode, s.trueAnomaly, s.argumentOfPerigee);
 	}
 
 	public Satellite(String name, double aperatureArea, float a, float e, float i, float raan, float ta,
