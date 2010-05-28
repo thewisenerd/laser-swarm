@@ -60,14 +60,13 @@ public class FindWindow {
 		for (Satellite satCur : satData.keySet()) { // iterate over all satellites
 			TimePair tmp = getWindow(new Vector3d(satData.get(satCur).getLookupPosition().find(tPulse)),
 					new Vector3d(hist.getPosition().find(tPulse))); // calculate the window times for the
-																	// current sat, current time
+			// current sat, current time
 			double tDataHigh = tmp.tF;
 			double tDataLow = tmp.t0;
 			boolean exec = false;
 			TreeMap<Double, Integer> result = Maps.newTreeMap();
 			result.clear();
 			SampleIterator satIt = satIter.get(satCur);
-
 
 			MeasermentSample ms = satIt.next();
 			// check whether the window is out of bounds
@@ -76,14 +75,13 @@ public class FindWindow {
 				tDataLow = ms.getTime();
 			if ((ms.getTime() + bigWindow) < tDataHigh)
 				tDataHigh = ms.getTime() + bigWindow;
-			
-			double tIPWoffset = (bigWindow - (tDataHigh - tDataLow)) / 2;	//offset from the highest time
-			double tUpper = tIPWoffset + tDataHigh;							//the highest time
 
+			double tIPWoffset = (bigWindow - (tDataHigh - tDataLow)) / 2; // offset from the highest time
+			double tUpper = tIPWoffset + tDataHigh; // the highest time
 
 			while (satIt.hasNext() & (ms.getTime() < tUpper)) { // Construct unfiltered result vector
 				if (exec) {
-					ms = satIt.next(); // ensure nothing is repeated
+					ms = satIt.next(); // ensure the incrmintation is repeated once
 
 				}
 				exec = true;
