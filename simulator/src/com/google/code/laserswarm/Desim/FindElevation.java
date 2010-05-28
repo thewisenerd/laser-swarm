@@ -13,6 +13,7 @@ import javax.vecmath.Vector3d;
 import org.apache.commons.math.MathException;
 
 import com.google.code.laserswarm.conf.Configuration;
+import com.google.code.laserswarm.conf.Constellation;
 import com.google.code.laserswarm.conf.Satellite;
 import com.google.code.laserswarm.process.EmitterHistory;
 import com.google.code.laserswarm.process.TimeLine;
@@ -94,18 +95,15 @@ public class FindElevation {
 
 	}
 
-	public static/* List<SimVars> */void run(Map<Satellite, TimeLine> rec, EmitterHistory hist) {
+	public static/* List<SimVars> */void run(Map<Satellite, TimeLine> rec, EmitterHistory hist,
+			Constellation con) {
 		Iterator<Double> timeIt = hist.time.iterator();
-		int count = 0;
-		int maxcount = 9;
-		double bigwindow = 2e-4;
 		Map<Satellite, DataContainer> InterpulseWindows = Maps.newHashMap();
-		FindWindow emitRecPair = new FindWindow(hist, rec, bigwindow, (int) 1e6);
+		FindWindow emitRecPair = new FindWindow(hist, rec, con, (int) 1e6);
 		while (timeIt.hasNext()) {
 			Map<Satellite, NoiseData> tempInterpulseWindow = emitRecPair.next();
 			for (Satellite tempSat : tempInterpulseWindow.keySet()) {
-				DataContainer tempDataContainer = InterpulseWindows.get(tempSat);
-				tempDataContainer.add(tempInterpulseWindow.get(tempSat));
+				InterpulseWindows.get(tempSat).add(tempInterpulseWindow.get(tempSat));
 			}
 		}
 

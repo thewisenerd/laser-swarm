@@ -23,7 +23,7 @@ public class DataContainer {
 
 	public void add(NoiseData nd) {
 		Data.add(nd);
-		if (Data.size() > queueLength) {
+		while (Data.size() > queueLength) {
 			Data.removeFirst();
 		}
 	}
