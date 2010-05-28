@@ -88,7 +88,8 @@ public class NoiseData {
 	
 	@Override
 	public String toString() {
-		return "tDiff " + dataFrame.diff() + "\n" + "diffL, diff R: " + noiseFrameL.diff() + " \t" + noiseFrameR.diff();
+		return "\n tFrac:" + dataFrame.diff() /windowFrame.diff()+ "\n" + "beg: " + noiseFrameL.diff()/windowFrame.diff()  + "\n end:" + (1 - noiseFrameR.diff()/windowFrame.diff());
+				//""nL, nR frac: " + noiseFrameL.diff() + " \t" + noiseFrameR.diff();
 	}
 	
 	
