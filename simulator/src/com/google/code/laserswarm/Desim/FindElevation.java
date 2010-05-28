@@ -41,10 +41,10 @@ public class FindElevation {
 
 		for (NoiseData noiseIt : nsData) { // iterate over the interpulse windows
 			tNoise += noiseIt.getNoiseFrameL().diff() + // calculate time of the noise in one interpulse
-														// window
+					// window
 					noiseIt.getNoiseFrameR().diff();
 			tSignal += noiseIt.getWindowFrame().diff(); // calculate the signal time in one interpulse
-														// window
+			// window
 
 			for (Integer intIt : noiseIt.getNoise().values()) {
 				noise += intIt; // add up noise photons
@@ -99,12 +99,10 @@ public class FindElevation {
 		Iterator<Double> timeIt = hist.time.iterator();
 		int count = 0;
 		int maxcount = 9;
+		double bigwindow = 2e-4;
 		DataContainer readyProc = new DataContainer();
-		// FindWindow erPair = new FindWindow(hist, sit, bigwindow)
+		FindWindow emitRecPair = new FindWindow(hist, rec, bigwindow, 1e6);
 		while (timeIt.hasNext()) {
-
-			if (true)
-				break;
 
 		}
 
