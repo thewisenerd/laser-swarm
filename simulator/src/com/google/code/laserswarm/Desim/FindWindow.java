@@ -1,5 +1,7 @@
 package com.google.code.laserswarm.Desim;
 
+import com.google.code.laserswarm.conf.Constellation;
+
 import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
@@ -18,22 +20,22 @@ import com.google.common.collect.Maps;
 
 public class FindWindow {
 
-	EmitterHistory				hist;
-	// double tWindow; // window time
-	// double tOffset; // offset time
-	double						ipwindow;
-	Iterator<Double>			timeIt;
-	Map<Satellite, TimeLine>	satData;		// satellite - timeline map
-	Map<Satellite,SampleIterator> satIter;		//satellite - sampleiterator map
-	public double				tPulse;
-	int							binFreqency;
-	double
+	EmitterHistory					hist;
 
-	public FindWindow(EmitterHistory hist, Map<Satellite, TimeLine> sit, double bigwindow,
+	double							ipwindow;
+	Iterator<Double>				timeIt;
+	Map<Satellite, TimeLine>		satData;		// satellite - timeline map
+	Map<Satellite, SampleIterator>	satIter;		// satellite - sampleiterator map
+	public double					tPulse;
+	int								binFreqency;
+	double							bigWindow;
+
+	public FindWindow(EmitterHistory hist, Map<Satellite, TimeLine> sit, Constellation con,
 			int binFreqency) {
 		// TODO Auto-generated constructor stub
 		this.binFreqency = binFreqency;
 		this.hist = hist;
+		this.bigWindow = con.getPulseFrequency();
 		satData = sit;
 		timeIt = hist.time.iterator();
 		for (Satellite satIt : sit.keySet()) {
@@ -43,50 +45,43 @@ public class FindWindow {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+
 		}
-		// timeIt.
-		// tPulse = timeIt.
+
 	}
 
-
-	public Map<Satellite, TreeMap<Double, Integer>> next() { // return window of values
+	public Map<Satellite, NoiseData> next() { // return window of values
 		// TODO Auto-generated method stub
 		// 
 		tPulse = timeIt.next();
-		Map<Satellite, TreeMap<Double, Integer>> satmap = Maps.newHashMap();
-		// double tPulse = hist.getPulseClosesTo(tCur); //pulse time of the closest pulse;
-		// find spikes untill time, and before time
+
+		Map<Satellite, NoiseData> dataMap = Maps.newHashMap();
 
 		for (Satellite satCur : satData.keySet()) { // iterate over all satellites
-			double[] tmp = getWindow(new Vector3d(satData.get(satCur).getLookupPosition().find(tPulse)),
-					new Vector3d(hist.getPosition().find(tPulse)));		//calculate the window times
-			double tHigh = tmp[0];
-			double tLow = tmp[1];
+			TimePair tmp = getWindow(new Vector3d(satData.get(satCur).getLookupPosition().find(tPulse)),
+					new Vector3d(hist.getPosition().find(tPulse))); // calculate the window times for the
+																	// current sat, current time
+			double tDataHigh = tmp.tF;
+			double tDataLow = tmp.t0;
 			boolean exec = false;
-			
-			
 			TreeMap<Double, Integer> result = Maps.newTreeMap();
-
-			
 			result.clear();
-
 			SampleIterator satIt = satIter.get(satCur);
-		/*	try {
-				satIt = satData.get(isat).getIterator(binFreqency);
-			} catch (MathException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}*/
-			MeasermentSample ms = satIt.next();
-			int size = 0;
-			double sum = 0;
-			int count = 0;
-			System.out.println("High Time " + tHigh);
-			System.out.println("MsTime: " + ms.getTime());
 
-			while (satIt.hasNext() & (ms.getTime() < tHigh)) { // Construct unfiltered result vector
-				// System.out.println("Loop cycle " + count++);
+
+			MeasermentSample ms = satIt.next();
+			// check whether the window is out of bounds
+
+			if (ms.getTime() > tDataLow)
+				tDataLow = ms.getTime();
+			if ((ms.getTime() + bigWindow) < tDataHigh)
+				tDataHigh = ms.getTime() + bigWindow;
+			
+			double tIPWoffset = (bigWindow - (tDataHigh - tDataLow)) / 2;	//offset from the highest time
+			double tUpper = tIPWoffset + tDataHigh;							//the highest time
+
+
+			while (satIt.hasNext() & (ms.getTime() < tUpper)) { // Construct unfiltered result vector
 				if (exec) {
 					ms = satIt.next(); // ensure nothing is repeated
 
@@ -94,13 +89,13 @@ public class FindWindow {
 				exec = true;
 				result.put(ms.getTime(), ms.getPhotons()); // put the results in the map
 
-			} // END consturcting resutl vector;
+			} // END construction of the result vector;
 
-			satmap.put(satCur, result);
+			dataMap.put(satCur, new NoiseData(result, new TimePair(tDataLow, tDataHigh)));
+
 		} // Stop ITerating over satellites;
-		System.out.println("filtered data: " + satmap);
-		return satmap;
-		// (tPulse+tOffset+1/2*tWindow);
+
+		return dataMap;
 
 	}
 
@@ -111,7 +106,7 @@ public class FindWindow {
 	 *            Vector3d position of the emitter
 	 */
 
-	public double[] getWindow(Vector3d REC, Vector3d EMIT) {
+	public TimePair getWindow(Vector3d REC, Vector3d EMIT) {
 		double maxDist;
 		double minDist;
 
@@ -138,7 +133,7 @@ public class FindWindow {
 		maxDist = maxRecHght.length() + maxEmitHght.length();
 		minDist = minRecHght.length() + minEmitHght.length();
 
-		return new double[] { maxDist / Configuration.c, minDist / Configuration.c };
+		return new TimePair(maxDist / Configuration.c, minDist / Configuration.c);
 
 	}
 
