@@ -1,0 +1,18 @@
+<configuration>
+	<!-- -Dlogback.configurationFile=logback.xml -->
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>
+				%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
+			</Pattern>
+		</layout>
+	</appender>
+	
+	<logger name="com.google.code.laserswarm" level="DEBUG" />
+	<logger name="com.google.code.laserswarm.simulation" level="INFO" />
+	<logger name="com.google.code.laserswarm.util.demReader" level="INFO" />
+	
+	<root level="DEBUG">
+		<appender-ref ref="STDOUT" />
+	</root>
+</configuration>
