@@ -112,7 +112,7 @@ public class FindWindow {
 			// System.out.println("tIPWoffset =" + tIPWoffset);
 			double tUpper = tIPWoffset + tDataHigh; // the highest time
 			// System.out.println("tUppser =" + tUpper);
-			while (satIt.hasNext() & (ms.getTime() < tUpper)) { // Construct unfiltered result vector
+			while (satIt.hasNext() && (ms.getTime() < tUpper)) { // Construct unfiltered result vector
 				if (exec) {
 					ms = satIt.next(); // ensure the increment is repeated once
 
