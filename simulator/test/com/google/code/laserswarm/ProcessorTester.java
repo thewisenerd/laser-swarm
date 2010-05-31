@@ -63,7 +63,7 @@ public class ProcessorTester {
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
 		}
-		Constellation testConstallation = SimulationTester.mkTestConstilation();
+		Constellation testConstallation = SimulationTester.mkTestConstellation();
 /*		try {
 			Field f;
 			f = Configuration.class.getDeclaredField("constellations");

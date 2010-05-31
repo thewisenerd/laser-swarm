@@ -67,7 +67,7 @@ public class TimeSeriesTester {
 	}
 
 	public void testProcessing() {
-		Constellation testConstallation = SimulationTester.mkTestConstilation();
+		Constellation testConstallation = SimulationTester.mkTestConstellation();
 
 		File demFolder = new File("DEM");
 		File[] dems = demFolder.listFiles(new FileFilter() {

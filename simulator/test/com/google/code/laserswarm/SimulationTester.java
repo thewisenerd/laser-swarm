@@ -37,7 +37,7 @@ public class SimulationTester extends TestCase {
 		new SimulationTester().testSim();
 	}
 
-	static Constellation mkTestConstilation() {
+	static Constellation mkTestConstellation() {
 		Satellite emittor = new Satellite("SAT01", (0.2 * 0.2),
 				(float) ((Configuration.R0 / 1E3) + 450), // 
 				0f, (float) Math.PI / 2, (float) (8.5 * Math.PI / 180), 0f, 0f);
@@ -54,7 +54,7 @@ public class SimulationTester extends TestCase {
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
 		}
-		Constellation testConstallation = mkTestConstilation();
+		Constellation testConstallation = mkTestConstellation();
 
 		EarthModel earth = EarthModel.getDefaultModel();
 

@@ -147,7 +147,7 @@ public class FindElevation {
 		return altTot / altCount;
 	}
 
-	public static/* List<SimVars> */void run(Map<Satellite, TimeLine> recTimes, EmitterHistory hist,
+	public static LinkedList<Point3d> run(Map<Satellite, TimeLine> recTimes, EmitterHistory hist,
 			Constellation con) throws MathException {
 		Iterator<Double> timeIt = hist.time.iterator();
 		Map<Satellite, DataContainer> interpulseWindows = Maps.newHashMap();
@@ -182,13 +182,7 @@ public class FindElevation {
 						thisEmit.y, thisEmit.z));
 			}
 		}
-
-	}
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		// 
-		throw new UnsupportedOperationException();
+		return altitudes;
 	}
 
 }
