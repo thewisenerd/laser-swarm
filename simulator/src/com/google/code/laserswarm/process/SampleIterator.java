@@ -44,7 +44,7 @@ public class SampleIterator implements Iterator<MeasermentSample> {
 
 	@Override
 	public boolean hasNext() {
-		return ((laserPhotons.ceilingKey(timeBlock(time + 2 * binTime))) != null);
+		return hasNext(2);
 	}
 
 	@Override
