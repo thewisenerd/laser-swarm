@@ -1,18 +1,52 @@
 \subsection{Prism design}
 \label{prism}
-Prism is quite important after the receiver's second parabolic to filter out all the noisy light except wavelength at 472[nm] to 474[nm]. The prism design contains glass material, the prism angle and incoming light angle. The general prism looks like:
+After the receiver's second parabolic mirror, the prism is used to filter out all the noisy light except wavelength at 472[nm] to 474[nm]. The prism design contains the type of prism glass material, the incident angle($\alpha$) and prism apex angle($A$).
+
 \begin{figure}[ht!]
 \centering
 \includegraphics[scale = 1]{chapters/img/prism3D.png}
 \caption{Prism in 3D}
 \label{fig:prism3D}
 \end{figure} 
+
 \begin{figure}[ht!]
 \centering
-\includegraphics[scale = 1]{chapters/img/prism2D.png}
-\caption{Prism configuration in 2D}
+\includegraphics[scale = 1]{chapters/img/Prism2D.png}
+\caption{Prism angles define in 2D}
 \label{fig:prism2D}
 \end{figure} 
-In figure \ref{prism2D} on page \ref{prism2D}, the outgoing angle $\epsilon$ can be calculated using the formula:
+In figure \ref{fig:prism2D} on page \ref{fig:prism2D}, the deviation angle $\epsilon$ can be calculated using the formula\cite{prism_angle_calculation}:
+\begin{equation}
+\label{epsilon}
+\epsilon = \alpha - A + sin^{-1}(sin(A)\sqrt{n^2 - (sin(\alpha))^2} - cos(A)sin(\alpha))
+\end {equation}
+The main key requirement to design the prism is to maximize the $\frac{d\epsilon}{d\lambda}$,  because for wavelength 473[nm] larger $\frac{d\epsilon}{d\lambda}$ leads to smaller distance between prism and barrier. The equation \ref{epsilon} shows that the deviation angle($\epsilon$) is a function of A, $\alpha$ and n. From Sellmeier formula\cite{prism_book}, the index of refraction n can be calculated as:
+\begin{equation}
+\label{index_refraction}
+n^2 - 1 = \frac{a_{1}\lambda^2}{\lambda^2-b_{1}} + \frac{a_{2}\lambda^2}{\lambda^2-b_{2}} + \frac{a_{3}\lambda^2}{\lambda^2-b_{3}}
+\end {equation}
+In the equation \ref{index_refraction}, $a_{1}, a_{2}, a_{3}$ and $b_{1}, b_{2}, b_{3}$ are the dispersion coefficients, which have different values for different glasses. In this case, the most 17 common prism glasses from Schott\cite{prism_material}\cite{prism_book} company are analyzed. Since it is difficult to calculate $\frac{d\epsilon}{d\lambda}$ analytically, $\Delta\epsilon$ due to wavelength 472[nm], 473[nm] and 474[nm] can be obtained by inserting arbitrary A and $\alpha$. During the calculation, no matter what values are given to A and $\alpha$, glass 'SF11' always has the maximum value of $\Delta\epsilon$ which is the optimal glass material. Meanwhile, SF11 glass also has an internal transmittance of 97\% for wavelength 473[nm], which is acceptable. Next step is to determine the prism apex angle(A) and the incident angle($\alpha$). The prism apex angle is defined as 60 degrees because which gives the most average value for $\Delta\epsilon$. Meanwhile, this kind of euqilateral prisms are also referred to as dispersing prisms used for wavelength separating applications(see figure \ref{fig:prism_equilateral} on page \ref{fig:prism_equilateral}). 
 
-The main key requirement to design the prism is to maximize the 
+\begin{figure}[ht!]
+\centering
+\includegraphics[scale = 0.8]{chapters/img/prism_equilateral.png}
+\caption{Equilateral prism for wavelength separating applications}
+\label{fig:prism_equilateral}
+\end{figure}
+To select the correct incident angle, the figure \ref{fig:prism_alpha} on page \ref{fig:prism_alpha} is used. In the figure, the blue line has the 
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[scale = 1.2]{chapters/img/prism_alpha.png}
+\caption{Plot of $\Delta\epsilon$ due to different incident angles}
+\label{fig:prism_alpha}
+\end{figure}
+
+The figure \ref{fig:SF11} shows the calculation in the excel sheet about SF11 glass.
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[scale = 0.8]{chapters/img/SF11.png}
+\caption{Glass 'SF11' calculations}
+\label{fig:SF11}
+\end{figure}
