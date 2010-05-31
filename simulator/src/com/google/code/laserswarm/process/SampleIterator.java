@@ -38,6 +38,10 @@ public class SampleIterator implements Iterator<MeasermentSample> {
 		return laserPhotons.lastKey();
 	}
 
+	public boolean hasNext(int n) {
+		return ((laserPhotons.ceilingKey(timeBlock(time + n * binTime))) != null);
+	}
+
 	@Override
 	public boolean hasNext() {
 		return ((laserPhotons.ceilingKey(timeBlock(time + 2 * binTime))) != null);
