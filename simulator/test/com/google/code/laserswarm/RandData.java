@@ -1,8 +1,10 @@
 package com.google.code.laserswarm;
 
+
 import java.io.FileNotFoundException;
 import java.util.Map;
 
+import com.google.code.laserswarm.conf.Constellation;
 import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.conf.Satellite;
 import com.google.code.laserswarm.process.EmitterHistory;
@@ -18,21 +20,21 @@ public class RandData {
 	}
 
 	Map<Satellite, TimeLine>	rec;
-
-	Map<Satellite, TimeLine>	em;
+Constellation	consCfg;
 	EmitterHistory				emHist;
+	
 
-	public RandData(Map<Satellite, TimeLine> rec, Map<Satellite, TimeLine> em, EmitterHistory emHist) {
+	public RandData(Map<Satellite, TimeLine> rec,  EmitterHistory emHist, Constellation consCfg) {
 		super();
 		this.rec = rec;
-		this.em = em;
 		this.emHist = emHist;
+		this.consCfg = consCfg;
 	}
 
-	public Map<Satellite, TimeLine> getEm() {
-		return em;
+	
+	public Constellation getCons(){
+		return consCfg;
 	}
-
 	public EmitterHistory getEmHist() {
 		return emHist;
 	}
