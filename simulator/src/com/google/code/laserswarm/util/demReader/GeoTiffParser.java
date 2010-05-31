@@ -48,11 +48,11 @@ public class GeoTiffParser extends DemReader {
 		GeoTiffReader reader;
 		try {
 			// This function always allocates about 23Mb, both for 2Mb and 225Mb
-			System.out.println("Start reading");
+			logger.dbg("Starting reader");
 			reader = new GeoTiffReader(
 					fc, new Hints(Hints.FORCE_LONGITUDE_FIRST_AXIS_ORDER,
 							Boolean.TRUE));
-			System.out.println("Done reading");
+			logger.dbg("Done reading");
 		} catch (DataSourceException e) {
 			logger.dbg(e, "Could not read in GeoTiff, most likly no memory mappings left");
 			throw new DemCreationException(e);

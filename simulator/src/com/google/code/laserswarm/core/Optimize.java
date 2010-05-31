@@ -1,5 +1,8 @@
 package com.google.code.laserswarm.core;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -17,13 +20,40 @@ import com.google.code.laserswarm.conf.Configuration.Actions;
 import com.google.code.laserswarm.simulation.Prospector;
 import com.google.code.laserswarm.simulation.SimTemplate;
 import com.google.code.laserswarm.simulation.SimVars;
+import com.google.code.laserswarm.simulation.Simulator;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import com.google.common.io.Files;
 import com.lyndir.lhunath.lib.system.logging.Logger;
 
 public class Optimize extends LaserSwarm implements MultivariateRealFunction {
 
 	private static final Logger	logger	= Logger.get(Optimize.class);
+
+	private class PrefLog {
+		private File	log	= new File("optimize.csv");
+
+		public PrefLog() {
+
+			try {
+				log.delete();
+				log.createNewFile();
+				Files.append(String.format("power, apperature, pref\n"), log, Charset.defaultCharset());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+		public void write(Double[] values) {
+			try {
+				for (Double string : values)
+					Files.append(String.format("%s,\t", string), log, Charset.defaultCharset());
+				Files.append("\n", log, Charset.defaultCharset());
+			} catch (IOException e) {
+				logger.wrn(e, "Could not write to preflog");
+			}
+		}
+	}
 
 	public static void main(String[] args) {
 		Configuration.getInstance();
@@ -43,7 +73,8 @@ public class Optimize extends LaserSwarm implements MultivariateRealFunction {
 		return tmpls;
 	}
 
-	private int	photons	= 0;
+	private int		photons	= 0;
+	private PrefLog	prefLog	= new PrefLog();
 
 	private void optimize() {
 		NelderMead optimizer = new NelderMead();
@@ -103,8 +134,13 @@ public class Optimize extends LaserSwarm implements MultivariateRealFunction {
 
 		run();
 
+		for (Simulator sim : simulations.values())
+			sim.getDataPointsDB().close();
+
 		double performace = (photons) / (power * aperature * aperature);
 		logger.inf("Performence: %s", performace);
+
+		prefLog.write(new Double[] { power, aperature, performace });
 
 		return performace;
 	}
