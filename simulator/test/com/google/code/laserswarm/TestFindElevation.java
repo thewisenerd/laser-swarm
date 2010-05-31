@@ -62,8 +62,7 @@ public class TestFindElevation {
 			emitterHistory = new EmitterHistory(templ.getConstellation(), dataPoints);
 			constellation = templ.getConstellation();
 
-			Emit = templ.getConstellation().getEmitter();
-			emData.put(Emit, new TimeLine(Emit, templ.getConstellation(), dataPoints));
+		
 
 			for (Satellite sat : templ.getConstellation().getReceivers()) {
 				satData.put(sat, new TimeLine(sat, templ.getConstellation(), dataPoints));
