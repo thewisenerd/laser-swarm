@@ -69,7 +69,7 @@ public class NoiseData {
 		noiseTMP.putAll(Maps.newTreeMap(interpulseData.subMap(windowFrame.t0Ref, true, dataFrame.t0Ref, false)));
 		noiseTMP.putAll(Maps.newTreeMap(interpulseData.subMap(dataFrame.tFRef, false, windowFrame.tFRef, false)));
 		
-		Predicate<Integer> filt = Predicates.equalTo(new Integer(0));	//create a filter that checks for 0
+		Predicate<Integer> filt = Predicates.not(Predicates.equalTo(new Integer(0)));	//create a filter that checks for 0
 		noise = new TreeMap<Double,Integer>(Maps.filterValues(noiseTMP, filt));		//apply filter
 		data = new TreeMap<Double,Integer>(Maps.filterValues(dataTMP, filt));		
 	
