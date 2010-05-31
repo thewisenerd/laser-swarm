@@ -145,6 +145,7 @@ public class plotHeightDistribution {
 	 *            File to plot to.
 	 */
 	public void plot(LinkedList<Point3d> alts, double lineThickness, String plotFile) {
+		logger.inf("Started plotting from LinkedList<Point3d>");
 		int width = 1600;
 		int height = 200;
 		int hOffset = 50;

@@ -1,12 +1,7 @@
 package com.google.code.laserswarm.Desim;
 
-import com.google.code.laserswarm.ProcessorTester;
-import com.google.code.laserswarm.RandData;
-import com.google.code.laserswarm.conf.Constellation;
-
 import java.io.FileNotFoundException;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -14,7 +9,10 @@ import javax.vecmath.Vector3d;
 
 import org.apache.commons.math.MathException;
 
+import com.google.code.laserswarm.ProcessorTester;
+import com.google.code.laserswarm.RandData;
 import com.google.code.laserswarm.conf.Configuration;
+import com.google.code.laserswarm.conf.Constellation;
 import com.google.code.laserswarm.conf.Satellite;
 import com.google.code.laserswarm.conf.Configuration.Actions;
 import com.google.code.laserswarm.process.EmitterHistory;
@@ -39,23 +37,24 @@ public class FindWindow {
 	public double					tPulse;
 	int								binFreqency;
 	double							bigWindow;
-/**
- * 
- * @param hist
- * EmitterHistory
- * @param sit
- * Map of satellites and their TimeLines
- * @param con
- * Constellation to determine the pulseFrequency;
- *  @param binFreqency
- *  determines the amount of samples, 5E8 corresponds to 2ns
- */
+
+	/**
+	 * 
+	 * @param hist
+	 *            EmitterHistory
+	 * @param sit
+	 *            Map of satellites and their TimeLines
+	 * @param con
+	 *            Constellation to determine the pulseFrequency;
+	 * @param binFreqency
+	 *            determines the amount of samples, 5E8 corresponds to 2ns
+	 */
 	public FindWindow(EmitterHistory hist, Map<Satellite, TimeLine> sit, Constellation con,
 			int binFreqency) {
 		// TODO Auto-generated constructor stub
 		this.binFreqency = binFreqency;
 		this.hist = hist;
-		this.bigWindow = 1/con.getPulseFrequency();
+		this.bigWindow = 1 / con.getPulseFrequency();
 		satData = sit;
 		satIter = Maps.newHashMap();
 		timeIt = hist.time.iterator();
@@ -70,11 +69,11 @@ public class FindWindow {
 		}
 
 	}
-/**
- * 
- * @return
- * returns the next Satellite, NoiseData window
- */
+
+	/**
+	 * 
+	 * @return returns the next Satellite, NoiseData window
+	 */
 	public Map<Satellite, NoiseData> next() { // return window of values
 		// TODO Auto-generated method stub
 		// 
@@ -86,8 +85,8 @@ public class FindWindow {
 			TimePair tmp = getWindow(new Vector3d(satData.get(satCur).getLookupPosition().find(tPulse)),
 					new Vector3d(hist.getPosition().find(tPulse))); // calculate the window times for the
 			// current sat, current time
-			double tDataHigh = tmp.tF+tPulse;
-			double tDataLow = tmp.t0+tPulse;
+			double tDataHigh = tmp.tF + tPulse;
+			double tDataLow = tmp.t0 + tPulse;
 			boolean exec = false;
 			TreeMap<Double, Integer> result = Maps.newTreeMap();
 			result.clear();
@@ -95,28 +94,27 @@ public class FindWindow {
 
 			MeasermentSample ms = satIt.next();
 			// check whether the window is out of bounds
-			
-			if (ms.getTime() > tDataLow){
-			//	System.out.println("tDataLow out exceeds left margin");	//opt
-			//	System.out.println("tDataLow = " + tDataLow);		//opt
+
+			if (ms.getTime() > tDataLow) {
+				// System.out.println("tDataLow out exceeds left margin"); //opt
+				// System.out.println("tDataLow = " + tDataLow); //opt
 				tDataLow = ms.getTime();
-			//	System.out.println("ms.getTime = " + tDataLow);		//opt
+				// System.out.println("ms.getTime = " + tDataLow); //opt
 			}
-			if ((ms.getTime() + bigWindow) < tDataHigh){
-			//	System.out.println("tDataHigh out exceeds right margin"); //opt
-			//	System.out.println("tDataHigh = " + tDataHigh);				//opt
-				tDataHigh = ms.getTime() + bigWindow;		
-			//	System.out.println("ms.getTime() + bigwindow= " + tDataHigh);	 //opt
+			if ((ms.getTime() + bigWindow) < tDataHigh) {
+				// System.out.println("tDataHigh out exceeds right margin"); //opt
+				// System.out.println("tDataHigh = " + tDataHigh); //opt
+				tDataHigh = ms.getTime() + bigWindow;
+				// System.out.println("ms.getTime() + bigwindow= " + tDataHigh); //opt
 			}
-				
-			
+
 			double tIPWoffset = (bigWindow - (tDataHigh - tDataLow)) / 2; // offset from the highest time
-			//System.out.println("tIPWoffset =" + tIPWoffset);
+			// System.out.println("tIPWoffset =" + tIPWoffset);
 			double tUpper = tIPWoffset + tDataHigh; // the highest time
-			//System.out.println("tUppser =" + tUpper);
+			// System.out.println("tUppser =" + tUpper);
 			while (satIt.hasNext() & (ms.getTime() < tUpper)) { // Construct unfiltered result vector
 				if (exec) {
-					ms = satIt.next(); // ensure the incrmintation is repeated once
+					ms = satIt.next(); // ensure the incrementation is repeated once
 
 				}
 				exec = true;
@@ -177,7 +175,6 @@ public class FindWindow {
 		Configuration.setMode(Sets.newHashSet( //
 				Actions.SIMULATE, Actions.PROSPECT));
 
-		
 		String flname = "sim_3sat";
 		ProcessorTester tester = new ProcessorTester();
 		RandData ret;
@@ -187,13 +184,13 @@ public class FindWindow {
 			ret = tester.testProcessing();
 			ret.write(flname);
 		}
-		
-		Constellation testcon = new Constellation(23,5000,ret.getEmHist().getEm(), Lists.newArrayList((ret.getRec().keySet())));
-		FindWindow testWindow = new FindWindow(ret.getEmHist(), ret.getRec(), testcon, (int) 5E8);	//2ns resolution
-		for(int i =0; i< 5000; i++)
-		System.out.println(testWindow.next()+"\n ______________");	
-		
 
+		Constellation testcon = new Constellation(23, 5000, ret.getEmHist().getEm(), Lists
+				.newArrayList((ret.getRec().keySet())));
+		FindWindow testWindow = new FindWindow(ret.getEmHist(), ret.getRec(), testcon, (int) 5E8); // 2ns
+																									// resolution
+		for (int i = 0; i < 5000; i++)
+			System.out.println(testWindow.next() + "\n ______________");
 
 	}
 

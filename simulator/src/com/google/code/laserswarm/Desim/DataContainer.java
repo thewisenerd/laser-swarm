@@ -69,12 +69,4 @@ public class DataContainer {
 			sumMaps.putAll(ndIterator.getData());
 		return sumMaps;
 	}
-
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		throw new UnsupportedOperationException();
-	}
-
 }

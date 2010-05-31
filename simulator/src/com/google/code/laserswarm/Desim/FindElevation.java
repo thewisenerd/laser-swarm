@@ -21,13 +21,15 @@ import com.google.code.laserswarm.process.EmitterHistory;
 import com.google.code.laserswarm.process.TimeLine;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.lyndir.lhunath.lib.system.logging.Logger;
 
 /**
  * @author Administrator
  * 
  */
 public class FindElevation {
-	private static int	qLength	= 9;
+	private static int			qLength	= 9;
+	private static final Logger	logger	= Logger.get(FindElevation.class);
 
 	/**
 	 * @param emit
@@ -72,17 +74,16 @@ public class FindElevation {
 
 		double focalDist = emit.distance(rec); // distance between the focal points formed by receiver
 		// and emitter
-		double c = Configuration.c; // speed of light
-		double dist = Math.abs(travTime) * c;
+		double dist = Math.abs(travTime) * Configuration.c;
 		if (dist < focalDist)
 			throw new MathException("Distance Traveled is shorter than Focal length");
 
 		double a = dist / 2; // semimajor axis
-
-		double b_2 = Math.pow(dist / 2, 2) - Math.pow(focalDist / 2.0, 2.0); // b^2 (semiminor axis
-		// squared)
-		double ecc_2 = Math.sqrt(1 - b_2 / (a * a)); // eccentricity^2
-		double ecc = Math.sqrt(ecc_2); // eccentricity^2
+		double a_2 = Math.pow(a, 2); // semimajor axis, squared
+		double c = focalDist / 2; // half of the centerline length
+		double b_2 = Math.pow(a, 2) - Math.pow(c, 2); // b^2 (semiminor axis squared)
+		double ecc_2 = (a_2 - b_2) / a_2; // eccentricity^2
+		double ecc = Math.sqrt(ecc_2); // eccentricity
 		Vector3d em = new Vector3d(emit);
 		Vector3d re = new Vector3d(rec);
 		Vector3d dif = new Vector3d();
@@ -95,7 +96,6 @@ public class FindElevation {
 		// from the emitter
 		return em.length() - Configuration.R0 - distGrndEmit; // altitude above the earth sphere in
 		// meters
-
 	}
 
 	public static double findAltitude(Map<Satellite, TimeLine> recTimes,
@@ -109,16 +109,26 @@ public class FindElevation {
 			DataContainer data = satsDatasets.get(tempSat);
 			// Count the noise photons.
 			prctNoise += findNoisePercentage(data);
+			logger.inf("Percentage noise: %s", prctNoise);
 			TreeMap<Double, Integer> middleDataWindow = data.getData().get(
 					(int) Math.ceil(0.5 * data.getQueueLength())).getData();
 			// Count the photons in the pulse data window; find the altitude for every photon.
 			for (Double time : middleDataWindow.keySet()) {
 				Integer nPhotons = middleDataWindow.get(time);
-				Double alt = calcAlt(pEmit, new Point3d(recTimes.get(tempSat).getLookupPosition().find(
-						time)), time - tPulse);
-				altCount += nPhotons;
-				altTot += nPhotons * alt;
-				altitudes.add(alt);
+				logger.inf("Time: %s : photon number: %s", time, nPhotons);
+				try {
+					Double alt = calcAlt(pEmit, new Point3d(recTimes.get(tempSat).getLookupPosition()
+							.find(time)), time - tPulse);
+					logger.inf("Altitude: %s", alt);
+					altCount += nPhotons;
+					altTot += nPhotons * alt;
+					for (int i = 0; i < nPhotons; i++) {
+						altitudes.add(alt);
+					}
+				} catch (Exception e) {
+					logger.err(e, "");
+					break;
+				}
 			}
 		}
 		// Find the percentage of noise, the average altitude found, the number of noise photons.
@@ -161,28 +171,39 @@ public class FindElevation {
 		LinkedList<Point3d> altitudes = Lists.newLinkedList();
 		while (timeIt.hasNext()) {
 			count++;
+			logger.inf("Iteration number %s", count);
 			// Copy over the values from FindWindow.
 			Map<Satellite, NoiseData> tempInterpulseWindow = emitRecPair.next();
-			for (Satellite tempSat : tempInterpulseWindow.keySet()) {
-				interpulseWindows.get(tempSat).add(tempInterpulseWindow.get(tempSat));
-			}
-			// Store the emitter time and position.
-			timePulses.addLast(emitRecPair.tPulse);
-			posEmits.addLast(new Point3d(hist.getPosition().find(emitRecPair.tPulse)));
-			// Remove pulse data we do not care about any more.
-			if (timePulses.size() > (int) Math.ceil(0.5 * qLength)) {
-				timePulses.removeFirst();
-				posEmits.removeFirst();
-			}
-			// Do the actual data processing.
-			if (count > qLength) {
-				Point3d thisEmit = posEmits.getFirst();
-				altitudes.add(new Point3d(Configuration.R0
-						+ findAltitude(recTimes, interpulseWindows, timePulses.getFirst(), thisEmit),
-						thisEmit.y, thisEmit.z));
+			if (timeIt.hasNext()) {
+				for (Satellite tempSat : tempInterpulseWindow.keySet()) {
+					if (interpulseWindows.get(tempSat) == null) {
+						interpulseWindows.put(tempSat, new DataContainer());
+					}
+					interpulseWindows.get(tempSat).add(tempInterpulseWindow.get(tempSat));
+				}
+				// Store the emitter time and position.
+				timePulses.addLast(emitRecPair.tPulse);
+				logger.inf("Pulse time: %s", emitRecPair.tPulse);
+				posEmits.addLast(new Point3d(hist.getPosition().find(emitRecPair.tPulse)));
+				logger.inf("Point: [%s, %s, %s]", hist.getPosition().find(emitRecPair.tPulse).x, hist
+						.getPosition().find(emitRecPair.tPulse).y, hist.getPosition().find(
+						emitRecPair.tPulse).z);
+				// Remove pulse data we do not care about any more.
+				if (timePulses.size() > (int) Math.ceil(0.5 * qLength)) {
+					timePulses.removeFirst();
+					posEmits.removeFirst();
+				}
+				// Do the actual data processing.
+				if (count > qLength) {
+					Point3d thisEmit = posEmits.getFirst();
+					altitudes.add(new Point3d(
+							Configuration.R0
+									+ findAltitude(recTimes, interpulseWindows, timePulses.getFirst(),
+											thisEmit),
+							thisEmit.y, thisEmit.z));
+				}
 			}
 		}
 		return altitudes;
 	}
-
 }
