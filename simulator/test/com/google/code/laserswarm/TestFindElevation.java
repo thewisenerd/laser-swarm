@@ -26,7 +26,24 @@ import com.google.common.collect.Maps;
 public class TestFindElevation {
 	public static void main(String[] args) throws DemCreationException, MathException {
 		SimulatorMaster mgr = new SimulatorMaster(EarthModel.getDefaultModel());
-		SimTemplate template = new SimTemplate(SimulationTester.mkTestConstellation(), 30);
+		Constellation cons = SimulationTester.mkTestConstellation();
+		Satellite recOrig = cons.getEmitter();
+		Satellite rec1 = new Satellite("Satellite RAAN-1", recOrig);
+		rec1.setArgumentOfPerigee((float) (-2.18 / 180 * Math.PI));
+		Satellite rec2 = new Satellite("Satellite RAAN+1", recOrig);
+		rec1.setArgumentOfPerigee((float) (2.18 / 180 * Math.PI));
+		Satellite rec3 = new Satellite("Satellite TA-1", recOrig);
+		rec1.setTrueAnomaly((float) (-2.18 / 180 * Math.PI));
+		Satellite rec4 = new Satellite("Satellite TA+1", recOrig);
+		rec1.setTrueAnomaly((float) (2.18 / 180 * Math.PI));
+
+		List<Satellite> recs = cons.getReceivers();
+		recs.add(rec1);
+		recs.add(rec2);
+		recs.add(rec3);
+		recs.add(rec4);
+
+		SimTemplate template = new SimTemplate(cons, 30);
 		mgr.addSimTemplate(template);
 
 		EmitterHistory emitterHistory = null;

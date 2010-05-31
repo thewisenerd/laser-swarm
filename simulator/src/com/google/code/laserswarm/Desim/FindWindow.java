@@ -114,7 +114,7 @@ public class FindWindow {
 			// System.out.println("tUppser =" + tUpper);
 			while (satIt.hasNext() & (ms.getTime() < tUpper)) { // Construct unfiltered result vector
 				if (exec) {
-					ms = satIt.next(); // ensure the incrementation is repeated once
+					ms = satIt.next(); // ensure the increment is repeated once
 
 				}
 				exec = true;
@@ -188,7 +188,7 @@ public class FindWindow {
 		Constellation testcon = new Constellation(23, 5000, ret.getEmHist().getEm(), Lists
 				.newArrayList((ret.getRec().keySet())));
 		FindWindow testWindow = new FindWindow(ret.getEmHist(), ret.getRec(), testcon, (int) 5E8); // 2ns
-																									// resolution
+		// resolution
 		for (int i = 0; i < 5000; i++)
 			System.out.println(testWindow.next() + "\n ______________");
 

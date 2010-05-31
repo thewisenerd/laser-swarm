@@ -11,7 +11,7 @@ public class Satellite {
 	private float	trueAnomaly					= 0f;
 	private float	argumentOfPerigee			= 0f;
 	private String	name						= "SAT";
-	private double	aperatureArea				= 1;				// (0.08 * 0.08); // m²
+	private double	aperatureArea				= 1;				// (0.08 * 0.08); // mï¿½
 	private double	beamDivergence				= 2.3333E-4 / 2;	// rad for the half beam /|
 
 	public Satellite() {
@@ -53,6 +53,30 @@ public class Satellite {
 
 	public float getInclination() {
 		return inclination;
+	}
+
+	public void setArgumentOfPerigee(float argumentOfPerigee) {
+		this.argumentOfPerigee = argumentOfPerigee;
+	}
+
+	public void setEccentricity(float eccentricity) {
+		this.eccentricity = eccentricity;
+	}
+
+	public void setInclination(float inclination) {
+		this.inclination = inclination;
+	}
+
+	public void setRightAngleOfAscendingNode(float rightAngleOfAscendingNode) {
+		this.rightAngleOfAscendingNode = rightAngleOfAscendingNode;
+	}
+
+	public void setSemimajorAxis(float semimajorAxis) {
+		this.semimajorAxis = semimajorAxis;
+	}
+
+	public void setTrueAnomaly(float trueAnomaly) {
+		this.trueAnomaly = trueAnomaly;
 	}
 
 	public KeplerElements getKeplerElements() {
