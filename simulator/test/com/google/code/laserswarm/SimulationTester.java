@@ -59,8 +59,7 @@ public class SimulationTester extends TestCase {
 		EarthModel earth = EarthModel.getDefaultModel();
 
 		SimulatorMaster mgr = new SimulatorMaster(earth);
-		SimTemplate tmpl = new SimTemplate(testConstallation);
-		tmpl.setTime(0, 191675.2);
+		SimTemplate tmpl = new SimTemplate(testConstallation, 1000);
 		mgr.addSimTemplate(tmpl);
 
 		HashMap<SimTemplate, Simulator> points = mgr.runSim();
