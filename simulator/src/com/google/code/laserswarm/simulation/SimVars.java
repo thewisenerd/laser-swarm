@@ -9,6 +9,7 @@ import javax.vecmath.Vector3d;
 
 import com.google.code.laserswarm.conf.Satellite;
 import com.google.code.laserswarm.earthModel.ScatteringCharacteristics;
+import com.google.common.collect.Maps;
 import com.google.common.io.LineProcessor;
 import com.thoughtworks.xstream.XStream;
 
@@ -103,6 +104,41 @@ public class SimVars {
 	 * Surface normal
 	 */
 	public Vector3d									surfNormal;
+
+	/**
+	 * Clone a given simVar object, but leave out all the sat specific data
+	 * 
+	 * @param simVar
+	 */
+	public SimVars(SimVars simVar) {
+		t0 = simVar.t0;
+		tR = simVar.tR;
+		tE = Maps.newHashMap();
+		p0 = simVar.p0;
+		pR = simVar.pR;
+		pE = Maps.newHashMap();
+		power0 = simVar.power0;
+		powerR = simVar.powerR;
+		powerR_SC = Maps.newHashMap();
+		powerE = Maps.newHashMap();
+		photonDensity = Maps.newHashMap();
+		photonsE = Maps.newHashMap();
+		illuminated = simVar.illuminated;
+		sunVector = simVar.sunVector;
+		surfNormal = simVar.surfNormal;
+	}
+
+	public SimVars() {
+	}
+
+	public void apply(SimVars vars, Satellite sat) {
+		tE.put(sat, new Double(vars.tE.get(sat)));
+		pE.put(sat, (Point3d) vars.pE.get(sat).clone());
+		powerR_SC.put(sat, new Double(vars.powerR_SC.get(sat)));
+		powerE.put(sat, new Double(vars.powerE.get(sat)));
+		photonDensity.put(sat, new Double(vars.photonDensity.get(sat)));
+		photonsE.put(sat, new Integer(vars.photonsE.get(sat)));
+	}
 
 	public void reduce() {
 		for (Field field : getClass().getDeclaredFields()) {

@@ -12,6 +12,7 @@ import com.google.code.laserswarm.out.Report;
 import com.google.code.laserswarm.simulation.SimTemplate;
 import com.google.code.laserswarm.simulation.Simulator;
 import com.google.code.laserswarm.simulation.SimulatorMaster;
+import com.google.code.laserswarm.simulation.postSimulation.SlopeSpread;
 import com.google.common.collect.Lists;
 import com.lyndir.lhunath.lib.system.logging.Logger;
 
@@ -31,6 +32,7 @@ public abstract class LaserSwarm {
 			System.exit(0);
 		}
 
+		/* Simulation */
 		if (Configuration.hasAction(Actions.SIMULATE) || //
 				Configuration.hasAction(Actions.PROCESS) || //
 				Configuration.hasAction(Actions.PLOT_DISK) || //
@@ -39,6 +41,17 @@ public abstract class LaserSwarm {
 			simulate();
 		}
 
+		/* Post simulation modifiers */
+		for (SimTemplate tmpl : simulations.keySet()) {
+			if (Configuration.hasAction(Actions.DISTRIBUTE_SLOPE)) {
+				Simulator sim = simulations.get(tmpl);
+				SlopeSpread spread = new SlopeSpread();
+				simulations.put(tmpl, spread.modify(sim, tmpl.getConstellation()));
+			}
+
+		}
+
+		/* Processing */
 		if (Configuration.hasAction(Actions.PROCESS) || //
 				Configuration.hasAction(Actions.PLOT_DISK) || //
 				Configuration.hasAction(Actions.PLOT_SCREEN) || //
@@ -46,6 +59,7 @@ public abstract class LaserSwarm {
 			process();
 		}
 
+		/* Make some reports */
 		if (Configuration.hasAction(Actions.PLOT_DISK) || //
 				Configuration.hasAction(Actions.PLOT_SCREEN) || //
 				Configuration.hasAction(Actions.TABULATE)) {

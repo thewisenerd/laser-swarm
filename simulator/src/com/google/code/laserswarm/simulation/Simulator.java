@@ -88,16 +88,25 @@ public class Simulator implements Runnable {
 		this.template = templ;
 		this.earth = earth;
 
-		File dbFile = new File(Configuration.volitileCache, toString() + "-" + hashCode() + ".db4o");
+		this.db = mkDb(this, "");
+		open();
+	}
+
+	public static ObjectContainer mkDb(Simulator sim, String sufix) {
+		File dbFile = new File(Configuration.volitileCache, sim.toString()
+				+ (sufix.equals("") ? "" : "-" + sufix)
+				+ "-" + sim.hashCode() + ".db4o");
 		if (!dbFile.exists())
 			try {
 				dbFile.createNewFile();
 			} catch (IOException e) {
 				logger.err(e, "Could not create the simvals db");
 			}
-		databaseFile = dbFile.getAbsolutePath();
+		return Db4oEmbedded.openFile(dbFile.getAbsolutePath());
+	}
 
-		open();
+	public void setDb(ObjectContainer db) {
+		this.db = db;
 	}
 
 	public ObjectContainer getDataPointsDB() {

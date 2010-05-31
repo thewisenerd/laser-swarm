@@ -32,7 +32,7 @@ public class InvErf {
 	 * @throws MathException
 	 *             if the algorithm fails to converge.
 	 */
-	public static double erf(double x) throws MathException {
+	public static double invErf(double x) throws MathException {
 		double x2 = x * Math.sqrt(Math.PI) / 2;
 		double invErf = 0;
 		for (int i = 1; i < ORDER; i += 2) {

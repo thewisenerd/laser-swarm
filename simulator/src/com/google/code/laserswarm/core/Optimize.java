@@ -9,6 +9,7 @@ import java.util.List;
 import org.apache.commons.math.FunctionEvaluationException;
 import org.apache.commons.math.MathException;
 import org.apache.commons.math.analysis.MultivariateRealFunction;
+import org.apache.commons.math.distribution.NormalDistributionImpl;
 import org.apache.commons.math.optimization.GoalType;
 import org.apache.commons.math.optimization.RealPointValuePair;
 import org.apache.commons.math.optimization.direct.NelderMead;
@@ -80,7 +81,7 @@ public class Optimize extends LaserSwarm implements MultivariateRealFunction {
 		NelderMead optimizer = new NelderMead();
 		try {
 			RealPointValuePair values = optimizer.optimize(this, GoalType.MAXIMIZE, new double[] { 5,
-					0.02 * 0.02 });
+					0.075 * 0.075 });
 
 			for (Double val : values.getPoint())
 				logger.inf("Value %s", val);
@@ -129,6 +130,12 @@ public class Optimize extends LaserSwarm implements MultivariateRealFunction {
 		double aperature = point[1];
 
 		logger.inf("Running iteration for %s W and %s m²", power, aperature);
+		if (power < 0 || aperature < 0) {
+			logger.inf("Negative power or aperture");
+			logger.inf("Performance: 0");
+			return 0;
+		}
+
 		constellations.clear();
 		constellations.add(mkConstellation(power, aperature));
 
@@ -137,8 +144,16 @@ public class Optimize extends LaserSwarm implements MultivariateRealFunction {
 		for (Simulator sim : simulations.values())
 			sim.getDataPointsDB().close();
 
-		double performace = (photons) / (power * aperature * aperature);
-		logger.inf("Performence: %s", performace);
+		NormalDistributionImpl gausian = new NormalDistributionImpl(800, 100);
+		double performace = 0;
+		try {
+			performace = (gausian.cumulativeProbability(photons) * 100)
+					/ (power * aperature * aperature);
+		} catch (MathException e) {
+			e.printStackTrace();
+			System.exit(1);
+		}
+		logger.inf("Performance: %s (%s photons)", performace, photons);
 
 		prefLog.write(new Double[] { power, aperature, performace });
 
