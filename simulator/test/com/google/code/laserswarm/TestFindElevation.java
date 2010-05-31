@@ -42,6 +42,7 @@ public class TestFindElevation {
 		recs.add(rec2);
 		recs.add(rec3);
 		recs.add(rec4);
+		cons.setReceivers(recs);
 
 		SimTemplate template = new SimTemplate(cons, 30);
 		mgr.addSimTemplate(template);

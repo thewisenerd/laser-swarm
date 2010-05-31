@@ -53,6 +53,10 @@ public class Constellation {
 		this.pulseFrequency = pulseFrequency;
 	}
 
+	public void setReceivers(List<Satellite> receivers) {
+		this.receivers = receivers;
+	}
+
 	public Satellite getEmitter() {
 		return emitter;
 	}
