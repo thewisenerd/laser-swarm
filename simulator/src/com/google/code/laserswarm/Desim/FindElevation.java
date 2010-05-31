@@ -114,9 +114,10 @@ public class FindElevation {
 					(int) Math.ceil(0.5 * data.getQueueLength())).getData();
 			// Count the photons in the pulse data window; find the altitude for every photon.
 			for (Double time : middleDataWindow.keySet()) {
+				Double lastKey = recTimes.get(tempSat).getLookupPosition().lastKey();
 				Integer nPhotons = middleDataWindow.get(time);
 				logger.inf("Time: %s : photon number: %s", time, nPhotons);
-				try {
+				if (time < lastKey) {
 					Double alt = calcAlt(pEmit, new Point3d(recTimes.get(tempSat).getLookupPosition()
 							.find(time)), time - tPulse);
 					logger.inf("Altitude: %s", alt);
@@ -125,10 +126,10 @@ public class FindElevation {
 					for (int i = 0; i < nPhotons; i++) {
 						altitudes.add(alt);
 					}
-				} catch (Exception e) {
-					logger.err(e, "");
-					break;
-				}
+				} // catch (Exception e) {
+				// logger.err(e, "");
+				// break;
+				// }
 			}
 		}
 		// Find the percentage of noise, the average altitude found, the number of noise photons.
@@ -198,8 +199,8 @@ public class FindElevation {
 					Point3d thisEmit = posEmits.getFirst();
 					altitudes.add(new Point3d(
 							Configuration.R0
-									+ findAltitude(recTimes, interpulseWindows, timePulses.getFirst(),
-											thisEmit),
+							+ findAltitude(recTimes, interpulseWindows, timePulses.getFirst(),
+							thisEmit),
 							thisEmit.y, thisEmit.z));
 				}
 			}
