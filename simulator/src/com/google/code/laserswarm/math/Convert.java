@@ -1,4 +1,4 @@
-package com.google.code.laserswarm.earthModel;
+package com.google.code.laserswarm.math;
 
 import javax.vecmath.Point3d;
 import javax.vecmath.Vector3d;
