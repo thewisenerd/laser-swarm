@@ -17,16 +17,42 @@ import com.lyndir.lhunath.lib.system.logging.Logger;
 
 public class Prospector {
 
-	public static int						after			= 10;
-	public static double					roughTimeStep	= 5;
+	public interface ProspectorFactory {
+		public Prospector getProspector(OrbitClass emittorOrbit,
+				HashMap<Satellite, OrbitClass> receiverOrbits,
+				EarthModel earth, long samples, double dt);
+	}
 
-	private LinkedList<Long>				lastNulls		= Lists.newLinkedList();
-	private static final Logger				logger			= Logger.get(Prospector.class);
+	public static int					after			= 10;
+	public static double				roughTimeStep	= 5;
+	private static ProspectorFactory	factory;
 
+	public static ProspectorFactory getFactory() {
+		if (factory == null)
+			return new ProspectorFactory() {
+				@Override
+				public Prospector getProspector(OrbitClass emittorOrbit,
+						HashMap<Satellite, OrbitClass> receiverOrbits, EarthModel earth, long samples,
+						double dt) {
+					return new Prospector(emittorOrbit, receiverOrbits, earth, samples, dt);
+				}
+			};
+		else
+			return factory;
+	}
+
+	public static void setFactory(ProspectorFactory factory) {
+		Prospector.factory = factory;
+	}
+
+	private LinkedList<Long>				lastNulls	= Lists.newLinkedList();
+
+	private static final Logger				logger		= Logger.get(Prospector.class);
 	private OrbitClass						emittorOrbit;
 	private HashMap<Satellite, OrbitClass>	receiverOrbits;
 	private EarthModel						earth;
 	private long							samples;
+
 	private double							dt;
 
 	public Prospector(OrbitClass emittorOrbit, HashMap<Satellite, OrbitClass> receiverOrbits,
@@ -37,6 +63,10 @@ public class Prospector {
 		this.earth = earth;
 		this.samples = samples;
 		this.dt = dt;
+	}
+
+	public EarthModel getEarth() {
+		return earth;
 	}
 
 	public long prospect(long i) {
@@ -63,14 +93,8 @@ public class Prospector {
 				/* Find the current position */
 				Point3d point = emittorOrbit.ECEF_point();
 				Point3d sphere = Convert.toSphere(point);
-				double lon = sphere.y * (180. / Math.PI);
-				double lat = sphere.z * (180. / Math.PI);
 
-				/* Quick test over land */
-				DirectPosition2D p2d = new DirectPosition2D(lon, lat);
-				ElevationModel dem = earth.findCoverage(p2d);
-				if (dem != null)
-					overGround = true;
+				overGround = testPoint(sphere);
 
 				/* propagate */
 				emittorOrbit.propogate(s * dt);
@@ -86,4 +110,22 @@ public class Prospector {
 			return moved;
 		}
 	}
+
+	public void setSamples(long samples) {
+		this.samples = samples;
+	}
+
+	protected boolean testPoint(Point3d sphere) {
+		double lon = sphere.y * (180. / Math.PI);
+		double lat = sphere.z * (180. / Math.PI);
+
+		/* Quick test over land */
+		DirectPosition2D p2d = new DirectPosition2D(lon, lat);
+		ElevationModel dem = earth.findCoverage(p2d);
+		if (dem != null)
+			return true;
+		else
+			return false;
+	}
+
 }

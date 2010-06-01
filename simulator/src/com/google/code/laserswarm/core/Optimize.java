@@ -36,7 +36,6 @@ public class Optimize extends LaserSwarm implements MultivariateRealFunction {
 		private File	log	= new File("optimize.csv");
 
 		public PrefLog() {
-
 			try {
 				log.delete();
 				log.createNewFile();

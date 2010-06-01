@@ -312,11 +312,10 @@ public class Simulator implements Runnable {
 			}
 		}
 
-		Prospector prospector;
-		if (template.useTime())
-			prospector = new Prospector(emittorOrbit, receiverOrbits, earth, samples, dt);
-		else
-			prospector = new Prospector(emittorOrbit, receiverOrbits, earth, Long.MAX_VALUE, dt);
+		Prospector prospector = Prospector.getFactory().getProspector(
+				emittorOrbit, receiverOrbits, earth, samples, dt);
+		if (!template.useTime())
+			prospector.setSamples(Long.MAX_VALUE);
 
 		long i = 0;
 		boolean goalReached = false;
