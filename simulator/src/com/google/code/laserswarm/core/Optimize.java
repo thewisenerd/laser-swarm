@@ -37,7 +37,6 @@ public class Optimize extends LaserSwarm implements MultivariateRealFunction {
 			try {
 				log.delete();
 				log.createNewFile();
-				Files.append(String.format("power, apperature, pref\n"), log, Charset.defaultCharset());
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -45,9 +44,13 @@ public class Optimize extends LaserSwarm implements MultivariateRealFunction {
 
 		public void write(Double[] values) {
 			try {
-				for (Double string : values)
-					Files.append(String.format("%s,\t", string), log, Charset.defaultCharset());
-				Files.append("\n", log, Charset.defaultCharset());
+				StringBuffer str = new StringBuffer();
+				for (int i = 0; i < values.length; i++) {
+					str.append(values[i]);
+					if (i + 1 < values.length)
+						str.append(",\t");
+				}
+				Files.append(str + "\n", log, Charset.defaultCharset());
 			} catch (IOException e) {
 				logger.wrn(e, "Could not write to preflog");
 			}
@@ -106,14 +109,17 @@ public class Optimize extends LaserSwarm implements MultivariateRealFunction {
 	protected void simulate() {
 		super.simulate();
 		photons = 0;
+		StringBuffer str = new StringBuffer();
 		for (SimTemplate tmpl : simulations.keySet()) {
-			long samples = 0;
 			for (Satellite sat : tmpl.getConstellation().getReceivers()) {
-				samples += simulations.get(tmpl).getDataPoints().size();
+				int satPhotons = 0;
 				for (SimVars var : simulations.get(tmpl).getDataPoints())
-					photons += var.photonsE.get(sat);
+					satPhotons += var.photonsE.get(sat);
+				photons += satPhotons;
+				str.append(String.format("%s=>%d\t", sat, satPhotons));
 			}
 		}
+		logger.inf(str.toString());
 	}
 
 	@Override
@@ -136,7 +142,7 @@ public class Optimize extends LaserSwarm implements MultivariateRealFunction {
 		for (Simulator sim : simulations.values())
 			sim.getDataPointsDB().close();
 
-		NormalDistributionImpl gausian = new NormalDistributionImpl(800, 100);
+		NormalDistributionImpl gausian = new NormalDistributionImpl(4000, 100);
 		double performace = 0;
 		try {
 			performace = (gausian.cumulativeProbability(photons) * 100)

@@ -43,7 +43,7 @@ import com.google.code.laserswarm.RandData;
 import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.conf.Satellite;
 import com.google.code.laserswarm.conf.Configuration.Actions;
-import com.google.code.laserswarm.earthModel.Convert;
+import com.google.code.laserswarm.math.Convert;
 import com.google.code.laserswarm.out.plot1D.plotHeightDistribution;
 import com.google.code.laserswarm.process.EmitterHistory;
 import com.google.code.laserswarm.process.MeasermentSample;

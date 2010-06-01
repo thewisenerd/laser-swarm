@@ -19,6 +19,7 @@ import org.opengis.geometry.DirectPosition;
 import org.ujmp.core.Matrix;
 
 import com.google.code.laserswarm.conf.Configuration;
+import com.google.code.laserswarm.math.Convert;
 import com.google.common.base.Preconditions;
 
 public class ElevationModel implements IElevationModel {

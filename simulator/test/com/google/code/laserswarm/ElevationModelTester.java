@@ -11,9 +11,9 @@ import org.geotools.geometry.DirectPosition2D;
 import org.geotools.referencing.operation.projection.PointOutsideEnvelopeException;
 
 import com.google.code.laserswarm.conf.Configuration;
-import com.google.code.laserswarm.earthModel.Convert;
 import com.google.code.laserswarm.earthModel.EarthModel;
 import com.google.code.laserswarm.earthModel.ElevationModel;
+import com.google.code.laserswarm.math.Convert;
 import com.google.code.laserswarm.out.plot2D.Plot2D;
 import com.google.code.laserswarm.util.demReader.DemCreationException;
 import com.google.code.laserswarm.util.demReader.DemReader;

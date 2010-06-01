@@ -16,7 +16,7 @@ import javax.imageio.ImageIO;
 import javax.vecmath.Point3d;
 
 import com.google.code.laserswarm.conf.Configuration;
-import com.google.code.laserswarm.earthModel.Convert;
+import com.google.code.laserswarm.math.Convert;
 import com.google.code.laserswarm.simulation.SimVars;
 import com.google.common.collect.Lists;
 import com.lyndir.lhunath.lib.system.logging.Logger;

@@ -9,7 +9,7 @@ import javax.vecmath.Point3d;
 import com.google.code.laserswarm.Orbit.OrbitClass;
 import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.conf.Satellite;
-import com.google.code.laserswarm.earthModel.Convert;
+import com.google.code.laserswarm.math.Convert;
 import com.google.common.collect.Lists;
 import com.lyndir.lhunath.lib.system.logging.Logger;
 

@@ -31,12 +31,12 @@ public class Constellation {
 		Satellite emittor = new Satellite("Emittor", aperature, (float) (Configuration.R0 / 1000
 				+ altitude), 0f, (float) Math.PI / 2, (float) (8.5 * Math.PI / 180), 0f, 0f);
 
-		double raan = (-2.18 / 180 * Math.PI);
-		double ta = (-2.18 / 180 * Math.PI);
-		double[][] sats = new double[][] { { +raan, +ta },
-											{ +raan, -ta },
-											{ -raan, +ta },
-											{ -raan, -ta } };
+		double raan = emittor.getRightAngleOfAscendingNode() + (-2.18 / 180 * Math.PI);
+		double ta = emittor.getTrueAnomaly() + (-2.18 / 180 * Math.PI);
+		double[][] sats = new double[][] { { +raan, 0 },
+											{ -raan, 0 },
+											{ 0, +ta },
+											{ 0, -ta } };
 
 		List<Satellite> receivers = Lists.newLinkedList();
 		for (int i = 0; i < sats.length; i++) {
