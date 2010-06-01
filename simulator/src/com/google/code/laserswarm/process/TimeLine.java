@@ -39,7 +39,7 @@ public class TimeLine {
 	private LookupTable					lookupPosition	= new LookupTable();
 	private LookupTable					lookupDirection	= new LookupTable();
 
-	private List<SimVars>				dataSet;
+	private transient List<SimVars>		dataSet;
 	private Satellite					sat;
 	private Constellation				constellation;
 
