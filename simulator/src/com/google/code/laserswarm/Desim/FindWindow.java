@@ -49,7 +49,7 @@ public class FindWindow {
 	 * @param binFreqency
 	 *            determines the amount of samples, 5E8 corresponds to 2ns
 	 */
-	public FindWindow(EmitterHistory hist, Map<Satellite, TimeLine> sit, Constellation con,
+	public FindWindow(EmitterHistory hist, Iterator<Double> tIt, Map<Satellite, TimeLine> sit, Constellation con,
 			int binFreqency) {
 		// TODO Auto-generated constructor stub
 		this.binFreqency = binFreqency;
@@ -57,7 +57,7 @@ public class FindWindow {
 		this.bigWindow = 1 / con.getPulseFrequency();
 		satData = sit;
 		satIter = Maps.newHashMap();
-		timeIt = hist.time.iterator();
+		timeIt = tIt; //hist.time.iterator();
 		for (Satellite satIt : sit.keySet()) {
 			try {
 				satIter.put(satIt, satData.get(satIt).getIterator(binFreqency));
@@ -187,10 +187,10 @@ public class FindWindow {
 
 		Constellation testcon = new Constellation(23, 5000, ret.getEmHist().getEm(), Lists
 				.newArrayList((ret.getRec().keySet())));
-		FindWindow testWindow = new FindWindow(ret.getEmHist(), ret.getRec(), testcon, (int) 5E8); // 2ns
+		//FindWindow testWindow = new FindWindow(ret.getEmHist(), ret.getRec(), testcon, (int) 5E8); // 2ns
 		// resolution
-		for (int i = 0; i < 5000; i++)
-			System.out.println(testWindow.next() + "\n ______________");
+		//for (int i = 0; i < 5000; i++)
+		//	System.out.println(testWindow.next() + "\n ______________");
 
 	}
 
