@@ -165,7 +165,7 @@ public class FindElevation {
 		for (DataContainer tempData : interpulseWindows.values()) {
 			tempData.setQueueLength(qLength);
 		}
-		FindWindow emitRecPair = new FindWindow(hist, recTimes, con, (int) 1e6);
+		FindWindow emitRecPair = new FindWindow(hist, timeIt, recTimes, con, (int) 1e6);
 		int count = 0;
 		LinkedList<Double> timePulses = Lists.newLinkedList();
 		LinkedList<Point3d> posEmits = Lists.newLinkedList();
