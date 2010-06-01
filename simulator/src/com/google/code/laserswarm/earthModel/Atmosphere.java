@@ -1,12 +1,15 @@
 package com.google.code.laserswarm.earthModel;
 
 import com.google.code.laserswarm.conf.Configuration;
+import com.lyndir.lhunath.lib.system.logging.Logger;
 
 public class Atmosphere {
 
 	private static Atmosphere	instance;
+	private static final Logger	logger	= Logger.get(Atmosphere.class);
 
 	public static double computeIntensity(double I0, double l, double optThick) {
+		// logger.wrn("AM:%f", l);
 		double I = I0 * Math.exp(-optThick * l);
 		return I;
 	}

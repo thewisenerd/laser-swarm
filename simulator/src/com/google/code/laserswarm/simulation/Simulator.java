@@ -61,17 +61,31 @@ public class Simulator implements Runnable {
 	public static long			timeOut	= (6 * 60 * 60000);			// ms
 	private static boolean		usedDB	= true;
 
-	private SimTemplate			template;
-	private Thread				thread;
-	private EarthModel			earth;
+	public static ObjectContainer mkDb(Simulator sim, String sufix) {
+		File dbFile = new File(Configuration.volitileCache, sim.toString()
+				+ (sufix.equals("") ? "" : "-" + sufix)
+				+ "-" + sim.hashCode() + ".db4o");
+		if (!dbFile.exists())
+			try {
+				dbFile.createNewFile();
+			} catch (IOException e) {
+				logger.err(e, "Could not create the simvals db");
+			}
+		return Db4oEmbedded.openFile(dbFile.getAbsolutePath());
+	}
 
-	private List<SimVars>		dataPoints;
+	private SimTemplate		template;
+	private Thread			thread;
 
-	private double				powerPerPulse;
+	private EarthModel		earth;
 
-	private double				ePhoton;
-	private ObjectContainer		db;
-	private String				databaseFile;
+	private List<SimVars>	dataPoints;
+
+	private double			powerPerPulse;
+	private double			ePhoton;
+	private ObjectContainer	db;
+
+	private String			databaseFile;
 
 	/**
 	 * Make a new simulation from a given template over the given model of the earth
@@ -92,25 +106,16 @@ public class Simulator implements Runnable {
 		open();
 	}
 
-	public static ObjectContainer mkDb(Simulator sim, String sufix) {
-		File dbFile = new File(Configuration.volitileCache, sim.toString()
-				+ (sufix.equals("") ? "" : "-" + sufix)
-				+ "-" + sim.hashCode() + ".db4o");
-		if (!dbFile.exists())
-			try {
-				dbFile.createNewFile();
-			} catch (IOException e) {
-				logger.err(e, "Could not create the simvals db");
-			}
-		return Db4oEmbedded.openFile(dbFile.getAbsolutePath());
+	private void cleanDb() {
+		ObjectSet<SimVars> result = db.query(SimVars.class);
+		while (result.hasNext())
+			db.delete(result.next());
 	}
 
-	public void setDb(ObjectContainer db) {
-		this.db = db;
-	}
-
-	public ObjectContainer getDataPointsDB() {
-		return db;
+	public void close() {
+		if (db != null)
+			db.close();
+		db = null;
 	}
 
 	public List<SimVars> getDataPoints() {
@@ -122,6 +127,10 @@ public class Simulator implements Runnable {
 			return result;
 		} else
 			return dataPoints;
+	}
+
+	public ObjectContainer getDataPointsDB() {
+		return db;
 	}
 
 	public Thread getThread() {
@@ -207,6 +216,9 @@ public class Simulator implements Runnable {
 		simVals.powerR_SC = Maps.newHashMap();
 		for (Satellite sat : constellation.getReceivers()) {
 			dR = relative(simVals.pR, simVals.pE.get(sat));
+			// logger.wrn("Sat=%s", sat);
+			// logger.wrn("%s", dR);
+			// logger.wrn("sphre: %s", Convert.toSphere(dR));
 			angle = dR.angle(simVals.surfNormal);
 			z = dR.length() * Math.cos(angle);
 			x = dR.length() * Math.sin(angle);
@@ -220,11 +232,10 @@ public class Simulator implements Runnable {
 		simVals.tE = Maps.newHashMap();
 		simVals.powerE = Maps.newHashMap();
 		for (Satellite sat : constellation.getReceivers()) {
-			dR = new Vector3d(simVals.pE.get(sat));
-			dR.sub(simVals.pR);
+			dR = relative(simVals.pR, simVals.pE.get(sat));
 			angle = dR.angle(new Vector3d(simVals.pR));
 			simVals.tE.put(sat, dR.length() / Constants.c);
-
+			// logger.wrn("Angle (%s) = %f", sat, angle * 180 / Math.PI);
 			simVals.powerE.put(sat, Atmosphere.getInstance().computeIntensity(
 					simVals.powerR_SC.get(sat), angle));
 		}
@@ -246,6 +257,11 @@ public class Simulator implements Runnable {
 		}
 		return simVals;
 
+	}
+
+	private void open() {
+		if (db == null)
+			db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), databaseFile);
 	}
 
 	@Override
@@ -353,27 +369,14 @@ public class Simulator implements Runnable {
 
 	}
 
+	public void setDb(ObjectContainer db) {
+		this.db = db;
+	}
+
 	public Thread start() {
 		thread = new Thread(this, "Sim - " + template.getConstellation());
 		thread.start();
 		return thread;
-	}
-
-	private void cleanDb() {
-		ObjectSet<SimVars> result = db.query(SimVars.class);
-		while (result.hasNext())
-			db.delete(result.next());
-	}
-
-	private void open() {
-		if (db == null)
-			db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), databaseFile);
-	}
-
-	public void close() {
-		if (db != null)
-			db.close();
-		db = null;
 	}
 
 	@Override

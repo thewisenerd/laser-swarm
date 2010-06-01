@@ -1,6 +1,7 @@
 package com.google.code.laserswarm.math;
 
 import javax.vecmath.Point3d;
+import javax.vecmath.Tuple3d;
 import javax.vecmath.Vector3d;
 
 public abstract class Convert {
@@ -11,7 +12,7 @@ public abstract class Convert {
 	 * @param xyz
 	 * @return
 	 */
-	public static Point3d toSphere(Point3d xyz) {
+	public static Point3d toSphere(Tuple3d xyz) {
 		double r = new Vector3d(xyz).length();
 		float theta = (float) Math.atan2(xyz.y, xyz.x); // long
 		// float phi = (float) Math.atan2(Math.sqrt(xyz.x * xyz.x + xyz.y * xyz.y), xyz.z);// lat
@@ -26,7 +27,7 @@ public abstract class Convert {
 	 * @param sphere
 	 * @return
 	 */
-	public static Point3d toXYZ(Point3d sphere) {
+	public static Point3d toXYZ(Tuple3d sphere) {
 		double r = sphere.x;
 		double theta = sphere.y;
 		double phi = sphere.z;

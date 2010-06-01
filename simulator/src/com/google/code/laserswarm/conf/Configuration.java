@@ -163,7 +163,7 @@ public class Configuration {
 		}
 	}
 
-	private float				atmOpticalThickness				= 0.25f;
+	private float				atmOpticalThickness				= 0.1f;
 
 	private String				filePrefixReport				= "";
 
@@ -199,6 +199,10 @@ public class Configuration {
 			setInstance(cfg);
 		}
 		return instance;
+	}
+
+	public static boolean hasAction(Actions a) {
+		return mode.contains(a);
 	}
 
 	public static Configuration read() throws FileNotFoundException {
@@ -263,10 +267,6 @@ public class Configuration {
 
 	public Set<Actions> getMode() {
 		return mode;
-	}
-
-	public static boolean hasAction(Actions a) {
-		return mode.contains(a);
 	}
 
 }

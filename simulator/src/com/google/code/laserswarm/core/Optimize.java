@@ -3,12 +3,14 @@ package com.google.code.laserswarm.core;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.commons.math.FunctionEvaluationException;
 import org.apache.commons.math.MathException;
 import org.apache.commons.math.analysis.MultivariateRealFunction;
+import org.apache.commons.math.distribution.NormalDistribution;
 import org.apache.commons.math.distribution.NormalDistributionImpl;
 import org.apache.commons.math.optimization.GoalType;
 import org.apache.commons.math.optimization.RealPointValuePair;
@@ -23,6 +25,7 @@ import com.google.code.laserswarm.simulation.SimTemplate;
 import com.google.code.laserswarm.simulation.SimVars;
 import com.google.code.laserswarm.simulation.Simulator;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.common.io.Files;
 import com.lyndir.lhunath.lib.system.logging.Logger;
@@ -74,8 +77,9 @@ public class Optimize extends LaserSwarm implements MultivariateRealFunction {
 		return Constellation.swarm(power, aperature, 500);
 	}
 
-	private int		photons	= 0;
-	private PrefLog	prefLog	= new PrefLog();
+	private int							photons	= 0;
+	private PrefLog						prefLog	= new PrefLog();
+	private HashMap<Satellite, Integer>	satPhotons;
 
 	@Override
 	protected List<Constellation> mkConstellations() {
@@ -109,14 +113,16 @@ public class Optimize extends LaserSwarm implements MultivariateRealFunction {
 	protected void simulate() {
 		super.simulate();
 		photons = 0;
+		satPhotons = Maps.newHashMap();
 		StringBuffer str = new StringBuffer();
 		for (SimTemplate tmpl : simulations.keySet()) {
 			for (Satellite sat : tmpl.getConstellation().getReceivers()) {
-				int satPhotons = 0;
+				int satP = 0;
 				for (SimVars var : simulations.get(tmpl).getDataPoints())
-					satPhotons += var.photonsE.get(sat);
-				photons += satPhotons;
-				str.append(String.format("%s=>%d\t", sat, satPhotons));
+					satP += var.photonsE.get(sat);
+				photons += satP;
+				satPhotons.put(sat, satP);
+				str.append(String.format("%s=>%d\t", sat, satP));
 			}
 		}
 		logger.inf(str.toString());
@@ -142,11 +148,16 @@ public class Optimize extends LaserSwarm implements MultivariateRealFunction {
 		for (Simulator sim : simulations.values())
 			sim.getDataPointsDB().close();
 
-		NormalDistributionImpl gausian = new NormalDistributionImpl(4000, 100);
+		NormalDistributionImpl gausian = new NormalDistributionImpl(1000 * satPhotons.size(), 100);
 		double performace = 0;
 		try {
 			performace = (gausian.cumulativeProbability(photons) * 100)
 					/ (power * aperature * aperature);
+			for (Satellite sat : satPhotons.keySet()) {
+				NormalDistribution gausian2 = new NormalDistributionImpl(1000, 300);
+				double modifier = 500 * gausian2.cumulativeProbability(satPhotons.get(sat));
+				performace *= modifier;
+			}
 		} catch (MathException e) {
 			e.printStackTrace();
 			System.exit(1);
