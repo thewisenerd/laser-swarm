@@ -1,10 +1,56 @@
 package com.google.code.laserswarm.conf;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import com.google.common.collect.Lists;
 
 public class Constellation {
+
+	/**
+	 * Make a simple constellation with one receiver and emitter, in the same orbit
+	 * 
+	 * @param power
+	 * @param aperature
+	 * @param altitude
+	 * @return
+	 */
+	public static Constellation simpleConstellation(double power, double aperature, double altitude) {
+		Satellite emittor = new Satellite("Emittor", aperature, (float) (Configuration.R0 / 1000
+				+ altitude), 0f, (float) Math.PI / 2, (float) (8.5 * Math.PI / 180), 0f, 0f);
+
+		LinkedList<Satellite> r = Lists.newLinkedList();
+		r.add(new Satellite("Receiver #1", emittor));
+
+		Constellation c = new Constellation(power, 5000, emittor, r);
+		c.setName(String.format("Constellation"));
+		return c;
+	}
+
+	public static Constellation swarm(double power, double aperature, double altitude) {
+		Satellite emittor = new Satellite("Emittor", aperature, (float) (Configuration.R0 / 1000
+				+ altitude), 0f, (float) Math.PI / 2, (float) (8.5 * Math.PI / 180), 0f, 0f);
+
+		double raan = (-2.18 / 180 * Math.PI);
+		double ta = (-2.18 / 180 * Math.PI);
+		double[][] sats = new double[][] { { +raan, +ta },
+											{ +raan, -ta },
+											{ -raan, +ta },
+											{ -raan, -ta } };
+
+		List<Satellite> receivers = Lists.newLinkedList();
+		for (int i = 0; i < sats.length; i++) {
+			double[] config = sats[i];
+			Satellite sat = new Satellite(
+					String.format("Satellite [RAAN:%f TA:%f]", config[0], config[1]),
+					emittor);
+			sat.setRightAngleOfAscendingNode(config[0]);
+			sat.setTrueAnomaly(config[1]);
+			receivers.add(sat);
+		}
+
+		return new Constellation(power, 5000, emittor, receivers);
+	}
 
 	/**
 	 * Power that the emmitor has [W] (of the laser beam)
@@ -53,10 +99,6 @@ public class Constellation {
 		this.pulseFrequency = pulseFrequency;
 	}
 
-	public void setReceivers(List<Satellite> receivers) {
-		this.receivers = receivers;
-	}
-
 	public Satellite getEmitter() {
 		return emitter;
 	}
@@ -95,6 +137,10 @@ public class Constellation {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public void setReceivers(List<Satellite> receivers) {
+		this.receivers = receivers;
 	}
 
 	@Override

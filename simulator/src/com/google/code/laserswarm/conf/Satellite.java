@@ -4,12 +4,12 @@ import jat.cm.KeplerElements;
 
 public class Satellite {
 
-	private float	semimajorAxis				= 0f;
-	private float	eccentricity				= 0f;
-	private float	inclination					= 0f;
-	private float	rightAngleOfAscendingNode	= 0f;
-	private float	trueAnomaly					= 0f;
-	private float	argumentOfPerigee			= 0f;
+	private double	semimajorAxis				= 0f;
+	private double	eccentricity				= 0f;
+	private double	inclination					= 0f;
+	private double	rightAngleOfAscendingNode	= 0f;
+	private double	trueAnomaly					= 0f;
+	private double	argumentOfPerigee			= 0f;
 	private String	name						= "SAT";
 	private double	aperatureArea				= 1;				// (0.08 * 0.08); // m�
 	private double	beamDivergence				= 2.3333E-4 / 2;	// rad for the half beam /|
@@ -18,13 +18,8 @@ public class Satellite {
 		trueAnomaly = semimajorAxis = rightAngleOfAscendingNode = inclination = eccentricity = argumentOfPerigee = 0f;
 	}
 
-	public Satellite(String name, Satellite s) {
-		this(name, s.aperatureArea, s.semimajorAxis, s.eccentricity, s.inclination,
-				s.rightAngleOfAscendingNode, s.trueAnomaly, s.argumentOfPerigee);
-	}
-
-	public Satellite(String name, double aperatureArea, float a, float e, float i, float raan, float ta,
-			float w) {
+	public Satellite(String name, double aperatureArea, double a, double e, double i, double raan,
+			double ta, double w) {
 		this.name = name;
 		trueAnomaly = ta;
 		semimajorAxis = a;
@@ -35,11 +30,16 @@ public class Satellite {
 		this.aperatureArea = aperatureArea;
 	}
 
+	public Satellite(String name, Satellite s) {
+		this(name, s.aperatureArea, s.semimajorAxis, s.eccentricity, s.inclination,
+				s.rightAngleOfAscendingNode, s.trueAnomaly, s.argumentOfPerigee);
+	}
+
 	public double getAperatureArea() {
 		return aperatureArea;
 	}
 
-	public float getArgumentOfPerigee() {
+	public double getArgumentOfPerigee() {
 		return argumentOfPerigee;
 	}
 
@@ -47,36 +47,12 @@ public class Satellite {
 		return beamDivergence;
 	}
 
-	public float getEccentricity() {
+	public double getEccentricity() {
 		return eccentricity;
 	}
 
-	public float getInclination() {
+	public double getInclination() {
 		return inclination;
-	}
-
-	public void setArgumentOfPerigee(float argumentOfPerigee) {
-		this.argumentOfPerigee = argumentOfPerigee;
-	}
-
-	public void setEccentricity(float eccentricity) {
-		this.eccentricity = eccentricity;
-	}
-
-	public void setInclination(float inclination) {
-		this.inclination = inclination;
-	}
-
-	public void setRightAngleOfAscendingNode(float rightAngleOfAscendingNode) {
-		this.rightAngleOfAscendingNode = rightAngleOfAscendingNode;
-	}
-
-	public void setSemimajorAxis(float semimajorAxis) {
-		this.semimajorAxis = semimajorAxis;
-	}
-
-	public void setTrueAnomaly(float trueAnomaly) {
-		this.trueAnomaly = trueAnomaly;
 	}
 
 	public KeplerElements getKeplerElements() {
@@ -84,20 +60,44 @@ public class Satellite {
 				argumentOfPerigee, trueAnomaly);
 	}
 
-	public float getRightAngleOfAscendingNode() {
+	public double getRightAngleOfAscendingNode() {
 		return rightAngleOfAscendingNode;
 	}
 
-	public float getSemimajorAxis() {
+	public double getSemimajorAxis() {
 		return semimajorAxis;
 	}
 
-	public float getTrueAnomaly() {
+	public double getTrueAnomaly() {
 		return trueAnomaly;
 	}
 
 	public void setAperatureArea(double aperatureArea) {
 		this.aperatureArea = aperatureArea;
+	}
+
+	public void setArgumentOfPerigee(double argumentOfPerigee) {
+		this.argumentOfPerigee = argumentOfPerigee;
+	}
+
+	public void setEccentricity(double eccentricity) {
+		this.eccentricity = eccentricity;
+	}
+
+	public void setInclination(double inclination) {
+		this.inclination = inclination;
+	}
+
+	public void setRightAngleOfAscendingNode(double config) {
+		this.rightAngleOfAscendingNode = config;
+	}
+
+	public void setSemimajorAxis(double semimajorAxis) {
+		this.semimajorAxis = semimajorAxis;
+	}
+
+	public void setTrueAnomaly(double config) {
+		this.trueAnomaly = config;
 	}
 
 	@Override
