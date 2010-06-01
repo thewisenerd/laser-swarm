@@ -7,6 +7,8 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -19,6 +21,7 @@ import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.math.Convert;
 import com.google.code.laserswarm.simulation.SimVars;
 import com.google.common.collect.Lists;
+import com.google.common.io.Files;
 import com.lyndir.lhunath.lib.system.logging.Logger;
 
 public class plotHeightDistribution {
@@ -143,8 +146,9 @@ public class plotHeightDistribution {
 	 *            Line thickness used in the plot.
 	 * @param plotFile
 	 *            File to plot to.
+	 * @throws IOException
 	 */
-	public void plot(LinkedList<Point3d> alts, double lineThickness, String plotFile) {
+	public void plot(LinkedList<Point3d> alts, double lineThickness, String plotFile) throws IOException {
 		logger.inf("Started plotting from LinkedList<Point3d>");
 		int width = 1600;
 		int height = 200;
@@ -171,15 +175,22 @@ public class plotHeightDistribution {
 		double hMin = Double.MAX_VALUE;
 		Iterator<Point3d> altsIt = alts.iterator();
 		int count = 0;
+		File out = new File("plotPoints.csv");
+		out.delete();
 		while (altsIt.hasNext()) {
 			count++;
 			Point3d sphere = altsIt.next();
 			logger.inf("Plot iteration: %s, with: %s, %s, %s", count, sphere.x, sphere.y, sphere.z);
+			Files.append(sphere.x + ", " + sphere.y + ", " + sphere.z + "\n", out, Charset
+					.defaultCharset());
 			double rp = sphere.x;
 			double hFound = rp - Configuration.R0;
 			theta.add(sphere.y); // longitude
 			phi.add(sphere.z); // latitude
 			h.add(hFound);
+			if (count < 2) {
+				hMax = hFound;
+			}
 			if (hFound > hMax) {
 				hMax = hFound;
 			}
@@ -199,8 +210,8 @@ public class plotHeightDistribution {
 				dist.add(dist.get(dist.size() - 1) + Configuration.R0 * c);
 			}
 		}
-		logger.inf("Still alive.");
 		double hDiff = hMax - hMin;
+		logger.inf("hDiff, hMax, hMin: %s, %s, %s", hDiff, hMax, hMin);
 		int size = h.size();
 		double scaleFactor = 1;
 		double plotOffset = 3;

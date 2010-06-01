@@ -1,7 +1,7 @@
 package com.google.code.laserswarm;
 
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -27,10 +27,10 @@ import com.google.code.laserswarm.util.demReader.DemCreationException;
 import com.google.common.collect.Maps;
 
 public class TestFindElevation {
-	private static final int	dataPoints	= 300;
+	private static final int	dataPoints	= 5000;
 
 	public static void main(String[] args) throws DemCreationException, MathException,
-			FileNotFoundException {
+			IOException {
 		EmitterHistory emitterHistory = null;
 		Constellation constellation = null;
 		Map<Satellite, TimeLine> satData = Maps.newHashMap();

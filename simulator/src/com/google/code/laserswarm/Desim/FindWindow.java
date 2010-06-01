@@ -35,7 +35,7 @@ public class FindWindow {
 	 * Time of the current emitted pulse
 	 */
 	public double					tPulse;
-	int								binFreqency;
+	int								binFrequency;
 	double							bigWindow;
 
 	/**
@@ -46,13 +46,13 @@ public class FindWindow {
 	 *            Map of satellites and their TimeLines
 	 * @param con
 	 *            Constellation to determine the pulseFrequency;
-	 * @param binFreqency
+	 * @param binFrequency
 	 *            determines the amount of samples, 5E8 corresponds to 2ns
 	 */
 	public FindWindow(EmitterHistory hist, Iterator<Double> tIt, Map<Satellite, TimeLine> sit, Constellation con,
-			int binFreqency) {
+			int binFrequency) {
 		// TODO Auto-generated constructor stub
-		this.binFreqency = binFreqency;
+		this.binFrequency = binFrequency;
 		this.hist = hist;
 		this.bigWindow = 1 / con.getPulseFrequency();
 		satData = sit;
@@ -60,7 +60,7 @@ public class FindWindow {
 		timeIt = tIt; //hist.time.iterator();
 		for (Satellite satIt : sit.keySet()) {
 			try {
-				satIter.put(satIt, satData.get(satIt).getIterator(binFreqency));
+				satIter.put(satIt, satData.get(satIt).getIterator(binFrequency));
 			} catch (MathException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

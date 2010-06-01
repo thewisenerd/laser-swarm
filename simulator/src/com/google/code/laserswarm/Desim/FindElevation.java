@@ -61,7 +61,7 @@ public class FindElevation {
 				signal += intIt; // add up signal photons
 			}
 		}
-		logger.inf("Noise, signal photons: %s, %s, Noise, signal times: %s, %s", noise, signal, tNoise,
+		logger.dbg("Noise, signal photons: %s, %s, Noise, signal times: %s, %s", noise, signal, tNoise,
 				tSignal);
 		return (noise / tNoise * (tNoise + tSignal)) / (signal + noise);
 	}
@@ -75,7 +75,7 @@ public class FindElevation {
 
 		// create an ellipse
 
-		logger.inf("emit: %s, %s, %s\n rec: %s, %s, %s\n travTime: %s", emit.x, emit.y, emit.z, rec.x,
+		logger.dbg("emit: %s, %s, %s\n rec: %s, %s, %s\n travTime: %s", emit.x, emit.y, emit.z, rec.x,
 				rec.y, rec.z, travTime);
 		double focalDist = emit.distance(rec); // distance between the focal points formed by receiver
 		// and emitter
@@ -117,18 +117,18 @@ public class FindElevation {
 			double nsPrct = findNoisePercentage(data);
 			prctNoise += nsPrct;
 			noiseCount++;
-			logger.inf("Percentage noise: %s", nsPrct);
+			logger.dbg("Percentage noise: %s", nsPrct);
 			TreeMap<Double, Integer> middleDataWindow = data.getData().get(
 					(int) Math.ceil(0.5 * data.getQueueLength())).getData();
 			// Count the photons in the pulse data window; find the altitude for every photon.
 			for (Double time : middleDataWindow.keySet()) {
 				Double lastKey = recTimes.get(tempSat).getLookupPosition().lastKey();
 				Integer nPhotons = middleDataWindow.get(time);
-				logger.inf("Time: %s : photon number: %s", time, nPhotons);
+				logger.dbg("Time: %s : photon number: %s", time, nPhotons);
 				if (time < lastKey) {
 					Double alt = calcAlt(pEmit, new Point3d(recTimes.get(tempSat).getLookupPosition()
 							.find(time)), time - tPulse);
-					logger.inf("Altitude: %s", alt);
+					logger.dbg("Altitude: %s", alt);
 					altCount += (int) nPhotons;
 					altTot += (double) nPhotons * alt;
 					for (int i = 0; i < (int) nPhotons; i++) {
@@ -143,7 +143,7 @@ public class FindElevation {
 		double altNoise = prctNoise * altCount;
 		// Remove the outlying altitudes.
 		Collections.sort(altitudes);
-		logger.inf("Length of the altitudes list: %s, altCount: %s, prctNoise: %s, altNoise: %s",
+		logger.dbg("Length of the altitudes list: %s, altCount: %s, prctNoise: %s, altNoise: %s",
 				altitudes.size(), altCount, prctNoise, altNoise);
 		while (altNoise > 0) {
 			double altFirst = altitudes.getFirst();
@@ -172,7 +172,7 @@ public class FindElevation {
 		for (DataContainer tempData : interpulseWindows.values()) {
 			tempData.setQueueLength(qLength);
 		}
-		FindWindow emitRecPair = new FindWindow(hist, timeIt, recTimes, con, (int) 1e6);
+		FindWindow emitRecPair = new FindWindow(hist, timeIt, recTimes, con, (int) 1e8);
 		int count = 0;
 		LinkedList<Double> timePulses = Lists.newLinkedList();
 		LinkedList<Point3d> posEmits = Lists.newLinkedList();
@@ -191,9 +191,9 @@ public class FindElevation {
 				}
 				// Store the emitter time and position.
 				timePulses.addLast(emitRecPair.tPulse);
-				logger.inf("Pulse time: %s", emitRecPair.tPulse);
+				logger.dbg("Pulse time: %s", emitRecPair.tPulse);
 				posEmits.addLast(new Point3d(hist.getPosition().find(emitRecPair.tPulse)));
-				logger.inf("Point: [%s, %s, %s]", hist.getPosition().find(emitRecPair.tPulse).x,
+				logger.dbg("Point: [%s, %s, %s]", hist.getPosition().find(emitRecPair.tPulse).x,
 						hist
 						.getPosition().find(emitRecPair.tPulse).y, hist.getPosition().find(
 						emitRecPair.tPulse).z);

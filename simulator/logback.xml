@@ -11,7 +11,7 @@
 	<logger name="com.google.code.laserswarm" level="DEBUG" />
 	<logger name="com.google.code.laserswarm.simulation" level="INFO" />
 	<logger name="com.google.code.laserswarm.util.demReader" level="INFO" />
-	<logger name="com.google.code.laserswarm.Desim.FindElevation" level="ERROR" />
+	<logger name="com.google.code.laserswarm.Desim.FindElevation" level="INFO" />
 	
 	<root level="DEBUG">
 		<appender-ref ref="STDOUT" />
