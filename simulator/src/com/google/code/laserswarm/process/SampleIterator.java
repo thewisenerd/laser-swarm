@@ -38,13 +38,13 @@ public class SampleIterator implements Iterator<MeasermentSample> {
 		return laserPhotons.lastKey();
 	}
 
-	public boolean hasNext(int n) {
-		return ((laserPhotons.ceilingKey(timeBlock(time + n * binTime))) != null);
-	}
-
 	@Override
 	public boolean hasNext() {
 		return hasNext(2);
+	}
+
+	public boolean hasNext(int n) {
+		return ((laserPhotons.ceilingKey(timeBlock(time + n * binTime))) != null);
 	}
 
 	@Override
@@ -68,6 +68,16 @@ public class SampleIterator implements Iterator<MeasermentSample> {
 		} catch (ArgumentOutsideDomainException e) {
 			return null;
 		}
+	}
+
+	public MeasermentSample nextNonZero() {
+		MeasermentSample nxt = null;
+		while (hasNext()) {
+			nxt = next();
+			if (nxt.getPhotons() > 0)
+				return nxt;
+		}
+		return new MeasermentSample(nxt.getTime(), 1);
 	}
 
 	@Override
