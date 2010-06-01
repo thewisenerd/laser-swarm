@@ -12,6 +12,7 @@ import org.geotools.xml.xsi.XSISimpleTypes.Int;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Maps;
+import com.lyndir.lhunath.lib.system.logging.Logger;
 
 /**
  * @author Administrator
@@ -41,6 +42,7 @@ public class NoiseData {
 	}
 
 
+	private static final Logger	logger	= Logger.get(NoiseData.class);
 
 	private TimePair noiseFrameL;		//points to the first and last element of the left noise region on interpulse window
 	private TimePair noiseFrameR;		//points to the first and last element of the right noise region on interpulse window
@@ -67,7 +69,15 @@ public class NoiseData {
 		dataTMP= Maps.newTreeMap(interpulseData.subMap(dataFrame.t0Ref, true, dataFrame.tFRef, true));//create a treem
 		
 		noiseTMP.putAll(Maps.newTreeMap(interpulseData.subMap(windowFrame.t0Ref, true, dataFrame.t0Ref, false)));
-		noiseTMP.putAll(Maps.newTreeMap(interpulseData.subMap(dataFrame.tFRef, false, windowFrame.tFRef, false)));
+		
+		try{
+			TreeMap tmp = Maps.newTreeMap(interpulseData.subMap(dataFrame.tFRef, false, windowFrame.tFRef, false));
+			noiseTMP.putAll(tmp);
+		}
+				catch(Exception e){
+					logger.inf("Reached end of array: %s", null);
+					
+				}
 		
 		Predicate<Integer> filt = Predicates.not(Predicates.equalTo(new Integer(0)));	//create a filter that checks for 0
 		noise = new TreeMap<Double,Integer>(Maps.filterValues(noiseTMP, filt));		//apply filter
