@@ -170,8 +170,11 @@ public class plotHeightDistribution {
 		double hMax = Double.MIN_VALUE;
 		double hMin = Double.MAX_VALUE;
 		Iterator<Point3d> altsIt = alts.iterator();
+		int count = 0;
 		while (altsIt.hasNext()) {
+			count++;
 			Point3d sphere = altsIt.next();
+			logger.inf("Plot iteration: %s, with: %s, %s, %s", count, sphere.x, sphere.y, sphere.z);
 			double rp = sphere.x;
 			double hFound = rp - Configuration.R0;
 			theta.add(sphere.y); // longitude
@@ -196,6 +199,7 @@ public class plotHeightDistribution {
 				dist.add(dist.get(dist.size() - 1) + Configuration.R0 * c);
 			}
 		}
+		logger.inf("Still alive.");
 		double hDiff = hMax - hMin;
 		int size = h.size();
 		double scaleFactor = 1;

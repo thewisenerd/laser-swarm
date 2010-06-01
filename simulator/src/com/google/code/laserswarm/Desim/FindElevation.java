@@ -17,6 +17,7 @@ import org.apache.commons.math.MathException;
 import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.conf.Constellation;
 import com.google.code.laserswarm.conf.Satellite;
+import com.google.code.laserswarm.math.Convert;
 import com.google.code.laserswarm.process.EmitterHistory;
 import com.google.code.laserswarm.process.TimeLine;
 import com.google.common.collect.Lists;
@@ -50,7 +51,7 @@ public class FindElevation {
 			tNoise += noiseIt.getNoiseFrameL().diff() + // calculate time of the noise in one interpulse
 					// window
 					noiseIt.getNoiseFrameR().diff();
-			tSignal += noiseIt.getWindowFrame().diff(); // calculate the signal time in one interpulse
+			tSignal += noiseIt.getDataFrame().diff(); // calculate the signal time in one interpulse
 			// window
 
 			for (Integer intIt : noiseIt.getNoise().values()) {
@@ -60,6 +61,8 @@ public class FindElevation {
 				signal += intIt; // add up signal photons
 			}
 		}
+		logger.inf("Noise, signal photons: %s, %s, Noise, signal times: %s, %s", noise, signal, tNoise,
+				tSignal);
 		return (noise / tNoise * (tNoise + tSignal)) / (signal + noise);
 	}
 
@@ -72,6 +75,8 @@ public class FindElevation {
 
 		// create an ellipse
 
+		logger.inf("emit: %s, %s, %s\n rec: %s, %s, %s\n travTime: %s", emit.x, emit.y, emit.z, rec.x,
+				rec.y, rec.z, travTime);
 		double focalDist = emit.distance(rec); // distance between the focal points formed by receiver
 		// and emitter
 		double dist = Math.abs(travTime) * Configuration.c;
@@ -103,13 +108,16 @@ public class FindElevation {
 			throws MathException {
 		double prctNoise = 0;
 		LinkedList<Double> altitudes = Lists.newLinkedList();
-		double altCount = 0;
+		int altCount = 0;
+		int noiseCount = 0;
 		double altTot = 0;
 		for (Satellite tempSat : satsDatasets.keySet()) {
 			DataContainer data = satsDatasets.get(tempSat);
 			// Count the noise photons.
-			prctNoise += findNoisePercentage(data);
-			logger.inf("Percentage noise: %s", prctNoise);
+			double nsPrct = findNoisePercentage(data);
+			prctNoise += nsPrct;
+			noiseCount++;
+			logger.inf("Percentage noise: %s", nsPrct);
 			TreeMap<Double, Integer> middleDataWindow = data.getData().get(
 					(int) Math.ceil(0.5 * data.getQueueLength())).getData();
 			// Count the photons in the pulse data window; find the altitude for every photon.
@@ -121,23 +129,22 @@ public class FindElevation {
 					Double alt = calcAlt(pEmit, new Point3d(recTimes.get(tempSat).getLookupPosition()
 							.find(time)), time - tPulse);
 					logger.inf("Altitude: %s", alt);
-					altCount += nPhotons;
-					altTot += nPhotons * alt;
-					for (int i = 0; i < nPhotons; i++) {
+					altCount += (int) nPhotons;
+					altTot += (double) nPhotons * alt;
+					for (int i = 0; i < (int) nPhotons; i++) {
 						altitudes.add(alt);
 					}
-				} // catch (Exception e) {
-				// logger.err(e, "");
-				// break;
-				// }
+				}
 			}
 		}
 		// Find the percentage of noise, the average altitude found, the number of noise photons.
-		prctNoise /= satsDatasets.size();
+		prctNoise /= (double) noiseCount;
 		double altAv = altTot / altCount;
 		double altNoise = prctNoise * altCount;
 		// Remove the outlying altitudes.
 		Collections.sort(altitudes);
+		logger.inf("Length of the altitudes list: %s, altCount: %s, prctNoise: %s, altNoise: %s",
+				altitudes.size(), altCount, prctNoise, altNoise);
 		while (altNoise > 0) {
 			double altFirst = altitudes.getFirst();
 			double altLast = altitudes.getLast();
@@ -146,7 +153,7 @@ public class FindElevation {
 			} else {
 				altitudes.removeLast();
 			}
-			altNoise -= 1;
+			altNoise--;
 		}
 		// Find the average altitude for the cleansed altitude set.
 		Iterator<Double> altIt = altitudes.iterator();
@@ -159,7 +166,7 @@ public class FindElevation {
 	}
 
 	public static LinkedList<Point3d> run(Map<Satellite, TimeLine> recTimes, EmitterHistory hist,
-			Constellation con) throws MathException {
+			Constellation con, int dataPoints) throws MathException {
 		Iterator<Double> timeIt = hist.time.iterator();
 		Map<Satellite, DataContainer> interpulseWindows = Maps.newHashMap();
 		for (DataContainer tempData : interpulseWindows.values()) {
@@ -170,7 +177,7 @@ public class FindElevation {
 		LinkedList<Double> timePulses = Lists.newLinkedList();
 		LinkedList<Point3d> posEmits = Lists.newLinkedList();
 		LinkedList<Point3d> altitudes = Lists.newLinkedList();
-		while (timeIt.hasNext()) {
+		while (count < dataPoints - 1 && timeIt.hasNext()) {
 			count++;
 			logger.inf("Iteration number %s", count);
 			// Copy over the values from FindWindow.
@@ -186,7 +193,8 @@ public class FindElevation {
 				timePulses.addLast(emitRecPair.tPulse);
 				logger.inf("Pulse time: %s", emitRecPair.tPulse);
 				posEmits.addLast(new Point3d(hist.getPosition().find(emitRecPair.tPulse)));
-				logger.inf("Point: [%s, %s, %s]", hist.getPosition().find(emitRecPair.tPulse).x, hist
+				logger.inf("Point: [%s, %s, %s]", hist.getPosition().find(emitRecPair.tPulse).x,
+						hist
 						.getPosition().find(emitRecPair.tPulse).y, hist.getPosition().find(
 						emitRecPair.tPulse).z);
 				// Remove pulse data we do not care about any more.
@@ -197,13 +205,18 @@ public class FindElevation {
 				// Do the actual data processing.
 				if (count > qLength) {
 					Point3d thisEmit = posEmits.getFirst();
+					Point3d sphericalEmit = Convert.toSphere(thisEmit);
 					altitudes.add(new Point3d(
 							Configuration.R0
 							+ findAltitude(recTimes, interpulseWindows, timePulses.getFirst(),
 							thisEmit),
-							thisEmit.y, thisEmit.z));
+							sphericalEmit.y, sphericalEmit.z));
 				}
 			}
+		}
+		while (Double.isNaN(altitudes.getLast().x)
+				|| Math.abs(altitudes.getLast().x - altitudes.get(altitudes.size() - 2).x) > 1000) {
+			altitudes.removeLast();
 		}
 		return altitudes;
 	}
