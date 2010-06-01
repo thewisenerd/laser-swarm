@@ -27,7 +27,7 @@ import com.google.code.laserswarm.util.demReader.DemCreationException;
 import com.google.common.collect.Maps;
 
 public class TestFindElevation {
-	private static final int	dataPoints	= 5000;
+	private static final int	dataPoints	= 250;
 
 	public static void main(String[] args) throws DemCreationException, MathException,
 			IOException {
@@ -82,5 +82,7 @@ public class TestFindElevation {
 		}
 		LinkedList<Point3d> alts = FindElevation.run(satData, emitterHistory, constellation, dataPoints);
 		plotter.plot(alts, 3, "heightAnalysed");
+		LinkedList<Point3d> averagedAlts = FindElevation.average(alts, 21);
+		plotter.plot(averagedAlts, 3, "heightAnalysed&Averaged");
 	}
 }

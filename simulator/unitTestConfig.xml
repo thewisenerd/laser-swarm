@@ -1,5 +1,5 @@
 <com.google.code.laserswarm.conf.Configuration>
-  <atmOpticalThickness>0.25</atmOpticalThickness>
+  <atmOpticalThickness>0.1</atmOpticalThickness>
   <filePrefixReport></filePrefixReport>
   <filePathReport>./</filePathReport>
   <fileNameDigitalElevationModel></fileNameDigitalElevationModel>

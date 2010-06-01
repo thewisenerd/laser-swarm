@@ -3,6 +3,7 @@
  */
 package com.google.code.laserswarm.Desim;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -163,6 +164,33 @@ public class FindElevation {
 			altTot += altIt.next();
 		}
 		return altTot / altCount;
+	}
+
+	public static LinkedList<Point3d> average(LinkedList<Point3d> altitudes, int width) {
+		if (width < 1) {
+			width = 1;
+		}
+		LinkedList<Point3d> result = Lists.newLinkedList();
+		ArrayList<Point3d> temp = Lists.newArrayList();
+		int count = 0;
+		int mid = (int) Math.floor(0.5 * width);
+		for (Point3d point : altitudes) {
+			count++;
+			temp.add(point);
+			while (temp.size() > width) {
+				temp.remove(0);
+			}
+			if (temp.size() == width) {
+				double tot = 0;
+				for (Point3d pt : temp) {
+					tot += pt.x;
+				}
+				tot = tot / width;
+				Point3d sat = altitudes.get(count - mid);
+				result.add(new Point3d(tot, sat.y, sat.z));
+			}
+		}
+		return result;
 	}
 
 	public static LinkedList<Point3d> run(Map<Satellite, TimeLine> recTimes, EmitterHistory hist,

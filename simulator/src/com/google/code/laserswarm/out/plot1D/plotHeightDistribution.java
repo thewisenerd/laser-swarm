@@ -118,7 +118,8 @@ public class plotHeightDistribution {
 		}
 		g.drawString("h [m]", 5, (int) (0.13 * height * scaleFactor + fontSize));
 		for (int i = 0; i < 5; i++) {
-			g.drawString(Integer.toString((int) ((1 - i * 0.25) * hMax)), 5, (int) (i * 0.25 * height
+			g.drawString(Integer.toString((int) ((1 - i * 0.25) * hDiff + hMin)), 5, (int) (i * 0.25
+					* height
 					* scaleFactor + plotOffset + fontSize));
 		}
 		for (int i = 0; i < 8; i++) {
@@ -242,7 +243,8 @@ public class plotHeightDistribution {
 		}
 		g.drawString("h [m]", 5, (int) (0.13 * height * scaleFactor + fontSize));
 		for (int i = 0; i < 5; i++) {
-			g.drawString(Integer.toString((int) ((1 - i * 0.25) * hMax)), 5, (int) (i * 0.25 * height
+			g.drawString(Integer.toString((int) ((1 - i * 0.25) * hDiff + hMin)), 5, (int) (i * 0.25
+					* height
 					* scaleFactor + plotOffset + fontSize));
 		}
 		for (int i = 0; i < 8; i++) {
