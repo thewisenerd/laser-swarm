@@ -29,8 +29,6 @@ import com.lyndir.lhunath.lib.system.logging.Logger;
 
 public class Optimize extends LaserSwarm implements MultivariateRealFunction {
 
-	private static final Logger	logger	= Logger.get(Optimize.class);
-
 	private class PrefLog {
 		private File	log	= new File("optimize.csv");
 
@@ -56,6 +54,8 @@ public class Optimize extends LaserSwarm implements MultivariateRealFunction {
 		}
 	}
 
+	private static final Logger	logger	= Logger.get(Optimize.class);
+
 	public static void main(String[] args) {
 		Configuration.getInstance();
 		Configuration.setMode(Sets.newHashSet( //
@@ -67,15 +67,25 @@ public class Optimize extends LaserSwarm implements MultivariateRealFunction {
 		sim.optimize();
 	}
 
+	private static Constellation mkConstellation(double power, double aperature) {
+		return Constellation.swarm(power, aperature, 500);
+	}
+
+	private int		photons	= 0;
+	private PrefLog	prefLog	= new PrefLog();
+
+	@Override
+	protected List<Constellation> mkConstellations() {
+		List<Constellation> constellations = Lists.newLinkedList();
+		return constellations;
+	}
+
 	@Override
 	protected List<SimTemplate> mkTemplates(Constellation constellation) {
 		LinkedList<SimTemplate> tmpls = Lists.newLinkedList();
 		tmpls.add(new SimTemplate(constellation, 1000L));
 		return tmpls;
 	}
-
-	private int		photons	= 0;
-	private PrefLog	prefLog	= new PrefLog();
 
 	private void optimize() {
 		NelderMead optimizer = new NelderMead();
@@ -90,24 +100,6 @@ public class Optimize extends LaserSwarm implements MultivariateRealFunction {
 		} catch (MathException e) {
 			e.printStackTrace();
 		}
-	}
-
-	private static Constellation mkConstellation(double power, double aperature) {
-		Satellite emittor = new Satellite("Emittor", aperature, (float) Configuration.R0 / 1000 + 500,
-				0f, (float) Math.PI / 2, (float) (8.5 * Math.PI / 180), 0f, 0f);
-
-		LinkedList<Satellite> r = Lists.newLinkedList();
-		r.add(new Satellite("Receiver #1", emittor));
-
-		Constellation c = new Constellation(power, 5000, emittor, r);
-		c.setName(String.format("Constellation"));
-		return c;
-	}
-
-	@Override
-	protected List<Constellation> mkConstellations() {
-		List<Constellation> constellations = Lists.newLinkedList();
-		return constellations;
 	}
 
 	@Override

@@ -26,6 +26,32 @@ public abstract class LaserSwarm {
 
 	protected EarthModel						earth;
 
+	protected List<Constellation> mkConstellations() {
+		LinkedList<Constellation> l = Lists.newLinkedList();
+		l.add(Constellation.swarm(5, 0.007, 500));
+		return l;
+	}
+
+	protected void mkEarth() {
+		earth = EarthModel.getDefaultModel();
+	}
+
+	protected List<SimTemplate> mkTemplates(Constellation constellation) {
+		LinkedList<SimTemplate> tmpls = Lists.newLinkedList();
+
+		for (double[] timeRange : timeSteps) {
+			SimTemplate template = new SimTemplate(constellation);
+			template.setTime(timeRange[0], timeRange[1]);
+			tmpls.add(template);
+		}
+
+		return tmpls;
+	}
+
+	protected void process() {
+		// throw new UnsupportedOperationException();
+	}
+
 	public void run() {
 		if (Configuration.hasAction(Actions.SLEEP)) {
 			logger.inf("Sleeping ...");
@@ -68,12 +94,6 @@ public abstract class LaserSwarm {
 
 	}
 
-	protected abstract List<Constellation> mkConstellations();
-
-	protected void process() {
-		// throw new UnsupportedOperationException();
-	}
-
 	protected void simulate() {
 		if (earth == null)
 			mkEarth();
@@ -83,21 +103,5 @@ public abstract class LaserSwarm {
 			simMaster.addSimTemplates(mkTemplates(constellation));
 
 		simulations = simMaster.runSim();
-	}
-
-	protected List<SimTemplate> mkTemplates(Constellation constellation) {
-		LinkedList<SimTemplate> tmpls = Lists.newLinkedList();
-
-		for (double[] timeRange : timeSteps) {
-			SimTemplate template = new SimTemplate(constellation);
-			template.setTime(timeRange[0], timeRange[1]);
-			tmpls.add(template);
-		}
-
-		return tmpls;
-	}
-
-	protected void mkEarth() {
-		earth = EarthModel.getDefaultModel();
 	}
 }

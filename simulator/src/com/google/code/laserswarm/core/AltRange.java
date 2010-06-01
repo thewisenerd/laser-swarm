@@ -1,6 +1,5 @@
 package com.google.code.laserswarm.core;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import com.google.code.laserswarm.conf.Configuration;
@@ -26,13 +25,7 @@ public class AltRange extends LaserSwarm {
 	}
 
 	private static Constellation mkConstellation(float alt) {
-		Satellite emittor = new Satellite("SAT01", (0.08 * 0.08), 6370f + alt, 0f, (float) Math.PI / 2,
-				(float) (8.5 * Math.PI / 180), 0f, 0f);
-		LinkedList<Satellite> r = Lists.newLinkedList();
-		r.add(emittor);
-		Constellation c = new Constellation(30 * (1. / 3), 5000, emittor, r);
-		c.setName(String.format("Constellation %s km", alt));
-		return c;
+		return Constellation.swarm(5, 0.007, alt);
 	}
 
 	public AltRange() {
