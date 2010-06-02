@@ -96,18 +96,17 @@ public class SampleIterator implements Iterator<MeasermentSample> {
 			double nextPulsePhotonBin = timeBlock(nextPulsePhotonTime);
 			double nextSunPhotonBin = timeBlock((2 * Math.random()) / noise.value(newTime));
 
+			time = Math.min(nextPulsePhotonBin, nextSunPhotonBin);
+
 			if (nextPulsePhotonBin == nextSunPhotonBin)
 				// We re so darn unlucky, two at the exact same time (bin) -_-
-				return new MeasermentSample(nextPulsePhotonBin * binTime,
-						laserPhotons.get(nextPulsePhotonTime) + 1);
+				return new MeasermentSample(time, laserPhotons.get(nextPulsePhotonTime) + 1);
 			else if (nextPulsePhotonBin < nextSunPhotonBin)
 				// The first pulse sample
-				return new MeasermentSample(nextPulsePhotonBin * binTime,
-						laserPhotons.get(nextPulsePhotonTime));
+				return new MeasermentSample(time, laserPhotons.get(nextPulsePhotonTime));
 			else
 				// The first noise sample
-				return new MeasermentSample(nextSunPhotonBin * binTime,
-						1);
+				return new MeasermentSample(time, 1);
 
 		} catch (MathException e) {
 			return new MeasermentSample(newTime, 1);
