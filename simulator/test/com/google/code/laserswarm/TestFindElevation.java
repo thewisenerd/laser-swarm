@@ -30,7 +30,7 @@ import com.google.code.laserswarm.util.demReader.DemCreationException;
 import com.google.common.collect.Maps;
 
 public class TestFindElevation {
-	private static final int	dataPoints	= 250;
+	private static final int	dataPoints	= 1000;
 
 	public static void main(String[] args) throws DemCreationException, MathException,
 			IOException {
