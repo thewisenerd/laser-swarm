@@ -28,6 +28,8 @@ public class SampleIterator implements Iterator<MeasermentSample> {
 	private SimpsonIntegrator			integrator		= new SimpsonIntegrator();
 	private boolean						endNextNonZero	= false;
 
+	private double						startT;
+
 	public SampleIterator(double binFreqency, TreeMap<Double, Integer> laser,
 			PolynomialSplineFunction noise) {
 		super();
@@ -35,7 +37,8 @@ public class SampleIterator implements Iterator<MeasermentSample> {
 		this.laserPhotons = laser;
 		this.noise = noise;
 
-		time = timeBlock(laserPhotons.firstKey() + binTime);
+		startT = timeBlock(laserPhotons.firstKey() + binTime);
+		time = startT;
 	}
 
 	public double endTime() {
@@ -59,7 +62,7 @@ public class SampleIterator implements Iterator<MeasermentSample> {
 			if (Math.random() <= t - noisePhotons)
 				noisePhotons++;
 
-			return new MeasermentSample(binTime * timeBlock(endT), photons + noisePhotons);
+			return new MeasermentSample(timeBlock(endT), photons + noisePhotons);
 		} catch (Exception e) {
 			throw new MathException(e);
 		}
@@ -71,7 +74,8 @@ public class SampleIterator implements Iterator<MeasermentSample> {
 	}
 
 	public boolean hasNext(int n) {
-		return ((laserPhotons.ceilingKey(timeBlock(time + n * binTime))) != null);
+		boolean r = ((laserPhotons.ceilingKey(timeBlock(time + n * binTime))) != null);
+		return r;
 	}
 
 	public boolean hasNextNonZero() {
