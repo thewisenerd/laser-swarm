@@ -13,6 +13,7 @@ import org.apache.commons.math.MathException;
 
 import com.google.code.laserswarm.Desim.Filter;
 import com.google.code.laserswarm.Desim.FilterAverage;
+import com.google.code.laserswarm.Desim.FilterOutlierRemoval;
 import com.google.code.laserswarm.Desim.FindElevation;
 import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.conf.Constellation;
@@ -87,5 +88,8 @@ public class TestFindElevation {
 		Filter filtAvg = new FilterAverage(21);
 		LinkedList<Point3d> averagedAlts = filtAvg.filter(alts);
 		plotter.plot(averagedAlts, 3, "heightAnalysed&Averaged");
+		Filter filtOutliers = new FilterOutlierRemoval(200, 25);
+		LinkedList<Point3d> outlierAlts = filtOutliers.filter(alts);
+		plotter.plot(outlierAlts, 3, "heightAnalysed&OutlierFiltered");
 	}
 }

@@ -66,7 +66,7 @@ public class SampleIterator implements Iterator<MeasermentSample> {
 
 	@Override
 	public boolean hasNext() {
-		return hasNext(2);
+		return hasNext(3);
 	}
 
 	public boolean hasNext(int n) {
