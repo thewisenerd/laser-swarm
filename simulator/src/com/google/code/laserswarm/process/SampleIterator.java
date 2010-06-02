@@ -52,8 +52,9 @@ public class SampleIterator implements Iterator<MeasermentSample> {
 				found = true;
 			}
 
-			// double t = noise.value(time);
-			double t = integrator.integrate(noise, startT, endT);
+			double t = noise.value(time);
+			// double t = integrator.integrate(noise, startT, endT);
+			t *= binTime;
 			int noisePhotons = (int) t;
 			if (Math.random() <= t - noisePhotons)
 				noisePhotons++;
