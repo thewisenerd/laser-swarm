@@ -4,7 +4,8 @@ import java.util.Iterator;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
-import org.apache.commons.math.ArgumentOutsideDomainException;
+import org.apache.commons.math.MathException;
+import org.apache.commons.math.analysis.integration.SimpsonIntegrator;
 import org.apache.commons.math.analysis.polynomials.PolynomialSplineFunction;
 
 import com.lyndir.lhunath.lib.system.logging.Logger;
@@ -18,11 +19,14 @@ public class SampleIterator implements Iterator<MeasermentSample> {
 	private double						time;
 
 	@Deprecated
-	public int							c		= 0;
+	public int							c				= 0;
 	@Deprecated
-	public boolean						found	= false;
+	public boolean						found			= false;
 
-	private static final Logger			logger	= Logger.get(SampleIterator.class);
+	private static final Logger			logger			= Logger.get(SampleIterator.class);
+
+	private SimpsonIntegrator			integrator		= new SimpsonIntegrator();
+	private boolean						endNextNonZero	= false;
 
 	public SampleIterator(double binFreqency, TreeMap<Double, Integer> laser,
 			PolynomialSplineFunction noise) {
@@ -38,6 +42,28 @@ public class SampleIterator implements Iterator<MeasermentSample> {
 		return laserPhotons.lastKey();
 	}
 
+	private MeasermentSample getMeasermentSample(double startT, double endT) throws MathException {
+		try {
+			Integer photons = 0;
+			SortedMap<Double, Integer> values = laserPhotons.subMap(startT, endT);
+			for (Integer photonsSample : values.values()) {
+				c++;
+				photons += photonsSample;
+				found = true;
+			}
+
+			// double t = noise.value(time);
+			double t = integrator.integrate(noise, startT, endT);
+			int noisePhotons = (int) t;
+			if (Math.random() <= t - noisePhotons)
+				noisePhotons++;
+
+			return new MeasermentSample(binTime * timeBlock(endT), photons + noisePhotons);
+		} catch (Exception e) {
+			throw new MathException(e);
+		}
+	}
+
 	@Override
 	public boolean hasNext() {
 		return hasNext(2);
@@ -47,37 +73,44 @@ public class SampleIterator implements Iterator<MeasermentSample> {
 		return ((laserPhotons.ceilingKey(timeBlock(time + n * binTime))) != null);
 	}
 
+	public boolean hasNextNonZero() {
+		return time < endTime();
+
+	}
+
 	@Override
 	public MeasermentSample next() {
 		time += binTime;
 		try {
-			found = false;
-			Integer photons = 0;
-			SortedMap<Double, Integer> values = laserPhotons.subMap(time, time + binTime);
-			for (Integer photonsSample : values.values()) {
-				c++;
-				photons += photonsSample;
-				found = true;
-			}
-
-			double t = noise.value(time);
-			int noisePhotons = (int) t;
-			if (Math.random() <= t - noisePhotons)
-				noisePhotons++;
-			return new MeasermentSample(time, photons + noisePhotons);
-		} catch (ArgumentOutsideDomainException e) {
+			return getMeasermentSample(time, time + binTime);
+		} catch (MathException e) {
 			return null;
 		}
 	}
 
 	public MeasermentSample nextNonZero() {
-		MeasermentSample nxt = null;
-		while (hasNext()) {
-			nxt = next();
-			if (nxt.getPhotons() > 0)
-				return nxt;
+		double newTime = time + binTime;
+		try {
+			double nextPulsePhotonTime = laserPhotons.ceilingKey(newTime);
+			double nextPulsePhotonBin = timeBlock(nextPulsePhotonTime);
+			double nextSunPhotonBin = timeBlock((2 * Math.random()) / noise.value(newTime));
+
+			if (nextPulsePhotonBin == nextSunPhotonBin)
+				// We re so darn unlucky, two at the exact same time (bin) -_-
+				return new MeasermentSample(nextPulsePhotonBin * binTime,
+						laserPhotons.get(nextPulsePhotonTime) + 1);
+			else if (nextPulsePhotonBin < nextSunPhotonBin)
+				// The first pulse sample
+				return new MeasermentSample(nextPulsePhotonBin * binTime,
+						laserPhotons.get(nextPulsePhotonTime));
+			else
+				// The first noise sample
+				return new MeasermentSample(nextSunPhotonBin * binTime,
+						1);
+
+		} catch (MathException e) {
+			return new MeasermentSample(newTime, 1);
 		}
-		return new MeasermentSample(nxt.getTime(), 1);
 	}
 
 	@Override
