@@ -166,28 +166,16 @@ public class FindElevation {
 		return altTot / altCount;
 	}
 
-	public static LinkedList<Point3d> average(LinkedList<Point3d> altitudes, int width) {
-		if (width < 1) {
-			width = 1;
-		}
+	public static LinkedList<Point3d> outlierRemoval(LinkedList<Point3d> altitudes, int sigmaWindow,
+			int meanWindow) {
 		LinkedList<Point3d> result = Lists.newLinkedList();
 		ArrayList<Point3d> temp = Lists.newArrayList();
 		int count = 0;
-		int mid = (int) Math.floor(0.5 * width);
 		for (Point3d point : altitudes) {
 			count++;
 			temp.add(point);
-			while (temp.size() > width) {
-				temp.remove(0);
-			}
-			if (temp.size() == width) {
-				double tot = 0;
-				for (Point3d pt : temp) {
-					tot += pt.x;
-				}
-				tot = tot / width;
-				Point3d sat = altitudes.get(count - mid);
-				result.add(new Point3d(tot, sat.y, sat.z));
+			if (count == sigmaWindow) {
+
 			}
 		}
 		return result;

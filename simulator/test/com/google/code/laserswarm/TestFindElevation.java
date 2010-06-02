@@ -11,6 +11,8 @@ import javax.vecmath.Point3d;
 
 import org.apache.commons.math.MathException;
 
+import com.google.code.laserswarm.Desim.Filter;
+import com.google.code.laserswarm.Desim.FilterAverage;
 import com.google.code.laserswarm.Desim.FindElevation;
 import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.conf.Constellation;
@@ -82,7 +84,8 @@ public class TestFindElevation {
 		}
 		LinkedList<Point3d> alts = FindElevation.run(satData, emitterHistory, constellation, dataPoints);
 		plotter.plot(alts, 3, "heightAnalysed");
-		LinkedList<Point3d> averagedAlts = FindElevation.average(alts, 21);
+		Filter filtAvg = new FilterAverage(21);
+		LinkedList<Point3d> averagedAlts = filtAvg.filter(alts);
 		plotter.plot(averagedAlts, 3, "heightAnalysed&Averaged");
 	}
 }
