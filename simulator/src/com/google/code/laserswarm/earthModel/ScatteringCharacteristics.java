@@ -149,6 +149,17 @@ public class ScatteringCharacteristics implements Distribution {
 		}
 	}
 
+	/**
+	 * Visualize the scattering characteristics to an image.
+	 * <p>
+	 * This code uses J/Link with mathematica. To use this function you need to have Mathematica
+	 * installed, and the appropriate kernel set in the config.
+	 * </p>
+	 * 
+	 * @return
+	 * @throws LinkageError
+	 *             If there was an error in creating the MathLink to Mathematica
+	 */
 	private Image toImage() throws LinkageError {
 		File kernelFile = Configuration.getInstance().getMathematicaKernel();
 
@@ -165,10 +176,13 @@ public class ScatteringCharacteristics implements Distribution {
 			throw new LinkageError("An error occurred connecting to the kernel)");
 		}
 
+		File csv = new File(Configuration.volitileCache, "scatter.csv");
+		toCSV(csv.getAbsolutePath());
+
 		byte[] gifData = ml
 				.evaluateToImage(
 						"Clear[\"Global`*\"];"
-								+ "data = Import[\"C:/Users/simon/workspace/laser-swarm-simulator/scatter.csv\", \"Table\"];"
+								+ "data = Import[\"" + csv.getAbsolutePath() + "\", \"Table\"];"
 								+ "scale = data[[All, 6]];"
 								+ "scale = scale /Mean[scale];"
 								+ "coordinates = data[[All, 3 ;; 5]];"
