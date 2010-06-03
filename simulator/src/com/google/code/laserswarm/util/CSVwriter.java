@@ -12,9 +12,16 @@ public class CSVwriter {
 
 	private static final Logger	logger	= Logger.get(CSVwriter.class);
 	private File				csvFile;
+	private String				seperator;
 
 	public CSVwriter(File file) {
+		this(file, ",\t");
+	}
+
+	public CSVwriter(File file, String seperator) {
+		this.seperator = seperator;
 		this.csvFile = file;
+
 		try {
 			csvFile.delete();
 			csvFile.createNewFile();
@@ -45,7 +52,7 @@ public class CSVwriter {
 				str.append(values[i]);
 				str.append(sufix);
 				if (i + 1 < values.length)
-					str.append(",\t");
+					str.append(seperator);
 			}
 			Files.append(str + "\n", csvFile, Charset.defaultCharset());
 		} catch (IOException e) {
