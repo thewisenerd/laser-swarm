@@ -34,9 +34,9 @@ public class Constellation {
 		double raan = emittor.getRightAngleOfAscendingNode() + (-2.18 / 180 * Math.PI);
 		double ta = emittor.getTrueAnomaly() + (-2.18 / 180 * Math.PI);
 		double[][] sats = new double[][] { { +raan, 0 },
-											{ -raan, 0 },
-											{ 0, +ta },
-											{ 0, -ta } };
+				{ -raan, 0 },
+				{ 0, +ta },
+				{ 0, -ta } };
 
 		List<Satellite> receivers = Lists.newLinkedList();
 		for (int i = 0; i < sats.length; i++) {
@@ -53,7 +53,7 @@ public class Constellation {
 	}
 
 	/**
-	 * Power that the emmitor has [W] (of the laser beam)
+	 * Power that the emitter has [W] (of the laser beam)
 	 */
 	private double			power				= 0f;
 
@@ -143,8 +143,20 @@ public class Constellation {
 		this.receivers = receivers;
 	}
 
+	public void setReceiverBandWidth(double receiverBandWidth) {
+		this.receiverBandWidth = receiverBandWidth;
+	}
+
 	@Override
 	public String toString() {
 		return name;
+	}
+
+	public void setReceiverEfficiency(double receiverEfficiency) {
+		this.receiverEfficiency = receiverEfficiency;
+	}
+
+	public void setLaserWaveLength(double laserWaveLength) {
+		this.laserWaveLength = laserWaveLength;
 	}
 }

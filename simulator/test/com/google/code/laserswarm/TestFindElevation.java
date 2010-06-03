@@ -102,6 +102,9 @@ public class TestFindElevation {
 			recs.add(rec3);
 			recs.add(rec4);
 			cons.setReceivers(recs);
+			cons.setReceiverBandWidth(2E-9);
+			cons.setReceiverEfficiency(0.36 * 0.9);
+			cons.setLaserWaveLength(473E-9);
 
 			SimTemplate template = new SimTemplate(cons, dataPoints);
 			mgr.addSimTemplate(template);
@@ -125,7 +128,7 @@ public class TestFindElevation {
 					.getDefaultSerializer("altData.xml"));
 		} else {
 			alts = FindElevation.run(satData, emitterHistory, constellation, dataPoints,
-					new OutlierRemovalCorrelation(0.7), 0);
+					new OutlierRemovalCorrelation(1.2), 0);
 			Configuration.write("altData.xml", alts);
 		}
 		plotter.plot(alts, 3, "heightAnalysed");

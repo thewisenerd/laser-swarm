@@ -38,12 +38,12 @@ public class SimulationTester extends TestCase {
 	}
 
 	static Constellation mkTestConstellation() {
-		Satellite emittor = new Satellite("SAT01", (0.2 * 0.2),
+		Satellite emitter = new Satellite("SAT01", (0.2 * 0.2),
 				(float) ((Configuration.R0 / 1E3) + 450), // 
 				0f, (float) Math.PI / 2, (float) (8.5 * Math.PI / 180), 0f, 0f);
 		LinkedList<Satellite> r = Lists.newLinkedList();
-		r.add(emittor);
-		return new Constellation(5, 5000, emittor, r);
+		r.add(emitter);
+		return new Constellation(5, 5000, emitter, r);
 	}
 
 	public static HashMap<SimTemplate, Simulator> sim() {

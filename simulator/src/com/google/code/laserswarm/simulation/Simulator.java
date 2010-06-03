@@ -42,7 +42,7 @@ import com.lyndir.lhunath.lib.system.logging.Logger;
  * <p>
  * Computes the actual signal propagation in multiple steps.
  * <ul>
- * <li>Creation at the emittor</li>
+ * <li>Creation at the emitter</li>
  * <li>Downtravel trough the atmosphere</li>
  * <li>Reflection in the footprint area</li>
  * <li>Uptravel trough the atmosphere</li>
@@ -283,7 +283,7 @@ public class Simulator implements Runnable {
 		logger.inf("Simulator info for constellation: %s \n"
 				+ "Emitter\t| %s, lasing power: %s W \n"
 				+ "Laser\t| waveLength: %s m, f: %s Hz, pulse interval: %s s\n"
-				+ "\t| pulse time: %s s, pulse energy: %s µJ",//
+				+ "\t| pulse time: %s s, pulse energy: %s ï¿½J",//
 				constellation,//
 				constellation.getEmitter(), constellation.getPower(),//
 				constellation.getLaserWaveLength(), f, dt,//
