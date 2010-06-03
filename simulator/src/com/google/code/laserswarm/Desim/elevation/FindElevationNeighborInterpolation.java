@@ -22,8 +22,10 @@ import com.google.common.collect.Maps;
 import com.lyndir.lhunath.lib.system.logging.Logger;
 
 public class FindElevationNeighborInterpolation implements ElevationFinder {
-	private static int			qLength	= 9;
-	private static final Logger	logger	= Logger.get(FindElevationNeighborInterpolation.class);
+	private int						qLength			= 9;
+	private NeighborInterpolation	interpolator	= new MeanAveragingInterpolation();
+	private static final Logger		logger			= Logger
+															.get(FindElevationNeighborInterpolation.class);
 
 	public FindElevationNeighborInterpolation(int queueLength) {
 		qLength = queueLength;
@@ -35,6 +37,9 @@ public class FindElevationNeighborInterpolation implements ElevationFinder {
 		Iterator<Double> timeIt = hist.time.iterator();
 		Map<Satellite, DataContainer> interpulseWindows = Maps.newHashMap();
 		for (DataContainer tempData : interpulseWindows.values()) {
+			if (tempData == null) {
+				tempData = new DataContainer();
+			}
 			tempData.setQueueLength(qLength);
 		}
 		FindWindow emitRecPair = new FindWindow(hist, timeIt, recTimes, con, (int) 1e8);
@@ -49,9 +54,6 @@ public class FindElevationNeighborInterpolation implements ElevationFinder {
 			Map<Satellite, NoiseData> tempInterpulseWindow = emitRecPair.next();
 			if (timeIt.hasNext()) {
 				for (Satellite tempSat : tempInterpulseWindow.keySet()) {
-					if (interpulseWindows.get(tempSat) == null) {
-						interpulseWindows.put(tempSat, new DataContainer());
-					}
 					interpulseWindows.get(tempSat).add(tempInterpulseWindow.get(tempSat));
 				}
 				// Store the emitter time and position.
@@ -63,7 +65,7 @@ public class FindElevationNeighborInterpolation implements ElevationFinder {
 						.getPosition().find(emitRecPair.tPulse).y, hist.getPosition().find(
 						emitRecPair.tPulse).z);
 				// Remove pulse data we do not care about any more.
-				if (timePulses.size() > (int) Math.ceil(0.5 * qLength)) {
+				if (timePulses.size() > qLength) {
 					timePulses.removeFirst();
 					posEmits.removeFirst();
 				}
@@ -73,8 +75,8 @@ public class FindElevationNeighborInterpolation implements ElevationFinder {
 					Point3d sphericalEmit = Convert.toSphere(thisEmit);
 					altitudes.add(new Point3d(
 							Configuration.R0
-							+ altCorr.findAltitude(recTimes, interpulseWindows, timePulses.getFirst(),
-							thisEmit),
+							+ interpolator.findAltitude(recTimes, interpulseWindows, timePulses,
+							posEmits),
 							sphericalEmit.y, sphericalEmit.z));
 				}
 			}
