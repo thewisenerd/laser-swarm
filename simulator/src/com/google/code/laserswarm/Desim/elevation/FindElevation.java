@@ -15,6 +15,7 @@ import com.google.code.laserswarm.Desim.DataContainer;
 import com.google.code.laserswarm.Desim.FindWindow;
 import com.google.code.laserswarm.Desim.NoiseData;
 import com.google.code.laserswarm.Desim.elevation.correlation.AltitudeCorrelation;
+import com.google.code.laserswarm.Desim.elevation.correlation.OutlierRemovalCorrelation;
 import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.conf.Constellation;
 import com.google.code.laserswarm.conf.Satellite;
@@ -29,7 +30,7 @@ import com.lyndir.lhunath.lib.system.logging.Logger;
  * @author Administrator
  * 
  */
-public class FindElevation {
+public class FindElevation implements ElevationFinder {
 	private static int			qLength	= 9;
 	private static final Logger	logger	= Logger.get(FindElevation.class);
 
@@ -42,16 +43,13 @@ public class FindElevation {
 	 *            The constellation used.
 	 * @param dataPoints
 	 *            The number of data points in this run. One data point corresponds to one emitted pulse.
-	 * @param altCorr
-	 *            The AltitudeCorrelation class to be used.
-	 * @param nLastRemove
-	 *            The number of last results that need to be removed to provide good end-of-list data.
 	 * @return Returns a list of the Point3d's found on the Earth's surface (in r-lat-lon coordinates).
 	 * @throws MathException
 	 */
-	public static LinkedList<Point3d> run(Map<Satellite, TimeLine> recTimes, EmitterHistory hist,
-			Constellation con, int dataPoints, AltitudeCorrelation altCorr, int nLastRemove)
+	public LinkedList<Point3d> run(Map<Satellite, TimeLine> recTimes, EmitterHistory hist,
+			Constellation con, int dataPoints)
 			throws MathException {
+		AltitudeCorrelation altCorr = new OutlierRemovalCorrelation(1.5);
 		Iterator<Double> timeIt = hist.time.iterator();
 		Map<Satellite, DataContainer> interpulseWindows = Maps.newHashMap();
 		for (DataContainer tempData : interpulseWindows.values()) {
@@ -101,10 +99,6 @@ public class FindElevation {
 		}
 		while (Double.isNaN(altitudes.getLast().x)
 				|| Math.abs(altitudes.getLast().x - altitudes.get(altitudes.size() - 2).x) > 1000) {
-			altitudes.removeLast();
-		}
-		while (nLastRemove > 0) {
-			nLastRemove--;
 			altitudes.removeLast();
 		}
 		return altitudes;
