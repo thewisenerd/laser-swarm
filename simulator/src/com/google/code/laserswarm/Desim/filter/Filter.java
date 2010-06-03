@@ -1,4 +1,4 @@
-package com.google.code.laserswarm.Desim;
+package com.google.code.laserswarm.Desim.filter;
 
 import java.util.LinkedList;
 

@@ -1,4 +1,4 @@
-package com.google.code.laserswarm.Desim;
+package com.google.code.laserswarm.Desim.elevation;
 
 import javax.vecmath.Point3d;
 import javax.vecmath.Vector3d;

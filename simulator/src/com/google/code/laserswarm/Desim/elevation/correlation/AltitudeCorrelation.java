@@ -1,4 +1,4 @@
-package com.google.code.laserswarm.Desim;
+package com.google.code.laserswarm.Desim.elevation.correlation;
 
 import java.util.Map;
 
@@ -6,6 +6,7 @@ import javax.vecmath.Point3d;
 
 import org.apache.commons.math.MathException;
 
+import com.google.code.laserswarm.Desim.DataContainer;
 import com.google.code.laserswarm.conf.Satellite;
 import com.google.code.laserswarm.process.TimeLine;
 
