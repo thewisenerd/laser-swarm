@@ -13,7 +13,9 @@ import javax.vecmath.Point3d;
 
 import org.apache.commons.math.MathException;
 
+import com.google.code.laserswarm.Desim.elevation.ElevationFinder;
 import com.google.code.laserswarm.Desim.elevation.FindElevation;
+import com.google.code.laserswarm.Desim.elevation.correlation.OutlierRemovalCorrelation;
 import com.google.code.laserswarm.Desim.filter.Filter;
 import com.google.code.laserswarm.Desim.filter.FilterAverage;
 import com.google.code.laserswarm.Desim.filter.FilterOutlierRemoval;
@@ -126,7 +128,7 @@ public class TestFindElevation {
 			alts = Configuration.read("altData.xml", Configuration
 					.getDefaultSerializer("altData.xml"));
 		} else {
-			FindElevation findEl = new FindElevation();
+			ElevationFinder findEl = new FindElevation(9, new OutlierRemovalCorrelation(1.5));
 			alts = findEl.run(satData, emitterHistory, constellation, dataPoints);
 			Configuration.write("altData.xml", alts);
 		}

@@ -31,8 +31,14 @@ import com.lyndir.lhunath.lib.system.logging.Logger;
  * 
  */
 public class FindElevation implements ElevationFinder {
-	private static int			qLength	= 9;
+	private int					qLength	= 9;
+	private AltitudeCorrelation	altCorr	= new OutlierRemovalCorrelation(1);
 	private static final Logger	logger	= Logger.get(FindElevation.class);
+
+	public FindElevation(int queueLength, AltitudeCorrelation altitudeCorrelationClass) {
+		qLength = queueLength;
+		altCorr = altitudeCorrelationClass;
+	}
 
 	/**
 	 * @param recTimes
@@ -49,7 +55,6 @@ public class FindElevation implements ElevationFinder {
 	public LinkedList<Point3d> run(Map<Satellite, TimeLine> recTimes, EmitterHistory hist,
 			Constellation con, int dataPoints)
 			throws MathException {
-		AltitudeCorrelation altCorr = new OutlierRemovalCorrelation(1.5);
 		Iterator<Double> timeIt = hist.time.iterator();
 		Map<Satellite, DataContainer> interpulseWindows = Maps.newHashMap();
 		for (DataContainer tempData : interpulseWindows.values()) {
