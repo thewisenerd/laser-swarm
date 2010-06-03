@@ -134,7 +134,7 @@ public class plotHeightDistribution {
 		try {
 			ImageIO.write(bimg, "png", new File(plotFile + ".png"));
 		} catch (Exception e) {
-			logger.inf(e, "Plot file writing failed.");
+			logger.err(e, "Plot file writing failed.");
 		}
 	}
 
@@ -176,13 +176,13 @@ public class plotHeightDistribution {
 		double hMin = Double.MAX_VALUE;
 		Iterator<Point3d> altsIt = alts.iterator();
 		int count = 0;
-		File out = new File("plotPoints.csv");
+		File out = new File("plotPoints" + plotFile + ".csv");
 		out.delete();
 		while (altsIt.hasNext()) {
 			count++;
 			Point3d sphere = altsIt.next();
-			logger.inf("Plot iteration: %s, with: %s, %s, %s", count, sphere.x, sphere.y, sphere.z);
-			Files.append(sphere.x + ", " + sphere.y + ", " + sphere.z + "\n", out, Charset
+			logger.dbg("Plot iteration: %s, with: %s, %s, %s", count, sphere.x, sphere.y, sphere.z);
+			Files.append(sphere.x + ";" + sphere.y + ";" + sphere.z + ";\n", out, Charset
 					.defaultCharset());
 			double rp = sphere.x;
 			double hFound = rp - Configuration.R0;
@@ -259,7 +259,7 @@ public class plotHeightDistribution {
 		try {
 			ImageIO.write(bimg, "png", new File(plotFile + ".png"));
 		} catch (Exception e) {
-			logger.inf(e, "Plot file writing failed.");
+			logger.err(e, "Plot file writing failed.");
 		}
 	}
 }

@@ -12,6 +12,9 @@
 	<logger name="com.google.code.laserswarm.simulation" level="INFO" />
 	<logger name="com.google.code.laserswarm.util.demReader" level="INFO" />
 	<logger name="com.google.code.laserswarm.Desim.FindElevation" level="INFO" />
+	<logger name="com.google.code.laserswarm.Desim.NoiseRemovalCorrelation" level="INFO" />
+	<logger name="com.google.code.laserswarm.Desim.NoisePercentage" level="INFO" />
+	<logger name="com.google.code.laserswarm.out.plot1D.plotHeightDistribution" level="INFO" />
 	
 	<root level="DEBUG">
 		<appender-ref ref="STDOUT" />

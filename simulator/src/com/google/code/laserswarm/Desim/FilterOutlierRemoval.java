@@ -84,7 +84,7 @@ public class FilterOutlierRemoval implements Filter {
 		int size = alts.size();
 		for (Point3d pt : alts) {
 			count++;
-			if (count == 0 || count == size || Math.abs(pt.x - meanIt.next()) < 2 * sigmIt.next()) {
+			if (count == 1 || count == size || Math.abs(pt.x - meanIt.next()) < 2 * sigmIt.next()) {
 				result.add(new Point3d(pt));
 			} else {
 				empties.add(new Point3d(Double.MAX_VALUE, pt.y, pt.z));
@@ -94,7 +94,7 @@ public class FilterOutlierRemoval implements Filter {
 		int numEmpty = 0;
 		double first = Double.MAX_VALUE;
 		double last = Double.MAX_VALUE;
-		for (Point3d pt : alts) {
+		for (Point3d pt : result) {
 			if (pt.x == Double.MAX_VALUE) {
 				numEmpty++;
 			} else {
