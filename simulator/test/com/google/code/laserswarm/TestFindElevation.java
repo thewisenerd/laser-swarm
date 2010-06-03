@@ -13,11 +13,11 @@ import javax.vecmath.Point3d;
 
 import org.apache.commons.math.MathException;
 
-import com.google.code.laserswarm.Desim.Filter;
-import com.google.code.laserswarm.Desim.FilterAverage;
-import com.google.code.laserswarm.Desim.FilterOutlierRemoval;
-import com.google.code.laserswarm.Desim.FindElevation;
-import com.google.code.laserswarm.Desim.OutlierRemovalCorrelation;
+import com.google.code.laserswarm.Desim.elevation.FindElevation;
+import com.google.code.laserswarm.Desim.elevation.correlation.OutlierRemovalCorrelation;
+import com.google.code.laserswarm.Desim.filter.Filter;
+import com.google.code.laserswarm.Desim.filter.FilterAverage;
+import com.google.code.laserswarm.Desim.filter.FilterOutlierRemoval;
 import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.conf.Constellation;
 import com.google.code.laserswarm.conf.Satellite;
@@ -128,14 +128,14 @@ public class TestFindElevation {
 					.getDefaultSerializer("altData.xml"));
 		} else {
 			alts = FindElevation.run(satData, emitterHistory, constellation, dataPoints,
-					new OutlierRemovalCorrelation(1.2), 0);
+					new OutlierRemovalCorrelation(1.5), 0);
 			Configuration.write("altData.xml", alts);
 		}
 		plotter.plot(alts, 3, "heightAnalysed");
 		Filter filtAvg = new FilterAverage(21);
 		LinkedList<Point3d> averagedAlts = filtAvg.filter(alts);
 		plotter.plot(averagedAlts, 3, "heightAnalysed&Averaged");
-		Filter filtOutliers = new FilterOutlierRemoval(25, 10, 1.0);
+		Filter filtOutliers = new FilterOutlierRemoval(10, 10, 0.5);
 		LinkedList<Point3d> outlierAlts = filtOutliers.filter(alts);
 		plotter.plot(outlierAlts, 3, "heightAnalysed&OutlierFiltered");
 	}
