@@ -30,21 +30,17 @@ public class CSVwriter {
 		}
 	}
 
-	public void write(List<Object[]> values) {
-		for (Object[] value : values)
+	public <T> void write(List<T[]> values) {
+		for (T[] value : values)
 			write(value);
 	}
 
-	public void write(Object... values) {
-		write("", "", values);
-	}
-
-	public void write(String prefix, String sufix, List<Object[]> values) {
-		for (Object[] value : values)
+	public <T> void write(String prefix, String sufix, List<T[]> values) {
+		for (T[] value : values)
 			write(prefix, sufix, value);
 	}
 
-	public void write(String prefix, String sufix, Object... values) {
+	public <T> void write(String prefix, String sufix, T... values) {
 		try {
 			StringBuffer str = new StringBuffer();
 			for (int i = 0; i < values.length; i++) {
@@ -58,6 +54,10 @@ public class CSVwriter {
 		} catch (IOException e) {
 			logger.wrn(e, "Could not write to preflog");
 		}
+	}
+
+	public <T> void write(T... values) {
+		write("", "", values);
 	}
 
 }
