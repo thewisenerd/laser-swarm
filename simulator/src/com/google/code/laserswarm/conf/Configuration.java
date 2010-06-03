@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.util.Set;
 
 import com.google.common.collect.Sets;
@@ -173,6 +174,8 @@ public class Configuration {
 
 	private String				fileNameScatterModel			= "";
 
+	private File				mathematicaKernel;
+
 	private static final Logger	logger							= Logger.get(Configuration.class);
 
 	public static XStream getDefaultSerializer(String name) {
@@ -187,7 +190,7 @@ public class Configuration {
 		return xstream;
 	}
 
-	public static Configuration getInstance() {
+	public static Configuration getInstance(String... args) {
 		if (instance == null) {
 			Configuration cfg;
 			try {
@@ -197,7 +200,9 @@ public class Configuration {
 				cfg = new Configuration();
 			}
 			setInstance(cfg);
+			write(configName);
 		}
+		instance.loadParam(args);
 		return instance;
 	}
 
@@ -215,6 +220,7 @@ public class Configuration {
 		return cfg;
 	}
 
+	@SuppressWarnings("unchecked")
 	public static <T> T read(String name, XStream xstream) throws FileNotFoundException {
 		T obj = null;
 		try {
@@ -232,7 +238,6 @@ public class Configuration {
 	}
 
 	public Configuration() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public Configuration(float atmAtt, Set<Actions> mod, String DEM, String prefix, String path,
@@ -265,8 +270,34 @@ public class Configuration {
 		return filePrefixReport;
 	}
 
+	public File getMathematicaKernel() {
+		if (mathematicaKernel == null) {
+			File kernelFile = new File(
+					"C:/Program Files/Wolfram Research/Mathematica/7.0/MathKernel.exe");
+			if (kernelFile.exists())
+				mathematicaKernel = kernelFile;
+		}
+		return mathematicaKernel;
+	}
+
 	public Set<Actions> getMode() {
 		return mode;
 	}
 
+	public void loadParam(String... args) {
+		for (int i = 0; i < args.length; i++) {
+			String arg = args[i];
+			Field field = null;
+			try {
+				field = Configuration.class.getDeclaredField(arg);
+				field.set(this, args[i + 1]);
+				logger.dbg("Set field %s to %s", field, args[i + 1]);
+			} catch (NoSuchFieldException e) {
+				continue;
+			} catch (IllegalAccessException e) {
+				logger.wrn(e, "Could not set field %s to %s", field, args[i + 1]);
+				continue;
+			}
+		}
+	}
 }

@@ -2,7 +2,7 @@ package com.google.code.laserswarm.conf;
 
 import jat.cm.KeplerElements;
 
-public class Satellite {
+public class Satellite implements Comparable<Satellite> {
 
 	private double	semimajorAxis				= 0f;
 	private double	eccentricity				= 0f;
@@ -33,6 +33,11 @@ public class Satellite {
 	public Satellite(String name, Satellite s) {
 		this(name, s.aperatureArea, s.semimajorAxis, s.eccentricity, s.inclination,
 				s.rightAngleOfAscendingNode, s.trueAnomaly, s.argumentOfPerigee);
+	}
+
+	@Override
+	public int compareTo(Satellite o) {
+		return name.compareTo(o.name);
 	}
 
 	public double getAperatureArea() {

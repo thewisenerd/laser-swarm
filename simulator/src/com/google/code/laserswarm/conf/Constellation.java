@@ -64,7 +64,7 @@ public class Constellation {
 	/**
 	 * Pulse length time [s]
 	 */
-	private double			pulselength			= 1E-9;
+	private double			pulselength			= 5E-9;
 	/**
 	 * Laser wave length [m]
 	 */
