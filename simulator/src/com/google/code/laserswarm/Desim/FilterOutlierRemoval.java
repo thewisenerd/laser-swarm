@@ -8,12 +8,22 @@ import javax.vecmath.Point3d;
 import com.google.common.collect.Lists;
 
 public class FilterOutlierRemoval implements Filter {
-	private int	sigmaInterval	= 200;
-	private int	meanInterval	= 25;
+	private int		sigmaInterval	= 200;
+	private int		meanInterval	= 25;
+	private double	thresh			= 1.5;
 
-	public FilterOutlierRemoval(int sigmaInt, int meanInt) {
-		sigmaInterval = sigmaInt;
-		meanInterval = meanInt;
+	/**
+	 * @param sigmaInt
+	 *            The interval over which to take sigma.
+	 * @param meanInt
+	 *            The interval over which to take the mean used for the outlier removal.
+	 * @param threshold
+	 *            The number of sigma's a peak needs to be off the mean to be removed.
+	 */
+	public FilterOutlierRemoval(int sigmaInt, int meanInt, double threshold) {
+		sigmaInterval = Math.abs(sigmaInt);
+		meanInterval = Math.abs(meanInt);
+		thresh = Math.abs(threshold);
 	}
 
 	public FilterOutlierRemoval() {
@@ -81,16 +91,54 @@ public class FilterOutlierRemoval implements Filter {
 		Iterator<Double> meanIt = means.iterator();
 		Iterator<Double> sigmIt = sigmas.iterator();
 		int count = 0;
-		int size = alts.size();
 		for (Point3d pt : alts) {
 			count++;
-			if (count == 1 || count == size || Math.abs(pt.x - meanIt.next()) < 2 * sigmIt.next()) {
+			if (Math.abs(pt.x - meanIt.next()) < thresh * sigmIt.next()) {
 				result.add(new Point3d(pt));
 			} else {
 				empties.add(new Point3d(Double.MAX_VALUE, pt.y, pt.z));
 				result.add(empties.getLast());
 			}
 		}
+		// If the first altitude(s) is (are) invalid, they cannot be averaged and need to be taken from
+		// the first good altitude.
+		if (result.getFirst().x == Double.MAX_VALUE) {
+			Iterator<Point3d> ptIt = result.iterator();
+			Point3d invalidPt = ptIt.next();
+			int invalidCount = 1;
+			while (invalidPt.x == Double.MAX_VALUE) {
+				invalidPt = ptIt.next();
+				invalidCount++;
+			}
+			double best = invalidPt.x;
+			ptIt = result.iterator();
+			Point3d thisPt = ptIt.next();
+			while (thisPt.x == Double.MAX_VALUE) {
+				thisPt.x = best;
+				empties.removeFirst();
+				thisPt = ptIt.next();
+			}
+		}
+		// Similarly, if the last altitude(s) is (are) invalid, they cannot be averaged and need to be
+		// taken from the last good altitude.
+		if (result.getLast().x == Double.MAX_VALUE) {
+			Iterator<Point3d> ptIt = result.descendingIterator();
+			Point3d invalidPt = ptIt.next();
+			int invalidCount = 1;
+			while (invalidPt.x == Double.MAX_VALUE) {
+				invalidPt = ptIt.next();
+				invalidCount++;
+			}
+			double best = invalidPt.x;
+			ptIt = result.descendingIterator();
+			Point3d thisPt = ptIt.next();
+			while (thisPt.x == Double.MAX_VALUE) {
+				thisPt.x = best;
+				empties.removeLast();
+				thisPt = ptIt.next();
+			}
+		}
+		// Now start the outlier removal & averaging process.
 		int numEmpty = 0;
 		double first = Double.MAX_VALUE;
 		double last = Double.MAX_VALUE;

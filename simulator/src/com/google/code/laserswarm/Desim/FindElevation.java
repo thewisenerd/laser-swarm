@@ -29,9 +29,25 @@ public class FindElevation {
 	private static int			qLength	= 9;
 	private static final Logger	logger	= Logger.get(FindElevation.class);
 
+	/**
+	 * @param recTimes
+	 *            The receiver history to be analysed.
+	 * @param hist
+	 *            The emitter history.
+	 * @param con
+	 *            The constellation used.
+	 * @param dataPoints
+	 *            The number of data points in this run. One data point corresponds to one emitted pulse.
+	 * @param altCorr
+	 *            The AltitudeCorrelation class to be used.
+	 * @param nLastRemove
+	 *            The number of last results that need to be removed to provide good end-of-list data.
+	 * @return Returns a list of the Point3d's found on the Earth's surface (in r-lat-lon coordinates).
+	 * @throws MathException
+	 */
 	public static LinkedList<Point3d> run(Map<Satellite, TimeLine> recTimes, EmitterHistory hist,
-			Constellation con, int dataPoints) throws MathException {
-		AltitudeCorrelation altCorr = new NoiseRemovalCorrelation();
+			Constellation con, int dataPoints, AltitudeCorrelation altCorr, int nLastRemove)
+			throws MathException {
 		Iterator<Double> timeIt = hist.time.iterator();
 		Map<Satellite, DataContainer> interpulseWindows = Maps.newHashMap();
 		for (DataContainer tempData : interpulseWindows.values()) {
@@ -81,6 +97,10 @@ public class FindElevation {
 		}
 		while (Double.isNaN(altitudes.getLast().x)
 				|| Math.abs(altitudes.getLast().x - altitudes.get(altitudes.size() - 2).x) > 1000) {
+			altitudes.removeLast();
+		}
+		while (nLastRemove > 0) {
+			nLastRemove--;
 			altitudes.removeLast();
 		}
 		return altitudes;

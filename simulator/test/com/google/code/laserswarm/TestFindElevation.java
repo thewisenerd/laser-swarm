@@ -1,7 +1,9 @@
 package com.google.code.laserswarm;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -15,6 +17,7 @@ import com.google.code.laserswarm.Desim.Filter;
 import com.google.code.laserswarm.Desim.FilterAverage;
 import com.google.code.laserswarm.Desim.FilterOutlierRemoval;
 import com.google.code.laserswarm.Desim.FindElevation;
+import com.google.code.laserswarm.Desim.OutlierRemovalCorrelation;
 import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.conf.Constellation;
 import com.google.code.laserswarm.conf.Satellite;
@@ -27,19 +30,53 @@ import com.google.code.laserswarm.simulation.SimVars;
 import com.google.code.laserswarm.simulation.Simulator;
 import com.google.code.laserswarm.simulation.SimulatorMaster;
 import com.google.code.laserswarm.util.demReader.DemCreationException;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.lyndir.lhunath.lib.system.logging.Logger;
 
 public class TestFindElevation {
 	private static final int	dataPoints	= 250;
+	private static final Logger	logger		= Logger.get(TestFindElevation.class);
 
 	public static void main(String[] args) throws DemCreationException, MathException,
 			IOException {
+		System.out.println("Do you want to re-run the simulator? (y/n default: no)");
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		String runSim = null;
+		String runCalc = null;
+		boolean dontSimulate = true;
+		boolean dontCalculate = true;
+		try {
+			runSim = br.readLine();
+		} catch (Exception ioe) {
+			logger.err(ioe, "Caught input exception.");
+		}
+		if (runSim.equals("y")) {
+			dontSimulate = false;
+			dontCalculate = false;
+			System.out.println("Re-running simulator, data analysis and post-processing.");
+		} else {
+			System.out.println("Do you want to re-run the data analysis? (y/n, default: no)");
+			try {
+				runCalc = br.readLine();
+			} catch (Exception ioe) {
+				logger.err(ioe, "Caught input exception.");
+			}
+			if (runCalc.equals("y")) {
+				dontCalculate = false;
+				System.out.println("If possible, re-running only data analysis and post-processing.");
+			} else {
+				System.out.println("If possible, re-running only post-processing.");
+			}
+		}
+
 		EmitterHistory emitterHistory = null;
 		Constellation constellation = null;
 		Map<Satellite, TimeLine> satData = Maps.newHashMap();
 		plotHeightDistribution plotter = new plotHeightDistribution();
+		LinkedList<Point3d> alts = Lists.newLinkedList();
 		if (new File("satData.xml").exists() & new File("emitterHistory.xml").exists()
-				& new File("constellation.xml").exists()) {
+				& new File("constellation.xml").exists() & dontSimulate) {
 			satData = Configuration.read("satData.xml", Configuration
 					.getDefaultSerializer("satData.xml"));
 			emitterHistory = Configuration.read("emitterHistory.xml", Configuration
@@ -83,12 +120,19 @@ public class TestFindElevation {
 			Configuration.write("emitterHistory.xml", emitterHistory);
 			Configuration.write("constellation.xml", constellation);
 		}
-		LinkedList<Point3d> alts = FindElevation.run(satData, emitterHistory, constellation, dataPoints);
+		if (new File("altData.xml").exists() & dontCalculate) {
+			alts = Configuration.read("altData.xml", Configuration
+					.getDefaultSerializer("altData.xml"));
+		} else {
+			alts = FindElevation.run(satData, emitterHistory, constellation, dataPoints,
+					new OutlierRemovalCorrelation(0.7), 0);
+			Configuration.write("altData.xml", alts);
+		}
 		plotter.plot(alts, 3, "heightAnalysed");
 		Filter filtAvg = new FilterAverage(21);
 		LinkedList<Point3d> averagedAlts = filtAvg.filter(alts);
 		plotter.plot(averagedAlts, 3, "heightAnalysed&Averaged");
-		Filter filtOutliers = new FilterOutlierRemoval(200, 25);
+		Filter filtOutliers = new FilterOutlierRemoval(25, 10, 1.0);
 		LinkedList<Point3d> outlierAlts = filtOutliers.filter(alts);
 		plotter.plot(outlierAlts, 3, "heightAnalysed&OutlierFiltered");
 	}

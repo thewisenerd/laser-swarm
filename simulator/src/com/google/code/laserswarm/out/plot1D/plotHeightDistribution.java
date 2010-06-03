@@ -150,7 +150,7 @@ public class plotHeightDistribution {
 	 * @throws IOException
 	 */
 	public void plot(LinkedList<Point3d> alts, double lineThickness, String plotFile) throws IOException {
-		logger.inf("Started plotting from LinkedList<Point3d>");
+		logger.inf("Started plotting from LinkedList<Point3d>. File name will be: " + plotFile + ".png");
 		int width = 1600;
 		int height = 200;
 		int hOffset = 50;
