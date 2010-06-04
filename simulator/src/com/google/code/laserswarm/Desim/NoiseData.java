@@ -67,23 +67,49 @@ public class NoiseData {
 	 * 
 	 */
 	public NoiseData(TreeMap<Double, Integer> interpulseData, TimePair dataWindow) {
-
-		windowFrame = new TimePair(interpulseData.firstKey(), interpulseData.lastKey());
+try{
+	windowFrame = new TimePair(interpulseData.firstKey(), interpulseData.lastKey());
+}catch(Exception E){
+	logger.dbg("interpulseData is empty!");
+		windowFrame = new TimePair(0.0,0.0);
+		dataFrame = new TimePair(0.0,0.0);
+		noiseFrameL = new TimePair(0.0,0.0);
+		noiseFrameR = new TimePair(0.0,0.0);
+		noise = Maps.newTreeMap();
+		noise.put(0.0, 0);
+		data = Maps.newTreeMap();
+		data.put(0.0, 0);
+		return;
+		
+};
 		dataFrame = new TimePair(dataWindow.t0Ref, dataWindow.tFRef);
 		noiseFrameL = new TimePair(windowFrame.t0Ref, dataFrame.t0Ref);
 		noiseFrameR = new TimePair(dataFrame.tFRef, windowFrame.tFRef);
-
+		logger.dbg("dataFrame: %s", dataFrame);
+		logger.dbg("windowFrame: %s", windowFrame);
+		logger.dbg("noiseFrameL: %s", noiseFrameL);
+		logger.dbg("noiseFrameR: %s", noiseFrameR);
 		TreeMap<Double, Integer> noiseTMP = Maps.newTreeMap();
 		TreeMap<Double, Integer> dataTMP = Maps.newTreeMap();
-		dataTMP = Maps.newTreeMap(interpulseData.subMap(dataFrame.t0Ref, true, dataFrame.tFRef, true));// create
+		if(dataFrame.diff() != 0){
+		dataTMP = Maps.newTreeMap(interpulseData.subMap(dataFrame.t0, true, dataFrame.tF, true));// create
+		}
+		else{
+			dataTMP = Maps.newTreeMap();
+		}
 		// a
 		// treem
-
+		if(noiseFrameL.diff() != 0){
+			
 		noiseTMP.putAll(Maps.newTreeMap(interpulseData.subMap(windowFrame.t0Ref, true, dataFrame.t0Ref,
 				false)));
+		}
+		else{
+			noiseTMP = Maps.newTreeMap();
+		}
 
 		try {
-			TreeMap tmp = Maps.newTreeMap(interpulseData.subMap(dataFrame.tFRef, false,
+			TreeMap<Double,Integer> tmp = Maps.newTreeMap(interpulseData.subMap(dataFrame.tFRef, false,
 					windowFrame.tFRef, false));
 			noiseTMP.putAll(tmp);
 		} catch (Exception e) {
