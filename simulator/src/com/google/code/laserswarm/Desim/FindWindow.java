@@ -22,8 +22,10 @@ import com.google.code.laserswarm.process.TimeLine;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+import com.lyndir.lhunath.lib.system.logging.Logger;
 
 public class FindWindow {
+	private static final Logger	logger	= Logger.get(FindWindow.class);
 
 	EmitterHistory					hist;
 
@@ -37,6 +39,7 @@ public class FindWindow {
 	public double					tPulse;
 	int								binFrequency;
 	double							bigWindow;
+	private Map<Satellite,MeasermentSample>		satMsMap;	//map that contains initial data
 
 	/**
 	 * 
@@ -52,6 +55,7 @@ public class FindWindow {
 	public FindWindow(EmitterHistory hist, Iterator<Double> tIt, Map<Satellite, TimeLine> sit, Constellation con,
 			int binFrequency) {
 		// TODO Auto-generated constructor stub
+		satMsMap = Maps.newHashMap();
 		this.binFrequency = binFrequency;
 		this.hist = hist;
 		this.bigWindow = 1 / con.getPulseFrequency();
@@ -61,6 +65,11 @@ public class FindWindow {
 		for (Satellite satIt : sit.keySet()) {
 			try {
 				satIter.put(satIt, satData.get(satIt).getIterator(binFrequency));
+				
+					MeasermentSample tms = satIter.get(satIt).nextNonZero();
+					tms = satIter.get(satIt).nextNonZero();
+					satMsMap.put(satIt,tms);	//could be set to nextNonZero
+				
 			} catch (MathException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -74,7 +83,8 @@ public class FindWindow {
 	 * 
 	 * @return returns the next Satellite, NoiseData window
 	 */
-	public Map<Satellite, NoiseData> next() { // return window of values
+	@Deprecated
+	public Map<Satellite, NoiseData> next2() { // return window of values
 		// TODO Auto-generated method stub
 		// 
 		tPulse = timeIt.next();
@@ -102,16 +112,16 @@ public class FindWindow {
 				// System.out.println("ms.getTime = " + tDataLow); //opt
 			}
 			if ((ms.getTime() + bigWindow) < tDataHigh) {
-				// System.out.println("tDataHigh out exceeds right margin"); //opt
-				// System.out.println("tDataHigh = " + tDataHigh); //opt
+				logger.dbg("tDataHigh out exceeds right margin"); //opt
+				logger.dbg("tDataHigh = %s ", tDataHigh); //opt
 				tDataHigh = ms.getTime() + bigWindow;
-				// System.out.println("ms.getTime() + bigwindow= " + tDataHigh); //opt
+				logger.dbg("ms.getTime() + bigwindow= %s", tDataHigh); //opt
 			}
 
 			double tIPWoffset = (bigWindow - (tDataHigh - tDataLow)) / 2; // offset from the highest time
-			// System.out.println("tIPWoffset =" + tIPWoffset);
+			logger.dbg("tIPWoffset = %s" , tIPWoffset);
 			double tUpper = tIPWoffset + tDataHigh; // the highest time
-			// System.out.println("tUppser =" + tUpper);
+			logger.dbg("tUppser = %s" , tUpper);
 			while (satIt.hasNext() && (ms.getTime() < tUpper)) { // Construct unfiltered result vector
 				if (exec) {
 					ms = satIt.next(); // ensure the increment is repeated once
@@ -122,6 +132,61 @@ public class FindWindow {
 
 			} // END construction of the result vector;
 
+			dataMap.put(satCur, new NoiseData(result, new TimePair(tDataLow, tDataHigh)));
+
+		} // Stop ITerating over satellites;
+
+		return dataMap;
+
+	}
+
+	public Map<Satellite, NoiseData> next() { // return window of values
+		// TODO Auto-generated method stub
+		// 
+		tPulse = timeIt.next();
+
+		Map<Satellite, NoiseData> dataMap = Maps.newHashMap();
+
+		for (Satellite satCur : satData.keySet()) { // iterate over all satellites
+			TimePair tmp = getWindow(new Vector3d(satData.get(satCur).getLookupPosition().find(tPulse)),
+					new Vector3d(hist.getPosition().find(tPulse))); // calculate the window times for the
+			// current sat, current time
+			double tDataHigh = tmp.tF + tPulse;
+			double tDataLow = tmp.t0 + tPulse;
+
+			TreeMap<Double, Integer> result = Maps.newTreeMap();
+			result.clear();
+			SampleIterator satIt = satIter.get(satCur);
+
+			MeasermentSample ms = satMsMap.get(satCur);
+			// check whether the window is out of bounds
+
+			if (ms.getTime() > tDataLow) {
+				logger.dbg("tDataLow out exceeds left margin"); //opt
+				logger.dbg("tDataLow = %s" , tDataLow); //opt
+				tDataLow = ms.getTime();
+				logger.dbg("ms.getTime = %s", tDataLow); //opt
+			}
+			if ((ms.getTime() + bigWindow) <tDataHigh) {
+				logger.dbg("tDataHigh out exceeds right margin"); //opt
+				logger.dbg("tDataHigh = %s ", tDataHigh); //opt
+				tDataHigh = ms.getTime() + bigWindow;
+				logger.dbg("ms.getTime() + bigwindow= %s", tDataHigh); //opt
+			}
+
+			double tIPWoffset = (bigWindow - (tDataHigh - tDataLow)) / 2; // offset from the highest time
+			logger.dbg("tIPWoffset = %s",tIPWoffset);
+			double tUpper = tIPWoffset + tDataHigh; // the highest time
+			logger.dbg("tUppser = %s", tUpper);
+			while (satIt.hasNextNonZero() && (ms.getTime() < tUpper)) { // Construct unfiltered result vector
+
+
+
+				result.put(ms.getTime(), ms.getPhotons()); // put the results in the map
+				ms = satIt.nextNonZero(); // ensure the increment is repeated once
+
+			} // END construction of the result vector;
+			satMsMap.put(satCur, ms); //store the last value 
 			dataMap.put(satCur, new NoiseData(result, new TimePair(tDataLow, tDataHigh)));
 
 		} // Stop ITerating over satellites;
