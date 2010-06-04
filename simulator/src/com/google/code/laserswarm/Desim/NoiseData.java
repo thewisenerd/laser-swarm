@@ -3,6 +3,7 @@
  */
 package com.google.code.laserswarm.Desim;
 
+import java.util.NoSuchElementException;
 import java.util.TreeMap;
 
 import com.google.common.base.Predicate;
@@ -57,6 +58,9 @@ public class NoiseData {
 	// beginning and end of
 	// the interpulse window
 	// window
+	private boolean 					noData;
+	private boolean						noLNoise;
+	private boolean						noRNoise;
 	private TreeMap<Double, Integer>	noise;
 	private TreeMap<Double, Integer>	data;
 
@@ -64,64 +68,69 @@ public class NoiseData {
 	// private NoiseData prev; //point to the previous element;
 
 	/**
+	 * Assume that dataWindow is always in the interpulseData
+	 * The 
 	 * 
 	 */
 	public NoiseData(TreeMap<Double, Integer> interpulseData, TimePair dataWindow) {
-try{
-	windowFrame = new TimePair(interpulseData.firstKey(), interpulseData.lastKey());
-}catch(Exception E){
-	logger.dbg("interpulseData is empty!");
-		windowFrame = new TimePair(0.0,0.0);
-		dataFrame = new TimePair(0.0,0.0);
-		noiseFrameL = new TimePair(0.0,0.0);
-		noiseFrameR = new TimePair(0.0,0.0);
-		noise = Maps.newTreeMap();
-		noise.put(0.0, 0);
-		data = Maps.newTreeMap();
-		data.put(0.0, 0);
-		return;
-		
-};
+		try {
+			windowFrame = new TimePair(interpulseData.firstKey(), interpulseData.lastKey());
+		} catch (NoSuchElementException E) {
+			logger.dbg("interpulseData is empty!");
+			noData = true;
+			windowFrame = null;// new TimePair(0.0,0.0);
+			dataFrame = null;// new TimePair(0.0,0.0);
+			noiseFrameL = null;// new TimePair(0.0,0.0);
+			noiseFrameR = null;// new TimePair(0.0,0.0);
+			noise = null;// Maps.newTreeMap();
+			// noise.put(0.0, 0);
+			// data = Maps.newTreeMap();
+			// data.put(0.0, 0);
+			return;
+
+		}
+		;
 		dataFrame = new TimePair(dataWindow.t0Ref, dataWindow.tFRef);
 		noiseFrameL = new TimePair(windowFrame.t0Ref, dataFrame.t0Ref);
 		noiseFrameR = new TimePair(dataFrame.tFRef, windowFrame.tFRef);
+
 		logger.dbg("dataFrame: %s", dataFrame);
 		logger.dbg("windowFrame: %s", windowFrame);
 		logger.dbg("noiseFrameL: %s", noiseFrameL);
 		logger.dbg("noiseFrameR: %s", noiseFrameR);
-		TreeMap<Double, Integer> noiseTMP = Maps.newTreeMap();
-		TreeMap<Double, Integer> dataTMP = Maps.newTreeMap();
-		if(dataFrame.diff() != 0){
-		dataTMP = Maps.newTreeMap(interpulseData.subMap(dataFrame.t0, true, dataFrame.tF, true));// create
+
+		if (noiseFrameL.diff() == 0) {
+			noLNoise = true; // left noise is not present
+			noiseFrameL = null;
 		}
-		else{
-			dataTMP = Maps.newTreeMap();
-		}
-		// a
-		// treem
-		if(noiseFrameL.diff() != 0){
-			
-		noiseTMP.putAll(Maps.newTreeMap(interpulseData.subMap(windowFrame.t0Ref, true, dataFrame.t0Ref,
-				false)));
-		}
-		else{
-			noiseTMP = Maps.newTreeMap();
+		if (noiseFrameR.diff() == 0) {
+			noRNoise = true;
+			noiseFrameR = null; // right noise is not present
 		}
 
-		try {
-			TreeMap<Double,Integer> tmp = Maps.newTreeMap(interpulseData.subMap(dataFrame.tFRef, false,
-					windowFrame.tFRef, false));
-			noiseTMP.putAll(tmp);
-		} catch (Exception e) {
-			logger.inf(e, "Reached end of array");
+		noData = false;
+		data = Maps.newTreeMap(interpulseData.subMap(dataFrame.t0, true, dataFrame.tF, true));// create
 
+		if (noRNoise && noLNoise) {
+			noise = null;
+		} else {
+			if (noLNoise) {
+				noise.putAll(Maps.newTreeMap(interpulseData.subMap(windowFrame.t0Ref, true,
+						dataFrame.t0Ref, false))); // put right noise
+
+			}
+			if (noRNoise) {
+				noise.putAll(Maps.newTreeMap(interpulseData.subMap(dataFrame.tFRef, false,
+						windowFrame.tFRef, true))); // put left noise noise
+			}
 		}
+		
 
-		Predicate<Integer> filt = Predicates.not(Predicates.equalTo(new Integer(0))); // create a filter
+		//Predicate<Integer> filt = Predicates.not(Predicates.equalTo(new Integer(0))); // create a filter
 		// that checks
 		// for 0
-		noise = new TreeMap<Double, Integer>(Maps.filterValues(noiseTMP, filt)); // apply filter
-		data = new TreeMap<Double, Integer>(Maps.filterValues(dataTMP, filt));
+		//noise = new TreeMap<Double, Integer>(Maps.filterValues(noiseTMP, filt)); // apply filter
+		//data = new TreeMap<Double, Integer>(Maps.filterValues(dataTMP, filt));
 
 	}
 
