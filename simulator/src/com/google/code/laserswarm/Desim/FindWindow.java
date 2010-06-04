@@ -62,12 +62,13 @@ public class FindWindow {
 		satData = sit;
 		satIter = Maps.newHashMap();
 		timeIt = tIt; //hist.time.iterator();
+	//	tPulse=timeIt.next();
 		for (Satellite satIt : sit.keySet()) {
 			try {
 				satIter.put(satIt, satData.get(satIt).getIterator(binFrequency));
 				
 					MeasermentSample tms = satIter.get(satIt).nextNonZero();
-					tms = satIter.get(satIt).nextNonZero();
+				//	tms = satIter.get(satIt).nextNonZero();
 					satMsMap.put(satIt,tms);	//could be set to nextNonZero
 				
 			} catch (MathException e) {
@@ -160,32 +161,34 @@ public class FindWindow {
 
 			MeasermentSample ms = satMsMap.get(satCur);
 			// check whether the window is out of bounds
+			logger.dbg("tDataLow = %s" , tDataLow); //opt
+			logger.dbg("tDataHigh = %s ", tDataHigh); //opt
 
-			if (ms.getTime() > tDataLow) {
+			if (ms.getTime() > tDataLow) {	//fit tDataLow into the window
 				logger.dbg("tDataLow out exceeds left margin"); //opt
-				logger.dbg("tDataLow = %s" , tDataLow); //opt
 				tDataLow = ms.getTime();
 				logger.dbg("ms.getTime = %s", tDataLow); //opt
 			}
-			if ((ms.getTime() + bigWindow) <tDataHigh) {
+			if ((ms.getTime() + bigWindow) < tDataHigh) {	//fit the tDataHigh into the bigWindow
 				logger.dbg("tDataHigh out exceeds right margin"); //opt
-				logger.dbg("tDataHigh = %s ", tDataHigh); //opt
 				tDataHigh = ms.getTime() + bigWindow;
 				logger.dbg("ms.getTime() + bigwindow= %s", tDataHigh); //opt
 			}
+			if(tDataLow > tDataHigh) tDataLow =tDataHigh;
 
 			double tIPWoffset = (bigWindow - (tDataHigh - tDataLow)) / 2; // offset from the highest time
 			logger.dbg("tIPWoffset = %s",tIPWoffset);
 			double tUpper = tIPWoffset + tDataHigh; // the highest time
 			logger.dbg("tUppser = %s", tUpper);
+			
 			while (satIt.hasNextNonZero() && (ms.getTime() < tUpper)) { // Construct unfiltered result vector
-
-
-
 				result.put(ms.getTime(), ms.getPhotons()); // put the results in the map
-				ms = satIt.nextNonZero(); // ensure the increment is repeated once
-
-			} // END construction of the result vector;
+				ms = satIt.nextNonZero(); //
+			
+			}
+			if(tDataHigh > tUpper) tDataHigh = tUpper;
+			
+			// END construction of the result vector;
 			satMsMap.put(satCur, ms); //store the last value 
 			dataMap.put(satCur, new NoiseData(result, new TimePair(tDataLow, tDataHigh)));
 
