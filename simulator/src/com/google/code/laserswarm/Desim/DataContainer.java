@@ -22,7 +22,8 @@ public class DataContainer {
 	}
 
 	public void add(NoiseData nd) {
-		Data.add(nd);
+		if(nd.hasData())
+		    Data.add(nd);
 		while (Data.size() > queueLength) {
 			Data.removeFirst();
 		}
@@ -58,6 +59,7 @@ public class DataContainer {
 		LinkedList<NoiseData> sampList = getRange(tFrame);
 		Map<Double, Integer> sumMaps = Maps.newHashMap();
 		for (NoiseData ndIterator : sampList)
+			if(ndIterator.hasNoise())				
 			sumMaps.putAll(ndIterator.getNoise());
 		return sumMaps;
 	}
@@ -66,6 +68,7 @@ public class DataContainer {
 		LinkedList<NoiseData> sampList = getRange(tFrame);
 		Map<Double, Integer> sumMaps = Maps.newHashMap();
 		for (NoiseData ndIterator : sampList)
+			if(ndIterator.hasData())	//REDUNDANT
 			sumMaps.putAll(ndIterator.getData());
 		return sumMaps;
 	}
