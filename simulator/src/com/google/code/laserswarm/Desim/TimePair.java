@@ -21,8 +21,17 @@ public class TimePair {
 	 * final time to be stored in the class
 	 */
 	public TimePair(Double t0Ref, Double tFRef) {
-		this.t0 = t0Ref.doubleValue();
-		this.tF = tFRef.doubleValue();
+		if(t0Ref!=null && tFRef != null){
+			this.t0 = t0Ref.doubleValue();
+			this.tF = tFRef.doubleValue();
+			
+		}else
+		{
+			this.t0 = Double.NaN;
+			this.tF = Double.NaN;
+			
+		}
+		
 		this.tFRef = tFRef;
 		this.t0Ref = t0Ref;
 		
@@ -34,6 +43,10 @@ public class TimePair {
 	 */
 	public double diff() {
 		return (tF-t0);
+	}
+	@Override
+	public String toString() {
+		return "[ " + t0 + ", " + tF + " ] \n";
 	}
 
 	/**
