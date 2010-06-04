@@ -3,7 +3,6 @@
 \pagestyle{myheadings}
 \markright{Group 13\hfill Laser Swarm\hfill}
 \usepackage{pdflscape}
-
 \usepackage{longtable}
 \usepackage{multirow}
 \usepackage{enumerate}
@@ -99,7 +98,6 @@
 %
 %%%%%%%%%%%%%
 
-
 \chapter{Introduction}
 \label{intro}
 \pagenumbering{arabic}
@@ -107,13 +105,15 @@
 
 %%%%%%%%%%%%%
 %
-%	PROJECT PLANNING STUFF
+%	 Flowdiagrams and breakdowns
 %
 %%%%%%%%%%%%%
 
-\input{chapters/technDesignDev.tex}
-\input{chapters/projectApproachDescription.tex}
-\input{chapters/projectPlanningReview.tex}
+%%%%%%%%%%%%%
+%
+%	 Budget breakdowns and resource Allocation
+%
+%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%
 %
@@ -121,53 +121,59 @@
 %
 %%%%%%%%%%%%%
 
-\input{chapters/rmIntro.tex}
-\input{chapters/markanal.tex}
-\input{chapters/contingency.tex}
-\input{chapters/riskmap.tex}
-
 %%%%%%%%%%%%%
 %
-%       DESIGN OPTIONS
+%       Project management
+%				 - Project Design and development logic
+%				 - Project Gantt Chart
+%				 
 %
 %%%%%%%%%%%%%
 
-\input{chapters/designOptionsIntro.tex}
-\input{chapters/designOptionsADCS.tex}
-\input{chapters/designOptionsCommunications.tex}
-\input{chapters/designOptionsPower.tex}
-\input{chapters/designOptionsOrbit.tex}
-\input{chapters/designOptionsEmitter.tex}
-\input{chapters/designOptionsReceiver.tex}
+%%%%%%%%%%%%%
+%
+%       Cost Breakdown
+%
+%%%%%%%%%%%%%
 
 
 %%%%%%%%%%%%%
 %
 %       INTERFACE
 %
-%%%%%%%%%%%%%
-
-\input{chapters/INTn2diag}
-
-%%%%%%%%%%%%%
-%
-%       TRADEOFF
+%				 -H/W S/W
+%				 - electircal block diagrams
+%				 - data handling
+%				 -data handling
 %
 %%%%%%%%%%%%%
 
-\chapter{Tradeoff}
-\input{chapters/IntroTradeOff.tex}
-\input{chapters/TOadcs.tex}
-\input{chapters/mtrTOCOM.tex}
-\input{chapters/TOeps.tex}
-\input{chapters/AnalOrb.tex}
-\input{chapters/OrbAltitude.tex}
-\input{chapters/deltaVtable.tex}
-\input{chapters/OrbAltitude2.tex}
-\input{chapters/swarmDesign.tex}
-\input{chapters/mtOpS.tex}
-\input{chapters/TOpointing.tex}
-\input{chapters/TOsummery.tex}
+
+%%%%%%%%%%%%%
+%
+%       Emitter
+%
+%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%
+%
+%       Receiver
+%
+%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%
+%
+%       Astrodynamics
+%
+%%%%%%%%%%%%%
+
+\input{chapters/astrodynamics.tex}
+
+%%%%%%%%%%%%%
+%
+%       DATA RECONSTRUCTION
+%
+%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%
 %
@@ -175,15 +181,11 @@
 %
 %%%%%%%%%%%%%
 
-\input{chapters/MTROpsLog.tex}
-
 %%%%%%%%%%%%%
 %
-%       STABILITY & CONTROL
+%       Compliance Matrix
 %
 %%%%%%%%%%%%%
-
-\input{chapters/SCstabcont.tex}
 
 %%%%%%%%%%%%%
 %
@@ -198,32 +200,11 @@
 
 %%%%%%%%%%%%%
 %
-%       SIMULATION CHAPTER
-%
-%%%%%%%%%%%%%
-
-\input{chapters/simIntroduction.tex}
-\input{chapters/simulation.tex}
-\input{chapters/orbit.tex}
-\input{chapters/earthModel.tex}
-\input{chapters/DEM.tex}
-\input{chapters/scatter.tex}
-\input{chapters/signPath.tex}
-\input{chapters/noise.tex}
-\input{chapters/dataAnalysis.tex}
-\input{chapters/altDet.tex}
-\input{chapters/BRDFDet.tex}
-\input{chapters/Simulations.tex}
-\input{chapters/VariationOfPhotonDensity.tex}
-\input{chapters/SolarPhotonsFraction.tex}
-
-%%%%%%%%%%%%%
-%
 %       BIBLIOGRAPHY
 %
 %%%%%%%%%%%%%
 
-\bibliographystyle{plainnat}
+\bibliographystyle{plain}
 \bibliography{bibliography}
 
 %%%%%%%%%%%%%
@@ -233,9 +214,7 @@
 %%%%%%%%%%%%%
 
 \appendix
-\input{chapters/designOptionsDiagrams}
-\input{chapters/budgetOverview.tex}
-\chapter{Gantt Chart}
-\label{ganttChart}
+\chapter{AppA}
+\label{appa}
 
 \end{document}
