@@ -19,16 +19,18 @@ public class SampleIterator implements Iterator<MeasermentSample> {
 	private double						time;
 
 	@Deprecated
-	public int							c				= 0;
+	public int							c					= 0;
 	@Deprecated
-	public boolean						found			= false;
+	public boolean						found				= false;
 
-	private static final Logger			logger			= Logger.get(SampleIterator.class);
+	private static final Logger			logger				= Logger.get(SampleIterator.class);
 
-	private SimpsonIntegrator			integrator		= new SimpsonIntegrator();
-	private boolean						endNextNonZero	= false;
+	private SimpsonIntegrator			integrator			= new SimpsonIntegrator();
+	private boolean						endNextNonZero		= false;
 
 	private double						startT;
+
+	private Double						nextSunPhotonBin	= null;
 
 	public SampleIterator(double binFreqency, TreeMap<Double, Integer> laser,
 			PolynomialSplineFunction noise) {
@@ -98,19 +100,23 @@ public class SampleIterator implements Iterator<MeasermentSample> {
 		try {
 			double nextPulsePhotonTime = laserPhotons.ceilingKey(newTime);
 			double nextPulsePhotonBin = timeBlock(nextPulsePhotonTime);
-			double nextSunPhotonBin = timeBlock((2 * Math.random()) / noise.value(newTime));
+			if (nextSunPhotonBin == null)
+				nextSunPhotonBin = timeBlock(time + (2 * Math.random()) / noise.value(newTime));
 
 			time = Math.min(nextPulsePhotonBin, nextSunPhotonBin);
 
-			if (nextPulsePhotonBin == nextSunPhotonBin)
+			if (nextPulsePhotonBin == nextSunPhotonBin) {
 				// We re so darn unlucky, two at the exact same time (bin) -_-
+				nextSunPhotonBin = null;
 				return new MeasermentSample(time, laserPhotons.get(nextPulsePhotonTime) + 1);
-			else if (nextPulsePhotonBin < nextSunPhotonBin)
+			} else if (nextPulsePhotonBin < nextSunPhotonBin) {
 				// The first pulse sample
 				return new MeasermentSample(time, laserPhotons.get(nextPulsePhotonTime));
-			else
+			} else {
 				// The first noise sample
+				nextSunPhotonBin = null;
 				return new MeasermentSample(time, 1);
+			}
 
 		} catch (MathException e) {
 			return new MeasermentSample(newTime, 1);
