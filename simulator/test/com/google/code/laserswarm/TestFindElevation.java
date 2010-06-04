@@ -19,6 +19,7 @@ import com.google.code.laserswarm.Desim.elevation.correlation.OutlierRemovalCorr
 import com.google.code.laserswarm.Desim.filter.Filter;
 import com.google.code.laserswarm.Desim.filter.FilterAverage;
 import com.google.code.laserswarm.Desim.filter.FilterOutlierRemoval;
+import com.google.code.laserswarm.Desim.filter.MovingAverageFilter;
 import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.conf.Constellation;
 import com.google.code.laserswarm.conf.Satellite;
@@ -139,5 +140,8 @@ public class TestFindElevation {
 		Filter filtOutliers = new FilterOutlierRemoval(10, 10, 0.5);
 		LinkedList<Point3d> outlierAlts = filtOutliers.filter(alts);
 		plotter.plot(outlierAlts, 3, "heightAnalysed&OutlierFiltered");
+		Filter mvgAvgFilter = new MovingAverageFilter(10);
+		LinkedList<Point3d> mvgAvg = mvgAvgFilter.filter(alts);
+		plotter.plot(mvgAvg, 3, "heightAnalysed&MovingAvg");
 	}
 }

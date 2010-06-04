@@ -10,8 +10,8 @@ import javax.vecmath.Point3d;
 import javax.vecmath.Vector3d;
 
 import org.apache.commons.math.MathException;
-import org.apache.commons.math.analysis.interpolation.LoessInterpolator;
-import org.apache.commons.math.analysis.polynomials.PolynomialSplineFunction;
+import org.apache.commons.math.analysis.interpolation.NevilleInterpolator;
+import org.apache.commons.math.analysis.polynomials.PolynomialFunctionLagrangeForm;
 
 import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.conf.Constellation;
@@ -115,7 +115,8 @@ public class TimeLine {
 
 			i++;
 		}
-		final PolynomialSplineFunction noise = new LoessInterpolator().interpolate(x, y);
+		PolynomialFunctionLagrangeForm noise = new NevilleInterpolator().interpolate(x, y);
+		// interpolate(x, y);
 		return new SampleIterator(binFreqency, laserPhotons, noise);
 	}
 
