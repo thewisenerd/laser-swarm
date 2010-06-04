@@ -34,6 +34,10 @@ public class SimulatorMaster {
 		templates.add(templ);
 	}
 
+	public void addSimTemplates(List<SimTemplate> tmpls) {
+		templates.addAll(tmpls);
+	}
+
 	/**
 	 * Run all the added templates.
 	 */
@@ -75,9 +79,5 @@ public class SimulatorMaster {
 
 		}
 		return doneTemplates;
-	}
-
-	public void addSimTemplates(List<SimTemplate> tmpls) {
-		templates.addAll(tmpls);
 	}
 }

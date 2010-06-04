@@ -9,6 +9,7 @@ import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.conf.Configuration.Actions;
 import com.google.code.laserswarm.earthModel.ElevationModel;
 import com.google.code.laserswarm.earthModel.IElevationModel;
+import com.google.code.laserswarm.util.ThreadRunner;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
 import com.lyndir.lhunath.lib.system.logging.Logger;
@@ -28,10 +29,6 @@ public abstract class DemReader {
 		}
 
 		return dems;
-	}
-
-	private static ImmutableSet<ElevationModel> parseDem(File[] listFiles) {
-		return parseDem(Arrays.asList(listFiles));
 	}
 
 	public static ElevationModel parseDem(File demFile) throws DemCreationException {
@@ -72,51 +69,36 @@ public abstract class DemReader {
 		return dem;
 	}
 
+	private static ImmutableSet<ElevationModel> parseDem(File[] listFiles) {
+		return parseDem(Arrays.asList(listFiles));
+	}
+
 	public static ImmutableSet<ElevationModel> parseDem(List<File> demFiles) {
 		final Set<ElevationModel> dems = Sets.newHashSet();
 
 		logger.dbg("Reading dems: %s", demFiles);
 
-		Set<Thread> waiting = Sets.newHashSet();
+		Set<DemParseThread> parsers = Sets.newHashSet();
 		for (int i = 0; i < demFiles.size(); i++) {
-			final File demFile = demFiles.get(i);
-			Thread tr = new Thread(String.format("Parser %s", demFile.getName())) {
-				@Override
-				public void run() {
-					try {
-						ElevationModel dem = DemReader.parseDem(demFile);
-						dems.add(dem);
-					} catch (DemCreationException e) {
-						logger.wrn("Cannot parse dem %s", demFile);
-					}
-				}
-			};
-			waiting.add(tr);
+			File demFile = demFiles.get(i);
+			DemParseThread tr = new DemParseThread(
+					String.format("Parser %s", demFile.getName()), demFile);
+			parsers.add(tr);
 		}
+		ThreadRunner<DemParseThread> tr = new ThreadRunner<DemParseThread>(parsers);
+		tr.start();
 
-		Set<Thread> running = Sets.newHashSet();
-		while (running.size() > 0 || waiting.size() > 0) {
-			if (waiting.iterator().hasNext()) {
-				Thread tr = waiting.iterator().next();
-				waiting.remove(tr);
-				running.add(tr);
-				tr.start();
-				logger.inf("Sarting %s (waiting:%s, running: %s)", tr, waiting.size(), running.size());
+		while (!tr.isComplete())
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				logger.wrn(e, "Interrupted while sleeping");
 			}
-			do {
-				// logger.dbg("%d threads alive", running.size());
-				for (Thread thread : ImmutableSet.copyOf(running))
-					if (!thread.isAlive()) {
-						running.remove(thread);
-					}
 
-				try {
-					Thread.sleep(100);
-				} catch (InterruptedException e) {
-					logger.wrn("Interrupted while sleeping");
-				}
-			} while (running.size() >= Configuration.demThreads);
-		}
+		for (DemParseThread parser : parsers)
+			if (parser.getDem() != null)
+				dems.add(parser.getDem());
+
 		return ImmutableSet.copyOf(dems);
 	}
 

@@ -37,5 +37,10 @@
 	<classpathentry kind="lib" path="lib/Chart2D_1.9.6k.jar"/>
 	<classpathentry kind="lib" path="lib/xpp3-1.1.4c.jar"/>
 	<classpathentry kind="lib" path="lib/xstream-1.3.1.jar" sourcepath="C:/Users/simon/Desktop/xstream-distribution-1.3.1-src.zip"/>
+	<classpathentry kind="lib" path="lib/jlink/JLink.jar" sourcepath="C:/Users/simon/workspace/JLink/Source/Java">
+		<attributes>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="laser-swarm-simulator/lib/jlink/Windows"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
