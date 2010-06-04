@@ -22,7 +22,7 @@ import com.google.common.collect.Maps;
 import com.lyndir.lhunath.lib.system.logging.Logger;
 
 public class FindElevationNeighborInterpolation implements ElevationFinder {
-	private int						qLength			= 9;
+	private int						qLength			= 5;
 	private NeighborInterpolation	interpolator	= new MeanAveragingInterpolation();
 	private static final Logger		logger			= Logger
 															.get(FindElevationNeighborInterpolation.class);
@@ -52,34 +52,12 @@ public class FindElevationNeighborInterpolation implements ElevationFinder {
 			logger.inf("Iteration number %s", count);
 			// Copy over the values from FindWindow.
 			Map<Satellite, NoiseData> tempInterpulseWindow = emitRecPair.next();
-			if (timeIt.hasNext()) {
-				for (Satellite tempSat : tempInterpulseWindow.keySet()) {
-					interpulseWindows.get(tempSat).add(tempInterpulseWindow.get(tempSat));
-				}
-				// Store the emitter time and position.
-				timePulses.addLast(emitRecPair.tPulse);
-				logger.dbg("Pulse time: %s", emitRecPair.tPulse);
-				posEmits.addLast(new Point3d(hist.getPosition().find(emitRecPair.tPulse)));
-				logger.dbg("Point: [%s, %s, %s]", hist.getPosition().find(emitRecPair.tPulse).x,
-						hist
-						.getPosition().find(emitRecPair.tPulse).y, hist.getPosition().find(
-						emitRecPair.tPulse).z);
-				// Remove pulse data we do not care about any more.
-				if (timePulses.size() > qLength) {
-					timePulses.removeFirst();
-					posEmits.removeFirst();
-				}
-				// Do the actual data processing.
-				if (count > qLength) {
-					Point3d thisEmit = posEmits.getFirst();
-					Point3d sphericalEmit = Convert.toSphere(thisEmit);
-					altitudes.add(new Point3d(
-							Configuration.R0
-							+ interpolator.findAltitude(recTimes, interpulseWindows, timePulses,
-							posEmits),
-							sphericalEmit.y, sphericalEmit.z));
-				}
-			}
+			Point3d thisEmit = new Point3d(hist.getPosition().find(emitRecPair.tPulse));
+			Point3d sphericalEmit = Convert.toSphere(thisEmit);
+			altitudes.add(new Point3d(
+					Configuration.R0
+					+ interpolator.next(tempInterpulseWindow, emitRecPair.tPulse, thisEmit),
+					sphericalEmit.y, sphericalEmit.z));
 		}
 		while (Double.isNaN(altitudes.getLast().x)
 				|| Math.abs(altitudes.getLast().x - altitudes.get(altitudes.size() - 2).x) > 1000) {
