@@ -45,15 +45,15 @@ public class Configuration {
 	 * Location of the DEMs
 	 */
 	public transient static File			demDir				= new File("DEM");
-	public transient static File			volitileCache		= new File("cache/volitile");
+	public transient static File			volatileCache		= new File("cache/volatile");
 	static {
-		volitileCache.mkdirs();
-		for (File subFile : volitileCache.listFiles())
+		volatileCache.mkdirs();
+		for (File subFile : volatileCache.listFiles())
 			subFile.delete();
 	}
-	public transient static File			nonVolitileCache	= new File("cache/nonVolitile");
+	public transient static File			nonVolatileCache	= new File("cache/nonVolatile");
 	static {
-		nonVolitileCache.mkdirs();
+		nonVolatileCache.mkdirs();
 	}
 	/**
 	 * Earth radius based on EPSG:3785 ellipsoid (spheroid)

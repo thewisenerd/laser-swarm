@@ -34,8 +34,8 @@ public abstract class DemReader {
 	public static ElevationModel parseDem(File demFile) throws DemCreationException {
 		String fileName = demFile.getName();
 
-		File cf = new File(Configuration.nonVolitileCache, demFile.getName() + ".cache.tiff");
-		File ef = new File(Configuration.nonVolitileCache, demFile.getName() + ".env.xml");
+		File cf = new File(Configuration.nonVolatileCache, demFile.getName() + ".cache.tiff");
+		File ef = new File(Configuration.nonVolatileCache, demFile.getName() + ".env.xml");
 		boolean cached = cf.exists() && ef.exists();
 		ElevationModel dem;
 

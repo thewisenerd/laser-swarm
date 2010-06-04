@@ -176,7 +176,7 @@ public class ScatteringCharacteristics implements Distribution {
 			throw new LinkageError("An error occurred connecting to the kernel)");
 		}
 
-		File csv = new File(Configuration.volitileCache, "scatter.csv");
+		File csv = new File(Configuration.volatileCache, "scatter.csv");
 		toCSV(csv.getAbsolutePath());
 
 		byte[] gifData = ml

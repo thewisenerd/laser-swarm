@@ -62,7 +62,7 @@ public class Simulator implements Runnable {
 	private static boolean		usedDB	= true;
 
 	public static ObjectContainer mkDb(Simulator sim, String sufix) {
-		File dbFile = new File(Configuration.volitileCache, sim.toString()
+		File dbFile = new File(Configuration.volatileCache, sim.toString()
 				+ (sufix.equals("") ? "" : "-" + sufix)
 				+ "-" + sim.hashCode() + ".db4o");
 		if (!dbFile.exists())
@@ -305,7 +305,7 @@ public class Simulator implements Runnable {
 			cleanDb();
 		else {
 			try {
-				dataPoints = new NonVolatileList(new File(Configuration.volitileCache, //
+				dataPoints = new NonVolatileList(new File(Configuration.volatileCache, //
 						template.toString() + "-" + template.hashCode() + ".db"));
 			} catch (IOException e) {
 				e.printStackTrace();

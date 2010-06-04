@@ -1,11 +1,10 @@
 package com.google.code.laserswarm.core;
 
 import java.io.File;
-import java.io.IOException;
-import java.nio.charset.Charset;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeMap;
 
 import org.apache.commons.math.FunctionEvaluationException;
 import org.apache.commons.math.MathException;
@@ -24,40 +23,16 @@ import com.google.code.laserswarm.simulation.Prospector;
 import com.google.code.laserswarm.simulation.SimTemplate;
 import com.google.code.laserswarm.simulation.SimVars;
 import com.google.code.laserswarm.simulation.Simulator;
+import com.google.code.laserswarm.util.CSVwriter;
+import com.google.common.base.Function;
+import com.google.common.collect.Collections2;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import com.google.common.io.Files;
 import com.lyndir.lhunath.lib.system.logging.Logger;
 
 public class Optimize extends LaserSwarm implements MultivariateRealFunction {
-
-	private class PrefLog {
-		private File	log	= new File("optimize.csv");
-
-		public PrefLog() {
-			try {
-				log.delete();
-				log.createNewFile();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-
-		public void write(Double[] values) {
-			try {
-				StringBuffer str = new StringBuffer();
-				for (int i = 0; i < values.length; i++) {
-					str.append(values[i]);
-					if (i + 1 < values.length)
-						str.append(",\t");
-				}
-				Files.append(str + "\n", log, Charset.defaultCharset());
-			} catch (IOException e) {
-				logger.wrn(e, "Could not write to preflog");
-			}
-		}
-	}
 
 	private static final Logger	logger	= Logger.get(Optimize.class);
 
@@ -68,17 +43,58 @@ public class Optimize extends LaserSwarm implements MultivariateRealFunction {
 
 		Prospector.roughTimeStep = 3;
 
-		Optimize sim = new Optimize();
-		sim.optimize();
+		Set<Thread> waiting = Sets.newHashSet();
+		for (double i = 1; i <= 3; i += 0.25) {
+			for (double j = 1; j <= 3; j += 0.5) {
+				final Optimize sim = new Optimize();
+				sim.POWER_POWER = i;
+				sim.APERTURE_POWER = j;
+				Thread tr = new Thread() {
+					@Override
+					public void run() {
+						sim.optimize();
+					}
+				};
+				waiting.add(tr);
+			}
+		}
+
+		Set<Thread> running = Sets.newHashSet();
+		while (running.size() > 0 || waiting.size() > 0) {
+			if (waiting.iterator().hasNext()) {
+				Thread tr = waiting.iterator().next();
+				waiting.remove(tr);
+				running.add(tr);
+				tr.start();
+				logger.inf("Sarting %s (waiting:%s, running: %s)", tr, waiting.size(), running.size());
+			}
+			do {
+				// logger.dbg("%d threads alive", running.size());
+				for (Thread thread : ImmutableSet.copyOf(running))
+					if (!thread.isAlive()) {
+						running.remove(thread);
+					}
+
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					logger.wrn("Interrupted while sleeping");
+				}
+			} while (running.size() >= Configuration.getInstance().simThreads);
+		}
 	}
 
 	private static Constellation mkConstellation(double power, double aperature) {
 		return Constellation.swarm(power, aperature, 500);
 	}
 
-	private int							photons	= 0;
-	private PrefLog						prefLog	= new PrefLog();
-	private HashMap<Satellite, Integer>	satPhotons;
+	private double						POWER_POWER		= 1;
+
+	private double						APERTURE_POWER	= 1;
+
+	private int							photons			= 0;
+	private CSVwriter					prefLog;
+	private TreeMap<Satellite, Integer>	satPhotons;
 
 	@Override
 	protected List<Constellation> mkConstellations() {
@@ -95,9 +111,15 @@ public class Optimize extends LaserSwarm implements MultivariateRealFunction {
 
 	private void optimize() {
 		NelderMead optimizer = new NelderMead();
+		optimizer.setMaxIterations(100);
+		optimizer.setMaxEvaluations(100);
+
+		prefLog = new CSVwriter(new File(String
+				.format("optimize-%f-%f.csv", POWER_POWER, APERTURE_POWER)), "\t");
 		try {
-			RealPointValuePair values = optimizer.optimize(this, GoalType.MAXIMIZE, new double[] { 5,
-					0.075 * 0.075 });
+			RealPointValuePair values = optimizer.optimize(this, GoalType.MAXIMIZE,
+							new double[] { 5,
+									0.075 * 0.075 });
 
 			for (Double val : values.getPoint())
 				logger.inf("Value %s", val);
@@ -106,13 +128,14 @@ public class Optimize extends LaserSwarm implements MultivariateRealFunction {
 		} catch (MathException e) {
 			e.printStackTrace();
 		}
+
 	}
 
 	@Override
 	protected void simulate() {
 		super.simulate();
 		photons = 0;
-		satPhotons = Maps.newHashMap();
+		satPhotons = Maps.newTreeMap();
 		StringBuffer str = new StringBuffer();
 		for (SimTemplate tmpl : simulations.keySet()) {
 			for (Satellite sat : tmpl.getConstellation().getReceivers()) {
@@ -150,11 +173,11 @@ public class Optimize extends LaserSwarm implements MultivariateRealFunction {
 		NormalDistributionImpl gausian = new NormalDistributionImpl(1000 * satPhotons.size(), 100);
 		double performace = 0;
 		try {
-			performace = (gausian.cumulativeProbability(photons) * 100)
-					/ (power * aperature * aperature);
+			performace = 1 / (Math.pow(power, POWER_POWER) * Math.pow(aperature, APERTURE_POWER));
+			performace *= gausian.cumulativeProbability(photons);
 			for (Satellite sat : satPhotons.keySet()) {
-				NormalDistribution gausian2 = new NormalDistributionImpl(1000, 300);
-				double modifier = 500 * gausian2.cumulativeProbability(satPhotons.get(sat));
+				NormalDistribution gausian2 = new NormalDistributionImpl(1000, 500);
+				double modifier = gausian2.cumulativeProbability(satPhotons.get(sat));
 				performace *= modifier;
 			}
 		} catch (MathException e) {
@@ -163,7 +186,17 @@ public class Optimize extends LaserSwarm implements MultivariateRealFunction {
 		}
 		logger.inf("Performance: %s (%s photons)", performace, photons);
 
-		prefLog.write(new Double[] { power, aperature, performace });
+		List<Double> values = Lists.newLinkedList();
+		values.add(power);
+		values.add(aperature);
+		values.addAll(Collections2.transform(satPhotons.values(), new Function<Integer, Double>() {
+			@Override
+			public Double apply(Integer from) {
+				return new Double(from);
+			}
+		}));
+		values.add(performace);
+		prefLog.write(values.toArray(new Double[] {}));
 
 		return performace;
 	}
