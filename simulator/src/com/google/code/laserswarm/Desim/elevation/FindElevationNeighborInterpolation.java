@@ -22,10 +22,10 @@ import com.google.common.collect.Maps;
 import com.lyndir.lhunath.lib.system.logging.Logger;
 
 public class FindElevationNeighborInterpolation implements ElevationFinder {
-	private int						qLength			= 5;
-	private NeighborInterpolation	interpolator	= new MeanAveragingInterpolation();
-	private static final Logger		logger			= Logger
-															.get(FindElevationNeighborInterpolation.class);
+	private int						qLength	= 5;
+	private NeighborInterpolation	interpolator;
+	private static final Logger		logger	= Logger
+													.get(FindElevationNeighborInterpolation.class);
 
 	public FindElevationNeighborInterpolation(int queueLength) {
 		qLength = queueLength;
@@ -34,6 +34,7 @@ public class FindElevationNeighborInterpolation implements ElevationFinder {
 	@Override
 	public LinkedList<Point3d> run(Map<Satellite, TimeLine> recTimes, EmitterHistory hist,
 			Constellation con, int dataPoints) throws MathException {
+		interpolator = new MeanAveragingInterpolation(qLength, recTimes);
 		Iterator<Double> timeIt = hist.time.iterator();
 		Map<Satellite, DataContainer> interpulseWindows = Maps.newHashMap();
 		for (DataContainer tempData : interpulseWindows.values()) {
@@ -65,5 +66,4 @@ public class FindElevationNeighborInterpolation implements ElevationFinder {
 		}
 		return altitudes;
 	}
-
 }
