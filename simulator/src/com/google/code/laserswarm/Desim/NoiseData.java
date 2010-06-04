@@ -74,15 +74,19 @@ public class NoiseData {
 	 */
 	public NoiseData(TreeMap<Double, Integer> interpulseData, TimePair dataWindow) {
 		try {
-			windowFrame = new TimePair(interpulseData.firstKey(), interpulseData.lastKey());
+			windowFrame = new TimePair(interpulseData.firstKey(), interpulseData.lastKey());		//check if not empty
 		} catch (NoSuchElementException E) {
 			logger.dbg("interpulseData is empty!");
 			noData = true;
+			noLNoise =true;
+			noRNoise = true;
 			windowFrame = null;// new TimePair(0.0,0.0);
 			dataFrame = null;// new TimePair(0.0,0.0);
 			noiseFrameL = null;// new TimePair(0.0,0.0);
 			noiseFrameR = null;// new TimePair(0.0,0.0);
 			noise = null;// Maps.newTreeMap();
+			data = null;
+			
 			// noise.put(0.0, 0);
 			// data = Maps.newTreeMap();
 			// data.put(0.0, 0);
@@ -90,6 +94,8 @@ public class NoiseData {
 
 		}
 		;
+		noRNoise = false;
+		noLNoise = false;
 		dataFrame = new TimePair(dataWindow.t0Ref, dataWindow.tFRef);
 		noiseFrameL = new TimePair(windowFrame.t0Ref, dataFrame.t0Ref);
 		noiseFrameR = new TimePair(dataFrame.tFRef, windowFrame.tFRef);
@@ -141,7 +147,7 @@ public class NoiseData {
 	 */
 
 	public boolean contains(double time) {
-		return (windowFrame.t0 <= time && windowFrame.tF > time);
+		return (windowFrame.t0 <= time && windowFrame.tF >= time);
 
 	}
 
@@ -151,4 +157,12 @@ public class NoiseData {
 				/ windowFrame.diff() + "\n end:" + (1 - noiseFrameR.diff() / windowFrame.diff());
 		// ""nL, nR frac: " + noiseFrameL.diff() + " \t" + noiseFrameR.diff();
 	}
+
+	public boolean hasNoise() {
+	return (!noLNoise || !noRNoise);
+	}
+	public boolean hasData() {
+		return (!noData);
+		}
 }
+
