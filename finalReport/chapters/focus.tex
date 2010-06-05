@@ -55,7 +55,7 @@ Insert value of $\mu_{2}$ and $\mu_{3}$ to equation \ref{gamma}, so the divergen
 
 \subsection{Diffraction}
 \label{diff}
-Diffraction occurs when a wavefront(radiant beam)impinges upon the edge of an opaque screen or aperture. Light appears outside the perfect geometrical shadow because the light has been diffracted by the edge of the aperture. The effect this has on our simple rotationally symmetric optical systems is that a point does not map to a point, but is blurred or smeared. 
+Diffraction occurs when a wavefront(radiant beam)impinges upon the edge of an opaque screen or aperture. Light appears outside the perfect geometrical shadow because the light has been diffracted by the edge of the aperture. The effect this has on our simple rotationally symmetric optical systems is that a point does not map to a point, but is blurred or smeared.\cite{prism_book} 
 
 \begin{figure}[ht!]
 \centering
@@ -64,7 +64,12 @@ Diffraction occurs when a wavefront(radiant beam)impinges upon the edge of an op
 \label{fig:single_slit}
 \end{figure}
 
-In far-field case, where the pattern observed is a long distance from the aperture, it is known as Fraunhofer diffraction. The patterns caused by diffraction can be analyzed via Fourier optics of a circular aperture for rotationally symmetric optical systems. The results are in the form of a Bessel function, which is shown as figure \ref{fig:single_slit} on page \ref{fig:single_slit} for single-slit diffraction. Therefore, the actual radiant energy distribution in the image of a point differs from the point because of diffraction. This diffraction spot is called the "Airy disc", a three-dimensional representation of which is given in figure \ref{fig:airydisk} on page \ref{fig:airydisk} by definition or accepted practice. About 84\% of the radiant power is contained in this central disc.
+In far-field case, where the pattern observed is a long distance from the aperture, it is known as Fraunhofer diffraction. The patterns caused by diffraction can be analyzed via Fourier optics of a circular aperture for rotationally symmetric optical systems. The results are in the form of a Bessel function, which is shown as figure \ref{fig:single_slit} on page \ref{fig:single_slit} for single-slit diffraction. Therefore, the actual radiant energy distribution in the image of a point differs from the point because of diffraction. This diffraction spot is called the "Airy disc", a three-dimensional representation of which is given in figure \ref{fig:airydisk} on page \ref{fig:airydisk} by definition or accepted practice. About 84\% of the radiant power is contained in this central disc. The diffraction limit is the ultimate design criterion as to how well the optical system creates an image. The diffraction limit is described as angular resolution, $\theta$, for half of the diffraction blur, which can be expressed as equation \ref{diffraction}. where D is the diameter of the aperture and $\lambda$ is the light wavelength.
+
+\begin{equation}
+\label{diffraction}
+\theta = 1.22\frac{\lambda}{D}
+\end {equation}
 
 \begin{figure}[ht!]
 \centering
@@ -72,3 +77,5 @@ In far-field case, where the pattern observed is a long distance from the apertu
 \caption{Airy disk pattern.}
 \label{fig:airydisk}
 \end{figure}
+
+To compare with previous earth observation mission \acs{ICEsat}, which produces 70 meters diameter laser spot, 10[mm] laser diameter can produce about 60 meters diameter without focusing system. 

@@ -1,3 +1,13 @@
+\section{Detailed Design Receiver Optics}
+\label{sec:DDreceiver}
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[scale = 0.8]{chapters/img/Prism.png}
+\caption{Receiver optics overview}
+\label{fig:prism}
+\end{figure} 
+
 \subsection{Prism design}
 \label{prism}
 Before the prism is taking into consideration, the optical filter is also considered as an option, which is more simple than prism and barriers. The optical filters bandwidth accuracy are in terms of several docades of nano meters(minimum 10nm\cite{optical_filter}), which is not acceptable since the objective is to filter out all noisy light except wavelength around 473nm. Meanwhile, the transmission is another problem for normal optical filters, which have much lower value(around 50\%) for smaller bandwidth(10nm to 20nm) and higher value(around 90\%) for larger bandwidth(more than 30nm), but prism can has higher transmission as 97\% for specified glass material.
@@ -37,7 +47,7 @@ In the equation \ref{index_refraction}, $a_{1}, a_{2}, a_{3}$ and $b_{1}, b_{2},
 \label{fig:prism_equilateral}
 \end{figure}
 
-To select the correct incident angle, the figure \ref{fig:prism_alpha} on page \ref{fig:prism_alpha} is used. In the figure, the blue line has the asymptote about $\alpha = 54[deg]$. To avoid the asymptote, $\alpha = 55[deg]$ is selected as the incident angle, which leads to $\epsilon = 76[deg]$ and $\Delta\epsilon = 2.1432[mrad]$. The figure \ref{fig:SF11} is the calculation in the excel sheet. There are two $\Delta\epsilon$ in the calculation, and $\Delta\epsilon1 = \epsilon(472[nm]) - \epsilon(473[nm])$ meanwhile $\Delta\epsilon2 = \epsilon(473[nm]) - \epsilon(474[nm])$. The driving $\Delta\epsilon$ is the smaller one, since it is the minimum requirement. Taking $\Delta\epsilon = 2.1432[mrad]$ into further calculation, in order to separate wavelength 472[nm], 473[nm] and 474[nm], barrier radius(or beam width) 1[mm] leads to distance 0.4666[m] between prism and barrier. To short the distance, more concentrated beam is needed from parabolic mirror. The figure \ref{fig:prism_final} on page \ref{fig:prism_final} shows the final values of all angles.
+To select the correct incident angle, the figure \ref{fig:prism_alpha} on page \ref{fig:prism_alpha} is used. In the figure, the blue line has the asymptote about $\alpha = 54[deg]$. To avoid the asymptote, $\alpha = 55[deg]$ is selected as the incident angle, which leads to $\epsilon = 76[deg]$ and $\Delta\epsilon = 2.1432[mrad]$. The figure \ref{fig:SF11} is the calculation in the excel sheet. There are two $\Delta\epsilon$ in the calculation, and $\Delta\epsilon1 = \epsilon(472[nm]) - \epsilon(473[nm])$ meanwhile $\Delta\epsilon2 = \epsilon(473[nm]) - \epsilon(474[nm])$. The driving $\Delta\epsilon$ is the smaller one, since it is the minimum requirement. Taking $\Delta\epsilon = 2.1432[mrad]$ into further calculation, in order to separate wavelength 472[nm], 473[nm] and 474[nm], barrier radius(or beam width) 1[mm] leads to distance 466.7[mm] between prism and barrier. To short the distance, more concentrated beam is needed from parabolic mirror. The figure \ref{fig:prism_final} on page \ref{fig:prism_final} shows the final values of all angles.
 
 \begin{figure}[ht!]
 \centering
@@ -59,3 +69,19 @@ To select the correct incident angle, the figure \ref{fig:prism_alpha} on page \
 \caption{Overview of all angles}
 \label{fig:prism_final}
 \end{figure}
+
+\subsection{Summary}
+\label{sum}
+
+\begin{table}[h]
+\begin{tabular}{l | c | c c | c c | c }
+Subsystem component    & Number & Mass & Cost & Total mass & Total cost & Power\\ 
+                       &   & [g] & [Dollar]& [g]  &[Dollar] & [W]         \\ \hline \hline
+Parabolic mirror       & 4 & 24  & 11000& 96   & 44000 &  0 (0)      \\
+Faceted mirror         & 1 & 375 & 75000& 375  & 75000 &  1 (2)      \\ 
+Straight mirror        & 3 & 8.5 & 176  & 25.5 & 528   &  0.15 (1.5) \\
+\acs{SPAD}             & 3 & 18  & 10*  & 54   & 30*   &  0 (0)      \\
+Prism                  & 3 & 30  & 1150 & 90   & 3450  &  1 (3)      \\ \hline
+Total                  &   &     &      & 814  & 123310& 2.75 (4.1 rms) \\
+                       &   &     &      &      & 143603 FY00\$ &
+\end{tabular}
