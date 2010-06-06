@@ -5,13 +5,12 @@ import jat.cm.Constants;
 
 import java.util.List;
 import java.util.TreeMap;
+import java.util.Map.Entry;
 
 import javax.vecmath.Point3d;
 import javax.vecmath.Vector3d;
 
 import org.apache.commons.math.MathException;
-import org.apache.commons.math.analysis.interpolation.NevilleInterpolator;
-import org.apache.commons.math.analysis.polynomials.PolynomialFunctionLagrangeForm;
 
 import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.conf.Constellation;
@@ -44,6 +43,10 @@ public class TimeLine {
 	private Constellation				constellation;
 
 	private static final Logger			logger			= Logger.get(TimeLine.class);
+
+	public static boolean approxEquals(double d1, double d2, double tolerance) {
+		return d1 - tolerance < d2 && d1 + tolerance > d2;
+	}
 
 	public TimeLine(Satellite sat, Constellation constellation, List<SimVars> dataSet) {
 		this.constellation = constellation;
@@ -100,24 +103,7 @@ public class TimeLine {
 		final double binTime = 1. / binFreqency;
 		logger.inf("Bin f=%s\tBin t=%s", binFreqency, binTime);
 
-		final TreeMap<Double, Integer> laserPhotons = Maps.newTreeMap(this.laserPhotons);
-
-		double[] x = new double[noisePhotons.size()];
-		double[] y = new double[noisePhotons.size()];
-		int i = 0;
-		for (Double t : noisePhotons.keySet()) {
-			x[i] = t;
-			y[i] = noisePhotons.get(t) * binTime;
-			y[i] += (Math.random() <= y[i] - Math.round(y[i]) ? 1 : 0);
-
-			if (Double.isNaN(y[i]))
-				y[i] = 0;
-
-			i++;
-		}
-		PolynomialFunctionLagrangeForm noise = new NevilleInterpolator().interpolate(x, y);
-		// interpolate(x, y);
-		return new SampleIterator(binFreqency, laserPhotons, noise);
+		return new SampleIterator(binFreqency, laserPhotons, noisePhotons);
 	}
 
 	public LookupTable getLookupDirection() {
@@ -202,9 +188,15 @@ public class TimeLine {
 			double nrP = (totalReceivedPower / ePhoton); // # per second
 			if (nrP == 0)
 				System.out.println("NOO (nr photons == 0)");
-			noisePhotons.put(t, nrP);
+
+			Entry<Double, Double> closest = noisePhotons.floorEntry(t);
+			if (closest == null || !approxEquals(closest.getValue(), nrP, 0.5)) {
+				noisePhotons.put(t, nrP);
+				// logger.inf("- ADDING t=%f (p=%f)", t, nrP);
+			} else {
+				// logger.dbg("Skipping t=%f (p=%f)", t, nrP);
+			}
 		}
 		logger.dbg("Done making noise");
 	}
-
 }

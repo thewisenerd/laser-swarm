@@ -17,4 +17,9 @@ public class MeasermentSample {
 	public double getTime() {
 		return time;
 	}
+
+	@Override
+	public String toString() {
+		return String.format("t=%s\tphotons=%s", time, photons);
+	}
 }
