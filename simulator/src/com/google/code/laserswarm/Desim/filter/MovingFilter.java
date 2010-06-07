@@ -1,9 +1,11 @@
 package com.google.code.laserswarm.Desim.filter;
 
 import java.util.LinkedList;
+import java.util.ListIterator;
 
 import javax.vecmath.Point3d;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 
 public abstract class MovingFilter implements Filter {
@@ -19,14 +21,19 @@ public abstract class MovingFilter implements Filter {
 		LinkedList<Point3d> previus = Lists.newLinkedList();
 		LinkedList<Point3d> newVals = Lists.newLinkedList();
 
-		for (Point3d point : alts) {
-			previus.add(point);
-			if (previus.size() > filterSize)
+		ListIterator<Point3d> it = alts.listIterator();
+		for (int i = 0; i <= filterSize; i++)
+			previus.add(it.next());
+
+		for (int i = 0; i < alts.size(); i++) {
+			if (it.hasNext())
+				previus.add(it.next());
+			if (previus.size() > filterSize * 2 + 1)
 				previus.removeFirst();
-			newVals.add(filterPoint(previus));
+			newVals.add(filterPoint(ImmutableList.copyOf(previus)));
 		}
 		return newVals;
 	}
 
-	protected abstract Point3d filterPoint(LinkedList<Point3d> previus);
+	protected abstract Point3d filterPoint(ImmutableList<Point3d> immutableList);
 }
