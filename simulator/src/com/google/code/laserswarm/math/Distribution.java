@@ -3,12 +3,14 @@ package com.google.code.laserswarm.math;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.File;
+import java.util.List;
 
 import javax.vecmath.Point3d;
 import javax.vecmath.Vector3d;
 
 import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.util.CSVwriter;
+import com.google.common.collect.Lists;
 import com.lyndir.lhunath.lib.system.logging.Logger;
 import com.wolfram.jlink.KernelLink;
 import com.wolfram.jlink.MathLinkException;
@@ -29,6 +31,31 @@ public abstract class Distribution {
 
 	private static final Logger	logger	= Logger.get(Distribution.class);
 
+	public void compareTo(Distribution distribution2) {
+		compareTo(distribution2, 100);
+	}
+
+	public void compareTo(Distribution distribution2, int steps) {
+		List<Point3d> ownPoints = pointCloud(steps);
+		List<Point3d> therePoints = distribution2.pointCloud(steps);
+		new PointCloudComparison(ownPoints, therePoints, 0, false);
+		// Collections.binarySearch(list, key, c)
+	}
+
+	public List<Point3d> pointCloud(int steps) {
+		double step = (2 * Math.PI) / steps;
+		List<Point3d> points = Lists.newLinkedList();
+		for (double az = 0; az < 2 * Math.PI; az += step) {
+			for (double el = 0; el < Math.PI / 2; el += step) {
+				Vector3d exittanceVector = new Vector3d(
+						Convert.toXYZ(new Point3d(1, az, Math.PI / 2 - el)));
+				double out = probability(exittanceVector);
+				points.add(new Point3d(az, el, out));
+			}
+		}
+		return points;
+	}
+
 	/**
 	 * Evaluate the distribution for a given direction. <0,0,1> is considered to be up
 	 * 
@@ -41,15 +68,15 @@ public abstract class Distribution {
 	public void toCSV(String filename) {
 		CSVwriter csv = new CSVwriter(new File(filename), "\t");
 
-		double step = Math.PI / 100;
+		List<Point3d> points = pointCloud(100);
+		for (Point3d point3d : points) {
+			double az = point3d.x;
+			double el = point3d.y;
+			double out = point3d.z;
 
-		for (double az = 0; az < 2 * Math.PI; az += step) {
-			for (double el = 0; el < Math.PI / 2; el += step) {
-				Vector3d exittanceVector = new Vector3d(
+			Vector3d exittanceVector = new Vector3d(
 						Convert.toXYZ(new Point3d(1, az, Math.PI / 2 - el)));
-				double out = probability(exittanceVector);
-				csv.write(az, el, exittanceVector.x, exittanceVector.y, exittanceVector.z, out);
-			}
+			csv.write(az, el, exittanceVector.x, exittanceVector.y, exittanceVector.z, out);
 		}
 	}
 
