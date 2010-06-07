@@ -1,26 +1,16 @@
 package com.google.code.laserswarm.earthModel;
 
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.io.File;
-
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.vecmath.Point3d;
 import javax.vecmath.Vector3d;
 
 import com.google.code.laserswarm.conf.Configuration;
-import com.google.code.laserswarm.math.Convert;
 import com.google.code.laserswarm.math.Distribution;
-import com.google.code.laserswarm.util.CSVwriter;
 import com.google.code.laserswarm.util.GuiFactory;
 import com.lyndir.lhunath.lib.system.logging.Logger;
-import com.wolfram.jlink.KernelLink;
-import com.wolfram.jlink.MathLinkException;
-import com.wolfram.jlink.MathLinkFactory;
 
-public class ScatteringCharacteristics implements Distribution {
+public class ScatteringCharacteristics extends Distribution {
 	private static final Logger	logger	= Logger.get(ScatteringCharacteristics.class);
 
 	public static void main(String[] args) {
@@ -132,64 +122,6 @@ public class ScatteringCharacteristics implements Distribution {
 						* (Math.cos(theta0) * Math.cos(theta1) + Math.sin(theta0) * Math.sin(theta1)
 								* Math.cos(dPhi)) + Theta * Theta), 1.5);
 		return R_HenyeyGreenstein;
-	}
-
-	public void toCSV(String filename) {
-		CSVwriter csv = new CSVwriter(new File(filename), "\t");
-
-		double step = Math.PI / 100;
-
-		for (double az = 0; az < 2 * Math.PI; az += step) {
-			for (double el = 0; el < Math.PI / 2; el += step) {
-				Vector3d exittanceVector = new Vector3d(
-						Convert.toXYZ(new Point3d(1, az, Math.PI / 2 - el)));
-				double out = probability(exittanceVector);
-				csv.write(az, el, exittanceVector.x, exittanceVector.y, exittanceVector.z, out);
-			}
-		}
-	}
-
-	/**
-	 * Visualize the scattering characteristics to an image.
-	 * <p>
-	 * This code uses J/Link with mathematica. To use this function you need to have Mathematica
-	 * installed, and the appropriate kernel set in the config.
-	 * </p>
-	 * 
-	 * @return
-	 * @throws LinkageError
-	 *             If there was an error in creating the MathLink to Mathematica
-	 */
-	private Image toImage() throws LinkageError {
-		File kernelFile = Configuration.getInstance().getMathematicaKernel();
-
-		if (kernelFile == null || !kernelFile.exists())
-			throw new LinkageError("Cannot find the Mathematica Kernel");
-
-		KernelLink ml = null;
-		try {
-			String[] mlArgs = { "-linkmode", "launch", "-linkname", kernelFile.getAbsolutePath() };
-			ml = MathLinkFactory.createKernelLink(mlArgs);
-			ml.discardAnswer();
-		} catch (MathLinkException e) {
-			logger.wrn(e, "Kernel connection failed");
-			throw new LinkageError("An error occurred connecting to the kernel)");
-		}
-
-		File csv = new File(Configuration.volatileCache, "scatter.csv");
-		toCSV(csv.getAbsolutePath());
-
-		byte[] gifData = ml
-				.evaluateToImage(
-						"Clear[\"Global`*\"];"
-								+ "data = Import[\"" + csv.getAbsolutePath() + "\", \"Table\"];"
-								+ "scale = data[[All, 6]];"
-								+ "scale = scale /Mean[scale];"
-								+ "coordinates = data[[All, 3 ;; 5]];"
-								+ "ListPointPlot3D[coordinates*scale]",
-						800, 600, 0, false);
-		Image im = Toolkit.getDefaultToolkit().createImage(gifData);
-		return im;
 	}
 
 	@Override
