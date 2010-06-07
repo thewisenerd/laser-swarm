@@ -19,6 +19,7 @@ import com.google.code.laserswarm.Desim.elevation.FindElevationNeighborInterpola
 import com.google.code.laserswarm.Desim.filter.Filter;
 import com.google.code.laserswarm.Desim.filter.FilterAverage;
 import com.google.code.laserswarm.Desim.filter.FilterOutlierRemoval;
+import com.google.code.laserswarm.Desim.filter.FilterSpikes;
 import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.conf.Constellation;
 import com.google.code.laserswarm.conf.Satellite;
@@ -145,5 +146,8 @@ public class Altitude {
 		Filter filtOutliers = new FilterOutlierRemoval(200, 50, 3);
 		LinkedList<Point3d> outlierAlts = filtOutliers.filter(alts);
 		plotter.plot(outlierAlts, 3, "heightAnalysed&OutlierFiltered");
+		Filter filtSpikes = new FilterSpikes(3, 0.3);
+		LinkedList<Point3d> despikedAlts = filtSpikes.filter(alts);
+		plotter.plot(despikedAlts, 3, "heightAnalysed&SpikeFiltered");
 	}
 }
