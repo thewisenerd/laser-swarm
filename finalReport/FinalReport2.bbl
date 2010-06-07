@@ -1,0 +1,29 @@
+\begin{thebibliography}{1}
+
+\bibitem{SPAD3}
+Justin Richardson Richard Walker Lindsay Grant Robert K. Henderson
+  Marek~Gersbach David~Stoppa, Fausto~Borghetti and Edoardo Charbon.
+\newblock A 32x32-pixel array with in-pixel photon counting and arrival time
+  measurement in the analog domain.
+\newblock 2009.
+
+\bibitem{SPAD2}
+E.~Labonne J. Richardson R. Walker L. Grant R Henderson F. Borghetti D.~Stoppa
+  M.~Gersbach, Y.~Maruyama and E.~Charbon.
+\newblock A parallel 32x32 time-to-digital converter array fabricated in a 130
+  nm imaging cmos technology.
+\newblock 2009.
+
+\bibitem{SPADThesis}
+Cristiano~L. Niclass.
+\newblock {\em Single-Photon Image Sensors in CMOS: Picosecond Resolution for
+  Three-Dimensional Imaging}.
+\newblock PhD thesis, École Polytechnique Fédérale de Lausanne, 2008.
+
+\bibitem{larson}
+Wiley J. Larson \& James~R. Wertz, editor.
+\newblock {\em Space Mission Analysis And Design}.
+\newblock Microcosm Press and Springer, El Segundo, CA (Microcosm Press) \& New
+  York, NY (Springer), 3 edition, 2006.
+
+\end{thebibliography}

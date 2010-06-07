@@ -10,7 +10,65 @@ The launch segment of the mission includes the selection of the launch vehicle, 
 \subsection{Launch Vehicle}
 \label{frLSLV}
 
+HERE ADD VIBRATION ANALYSIS
 
+\subsubsection{Cost and Reliability Analysis}
+\label{frLVCA}
+
+The costs of launch vary greatly between different vehicles. Table \ref{table:vehicleCosts} on page \pageref{table:vehicleCosts} lists approximate total launch costs of respective platforms. The prices are given in Fiscal Year 2000 dollars for consistency.
+\begin{table}[h]
+\begin{centering}
+\begin{tabular}{llr}
+\toprule
+Platform & Operator & Price (FY00\$m) \\
+\midrule
+Ariane V  & ESA & 97.96 \\
+Soyuz   & Starsem    &  8.16 - 22.1 \\
+Vega   & European and Italian SA  & 15.1 \\
+Falcon 1E  & SPACEX  & 8.89 \\
+PSLV & ISRO & 13.88 - 16.33 \\
+Rokot & Eurokot & 9.8 - 11.4 \\
+\bottomrule
+\end{tabular}
+\caption{Estimated price comparison of different launch vehicles. \emph{Source: various.}}
+\label{table:vehicleCosts}
+\end{centering}
+\end{table}
+
+Based on the information  in the above table it is possible to single out a few platforms which will be affordable for the purpose of this feasibility study. The Ariane V launcher is the most expensive option by far and would push the budget quite heavily, with an estimated cost of launch almost half of the total budget. However the payload capabilities of the Ariane V launcher far outweigh that of all other platforms, thus making it possible for a combined launch with other satellites, leading to shared costs. This however could jeopardize the mission in the sense that it becomes secondary priority. If that happens, the constellation would have have have higher requirements for orbit acquisition: an extra booster stage or higher onboard fuel capacity for the altitude and/or plane shift, which is not feasible. The Ariane V is therefore an unsuitable platform for this project. 
+
+The rest of the launchers can be analyzed with respect to reliability. All of the launch vehicles have been tested, with the exception of the Vega system, which is yet to make its maiden flight. The Vega is therefore not suitable for the analysis at this time. It is for this reason that the project will no longer consider this system at all.  However, better data should be available in the near future which should allow for the Vega platform to be reevaluated.
+
+The same goes for the Falcon - 1e system. The launcher is still under development. Furthermore, the predecessor of the 1e system is the Falcon - 1, which out of total of five launches only had two successful, fails to make a favorable impression. 
+
+Table \ref{table:LVreliability} on page \pageref{table:LVreliability} shows some reliability statistics for the remaining 3 vehicles.
+
+\begin{table}[h]
+\begin{centering}
+\begin{tabular}{lcccp{5cm}}
+\toprule
+Platform & Total No. of Launches & Total Failures & Reliability & No. of Successful Launches Since Last Failure  \\
+\midrule
+Soyuz   & 1754  &  88 & 95\% & 57 \\
+PSLV & 16 & 1 & 94\% & 15 \\
+Rokot & 17& 2 & 88\% & 6 \\
+\bottomrule
+\end{tabular}
+\caption{Reliability figures for }
+\label{table:LVreliability}
+\end{centering}
+\end{table}
+
+The Soyuz launch vehicle presents itself as the most reliable platform, with a track record that far surpassed all other options. This launch vehicle will be the one considered for this project. In the next section, its payload capabilities are discussed.
+
+\subsubsection{Soyuz LV Payload Capability Analysis}
+\label{frLVPCA}
+
+There is a large selection of Soyuz vehicles available for consideration. For the purpose of this project, the newest modification - Soyuz-ST will be used. This vehicle is part of the Soyuz-2 family, which are technologically superior to the older Soyuz-U and U2 launchers. An illustration and technical parameters of the Soyuz-ST can be found in Appendix \ref{appa} on page \pageref{appa}.
+
+
+\subsubsection{Conclusion}
+\label{frLVConc} 
 
 \subsection{Launch Site}
 \label{frLSLS}
@@ -26,7 +84,8 @@ The selection of the launch site relies on several factors:
 
 The first factor is crucial. It is paramount that the satellites are injected into their final inclinations at launch and do not have to perform any inclination change maneuvers, which require a substantial $\Delta$V. With this in mind choosing a launch site closer to the equator is necessary. Launch sites at higher latitudes would need to sacrifice velocity and thus payload mass because of their location. Table \ref{table:launchtable} on page \pageref{table:launchtable} shows a number of possible launch sites and their locations \cite{larson}. It is also very important that the selected launcher can be used on the given location.
 
-\subsection{Orbit Insertion}
+
+\subsection{Orbit Acquisition}
 \label{frLSOI}
 
 Once the final stage of the launch vehicle has reached desired orbit altitude and inclination, preparations can start for proper separation maneuvers. This maneuver has to be designed in such a way as to accommodate all phase shifts required by the satellite orbits. Using the 
