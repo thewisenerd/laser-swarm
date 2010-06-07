@@ -26,6 +26,9 @@ public abstract class LaserSwarm {
 
 	protected EarthModel						earth;
 
+	protected void end() {
+	}
+
 	protected List<Constellation> mkConstellations() {
 		LinkedList<Constellation> l = Lists.newLinkedList();
 		l.add(Constellation.swarm(5, 0.007, 500));
@@ -92,6 +95,7 @@ public abstract class LaserSwarm {
 			Report.write(simulations);
 		}
 
+		end();
 	}
 
 	protected void simulate() {

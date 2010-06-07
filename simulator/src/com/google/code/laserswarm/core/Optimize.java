@@ -3,7 +3,6 @@ package com.google.code.laserswarm.core;
 import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 import java.util.TreeMap;
 
 import org.apache.commons.math.FunctionEvaluationException;
@@ -26,7 +25,6 @@ import com.google.code.laserswarm.simulation.Simulator;
 import com.google.code.laserswarm.util.CSVwriter;
 import com.google.common.base.Function;
 import com.google.common.collect.Collections2;
-import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
@@ -43,45 +41,10 @@ public class Optimize extends LaserSwarm implements MultivariateRealFunction {
 
 		Prospector.roughTimeStep = 3;
 
-		Set<Thread> waiting = Sets.newHashSet();
-		for (double i = 1; i <= 3; i += 0.25) {
-			for (double j = 1; j <= 3; j += 0.5) {
-				final Optimize sim = new Optimize();
-				sim.POWER_POWER = i;
-				sim.APERTURE_POWER = j;
-				Thread tr = new Thread() {
-					@Override
-					public void run() {
-						sim.optimize();
-					}
-				};
-				waiting.add(tr);
-			}
-		}
-
-		Set<Thread> running = Sets.newHashSet();
-		while (running.size() > 0 || waiting.size() > 0) {
-			if (waiting.iterator().hasNext()) {
-				Thread tr = waiting.iterator().next();
-				waiting.remove(tr);
-				running.add(tr);
-				tr.start();
-				logger.inf("Sarting %s (waiting:%s, running: %s)", tr, waiting.size(), running.size());
-			}
-			do {
-				// logger.dbg("%d threads alive", running.size());
-				for (Thread thread : ImmutableSet.copyOf(running))
-					if (!thread.isAlive()) {
-						running.remove(thread);
-					}
-
-				try {
-					Thread.sleep(100);
-				} catch (InterruptedException e) {
-					logger.wrn("Interrupted while sleeping");
-				}
-			} while (running.size() >= Configuration.getInstance().simThreads);
-		}
+		final Optimize sim = new Optimize();
+		sim.POWER_POWER = 1;
+		sim.APERTURE_POWER = 1.5;
+		sim.optimize();
 	}
 
 	private static Constellation mkConstellation(double power, double aperature) {
@@ -111,8 +74,8 @@ public class Optimize extends LaserSwarm implements MultivariateRealFunction {
 
 	private void optimize() {
 		NelderMead optimizer = new NelderMead();
-		optimizer.setMaxIterations(100);
-		optimizer.setMaxEvaluations(100);
+		optimizer.setMaxIterations(500);
+		optimizer.setMaxEvaluations(500);
 
 		prefLog = new CSVwriter(new File(String
 				.format("optimize-%f-%f.csv", POWER_POWER, APERTURE_POWER)), "\t");
