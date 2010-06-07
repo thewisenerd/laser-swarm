@@ -15,22 +15,28 @@ public class NoisePercentage {
 		double signal = 0; // signal Photons
 
 		for (NoiseData noiseIt : nsData) { // iterate over the interpulse windows
-			tNoise += noiseIt.getNoiseFrameL().diff() + // calculate time of the noise in one interpulse
-					// window
-					noiseIt.getNoiseFrameR().diff();
-			tSignal += noiseIt.getDataFrame().diff(); // calculate the signal time in one interpulse
-			// window
-
-			for (Integer intIt : noiseIt.getNoise().values()) {
-				noise += intIt; // add up noise photons
+			if (noiseIt.hasNoise()) {
+				for (Integer intIt : noiseIt.getNoise().values()) {
+					noise += intIt; // add up noise photons
+				}
+				tNoise += noiseIt.getNoiseFrameL().diff() + noiseIt.getNoiseFrameR().diff();
+				// calculate time of the noise in one interpulse window
 			}
-			for (Integer intIt : noiseIt.getData().values()) {
-				signal += intIt; // add up signal photons
+			if (noiseIt.hasData()) {
+				for (Integer intIt : noiseIt.getData().values()) {
+					signal += intIt; // add up signal photons
+				}
+				tSignal += noiseIt.getDataFrame().diff(); // calculate the signal time in one interpulse
+															// window
 			}
 		}
 		logger.dbg("Noise, signal photons: %s, %s, Noise, signal times: %s, %s", noise, signal, tNoise,
 				tSignal);
-		return (noise / tNoise * (tNoise + tSignal)) / (signal + noise);
+		Double result = (noise / tNoise * (tNoise + tSignal)) / (signal + noise);
+		if (result.isNaN()) {
+			result = 0.0;
+		}
+		return (double) result;
 	}
 
 }

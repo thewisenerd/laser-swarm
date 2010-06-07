@@ -55,10 +55,10 @@ public class FindElevationNeighborInterpolation implements ElevationFinder {
 			Map<Satellite, NoiseData> tempInterpulseWindow = emitRecPair.next();
 			Point3d thisEmit = new Point3d(hist.getPosition().find(emitRecPair.tPulse));
 			Point3d sphericalEmit = Convert.toSphere(thisEmit);
-			altitudes.add(new Point3d(
-					Configuration.R0
-					+ interpolator.next(tempInterpulseWindow, emitRecPair.tPulse, thisEmit),
-					sphericalEmit.y, sphericalEmit.z));
+			double alt = interpolator.next(tempInterpulseWindow, emitRecPair.tPulse, thisEmit);
+			if (!(new Double(alt).isNaN())) {
+				altitudes.add(new Point3d(Configuration.R0 + alt, sphericalEmit.y, sphericalEmit.z));
+			}
 		}
 		while (Double.isNaN(altitudes.getLast().x)
 				|| Math.abs(altitudes.getLast().x - altitudes.get(altitudes.size() - 2).x) > 1000) {

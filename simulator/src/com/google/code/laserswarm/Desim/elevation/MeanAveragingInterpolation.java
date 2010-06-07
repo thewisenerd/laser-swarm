@@ -113,12 +113,16 @@ public class MeanAveragingInterpolation implements NeighborInterpolation {
 		// Filter altitudes and compute average.
 		double filteredAltTotal = 0;
 		int filteredAltCount = 0;
-		for (Double thisAlt : altitudes.get((int) Math.ceil((double) qLength / 2))) {
-			if (thisAlt < upper & thisAlt > lower) {
-				filteredAltTotal += thisAlt;
-				filteredAltCount++;
+		double result = Double.NaN;
+		if (altitudes.size() >= qLength) {
+			for (Double thisAlt : altitudes.get((int) Math.ceil((double) qLength / 2))) {
+				if (thisAlt < upper & thisAlt > lower) {
+					filteredAltTotal += thisAlt;
+					filteredAltCount++;
+				}
 			}
+			result = filteredAltTotal / filteredAltCount;
 		}
-		return filteredAltTotal / filteredAltCount;
+		return result;
 	}
 }
