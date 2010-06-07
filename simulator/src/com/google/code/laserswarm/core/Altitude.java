@@ -142,7 +142,7 @@ public class Altitude {
 		Filter filtAvg = new FilterAverage(21);
 		LinkedList<Point3d> averagedAlts = filtAvg.filter(alts);
 		plotter.plot(averagedAlts, 3, "heightAnalysed&Averaged");
-		Filter filtOutliers = new FilterOutlierRemoval(10, 10, 0.5);
+		Filter filtOutliers = new FilterOutlierRemoval(200, 50, 3);
 		LinkedList<Point3d> outlierAlts = filtOutliers.filter(alts);
 		plotter.plot(outlierAlts, 3, "heightAnalysed&OutlierFiltered");
 	}
