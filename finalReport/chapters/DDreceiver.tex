@@ -1,4 +1,4 @@
-\section{Detailed Design Receiver Optics}
+\section{Detailed Design Optical Receiving Payload}
 \label{sec:DDreceiver}
 The figure \ref{fig:receiver_overview} on page \ref{fig:receiver_overview} gives an overview diagram of the receiver optics.  More information about the design concept or trade off can be found in the midterm report. In this detailed design report, the wavelength filter system and the photon detect device \acs{SPAD} research will be the pivot, after that the receiver payload summary and budget will be drawn.
 \begin{figure}[ht!]
@@ -32,7 +32,7 @@ As it happens in \ac{PMT}s, thermal generation effects produce current pulses ev
 The bias voltage is then restored, in order to be able to detect another photon. 	
  
 
-\subsection{Prism design}
+\subsection{Prism Design}
 \label{prism}
 Before the prism is taking into consideration, the optical filter is also considered as an option, which is more simple than prism and barriers. The optical filters bandwidth accuracy are in terms of several docades of nano meters(minimum 10nm\cite{optical_filter}), which is not acceptable since the objective is to filter out all noisy light except wavelength around 473nm. Meanwhile, the transmission is another problem for normal optical filters, which have much lower value(around 50\%) for smaller bandwidth(10nm to 20nm) and higher value(around 90\%) for larger bandwidth(more than 30nm), but prism can has higher transmission as 97\% for specified glass material.
 
