@@ -3,7 +3,7 @@
 	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
 		<layout class="ch.qos.logback.classic.PatternLayout">
 			<Pattern>
-				%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
+				%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36}: %msg%n
 			</Pattern>
 		</layout>
 	</appender>
@@ -11,10 +11,10 @@
 	<logger name="com.google.code.laserswarm" level="DEBUG" />
 	<logger name="com.google.code.laserswarm.simulation" level="INFO" />
 	<logger name="com.google.code.laserswarm.util.demReader" level="INFO" />
-	<logger name="com.google.code.laserswarm.Desim.FindElevation" level="INFO" />
+	<logger name="com.google.code.laserswarm.Desim.elevation.FindElevation" level="INFO" />
+	<logger name="com.google.code.laserswarm.Desim.elevation.AltitudeCalculation" level="INFO" />
 	<logger name="com.google.code.laserswarm.Desim.NoiseRemovalCorrelation" level="INFO" />
 	<logger name="com.google.code.laserswarm.Desim.NoisePercentage" level="INFO" />
-	<logger name="com.google.code.laserswarm.Desim.AltitudeCalculation" level="INFO" />
 	<logger name="com.google.code.laserswarm.Desim.NoiseData" level="INFO" />
 	<logger name="com.google.code.laserswarm.Desim.FindWindow" level="INFO" />
 	<logger name="com.google.code.laserswarm.out.plot1D.plotHeightDistribution" level="INFO" />

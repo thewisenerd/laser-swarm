@@ -22,10 +22,9 @@ import com.google.common.collect.Maps;
 import com.lyndir.lhunath.lib.system.logging.Logger;
 
 public class FindElevationNeighborInterpolation implements ElevationFinder {
-	private int						qLength	= 5;
-	private NeighborInterpolation	interpolator;
-	private static final Logger		logger	= Logger
-													.get(FindElevationNeighborInterpolation.class);
+	private int					qLength	= 5;
+	private SampleCorrelation	interpolator;
+	private static final Logger	logger	= Logger.get(FindElevationNeighborInterpolation.class);
 
 	public FindElevationNeighborInterpolation(int queueLength) {
 		qLength = queueLength;
@@ -34,7 +33,7 @@ public class FindElevationNeighborInterpolation implements ElevationFinder {
 	@Override
 	public LinkedList<Point3d> run(Map<Satellite, TimeLine> recTimes, EmitterHistory hist,
 			Constellation con, int dataPoints) throws MathException {
-		interpolator = new MeanAveragingInterpolation(qLength, recTimes);
+		interpolator = new SubSampleCorrelation(recTimes, 5);
 		Iterator<Double> timeIt = hist.time.iterator();
 		Map<Satellite, DataContainer> interpulseWindows = Maps.newHashMap();
 		for (DataContainer tempData : interpulseWindows.values()) {
@@ -45,8 +44,6 @@ public class FindElevationNeighborInterpolation implements ElevationFinder {
 		}
 		FindWindow emitRecPair = new FindWindow(hist, timeIt, recTimes, con, (int) 1e8);
 		int count = 0;
-		LinkedList<Double> timePulses = Lists.newLinkedList();
-		LinkedList<Point3d> posEmits = Lists.newLinkedList();
 		LinkedList<Point3d> altitudes = Lists.newLinkedList();
 		while (count < dataPoints - 1 && timeIt.hasNext()) {
 			count++;
@@ -56,10 +53,12 @@ public class FindElevationNeighborInterpolation implements ElevationFinder {
 			Point3d thisEmit = new Point3d(hist.getPosition().find(emitRecPair.tPulse));
 			Point3d sphericalEmit = Convert.toSphere(thisEmit);
 			double alt = interpolator.next(tempInterpulseWindow, emitRecPair.tPulse, thisEmit);
+			logger.dbg("Altitude found: %s", alt);
 			if (!(new Double(alt).isNaN())) {
 				altitudes.add(new Point3d(Configuration.R0 + alt, sphericalEmit.y, sphericalEmit.z));
 			}
 		}
+		logger.inf("Altitudes LinkedList size: %s", altitudes.size());
 		while (Double.isNaN(altitudes.getLast().x)
 				|| Math.abs(altitudes.getLast().x - altitudes.get(altitudes.size() - 2).x) > 1000) {
 			altitudes.removeLast();
