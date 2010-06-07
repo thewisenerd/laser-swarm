@@ -1,12 +1,36 @@
 \section{Detailed Design Receiver Optics}
 \label{sec:DDreceiver}
-The figure \ref{fig:receiver_overview} on page \ref{fig:receiver_overview} gives an overview diagram of the receiver optics.  More information about the design concept or trade off can be found in the midterm report. In this detailed design report, the wavelength filter system will be the pivot, after that the receiver payload summary and budget will be drawn.
+The figure \ref{fig:receiver_overview} on page \ref{fig:receiver_overview} gives an overview diagram of the receiver optics.  More information about the design concept or trade off can be found in the midterm report. In this detailed design report, the wavelength filter system and the photon detect device \acs{SPAD} research will be the pivot, after that the receiver payload summary and budget will be drawn.
 \begin{figure}[ht!]
 \centering
 \includegraphics[scale = 0.5]{chapters/img/DiagramReceiverGeneral.png}
 \caption{Receiver optics overview}
 \label{fig:receiver_overview}
 \end{figure} 
+
+\subsection{\ac{SPAD}}
+	\label{SPAD}
+introduction
+
+\subsubsection{Avalanche Diodes}
+\label{diodes}	
+Essentially, a \ac{SPAD} is a reversed biased \textit{p-n junction} that operates at a voltage level above the breakdown voltage. At this bias, the electric field is so high that a single charge carrier injected into the depletion layer can trigger a self-sustaining avalanche. The current rises swiftly (nanoseconds or subnanosecond rise time) to a macroscopic steady level in the milliampere range. Bias supply voltage Va exceeds breakdown voltage (non-destructive and reversible process) Vb by an amount called the \textit{excess bias voltage} $V_e = (V_a - V_b)$, which has a determining influence on detector performance. Actually, the value of the ratio $\frac{V_e}{V_b}$ is important, not the value of $V_e$ alone, because the performance is related to the excess electric field above breakdown level.  
+
+If the primary carrier is photogenerated, the leading edge of the avalanche pulse marks the arrival time of the detected photon. The current continues to flow until the avalanche can be quenched by lowering the bias voltage to the breakdown voltage ($V_b$) or below. For a photon to be detected, not only must it be absorbed in the detector active volume and generate a primary carrier (more precisely, an electron-hole pair, i.e. \textit{an exciton}), it is also necessary that the primary carrier succeeds in triggering an avalanche. The efficiency of photon detection thus increases with excess bias voltage $V_e$, since higher electric field gradient enhances the triggering probability.   
+
+As it happens in \ac{PMT}s, thermal generation effects produce current pulses even in the absence of illumination, and the Poissonian fluctuation of the dark counts represents the internal noise source of the detector. \textit{Dark-count rate} includes primary and secondary pulses. \textit{Primary dark pulses} are due to carriers thermally generated in the \acs{SPAD} junction, so that the count rate increases with the temperature as does the dark current in ordinary photodiodes. The rate also increases with $V_e$ because of field-assisted enhancement of the emission rate from generation centers and an increase in triggering probability. \textit{Secondary dark pulses} are due to afterpulsing effects that may strongly enhance the total dark-count rate. During avalanche some carriers are captured by deep levels in the junction depletion layer and subsequently released with a statistically fluctuating delay. Released carriers can retrigger the avalanche, generating afterpulses correlated with a previous avalanche pulse. The number of carriers captured during the avalanche pulse increases with the total number of carriers crossing the junction, that is, with the total charge of the avalanche pulse. Therefore afterpulsing increases with the delay of avalanche quenching and the current intensity, which is proportional to excess bias voltage $V_e$.
+
+\begin{figure} [ht]
+\centering
+\includegraphics[scale=0.8]{chapters/img/SPAD_Ve_functions.png}	
+\caption{\acs{SPAD} parameters diagrams }
+\label{spad}
+\end{figure}
+
+\subsubsection{Quenching Circuits}
+\label{AQC}
+The bias voltage is then restored, in order to be able to detect another photon. 	
+ 
 
 \subsection{Prism design}
 \label{prism}
@@ -72,14 +96,14 @@ To select the correct incident angle, the figure \ref{fig:prism_alpha} on page \
 
 \subsection{Summary}
 \label{sum}
-The table \ref{tab:receiverbudget} on page \ref{tab:receiverbudget} is the budget breakdown including mass, cost and power consumption. It is obvious that the \acs{SPAD} is the main expense which is estimated by one of the developers. $4666530 FY00\$$ at the end is the final cost convert to fiscal year 2000.
+The table \ref{tab:receiverbudget} on page \ref{tab:receiverbudget} is the budget breakdown including mass, cost and power consumption. It is obvious that the \acs{SPAD} is the main expense which is estimated by one of the developers. $4666530 FY00\$$ at the end is the final cost convert to fiscal year 2000. To be Clear, the large parabolic mirror is used to collect the reflected photons and the small parabolic mirror is used to create parallel tight beam before the prism. Flat mirrors are used after the prism to focus the light on faceted mirror.
 
 \begin{table}[ht!]
 \begin{tabular}{l | c | c c | c c | c }
 Components         & Number & Mass & Cost      & Total mass & Total cost & Power\\ 
                    &        & [g]  & [Dollar]  & [g]        &[Dollar]    & [W]  \\ \hline\hline
-Parabolic mirror   & 1      & 100  & 7000      & 100        & 7000       &  0   \\
-Parabolic mirror2  & 1      & 10   & 1500      & 10         & 1500       &  0   \\
+Parabolic mirror(large)   & 1      & 100  & 7000      & 100        & 7000       &  0   \\
+Parabolic mirror(small)   & 1      & 10   & 1500      & 10         & 1500       &  0   \\
 Faceted mirror     & 1      & 30   & 3000      & 30         & 3000       &  0   \\ 
 Flat mirror        & 5      & 10   & 500       & 50         & 2500       &  0   \\
 \acs{SPAD}         & 1      & 10   & 5700000   & 10         & 5700000    &  0   \\
