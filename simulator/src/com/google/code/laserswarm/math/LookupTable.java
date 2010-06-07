@@ -17,26 +17,22 @@ public class LookupTable extends TreeMap<Double, Tuple3d> {
 		Tuple3d vf = null;
 		Tuple3d vc = null;
 
-		try {
+		/* Scan for out of bounds case */
+		/* Then assume constant */
+		if (tf != null)
 			vf = get(tf);
-		} catch (NullPointerException e) {
-			logger.wrn("could not retrieve floor value in the Lookup table (border value " + t + ")");
-		}
 
-		try {
+		if (tc != null)
 			vc = get(tc);
-		} catch (NullPointerException e) {
-			logger.wrn("could not retrieve ceil value in the Lookup table (border value" + t + ")");
-			if (vf != null)
-				vc = (Tuple3d) vf.clone();
-			else
-				throw new RuntimeException("Cannot find the correct value for the ceil value");
+		else {
+			vc = get(tf);
+			tc = tf;
 		}
 
-		if (vf == null)
-			vf = (Tuple3d) vc.clone();
-		else
-			throw new RuntimeException("Cannot find the correct value for the floor value");
+		if (tf == null) {
+			vf = vc;
+			tf = tc;
+		}
 
 		double dt = tc - tf;
 		if (dt == 0)
@@ -48,5 +44,4 @@ public class LookupTable extends TreeMap<Double, Tuple3d> {
 		dv.add(vf);
 		return dv;
 	}
-
 }
