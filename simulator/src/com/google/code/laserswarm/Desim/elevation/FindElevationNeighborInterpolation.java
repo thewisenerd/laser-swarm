@@ -22,12 +22,14 @@ import com.google.common.collect.Maps;
 import com.lyndir.lhunath.lib.system.logging.Logger;
 
 public class FindElevationNeighborInterpolation implements ElevationFinder {
-	private int					qLength	= 5;
+	private int					qLength		= 5;
+	private int					frequency	= (int) 1e9;
 	private SampleCorrelation	interpolator;
-	private static final Logger	logger	= Logger.get(FindElevationNeighborInterpolation.class);
+	private static final Logger	logger		= Logger.get(FindElevationNeighborInterpolation.class);
 
-	public FindElevationNeighborInterpolation(int queueLength) {
+	public FindElevationNeighborInterpolation(int queueLength, int resolution_Hz) {
 		qLength = queueLength;
+		frequency = resolution_Hz;
 	}
 
 	@Override
@@ -42,7 +44,7 @@ public class FindElevationNeighborInterpolation implements ElevationFinder {
 			}
 			tempData.setQueueLength(qLength);
 		}
-		FindWindow emitRecPair = new FindWindow(hist, timeIt, recTimes, con, (int) 1e8);
+		FindWindow emitRecPair = new FindWindow(hist, timeIt, recTimes, con, frequency);
 		int count = 0;
 		LinkedList<Point3d> altitudes = Lists.newLinkedList();
 		while (count < dataPoints - 1 && timeIt.hasNext()) {

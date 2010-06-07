@@ -37,13 +37,12 @@ import com.google.common.collect.Maps;
 import com.lyndir.lhunath.lib.system.logging.Logger;
 
 public class Altitude {
-	private static final int	dataPoints	= 250;
+	private static final int	dataPoints	= 1000;
 	private static final Logger	logger		= Logger.get(TestFindElevation.class);
 
 	public static void main(String[] args) throws DemCreationException, MathException,
 			IOException {
-		// run(250, new FindElevation(9, new OutlierRemovalCorrelation(1.5)));
-		run(250, new FindElevationNeighborInterpolation(7));
+		run(dataPoints, new FindElevationNeighborInterpolation(7, (int) 97e12));
 	}
 
 	public static void run(int dataPoint, ElevationFinder findEl) throws DemCreationException,
