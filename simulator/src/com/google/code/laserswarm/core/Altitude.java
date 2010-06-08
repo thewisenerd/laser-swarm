@@ -33,6 +33,7 @@ import com.google.code.laserswarm.simulation.SimTemplate;
 import com.google.code.laserswarm.simulation.SimVars;
 import com.google.code.laserswarm.simulation.Simulator;
 import com.google.code.laserswarm.simulation.SimulatorMaster;
+import com.google.code.laserswarm.simulation.postSimulation.SlopeSpread;
 import com.google.code.laserswarm.util.demReader.DemCreationException;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -121,15 +122,17 @@ public class Altitude {
 			mgr.addSimTemplate(template);
 
 			HashMap<SimTemplate, Simulator> points = mgr.runSim();
-			plotter.plot(points.get(template).getDataPoints(), 3, "heightSimulated");
 			for (SimTemplate templ : points.keySet()) { // assuming only one template
 				List<SimVars> dataPoints = points.get(templ).getDataPoints();
 				emitterHistory = new EmitterHistory(templ.getConstellation(), dataPoints);
+				SlopeSpread slope = new SlopeSpread();
+				slope.modify(points.get(templ), templ.getConstellation());
 				constellation = templ.getConstellation();
 				for (Satellite sat : templ.getConstellation().getReceivers()) {
 					satData.put(sat, new TimeLine(sat, templ.getConstellation(), dataPoints));
 				}
 			}
+			plotter.plot(points.get(template).getDataPoints(), 3, "heightSimulated");
 			Configuration.write("satData.xml", satData);
 			Configuration.write("emitterHistory.xml", emitterHistory);
 			Configuration.write("constellation.xml", constellation);

@@ -33,7 +33,8 @@ public class plotHeightDistribution {
 	 * @param sims
 	 *            The list of SimVars used to plot.
 	 * @param lineThickness
-	 *            Line thickness used in the plot.
+	 *            Line thickness used in the plot.t) (i * 0.125 * size))) / 1000 + ")", wOffset + (int)
+	 *            (i * 0.125 * width), height +
 	 * @param plotFile
 	 *            File to plot to.
 	 */
