@@ -54,7 +54,7 @@ PSLV & 16 & 1 & 94\% & 15 \\
 Rokot & 17& 2 & 88\% & 6 \\
 \bottomrule
 \end{tabular}
-\caption{Reliability figures for }
+\caption{Reliability figures for several launch vehicles. \emph{Source: various.} }
 \label{table:LVreliability}
 \end{centering}
 \end{table}
@@ -64,11 +64,29 @@ The Soyuz launch vehicle presents itself as the most reliable platform, with a t
 \subsubsection{Soyuz LV Payload Capability Analysis}
 \label{frLVPCA}
 
-There is a large selection of Soyuz vehicles available for consideration. For the purpose of this project, the newest modification - Soyuz-ST will be used. This vehicle is part of the Soyuz-2 family, which are technologically superior to the older Soyuz-U and U2 launchers. An illustration and technical parameters of the Soyuz-ST can be found in Appendix \ref{appa} on page \pageref{appa}.
+There is a large selection of Soyuz vehicles available for consideration. For the purpose of this project, the newest modification - Soyuz-ST will be used. This vehicle is part of the Soyuz-2 family, which are technologically superior to the older Soyuz-U and U2 launchers. An illustration and technical parameters of the Soyuz-ST can be found in Appendix \ref{appa} on page \pageref{appa} \cite{soyuzman}.
 
+An estimation of mass performance for the launch vehicle can be seen in figure \ref{fig:massperformance} on page \pageref{fig:massperformance}.
 
-\subsubsection{Conclusion}
-\label{frLVConc} 
+\begin{figure}[ht]
+\centering
+\includegraphics[width=1.0\textwidth, angle=0]{chapters/img/lvmass.png}
+\caption{Mass performance of the Soyuz-ST for circular Orbits.\emph{ Source: \cite{soyuzman}.}}
+\label{fig:massperformance}
+\end{figure}
+
+The payload mass data provided in \cite{soyuzman} is estimated, yet is good enough to have a reasonable idea about the maximum mass. The Soyuz-ST is able to launch roughly a maximum of 5000 kg into a 500km orbit. This is well above the design mass of the formation thus will allow for further considerations of joint launches (as long as the swarm mission is considered to be the primary payload) and thus spread launch costs. 
+
+The available volume in the Soyuz-ST Fairing can be seen in figure \ref{fig:soyuzvol} on page \pageref{fig:soyuzvol}.
+
+\begin{figure}[!h]
+\centering
+\includegraphics[scale = 0.5, angle=0]{chapters/img/soyuzvol.png}
+\caption{Fairing volume of the Soyuz-ST launch vehicle.\emph{ Source: \cite{soyuzman}.}}
+\label{fig:soyuzvol}
+\end{figure} 
+
+The dimensions of the fairing are visibly too large and there is no possibility of using a different one, however that leaves a lot of possibilities for different designs of release adapters to adapt to the unique sequence of separation upon orbit injection. Again, the possibility of taking other small satellites along on the same launch arises.  
 
 \subsection{Launch Site}
 \label{frLSLS}
@@ -82,8 +100,30 @@ The selection of the launch site relies on several factors:
 	\item Security and political reasons. 
 \end{itemize}
 
-The first factor is crucial. It is paramount that the satellites are injected into their final inclinations at launch and do not have to perform any inclination change maneuvers, which require a substantial $\Delta$V. With this in mind choosing a launch site closer to the equator is necessary. Launch sites at higher latitudes would need to sacrifice velocity and thus payload mass because of their location. Table \ref{table:launchtable} on page \pageref{table:launchtable} shows a number of possible launch sites and their locations \cite{larson}. It is also very important that the selected launcher can be used on the given location.
+The first factor is crucial. It is paramount that the satellites are injected into their final inclinations at launch and do not have to perform any inclination change maneuvers, which require a substantial $\Delta$V. With this in mind choosing a launch site closer to the equator is necessary. Launch sites at higher latitudes would need to sacrifice velocity and thus payload mass because of their location. Table \ref{table:launchtable} on page \pageref{table:launchtable} shows a number of possible launch sites and their locations \cite{larson}. The list contains only the sites compatible with the Soyuz-ST launch vehicle. Furthermore, in figure \ref{fig:launchsites} on page \pageref{fig:launchsites}, the same sites are indicated with their respective authorized inclination ranges.
 
+\begin{table}[!h]
+\begin{centering}
+\begin{tabular}{llp{2cm}p{2cm}}
+\toprule
+Launch Site & Operator & Latitude (deg min) & Longitude (deg min) \\
+\midrule
+Baikonur LC-31/6  & Russia (Starsem) & 45 54 N & 63 18 E \\
+Plesetsk LC-43  & Russia (Starsem)   &  62 48 N & 40 24 E \\
+Guiana Space Centre  ELS  & CNES/Arianespace  & 5 18 N & 52 50 W \\
+\bottomrule
+\end{tabular}
+\caption{Available launch sites for the Soyuz-ST.   \emph{Source: \cite{larson}.}}
+\label{table:launchtable}
+\end{centering}
+\end{table}  
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=1.0\textwidth, angle=0]{chapters/img/launchsites.png}
+\caption{Launch site locations and allowable inclinations for the Soyuz-ST.}
+\label{fig:launchsites}
+\end{figure}
 
 \subsection{Orbit Acquisition}
 \label{frLSOI}

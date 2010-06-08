@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (MiKTeX 2.8) (preloaded format=pdflatex 2010.4.20)  7 JUN 2010 15:58
+This is pdfTeX, Version 3.1415926-1.40.10 (MiKTeX 2.8) (preloaded format=pdflatex 2010.4.20)  7 JUN 2010 16:10
 entering extended mode
 **C:/Users/Alex/Desktop/Laser*Swarm/laser-swarm/finalReport/FinalReport.tex
 ("C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/finalReport/FinalReport.tex"
@@ -342,20 +342,20 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 [2
 
 ] [3]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 79.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 81.
  ("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\base\omscmr.fd"
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 79.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 81.
 
 
 LaTeX Warning: Reference `table:launchtable' on page 4 undefined on input line 
-85.
+87.
 
 
 LaTeX Warning: Reference `table:launchtable' on page 4 undefined on input line 
-85.
+87.
 
 ) ("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\finalReport\chapters/SS.tex"
 [4] [5]
@@ -387,10 +387,10 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 3541 strings out of 495285
- 51894 string characters out of 3179881
- 120798 words of memory out of 3000000
- 6655 multiletter control sequences out of 15000+200000
+ 3547 strings out of 495285
+ 51956 string characters out of 3179881
+ 120913 words of memory out of 3000000
+ 6661 multiletter control sequences out of 15000+200000
  14873 words of font info for 52 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
  44i,9n,42p,1001b,312s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -411,7 +411,7 @@ TeX 2.8/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Program Files (x86)/MiKTeX
 fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files (x86)/MiKTeX 2.8/fon
 ts/type1/public/amsfonts/cm/cmti10.pfb><C:/Program Files (x86)/MiKTeX 2.8/fonts
 /type1/public/amsfonts/cm/cmti12.pfb>
-Output written on FinalReport.pdf (19 pages, 230187 bytes).
+Output written on FinalReport.pdf (19 pages, 231459 bytes).
 PDF statistics:
  132 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

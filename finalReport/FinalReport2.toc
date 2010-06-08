@@ -10,17 +10,16 @@
 \contentsline {subsection}{\numberline {2.1.1}Launch Vehicle}{2}
 \contentsline {subsubsection}{\numberline {2.1.1.1}Cost and Reliability Analysis}{2}
 \contentsline {subsubsection}{\numberline {2.1.1.2}Soyuz LV Payload Capability Analysis}{3}
-\contentsline {subsubsection}{\numberline {2.1.1.3}Conclusion}{3}
-\contentsline {subsection}{\numberline {2.1.2}Launch Site}{3}
-\contentsline {subsection}{\numberline {2.1.3}Orbit Acquisition}{4}
-\contentsline {section}{\numberline {2.2}Space Segment}{4}
-\contentsline {subsection}{\numberline {2.2.1}Emitter Orbit}{4}
-\contentsline {subsection}{\numberline {2.2.2}Receiver Orbits}{4}
-\contentsline {subsection}{\numberline {2.2.3}Collision Avoidance}{4}
-\contentsline {subsection}{\numberline {2.2.4}Stationkeeping}{4}
-\contentsline {section}{\numberline {2.3}Space Environment and Shielding}{4}
-\contentsline {chapter}{\numberline {3}Sustainable Development Strategy}{5}
-\contentsline {section}{\numberline {3.1}Production and Logistics}{5}
-\contentsline {section}{\numberline {3.2}Operations}{5}
-\contentsline {section}{\numberline {3.3}End of Life}{6}
-\contentsline {chapter}{\numberline {A}Soyuz-ST Factsheet}{8}
+\contentsline {subsection}{\numberline {2.1.2}Launch Site}{4}
+\contentsline {subsection}{\numberline {2.1.3}Orbit Acquisition}{5}
+\contentsline {section}{\numberline {2.2}Space Segment}{6}
+\contentsline {subsection}{\numberline {2.2.1}Emitter Orbit}{6}
+\contentsline {subsection}{\numberline {2.2.2}Receiver Orbits}{6}
+\contentsline {subsection}{\numberline {2.2.3}Collision Avoidance}{6}
+\contentsline {subsection}{\numberline {2.2.4}Stationkeeping}{6}
+\contentsline {section}{\numberline {2.3}Space Environment and Shielding}{6}
+\contentsline {chapter}{\numberline {3}Sustainable Development Strategy}{7}
+\contentsline {section}{\numberline {3.1}Production and Logistics}{7}
+\contentsline {section}{\numberline {3.2}Operations}{7}
+\contentsline {section}{\numberline {3.3}End of Life}{8}
+\contentsline {chapter}{\numberline {A}Soyuz-ST Factsheet}{10}

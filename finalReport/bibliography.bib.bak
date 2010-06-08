@@ -62,6 +62,14 @@
   timestamp = {2010.05.16}
 }
 
+@MISC{aeromst,
+  author = {{Comtech Aeroastro Inc.}},
+  title = {{Minature Star Tracker (MST)}},
+  month = {April},
+  year = {2010},
+  note = {\texttt{http://www.aeroastro.com/index.php/components/minature-star-tracker-mst}}
+}
+
 @ARTICLE{SPAD,
   author = {Cristiano Niclass, Marek Gersbach, Robert Henderson, Lindsay Grant
 	and Edoardo Charbon},
@@ -79,7 +87,8 @@
 	Lindsay Grant, Robert K. Henderson, Marek Gersbach and Edoardo Charbon},
   title = {A 32x32-Pixel Array with In-Pixel Photon Counting and Arrival Time
 	Measurement in the Analog Domain},
-  year = {2009}
+  year = {2009},
+  owner = {Zhuan}
 }
 
 @ELECTRONIC{delfi_c3,
@@ -153,6 +162,16 @@
   timestamp = {2010.05.18}
 }
 
+@MASTERSTHESIS{wheelmotor,
+  author = {Angel Mario Cano Garza},
+  title = {{Reaction Wheels for Picosatellites}},
+  school = {University of Wurzburg},
+  year = {2008},
+  month = {December},
+  note = {\texttt{http://epubl.ltu.se/1653-0187/2009/013/index.html}},
+  owner = {Lieuwe}
+}
+
 @MISC{azurspace,
   author = {Azurspace - solar energy GmbH},
   year = {2010},
@@ -177,7 +196,7 @@
   year = {2009},
   volume = {94},
   pages = {1718-1728},
-  owner = {Zhou},
+  owner = {Zhuan},
   timestamp = {2010.04.27}
 }
 
@@ -217,7 +236,8 @@
 	Grant, R Henderson, F. Borghetti, D. Stoppa and E. Charbon},
   title = {A Parallel 32x32 Time-To-Digital Converter Array Fabricated in a
 	130 nm Imaging CMOS Technology},
-  year = {2009}
+  year = {2009},
+  owner = {Zhuan}
 }
 
 @ARTICLE{yastrebova,
@@ -350,6 +370,33 @@
   timestamp = {2010.04.28}
 }
 
+@ELECTRONIC{laser_power,
+  author = {Toshiyuki KAWASHIMA, Tomokazu ICHn, Takeshi KANZAKI, Masanobu YAMANAI,
+	Yasukazu IZAWA, 
+	
+	Sadao NAKA and Hirofumi KAN},
+  month = {September},
+  year = {2000},
+  title = {Therlnal and Spectral-Characteristics of High-PoWer Quasi-Continuous
+	Wave 940-nm InGaAS Diode Laser Arrays},
+  language = {English},
+  url = {http://www.springerlink.com/content/h5036183563w0638/fulltext.pdf},
+  owner = {Tim},
+  timestamp = {2010.06.07}
+}
+
+@INPROCEEDINGS{harmonicdrive,
+  author = {K Ueura and Y Kiyosawa and J Kurogi and S Kanai and H Miyaba and
+	K Maniwa and M Suzuki and S Obara},
+  title = {Tribological aspects of a strain wave gearing system with specific
+	reference to its space application},
+  booktitle = {Proc. IMechE},
+  year = {2008},
+  volume = {222},
+  number = {8},
+  note = {\texttt{http://journals.pepublishing.com/content/946r100259581426/}}
+}
+
 @ELECTRONIC{fresnel2,
   author = {Thayer Watkins},
   title = {Fresnel equations},
@@ -364,6 +411,20 @@
   author = {James R. Wertz},
   owner = {Alex},
   timestamp = {2010.05.10}
+}
+
+@CONFERENCE{responsive,
+  author = {James R. Wertz},
+  title = {Coverage, Responsiveness, and Accessibility for Various “Responsive
+	Orbits”},
+  booktitle = {3rd Responsive Space Conference RS3-2005-2002},
+  year = {2005},
+  address = {El Segundo, CA},
+  month = {April},
+  organization = {Microcosm, Inc.},
+  publisher = {AIAA},
+  owner = {Alex},
+  timestamp = {2010.06.04}
 }
 
 @BOOK{quantumoptics,
@@ -431,6 +492,11 @@
   url = {http://en.wikipedia.org/wiki/Fresnel_equations}
 }
 
+@MISC{harmweb,
+  title = {{Harmonic Drive Website}},
+  note = {\texttt{http://www.harmonicdrive.net}}
+}
+
 @ELECTRONIC{jerOrbit,
   title = {Lecture 6: Orbits},
   organization = {University of Oregon},
@@ -485,6 +551,13 @@
   note = {http://www.delfispace.nl},
   owner = {Lieuwe},
   timestamp = {2010.05.17}
+}
+
+@MISC{faulhaber,
+  title = {{Faulhaber, Drives and Micro precision systems}},
+  howpublished = {Website},
+  year = {2010},
+  note = {\texttt{http://www.faulhaber-group.com}}
 }
 
 @ELECTRONIC{geotools,
@@ -579,6 +652,16 @@
   timestamp = {2010.04.28}
 }
 
+@MANUAL{soyuzman,
+  title = {Soyuz from the Guiana Space Center User's Manual},
+  organization = {Arianespace},
+  edition = {Issue 1 - Revision 0},
+  month = {June},
+  year = {2006},
+  owner = {Alex},
+  timestamp = {2010.06.07}
+}
+
 @ELECTRONIC{landsatcom,
   year = {2005},
   title = {Chapter 2 - Landsat 7 Spacecraft: section 4 Communication links},
@@ -588,65 +671,3 @@
   timestamp = {2010.05.17}
 }
 
-@MastersThesis{wheelmotor,
-author = {Angel Mario Cano Garza},
-title = {{Reaction Wheels for Picosatellites}},
-school = {University of Wurzburg},
-year = {2008},
-month = {December},
-note = {\texttt{http://epubl.ltu.se/1653-0187/2009/013/index.html}},
-owner = {Lieuwe}
-}
-
-@InProceedings{harmonicdrive,
-author = {K Ueura and Y Kiyosawa and J Kurogi and S Kanai and H Miyaba and K Maniwa and M Suzuki and S Obara},
-title = {Tribological aspects of a strain wave gearing system with specific reference to its space application},
-booktitle = {Proc. IMechE},
-year = {2008},
-volume = {222},
-number = {8},
-note = {\texttt{http://journals.pepublishing.com/content/946r100259581426/}}
-}
-
-@Misc{faulhaber,
-title = {{Faulhaber, Drives and Micro precision systems}},
-howpublished = {Website},
-year = {2010},
-note = {\texttt{http://www.faulhaber-group.com}},
-}
-
-@Misc{cubesatshop,
-author = {Innovative Solutions In Space},
-title = {Cubesat Webshop},
-note = {\texttt{http://www.cubesatshop.com}
-}
-
-@Misc{tnoweb,
-title = {{TNO Website}},
-note = {\texttt{http://www.tno.nl}}
-}
-
-@Misc{aeromst,
-author = {{Comtech Aeroastro Inc.}},
-title = {{Minature Star Tracker (MST)}},
-month = {April},
-year = {2010},
-note = {\texttt{http://www.aeroastro.com/index.php/components/minature-star-tracker-mst}},
-}
-
-@TECHREPORT{midterm,
-  author = {S. Billemont and L.S. Boersma and B. Buyens and S.R. Finck and J.P.
-	Florijn and T.C. Goossens and N.S. Oborin and A.J. Vorobiev and G.J.
-	van der Wel and Z. Zhou},
-  title = {Midterm Report},
-  institution = {Delft University of Technology},
-  year = {2010},
-  month = {May},
-  owner = {Lieuwe},
-  timestamp = {2010.06.01}
-}
-
-@Misc{harmweb,
-title = {{Harmonic Drive Website}},
-note = {\texttt{http://www.harmonicdrive.net}}
-}
