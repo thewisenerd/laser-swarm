@@ -1,6 +1,7 @@
 \section{Detailed Design Optical Receiving Payload}
 \label{sec:DDreceiver}
 The figure \ref{fig:receiver_overview} on page \ref{fig:receiver_overview} gives an overview diagram of the receiver optics.  More information about the design concept or trade off can be found in the midterm report. In this detailed design report, the wavelength filter system and the single photon detection device \acs{SPAD} research will be the pivot, after that the receiver payload summary and budget will be drawn.
+
 \begin{figure}[ht!]
 \centering
 \includegraphics[scale = 0.5]{chapters/img/DiagramReceiverGeneral.png}
@@ -9,8 +10,15 @@ The figure \ref{fig:receiver_overview} on page \ref{fig:receiver_overview} gives
 \end{figure} 
 
 \subsection{\ac{SPAD}}
-	\label{SPAD}
-introduction
+\label{SPAD}
+\ac{SPAD} identifies a class of solid-state photo detectors based on a reverse biased \textit{p-n junction} in which a photo-generated carrier can trigger an avalanche current due to the impact ionization mechanism. This device is able to detect low intensity signals (down to the single photon) and to signal the arrival times of the photons with a jitter of a few tens of picoseconds. However, these devices are typically based on complex circuits, whose area occupation and power consumption makes their integration impossible at a pixel level. In this case, 32 \ac{TDC}s have been implemented on chip serving an array of 128x128 SPAD based pixels, while reports an example of in-pixel implementation, in a linear array, of a \ac{TAC}\cite{SPAD3}. The figure \ref{fig:spad_overview} on page \ref{fig:spad_overview} is how the \acs{SPAD} chip looks like.
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[scale = 0.8]{chapters/img/32by32array.png}
+\caption{\acs{SPAD} chip photon-micrograph}
+\label{fig:spad_overview}
+\end{figure} 
 
 \subsubsection{Avalanche Diodes}
 \label{diodes}	
@@ -29,7 +37,7 @@ As it happens in \ac{PMT}s, thermal generation effects produce current pulses ev
 
 \subsubsection{Quenching Circuits}
 \label{AQC}
-The bias voltage is then restored, in order to be able to detect another photon. 	
+The bias voltage is then restored, in order to be able to detect another photon. 
 
 \subsubsection{Space Qualification}
 \label{SQ}
