@@ -76,7 +76,7 @@ public class Constellation {
 	/**
 	 * Efficiency of the receiver [-]
 	 * <p>
-	 * (Receiver chip efficency) x (optical filter efficency)
+	 * (Receiver chip efficiency) x (optical filter efficiency)
 	 * </p>
 	 */
 	private double			receiverEfficiency	= 0.4 * .9;

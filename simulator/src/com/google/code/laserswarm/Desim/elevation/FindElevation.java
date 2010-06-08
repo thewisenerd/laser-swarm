@@ -16,6 +16,7 @@ import com.google.code.laserswarm.Desim.FindWindow;
 import com.google.code.laserswarm.Desim.NoiseData;
 import com.google.code.laserswarm.Desim.elevation.correlation.AltitudeCorrelation;
 import com.google.code.laserswarm.Desim.elevation.correlation.OutlierRemovalCorrelation;
+import com.google.code.laserswarm.Desim.elevation.slope.ElevationSlope;
 import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.conf.Constellation;
 import com.google.code.laserswarm.conf.Satellite;
@@ -52,7 +53,7 @@ public class FindElevation implements ElevationFinder {
 	 * @return Returns a list of the Point3d's found on the Earth's surface (in r-lat-lon coordinates).
 	 * @throws MathException
 	 */
-	public LinkedList<Point3d> run(Map<Satellite, TimeLine> recTimes, EmitterHistory hist,
+	public ElevationSlope run(Map<Satellite, TimeLine> recTimes, EmitterHistory hist,
 			Constellation con, int dataPoints)
 			throws MathException {
 		Iterator<Double> timeIt = hist.time.iterator();
@@ -62,6 +63,7 @@ public class FindElevation implements ElevationFinder {
 		}
 		FindWindow emitRecPair = new FindWindow(hist, timeIt, recTimes, con, (int) 1e8);
 		int count = 0;
+		ElevationSlope elSlope = new ElevationSlope();
 		LinkedList<Double> timePulses = Lists.newLinkedList();
 		LinkedList<Point3d> posEmits = Lists.newLinkedList();
 		LinkedList<Point3d> altitudes = Lists.newLinkedList();
@@ -83,8 +85,8 @@ public class FindElevation implements ElevationFinder {
 				posEmits.addLast(new Point3d(hist.getPosition().find(emitRecPair.tPulse)));
 				logger.dbg("Point: [%s, %s, %s]", hist.getPosition().find(emitRecPair.tPulse).x,
 						hist
-						.getPosition().find(emitRecPair.tPulse).y, hist.getPosition().find(
-						emitRecPair.tPulse).z);
+								.getPosition().find(emitRecPair.tPulse).y, hist.getPosition().find(
+								emitRecPair.tPulse).z);
 				// Remove pulse data we do not care about any more.
 				if (timePulses.size() > (int) Math.ceil(0.5 * qLength)) {
 					timePulses.removeFirst();
@@ -96,8 +98,9 @@ public class FindElevation implements ElevationFinder {
 					Point3d sphericalEmit = Convert.toSphere(thisEmit);
 					altitudes.add(new Point3d(
 							Configuration.R0
-							+ altCorr.findAltitude(recTimes, interpulseWindows, timePulses.getFirst(),
-							thisEmit),
+									+ altCorr.findAltitude(recTimes, interpulseWindows, timePulses
+											.getFirst(),
+											thisEmit),
 							sphericalEmit.y, sphericalEmit.z));
 				}
 			}
@@ -106,6 +109,7 @@ public class FindElevation implements ElevationFinder {
 				|| Math.abs(altitudes.getLast().x - altitudes.get(altitudes.size() - 2).x) > 1000) {
 			altitudes.removeLast();
 		}
-		return altitudes;
+		elSlope.setAltitudes(altitudes);
+		return elSlope;
 	}
 }

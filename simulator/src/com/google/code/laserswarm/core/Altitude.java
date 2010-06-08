@@ -15,11 +15,13 @@ import org.apache.commons.math.MathException;
 
 import com.google.code.laserswarm.TestFindElevation;
 import com.google.code.laserswarm.Desim.elevation.ElevationFinder;
-import com.google.code.laserswarm.Desim.elevation.FindElevationNeighborInterpolation;
+import com.google.code.laserswarm.Desim.elevation.slope.ElevationSlope;
+import com.google.code.laserswarm.Desim.elevation.slope.FindElevationNeighborInterpolation;
 import com.google.code.laserswarm.Desim.filter.Filter;
 import com.google.code.laserswarm.Desim.filter.FilterAverage;
 import com.google.code.laserswarm.Desim.filter.FilterOutlierRemoval;
-import com.google.code.laserswarm.Desim.filter.FilterSpikes;
+import com.google.code.laserswarm.Desim.filter.elevationslope.ElevationSlopeFilter;
+import com.google.code.laserswarm.Desim.filter.elevationslope.FilterSpikes;
 import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.conf.Constellation;
 import com.google.code.laserswarm.conf.Satellite;
@@ -82,6 +84,7 @@ public class Altitude {
 		Constellation constellation = null;
 		Map<Satellite, TimeLine> satData = Maps.newHashMap();
 		plotHeightDistribution plotter = new plotHeightDistribution();
+		ElevationSlope elSlope = new ElevationSlope();
 		LinkedList<Point3d> alts = Lists.newLinkedList();
 		if (new File("satData.xml").exists() & new File("emitterHistory.xml").exists()
 				& new File("constellation.xml").exists() & dontSimulate) {
@@ -135,7 +138,8 @@ public class Altitude {
 			alts = Configuration.read("altData.xml", Configuration
 					.getDefaultSerializer("altData.xml"));
 		} else {
-			alts = findEl.run(satData, emitterHistory, constellation, dataPoints);
+			elSlope = findEl.run(satData, emitterHistory, constellation, dataPoints);
+			alts = elSlope.getAltitudes();
 			Configuration.write("altData.xml", alts);
 		}
 		plotter.plot(alts, 3, "heightAnalysed");
@@ -145,8 +149,8 @@ public class Altitude {
 		Filter filtOutliers = new FilterOutlierRemoval(200, 50, 3);
 		LinkedList<Point3d> outlierAlts = filtOutliers.filter(alts);
 		plotter.plot(outlierAlts, 3, "heightAnalysed&OutlierFiltered");
-		Filter filtSpikes = new FilterSpikes(3, 0.3);
-		LinkedList<Point3d> despikedAlts = filtSpikes.filter(alts);
-		plotter.plot(despikedAlts, 3, "heightAnalysed&SpikeFiltered");
+		ElevationSlopeFilter filtSpikes = new FilterSpikes(3, 0.3);
+		ElevationSlope despiked = filtSpikes.filter(elSlope);
+		plotter.plot(despiked.getAltitudes(), 3, "heightAnalysed&SpikeFiltered");
 	}
 }
