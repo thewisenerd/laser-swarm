@@ -15,12 +15,15 @@ import javax.vecmath.Vector3d;
 public class Region {
 	BRDF brdf;
 	Boundries bound; 
-	LinkedList<Vector3d> path;
+	LinkedList<Vector3d> path;		//List of points in ECEF
 	
 	public void add(Map<Vector3d,Double> recMap, Vector3d loc) {
 	brdf.add(recMap);
 	path.add(loc);
+	}
 	
+	public	boolean contains(Vector3d vec) {
+		return bound.contains(vec);
 	}
 	
 	/**
