@@ -41,7 +41,7 @@ public abstract class Convert {
 	/**
 	 * Convert from ECEF to ENU
 	 * @param coord in ECEF
-	 * @return coordinates in ENU
+	 * @return coordinates in ENU (x east, y north, up z)
 	 */
 	
 	public static Vector3d toENU(Tuple3d coord) {
