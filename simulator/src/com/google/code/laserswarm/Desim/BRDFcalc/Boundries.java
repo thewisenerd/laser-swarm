@@ -19,6 +19,25 @@ public class Boundries {
 		return new Vector3d(Math.cos(lat)*Math.cos(lon),Math.cos(lat)*Math.sin(lon),Math.sin(lat));
 	}
 	
+	public boolean contains(Vector3d pnt) {
+		Double maxX = Double.NEGATIVE_INFINITY;
+		Double minX = Double.POSITIVE_INFINITY;
+		Double maxY = Double.NEGATIVE_INFINITY;
+		Double minY = Double.POSITIVE_INFINITY;
+		Double maxZ = Double.NEGATIVE_INFINITY;
+		Double minZ = Double.POSITIVE_INFINITY;
+		for (Vector3d pIt : pnts) {
+			
+			if(pIt.x > maxX) maxX = pIt.x; 
+			if(pIt.x < minX ) minX   = pIt.x;
+			if(pIt.x > maxY) maxY = pIt.y; 
+			if(pIt.x < minY ) minY   = pIt.y;
+			if(pIt.x > maxZ) maxZ = pIt.z; 
+			if(pIt.x < minZ ) minZ   = pIt.z;
+	}
+		return(pnt.x <= maxX && pnt.x >= minX   && pnt.y <= maxY && pnt.y >= minY && pnt.z <= maxZ && pnt.z >= minZ);
+
+	}
 	public void addConPoint(Vector3d pnt){
 		pnts.add(pnt);
 	}
