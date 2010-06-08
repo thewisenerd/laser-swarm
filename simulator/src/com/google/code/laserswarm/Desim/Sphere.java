@@ -9,33 +9,44 @@ import java.util.Map;
 import java.util.TreeMap;
 import javax.vecmath.*;
 
+import com.google.code.laserswarm.TestFindElevation;
+import com.lyndir.lhunath.lib.system.logging.Logger;
+
 /**
- * @author Administrator
+ * @author 
  *
  */
 public class Sphere  extends TreeMap<Vector3d, Double>{
 	
 	double total;
-/*	class Comp implements Comparator<Coord>{
+	private static final Logger	logger		= Logger.get(Sphere.class);
+	private static final long	serialVersionUID	= -1571965505162878630L;
+	
+	static Comparator<Vector3d> vecComparator = new Comparator<Vector3d>() {
 
 		@Override
-		public int compare(Coord o1, Coord o2) {
-			if(o1.thI == o2.thI){
-				if(o1.thR > o2.thR)
-					return 1;
+		public int compare(Vector3d o1, Vector3d o2) {
+			Vector3d zerovec = new Vector3d(0.0,0.0,1.0);
+			if ( o1.angle(zerovec) > o2.angle(zerovec) ){
+				return 1;
+			}else if(o1.angle(zerovec) ==  o2.angle(zerovec) )
+				return 0;
+			else{
+				return -1;
 			}
-				
-			
+
 		}
-		
-	}*/
+
+
+	};
+
 	/**
 	 * Rotate the points around the center  in the horizontal plane 
 	 */
 	@Override
 	public Double put(Vector3d key, Double value) {
 		// TODO Auto-generated method stub
-		total++;
+		total += value;
 		if(!this.containsKey(key)){
 			return super.put(key, value);
 		}
@@ -55,30 +66,37 @@ public class Sphere  extends TreeMap<Vector3d, Double>{
 		}*/
 	@Override
 	public Double get(Object key) {
-		 Double tmp = super.get(key);
+		try{
+		Double tmp = super.get(key);
 		 return tmp/total;
+		}catch(ClassCastException e ){
+			logger.dbg("Vector needs to be made compareable: %s", key);
+			return null;
+		}catch(NullPointerException e){
+			logger.dbg("Element does not exist", e);
+			return 0.0;
+		}
+		
+		
 		
 	}
+	
 	public Sphere() {
-		// TODO Auto-generated constructor stub
-	super();
+	super(vecComparator);
 	
 	}
 	
-	/**
-	 * 
-	 */
-	private static final long	serialVersionUID	= -1571965505162878630L;
 	
-
-	/**
-	 * @param args
-	 */
 	
 	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		// 
+		Sphere round = new Sphere();
+		Vector3d nvec = new Vector3d(1.0,2.0,3.0);
+		Vector3d nvec2 = new Vector3d(1.0,3.0,2.0);
+		Vector3d nvec3 = new Vector3d(1.0,2.5,2.0);
+		round.put(nvec, 3.0);
+		round.put(nvec2, 2.3);
+		System.out.println(round.get(nvec3));
 		
 	}
 
