@@ -27,6 +27,7 @@ public class BRDF extends Distribution  {
 	
 	public BRDF(boolean sym) {
 	symetric = sym;
+	this.brdf= new Sphere();
 	}
 	
 	public void add(Map<Vector3d,Double> dirs ){
