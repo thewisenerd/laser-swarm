@@ -34,6 +34,7 @@ public class Constellation {
 		double raan = emittor.getRightAngleOfAscendingNode() + (-2.18 / 180 * Math.PI);
 		double ta = emittor.getTrueAnomaly() + ((-2.18 / 180) * Math.PI);
 		double[][] sats = new double[][] {
+				{ 0, 0 },
 				{ +raan, 0 },
 				{ -raan, 0 },
 				{ 0, +ta },

@@ -96,29 +96,13 @@ public class Altitude {
 			constellation = Configuration.read("constellation.xml", Configuration
 					.getDefaultSerializer("constellation.xml"));
 		} else {
-			SimulatorMaster mgr = new SimulatorMaster(EarthModel.getDefaultModel());
-			Constellation cons = Constellation.simpleConstellation(5, 0.005625, 500);
-			Satellite recOrig = cons.getEmitter();
-			Satellite rec1 = new Satellite("Satellite RAAN-1", recOrig);
-			rec1.setArgumentOfPerigee((float) (-2.18 / 180 * Math.PI));
-			Satellite rec2 = new Satellite("Satellite RAAN+1", recOrig);
-			rec1.setArgumentOfPerigee((float) (2.18 / 180 * Math.PI));
-			Satellite rec3 = new Satellite("Satellite TA-1", recOrig);
-			rec1.setTrueAnomaly((float) (-2.18 / 180 * Math.PI));
-			Satellite rec4 = new Satellite("Satellite TA+1", recOrig);
-			rec1.setTrueAnomaly((float) (2.18 / 180 * Math.PI));
-
-			List<Satellite> recs = cons.getReceivers();
-			recs.add(rec1);
-			recs.add(rec2);
-			recs.add(rec3);
-			recs.add(rec4);
-			cons.setReceivers(recs);
+			Constellation cons = Constellation.swarm(5, 0.005625, 500);
 			cons.setReceiverBandWidth(2E-9);
 			cons.setReceiverEfficiency(0.36 * 0.9);
 			cons.setLaserWaveLength(473E-9);
 
 			SimTemplate template = new SimTemplate(cons, dataPoints);
+			SimulatorMaster mgr = new SimulatorMaster(EarthModel.getDefaultModel());
 			mgr.addSimTemplate(template);
 
 			HashMap<SimTemplate, Simulator> points = mgr.runSim();
