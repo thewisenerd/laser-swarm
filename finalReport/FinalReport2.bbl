@@ -5,12 +5,21 @@ Arianespace.
 \newblock {\em Soyuz from the Guiana Space Center User's Manual}, issue 1 -
   revision 0 edition, June 2006.
 
+\bibitem{arianesoyuz}
+Arianespace.
+\newblock Soyuz launch services overview, 2010.
+
 \bibitem{SPAD3}
 Justin Richardson Richard Walker Lindsay Grant Robert K. Henderson
   Marek~Gersbach David~Stoppa, Fausto~Borghetti and Edoardo Charbon.
 \newblock A 32x32-pixel array with in-pixel photon counting and arrival time
   measurement in the analog domain.
 \newblock 2009.
+
+\bibitem{rockotman}
+EUROCKOT.
+\newblock {\em EUROCKOT Launch Service Provider User Manual, Chapter 3: General
+  Performance Capabilities}, 4 edition, November 2004.
 
 \bibitem{SPAD2}
 E.~Labonne J. Richardson R. Walker L. Grant R Henderson F. Borghetti D.~Stoppa
@@ -24,6 +33,12 @@ Cristiano~L. Niclass.
 \newblock {\em Single-Photon Image Sensors in CMOS: Picosecond Resolution for
   Three-Dimensional Imaging}.
 \newblock PhD thesis, École Polytechnique Fédérale de Lausanne, 2008.
+
+\bibitem{constDesign}
+James~R. Wertz.
+\newblock {\em Mission Geometry; Orbit and Constellation Design and
+  Management}.
+\newblock Microcosm Press and Kluwer Academic Publishers, 2001.
 
 \bibitem{larson}
 Wiley J. Larson \& James~R. Wertz, editor.

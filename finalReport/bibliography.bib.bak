@@ -1,6 +1,16 @@
 % This file was created with JabRef 2.6.
 % Encoding: Cp1252
 
+@ELECTRONIC{arianesoyuz,
+  author = {Arianespace},
+  year = {2010},
+  title = {Soyuz launch services overview},
+  organization = {Arianespace},
+  url = {http://www.arianespace.com/launch-services-soyuz/soyuz-introduction.asp},
+  owner = {Alex},
+  timestamp = {2010.06.08}
+}
+
 @TECHREPORT{midterm,
   author = {S. Billemont and L.S. Boersma and B. Buyens and S.R. Finck and J.P.
 	Florijn and T.C. Goossens and N.S. Oborin and A.J. Vorobiev and G.J.
@@ -669,5 +679,16 @@
   url = {http://landsathandbook.gsfc.nasa.gov/handbook/handbook_htmls/chapter2/chapter2.html#section2.4},
   owner = {Bart},
   timestamp = {2010.05.17}
+}
+
+@MANUAL{rockotman,
+  title = {EUROCKOT Launch Service Provider User Manual, Chapter 3: General
+	Performance Capabilities},
+  organization = {EUROCKOT},
+  edition = {4},
+  month = {November},
+  year = {2004},
+  owner = {Alex},
+  timestamp = {2010.06.08}
 }
 

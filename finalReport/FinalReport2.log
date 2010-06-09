@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (MiKTeX 2.8) (preloaded format=pdflatex 2010.4.20)  8 JUN 2010 10:16
+This is pdfTeX, Version 3.1415926-1.40.10 (MiKTeX 2.8) (preloaded format=pdflatex 2010.4.20)  9 JUN 2010 13:20
 entering extended mode
 **C:/Users/Alex/Desktop/Laser*Swarm/laser-swarm/finalReport/FinalReport2.tex
 ("C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/finalReport/FinalReport2.tex"
@@ -353,38 +353,60 @@ File: chapters/img/soyuzvol.png Graphic file (type png)
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 97.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 99.
 ("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\base\omscmr.fd"
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 97.
-
-Underfull \hbox (badness 10000) in paragraph at lines 109--109
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 99.
+ [4 <C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/finalReport/chapters/img/lvm
+ass.png (PNG copy)>]
+Underfull \hbox (badness 10000) in paragraph at lines 111--111
 []\OT1/cmr/m/n/10.95 Latitude
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 109--110
+Underfull \hbox (badness 10000) in paragraph at lines 111--112
 []\OT1/cmr/m/n/10.95 Longitude
  []
 
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<chapters/img/launchsites.png, id=62, 1653.17625pt x 839.135pt>
+<chapters/img/launchsites.png, id=65, 1653.17625pt x 839.135pt>
 File: chapters/img/launchsites.png Graphic file (type png)
 
 <use chapters/img/launchsites.png>
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[4 <C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/finalReport/chapters/img/lvma
-ss.png (PNG copy)>] [5 <C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/finalRepo
-rt/chapters/img/soyuzvol.png (PNG copy)>])
-("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\finalReport\chapters/SS.tex"
+Package acronym Info: Label `acro:ELS' newly defined as it shall be overridden
+although it is yet undefined on input line 132.
+[5 <C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/finalReport/chapters/img/soyu
+zvol.png (PNG copy)>]
+<chapters/img/launchprofile.png, id=69, 1447.4075pt x 739.76375pt>
+File: chapters/img/launchprofile.png Graphic file (type png)
+
+<use chapters/img/launchprofile.png>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
 [6 <C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/finalReport/chapters/img/laun
-chsites.png (PNG copy)>]
+chsites.png (PNG copy)>] [7 <C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/fina
+lReport/chapters/img/launchprofile.png (PNG copy)>]
+<chapters/img/primaryconfmax.png, id=77, 952.55875pt x 584.1825pt>
+File: chapters/img/primaryconfmax.png Graphic file (type png)
+
+<use chapters/img/primaryconfmax.png>
+<chapters/img/primaryconfmin.png, id=78, 952.55875pt x 554.07pt>
+File: chapters/img/primaryconfmin.png Graphic file (type png)
+
+<use chapters/img/primaryconfmin.png>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[8 <C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/finalReport/chapters/img/prim
+aryconfmax.png (PNG copy)>])
+("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\finalReport\chapters/SS.tex"
+[9 <C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/finalReport/chapters/img/prim
+aryconfmin.png (PNG copy)>]
 Chapter 3.
 Package acronym Info: Label `acro:EOL' newly defined as it shall be overridden
 although it is yet undefined on input line 4.
@@ -392,32 +414,32 @@ although it is yet undefined on input line 4.
 x")
 ("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\finalReport\chapters/SSOPE.tex"
 ) ("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\finalReport\chapters/SSEOL.te
-x") [7
+x") [10
 
 ]
 ("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\finalReport\FinalReport2.bbl"
-[8]
+[11]
 Missing character: There is no É in font cmr10!
 Missing character: There is no é in font cmr10!
 Missing character: There is no é in font cmr10!
-) [9
+) [12
 
 ]
 Appendix A.
-[10
+[13
 
-] <chapters/img/soyuzfact.png, id=85, 1451.4225pt x 829.0975pt>
+] <chapters/img/soyuzfact.png, id=98, 1451.4225pt x 829.0975pt>
 File: chapters/img/soyuzfact.png Graphic file (type png)
 
-<use chapters/img/soyuzfact.png> [11 <C:/Users/Alex/Desktop/Laser Swarm/laser-s
+<use chapters/img/soyuzfact.png> [14 <C:/Users/Alex/Desktop/Laser Swarm/laser-s
 warm/finalReport/chapters/img/soyuzfact.png (PNG copy)>]
 ("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\finalReport\FinalReport2.aux") 
 ) 
 Here is how much of TeX's memory you used:
- 3577 strings out of 495285
- 52676 string characters out of 3179881
- 120984 words of memory out of 3000000
- 6685 multiletter control sequences out of 15000+200000
+ 3619 strings out of 495285
+ 53426 string characters out of 3179881
+ 122232 words of memory out of 3000000
+ 6724 multiletter control sequences out of 15000+200000
  14873 words of font info for 52 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
  44i,9n,42p,1002b,318s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -425,22 +447,23 @@ Here is how much of TeX's memory you used:
 C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:
 /Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/
 Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Pr
-ogram Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Progr
-am Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program 
-Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Program File
-s (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Program Files (x
-86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files (x86)/
-MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files (x86)/MiKT
-eX 2.8/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Program Files (x86)/MiKTeX 2
-.8/fonts/type1/public/amsfonts/cm/cmsl10.pfb><C:/Program Files (x86)/MiKTeX 2.8
-/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><C:/Program Files (x86)/MiKTeX 2.8
-/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86)/MiKTeX 2.8/f
-onts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files (x86)/MiKTeX 2.8/font
-s/type1/public/amsfonts/cm/cmti10.pfb><C:/Program Files (x86)/MiKTeX 2.8/fonts/
-type1/public/amsfonts/cm/cmti12.pfb>
-Output written on FinalReport2.pdf (21 pages, 796432 bytes).
+ogram Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Progr
+am Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Program 
+Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Fil
+es (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Program Files (
+x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Program Files (x86)
+/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files (x86)/MiK
+TeX 2.8/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files (x86)/MiKTeX 
+2.8/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Program Files (x86)/MiKTeX 2.8/
+fonts/type1/public/amsfonts/cm/cmsl10.pfb><C:/Program Files (x86)/MiKTeX 2.8/fo
+nts/type1/public/amsfonts/cm/cmssbx10.pfb><C:/Program Files (x86)/MiKTeX 2.8/fo
+nts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86)/MiKTeX 2.8/font
+s/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files (x86)/MiKTeX 2.8/fonts/t
+ype1/public/amsfonts/cm/cmti10.pfb><C:/Program Files (x86)/MiKTeX 2.8/fonts/typ
+e1/public/amsfonts/cm/cmti12.pfb>
+Output written on FinalReport2.pdf (24 pages, 1191912 bytes).
 PDF statistics:
- 142 PDF objects out of 1000 (max. 8388607)
+ 158 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 21 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 36 words of extra memory for PDF output out of 10000 (max. 10000000)
 

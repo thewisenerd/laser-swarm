@@ -21,7 +21,7 @@ The costs of launch vary greatly between different vehicles. Table \ref{table:ve
 \begin{tabular}{llr}
 \toprule
 Platform & Operator & Price (FY00\$m) \\
-\midrule
+\hline \hline
 Ariane V  & ESA & 97.96 \\
 Soyuz   & Starsem    &  8.16 - 22.1 \\
 Vega   & European and Italian SA  & 15.1 \\
@@ -48,7 +48,7 @@ Table \ref{table:LVreliability} on page \pageref{table:LVreliability} shows some
 \begin{tabular}{lcccp{5cm}}
 \toprule
 Platform & Total No. of Launches & Total Failures & Reliability & No. of Successful Launches Since Last Failure  \\
-\midrule
+\hline \hline
 Soyuz   & 1754  &  88 & 95\% & 57 \\
 PSLV & 16 & 1 & 94\% & 15 \\
 Rokot & 17& 2 & 88\% & 6 \\
@@ -82,11 +82,13 @@ The available volume in the Soyuz-ST Fairing can be seen in figure \ref{fig:soyu
 \begin{figure}[!h]
 \centering
 \includegraphics[scale = 0.5, angle=0]{chapters/img/soyuzvol.png}
-\caption{Fairing volume of the Soyuz-ST launch vehicle.\emph{ Source: \cite{soyuzman}.}}
+\caption{Fairing volume of the Soyuz-ST launch vehicle. Here shown in dual launch carrying configuration.\emph{ Source: \cite{soyuzman}.}}
 \label{fig:soyuzvol}
 \end{figure} 
 
-The dimensions of the fairing are visibly too large and there is no possibility of using a different one, however that leaves a lot of possibilities for different designs of release adapters to adapt to the unique sequence of separation upon orbit injection. Again, the possibility of taking other small satellites along on the same launch arises.  
+The dimensions of the fairing are visibly too large and there is no possibility of using a different one, however that leaves a lot of possibilities for different designs of release adapters to adapt to the unique sequence of separation upon orbit injection. Again, the possibility of taking other small satellites along on the same launch arises. The dual launch configuration shown in the previous figure is the one being considered for the launch.
+
+The choice of the Soyuz brings forth one more advantage: the use of a unique orbit insertion booster, the Fregat. This final stage will allow for minimization of fuel on the satellite as all orbit insertion maneuvers can be done using the Fregat. The Fregat stage has been designed to handle 20 individual burns.   
 
 \subsection{Launch Site}
 \label{frLSLS}
@@ -107,7 +109,7 @@ The first factor is crucial. It is paramount that the satellites are injected in
 \begin{tabular}{llp{2cm}p{2cm}}
 \toprule
 Launch Site & Operator & Latitude (deg min) & Longitude (deg min) \\
-\midrule
+\hline \hline
 Baikonur LC-31/6  & Russia (Starsem) & 45 54 N & 63 18 E \\
 Plesetsk LC-43  & Russia (Starsem)   &  62 48 N & 40 24 E \\
 Guiana Space Centre  ELS  & CNES/Arianespace  & 5 18 N & 52 50 W \\
@@ -121,14 +123,75 @@ Guiana Space Centre  ELS  & CNES/Arianespace  & 5 18 N & 52 50 W \\
 \begin{figure}[!h]
 \centering
 \includegraphics[width=1.0\textwidth, angle=0]{chapters/img/launchsites.png}
-\caption{Launch site locations and allowable inclinations for the Soyuz-ST.}
+\caption{Launch site locations and allowable inclinations for the Soyuz-ST. \emph{Sources: \cite{constDesign} and \cite{rockotman}.} }
 \label{fig:launchsites}
 \end{figure}
 
-\subsection{Orbit Acquisition}
+Even though all the above sites allow inclinations of 85 degrees, it is still preferable to select a site closer to the equator in order to utilize the full effect of Earth's rotation and lower the launch costs. With this in mind, the Guiana Space Centre is selected to be the preferable location for launch.
+
+The \ac{ELS} in Kourou, Guiana is currently being finalized and should accommodate its first Soyuz launch in 2010 \cite{arianesoyuz}.
+
+A typical launch profile of the Soyuz launch vehicle from Kourou is shown in figure \ref{fig:launch} on page \pageref{fig:launch}. The first three stages of the vehicle are used propel the payload and the Frigate booster to a circular orbit at around 200 km. After separation (stage 6 on the figure), the Fregat initiates the first orbit injection burn to bring the satellites to the appropriate orbits.
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=1.0\textwidth, angle=0]{chapters/img/launchprofile.png}
+\caption{Launch profile of the Soyuz LV from Kourou. \emph{Sources: \cite{soyuzman}.} }
+\label{fig:launch}
+\end{figure}
+
+With this information it is possible to further calculate some important launch parameters:
+
+\begin{itemize}
+	\item The inertial velocity of the launch site is given by:
+	
+	\begin{equation} 
+ 		V_L = (464.5) cos L 
+	\end{equation}
+	
+	where $L$ is the site latitude. For the case of Kourou the inertial velocity is 462.51 m/s.
+	\item The launch azimuth in inertial frame of reference is given by:
+	
+	\begin{equation} 
+ 		A_{Z_I} = arcsin(\frac{cos i}{cos L})
+	\end{equation}
+	
+	and is equal to 5.022 degrees for this launch.
+	\item The launch azimuth corrected for the Earth's rotation, is given by:
+	
+	\begin{equation} 
+ 		A_Z = arctan(\frac{V_0sinA_{Z_I}-V_{eq}cosL}{V_0cosA_{Z_I}})
+	\end{equation}
+	
+	where $V_0$ is the orbital velocity reached by the launcher before separation and the first burn of Fregat upper stage (see above, around 7.784 km/s), $V_{eq}$ is the velocity of the Earth's rotation at the equator - 464.5 m/s. Thus the corrected launch azimuth becomes 1.61 degrees. 
+	
+	\item The required launch velocity is calculated to be 7.76 km/s which means that due to Earth's rotation 26.8 m/s are saved.
+\end{itemize}
+
+Furthermore the region is politically stable and the launch site is under the protection from the French government and other security forces. All safety procedures are kept to the highest of standards and the spaceport is easily accessible by air or sea \cite{soyuzman}.
+
+\subsection{Orbit Insertion}
 \label{frLSOI}
 
-Once the final stage of the launch vehicle has reached desired orbit altitude and inclination, preparations can start for proper separation maneuvers. This maneuver has to be designed in such a way as to accommodate all phase shifts required by the satellite orbits. Using the 
+The orbit insertion is separated into two distinct stages: primary orbits and secondary orbits. The primary orbits are located at an altitude of 500 km and contain the emitter and four initial receivers. The secondary orbits are located at a slightly different altitude of 550 (CHECK ALTITUDE!!!!) km and contain the auxiliary receivers intended for replenishment.
+
+The configuration of the primary orbits is discussed in section \ref{frSSSC} and an image of the formation can be seen in figure \ref{fig:confmax} on page \pageref{fig:confmax}. The release sequence and the important parameters are as follows (for satellite and orbit numbers please refer to figure \ref{fig:confmax}):
+
+\begin{enumerate}
+	\item The Fregat is injected in Orbit 1.
+	\item The ascending intersection of Orbit 1 and Orbit 2 is reached at a latitude of 85$^{\circ}$ and a longitude offset (from the ascending node of Orbit 1) of 88.91$^{\circ}$. At this point the Fregat should be orientated in the direction of Orbit 2 and separate Rec 2. The separation $\Delta$V that the adapter should produce is calculated using:
+	
+	\begin{equation} 
+ 		\Delta V = 2 V_i sin \frac{\alpha}{2}
+	\end{equation}
+	
+	where $V_i$ is the orbital velocity (7.612 km/s) and $\alpha$ is the relative inclination (2.17$^{\circ}$, see section \ref{frSSSC}. The $\Delta$V is calculated to be 289.63 m/s.
+\end{enumerate}
+
+
+
+\subsection{Total Launch Segment Costs}
+\label{frLSTC} 
 
 \section{Space Segment}
 \label{frSS}
@@ -142,6 +205,23 @@ bla
 \label{frSSRO}
 
 b lss
+
+\subsection{Swarm Configuration}
+\label{frSSSC}
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=0.8\textwidth, angle=0]{chapters/img/primaryconfmax.png}
+\caption{Swarm configuration as seen when the emitter (labeled here as Base) crosses its ascending node. Orbit numbers represent the different orbital planes.}
+\label{fig:confmax}
+\end{figure}
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.8\textwidth, angle=0]{chapters/img/primaryconfmin.png}
+\caption{Swarm configuration as seen when the orbit planes intersect. In this figure the intersection in ascent is pictured.}
+\label{fig:confmin}
+\end{figure}
 
 \subsection{Collision Avoidance}
 \label{frSSCA}

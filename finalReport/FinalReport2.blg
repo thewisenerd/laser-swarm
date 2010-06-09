@@ -1,6 +1,8 @@
 This is BibTeX, Version 0.99cThe top-level auxiliary file: C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\finalReport\FinalReport2.aux
 The style file: plain.bst
 Database file #1: bibliography.bib
+Warning--entry type for "arianesoyuz" isn't style-file defined
+--line 4 of file bibliography.bib
 Too many commas in name 1 of "M. Gersbach, Y. Maruyama, E. Labonne, J. Richardson, R. Walker, L. Grant, R Henderson, F. Borghetti, D. Stoppa and E. Charbon" for entry SPAD2
 while executing---line 1049 of file plain.bst
 Too many commas in name 1 of "M. Gersbach, Y. Maruyama, E. Labonne, J. Richardson, R. Walker, L. Grant, R Henderson, F. Borghetti, D. Stoppa and E. Charbon" for entry SPAD2
@@ -43,4 +45,5 @@ while executing---line 1090 of file plain.bst
 Too many commas in name 1 of "M. Gersbach, Y. Maruyama, E. Labonne, J. Richardson, R. Walker, L. Grant, R Henderson, F. Borghetti, D. Stoppa and E. Charbon" for entry SPAD2
 while executing---line 1090 of file plain.bst
 Warning--empty journal in SPAD2
+Warning--can't use both author and editor fields in constDesign
 (There were 20 error messages)
