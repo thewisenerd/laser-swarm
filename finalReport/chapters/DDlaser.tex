@@ -60,9 +60,6 @@ A high laser efficiency demands that the light and injected charge carriers be c
 \label{nd_yag}
 \textit{Yttrium Aluminum Garnet} has emerged as the most widely produced laser gain host and has enjoyed recent popularity as a substrate material for optical components. The YAG host is a stable compound, mechanically robust, physically hard, optically isotropic, and transparent from below 300 to beyond 4,000 [nm]. YAG single crystals are able to accept trivalent laser activator ions from both the rare Earth and transition metal groups, and can be grown with very low strain.
 
-The Nd-YAG laser did not become a widely accepted tool until the 1970s, finding its first important application in the laser rangefinder arena. These YAG systems could be run at higher repetition rates, higher output energies,  
-and operate more covertly than the first generation ruby systems, primarily because of the thermal stability and robust nature of the Nd-YAG material. After gaining acceptance within the military community, the scientific, industrial, and medical markets were explored. Nd-YAG lasers quickly gained recognition in new market applications due to their increased reliability and flexibility in delivery of the laser beam via fiber optics.
-
 For applications where $TEM_{00}$ single mode operation is required, it is necessary to reduce or eliminate the variations in the bulk material and in the absorption of the pumping radiation throughout the component. In addition, wavefront distortions due to geometric imperfections and thermal gradient effects such as thermal lensing must be minimized. In this case, Neodymium concentration in the 0.4 to 0.8\% range is typically specified.
 
 \begin{figure} [ht]
@@ -173,14 +170,17 @@ For damage-free operation in a harsh, hands-off, environment such as space, a ma
 
 Considering a constant value of $f_{rep}$ of 5,000 [Hz], the total number of pulses equals $788.4\cdot10^{9}$ [pulses/5 years]. All optical components should be able to cope with the large amount of pulses and the peak power implied by these pulses, i.e. the energy damage threshold of the dielectric components should be higher than the incoming energy of the electromagnetic radiation. Since $I_{p,damage}$) is given with a temporal resolution in the order of a single pulse width ($\sim$10 [ns]), individual pulses can be analyzed. Stationary calculations can be conducted with the information based on the electromagnetic radiation energy and hence, the proper optical elements could be chosen ($I_{p,damage} > I_{p}$).
 
+\cite(nd_yag_life) shows an experimental set-up, where the lifetime of a \acs{DPSSL} is investigated, using approximately the same \acs{laser} configuration with $f_{rep}$ = 242 [Hz] and $E_{p}$ = 0.0150 [J]. The pulse energy is much larger then the value of $E_{p}$ in the case of the \acs{LiDAR} mission described in this report ($\sim$0.001 [J]). \ref{figure} shows the results. After 2.4\cdot10^{9} shots, there was no damage found in any of the cavity optics, but inspection of the diodes revealed that a single bas was lost on one array. After the first year, the pump pulse length was increased from 89 [\mum] to 105 [\mum] to restore the output energy to 15 [mJ]. This roughly simulated the procedure that would be performed in space in order to maintain an altimetry link. The final result was that after more than 4.8\cdot10^{9} 10 - 15 [mJ] laser pulses, there was no optical damage present in the system \cite{nd_yag_life}. This clearly indicates that the \acp{LDA} lifetime considerations are important for the entire \acs{laser} system. AlGaAs lasers can suffer from catastrophic optical damage (COD), rapid degradation, and gradual degradation. These phenomena are due to darkline defect propagation and a high surface recombination rate \cite{algaas}.
+
 \cite{nd_yag_life} shows an experimental set-up, where the lifetime of a \acs{DPSSL} is investigated, using approximately the same \acs{laser} configuration with $f_{rep} = 242 [Hz]$ and $E_{p} = 0.0150 [J]$. The pulse energy is much larger then the value of $E_{p}$ in the case of the \acs{LiDAR} mission described in this report ($\sim$0.001 [J]). \ref{figure} shows the results. After $2.4\cdot10^{9}$ shots, there was no damage found in any of the cavity optics, but inspection of the diodes revealed that a single bas was lost on one array. After the first year, the pump pulse length was increased from 89 [$\mu$m] to 105 [$\mu$m] to restore the output energy to 15 [mJ]. This roughly simulated the procedure that would be performed in space in order to maintain an altimetry link. The final result was that after more than $4.8\cdot10^{9} 10 - 15 [mJ]$ laser pulses, there was no optical damage present in the system \cite{nd_yag_life}. This clearly indicates that the \acp{LDA} lifetime considerations are important for the entire \acs{laser} system.
 
-%\begin{figure}[ht!]
-%\centering
-%\includegraphics[scale=0.5]{chapters/img/Nd-YAG_reliability.jpg} 
-%\caption{}
-%\label{reliability}
-%\end{figure}
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[scale=0.5]{chapters/img/diode_lifetime.png} 
+\caption{}
+\label{reliability}
+\end{figure}
 
 Taken into account the fact that the total number of shots in five years exceed the number of total shots delivered by a single \acs{LDA} without considerable loss in power and beam quality, the obvious consequence is that multiple \acp{LDA} should be implemented within the structure. 
 
