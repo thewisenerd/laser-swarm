@@ -1,6 +1,8 @@
 \section{Detailed Design Optical Receiving Payload}
 \label{sec:DDreceiver}
-The figure \ref{fig:receiver_overview} on page \ref{fig:receiver_overview} gives an overview diagram of the receiver optics.  More information about the design concept or trade off can be found in the midterm report. In this detailed design report, the wavelength filter system and the single photon detection device \acs{SPAD} research will be the pivot, after that the receiver payload summary and budget will be drawn.
+The figure \ref{fig:receiver_overview} on page \pageref{fig:receiver_overview} gives an overview diagram of the receiver optics.  More information about the design concept or trade off can be found in the midterm report. In this detailed design report, the wavelength filter system and the single photon detection device \acs{SPAD} research will be the pivot, after that the receiver payload summary and budget will be drawn.
+
+
 
 \begin{figure}[ht!]
 \centering
@@ -11,7 +13,7 @@ The figure \ref{fig:receiver_overview} on page \ref{fig:receiver_overview} gives
 
 \subsection{\ac{SPAD}}
 \label{SPAD}
-\ac{SPAD} identifies a class of solid-state photo detectors based on a reverse biased \textit{p-n junction} in which a photo-generated carrier can trigger an avalanche current due to the impact ionization mechanism. This device is able to detect low intensity signals (down to the single photon) and to signal the arrival times of the photons with a jitter of a few tens of picoseconds. However, these devices are typically based on complex circuits, whose area occupation and power consumption makes their integration impossible at a pixel level. In this case, 32 \ac{TDC}s have been implemented on chip serving an array of 128x128 SPAD based pixels, while reports an example of in-pixel implementation, in a linear array, of a \ac{TAC}\cite{SPAD3}. The figure \ref{fig:spad_overview} on page \ref{fig:spad_overview} is how the \acs{SPAD} chip looks like.
+\ac{SPAD} identifies a class of solid-state photo detectors based on a reverse biased \textit{p-n junction} in which a photo-generated carrier can trigger an avalanche current due to the impact ionization mechanism. This device is able to detect low intensity signals (down to the single photon) and to signal the arrival times of the photons with a jitter of a few tens of picoseconds. However, these devices are typically based on complex circuits, whose area occupation and power consumption makes their integration impossible at a pixel level. In this case, 32 \ac{TDC}s have been implemented on chip serving an array of 128x128 SPAD based pixels, while reports an example of in-pixel implementation, in a linear array, of a \ac{TAC}\cite{SPAD3}. The figure \ref{fig:spad_overview} on page \pageref{fig:spad_overview} is how the \acs{SPAD} chip looks like.
 
 \begin{figure}[ht!]
 \centering
@@ -43,6 +45,8 @@ In active quenching, the avalanche is sensed and a feedback circuit provides a m
 
 In passive quenching, the avalanche current is used to directly act on the reverse bias voltage by lowering it towards breakdown voltage, which eventually quenches the current. If this is achieved, for example, using a resistance in series to the photo diode, the effective capacitance of the junction must be passively recharged through the quenching resistance.
 
+According to the experimental result, the passive quenching circuit has the dead time in terms of hundreds nanoseconds but the active quenching circuit can reduce the dead time to a few tens of nanoseconds. That is the reason the active quenching circuit is selected in this case.
+
 \subsubsection{Space Qualification}
 \label{SQ}
 Since the photon detection device will be operating in space, there is a big advantage of the 32$\times$32 pixel array \acs{SPAD} which did the \acs{ESA}'s space qualification test. According to professor Charbon(\acs{SPAD} developer), the \acs{SPAD} chip itself is survived during the test but not the motherboard connected to it, which means that a separate space application motherboard for \acs{SPAD} need to be designed.
@@ -51,7 +55,7 @@ Since the photon detection device will be operating in space, there is a big adv
 \label{prism}
 Before the prism is taking into consideration, the optical filter is also considered as an option, which is more simple than prism and barriers. The optical filters bandwidth accuracy are in terms of several docades of nano meters(minimum 10nm\cite{optical_filter}), which is not acceptable since the objective is to filter out all noisy light except wavelength around 473nm. Meanwhile, the transmission is another problem for normal optical filters, which have much lower value(around 50\%) for smaller bandwidth(10nm to 20nm) and higher value(around 90\%) for larger bandwidth(more than 30nm), but prism can has higher transmission as 97\% for specified glass material.
 
-The figure \ref{fig:prism} on page \ref{fig:prism} gives an overview of the receiver optics after the second parabolic mirror. the prism is used to filter out all the noisy light except wavelength 472[nm] to 474[nm]. The prism system needs to be accurate enough to perform the filtering in limited distance. The design contains the type of prism glass material, the incident angle($\alpha$), prism apex angle($A$) and distance between prism and barriers. They will be treated one by one.
+The figure \ref{fig:prism} on page \pageref{fig:prism} gives an overview of the receiver optics after the second parabolic mirror. the prism is used to filter out all the noisy light except wavelength 472[nm] to 474[nm]. The prism system needs to be accurate enough to perform the filtering in limited distance. The design contains the type of prism glass material, the incident angle($\alpha$), prism apex angle($A$) and distance between prism and barriers. They will be treated one by one.
 
 \begin{figure}[ht!]
 \centering
@@ -67,7 +71,7 @@ The figure \ref{fig:prism} on page \ref{fig:prism} gives an overview of the rece
 \caption{Prism angles define in 2D}
 \label{fig:prism2D}
 \end{figure} 
-In figure \ref{fig:prism2D} on page \ref{fig:prism2D}, the deviation angle $\epsilon$ can be calculated using the formula\cite{prism_angle_calculation}:
+In figure \ref{fig:prism2D} on page \pageref{fig:prism2D}, the deviation angle $\epsilon$ can be calculated using the formula\cite{prism_angle_calculation}:
 \begin{equation}
 \label{epsilon}
 \epsilon = \alpha - A + sin^{-1}(sin(A)\sqrt{n^2 - (sin(\alpha))^2} - cos(A)sin(\alpha))
@@ -77,7 +81,7 @@ The key requirement to design the prism is to maximize the $\frac{d\epsilon}{d\l
 \label{index_refraction}
 n^2 - 1 = \frac{a_{1}\lambda^2}{\lambda^2-b_{1}} + \frac{a_{2}\lambda^2}{\lambda^2-b_{2}} + \frac{a_{3}\lambda^2}{\lambda^2-b_{3}}
 \end {equation}
-In the equation \ref{index_refraction}, $a_{1}, a_{2}, a_{3}$ and $b_{1}, b_{2}, b_{3}$ are the dispersion coefficients, which have different values for different glasses. In this case, the most 17 common prism glasses from Schott\cite{prism_material}\cite{prism_book} company are analyzed. Since it is difficult to calculate $\frac{d\epsilon}{d\lambda}$ analytically, $\Delta\epsilon$ due to wavelength 472[nm], 473[nm] and 474[nm] can be obtained by inserting arbitrary A and $\alpha$, which is actually the $\frac{d\epsilon}{d\lambda}$ because the wavelength difference is only 1[nm] of each. During the calculation, no matter what values are given to A and $\alpha$, SF11 glass always has the maximum value of $\Delta\epsilon$ which means it is the optimal glass material. Meanwhile, SF11 glass also has an internal transmittance of 97\% for wavelength around 473[nm], which is acceptable. Next step is to determine the prism apex angle(A) and the incident angle($\alpha$). The prism apex angle is defined as 60 degrees because which gives the most average value for $\Delta\epsilon$. Meanwhile, this kind of euqilateral prisms are also referred to as dispersing prisms used for wavelength separating applications(see figure \ref{fig:prism_equilateral} on page \ref{fig:prism_equilateral}). 
+In the equation \ref{index_refraction}, $a_{1}, a_{2}, a_{3}$ and $b_{1}, b_{2}, b_{3}$ are the dispersion coefficients, which have different values for different glasses. In this case, the most 17 common prism glasses from Schott\cite{prism_material}\cite{prism_book} company are analyzed. Since it is difficult to calculate $\frac{d\epsilon}{d\lambda}$ analytically, $\Delta\epsilon$ due to wavelength 472[nm], 473[nm] and 474[nm] can be obtained by inserting arbitrary A and $\alpha$, which is actually the $\frac{d\epsilon}{d\lambda}$ because the wavelength difference is only 1[nm] of each. During the calculation, no matter what values are given to A and $\alpha$, SF11 glass always has the maximum value of $\Delta\epsilon$ which means it is the optimal glass material. Meanwhile, SF11 glass also has an internal transmittance of 97\% for wavelength around 473[nm], which is acceptable. Next step is to determine the prism apex angle(A) and the incident angle($\alpha$). The prism apex angle is defined as 60 degrees because which gives the most average value for $\Delta\epsilon$. Meanwhile, this kind of euqilateral prisms are also referred to as dispersing prisms used for wavelength separating applications(see figure \ref{fig:prism_equilateral} on page \pageref{fig:prism_equilateral}). 
 
 \begin{figure}[ht!]
 \centering
@@ -86,7 +90,7 @@ In the equation \ref{index_refraction}, $a_{1}, a_{2}, a_{3}$ and $b_{1}, b_{2},
 \label{fig:prism_equilateral}
 \end{figure}
 
-To select the correct incident angle, the figure \ref{fig:prism_alpha} on page \ref{fig:prism_alpha} is used. In the figure, the blue line has the asymptote about $\alpha = 54[deg]$. To avoid the asymptote, $\alpha = 55[deg]$ is selected as the incident angle, which leads to $\epsilon = 76[deg]$ and $\Delta\epsilon = 2.1432[mrad]$. The figure \ref{fig:SF11} is the calculation in the excel sheet. There are two $\Delta\epsilon$ in the calculation, and $\Delta\epsilon1 = \epsilon(472[nm]) - \epsilon(473[nm])$ meanwhile $\Delta\epsilon2 = \epsilon(473[nm]) - \epsilon(474[nm])$. The driving $\Delta\epsilon$ is the smaller one, since it is the minimum requirement. Taking $\Delta\epsilon = 2.1432[mrad]$ into further calculation, in order to separate wavelength 472[nm], 473[nm] and 474[nm], barrier radius(or beam width) 1[mm] leads to distance 466.7[mm] between prism and barrier. To short the distance, more concentrated beam is needed from parabolic mirror. The figure \ref{fig:prism_final} on page \ref{fig:prism_final} shows the final values of all angles.
+To select the correct incident angle, the figure \ref{fig:prism_alpha} on page \pageref{fig:prism_alpha} is used. In the figure, the blue line has the asymptote about $\alpha = 54[deg]$. To avoid the asymptote, $\alpha = 55[deg]$ is selected as the incident angle, which leads to $\epsilon = 76[deg]$ and $\Delta\epsilon = 2.1432[mrad]$. The figure \ref{fig:SF11} is the calculation in the excel sheet. There are two $\Delta\epsilon$ in the calculation, and $\Delta\epsilon1 = \epsilon(472[nm]) - \epsilon(473[nm])$ meanwhile $\Delta\epsilon2 = \epsilon(473[nm]) - \epsilon(474[nm])$. The driving $\Delta\epsilon$ is the smaller one, since it is the minimum requirement. Taking $\Delta\epsilon = 2.1432[mrad]$ into further calculation, in order to separate wavelength 472[nm], 473[nm] and 474[nm], barrier radius(or beam width) 1[mm] leads to distance 466.7[mm] between prism and barrier. To short the distance, more concentrated beam is needed from parabolic mirror. The figure \ref{fig:prism_final} on page \pageref{fig:prism_final} shows the final values of all angles.
 
 \begin{figure}[ht!]
 \centering
@@ -111,7 +115,7 @@ To select the correct incident angle, the figure \ref{fig:prism_alpha} on page \
 
 \subsection{Summary}
 \label{sum}
-The table \ref{tab:receiverbudget} on page \ref{tab:receiverbudget} is the budget breakdown including mass, cost and power consumption. It is obvious that the \acs{SPAD} is the main expense which is estimated by one of the developers professor Charbon. $4666530 FY00\$$ at the end is the final cost convert to fiscal year 2000. To be Clear, the large parabolic mirror is used to collect the reflected photons and the small parabolic mirror is used to create parallel tight beam before the prism. Flat mirrors are used after the prism to focus the light on faceted mirror.
+The table \ref{tab:receiverbudget} on page \pageref{tab:receiverbudget} is the budget breakdown including mass, cost and power consumption. It is obvious that the \acs{SPAD} is the main expense which is estimated by one of the developers professor Charbon. $4666530 FY00\$$ at the end is the final cost convert to fiscal year 2000. To be Clear, the large parabolic mirror is used to collect the reflected photons and the small parabolic mirror is used to create parallel tight beam before the prism. Flat mirrors are used after the prism to focus the light on faceted mirror.
 
 \begin{table}[ht!]
 \begin{tabular}{l | c | c c | c c | c }
