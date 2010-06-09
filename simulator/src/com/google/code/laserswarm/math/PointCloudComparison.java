@@ -33,11 +33,11 @@ public class PointCloudComparison {
 
 	private static final Logger	logger	= Logger.get(PointCloudComparison.class);
 
-	public PointCloudComparison(List<Point3d> cloud1, List<Point3d> cloud2, double rotation,
+	public PointCloudComparison(Distribution distribution, Distribution distribution2, double rotation,
 			boolean fullStore) {
 
-		if (rotation != 0)
-			cloud2 = rotate(cloud1);
+		List<Point3d> cloud1 = distribution.pointCloud(100);
+		List<Point3d> cloud2 = distribution2.pointCloud(100);
 
 		LinkedList<Double> diff = Lists.newLinkedList();
 		for (Point3d basePoint : cloud1) {

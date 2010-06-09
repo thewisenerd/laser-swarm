@@ -5,11 +5,17 @@ import java.awt.Toolkit;
 import java.io.File;
 import java.util.List;
 
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.vecmath.Point3d;
 import javax.vecmath.Vector3d;
 
 import com.google.code.laserswarm.conf.Configuration;
+import com.google.code.laserswarm.earthModel.ScatteringCharacteristics;
+import com.google.code.laserswarm.earthModel.ScatteringParam;
 import com.google.code.laserswarm.util.CSVwriter;
+import com.google.code.laserswarm.util.GuiFactory;
 import com.google.common.collect.Lists;
 import com.lyndir.lhunath.lib.system.logging.Logger;
 import com.wolfram.jlink.KernelLink;
@@ -31,22 +37,30 @@ public abstract class Distribution {
 
 	private static final Logger	logger	= Logger.get(Distribution.class);
 
-	public void compareTo(Distribution distribution2) {
-		compareTo(distribution2, 100);
+	public static void main(String[] args) {
+		Configuration.getInstance(args);
+
+		ScatteringParam param = new ScatteringParam(1.5, 1.3, -0.5);
+		ScatteringCharacteristics sc = new ScatteringCharacteristics(new Vector3d(0, 1, 1), param);
+
+		JFrame fr = GuiFactory.getDefaultJFrame("Scatter");
+		fr.add(new JLabel(new ImageIcon(sc.toImage())));
+		fr.setVisible(true);
 	}
 
-	public void compareTo(Distribution distribution2, int steps) {
-		List<Point3d> ownPoints = pointCloud(steps);
-		List<Point3d> therePoints = distribution2.pointCloud(steps);
-		new PointCloudComparison(ownPoints, therePoints, 0, false);
-		// Collections.binarySearch(list, key, c)
+	public PointCloudComparison compareTo(Distribution distribution2) {
+		return new PointCloudComparison(this, distribution2, 0, false);
 	}
 
 	public List<Point3d> pointCloud(int steps) {
+		return pointCloud(steps, 0, Math.PI * 2, 0, Math.PI / 2);
+	}
+
+	public List<Point3d> pointCloud(int steps, double azMin, double azMax, double elMin, double elMax) {
 		double step = (2 * Math.PI) / steps;
 		List<Point3d> points = Lists.newLinkedList();
-		for (double az = 0; az < 2 * Math.PI; az += step) {
-			for (double el = 0; el < Math.PI / 2; el += step) {
+		for (double az = azMin; az < azMax; az += step) {
+			for (double el = elMin; el < elMax; el += step) {
 				Vector3d exittanceVector = new Vector3d(
 						Convert.toXYZ(new Point3d(1, az, Math.PI / 2 - el)));
 				double out = probability(exittanceVector);
