@@ -35,7 +35,7 @@ public class FindElevationNeighborInterpolation implements ElevationFinder {
 	@Override
 	public ElevationSlope run(Map<Satellite, TimeLine> recTimes, EmitterHistory hist,
 			Constellation con, int dataPoints) throws MathException {
-		interpolator = new SubSampleCorrelation(recTimes, 5, 3, 1.0);
+		interpolator = new SubSampleCorrelation(con, recTimes, 5, 3, 1.0, 0.707);
 		Iterator<Double> timeIt = hist.time.iterator();
 		Map<Satellite, DataContainer> interpulseWindows = Maps.newHashMap();
 		for (DataContainer tempData : interpulseWindows.values()) {
@@ -58,10 +58,12 @@ public class FindElevationNeighborInterpolation implements ElevationFinder {
 			Point3d sphericalEmit = Convert.toSphere(thisEmit);
 			ElevationBRDF elPt = interpolator.next(tempInterpulseWindow, emitRecPair.tPulse,
 					thisEmit);
-			double alt = elPt.getElevation();
-			logger.dbg("Altitude found: %s", alt);
-			if (!(new Double(alt).isNaN())) {
-				altitudes.add(new Point3d(alt, sphericalEmit.y, sphericalEmit.z));
+			if (elPt != null) {
+				double alt = elPt.getElevation();
+				logger.dbg("Altitude found: %s", alt);
+				if (!(new Double(alt).isNaN())) {
+					altitudes.add(new Point3d(alt, sphericalEmit.y, sphericalEmit.z));
+				}
 			}
 		}
 		logger.inf("Altitudes LinkedList size: %s", altitudes.size());

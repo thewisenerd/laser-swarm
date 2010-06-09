@@ -11,6 +11,8 @@
 	<logger name="com.google.code.laserswarm" level="DEBUG" />
 	<logger name="com.google.code.laserswarm.simulation" level="INFO" />
 	<logger name="com.google.code.laserswarm.util.demReader" level="INFO" />
+	<logger name="com.google.code.laserswarm.Desim.elevation.slope.FindElevationNeighborInterpolation" level="INFO" />
+	<logger name="com.google.code.laserswarm.Desim.elevation.slope.SubSampleCorrelation" level="INFO" />
 	<logger name="com.google.code.laserswarm.Desim.elevation.FindElevation" level="INFO" />
 	<logger name="com.google.code.laserswarm.Desim.elevation.AltitudeCalculation" level="INFO" />
 	<logger name="com.google.code.laserswarm.Desim.NoiseRemovalCorrelation" level="INFO" />

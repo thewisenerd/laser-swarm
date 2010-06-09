@@ -15,7 +15,11 @@ import com.google.code.laserswarm.Desim.DataContainer;
 import com.google.code.laserswarm.Desim.NoiseData;
 import com.google.code.laserswarm.Desim.BRDFcalc.BRDFinput;
 import com.google.code.laserswarm.Desim.elevation.AltitudeCalculation;
+import com.google.code.laserswarm.conf.Configuration;
+import com.google.code.laserswarm.conf.Constellation;
 import com.google.code.laserswarm.conf.Satellite;
+import com.google.code.laserswarm.math.Convert;
+import com.google.code.laserswarm.math.LookupTable;
 import com.google.code.laserswarm.process.TimeLine;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -30,17 +34,22 @@ public class SubSampleCorrelation implements SampleCorrelation {
 	private LinkedList<ElevationRelatedEntriesPoint>	rawElevationSlopes;
 	private double										equalitySpacing;
 	private double										interval;
+	private double										fractionD;
 	private int											qLength;
 	private int											middle;
+	private Constellation								cons;
 
-	public SubSampleCorrelation(Map<Satellite, TimeLine> receiverTimes, double correlationInterval,
-			int comparisonQueueLength, double whenEqual) {
+	public SubSampleCorrelation(Constellation swarm, Map<Satellite, TimeLine> receiverTimes,
+			double correlationInterval, int comparisonQueueLength, double whenEqual, double fractionD) {
 		this.interpulseData = Maps.newHashMap();
 		this.receiverTimelines = receiverTimes;
 		this.interval = correlationInterval;
 		this.qLength = comparisonQueueLength;
 		this.middle = (int) Math.floor((double) qLength / 2.0);
 		this.equalitySpacing = whenEqual;
+		this.fractionD = fractionD;
+		this.cons = swarm;
+		this.rawElevationSlopes = Lists.newLinkedList();
 	}
 
 	@Override
@@ -57,7 +66,7 @@ public class SubSampleCorrelation implements SampleCorrelation {
 		ElevationBRDF out = null;
 		// Do all calculations that can be done for a single data point (or: interpulse window).
 		// Start with the altitudes.
-		ArrayList<Double> altitudes = Lists.newArrayList();
+		TreeMap<Double, Vector3d> altitudes = Maps.newTreeMap();
 		double altTot = 0;
 		double satCount = 0;
 		int photonCount = 0;
@@ -72,16 +81,18 @@ public class SubSampleCorrelation implements SampleCorrelation {
 						.find(time)), time - nextPulseT);
 				int numPhotons = tempData.get(time);
 				photonCount += numPhotons;
+				LookupTable satPositions = receiverTimelines.get(curSat).getLookupPosition();
 				for (int i = 0; i < numPhotons; i++) {
-					altitudes.add(thisAlt);
+					altitudes.put(thisAlt, new Vector3d(satPositions.find(time)));
 				}
 				altTot += numPhotons * thisAlt;
-				logger.dbg("Found an altitude: %s, with photon no.: %s", thisAlt, numPhotons);
+				logger.dbg("Found an altitude: %s, with photon no.: %s", thisAlt - Configuration.R0,
+						numPhotons);
 			}
 		}
 		// Find and average altitudes that show a strong correlation.
-		ElevationRelatedEntriesPoint result = findAndAverageRelatedAltitudesAndSlopes(altitudes,
-				nextPulseT, nextEmitPt);
+		ElevationRelatedEntriesPoint result = findAndAverageRelatedAltitudes(altitudes, nextPulseT,
+				nextEmitPt);
 		rawElevationSlopes.add(result);
 		while (rawElevationSlopes.size() > qLength) {
 			rawElevationSlopes.removeFirst();
@@ -124,13 +135,14 @@ public class SubSampleCorrelation implements SampleCorrelation {
 						altNo++;
 					}
 					ElevationRelatedEntriesPoint middlePoint = rawElevationSlopes.get(middle);
-					ArrayList<TreeMap<Double, Boolean>> closeEntryMaps = middlePoint.getRelatedEntries();
-					Iterator<TreeMap<Double, Boolean>> closeIt = closeEntryMaps.iterator();
-					TreeMap<Double, Boolean> bestFitMap = Maps.newTreeMap();
+					ArrayList<TreeMap<Double, Vector3d>> closeEntryMaps = middlePoint
+							.getRelatedEntries();
+					Iterator<TreeMap<Double, Vector3d>> closeIt = closeEntryMaps.iterator();
+					TreeMap<Double, Vector3d> bestFitMap = Maps.newTreeMap();
 					double minDist = Double.MAX_VALUE;
 					double elevation = totalAlt / altNo;
 					while (closeIt.hasNext()) {
-						TreeMap<Double, Boolean> thisMap = closeIt.next();
+						TreeMap<Double, Vector3d> thisMap = closeIt.next();
 						double mapAvg = treeMapAvg(thisMap);
 						double dist = Math.abs(mapAvg - elevation);
 						if (dist < minDist) {
@@ -143,18 +155,63 @@ public class SubSampleCorrelation implements SampleCorrelation {
 							closeEntryMaps, bestFitMap));
 				}
 				ElevationRelatedEntriesPoint rawElBRDF = rawElevationSlopes.get(middle);
-				out = new ElevationBRDF(rawElBRDF.getElevation(), genBRDFInput(rawElBRDF));
+				out = new ElevationBRDF(rawElBRDF.getElevation(), genBRDFInput(rawElevationSlopes
+						.get(middle - 1), rawElBRDF, rawElevationSlopes.get(middle + 1)));
 			}
 		} else {
 		}
 		return out;
 	}
 
-	private BRDFinput genBRDFInput(ElevationRelatedEntriesPoint elBRDF) {
+	private BRDFinput genBRDFInput(ElevationRelatedEntriesPoint lastElBRDF,
+			ElevationRelatedEntriesPoint elBRDF,
+			ElevationRelatedEntriesPoint nextElBRDF) {
+		// Calculate the emitter groundtrack point.
 		Point3d posEmit = elBRDF.getPosEmit();
-		Vector3d emPos = new Vector3d(posEmit.x - elBRDF.getElevation(), posEmit.y, posEmit.z);
-		return new BRDFinput(emPos,
-				null, equalitySpacing, equalitySpacing, null, equalitySpacing);
+		Point3d posEmitSph = Convert.toSphere(posEmit);
+		posEmitSph.x -= elBRDF.getElevation();
+		Vector3d emPos = new Vector3d(Convert.toXYZ(posEmitSph));
+		// Calculate the direction in which the emitter is moving.
+		Vector3d nextEmPos = new Vector3d(nextElBRDF.getPosEmit());
+		Vector3d thisEmPos = new Vector3d(elBRDF.getPosEmit());
+		Vector3d emDir = new Vector3d();
+		emDir.sub(nextEmPos, thisEmPos);
+		emDir.normalize();
+		// Calculate the along-track slope.
+		Point3d lastEmitSph = Convert.toSphere(lastElBRDF.getPosEmit());
+		Point3d thisEmitSph = Convert.toSphere(elBRDF.getPosEmit());
+		double avgRad = (lastEmitSph.x + thisEmitSph.x) / 2.0;
+		double difRad = Math.abs(lastEmitSph.x - thisEmitSph.x);
+		lastEmitSph.x = avgRad;
+		thisEmitSph.x = avgRad;
+		Point3d lastEmitCart = Convert.toXYZ(lastEmitSph);
+		Point3d thisEmitCart = Convert.toXYZ(thisEmitSph);
+		Vector3d difTan = new Vector3d();
+		difTan.sub(thisEmitCart, lastEmitCart);
+		double alongTrackSlope = difRad / difTan.length();
+		// Calculate the cross-track slope.
+		Vector3d emitVect = new Vector3d(posEmit);
+		double footprintD = fractionD * 2.0 * cons.getEmitter().getBeamDivergence()
+				* (emitVect.length() - Configuration.R0);
+		TreeMap<Double, Vector3d> altitudes = elBRDF.getBestMap();
+		double min = Double.MAX_VALUE;
+		double max = Double.MIN_VALUE;
+		for (Double alt : altitudes.keySet()) {
+			if (alt > max) {
+				max = alt;
+			}
+			if (alt < min) {
+				min = alt;
+			}
+		}
+		double crossTrackSlope = Math.sqrt(Math.pow(alongTrackSlope, 2)
+				- Math.pow((max - min) / footprintD, 2));
+		// The satellite vectors go in here.
+		Map<Vector3d, Integer> photonDirs = Maps.newLinkedHashMap();
+
+		// Get the current emitter time.
+		double curTime = elBRDF.getTEmit();
+		return new BRDFinput(emPos, emDir, alongTrackSlope, crossTrackSlope, photonDirs, curTime);
 	}
 
 	private boolean areEqual(double a, double b) {
@@ -165,7 +222,7 @@ public class SubSampleCorrelation implements SampleCorrelation {
 		}
 	}
 
-	private double treeMapAvg(TreeMap<Double, Boolean> map) {
+	private double treeMapAvg(TreeMap<Double, Vector3d> map) {
 		// Average the altitude within the given TreeMap.
 		double altTotal = 0;
 		for (Double alt : map.keySet()) {
@@ -174,46 +231,42 @@ public class SubSampleCorrelation implements SampleCorrelation {
 		return altTotal / map.size();
 	}
 
-	private ElevationRelatedEntriesPoint findAndAverageRelatedAltitudesAndSlopes(ArrayList<Double> alts,
+	private ElevationRelatedEntriesPoint findAndAverageRelatedAltitudes(TreeMap<Double, Vector3d> alts,
 			double tEmit, Point3d posEmit) {
-		ArrayList<TreeMap<Double, Boolean>> entriesClose = Lists.newArrayList();
-		int index = 0;
+		ArrayList<TreeMap<Double, Vector3d>> entriesClose = Lists.newArrayList();
 		// Try to find lists of related altitudes, then put them in TreeMaps
-		while (index < alts.size()) {
-			Double currentAlt = alts.get(index);
+		for (Double currentAlt : alts.keySet()) {
 			boolean entryIsAlreadyListed = false;
 			boolean entryHasTreeMap = false;
-			for (TreeMap<Double, Boolean> relatedEntryMap : entriesClose) {
+			for (TreeMap<Double, Vector3d> relatedEntryMap : entriesClose) {
 				if (relatedEntryMap.get(currentAlt) != null) {
 					entryIsAlreadyListed = true;
 				}
 			}
 			if (!entryIsAlreadyListed) {
-				for (int i = index + 1; i < alts.size(); i++) {
-					Double thisAlt = alts.get(i);
+				for (Double thisAlt : alts.keySet()) {
+					Vector3d thisVect = alts.get(thisAlt);
 					if (Math.abs(currentAlt - thisAlt) < interval) {
 						if (!entryHasTreeMap) {
 							entryHasTreeMap = true;
-							entriesClose.add(new TreeMap<Double, Boolean>());
-							entriesClose.get(entriesClose.size() - 1).put(currentAlt, true);
+							entriesClose.add(new TreeMap<Double, Vector3d>());
+							entriesClose.get(entriesClose.size() - 1).put(currentAlt, thisVect);
 						}
-						entriesClose.get(entriesClose.size() - 1).put(thisAlt, true);
+						entriesClose.get(entriesClose.size() - 1).put(thisAlt, thisVect);
 					}
 				}
 			}
-			index++;
 		}
 		// Try to find the TreeMap with the largest amount of altitudes.
 		int maxSizeTreeMap = 0;
-		TreeMap<Double, Boolean> maxRelatedEntryMap = Maps.newTreeMap();
-		for (TreeMap<Double, Boolean> relatedEntryMap : entriesClose) {
+		TreeMap<Double, Vector3d> maxRelatedEntryMap = Maps.newTreeMap();
+		for (TreeMap<Double, Vector3d> relatedEntryMap : entriesClose) {
 			if (relatedEntryMap.size() > maxSizeTreeMap) {
 				maxSizeTreeMap = relatedEntryMap.size();
 				maxRelatedEntryMap = relatedEntryMap;
 			}
 		}
 		return new ElevationRelatedEntriesPoint(treeMapAvg(maxRelatedEntryMap), tEmit, posEmit,
-				entriesClose,
-				maxRelatedEntryMap);
+				entriesClose, maxRelatedEntryMap);
 	}
 }

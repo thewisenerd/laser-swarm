@@ -17,11 +17,6 @@ import com.google.code.laserswarm.TestFindElevation;
 import com.google.code.laserswarm.Desim.elevation.ElevationFinder;
 import com.google.code.laserswarm.Desim.elevation.slope.ElevationSlope;
 import com.google.code.laserswarm.Desim.elevation.slope.FindElevationNeighborInterpolation;
-import com.google.code.laserswarm.Desim.filter.Filter;
-import com.google.code.laserswarm.Desim.filter.FilterAverage;
-import com.google.code.laserswarm.Desim.filter.FilterOutlierRemoval;
-import com.google.code.laserswarm.Desim.filter.elevationslope.ElevationSlopeFilter;
-import com.google.code.laserswarm.Desim.filter.elevationslope.FilterSpikes;
 import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.conf.Constellation;
 import com.google.code.laserswarm.conf.Satellite;
@@ -137,14 +132,14 @@ public class Altitude {
 			Configuration.write("altData.xml", alts);
 		}
 		plotter.plot(alts, 3, "heightAnalysed");
-		Filter filtAvg = new FilterAverage(21);
-		LinkedList<Point3d> averagedAlts = filtAvg.filter(alts);
-		plotter.plot(averagedAlts, 3, "heightAnalysed&Averaged");
-		Filter filtOutliers = new FilterOutlierRemoval(200, 50, 3);
-		LinkedList<Point3d> outlierAlts = filtOutliers.filter(alts);
-		plotter.plot(outlierAlts, 3, "heightAnalysed&OutlierFiltered");
-		ElevationSlopeFilter filtSpikes = new FilterSpikes(3, 0.3);
-		ElevationSlope despiked = filtSpikes.filter(elSlope);
-		plotter.plot(despiked.getAltitudes(), 3, "heightAnalysed&SpikeFiltered");
+		// Filter filtAvg = new FilterAverage(21);
+		// LinkedList<Point3d> averagedAlts = filtAvg.filter(alts);
+		// plotter.plot(averagedAlts, 3, "heightAnalysed&Averaged");
+		// Filter filtOutliers = new FilterOutlierRemoval(200, 50, 3);
+		// LinkedList<Point3d> outlierAlts = filtOutliers.filter(alts);
+		// plotter.plot(outlierAlts, 3, "heightAnalysed&OutlierFiltered");
+		// ElevationSlopeFilter filtSpikes = new FilterSpikes(3, 0.3);
+		// ElevationSlope despiked = filtSpikes.filter(elSlope);
+		// plotter.plot(despiked.getAltitudes(), 3, "heightAnalysed&SpikeFiltered");
 	}
 }
