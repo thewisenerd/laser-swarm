@@ -74,14 +74,4 @@ public class BRDFinput {
 	 * time of the instance when the pulse was emitted
 	 */
 	double					curTime;
-
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		// 
-		throw new UnsupportedOperationException();
-	}
-
 }
