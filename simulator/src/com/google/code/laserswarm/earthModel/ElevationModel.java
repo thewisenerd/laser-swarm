@@ -7,11 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.imageio.ImageIO;
+import javax.media.jai.Interpolation;
 import javax.vecmath.Point3d;
 import javax.vecmath.Vector3d;
 
 import org.geotools.coverage.grid.GridCoverage2D;
 import org.geotools.coverage.grid.GridCoverageFactory;
+import org.geotools.coverage.grid.Interpolator2D;
 import org.geotools.geometry.DirectPosition2D;
 import org.geotools.geometry.Envelope2D;
 import org.geotools.referencing.operation.projection.PointOutsideEnvelopeException;
@@ -20,28 +22,21 @@ import org.ujmp.core.Matrix;
 
 import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.math.Convert;
-import com.google.common.base.Preconditions;
 
 public class ElevationModel implements IElevationModel {
 
-	private File			demFile;
+	public static Envelope2D importEnvelope(File envelopeFile) throws IOException {
+		return Configuration.read(envelopeFile.getAbsolutePath(), Configuration
+				.getDefaultSerializer(envelopeFile.getAbsolutePath()));
+	}
 
+	private File			demFile;
 	@Deprecated
 	private Matrix			elevationData;
+
 	private GridCoverage2D	coverage;
 
 	private Double			averageHeight;
-
-	public File getDemFile() {
-		return demFile;
-	}
-
-	public ElevationModel(File demFile, Matrix matrix, GridCoverage2D coverage) {
-		this.demFile = demFile;
-		setElevationData(matrix);
-		this.setCoverage(coverage);
-		getAverageHeight();
-	}
 
 	public ElevationModel(File cacheFile, File envelopeFile) {
 		this.demFile = cacheFile;
@@ -50,6 +45,13 @@ public class ElevationModel implements IElevationModel {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public ElevationModel(File demFile, Matrix matrix, GridCoverage2D coverage) {
+		this.demFile = demFile;
+		setElevationData(matrix);
+		this.setCoverage(coverage);
+		getAverageHeight();
 	}
 
 	/**
@@ -104,6 +106,18 @@ public class ElevationModel implements IElevationModel {
 		return points;
 	}
 
+	public void exportEnvelope(File envelopeFile) throws IOException {
+		Envelope2D env = coverage.getEnvelope2D();
+
+		Configuration.write(envelopeFile.getAbsolutePath(), env);
+	}
+
+	public void fromCache(File cacheFile, File envelope) throws IOException {
+		RenderedImage im = ImageIO.read(cacheFile);
+		Envelope2D env = importEnvelope(envelope);
+		coverage = new GridCoverageFactory().create("DEM", im, env);
+	}
+
 	/**
 	 * Get the average height of the DEM
 	 * 
@@ -122,6 +136,10 @@ public class ElevationModel implements IElevationModel {
 
 	public GridCoverage2D getCoverage() {
 		return coverage;
+	}
+
+	public File getDemFile() {
+		return demFile;
 	}
 
 	/*
@@ -231,28 +249,16 @@ public class ElevationModel implements IElevationModel {
 	}
 
 	public void setCoverage(GridCoverage2D coverage) {
-		this.coverage = Preconditions.checkNotNull(coverage);
+		this.coverage = Interpolator2D.create(coverage,
+				Interpolation.getInstance(Interpolation.INTERP_BICUBIC_2));
 	}
 
 	public void setElevationData(Matrix elevationData) {
 		this.elevationData = (elevationData);
 	}
 
-	public static Envelope2D importEnvelope(File envelopeFile) throws IOException {
-		return Configuration.read(envelopeFile.getAbsolutePath(), Configuration
-				.getDefaultSerializer(envelopeFile.getAbsolutePath()));
-	}
-
-	public void exportEnvelope(File envelopeFile) throws IOException {
-		Envelope2D env = coverage.getEnvelope2D();
-
-		Configuration.write(envelopeFile.getAbsolutePath(), env);
-	}
-
-	public void fromCache(File cacheFile, File envelope) throws IOException {
-		RenderedImage im = ImageIO.read(cacheFile);
-		Envelope2D env = importEnvelope(envelope);
-		coverage = new GridCoverageFactory().create("DEM", im, env);
+	public void shrink() {
+		elevationData = null;
 	}
 
 	public void toCache(File cacheFile, File envelope) {
@@ -267,10 +273,6 @@ public class ElevationModel implements IElevationModel {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-
-	public void shrink() {
-		elevationData = null;
 	}
 
 }
