@@ -12,7 +12,6 @@ import com.google.code.laserswarm.Desim.DataContainer;
 import com.google.code.laserswarm.Desim.FindWindow;
 import com.google.code.laserswarm.Desim.NoiseData;
 import com.google.code.laserswarm.Desim.elevation.ElevationFinder;
-import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.conf.Constellation;
 import com.google.code.laserswarm.conf.Satellite;
 import com.google.code.laserswarm.math.Convert;
@@ -36,7 +35,7 @@ public class FindElevationNeighborInterpolation implements ElevationFinder {
 	@Override
 	public ElevationSlope run(Map<Satellite, TimeLine> recTimes, EmitterHistory hist,
 			Constellation con, int dataPoints) throws MathException {
-		interpolator = new SubSampleCorrelation(recTimes, 5);
+		interpolator = new SubSampleCorrelation(recTimes, 5, 3, 1.0);
 		Iterator<Double> timeIt = hist.time.iterator();
 		Map<Satellite, DataContainer> interpulseWindows = Maps.newHashMap();
 		for (DataContainer tempData : interpulseWindows.values()) {
@@ -57,13 +56,12 @@ public class FindElevationNeighborInterpolation implements ElevationFinder {
 			Map<Satellite, NoiseData> tempInterpulseWindow = emitRecPair.next();
 			Point3d thisEmit = new Point3d(hist.getPosition().find(emitRecPair.tPulse));
 			Point3d sphericalEmit = Convert.toSphere(thisEmit);
-			ElevationSlopePoint ElSlPt = interpolator.next(tempInterpulseWindow, emitRecPair.tPulse,
+			ElevationBRDF elPt = interpolator.next(tempInterpulseWindow, emitRecPair.tPulse,
 					thisEmit);
-			double alt = ElSlPt.getElevation();
+			double alt = elPt.getElevation();
 			logger.dbg("Altitude found: %s", alt);
 			if (!(new Double(alt).isNaN())) {
-				altitudes.add(new Point3d(Configuration.R0 + alt, sphericalEmit.y, sphericalEmit.z));
-				slopes.add(ElSlPt.getSlope());
+				altitudes.add(new Point3d(alt, sphericalEmit.y, sphericalEmit.z));
 			}
 		}
 		logger.inf("Altitudes LinkedList size: %s", altitudes.size());
