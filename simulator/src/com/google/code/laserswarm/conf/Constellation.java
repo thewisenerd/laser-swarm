@@ -17,7 +17,7 @@ public class Constellation {
 	 */
 	public static Constellation simpleConstellation(double power, double aperature, double altitude) {
 		Satellite emittor = new Satellite("Emittor", aperature, (float) (Configuration.R0 / 1000
-				+ altitude), 0f, (float) Math.PI / 2, (float) (8.5 * Math.PI / 180), 0f, 0f);
+				+ altitude), 0f, 85 * (Math.PI / 180), 0, 0f, 0f);
 
 		LinkedList<Satellite> r = Lists.newLinkedList();
 		r.add(new Satellite("Receiver #1", emittor));
@@ -29,11 +29,12 @@ public class Constellation {
 
 	public static Constellation swarm(double power, double aperature, double altitude) {
 		Satellite emittor = new Satellite("Emittor", aperature, (float) (Configuration.R0 / 1000
-				+ altitude), 0f, (float) Math.PI / 2, (float) (8.5 * Math.PI / 180), 0f, 0f);
+				+ altitude), 0f, 85 * (Math.PI / 180), 0, 0, 0);
 
 		double raan = emittor.getRightAngleOfAscendingNode() + (-2.18 / 180 * Math.PI);
-		double ta = emittor.getTrueAnomaly() + (-2.18 / 180 * Math.PI);
-		double[][] sats = new double[][] { { +raan, 0 },
+		double ta = emittor.getTrueAnomaly() + ((-2.18 / 180) * Math.PI);
+		double[][] sats = new double[][] {
+				{ +raan, 0 },
 				{ -raan, 0 },
 				{ 0, +ta },
 				{ 0, -ta } };
@@ -72,7 +73,7 @@ public class Constellation {
 	/**
 	 * Receiver sensitivity wavelength band [m]
 	 */
-	private double			receiverBandWidth	= 1E-9;
+	private double			receiverBandWidth	= 2E-9;
 	/**
 	 * Efficiency of the receiver [-]
 	 * <p>
@@ -135,28 +136,28 @@ public class Constellation {
 		return receivers;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setLaserWaveLength(double laserWaveLength) {
+		this.laserWaveLength = laserWaveLength;
 	}
 
-	public void setReceivers(List<Satellite> receivers) {
-		this.receivers = receivers;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public void setReceiverBandWidth(double receiverBandWidth) {
 		this.receiverBandWidth = receiverBandWidth;
 	}
 
-	@Override
-	public String toString() {
-		return name;
-	}
-
 	public void setReceiverEfficiency(double receiverEfficiency) {
 		this.receiverEfficiency = receiverEfficiency;
 	}
 
-	public void setLaserWaveLength(double laserWaveLength) {
-		this.laserWaveLength = laserWaveLength;
+	public void setReceivers(List<Satellite> receivers) {
+		this.receivers = receivers;
+	}
+
+	@Override
+	public String toString() {
+		return name;
 	}
 }
