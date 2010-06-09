@@ -49,15 +49,15 @@ public class SimVars {
 	public HashMap<Satellite, Double>				tE;
 
 	/**
-	 * Point of origin.
+	 * Point of origin. [ECEF]
 	 */
 	public Point3d									p0;
 	/**
-	 * Point of reflection.
+	 * Point of reflection. [ECEF]
 	 */
 	public Point3d									pR;
 	/**
-	 * Endpoints.
+	 * Endpoints. [ECEF]
 	 */
 	public HashMap<Satellite, Point3d>				pE;
 
@@ -97,13 +97,16 @@ public class SimVars {
 	public boolean									illuminated;
 
 	/**
-	 * If illuminated by the sun, this is the incidence angle of the sun
+	 * If illuminated by the sun, this is the incidence angle of the sun [ECEF]
 	 */
 	public Vector3d									sunVector;
 	/**
-	 * Surface normal
+	 * Surface normal [ENU]
 	 */
 	public Vector3d									surfNormal;
+
+	public SimVars() {
+	}
 
 	/**
 	 * Clone a given simVar object, but leave out all the sat specific data
@@ -126,9 +129,7 @@ public class SimVars {
 		illuminated = simVar.illuminated;
 		sunVector = simVar.sunVector;
 		surfNormal = simVar.surfNormal;
-	}
-
-	public SimVars() {
+		scatter = simVar.scatter;
 	}
 
 	public void apply(SimVars vars, Satellite sat) {
