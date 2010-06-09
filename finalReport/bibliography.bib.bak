@@ -33,6 +33,29 @@
   url = {http://icesat.gsfc.nasa.gov/docs/IGARB.pdf}
 }
 
+@BOOK{spacedesign,
+  title = {Spacraft Mission Design},
+  publisher = {American Institute of Aeronautics and Astronautics, Inc.},
+  year = {1992},
+  editor = {J. S. Przemieniecki},
+  author = {Charles D. Brown},
+  owner = {Alex},
+  timestamp = {2010.06.09}
+}
+
+@ARTICLE{thermaldiode,
+  author = {Byron L. Meadows, Farzin Amzajerdiana, Nathaniel R. Bakerb, Vikas
+	Sudeshc,
+	
+	Upendra N. Singha, Michael J. Kavayaa},
+  title = {Thermal characteristics of high-power, long pulse width, quasi-CW
+	laser diode arrays},
+  journal = {NASA Langley Research},
+  year = {2008},
+  owner = {Tim},
+  timestamp = {2010.06.09}
+}
+
 @BOOK{Laser_fundamental,
   title = {Semiconductor-Laser fundamentals},
   publisher = {Springer},
@@ -116,6 +139,15 @@
   timestamp = {2010.05.17}
 }
 
+@ARTICLE{nd_yag_life,
+  author = {Donald B. Coyle, Richard B, Kay, Paul R. Stylsey},
+  title = {Efficient, reliable, long-lifetime, diode-pumped Nd:YAG laser for
+	space based vegetation topographical altimetry},
+  year = {2004},
+  owner = {Tim},
+  timestamp = {2010.06.08}
+}
+
 @ELECTRONIC{doody1,
   author = {Dave Doody},
   month = {February},
@@ -172,6 +204,30 @@
   timestamp = {2010.05.18}
 }
 
+@ELECTRONIC{SurveyAnt,
+  author = {Eric Gakstatter},
+  month = {January},
+  year = {2010},
+  title = {2010 Antenna Survey},
+  language = {English},
+  organization = {GPS World},
+  url = {www.gpsworld.com},
+  owner = {Gert-Jan},
+  timestamp = {2010.06.09}
+}
+
+@ELECTRONIC{SurveyGPS,
+  author = {Eric Gakstatter},
+  month = {January},
+  year = {2010},
+  title = {2010 Receiver Survey},
+  language = {English},
+  organization = {GPS World},
+  url = {www.gpsworld.com},
+  owner = {Gert-Jan},
+  timestamp = {2010.06.09}
+}
+
 @MASTERSTHESIS{wheelmotor,
   author = {Angel Mario Cano Garza},
   title = {{Reaction Wheels for Picosatellites}},
@@ -187,6 +243,26 @@
   year = {2010},
   owner = {Sean},
   timestamp = {2010.05.17}
+}
+
+@ELECTRONIC{MicroGPS,
+  author = {Oliver Montenbruck; Markus Markgraf; Miquel Garcia-Fernandez; Achim
+	Helm},
+  year = {2008},
+  title = {GPS for Microsatellites – Status and Perspectives},
+  language = {English},
+  url = {http://www.springerlink.com/content/x521pm1685k65757/fulltext.pdf},
+  owner = {Gert-Jan},
+  timestamp = {2010.06.09}
+}
+
+@ARTICLE{algaas,
+  author = {I. Eliashevich, J. Diaz, H. Yi, L. Wang, and M. Razeghi},
+  title = {Reliability of aluminum-free 808 nm high-power laser diodes with
+	uncoated mirrors},
+  year = {1995},
+  owner = {Tim},
+  timestamp = {2010.06.09}
 }
 
 @ELECTRONIC{icesatc98a,
@@ -250,6 +326,16 @@
   owner = {Zhuan}
 }
 
+@ARTICLE{algaasdiodes,
+  author = {Matthias Pospiech, Sha Liu (University of Hannover, Germany)},
+  title = {Laser Diodes, An Introduction},
+  year = {2004},
+  volume = {1},
+  pages = {25},
+  owner = {Tim},
+  timestamp = {2010.06.08}
+}
+
 @ARTICLE{yastrebova,
   author = {N.V.Yastrebova},
   title = {High-efficiency multi-junction solar cells: current status and future
@@ -266,6 +352,15 @@
 	Imaging},
   school = {École Polytechnique Fédérale de Lausanne},
   year = {2008}
+}
+
+@ARTICLE{lda_main,
+  author = {Melanie N. Ott},
+  title = {High Power Laser Diode Array Qualification and Guidelines for Space
+	Flight Environments},
+  year = {2006},
+  owner = {Tim},
+  timestamp = {2010.06.08}
 }
 
 @ELECTRONIC{Owen1999,
@@ -295,6 +390,14 @@
   publisher = {The Center of Occupational Research and Development},
   year = {1987},
   author = {Leno Pedrotti}
+}
+
+@ARTICLE{diodepower,
+  author = {R. Hülsewed, H. Schulze, J. Sebastiaan ,D. Schröder, J. Meusel, P.
+	Hennig},
+  title = {High Reliable – High Power AlGaAs/GaAs 808 nm Diode Laser Bars},
+  owner = {Tim},
+  timestamp = {2010.06.09}
 }
 
 @BOOK{rees,
@@ -640,6 +743,20 @@
   url = {http://ioannis.virtualcomposer2000.com/spectroscope/deviationangle.html},
   owner = {Zhuan},
   timestamp = {2010.05.31}
+}
+
+@ELECTRONIC{Surreygps,
+  month = {January},
+  year = {2009},
+  title = {SGR-05P – Space GPS Receiver: 
+	
+	
+	Navigation and Timing},
+  language = {English},
+  organization = {Surrey Satellite Technology Limited},
+  url = {www.sstl.co.uk},
+  owner = {Gert-Jan},
+  timestamp = {2010.06.09}
 }
 
 @ELECTRONIC{Market,
