@@ -37,7 +37,11 @@ As it happens in \ac{PMT}s, thermal generation effects produce current pulses ev
 
 \subsubsection{Quenching Circuits}
 \label{AQC}
-A \acs{SPAD} is generally implemented as a p-n junction biased above breakdown. Including quenching and recharge, there is a total 'Dead time' required by the \acs{SPAD} to perform detection for the next photon, which is also responsible for the upper limit of photon flux detectable by a \acs{SPAD}. Different quenching circuits will lead to different \acs{SPAD} dead time and smaller dead time is prior since during the time there is no. There exist several types of quenching circuits, named active and passive quenching. I
+A \acs{SPAD} is generally implemented as a p-n junction biased above breakdown. Including quenching and recharge, there is a total 'Dead time' required by the \acs{SPAD} to perform detection for the next photon, which is also responsible for the upper limit of photon flux detectable by a \acs{SPAD}. Different quenching circuits will lead to different \acs{SPAD} dead time and smaller dead time is prior since during the time the \acs{SPAD} cannot detect any incoming photons. There exist mainly two categories of quenching circuits, named active and passive quenching. 
+
+In active quenching, the avalanche is sensed and a feedback circuit provides a mechanism to force the reverse bias of the p-n junction below breakdown. The same circuit is generally used to actively recharge the device to its initial state, above breakdown, so as to enable the next detection cycle.
+
+In passive quenching, the avalanche current is used to directly act on the reverse bias voltage by lowering it towards breakdown voltage, which eventually quenches the current. If this is achieved, for example, using a resistance in series to the photo diode, the effective capacitance of the junction must be passively recharged through the quenching resistance.
 
 \subsubsection{Space Qualification}
 \label{SQ}
