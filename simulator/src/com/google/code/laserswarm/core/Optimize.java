@@ -74,8 +74,8 @@ public class Optimize extends LaserSwarm implements MultivariateRealFunction {
 
 	private void optimize() {
 		NelderMead optimizer = new NelderMead();
-		optimizer.setMaxIterations(500);
-		optimizer.setMaxEvaluations(500);
+		optimizer.setMaxIterations(1000);
+		optimizer.setMaxEvaluations(1000);
 
 		prefLog = new CSVwriter(new File(String
 				.format("optimize-%f-%f.csv", POWER_POWER, APERTURE_POWER)), "\t");
@@ -133,13 +133,13 @@ public class Optimize extends LaserSwarm implements MultivariateRealFunction {
 		for (Simulator sim : simulations.values())
 			sim.getDataPointsDB().close();
 
-		NormalDistributionImpl gausian = new NormalDistributionImpl(1000 * satPhotons.size(), 100);
+		NormalDistributionImpl gausian = new NormalDistributionImpl(800 * satPhotons.size(), 100);
 		double performace = 0;
 		try {
 			performace = 1 / (Math.pow(power, POWER_POWER) * Math.pow(aperature, APERTURE_POWER));
 			performace *= gausian.cumulativeProbability(photons);
 			for (Satellite sat : satPhotons.keySet()) {
-				NormalDistribution gausian2 = new NormalDistributionImpl(1000, 500);
+				NormalDistribution gausian2 = new NormalDistributionImpl(800, 500);
 				double modifier = gausian2.cumulativeProbability(satPhotons.get(sat));
 				performace *= modifier;
 			}

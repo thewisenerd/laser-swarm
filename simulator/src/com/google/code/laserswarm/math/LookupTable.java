@@ -25,13 +25,15 @@ public class LookupTable extends TreeMap<Double, Tuple3d> {
 		if (tc != null)
 			vc = get(tc);
 		else {
-			logger.wrn("There is no ceiling key, out of bounds, assuming constant value (t=%f)", t);
+			logger.wrn("There is no ceiling key, out of bounds, assuming constant value " +
+									"(t=%f, bounds=[%f,%f])", t, firstKey(), lastKey());
 			vc = get(tf);
 			tc = tf;
 		}
 
 		if (tf == null) {
-			logger.wrn("There is no floor key, out of bounds, assuming constant value (t=%f)", t);
+			logger.wrn("There is no floor key, out of bounds, assuming constant value " +
+							"(t=%f, bounds=[%f,%f])", t, firstKey(), lastKey());
 			vf = vc;
 			tf = tc;
 		}

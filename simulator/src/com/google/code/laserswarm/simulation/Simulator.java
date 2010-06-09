@@ -1,5 +1,7 @@
 package com.google.code.laserswarm.simulation;
 
+import static com.google.code.laserswarm.math.VectorMath.ecefToEnu;
+import static com.google.code.laserswarm.math.VectorMath.enuToLocal;
 import static com.google.code.laserswarm.math.VectorMath.relative;
 import jat.cm.Constants;
 import jat.cm.KeplerElements;
@@ -196,13 +198,16 @@ public class Simulator implements Runnable {
 		simVals.powerR = Atmosphere.getInstance().computeIntensity(simVals.power0, angle);
 
 		/* Make scatter characteristics */
-		angle = Math.acos((dR.dot(simVals.surfNormal)) / (dR.length() * simVals.surfNormal.length()));
-		double z = dR.length() * Math.cos(angle);
-		double x = dR.length() * Math.sin(angle);
-		Vector3d incidence = new Vector3d(x, 0, z);
+		// angle = Math.acos((dR.dot(simVals.surfNormal)) / (dR.length() * simVals.surfNormal.length()));
+		// double z = dR.length() * Math.cos(angle);
+		// double x = dR.length() * Math.sin(angle);
+		// Vector3d incidence = new Vector3d(x, 0, z);
+		Vector3d incidence = ecefToEnu(relative(simVals.pR, simVals.p0), sphere.y, sphere.z);
+		incidence = enuToLocal(incidence, simVals.surfNormal);
+		incidence.normalize();
 		ScatteringParam param;
 		if (Configuration.hasAction(Actions.CONSTANT_SCATTER))
-			param = new ScatteringParam(1.5, 1.3, -0.5);
+			param = new ScatteringParam(1.5, 1, 0);
 		else
 			try {
 				param = earth.getScatteringParam(reflectionPoint);
@@ -219,12 +224,16 @@ public class Simulator implements Runnable {
 			// logger.wrn("Sat=%s", sat);
 			// logger.wrn("%s", dR);
 			// logger.wrn("sphre: %s", Convert.toSphere(dR));
-			angle = dR.angle(simVals.surfNormal);
-			z = dR.length() * Math.cos(angle);
-			x = dR.length() * Math.sin(angle);
-			Vector3d exittanceVector = new Vector3d(x, 0, z);
+			// angle = dR.angle(simVals.surfNormal);
+			// double z = dR.length() * Math.cos(angle);
+			// double x = dR.length() * Math.sin(angle);
+			// Vector3d exittanceVector = new Vector3d(x, 0, z);
+			Vector3d exittanceVector = ecefToEnu(relative(simVals.pR, simVals.pE.get(sat)),
+					sphere.y, sphere.z);
+			exittanceVector = enuToLocal(exittanceVector, simVals.surfNormal);
+			exittanceVector.normalize();
 			simVals.powerR_SC.put(sat, simVals.scatter.probability(exittanceVector) // 
-					* simVals.powerR / dR.lengthSquared());
+					* simVals.powerR / dR.lengthSquared()); // FIXME: Number hack
 			// System.out.println(dR.lengthSquared());
 		}
 
@@ -234,6 +243,8 @@ public class Simulator implements Runnable {
 		for (Satellite sat : constellation.getReceivers()) {
 			dR = relative(simVals.pR, simVals.pE.get(sat));
 			angle = dR.angle(new Vector3d(simVals.pR));
+			if (angle > (40 * Math.PI / 180))
+				System.out.println("Woops : ) Sat to far");
 			simVals.tE.put(sat, dR.length() / Constants.c);
 			// logger.wrn("Angle (%s) = %f", sat, angle * 180 / Math.PI);
 			simVals.powerE.put(sat, Atmosphere.getInstance().computeIntensity(

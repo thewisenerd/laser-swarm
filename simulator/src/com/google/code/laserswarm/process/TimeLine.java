@@ -1,5 +1,7 @@
 package com.google.code.laserswarm.process;
 
+import static com.google.code.laserswarm.math.VectorMath.ecefToEnu;
+import static com.google.code.laserswarm.math.VectorMath.enuToLocal;
 import static com.google.code.laserswarm.math.VectorMath.relative;
 import jat.cm.Constants;
 
@@ -18,6 +20,7 @@ import com.google.code.laserswarm.conf.Satellite;
 import com.google.code.laserswarm.earthModel.Atmosphere;
 import com.google.code.laserswarm.earthModel.ScatteringCharacteristics;
 import com.google.code.laserswarm.earthModel.ScatteringParam;
+import com.google.code.laserswarm.math.Convert;
 import com.google.code.laserswarm.math.LookupTable;
 import com.google.code.laserswarm.math.VectorMath;
 import com.google.code.laserswarm.simulation.SimVars;
@@ -49,6 +52,7 @@ public class TimeLine {
 	}
 
 	public TimeLine(Satellite sat, Constellation constellation, List<SimVars> dataSet) {
+		logger.dbg("Making timeLine for sat %s", sat.toString());
 		this.constellation = constellation;
 		this.dataSet = dataSet;
 		this.sat = sat;
@@ -120,6 +124,9 @@ public class TimeLine {
 
 	private void makeLookupTables() {
 		for (SimVars simVars : dataSet) {
+			if (!simVars.tE.containsKey(sat))
+				continue;
+
 			double t = simVars.t0;
 			Point3d satPos = simVars.pE.get(getSatellite());
 			lookupPosition.put(t, satPos);
@@ -132,6 +139,9 @@ public class TimeLine {
 
 	private void makePhotons() {
 		for (SimVars current : dataSet) {
+			if (!current.tE.containsKey(sat))
+				continue;
+
 			double t = current.t0 + current.tR + current.tE.get(sat);
 
 			/* Add measured photons */
@@ -146,14 +156,18 @@ public class TimeLine {
 
 			/* Find the average satellite position */
 			Vector3d position = new Vector3d(current.pE.get(getSatellite()));
+			Point3d sphere = Convert.toSphere(position);
 			/* Find the average reflection position */
 			Vector3d reflection = new Vector3d(current.pR);
 
 			/* Make scatterer */
-			double angle = current.sunVector.angle(position);
-			double z = Math.cos(angle);
-			double x = Math.sin(angle);
-			Vector3d incidence = new Vector3d(-x, 0, -z);
+			// double angle = current.sunVector.angle(position);
+			// double z = Math.cos(angle);
+			// double x = Math.sin(angle);
+			// Vector3d incidence = new Vector3d(-x, 0, -z);
+			Vector3d incidence = ecefToEnu(relative(current.sunVector, reflection),
+					sphere.y, sphere.z);
+			incidence = enuToLocal(incidence, current.surfNormal);
 			ScatteringCharacteristics scatter = new ScatteringCharacteristics(incidence, param);
 
 			/* Find the power of the sun in the given frequency */
@@ -173,10 +187,12 @@ public class TimeLine {
 			}
 
 			Vector3d dR = VectorMath.relative(position, reflection);
-			angle = position.angle(reflection);
-			z = position.length() * Math.cos(angle);
-			x = position.length() * Math.sin(angle);
-			Vector3d exittanceVector = new Vector3d(x, 0, z);
+			// angle = position.angle(reflection);
+			// z = position.length() * Math.cos(angle);
+			// x = position.length() * Math.sin(angle);
+			// Vector3d exittanceVector = new Vector3d(x, 0, z);
+			Vector3d exittanceVector = ecefToEnu(relative(reflection, position), sphere.y, sphere.z);
+			exittanceVector = enuToLocal(exittanceVector, current.surfNormal);
 			double scatteredPower = scatter.probability(exittanceVector) * powerIn / dR.lengthSquared();
 
 			double totalReceivedPower = Atmosphere.getInstance().computeIntensity( //

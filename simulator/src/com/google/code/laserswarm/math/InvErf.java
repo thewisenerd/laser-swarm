@@ -1,22 +1,21 @@
 package com.google.code.laserswarm.math;
 
 import org.apache.commons.math.MathException;
+import org.apache.commons.math.special.Erf;
+
+import com.lyndir.lhunath.lib.system.logging.Logger;
 
 public class InvErf {
 
-	private static long[]	teller	= new long[] { 1, 1, 7, 127, 4369, 243649, 20036983, 2280356863L,
-									343141433761L, 65967241200001L, 15773461423793767L,
-									4591227123230945407L };
-	private static long[]	noemer	= new long[] { 1, 3, 30, 630, 22680, 1247400, 97297200,
-									10216206000L, 1389404016000L, 237588086736000L, 49893498214560000L };
-	public static int		ORDER	= 7;
+	private static double[]		a		= new double[] { 0.886226899, -1.645349621, 0.914624893,
+										-0.140543331 };
+	private static double[]		b		= new double[] { -2.118377725, 1.442710462, -0.329097515,
+										0.012229801 };
+	private static double[]		c		= new double[] { -1.970840454, -1.624906493, 3.429567803,
+										1.641345311 };
+	private static double[]		d		= new double[] { 3.543889200, 1.637067800 };
 
-	/**
-	 * Default constructor. Prohibit instantiation.
-	 */
-	private InvErf() {
-		super();
-	}
+	private static final Logger	logger	= Logger.get(InvErf.class);
 
 	/**
 	 * Returns the inverse of the error function erf(x).
@@ -32,13 +31,48 @@ public class InvErf {
 	 * @throws MathException
 	 *             if the algorithm fails to converge.
 	 */
-	public static double invErf(double x) throws MathException {
-		double x2 = x * Math.sqrt(Math.PI) / 2;
-		double invErf = 0;
-		for (int i = 1; i < ORDER; i += 2) {
-			int idx = (i + 1) / 2;
-			invErf += (teller[idx] / noemer[idx]) * Math.pow(x2, i);
+	public static double invErf(double y) throws MathException {
+		double x = Double.NaN;
+		// Central range.
+		double y0 = .7;
+		double z;
+
+		// Exceptional cases.
+		if (y == -1)
+			return Double.NEGATIVE_INFINITY;
+		if (y == 1)
+			return Double.POSITIVE_INFINITY;
+		if (Math.abs(y) > 1)
+			return Double.NaN;
+
+		if (Math.abs(y) <= y0) {
+			z = y * y;
+			x = y * (((a[3] * z + a[2]) * z + a[1]) * z + a[0]) /
+					((((b[3] * z + b[2]) * z + b[1]) * z + b[0]) * z + 1);
 		}
-		return invErf;
+		// Near end points of range.
+		else if ((y0 < y) && (y < 1)) {
+			z = Math.sqrt(-Math.log((1 - y) / 2));
+			x = (((c[3] * z + c[2]) * z + c[1]) * z + c[0]) / ((d[1] * z + d[0]) * z + 1);
+		} else if ((-y0 > y) & (y > -1)) {
+			z = Math.sqrt(-Math.log((1 + y) / 2));
+			x = -(((c[3] * z + c[2]) * z + c[1]) * z + c[0]) / ((d[1] * z + d[0]) * z + 1);
+		} else
+			throw new MathException("Outside range for %f", y);
+
+		// Two steps of Newton-Raphson correction to full accuracy.
+		// Without these steps, erfinv(y) would be about 3 times
+		// faster to compute, but accurate to only about 6 digits.
+		x = x - (Erf.erf(x) - y) / (2 / Math.sqrt(Math.PI) * Math.exp(-x * x));
+		x = x - (Erf.erf(x) - y) / (2 / Math.sqrt(Math.PI) * Math.exp(-x * x));
+
+		return x;
+	}
+
+	/**
+	 * Default constructor. Prohibit instantiation.
+	 */
+	private InvErf() {
+		super();
 	}
 }

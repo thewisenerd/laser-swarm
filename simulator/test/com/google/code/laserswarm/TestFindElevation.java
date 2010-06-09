@@ -23,6 +23,7 @@ import com.google.code.laserswarm.Desim.filter.MovingAverageFilter;
 import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.conf.Constellation;
 import com.google.code.laserswarm.conf.Satellite;
+import com.google.code.laserswarm.conf.Configuration.Actions;
 import com.google.code.laserswarm.earthModel.EarthModel;
 import com.google.code.laserswarm.out.plot1D.plotHeightDistribution;
 import com.google.code.laserswarm.process.EmitterHistory;
@@ -42,6 +43,7 @@ public class TestFindElevation {
 
 	public static void main(String[] args) throws DemCreationException, MathException,
 			IOException {
+		Configuration.getInstance().getMode().remove(Actions.DEM_CACHE);
 		System.out.println("Do you want to re-run the simulator? (y/n default: no)");
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		String runSim = null;

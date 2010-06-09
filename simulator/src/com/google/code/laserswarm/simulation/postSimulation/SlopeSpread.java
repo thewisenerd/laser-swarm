@@ -2,21 +2,22 @@ package com.google.code.laserswarm.simulation.postSimulation;
 
 import static com.google.code.laserswarm.math.VectorMath.relative;
 
+import java.util.HashMap;
 import java.util.List;
 
+import javax.vecmath.Point3d;
 import javax.vecmath.Vector3d;
 
 import org.apache.commons.math.MathException;
 
 import com.db4o.ObjectContainer;
-import com.db4o.ObjectSet;
-import com.db4o.query.Predicate;
 import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.conf.Constellation;
 import com.google.code.laserswarm.conf.Satellite;
 import com.google.code.laserswarm.math.EllipticalArea;
 import com.google.code.laserswarm.simulation.SimVars;
 import com.google.code.laserswarm.simulation.Simulator;
+import com.google.common.collect.Maps;
 import com.lyndir.lhunath.lib.system.logging.Logger;
 
 public class SlopeSpread implements IPostSimulation {
@@ -27,24 +28,29 @@ public class SlopeSpread implements IPostSimulation {
 	public Simulator modify(Simulator simulation, Constellation constellation) {
 		logger.inf("Post-process: Slope spreading");
 
-		ObjectContainer newDb = simulation.mkDb(simulation, "afterSlope");
+		ObjectContainer newDb = Simulator.mkDb(simulation, "afterSlope");
 
+		int i = 0;
 		List<SimVars> data = simulation.getDataPoints();
 		for (SimVars simVar : data) {
+			logger.dbg("Processing point a t=%f", simVar.t0);
 			Vector3d normal = simVar.surfNormal;
-			if (normal.z == 1)
+			if (normal.z == 1 && normal.lengthSquared() == 1) {
+				newDb.store(simVar);
 				continue;
+			}
 
 			double terrainAngle = normal.angle(new Vector3d(0, 0, 1));
 			double satDistance = relative(simVar.p0, simVar.pR).length();
 
 			double alpha = constellation.getEmitter().getBeamDivergence();
-			double beta = Math.PI - alpha - (Math.PI - terrainAngle);
+			double beta = Math.PI - alpha - ((Math.PI / 2) - terrainAngle);
 			double a = (Math.sin(alpha) / Math.sin(beta)) * satDistance;
 			double b = alpha * satDistance;
 
 			EllipticalArea area = new EllipticalArea(a, b);
 
+			HashMap<Double, SimVars> newSimVars = Maps.newHashMap();
 			for (Satellite sat : simVar.photonsE.keySet()) {
 				for (int photon = 0; photon < simVar.photonsE.get(sat); photon++) {
 					double offset = 0;
@@ -54,41 +60,45 @@ public class SlopeSpread implements IPostSimulation {
 						logger.wrn("Failed to compite offset for ellipse (a=%s and b=%s)", a, b);
 					}
 
-					if (offset == 0)
-						continue;
+					// if (offset == 0) {
+					// newDb.store(simVar);
+					// continue;
+					// }
 					double dH = Math.sin(terrainAngle) * offset;
 					double dt = dH / Configuration.c;
 
 					final Double tRNew = simVar.tR + dt;
 					final Double tENew = simVar.tE.get(sat) + dt;
 
-					/* already in db ? */
-					ObjectSet<SimVars> q = newDb.query(new Predicate<SimVars>() {
-						@Override
-						public boolean match(SimVars candidate) {
-							return (tRNew == candidate.tR);
-						}
-					});
-
 					SimVars simVarNew;
-					if (q.size() > 0)
-						simVarNew = q.next();
+					if (newSimVars.containsKey(tRNew))
+						simVarNew = newSimVars.get(tRNew);
 					else
 						simVarNew = new SimVars(simVar);
 
 					simVarNew.apply(simVar, sat);
 					simVarNew.tR = tRNew;
+					Vector3d dir = new Vector3d(simVar.pR);
+					dir.normalize();
+					dir.scale(new Vector3d(simVar.pR).length() + dH);
+					simVarNew.pR = new Point3d(dir);
 					simVarNew.tE.put(sat, tENew);
-
-					newDb.store(simVarNew);
+					newSimVars.put(tRNew, simVarNew);
 				}
-			}
-			newDb.commit();
 
+			}
+
+			for (SimVars simVarNew : newSimVars.values())
+				newDb.store(simVarNew);
+			if (i % 500 == 0)
+				newDb.commit();
+			i++;
 		}
 
 		newDb.commit();
-		simulation.setDb(newDb);
+
+		simulation.getDataPointsDB().close();// Close the old db
+		simulation.setDb(newDb); // Set the new db
 
 		return simulation;
 	}

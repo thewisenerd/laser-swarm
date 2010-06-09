@@ -46,7 +46,7 @@ public class SimpleSimulation extends LaserSwarm {
 	protected List<Constellation> mkConstellations() {
 		LinkedList<Constellation> c = Lists.newLinkedList();
 
-		Constellation constellation = Constellation.swarm(6, 0.0056, 500);
+		Constellation constellation = Constellation.swarm(10, 1, 500);
 		c.add(constellation);
 
 		return c;

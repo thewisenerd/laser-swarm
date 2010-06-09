@@ -107,15 +107,22 @@ public class Altitude {
 
 			HashMap<SimTemplate, Simulator> points = mgr.runSim();
 			for (SimTemplate templ : points.keySet()) { // assuming only one template
-				List<SimVars> dataPoints = points.get(templ).getDataPoints();
-				emitterHistory = new EmitterHistory(templ.getConstellation(), dataPoints);
 				SlopeSpread slope = new SlopeSpread();
 				slope.modify(points.get(templ), templ.getConstellation());
+				List<SimVars> dataPoints = points.get(templ).getDataPoints();
+				emitterHistory = new EmitterHistory(templ.getConstellation(), dataPoints);
 				constellation = templ.getConstellation();
 				for (Satellite sat : templ.getConstellation().getReceivers()) {
 					satData.put(sat, new TimeLine(sat, templ.getConstellation(), dataPoints));
 				}
+				for (int i = 0; i < dataPoints.size(); i++) {
+					if (i % 100 == 0) {
+						System.out.println("-- Datatpoint " + i);
+						System.out.println(dataPoints.get(i));
+					}
+				}
 			}
+
 			plotter.plot(points.get(template).getDataPoints(), 3, "heightSimulated");
 			Configuration.write("satData.xml", satData);
 			Configuration.write("emitterHistory.xml", emitterHistory);

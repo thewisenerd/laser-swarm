@@ -1,0 +1,7 @@
+<com.google.code.laserswarm.conf.Configuration>
+  <atmOpticalThickness>0.1</atmOpticalThickness>
+  <filePrefixReport></filePrefixReport>
+  <filePathReport>./</filePathReport>
+  <fileNameDigitalElevationModel></fileNameDigitalElevationModel>
+  <fileNameScatterModel></fileNameScatterModel>
+</com.google.code.laserswarm.conf.Configuration>

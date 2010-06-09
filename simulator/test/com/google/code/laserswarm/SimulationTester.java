@@ -1,6 +1,5 @@
 package com.google.code.laserswarm;
 
-import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -47,15 +46,7 @@ public class SimulationTester extends TestCase {
 	}
 
 	public static HashMap<SimTemplate, Simulator> sim() {
-		Configuration cfg = new Configuration();
-		Configuration.write(CfgName, cfg);
-		try {
-			Configuration.read(CfgName);
-		} catch (FileNotFoundException e1) {
-			e1.printStackTrace();
-		}
 		Constellation testConstallation = mkTestConstellation();
-
 		EarthModel earth = EarthModel.getDefaultModel();
 
 		SimulatorMaster mgr = new SimulatorMaster(earth);
@@ -67,6 +58,7 @@ public class SimulationTester extends TestCase {
 	}
 
 	public void testSim() {
+		// Configuration.getInstance().getMode().remove(Actions.CONSTANT_SCATTER);
 		HashMap<SimTemplate, Simulator> points = sim();
 
 		for (Simulator sim : points.values()) {

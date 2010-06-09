@@ -24,7 +24,7 @@ public interface IElevationModel {
 	 *            Direction of the XYZ ray (ECEF)
 	 * @param origin
 	 *            Origin of the ray (ECEF)
-	 * @return Point on the 3D surface where the intersection is; (r, theta, phi)
+	 * @return Point on the 3D surface where the intersection is; (r, long, lat)
 	 * @throws PointOutsideEnvelopeException
 	 *             When it does not intersect;
 	 */
