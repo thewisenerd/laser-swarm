@@ -8,21 +8,19 @@
 \contentsline {chapter}{\numberline {2}Launch and Astrodynamic Characteristics}{2}
 \contentsline {section}{\numberline {2.1}Launch Segment}{2}
 \contentsline {subsection}{\numberline {2.1.1}Launch Vehicle}{2}
-\contentsline {subsubsection}{\numberline {2.1.1.1}Cost and Reliability Analysis}{2}
-\contentsline {subsubsection}{\numberline {2.1.1.2}Soyuz LV Payload Capability Analysis}{3}
+\contentsline {subsubsection}{\numberline {2.1.1.1}Soyuz LV Payload Capability Analysis}{3}
+\contentsline {subsubsection}{\numberline {2.1.1.2}Vibrational Analysis}{4}
 \contentsline {subsection}{\numberline {2.1.2}Launch Site}{4}
 \contentsline {subsection}{\numberline {2.1.3}Orbit Insertion}{7}
 \contentsline {subsection}{\numberline {2.1.4}Launch Date}{8}
-\contentsline {subsection}{\numberline {2.1.5}Total Launch Segment Costs}{8}
 \contentsline {section}{\numberline {2.2}Space Segment}{8}
 \contentsline {subsection}{\numberline {2.2.1}Emitter Orbit}{8}
 \contentsline {subsection}{\numberline {2.2.2}Receiver Orbits}{8}
-\contentsline {subsection}{\numberline {2.2.3}Swarm Configuration}{8}
-\contentsline {subsection}{\numberline {2.2.4}Collision Avoidance}{8}
-\contentsline {subsection}{\numberline {2.2.5}Stationkeeping}{8}
+\contentsline {subsection}{\numberline {2.2.3}Swarm Configuration}{9}
+\contentsline {subsection}{\numberline {2.2.4}Collision Avoidance}{9}
 \contentsline {section}{\numberline {2.3}Space Environment and Shielding}{9}
-\contentsline {chapter}{\numberline {3}Sustainable Development Strategy}{10}
-\contentsline {section}{\numberline {3.1}Production and Logistics}{10}
-\contentsline {section}{\numberline {3.2}Operations}{10}
-\contentsline {section}{\numberline {3.3}End of Life}{11}
-\contentsline {chapter}{\numberline {A}Soyuz-ST Factsheet}{13}
+\contentsline {chapter}{\numberline {3}Sustainable Development Strategy}{11}
+\contentsline {section}{\numberline {3.1}Production and Logistics}{11}
+\contentsline {section}{\numberline {3.2}Operations}{11}
+\contentsline {section}{\numberline {3.3}End of Life}{12}
+\contentsline {chapter}{\numberline {A}Soyuz-ST Factsheet}{14}

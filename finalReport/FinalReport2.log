@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (MiKTeX 2.8) (preloaded format=pdflatex 2010.4.20)  9 JUN 2010 16:28
+This is pdfTeX, Version 3.1415926-1.40.10 (MiKTeX 2.8) (preloaded format=pdflatex 2010.4.20)  10 JUN 2010 09:47
 entering extended mode
 **C:/Users/Alex/Desktop/Laser*Swarm/laser-swarm/finalReport/FinalReport2.tex
 ("C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/finalReport/FinalReport2.tex"
@@ -261,8 +261,8 @@ Package caption3 Info: subfig package 1.2 or 1.3 is loaded.
 LaTeX Info: Redefining \subref on input line 30.
 Package caption Info: End \AtBeginDocument code.
 
-("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\finalReport\chapters/titlePage1
-.tex" [1
+("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\finalReport\chapters/titlePage.
+tex" [1
 
 {C:/ProgramData/MiKTeX/2.8/pdftex/config/pdftex.map}])
 ("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\finalReport\chapters/preface.te
@@ -337,9 +337,6 @@ ics.tex" [1
 
 ]
 Chapter 2.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
 [2
 
 ] <chapters/img/lvmass.png, id=56, 711.65875pt x 390.45876pt>
@@ -349,12 +346,13 @@ File: chapters/img/lvmass.png Graphic file (type png)
 <chapters/img/soyuzvol.png, id=57, 528.97626pt x 712.6625pt>
 File: chapters/img/soyuzvol.png Graphic file (type png)
 
-<use chapters/img/soyuzvol.png> [3]
+<use chapters/img/soyuzvol.png>
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
+[3]
 LaTeX Font Info:    Try loading font information for OMS+cmr on input line 99.
-("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\base\omscmr.fd"
+ ("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\base\omscmr.fd"
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
@@ -391,11 +389,21 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 [6 <C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/finalReport/chapters/img/laun
 chsites.png (PNG copy)>] [7 <C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/fina
 lReport/chapters/img/launchprofile.png (PNG copy)>]
-<chapters/img/primaryconfmax.png, id=77, 952.55875pt x 584.1825pt>
+<chapters/img/solarCycle.png, id=77, 542.025pt x 414.04688pt>
+File: chapters/img/solarCycle.png Graphic file (type png)
+
+<use chapters/img/solarCycle.png>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+LaTeX Warning: Reference `frPMGC' on page 8 undefined on input line 210.
+
+<chapters/img/primaryconfmax.png, id=78, 952.55875pt x 584.1825pt>
 File: chapters/img/primaryconfmax.png Graphic file (type png)
 
-<use chapters/img/primaryconfmax.png>
-<chapters/img/primaryconfmin.png, id=78, 952.55875pt x 554.07pt>
+<use chapters/img/primaryconfmax.png> [8]
+<chapters/img/primaryconfmin.png, id=82, 952.55875pt x 554.07pt>
 File: chapters/img/primaryconfmin.png Graphic file (type png)
 
 <use chapters/img/primaryconfmin.png>
@@ -403,9 +411,10 @@ File: chapters/img/primaryconfmin.png Graphic file (type png)
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 ) ("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\finalReport\chapters/SS.tex"
-[8] [9 <C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/finalReport/chapters/img/
-primaryconfmax.png (PNG copy)> <C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/f
-inalReport/chapters/img/primaryconfmin.png (PNG copy)>]
+[9 <C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/finalReport/chapters/img/sola
+rCycle.png (PNG copy)>] [10 <C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/fina
+lReport/chapters/img/primaryconfmax.png (PNG copy)> <C:/Users/Alex/Desktop/Lase
+r Swarm/laser-swarm/finalReport/chapters/img/primaryconfmin.png (PNG copy)>]
 Chapter 3.
 Package acronym Info: Label `acro:EOL' newly defined as it shall be overridden
 although it is yet undefined on input line 4.
@@ -413,56 +422,59 @@ although it is yet undefined on input line 4.
 x")
 ("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\finalReport\chapters/SSOPE.tex"
 ) ("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\finalReport\chapters/SSEOL.te
-x") [10
+x") [11
 
 ]
 ("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\finalReport\FinalReport2.bbl"
-[11]
+[12]
 Missing character: There is no É in font cmr10!
 Missing character: There is no é in font cmr10!
 Missing character: There is no é in font cmr10!
-) [12
+) [13
 
 ]
 Appendix A.
-[13
+[14
 
-] <chapters/img/soyuzfact.png, id=98, 1451.4225pt x 829.0975pt>
+] <chapters/img/soyuzfact.png, id=102, 1451.4225pt x 829.0975pt>
 File: chapters/img/soyuzfact.png Graphic file (type png)
 
-<use chapters/img/soyuzfact.png> [14 <C:/Users/Alex/Desktop/Laser Swarm/laser-s
+<use chapters/img/soyuzfact.png> [15 <C:/Users/Alex/Desktop/Laser Swarm/laser-s
 warm/finalReport/chapters/img/soyuzfact.png (PNG copy)>]
-("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\finalReport\FinalReport2.aux") 
-) 
+("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\finalReport\FinalReport2.aux")
+
+LaTeX Warning: There were undefined references.
+
+ ) 
 Here is how much of TeX's memory you used:
- 3627 strings out of 495285
- 53504 string characters out of 3179881
- 121335 words of memory out of 3000000
- 6732 multiletter control sequences out of 15000+200000
+ 3631 strings out of 495285
+ 53643 string characters out of 3179881
+ 121323 words of memory out of 3000000
+ 6735 multiletter control sequences out of 15000+200000
  14873 words of font info for 52 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
- 44i,9n,42p,1002b,318s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmbx10.pfb><
-C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:
-/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/
-Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Pr
-ogram Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Progr
-am Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Program 
-Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Fil
-es (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Program Files (
-x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Program Files (x86)
-/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files (x86)/MiK
-TeX 2.8/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files (x86)/MiKTeX 
-2.8/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Program Files (x86)/MiKTeX 2.8/
-fonts/type1/public/amsfonts/cm/cmsl10.pfb><C:/Program Files (x86)/MiKTeX 2.8/fo
-nts/type1/public/amsfonts/cm/cmssbx10.pfb><C:/Program Files (x86)/MiKTeX 2.8/fo
-nts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86)/MiKTeX 2.8/font
-s/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files (x86)/MiKTeX 2.8/fonts/t
-ype1/public/amsfonts/cm/cmti10.pfb><C:/Program Files (x86)/MiKTeX 2.8/fonts/typ
-e1/public/amsfonts/cm/cmti12.pfb>
-Output written on FinalReport2.pdf (24 pages, 1193926 bytes).
+ 44i,9n,42p,1055b,318s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmbx10.pfb>
+<C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C
+:/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:
+/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/P
+rogram Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Prog
+ram Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Program
+ Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Fi
+les (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Program Files 
+(x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Program Files (x86
+)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files (x86)/Mi
+KTeX 2.8/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files (x86)/MiKTeX
+ 2.8/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Program Files (x86)/MiKTeX 2.8
+/fonts/type1/public/amsfonts/cm/cmsl10.pfb><C:/Program Files (x86)/MiKTeX 2.8/f
+onts/type1/public/amsfonts/cm/cmssbx10.pfb><C:/Program Files (x86)/MiKTeX 2.8/f
+onts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86)/MiKTeX 2.8/fon
+ts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files (x86)/MiKTeX 2.8/fonts/
+type1/public/amsfonts/cm/cmti10.pfb><C:/Program Files (x86)/MiKTeX 2.8/fonts/ty
+pe1/public/amsfonts/cm/cmti12.pfb>
+Output written on FinalReport2.pdf (25 pages, 1209535 bytes).
 PDF statistics:
- 158 PDF objects out of 1000 (max. 8388607)
+ 163 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 36 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 41 words of extra memory for PDF output out of 10000 (max. 10000000)
 

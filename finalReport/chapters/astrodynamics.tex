@@ -10,11 +10,6 @@ The launch segment of the mission includes the selection of the launch vehicle, 
 \subsection{Launch Vehicle}
 \label{frLSLV}
 
-HERE ADD VIBRATION ANALYSIS
-
-\subsubsection{Cost and Reliability Analysis}
-\label{frLVCA}
-
 The costs of launch vary greatly between different vehicles. Table \ref{table:vehicleCosts} on page \pageref{table:vehicleCosts} lists approximate total launch costs of respective platforms. The prices are given in Fiscal Year 2000 dollars for consistency.
 \begin{table}[h]
 \begin{centering}
@@ -23,7 +18,7 @@ The costs of launch vary greatly between different vehicles. Table \ref{table:ve
 Platform & Operator & Price (FY00\$m) \\
 \hline \hline
 Ariane V  & ESA & 97.96 \\
-Soyuz   & Starsem    &  8.16 - 22.1 \\
+Soyuz   & Starsem or Arianespace&  8.16 - 22.1 \\
 Vega   & European and Italian SA  & 15.1 \\
 Falcon 1E  & SPACEX  & 8.89 \\
 PSLV & ISRO & 13.88 - 16.33 \\
@@ -35,7 +30,7 @@ Rokot & Eurokot & 9.8 - 11.4 \\
 \end{centering}
 \end{table}
 
-Based on the information  in the above table it is possible to single out a few platforms which will be affordable for the purpose of this feasibility study. The Ariane V launcher is the most expensive option by far and would push the budget quite heavily, with an estimated cost of launch almost half of the total budget. However the payload capabilities of the Ariane V launcher far outweigh that of all other platforms, thus making it possible for a combined launch with other satellites, leading to shared costs. This however could jeopardize the mission in the sense that it becomes secondary priority. If that happens, the constellation would have have have higher requirements for orbit acquisition: an extra booster stage or higher onboard fuel capacity for the altitude and/or plane shift, which is not feasible. The Ariane V is therefore an unsuitable platform for this project. 
+Based on the information  in the above table it is possible to single out a few platforms which will be affordable for the purpose of this feasibility study. The values represent the total launch segment costs. The Ariane V launcher is the most expensive option by far and would push the budget quite heavily, with an estimated cost of launch almost half of the total budget. However the payload capabilities of the Ariane V launcher far outweigh that of all other platforms, thus making it possible for a combined launch with other satellites, leading to shared costs. This however could jeopardize the mission in the sense that it becomes secondary priority. If that happens, the constellation would have have have higher requirements for orbit acquisition: an extra booster stage or higher onboard fuel capacity for the altitude and/or plane shift, which is not feasible. The Ariane V is therefore an unsuitable platform for this project. 
 
 The rest of the launchers can be analyzed with respect to reliability. All of the launch vehicles have been tested, with the exception of the Vega system, which is yet to make its maiden flight. The Vega is therefore not suitable for the analysis at this time. It is for this reason that the project will no longer consider this system at all.  However, better data should be available in the near future which should allow for the Vega platform to be reevaluated.
 
@@ -88,7 +83,12 @@ The available volume in the Soyuz-ST Fairing can be seen in figure \ref{fig:soyu
 
 The dimensions of the fairing are visibly too large and there is no possibility of using a different one, however that leaves a lot of possibilities for different designs of release adapters to adapt to the unique sequence of separation upon orbit injection. Again, the possibility of taking other small satellites along on the same launch arises. The dual launch configuration shown in the previous figure is the one being considered for the launch.
 
-The choice of the Soyuz brings forth one more advantage: the use of a unique orbit insertion booster, the Fregat. This final stage will allow for minimization of fuel on the satellite as all orbit insertion maneuvers can be done using the Fregat. The Fregat stage has been designed to handle 20 individual burns.   
+The choice of the Soyuz brings forth one more advantage: the use of a unique orbit insertion booster, the Fregat. This final stage will allow for minimization of fuel on the satellite as all orbit insertion maneuvers can be done using the Fregat. The Fregat stage has been designed to handle 20 individual burns.
+
+\subsubsection{Vibrational Analysis}
+\label{frLVCA}
+
+HERE ADD VIBRATION ANALYSIS  
 
 \subsection{Launch Site}
 \label{frLSLS}
@@ -198,18 +198,26 @@ After this, the satellites can be considered to be in their orbits. The Fregat c
 \subsection{Launch Date}
 \label{frLSLD}
 
-The launch date is dominated by development times and lifetime considerations. The satellite orbit decay is and thus lifetime is a function of atmospheric density. The density is, in turn, a function of the solar activity. The number of sun spots on the surface of the sun rises and falls every eleven years. 
+The launch date is dominated by development times and lifetime considerations. The satellite orbit decay is and thus lifetime is a function of atmospheric density. The density is, in turn, a function of the solar activity. The number of sun spots on the surface of the sun rises and falls every eleven years. The measurements are commonly represented in 10.7cm radio flux intensities. Figure \ref{fig:f10.7} on page \pageref{fig:f10.7} presents a projection for the next 10 years.
 
-\subsection{Total Launch Segment Costs}
-\label{frLSTC} 
+\begin{figure}[!h]
+\centering
+\includegraphics[width=1.0\textwidth, angle=0]{chapters/img/solarCycle.png}
+\caption{Solar activity projection up to 2019. \emph{Source: NOAA/Space Weather Prediction Center.} }
+\label{fig:f10.7}
+\end{figure}
+
+In order to provide the longest possible lifetime for the mission it is essential that the launch is timed in such a way that the satellites are in orbit most of the time during solar minimum. For this reason a launch on March 1st 2017 is planned. This also gives enough time for development and production. For further information on the timeline, please refer to section \ref{frPMGC}.
 
 \section{Space Segment}
 \label{frSS}
 
+This section covers the astrodynamical characteristics of the mission. Emitter orbit is covered first, then in section \ref{frSSRO}, all receiver orbits are examined. The formation and its properties are discussed in section \ref{frSSSC}. Collision avoidance is described in section \ref{frSSCA} and, finally, section \ref{frSEaS} covers the orbital environment and whether the mission is going to be heavily affected by it. 
+
 \subsection{Emitter Orbit}
 \label{frSSEOD}
 
-bla
+The emitter satellite is injected into a circular orbit at an altitude of 500 km. The eccentricity is frozen at 0. Inclination is chosen to be 85 degrees. 
 
 \subsection{Receiver Orbits}
 \label{frSSRO}
@@ -235,11 +243,6 @@ b lss
 
 \subsection{Collision Avoidance}
 \label{frSSCA}
-
-bla
-
-\subsection{Stationkeeping}
-\label{frSSS}
 
 bla
 
