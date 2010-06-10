@@ -14,6 +14,7 @@ import javax.vecmath.Point3d;
 import org.apache.commons.math.MathException;
 
 import com.google.code.laserswarm.TestFindElevation;
+import com.google.code.laserswarm.Desim.elevation.ElevationComparison;
 import com.google.code.laserswarm.Desim.elevation.ElevationFinder;
 import com.google.code.laserswarm.Desim.elevation.slope.ElevationSlope;
 import com.google.code.laserswarm.Desim.elevation.slope.FindElevationNeighborInterpolation;
@@ -132,6 +133,10 @@ public class Altitude {
 			Configuration.write("altData.xml", alts);
 		}
 		plotter.plot(alts, 3, "heightAnalysed");
+
+		logger.inf("heightAnalysed&SpikeFiltered Stats:\n%s",
+				new ElevationComparison(EarthModel.getDefaultModel(), alts));
+
 		// Filter filtAvg = new FilterAverage(21);
 		// LinkedList<Point3d> averagedAlts = filtAvg.filter(alts);
 		// plotter.plot(averagedAlts, 3, "heightAnalysed&Averaged");

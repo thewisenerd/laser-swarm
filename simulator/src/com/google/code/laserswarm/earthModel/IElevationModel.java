@@ -15,7 +15,7 @@ public interface IElevationModel {
 	 *            Point in (lon, lat)
 	 * @return
 	 */
-	public abstract double getElevation(DirectPosition2D point);
+	public abstract double getElevation(DirectPosition2D point) throws PointOutsideEnvelopeException;
 
 	/**
 	 * Find the intersection of a ray with the given DEM
@@ -38,6 +38,6 @@ public interface IElevationModel {
 	 *            Position of the point in (long, lat)
 	 * @return The local surface normal in the ENU system
 	 */
-	public abstract Vector3d getSurfaceNormal(DirectPosition2D pos);
+	public abstract Vector3d getSurfaceNormal(DirectPosition2D pos) throws PointOutsideEnvelopeException;
 
 }

@@ -31,9 +31,20 @@ import com.lyndir.lhunath.lib.system.logging.Logger;
  */
 public class EarthModel implements IElevationModel {
 
+	private static EarthModel	earth;
+
+	public static EarthModel getDefaultModel() {
+		if (earth == null) {
+			earth = new EarthModel(DemReader.getDefaultDems());
+			earth.loadCoef();
+		}
+		return earth;
+	}
+
 	private Set<ElevationModel>	dems	= Sets.newHashSet();
 	private GridCoverage2D		kappaMinnaertMap;
 	private GridCoverage2D		surfaceRefractionMap;
+
 	private GridCoverage2D		thetaHenyeyGreensteinMap;
 
 	private static final Logger	logger	= Logger.get(EarthModel.class);
@@ -91,12 +102,18 @@ public class EarthModel implements IElevationModel {
 	}
 
 	@Override
-	public double getElevation(DirectPosition2D point) {
+	public double getElevation(DirectPosition2D point) throws PointOutsideEnvelopeException {
 		ElevationModel dem = findCoverage(point);
 		if (dem == null)
-			return -1;
+			throw new PointOutsideEnvelopeException();
 		else
 			return dem.getElevation(point);
+	}
+
+	public double getElevation(Point3d sphere) throws PointOutsideEnvelopeException {
+		DirectPosition2D point = new DirectPosition2D(sphere.y * (180 / Math.PI), sphere.z
+				* (180 / Math.PI));
+		return getElevation(point);
 	}
 
 	@Override
@@ -173,11 +190,5 @@ public class EarthModel implements IElevationModel {
 					.getInstance(Interpolation.INTERP_BICUBIC));
 		} catch (Exception e) {
 		}
-	}
-
-	public static EarthModel getDefaultModel() {
-		EarthModel earth = new EarthModel(DemReader.getDefaultDems());
-		earth.loadCoef();
-		return earth;
 	}
 }
