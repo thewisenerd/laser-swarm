@@ -113,9 +113,10 @@ To select the correct incident angle, the figure \ref{fig:prism_alpha} on page \
 
 \subsection{Summary}
 \label{sum}
-The table \ref{tab:receiverbudget} on page \pageref{tab:receiverbudget} is the budget breakdown including mass, cost and power consumption. It is obvious that the \acs{SPAD} is the main expense which is estimated by one of the developers professor Charbon. $4666530 FY00\$$ at the end is the final cost convert to fiscal year 2000. To be Clear, the large parabolic mirror is used to collect the reflected photons and the small parabolic mirror is used to create parallel tight beam before the prism. Flat mirrors are used after the prism to focus the light on faceted mirror.
+The table \ref{tab:receiverbudget} on page \pageref{tab:receiverbudget} is the budget breakdown including mass and power consumption. To be Clear, the large parabolic mirror is used to collect the reflected photons and the small parabolic mirror is used to create parallel tight beam before the prism. Flat mirrors are used after the prism to focus the light on faceted mirror. A separate cost estimation can be found in the section \ref{cost} on page \pageref{}.
 
 \begin{table}[ht!]
+\centering
 \begin{tabular}{l | c | c c | c c | c }
 Components                & Mass  & Quantity & Total mass & Power\\ 
                           &  [g]  &          &     [g]    &  [W] \\\hline\hline
@@ -127,32 +128,34 @@ Flat mirror               &  10   &     5    &     50     &   0   \\
 Prism                     &  10   &     1    &     10     &   0   \\ 
 Diverge lens              &  10   &     1    &     10     &   0   \\ \hline
 Total                     &       &          &     220    &   0.1 \\
-                  
 \end{tabular}
 \caption{Buget breakdown for receiver payload}
 \label{tab:receiverbudget}
 \end{table}
 
 
-\subsection{Summary}
-\label{sum}
+\subsection{Payload Cost Estimation}
+\label{cost}
+The table \ref{tab:cost_payload} on \pageref{tab:cost_payload} is the cost breakdown of the whole emitter and receiver payload system. 
 
-\begin{tabular}{r|cccccccccc||c|}
-&\begin{sideways}Electrical Engineering (#)\end{sideways} 
-&\begin{sideways}System Engineering (#)\end {sideways} 
-&\begin{sideways}Quality Engineering (#)\end{sideways} 
-&\begin{sideways}Material Engineering (#)\end{sideways} 
-&\begin{sideways}Software Engineering (#)\end{sideways} 
-&\begin{sideways}Mechanical Engineering (#)\end{sideways} 
-&\begin{sideways}Optical Engineering (#)\end{sideways} 
-&\begin{sideways}Thermal Engineering (#)\end{sideways}
-&\begin{sideways}Assessment Manager(#) \end{sideways}
-&\begin{sideways}General Manager (#)\end{sideways}
-&\begin{sideways}Subtotal [M\$] (#)\end{sideways}\\\hline
+\begin{table}[ht!]
+\centering
+\begin{tabular}{p{0.7in}|cccccccccc||c}
+&\begin{sideways}Electrical Engineering\end{sideways} 
+&\begin{sideways}System Engineering\end {sideways} 
+&\begin{sideways}Quality Engineering\end{sideways} 
+&\begin{sideways}Material Engineering\end{sideways} 
+&\begin{sideways}Software Engineering\end{sideways} 
+&\begin{sideways}Mechanical Engineering\end{sideways} 
+&\begin{sideways}Optical Engineering\end{sideways} 
+&\begin{sideways}Thermal Engineering\end{sideways}
+&\begin{sideways}Assessment Manager\end{sideways}
+&\begin{sideways}General Manager\end{sideways}
+&\begin{sideways}Subtotal [M\$]\end{sideways}\\\hline
 \acs{SPAD} &2 &1 &1 &1 &2 &1 &0 &0 &1 &1 &1.8357 \\
 Optics &0 &1 &1 &2 &0 &1 &1 &0 &1 &0 &0.97904 \\
 \acs{laser} &3 &1 &2 &2 &2 &2 &3 &1 &1 &1 &2.32522 \\ \hline \hline 
-Cost [M\$] &0.61 &0.37 &0.49 &0.61 &0.49 &0.49 &0.49 &0.12 &0.73 &0.73 &5.13996 (a) \\ \hline\\
+Cost [M\$] &0.61 &0.37 &0.49 &0.61 &0.49 &0.49 &0.49 &0.12 &0.73 &0.73 &5.13996 (a) \\\hline\\
 
 &\begin{sideways}Integration and Test\end{sideways} 
 &\begin{sideways}Space Qualification Test\end{sideways} 
@@ -182,9 +185,10 @@ Cost [M\$] &0.96 &0.6 &0.3 &0.06 &1 & & & & & &2.92 (b)\\\hline\\
 &\begin{sideways}-\end{sideways}\\\hline
 Receiver [M\$] &0.034 &0.15 &0.26 & & & & & & & & \\
 \acs{laser} [M\$] &0.122 &0.34 &0.34 & & & & & & & & \\\hline\hline
-Cost [M\$] &0.156 &0.49 (c) &0.6 (d) & & & & & & & &\\\hline\hline\hline\\
-Total [M\$] & &8.55 &8.66 & & & & & & & &\\
+Cost [M\$] &0.156 &0.49 (c) &0.6 (d) & & & & & & & &\\\hline\hline\\
+Total [M\$] & &8.55 &8.66 & & & & & & & &\\\hline\\
 Total [FY00M\$] & &6.98 &7.07 & & & & & & & &\\
+\end{tabular}
 \caption{Cost breakdown for emitter and receiver payload}
 \label{tab:cost_payload}
-\end{tabular}
+\end{table}
