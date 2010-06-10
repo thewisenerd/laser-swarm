@@ -30,9 +30,9 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.lyndir.lhunath.lib.system.logging.Logger;
 
-public class Optimize extends LaserSwarm implements MultivariateRealFunction {
+public class OptimizePowerAperture extends LaserSwarm implements MultivariateRealFunction {
 
-	private static final Logger	logger	= Logger.get(Optimize.class);
+	private static final Logger	logger	= Logger.get(OptimizePowerAperture.class);
 
 	public static void main(String[] args) {
 		Configuration.getInstance();
@@ -41,7 +41,7 @@ public class Optimize extends LaserSwarm implements MultivariateRealFunction {
 
 		Prospector.roughTimeStep = 3;
 
-		final Optimize sim = new Optimize();
+		final OptimizePowerAperture sim = new OptimizePowerAperture();
 		sim.POWER_POWER = 1;
 		sim.APERTURE_POWER = 1.5;
 		sim.optimize();
