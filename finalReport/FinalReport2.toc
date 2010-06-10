@@ -15,12 +15,13 @@
 \contentsline {subsection}{\numberline {2.1.4}Launch Date}{8}
 \contentsline {section}{\numberline {2.2}Space Segment}{8}
 \contentsline {subsection}{\numberline {2.2.1}Emitter Orbit}{8}
-\contentsline {subsection}{\numberline {2.2.2}Receiver Orbits}{8}
-\contentsline {subsection}{\numberline {2.2.3}Swarm Configuration}{9}
-\contentsline {subsection}{\numberline {2.2.4}Collision Avoidance}{9}
-\contentsline {section}{\numberline {2.3}Space Environment and Shielding}{9}
-\contentsline {chapter}{\numberline {3}Sustainable Development Strategy}{11}
-\contentsline {section}{\numberline {3.1}Production and Logistics}{11}
-\contentsline {section}{\numberline {3.2}Operations}{11}
-\contentsline {section}{\numberline {3.3}End of Life}{12}
-\contentsline {chapter}{\numberline {A}Soyuz-ST Factsheet}{14}
+\contentsline {subsubsection}{\numberline {2.2.1.1}Orbital Parameters}{8}
+\contentsline {subsection}{\numberline {2.2.2}Receiver Orbits}{9}
+\contentsline {subsection}{\numberline {2.2.3}Swarm Configuration}{10}
+\contentsline {subsection}{\numberline {2.2.4}Collision Avoidance}{10}
+\contentsline {section}{\numberline {2.3}Space Environment and Shielding}{11}
+\contentsline {chapter}{\numberline {3}Sustainable Development Strategy}{12}
+\contentsline {section}{\numberline {3.1}Production and Logistics}{12}
+\contentsline {section}{\numberline {3.2}Operations}{12}
+\contentsline {section}{\numberline {3.3}End of Life}{13}
+\contentsline {chapter}{\numberline {A}Soyuz-ST Factsheet}{15}

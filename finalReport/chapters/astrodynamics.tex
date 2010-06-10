@@ -217,7 +217,41 @@ This section covers the astrodynamical characteristics of the mission. Emitter o
 \subsection{Emitter Orbit}
 \label{frSSEOD}
 
-The emitter satellite is injected into a circular orbit at an altitude of 500 km. The eccentricity is frozen at 0. Inclination is chosen to be 85 degrees. 
+\subsubsection{Orbital Parameters}
+\label{frSSEODOP}
+
+The emitter satellite is injected into a circular orbit at an altitude of 500 km. The eccentricity is frozen at 0. Inclination is chosen to be 85 degrees, as this allows access to polar areas, which are places of interest for the mission. Furthermore, the inclination provides an inherent relative phase for the crossing orbits. The \acl{RAAN} can be chosen arbitrary for the start of the mission, as no specific target is assumed for the mission. For consistency, in all following discussions it is assumed to be 0 degrees. The same goes for the Argument of Perigee and the True Anomaly. As the orbit is circular, these values are not really relevant. The emitter satellite acts as the reference for all the receivers.
+
+The orbit is non-sunsynchronous and does not have a specific repeat track. This allows for larger coverage of the Earth. 
+
+Figure \ref{fig:confmax} on page \pageref{fig:confmax} shows the emitter satellite (labeled as Base) in Orbit 1.
+
+A few basic properties of this orbit can be derived and are shown in table \ref{table:orb1ref} on page \pageref{table:orb1ref}. All the values were generated with the help of \cite{larson}, \cite{spacedesign} and \cite{constDesign}.
+
+\begin{table}[!h]
+\begin{centering}
+\begin{tabular}{lccr}
+\toprule
+Parameter				&			Symbol			&			Value			&			Unit \\
+\hline \hline
+Altitude				&			h						&			500				&			[km]	 \\
+Semi-major Axis	&			a						&			6871			&			[km]	 \\
+Eccentricity		&			e						&			0				  &			[-]	 \\
+\acs{RAAN}			&			$\Omega$		&			0				&			[deg]	 \\
+Period (mins)		&			P						&			94.6135	&			[mins]	 \\
+Revolutions per day		&									&			15.2198	&			[revs/day]	 \\
+Angular Velocity		&			n						&			3.805	&			[deg/min]	 \\
+Circular Velocity		&			V						&			7.6127	&			[km/s]	 \\
+Max. Eclipse		&			 	$T_e$					&			35.75	&			[mins]	 \\
+Node Spacing	&			 						&			23.72	&			[deg]	 \\
+Node Precession	&			 $\dot{\Omega}$					&			-0.6667	&			[deg/day]	 \\
+\bottomrule
+\end{tabular}
+\caption{Orbital properties of the emitter satellite.}
+\label{table:orb1ref}
+\end{centering}
+\end{table}
+
 
 \subsection{Receiver Orbits}
 \label{frSSRO}
