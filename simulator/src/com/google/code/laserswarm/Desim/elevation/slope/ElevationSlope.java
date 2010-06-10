@@ -4,15 +4,16 @@ import java.util.LinkedList;
 
 import javax.vecmath.Point3d;
 
+import com.google.code.laserswarm.Desim.BRDFcalc.BRDFinput;
 import com.google.common.collect.Lists;
 
 public class ElevationSlope {
-	private LinkedList<Point3d>	altitudes	= Lists.newLinkedList();
-	private LinkedList<Double>	slopes		= Lists.newLinkedList();
+	private LinkedList<Point3d>		altitudes	= Lists.newLinkedList();
+	private LinkedList<BRDFinput>	BRDFIn		= Lists.newLinkedList();
 
-	public ElevationSlope(LinkedList<Point3d> altitudes, LinkedList<Double> slopes) {
+	public ElevationSlope(LinkedList<Point3d> altitudes, LinkedList<BRDFinput> BRDFIn) {
 		this.altitudes = altitudes;
-		this.slopes = slopes;
+		this.BRDFIn = BRDFIn;
 	}
 
 	public ElevationSlope() {
@@ -26,12 +27,12 @@ public class ElevationSlope {
 		this.altitudes = altitudes;
 	}
 
-	public LinkedList<Double> getSlopes() {
-		return slopes;
+	public LinkedList<BRDFinput> getBRDFIn() {
+		return BRDFIn;
 	}
 
-	public void setSlopes(LinkedList<Double> slopes) {
-		this.slopes = slopes;
+	public void setBRDFIn(LinkedList<BRDFinput> BRDFIn) {
+		this.BRDFIn = BRDFIn;
 	}
 
 }
