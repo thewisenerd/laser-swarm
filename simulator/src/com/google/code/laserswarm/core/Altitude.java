@@ -31,6 +31,7 @@ import com.google.code.laserswarm.simulation.Simulator;
 import com.google.code.laserswarm.simulation.SimulatorMaster;
 import com.google.code.laserswarm.simulation.postSimulation.SlopeSpread;
 import com.google.code.laserswarm.util.demReader.DemCreationException;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.lyndir.lhunath.lib.system.logging.Logger;
@@ -108,14 +109,9 @@ public class Altitude {
 				List<SimVars> dataPoints = points.get(templ).getDataPoints();
 				emitterHistory = new EmitterHistory(templ.getConstellation(), dataPoints);
 				constellation = templ.getConstellation();
+				ImmutableList<SimVars> dataPointsImm = ImmutableList.copyOf(dataPoints);
 				for (Satellite sat : templ.getConstellation().getReceivers()) {
-					satData.put(sat, new TimeLine(sat, templ.getConstellation(), dataPoints));
-				}
-				for (int i = 0; i < dataPoints.size(); i++) {
-					if (i % 100 == 0) {
-						System.out.println("-- Datatpoint " + i);
-						System.out.println(dataPoints.get(i));
-					}
+					satData.put(sat, new TimeLine(sat, templ.getConstellation(), dataPointsImm));
 				}
 			}
 
