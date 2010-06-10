@@ -30,10 +30,9 @@ public class SlopeSpread implements IPostSimulation {
 
 		ObjectContainer newDb = Simulator.mkDb(simulation, "afterSlope");
 
-		int i = 0;
 		List<SimVars> data = simulation.getDataPoints();
 		for (SimVars simVar : data) {
-			logger.dbg("Processing point a t=%f", simVar.t0);
+			// logger.dbg("Processing point a t=%f", simVar.t0);
 			Vector3d normal = simVar.surfNormal;
 			if (normal.z == 1 && normal.lengthSquared() == 1) {
 				newDb.store(simVar);
@@ -90,9 +89,6 @@ public class SlopeSpread implements IPostSimulation {
 
 			for (SimVars simVarNew : newSimVars.values())
 				newDb.store(simVarNew);
-			if (i % 500 == 0)
-				newDb.commit();
-			i++;
 		}
 
 		newDb.commit();

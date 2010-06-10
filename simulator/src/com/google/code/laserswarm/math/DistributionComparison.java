@@ -6,13 +6,18 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.vecmath.Point3d;
+import javax.vecmath.Point4d;
+
+import org.apache.commons.math.stat.descriptive.DescriptiveStatistics;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
 import com.lyndir.lhunath.lib.system.logging.Logger;
 
-public class PointCloudComparison {
+public class DistributionComparison extends DescriptiveStatistics {
+
+	private static final Logger	logger	= Logger.get(DistributionComparison.class);
 
 	public static boolean approxEquals(double d1, double d2) {
 		return approxEquals(d1, d2, 1E-6);
@@ -22,46 +27,55 @@ public class PointCloudComparison {
 		return d1 - tolerance < d2 && d1 + tolerance > d2;
 	}
 
-	private List<Point3d>		cloud1;
-	private List<Point3d>		cloud2;
-	private LinkedList<Double>	diff;
+	private List<Point3d>	cloud1;
+	private List<Point3d>	cloud2;
 
-	private Double				max;
-	private Double				min;
-	private int					mean;
-	private Double				median;
+	/**
+	 * Compare over an entire hemisphere
+	 * <p>
+	 * Azimuth and alevation range:<br/>
+	 * [0, 2&pi;, 0, &pi;/2]
+	 * </p>
+	 * 
+	 * @param distribution
+	 * @param distribution2
+	 * @param fullStore
+	 */
+	public DistributionComparison(Distribution distribution, Distribution distribution2,
+			boolean fullStore) {
+		this(distribution, distribution2, new Point4d(0, Math.PI * 2, 0, Math.PI / 2), fullStore);
+	}
 
-	private static final Logger	logger	= Logger.get(PointCloudComparison.class);
-
-	public PointCloudComparison(Distribution distribution, Distribution distribution2, double rotation,
+	/**
+	 * Compare two distributions
+	 * 
+	 * @param distribution
+	 *            First distribution to compare
+	 * @param distribution2
+	 *            Second distribution
+	 * @param range
+	 *            [azMin, azMax, elMin, elMax] Ranges of azimuth and elevation.
+	 * @param fullStore
+	 *            Store all the values of the cloud
+	 */
+	public DistributionComparison(Distribution distribution, Distribution distribution2, Point4d range,
 			boolean fullStore) {
 
-		List<Point3d> cloud1 = distribution.pointCloud(100);
-		List<Point3d> cloud2 = distribution2.pointCloud(100);
+		List<Point3d> cloud1 = distribution.pointCloud(100, range);
+		List<Point3d> cloud2 = distribution2.pointCloud(100, range);
 
-		LinkedList<Double> diff = Lists.newLinkedList();
 		for (Point3d basePoint : cloud1) {
 			double baseSize = basePoint.z;
 
 			LinkedList<Point3d> canidates = findClosest(basePoint, cloud2);
 			Point3d closest = canidates.getFirst();
 			double closestSize = closest.z;
-			diff.add(closestSize - baseSize);
+			addValue(closestSize - baseSize);
 		}
-
-		min = diff.getFirst();
-		max = diff.getLast();
-		mean = 0;
-		for (Double double1 : diff) {
-			mean += double1;
-		}
-		mean = mean / diff.size();
-		median = diff.get((int) Math.ceil(diff.size() / 2));
 
 		if (fullStore) {
 			this.cloud1 = cloud1;
 			this.cloud2 = cloud2;
-			this.diff = diff;
 		}
 
 	}
@@ -101,32 +115,6 @@ public class PointCloudComparison {
 
 	public List<Point3d> getCloud2() {
 		return cloud2;
-	}
-
-	public LinkedList<Double> getDiff() {
-		return diff;
-	}
-
-	public Double getMax() {
-		return max;
-	}
-
-	public int getMean() {
-		return mean;
-	}
-
-	public Double getMedian() {
-		return median;
-	}
-
-	public Double getMin() {
-		return min;
-	}
-
-	private List<Point3d> rotate(List<Point3d> cloud12) {
-		// TODO Auto-generated method stub
-		// return null;
-		throw new UnsupportedOperationException();
 	}
 
 }

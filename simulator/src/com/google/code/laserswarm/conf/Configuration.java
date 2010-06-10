@@ -20,6 +20,7 @@ public class Configuration {
 	public enum Actions {
 		/* General actions */
 		SIMULATE,
+		SAVE,
 		PROCESS,
 		TABULATE,
 		PLOT_DISK,

@@ -9,6 +9,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.vecmath.Point3d;
+import javax.vecmath.Point4d;
 import javax.vecmath.Vector3d;
 
 import com.google.code.laserswarm.conf.Configuration;
@@ -48,19 +49,23 @@ public abstract class Distribution {
 		fr.setVisible(true);
 	}
 
-	public PointCloudComparison compareTo(Distribution distribution2) {
-		return new PointCloudComparison(this, distribution2, 0, false);
+	public DistributionComparison compareTo(Distribution distribution2) {
+		return new DistributionComparison(this, distribution2, false);
+	}
+
+	public DistributionComparison compareTo(Distribution distribution2, Point4d range) {
+		return new DistributionComparison(this, distribution2, range, false);
 	}
 
 	public List<Point3d> pointCloud(int steps) {
-		return pointCloud(steps, 0, Math.PI * 2, 0, Math.PI / 2);
+		return pointCloud(steps, new Point4d(0, Math.PI * 2, 0, Math.PI / 2));
 	}
 
-	public List<Point3d> pointCloud(int steps, double azMin, double azMax, double elMin, double elMax) {
+	public List<Point3d> pointCloud(int steps, Point4d range) {
 		double step = (2 * Math.PI) / steps;
 		List<Point3d> points = Lists.newLinkedList();
-		for (double az = azMin; az < azMax; az += step) {
-			for (double el = elMin; el < elMax; el += step) {
+		for (double az = range.w; az < range.x; az += step) {
+			for (double el = range.y; el < range.z; el += step) {
 				Vector3d exittanceVector = new Vector3d(
 						Convert.toXYZ(new Point3d(1, az, Math.PI / 2 - el)));
 				double out = probability(exittanceVector);
