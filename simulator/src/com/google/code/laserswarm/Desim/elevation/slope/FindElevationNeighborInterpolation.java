@@ -57,7 +57,7 @@ public class FindElevationNeighborInterpolation implements ElevationFinder {
 		this.qLength = queueLength;
 		this.frequency = resolution_Hz;
 		this.correlationInterval = correlationInterval;
-		this.qLength = comparisonQueueLength;
+		this.comparisonQueueLength = comparisonQueueLength;
 		this.equalitySpacing = whenEqual;
 		this.fractionD = fractionD;
 	}
