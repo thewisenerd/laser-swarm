@@ -117,18 +117,74 @@ The table \ref{tab:receiverbudget} on page \pageref{tab:receiverbudget} is the b
 
 \begin{table}[ht!]
 \begin{tabular}{l | c | c c | c c | c }
-Components         & Number & Mass & Cost      & Total mass & Total cost & Power\\ 
-                   &        & [g]  & [Dollar]  & [g]        &[Dollar]    & [W]  \\\hline\hline
-Parabolic mirror(large)   & 1      & 100  & 7000      & 100        & 7000       &  0   \\
-Parabolic mirror(small)   & 1      & 10   & 1500      & 10         & 1500       &  0   \\
-Faceted mirror     & 1      & 30   & 3000      & 30         & 3000       &  0   \\ 
-Flat mirror        & 5      & 10   & 500       & 50         & 2500       &  0   \\
-\acs{SPAD}         & 1      & 10   & 5700000   & 10         & 5700000    &  0   \\
-Prism              & 1      & 10   & 1500      & 10         & 1500       &  0.1 \\ 
-Diverge lens       & 1      & 10   & 1000      & 10         & 1000       &  0   \\ \hline
-Total              &        &      &           & 220        & 5716500    &  0.1 \\
-                   &        &      &           &            & 4666530 FY00\$ &
+Components                & Mass  & Quantity & Total mass & Power\\ 
+                          &  [g]  &          &     [g]    &  [W] \\\hline\hline
+Parabolic mirror (large)  &  100  &     1    &     100    &   0   \\
+Parabolic mirror (small)  &  10   &     1    &     10     &   0   \\
+Faceted mirror            &  30   &     1    &     30     &   0   \\ 
+Flat mirror               &  10   &     5    &     50     &   0   \\
+\acs{SPAD}                &  10   &     1    &     10     &   0.1 \\
+Prism                     &  10   &     1    &     10     &   0   \\ 
+Diverge lens              &  10   &     1    &     10     &   0   \\ \hline
+Total                     &       &          &     220    &   0.1 \\
+                  
 \end{tabular}
 \caption{Buget breakdown for receiver payload}
 \label{tab:receiverbudget}
 \end{table}
+
+
+\subsection{Summary}
+\label{sum}
+
+\begin{tabular}{r|cccccccccc||c|}
+&\begin{sideways}Electrical Engineering (#)\end{sideways} 
+&\begin{sideways}System Engineering (#)\end {sideways} 
+&\begin{sideways}Quality Engineering (#)\end{sideways} 
+&\begin{sideways}Material Engineering (#)\end{sideways} 
+&\begin{sideways}Software Engineering (#)\end{sideways} 
+&\begin{sideways}Mechanical Engineering (#)\end{sideways} 
+&\begin{sideways}Optical Engineering (#)\end{sideways} 
+&\begin{sideways}Thermal Engineering (#)\end{sideways}
+&\begin{sideways}Assessment Manager(#) \end{sideways}
+&\begin{sideways}General Manager (#)\end{sideways}
+&\begin{sideways}Subtotal [M\$] (#)\end{sideways}\\\hline
+\acs{SPAD} &2 &1 &1 &1 &2 &1 &0 &0 &1 &1 &1.8357 \\
+Optics &0 &1 &1 &2 &0 &1 &1 &0 &1 &0 &0.97904 \\
+\acs{laser} &3 &1 &2 &2 &2 &2 &3 &1 &1 &1 &2.32522 \\ \hline \hline 
+Cost [M\$] &0.61 &0.37 &0.49 &0.61 &0.49 &0.49 &0.49 &0.12 &0.73 &0.73 &5.13996 (a) \\ \hline\\
+
+&\begin{sideways}Integration and Test\end{sideways} 
+&\begin{sideways}Space Qualification Test\end{sideways} 
+&\begin{sideways}Product Assurance\end{sideways} 
+&\begin{sideways}Material Cost\end{sideways} 
+&\begin{sideways}Facilities/Machine\end{sideways}
+&\begin{sideways}-\end{sideways} 
+&\begin{sideways}-\end{sideways} 
+&\begin{sideways}-\end{sideways} 
+&\begin{sideways}-\end{sideways} 
+&\begin{sideways}-\end{sideways}
+&\begin{sideways}Subtotal [M\$]\end{sideways}\\\hline
+Receiver [M\$] &0.24 &0.3 &0.15 &0.01 &0.5 & & & & & &1.2 \\
+\acs{laser} [M\$] &0.72 &0.3 &0.15 &0.05 &0.5 & & & & & &1.72 \\\hline\hline
+Cost [M\$] &0.96 &0.6 &0.3 &0.06 &1 & & & & & &2.92 (b)\\\hline\\
+
+&\begin{sideways}Unit Cost\end{sideways} 
+&\begin{sideways}5 Receiver\end{sideways} 
+&\begin{sideways}9 Receiver\end{sideways} 
+&\begin{sideways}-\end{sideways} 
+&\begin{sideways}-\end{sideways}
+&\begin{sideways}-\end{sideways} 
+&\begin{sideways}-\end{sideways} 
+&\begin{sideways}-\end{sideways} 
+&\begin{sideways}-\end{sideways} 
+&\begin{sideways}-\end{sideways}
+&\begin{sideways}-\end{sideways}\\\hline
+Receiver [M\$] &0.034 &0.15 &0.26 & & & & & & & & \\
+\acs{laser} [M\$] &0.122 &0.34 &0.34 & & & & & & & & \\\hline\hline
+Cost [M\$] &0.156 &0.49 (c) &0.6 (d) & & & & & & & &\\\hline\hline\hline\\
+Total [M\$] & &8.55 &8.66 & & & & & & & &\\
+Total [FY00M\$] & &6.98 &7.07 & & & & & & & &\\
+\caption{Cost breakdown for emitter and receiver payload}
+\label{tab:cost_payload}
+\end{tabular}
