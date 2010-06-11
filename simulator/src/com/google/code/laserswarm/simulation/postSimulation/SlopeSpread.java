@@ -51,6 +51,7 @@ public class SlopeSpread implements IPostSimulation {
 
 			HashMap<Double, SimVars> newSimVars = Maps.newHashMap();
 			for (Satellite sat : simVar.photonsE.keySet()) {
+				// logger.inf("Working on satillite %s", sat);
 				for (int photon = 0; photon < simVar.photonsE.get(sat); photon++) {
 					double offset = 0;
 					try {
@@ -88,18 +89,40 @@ public class SlopeSpread implements IPostSimulation {
 					simVarNew.pR = new Point3d(dir);
 					simVarNew.tE.put(sat, tENew);
 					newSimVars.put(tRNew, simVarNew);
+
+					if (false) {
+						logger.dbg("\n\nNEW PHOTON");
+						logger.dbg("dH=>%s\tdt=%s", dH, dt);
+						logger.dbg("normal=>%s", simVar.surfNormal);
+						logger.dbg("TR from %s => %s", simVar.tR, tRNew);
+						logger.dbg("TE from %s => %s", simVar.tE.get(sat), tENew);
+					}
 				}
 
 			}
 
-			for (SimVars simVarNew : newSimVars.values())
+			int p1 = 0;
+			for (Satellite sat : simVar.tE.keySet()) {
+				p1 += simVar.photonsE.get(sat);
+			}
+
+			int p2 = 0;
+			for (SimVars simVarNew : newSimVars.values()) {
 				newDb.store(simVarNew);
+				for (Satellite sat : simVarNew.tE.keySet()) {
+					p2 += simVarNew.photonsE.get(sat);
+				}
+			}
+			logger.dbg("Photons %d => %d (spread over: %d vars)", p1, p2, newSimVars.size());
 		}
 
 		newDb.commit();
 
 		simulation.getDataPointsDB().close();// Close the old db
 		simulation.setDb(newDb); // Set the new db
+		logger.inf("Done slope spreading");
+
+		System.exit(1);
 
 		return simulation;
 	}
