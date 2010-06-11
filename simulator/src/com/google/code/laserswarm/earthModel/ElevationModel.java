@@ -234,7 +234,7 @@ public class ElevationModel implements IElevationModel {
 		double[] z4 = coverage.evaluate(
 				(DirectPosition) new DirectPosition2D(pos.x - dAngle, pos.y), new double[1]);
 
-		double g = dAngle * Configuration.R0;
+		double g = dAngle * (Math.PI / 180) * Configuration.R0;
 		double dx = (z5[0] - z4[0]) / (2 * g); // dz/d(lat)
 		double dy = (z2[0] - z7[0]) / (2 * g); // dz/d(lon)
 
