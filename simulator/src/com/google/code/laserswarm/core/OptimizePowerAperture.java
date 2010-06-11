@@ -32,7 +32,12 @@ import com.lyndir.lhunath.lib.system.logging.Logger;
 
 public class OptimizePowerAperture extends LaserSwarm implements MultivariateRealFunction {
 
-	private static final Logger	logger	= Logger.get(OptimizePowerAperture.class);
+	private static final Logger	logger			= Logger.get(OptimizePowerAperture.class);
+
+	private static double		SEQ_LENGTH		= 500;
+	private static double		TARGET_COUNT	= 16;
+	private static double		POWER_POWER		= 1;
+	private static double		APERTURE_POWER	= 1;
 
 	public static void main(String[] args) {
 		Configuration.getInstance();
@@ -42,8 +47,6 @@ public class OptimizePowerAperture extends LaserSwarm implements MultivariateRea
 		Prospector.roughTimeStep = 3;
 
 		final OptimizePowerAperture sim = new OptimizePowerAperture();
-		sim.POWER_POWER = 1;
-		sim.APERTURE_POWER = 1.5;
 		sim.optimize();
 	}
 
@@ -51,13 +54,13 @@ public class OptimizePowerAperture extends LaserSwarm implements MultivariateRea
 		return Constellation.swarm(power, aperature, 500);
 	}
 
-	private double						POWER_POWER		= 1;
-
-	private double						APERTURE_POWER	= 1;
-
-	private int							photons			= 0;
+	private int							photons	= 0;
 	private CSVwriter					prefLog;
 	private TreeMap<Satellite, Integer>	satPhotons;
+
+	@Override
+	protected void end() {
+	}
 
 	@Override
 	protected List<Constellation> mkConstellations() {
@@ -68,7 +71,7 @@ public class OptimizePowerAperture extends LaserSwarm implements MultivariateRea
 	@Override
 	protected List<SimTemplate> mkTemplates(Constellation constellation) {
 		LinkedList<SimTemplate> tmpls = Lists.newLinkedList();
-		tmpls.add(new SimTemplate(constellation, 1000L));
+		tmpls.add(new SimTemplate(constellation, (long) SEQ_LENGTH));
 		return tmpls;
 	}
 
@@ -133,13 +136,14 @@ public class OptimizePowerAperture extends LaserSwarm implements MultivariateRea
 		for (Simulator sim : simulations.values())
 			sim.getDataPointsDB().close();
 
-		NormalDistributionImpl gausian = new NormalDistributionImpl(800 * satPhotons.size(), 100);
+		double target = TARGET_COUNT * SEQ_LENGTH;
+		NormalDistributionImpl gausian = new NormalDistributionImpl(target * satPhotons.size(), 50);
 		double performace = 0;
 		try {
 			performace = 1 / (Math.pow(power, POWER_POWER) * Math.pow(aperature, APERTURE_POWER));
 			performace *= gausian.cumulativeProbability(photons);
 			for (Satellite sat : satPhotons.keySet()) {
-				NormalDistribution gausian2 = new NormalDistributionImpl(800, 500);
+				NormalDistribution gausian2 = new NormalDistributionImpl(target, 200);
 				double modifier = gausian2.cumulativeProbability(satPhotons.get(sat));
 				performace *= modifier;
 			}
@@ -147,6 +151,7 @@ public class OptimizePowerAperture extends LaserSwarm implements MultivariateRea
 			e.printStackTrace();
 			System.exit(1);
 		}
+
 		logger.inf("Performance: %s (%s photons)", performace, photons);
 
 		List<Double> values = Lists.newLinkedList();

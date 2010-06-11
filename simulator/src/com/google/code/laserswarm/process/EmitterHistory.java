@@ -39,10 +39,14 @@ public class EmitterHistory {
 	public double getPulseBeforePulse(double t) {
 		t = t - halfPulseTime;
 		return time.floor(t);
-		
+
 	}
 
 	public double getPulseClosesTo(double t) {
 		return time.floor(t);
+	}
+
+	public TreeSet<Double> getTime() {
+		return time;
 	}
 }
