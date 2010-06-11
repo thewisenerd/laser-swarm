@@ -88,9 +88,88 @@ public class SubSampleCorrelation implements SampleCorrelation {
 		}
 		ElevationBRDF out = null;
 		// Do all calculations that can be done for a single data point (or: interpulse window).
-		// Start with the altitudes.
+		TreeMap<Double, Vector3d> altitudes = findInterpulseData(nextEmitPt, nextPulseT);
+		// Find and average altitudes that show a strong correlation.
+		ElevationRelatedEntriesPoint result = findAndAverageRelatedAltitudes(altitudes, nextPulseT,
+				nextEmitPt);
+		// Some queue maintenance.
+		rawElevationSlopes.add(result);
+		while (rawElevationSlopes.size() > qLength) {
+			rawElevationSlopes.removeFirst();
+		}
+		if (rawElevationSlopes.size() == qLength) {
+			// Filter averages based on spike removal.
+			spikeFilter(25 * equalitySpacing);
+			spikeFilter(5 * equalitySpacing);
+			spikeFilter(equalitySpacing);
+			averageExclusionFilter(5);
+			averageExclusionFilter(1);
+			// Final elevation and BRDFinput generation.
+			ElevationRelatedEntriesPoint rawElBRDF = rawElevationSlopes.get(middle);
+			out = new ElevationBRDF(rawElBRDF.getElevation(), genBRDFInput(rawElevationSlopes
+					.get(middle - 1), rawElBRDF, rawElevationSlopes.get(middle + 1)));
+		}
+		return out;
+	}
+
+	private boolean averageExclusionFilter(int nSpacings) {
+		boolean didFilter = false;
+		Iterator<ElevationRelatedEntriesPoint> rawIt = rawElevationSlopes.iterator();
+		double totalAlt = 0;
+		double altNo = 0;
+		while (rawIt.hasNext()) {
+			totalAlt += rawIt.next().getElevation();
+			altNo++;
+		}
+		double altAvg = totalAlt / altNo;
+		while (rawIt.hasNext()) {
+			ElevationRelatedEntriesPoint thisElSlope = rawIt.next();
+			if (!(areEqual(altAvg, thisElSlope.getElevation(), nSpacings * equalitySpacing))) {
+				thisElSlope = adjustElevationRelatedEntriesPoint(thisElSlope, altAvg);
+			}
+		}
+		return didFilter;
+	}
+
+	private boolean spikeFilter(double spacing) {
+		boolean didFilter = false;
+		double first = rawElevationSlopes.get(middle - 1).getElevation();
+		double mid = rawElevationSlopes.get(middle).getElevation();
+		double last = rawElevationSlopes.get(middle + 1).getElevation();
+		if (areEqual(first, last, spacing)) {
+			if (!(areEqual(first, mid, spacing))) {
+				didFilter = true;
+				ElevationRelatedEntriesPoint middlePoint = rawElevationSlopes.get(middle);
+				double elevation = (first + last) / 2;
+				rawElevationSlopes.set(middle,
+						adjustElevationRelatedEntriesPoint(middlePoint, elevation));
+			}
+		}
+		return didFilter;
+	}
+
+	private ElevationRelatedEntriesPoint adjustElevationRelatedEntriesPoint(
+			ElevationRelatedEntriesPoint old, double newHeight) {
+		ArrayList<TreeMap<Double, Vector3d>> closeEntryMaps = old.getRelatedEntries();
+		Iterator<TreeMap<Double, Vector3d>> closeIt = closeEntryMaps.iterator();
+		TreeMap<Double, Vector3d> bestFitMap = Maps.newTreeMap();
+		double minDist = Double.MAX_VALUE;
+		while (closeIt.hasNext()) {
+			TreeMap<Double, Vector3d> thisMap = closeIt.next();
+			double mapAvg = treeMapAvg(thisMap);
+			double dist = Math.abs(mapAvg - newHeight);
+			if (dist < minDist) {
+				bestFitMap = thisMap;
+				minDist = dist;
+			}
+		}
+		return new ElevationRelatedEntriesPoint(newHeight, old.getTEmit(), old.getPosEmit(),
+				closeEntryMaps, bestFitMap);
+	}
+
+	private TreeMap<Double, Vector3d> findInterpulseData(Point3d nextEmitPt, Double nextPulseT)
+			throws MathException {
 		TreeMap<Double, Vector3d> altitudes = Maps.newTreeMap();
-		double altTot = 0;
 		double satCount = 0;
 		for (Satellite curSat : interpulseData.keySet()) {
 			satCount++;
@@ -102,87 +181,18 @@ public class SubSampleCorrelation implements SampleCorrelation {
 								.getLookupPosition().find(time)), time - nextPulseT);
 				int numPhotons = tempData.get(time);
 				LookupTable satPositions = receiverTimelines.get(curSat).getLookupPosition();
-				for (int i = 0; i < numPhotons; i++) {
-					altitudes.put(thisAlt, new Vector3d(satPositions.find(time)));
-				}
 				if (thisAlt < minEl || thisAlt > maxEl) {
-					logger.dbg("Filtering impossible elevation detected: %s", maxEl - Configuration.R0);
+					logger.inf("Filtering impossible elevation: %s", maxEl - Configuration.R0);
 				} else {
-					altTot += numPhotons * thisAlt;
-					logger.dbg("Found an altitude: %s, with photon no.: %s", thisAlt - Configuration.R0,
+					for (int i = 0; i < numPhotons; i++) {
+						altitudes.put(thisAlt, new Vector3d(satPositions.find(time)));
+					}
+					logger.inf("Found an altitude: %s, with photon no.: %s", thisAlt - Configuration.R0,
 							numPhotons);
 				}
 			}
 		}
-		// Find and average altitudes that show a strong correlation.
-		ElevationRelatedEntriesPoint result = findAndAverageRelatedAltitudes(altitudes, nextPulseT,
-				nextEmitPt);
-		rawElevationSlopes.add(result);
-		while (rawElevationSlopes.size() > qLength) {
-			rawElevationSlopes.removeFirst();
-		}
-		// Filter averages based on spike removal
-		if (rawElevationSlopes.size() == qLength) {
-			Iterator<ElevationRelatedEntriesPoint> rawIt = rawElevationSlopes.iterator();
-			double last = 0;
-			double current = 0;
-			int count = 0;
-			boolean stillEqual = true;
-			while (rawIt.hasNext()) {
-				last = current;
-				current = rawIt.next().getElevation();
-				if (count == 0) {
-					last = current;
-					current = rawIt.next().getElevation();
-					count++;
-				} else if (count == middle) {
-					current = rawIt.next().getElevation();
-					count++;
-				}
-				if (!areEqual(last, current)) {
-					stillEqual = false;
-				}
-				count++;
-			}
-			if (stillEqual) {
-				if (!(areEqual(rawElevationSlopes.getFirst().getElevation(), rawElevationSlopes
-						.get(middle).getElevation()))) {
-					rawIt = rawElevationSlopes.iterator();
-					double totalAlt = 0;
-					double altNo = 0;
-					while (rawIt.hasNext()) {
-						double localAlt = rawIt.next().getElevation();
-						if (!(altNo == middle)) {
-							totalAlt += localAlt;
-						}
-						altNo++;
-					}
-					ElevationRelatedEntriesPoint middlePoint = rawElevationSlopes.get(middle);
-					ArrayList<TreeMap<Double, Vector3d>> closeEntryMaps = middlePoint
-							.getRelatedEntries();
-					Iterator<TreeMap<Double, Vector3d>> closeIt = closeEntryMaps.iterator();
-					TreeMap<Double, Vector3d> bestFitMap = Maps.newTreeMap();
-					double minDist = Double.MAX_VALUE;
-					double elevation = totalAlt / altNo;
-					while (closeIt.hasNext()) {
-						TreeMap<Double, Vector3d> thisMap = closeIt.next();
-						double mapAvg = treeMapAvg(thisMap);
-						double dist = Math.abs(mapAvg - elevation);
-						if (dist < minDist) {
-							bestFitMap = thisMap;
-							minDist = dist;
-						}
-					}
-					rawElevationSlopes.set(middle, new ElevationRelatedEntriesPoint(elevation,
-							middlePoint.getTEmit(), middlePoint.getPosEmit(),
-							closeEntryMaps, bestFitMap));
-				}
-			}
-			ElevationRelatedEntriesPoint rawElBRDF = rawElevationSlopes.get(middle);
-			out = new ElevationBRDF(rawElBRDF.getElevation(), genBRDFInput(rawElevationSlopes
-					.get(middle - 1), rawElBRDF, rawElevationSlopes.get(middle + 1)));
-		}
-		return out;
+		return altitudes;
 	}
 
 	private BRDFinput genBRDFInput(ElevationRelatedEntriesPoint lastElBRDF,
@@ -252,8 +262,8 @@ public class SubSampleCorrelation implements SampleCorrelation {
 		return new BRDFinput(emPos, emDir, alongTrackSlope, crossTrackSlope, photonDirs, curTime);
 	}
 
-	private boolean areEqual(double a, double b) {
-		if (Math.abs(a - b) < equalitySpacing) {
+	private boolean areEqual(double a, double b, double spacing) {
+		if (Math.abs(a - b) < spacing) {
 			return true;
 		} else {
 			return false;
