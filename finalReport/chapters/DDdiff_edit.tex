@@ -1,0 +1,54 @@
+\subsection{Gaussian Beam Propagation And Diffraction}
+	\label{diffraction}
+	
+Collimated plane wave propagation (uniform \textbf{k}-vector distribution) in optical systems would give rise to discrete and accurate calculations. However, due to optical distortions and modifications, the \textbf{k}-vector distribution can change, hence, altering the wave propagation. 
+
+\textit{Gaussian Beams}
+For the analysis of the \acs{laser} beam intensity profile, a Gaussian profile (transverse mode &TEM_{00}&) is considered corrected by the $M^{2}$ factor for optical distortion. The electric field distribution for a Gaussian beam is represented as:
+
+\begin{equation}
+	E(r,z) = E_{0}\cdot \frac{w_{0}}{w(z)} \cdot exp\left[\frac{-r^{2}}{w(z)}\right]\cdot exp\left[-i(kz-arctan\left(\frac{z}{z_{r}}\right)+\frac{kr^{2}}{2R(z)}\right]
+\end{equation}
+
+\begin{equation}
+	E(x,y,z) = exp\left[\frac{-i(kz + \psi(z)}{w(z)}\right]exp\left[\frac{-(x^{2}+y^{2})}{w^{2}(z)} - ik \frac{(x^{2}+y^{2}}{2R(z)}\right]
+\end{equation}
+
+w1 equals
+
+\begin{equation}
+w_{1} = \frac{\lambda \cdot z}{\pi\cdot w_{0}}
+\end{equation}
+
+
+theta equals
+\begin{equation}
+\theta = \frac{\lambda}{\pi\cdot w_{0}}
+\end{equation}
+
+
+\textit{Fraunhofer Diffraction} 
+The Fresnel number $F = a^{2}/\lambda \cdot R$, where a is the characteristic size ("radius") of the aperture,  \lambda is the wavelength, and R is the distance from the aperture, determines the diffraction regime that should be considered (F<< 1: Fraunhofer; F > 1, Fresnel).
+
+The far-field light field is the Fourier transform of the aperatured field.
+	
+\begin{equation} 
+E(k_{x},k_{y}) = \mathcal{F}\left\{{\overbrace{t(x,y)}^{Transmission\  function}\cdot E(x,y)}\right\} = \iint(exp(-i(k_{x} x + k_{y}y))\cdot t(x,y)\cdot E(x,y)dxdy 
+\end{equation} 
+
+The expression for a real laser beam's electric field is given by
+
+\begin{equation}
+E(x,y,z) = \frac{exp\left[-i(kz + \psi(z))\right]}{w(z)}\cdot exp\left[\frac{-(x^{2}+y^{2})}{w^{2}(z)}-\frac{ik(x^{2}+y^{2})}{2R(z)}\right]
+\end{equation}
+
+The propagation equation for a real laser are now written as
+
+\begin{equation}
+w_{R}(z)=w_{0R}(z)\sqrt{\left[1 + \left(\frac{z\lambda M^{2}}{\pi w_{0R}^{2}}\right)^{2}\right]}
+\end{equation}
+
+\begin{equation}
+R_{R}(z)=z\left[1 + \left(\frac{\pi w_{0R}^{2}}{z\lambda M^{2}}\right)^{2}\right]
+\end{equation}
+
