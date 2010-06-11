@@ -75,7 +75,12 @@ public class SlopeSpread implements IPostSimulation {
 					else
 						simVarNew = new SimVars(simVar);
 
+					int photonsOld = 0;
+					if (simVarNew.photonsE.containsKey(sat))
+						photonsOld = simVar.photonsE.get(sat);
+
 					simVarNew.apply(simVar, sat);
+					simVarNew.photonsE.put(sat, photonsOld + 1);
 					simVarNew.tR = tRNew;
 					Vector3d dir = new Vector3d(simVar.pR);
 					dir.normalize();
