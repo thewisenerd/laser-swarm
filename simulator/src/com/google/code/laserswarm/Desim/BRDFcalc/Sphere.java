@@ -13,7 +13,7 @@ import com.google.code.laserswarm.TestFindElevation;
 import com.lyndir.lhunath.lib.system.logging.Logger;
 
 /**
- * @author 
+ *   
  *
  */
 public class Sphere  extends TreeMap<Vector3d, Double>{
