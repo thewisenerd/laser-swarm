@@ -26,7 +26,8 @@ import com.google.common.collect.Maps;
 import com.lyndir.lhunath.lib.system.logging.Logger;
 
 public class SubSampleCorrelation implements SampleCorrelation {
-	private static final Logger							logger	= Logger.get(SubSampleCorrelation.class);
+	private static final Logger							logger	= Logger
+																		.get(SubSampleCorrelation.class);
 
 	private Map<Satellite, TimeLine>					receiverTimelines;
 	private Map<Satellite, DataContainer>				interpulseData;
@@ -35,6 +36,8 @@ public class SubSampleCorrelation implements SampleCorrelation {
 	private double										equalitySpacing;
 	private double										interval;
 	private double										fractionD;
+	private double										minEl	= Configuration.R0 - 500.0;
+	private double										maxEl	= Configuration.R0 + 9000.0;
 	private int											qLength;
 	private int											middle;
 	private Constellation								cons;
@@ -89,7 +92,6 @@ public class SubSampleCorrelation implements SampleCorrelation {
 		TreeMap<Double, Vector3d> altitudes = Maps.newTreeMap();
 		double altTot = 0;
 		double satCount = 0;
-		int photonCount = 0;
 		for (Satellite curSat : interpulseData.keySet()) {
 			satCount++;
 			DataContainer tempContainer = interpulseData.get(curSat);
@@ -97,13 +99,14 @@ public class SubSampleCorrelation implements SampleCorrelation {
 			for (Double time : tempData.keySet()) {
 				double thisAlt = AltitudeCalculation.calcAlt(nextEmitPt,
 						new Point3d(receiverTimelines.get(curSat)
-						.getLookupPosition()
-						.find(time)), time - nextPulseT);
+								.getLookupPosition().find(time)), time - nextPulseT);
 				int numPhotons = tempData.get(time);
-				photonCount += numPhotons;
 				LookupTable satPositions = receiverTimelines.get(curSat).getLookupPosition();
 				for (int i = 0; i < numPhotons; i++) {
 					altitudes.put(thisAlt, new Vector3d(satPositions.find(time)));
+				}
+				if (thisAlt < minEl || thisAlt > maxEl) {
+					logger.wrn("Impossible elevation detected: %s", maxEl);
 				}
 				altTot += numPhotons * thisAlt;
 				logger.dbg("Found an altitude: %s, with photon no.: %s", thisAlt - Configuration.R0,
@@ -141,9 +144,8 @@ public class SubSampleCorrelation implements SampleCorrelation {
 				count++;
 			}
 			if (stillEqual) {
-				if (areEqual(rawElevationSlopes.getFirst().getElevation(), rawElevationSlopes
-						.get(middle).getElevation())) {
-				} else {
+				if (!(areEqual(rawElevationSlopes.getFirst().getElevation(), rawElevationSlopes
+						.get(middle).getElevation()))) {
 					rawIt = rawElevationSlopes.iterator();
 					double totalAlt = 0;
 					double altNo = 0;
@@ -174,11 +176,10 @@ public class SubSampleCorrelation implements SampleCorrelation {
 							middlePoint.getTEmit(), middlePoint.getPosEmit(),
 							closeEntryMaps, bestFitMap));
 				}
-				ElevationRelatedEntriesPoint rawElBRDF = rawElevationSlopes.get(middle);
-				out = new ElevationBRDF(rawElBRDF.getElevation(), genBRDFInput(rawElevationSlopes
-						.get(middle - 1), rawElBRDF, rawElevationSlopes.get(middle + 1)));
 			}
-		} else {
+			ElevationRelatedEntriesPoint rawElBRDF = rawElevationSlopes.get(middle);
+			out = new ElevationBRDF(rawElBRDF.getElevation(), genBRDFInput(rawElevationSlopes
+					.get(middle - 1), rawElBRDF, rawElevationSlopes.get(middle + 1)));
 		}
 		return out;
 	}
@@ -209,6 +210,7 @@ public class SubSampleCorrelation implements SampleCorrelation {
 		Vector3d difTan = new Vector3d();
 		difTan.sub(thisEmitCart, lastEmitCart);
 		double alongTrackSlope = difRad / difTan.length();
+		logger.dbg("avgRad, difRad, difTan: %s, %s, %s", avgRad, difRad, difTan.length());
 		// Calculate the cross-track slope.
 		Vector3d emitVect = new Vector3d(posEmit);
 		double footprintD = fractionD * 2.0 * cons.getEmitter().getBeamDivergence()
@@ -224,8 +226,11 @@ public class SubSampleCorrelation implements SampleCorrelation {
 				min = alt;
 			}
 		}
-		double crossTrackSlope = Math.sqrt(Math.pow(alongTrackSlope, 2)
-				- Math.pow((max - min) / footprintD, 2));
+		double a = Math.pow(alongTrackSlope, 2);
+		double b = Math.pow((max - min) / footprintD, 2);
+		double crossTrackSlope = Math.sqrt(b - a);
+		logger.dbg("min, max, footprintD: %s, %s, %s", min, max, footprintD);
+		logger.dbg("a, b, crossTrackSlope: %s, %s, %s", a, b, crossTrackSlope);
 		// The satellite vectors go in here.
 		Map<Vector3d, Integer> photonDirs = Maps.newLinkedHashMap();
 		for (Double time : altitudes.keySet()) {
@@ -238,8 +243,11 @@ public class SubSampleCorrelation implements SampleCorrelation {
 		}
 		// Get the current emitter time.
 		double curTime = elBRDF.getTEmit();
-		logger.dbg("Generated the following BRDFinput: \nemPos: %s\nemDir: %s\nslopes: %s, %s\nphotonDirs: %s\ntime: %s",
-						emPos.toString(), emDir.toString(), alongTrackSlope, crossTrackSlope, photonDirs.toString(), curTime);
+		logger
+				.dbg(
+						"Generated the following BRDFinput: \nemPos: %s\nemDir: %s\nslopes: %s, %s\nphotonDirs: %s\ntime: %s",
+						emPos.toString(), emDir.toString(), alongTrackSlope, crossTrackSlope, photonDirs
+								.toString(), curTime);
 		return new BRDFinput(emPos, emDir, alongTrackSlope, crossTrackSlope, photonDirs, curTime);
 	}
 

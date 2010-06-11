@@ -42,7 +42,7 @@ public class Altitude {
 
 	public static void main(String[] args) throws DemCreationException, MathException,
 			IOException {
-		run(dataPoints, new FindElevationNeighborInterpolation(1, (int) 97e12, 5, 3, 0.3, 0.707));
+		run(dataPoints, new FindElevationNeighborInterpolation(1, (int) 97e12, 15, 3, 1.5, 0.707));
 	}
 
 	public static void run(int dataPoint, ElevationFinder findEl) throws DemCreationException,
@@ -121,16 +121,16 @@ public class Altitude {
 			Configuration.write("constellation.xml", constellation);
 		}
 		if (new File("altData.xml").exists() & dontCalculate) {
-			alts = Configuration.read("altData.xml", Configuration
+			elSlope = Configuration.read("altData.xml", Configuration
 					.getDefaultSerializer("altData.xml"));
 		} else {
 			elSlope = findEl.run(satData, emitterHistory, constellation, dataPoints);
-			alts = elSlope.getAltitudes();
-			Configuration.write("altData.xml", alts);
+			Configuration.write("altData.xml", elSlope);
 		}
+		alts = elSlope.getAltitudes();
 		plotter.plot(alts, 3, "heightAnalysed");
 
-		logger.inf("heightAnalysed&SpikeFiltered Stats:\n%s",
+		logger.inf("heightAnalysed Stats:\n%s",
 				new ElevationComparison(EarthModel.getDefaultModel(), alts));
 
 		// Filter filtAvg = new FilterAverage(21);

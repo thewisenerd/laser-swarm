@@ -33,7 +33,6 @@ public class ElevationComparison extends DescriptiveStatistics {
 				e.printStackTrace();
 			}
 			addValue(pSphere.x - h);
-			System.out.println(new Point3d(h, pSphere.y, pSphere.z));
 			alts.add(new Point3d(h, pSphere.y, pSphere.z));
 		}
 
