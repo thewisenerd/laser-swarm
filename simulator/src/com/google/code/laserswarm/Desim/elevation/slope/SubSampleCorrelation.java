@@ -26,8 +26,7 @@ import com.google.common.collect.Maps;
 import com.lyndir.lhunath.lib.system.logging.Logger;
 
 public class SubSampleCorrelation implements SampleCorrelation {
-	private static final Logger							logger	= Logger
-																		.get(SubSampleCorrelation.class);
+	private static final Logger							logger	= Logger.get(SubSampleCorrelation.class);
 
 	private Map<Satellite, TimeLine>					receiverTimelines;
 	private Map<Satellite, DataContainer>				interpulseData;

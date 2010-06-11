@@ -56,7 +56,7 @@ public class SlopeSpread implements IPostSimulation {
 					try {
 						offset = area.cumulativeProbability(Math.random());// in m
 					} catch (MathException e) {
-						logger.wrn("Failed to compite offset for ellipse (a=%s and b=%s)", a, b);
+						logger.wrn("Failed to compute offset for ellipse (a=%s and b=%s)", a, b);
 					}
 
 					// if (offset == 0) {

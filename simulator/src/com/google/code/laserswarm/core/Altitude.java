@@ -18,6 +18,7 @@ import com.google.code.laserswarm.Desim.elevation.ElevationComparison;
 import com.google.code.laserswarm.Desim.elevation.ElevationFinder;
 import com.google.code.laserswarm.Desim.elevation.slope.ElevationSlope;
 import com.google.code.laserswarm.Desim.elevation.slope.FindElevationNeighborInterpolation;
+import com.google.code.laserswarm.Desim.elevation.slope.SlopeComparison;
 import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.conf.Constellation;
 import com.google.code.laserswarm.conf.Satellite;
@@ -132,6 +133,9 @@ public class Altitude {
 
 		logger.inf("heightAnalysed Stats:\n%s",
 				new ElevationComparison(EarthModel.getDefaultModel(), alts));
+
+		logger.inf("slope Stats:\n%s",
+				new SlopeComparison(EarthModel.getDefaultModel(), elSlope));
 
 		// Filter filtAvg = new FilterAverage(21);
 		// LinkedList<Point3d> averagedAlts = filtAvg.filter(alts);

@@ -14,9 +14,11 @@ import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.earthModel.EarthModel;
 import com.google.code.laserswarm.out.plot1D.plotHeightDistribution;
 import com.google.common.collect.Lists;
+import com.lyndir.lhunath.lib.system.logging.Logger;
 
 @SuppressWarnings("serial")
 public class ElevationComparison extends DescriptiveStatistics {
+	private static final Logger	logger	= Logger.get(ElevationComparison.class);
 
 	public ElevationComparison(EarthModel earth, List<Point3d> set1) {
 		super();
@@ -38,10 +40,9 @@ public class ElevationComparison extends DescriptiveStatistics {
 
 		plotHeightDistribution plotter = new plotHeightDistribution();
 		try {
-			plotter.plot(alts, 3, "SomeImage");
+			plotter.plot(alts, 3, "HeightFromDigitalElevationModel");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.err(e, "Error");
 		}
 	}
 
