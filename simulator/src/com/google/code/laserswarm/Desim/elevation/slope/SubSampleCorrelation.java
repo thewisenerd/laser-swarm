@@ -106,11 +106,12 @@ public class SubSampleCorrelation implements SampleCorrelation {
 					altitudes.put(thisAlt, new Vector3d(satPositions.find(time)));
 				}
 				if (thisAlt < minEl || thisAlt > maxEl) {
-					logger.wrn("Impossible elevation detected: %s", maxEl);
+					logger.dbg("Filtering impossible elevation detected: %s", maxEl - Configuration.R0);
+				} else {
+					altTot += numPhotons * thisAlt;
+					logger.dbg("Found an altitude: %s, with photon no.: %s", thisAlt - Configuration.R0,
+							numPhotons);
 				}
-				altTot += numPhotons * thisAlt;
-				logger.dbg("Found an altitude: %s, with photon no.: %s", thisAlt - Configuration.R0,
-						numPhotons);
 			}
 		}
 		// Find and average altitudes that show a strong correlation.
