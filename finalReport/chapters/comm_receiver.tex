@@ -1,0 +1,24 @@
+\section{Communications subsystem}
+This section will discuss the  the communication link to which the receiver satellite is connected:
+\begin{itemize}
+\item Crosslink for scientific and housekeeping data
+\end{itemize}
+
+These links are illustrated figure XXX
+For this link the link budget and the communications hardware selected will be presented. Only hardware specifications will be given, a more detailed description of the hardware selection can be found in \ref{crossem}.
+
+\subsection{Crosslink for scientific data and housekeeping data}
+This link transmits the scientific data gathered by the receiver satellites to the emitter satellite. The receiver satellites will transmit their scientific data continuously so that the emitter satellite can store all data in one data bank before it is transmitted to the ground. In addition to scientific data, command and housekeeping data is also transmitted in this link.
+
+The link budget has the following input parameters: the frequency selected was 2 GHz, the data rate required is 1.62 Mbit/s, the maximum distance between the satellites is 261 km, the modulation used is QPSK. Atmospheric losses were not considered for obvious reasons.
+
+A detailed description of these parameters can be found in ref{cross_em}.
+
+\subsubsection{Transceiver}
+The transceiver selected was an SBTRcvr of RDLabs, which has a maximum data rate of 10 Mb/s for QPSK modulation, an input power of 12 Watt and an output power of 1 to 5 Watt \ref{RDLabs}.
+
+\subsubsection{Antenna}
+The S Band patch antenna from Surrey Satellite technologies\ref{SurrPatch} was selected as the antenna for this link, it has a mass of only 80 grams, a 120$^{\circ}$ beamwidth, a gain of 4 dBi and measures 82x82x20 mm.
+
+\subsubsection{Link budget}
+Because the selected modulation is QPSK and the maximum allowable bit error rate is 10$^{-5}$, the required E$_{b}$/N$_{0}$ is equal to 9.6 dB. With the output power of the transceiver at maximum (5 Watt or 7 dBW) it is possible to have a E$_{b}$/N$_{0}$ of 10.35 dB, which leaves a margin of 2.36 dB.
