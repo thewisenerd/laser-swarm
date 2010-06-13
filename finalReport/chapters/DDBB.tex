@@ -1,19 +1,18 @@
-%\section{Human Resource Allocation}
-%\label{DDHR}
-%The first part of the project will involve a team of five specialists designing the five critical subsystems and one person designing the orbits of the swarm. The other four members will concentrate on the development of the software that will be used to assist the trade-off and verify the design. At later stages, some of the the software engineering personnel is heavily involved in designing proper algorithms for the processing of mission data, while others will be brought in to assist with detail design. 
-%
-%A schematic representation of the resource allocation can be found in figure \ref{fig:DDBBHR} on page \pageref{fig:DDBBHR}.
-%
-%\begin{figure}[ht!]
-%\begin{center}
-%\includegraphics[width=0.9\textwidth]{chapters/img/DDBBHR.jpg}
-%\label{fig:DDBBHR}
-%\caption{Human resource allocation chart}
-%\end{center}
-%\end{figure}
-%
-%The table \ref{tab:RWD} on page \pageref{tab:RWD} gives the documentation distribution of each person on each chapter.
+\section{Human Resource Allocation}
+\label{DDHR}
+The first part of the project will involve a team of five specialists designing the five critical subsystems and one person designing the orbits of the swarm. The other four members will concentrate on the development of the software that will be used to assist the trade-off and verify the design. At later stages, some of the the software engineering personnel is heavily involved in designing proper algorithms for the processing of mission data, while others will be brought in to assist with detail design. 
 
+A schematic representation of the resource allocation can be found in figure \ref{fig:DDBBHR} on page \pageref{fig:DDBBHR}.
+
+\begin{figure}[ht!]
+\begin{center}
+\includegraphics[width=0.9\textwidth]{chapters/img/DDBBHR.jpg}
+\end{center}
+\caption{Human resource allocation chart}
+\label{fig:DDBBHR}
+\end{figure}
+
+The table \ref{tab:RWD} on page \pageref{tab:RWD} gives the documentation distribution of each person on each chapter.
 \begin{table}[ht!]
 \centering
 \scalebox{0.7}{
@@ -60,7 +59,7 @@
  6.5     & \ -EPS                               & Sean &\\\hline
  6.6     & \ -Summary                           &\\\hline\hline
  7       & Receiver                             &\\\hline
- 7.1     & \ -OEP                               & Zhuan &\\\hline
+ 7.1     & \ -ORP                               & Zhuan &\\\hline
  7.1.2   & \ \ -SPAD Research                  & Tim, Zhuan &\\\hline
  7.1.3   & \ \ -Prism Design                   & Zhuan &\\\hline
  7.1.4   & \ \ -Summary                        & Zhuan &\\\hline
@@ -75,8 +74,8 @@
  10      & Compliance Matrix                    &\\\hline\hline
  -       & Others                               &\\\hline
  -       & \ -Catia Drawing                     & Lieuwe &\\\hline
- -       & \ -Latex Compile                     & Alex &\\
- \hline
+ -       & \ -Latex Compile                     & Alex &\\\hline
+
 \end{tabular}
 }
 \caption{Report writing distribution}
@@ -84,20 +83,34 @@
 \end{table}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\section{Mass Budget Breakdown}
-%\label{DDMBB}
-%
-%\begin{table}[ht!]
-%\centering
-%\begin{tabular}{|l|c|c|}
-%\hline
-%  & Author & Checked by \\\hline
-%  & Author & Checked by \\\hline 
-% \hline
-%\end{tabular}
-%\caption{Report writing distribution}
-%\label{tab:RWD}
-%\end{table}
+\section{Mass Budget Breakdown}
+\label{DDMBB}
+The table \ref{tab:MB} on page \pageref{tab:MB} indicates mass budget breakdown for emitter and receiver satellites.
+
+\begin{table}[ht!]
+\centering
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+ & \multicolumn{2}{|c|}{Emitter} & \multicolumn{2}{|c|}{Receiver} \\\hline
+ Subsystem        & $M [kg]$ & \%$M_{dry}$ & $M [kg]$ & \%$M_{dry}$ \\\hline\hline
+ Communication    & 10.66    & 21        & 2.49       & 21.3 \\\hline
+ Navigation       & 0.25     & 0.5       & 0.25       & 2.2 \\\hline
+ OEP              & 15       & 29.8      & -          & - \\\hline
+ ORP              & 0.22     & 0.4       & 0.22       & 2 \\\hline
+ EPS              & 5.8      & 11.5      & 2.6        & 22.2 \\\hline
+ ADCS             & 2        & 4         & 1.5        & 12.8 \\\hline
+ Thermal          & 1.48     & 3         & 0.29       & 2.5 \\\hline
+ Structure        & 12.35    & 24.5      & 2.45       & 21 \\\hline
+ Propulsion(tank) & 1        & 2         & 0.75       & 6.5 \\\hline
+ Thruster         & 0.65     & 1.3       & 0.35       & 2.7 \\\hline
+ Shielding        & 1        & 2         & 0.8        & 6.8 \\\hline\hline
+ $M_{dry}$        & 50.41    & 100       & 11.7       & 100 \\\hline
+ $M_{propellant}$ & 4        & -         & 3.6        & - \\\hline\hline
+ $M_{Loaded}$     & 54.41    & -         & 15.3       & - \\\hline
+\end{tabular}
+\caption{Mass Budget Breakdown}
+\label{tab:MB}
+\end{table}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\section{Cost Budget Breakdown}
