@@ -1,0 +1,81 @@
+
+\section{Communication subsystems}
+This section will discuss the  three different communication links to which the emitter satellite is connected:
+\begin{itemize}
+\item Crosslink for scientific and housekeeping data
+\item Ground-space link for scientific data
+\item Ground-space link for command and housekeeping data
+\end{itemize}
+
+These links are illustrated figure XXX
+For each link the link budget and the communications hardware selected will be presented.
+
+\subsection{Crosslink for scientific data and housekeeping data}
+This link transmits the scientific data gathered by the receiver satellites to the emitter satellite. To keep the receiver satellites as small as possible and to have efficient data storage, the receiver satellites will transmit their scientific data continuously so that the emitter satellite can store all data in one data bank before it is transmitted to the ground. In addition to scientific data, command and housekeeping data is also transmitted in this link.
+
+The link budget has the following input parameters: the frequency selected was 2 GHz, the data rate required is 1.62 Mbit/s, the maximum distance between the satellites is 261 km, the modulation used is QPSK. Atmospheric losses were not considered for obvious reasons.
+
+In the mid term report a frequency in the Ku-band was selected, however it turned out that the data rate was low enough to use S-band or more specifically 2 GHz, which requires far less power consuming hardware.
+
+The maximum distance is 261 km, which is longest distance that occurs between the emitter satellite and any of the receiver satellites. Distance between receiver satellites can be twice as long but were not considered after the relative tracking with these crosslinks was abandoned.
+
+The QPSK was selected for its good balance between required E$_{b}$/N$_{0}$ and spectrum utilization. Also a lot of transceivers are available for this modulation.
+
+Another important parameter is the data rate, 1.62 Mbit/s, which was calculated in appendix YYY. The position of the satellite is registered every second (144 bits), while for each received photon the coordinates on the array, time, satellite attitude and instrument attitude are registered (295 bits), with 5000 photons expected per second. Adding an extra 10 \% for overhead gives the final data rate between a single receiver satellite and the emitter satellite.
+
+
+\subsubsection{Transceiver}
+Since the data rate is quite high for an S-band, nanosatellite S-band transceivers did not satisfy the requirements, which only allow 9.6 kb/s at maximum \ref{cubeshopcomm}. However microsatellite sized transceivers turned out to be sufficient. The transceiver selected was an SBTRcvr of RDLabs, which has a maximum data rate of 10 Mb/s for QPSK modulation, an input power of 12 Watt and an output power of 1 to 5 Watt \ref{RDLabs}.
+
+\subsubsection{Antenna}
+For low gain applications and frequencies below 4 GHz three antennas were considered: a dipole antenna, a helix antenna and a patch antenna. The dipole antenna was not an option since its gain is too low (theoretical gain of a half wave antenna is only 2.15 dBi). A helix antenna would be too large and would decrease the ballistic coefficient too much, for example the S-Band quadrifilar helix antenna of Surrey Satellite technology \ref{SurrHelix} is 0.5 m long with a base of 100mm on 100mm, while the S Band patch antenna \ref{SurrPatch} from the same company is only 20mm thick and 82mm on 82mm large. 
+This S Band patch antenna, which was eventually selected, has a mass of only 80 grams, a 120$^{\circ}$ beamwidth and a gain of 4 dBi.
+
+\subsubsection{Link budget}
+Because the selected modulation is QPSK and the maximum allowable bit error rate is 10$^{-5}$, the required E$_{b}$/N$_{0}$ is equal to 9.6 dB. With the output power of the transceiver at maximum (5 Watt or 7 dBW) it is possible to have a E$_{b}$/N$_{0}$ of 10.35 dB, which leaves a margin of 2.36 dB.
+
+\subsection{Ground-space link for scientific data}
+As mentioned the past subsection, all scientific data is collected on the emitter satellite which is then transmitted to the ground when it passes its ground station.
+
+The link budget has the following input parameters: the frequency selected was 8.2 GHz, the data rate allowed is 150 Mbit/s, the maximum distance between the ground station and the satellite is 1000 km, the modulation used is SQPSK.
+
+The frequency selected is of the X-band as was mentioned in the mid-term review, since it allows a high data rate and is commonly used for Earth observation satellites and thus a lot of ground stations have the right equipment for this frequency band.
+
+The data rate depends on the link time between ground station and satellite, the time between the passes and the storage capacity. The exact required data rate was determined in section XXX on data storage and resulted in 110 Mb/s, nevertheless the 150 Mb/s figure was used in the calculations for the linkbudget to allow for more margin.
+
+The distance between the station and the satellite follows from the maximum beam angle of antenna on the satellite (45$^{\circ}$), for a detailed calculation of this distance, see appendix YYY.
+
+The SQPSK modulation was chosen since it also allows a good balance between required E$_{b}$/N$_{0}$ and spectrum utilization and also allows a high data rate than QPSK on certain transmitters.
+
+\subsubsection{Transmitter}
+The transmitters considered were the XTRA-6 from TESAT Spacecom \ref{TESATxtra} and the HRT150 from General Dynamics and \ref{HRT150}. Since the XTRA-6 is lighter, smaller and requires less power and allows a higher data rate than the HRT150, the choice was quickly made.
+The XTRA-6 weighs 1.1 kg, measures 197x89x74 mm, consumes 30 Watts of power and has an output power of 6 Watts.
+
+\subsubsection{Antenna}
+As was chosen in the mid term review, the antenna for the ground space link is a phased array. The phased array selected was the XPAA from Boeing's Phantom works in Seattle \ref{XPAA}. It has a mass of 5.5 kg, measures 330x305x74mm, has a gain of 23.03 dBi and a beamwidth of 15$^{\circ}$.
+
+\subsubsection{Ground station}
+The ground station selected was ESRANGE, which allows up to 12 passes a day as it is located above the pole circle. The ground station is operated by ESA and the SSE and is commonly used by Earth observation satellites. For X-band the base has a 13m parabolic receiver dish which has a very high gain, 58 dBi and a beamwidth of 0.18$^{circl}$ \ref{esrange}.
+
+\subsubsection{Link budget}
+
+Similar to the link budget of the crosslinks, the selected modulation is SQPSK and the maximum allowable bit error rate is 10$^{-5}$, meaning the required E$_{b}$/N$_{0}$ is equal to 9.6 dB. With the output power of the transceiver at 5 Watt or 7 dBW, it is possible to have a E$_{b}$/N$_{0}$ of 10.35 dB, which leaves a margin of 29.3 dB.
+
+\subsection{Ground-space link for command and housekeeping data}
+Aside from the one way space to ground link for scientific data there is also a separate two way link for commands and housekeeping data. 
+
+The link budget has the following input parameters: the frequency selected was 2 GHz, the data rate allowed is 20 kb/s, the maximum distance between the ground station and the satellite is 1000 km, the modulation used is QPSK.
+
+The frequency selected is 2 GHz since only a very low data rate is required, and since most ground station over the world are equipped with hardware for S-band links this allows for many contact opportunities to send commands or receive housekeeping data in addition to its main ground station at ESRANGE.
+
+The data rate required is 20 kb/s, normally a housekeeping data is never more than a few kb/s\ref{satcom} but since the housekeeping data of 5 satellites has to go through the link, it was estimated that 20 kb/s should suffice.
+
+The maximum distance is the same as for the space to ground link for scientific data.
+
+The modulation is again QPSK for its balance between required E$_{b}$/N$_{0}$ and spectrum utilization.
+
+\subsubsection{Transceiver}
+The transceiver selected was the same as the one used for the crosslinks.
+\subsubsection{Antenna}
+
+\subsubsection{Link budget}
