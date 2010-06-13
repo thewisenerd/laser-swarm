@@ -1,0 +1,50 @@
+\documentclass[11pt]{report}
+
+\usepackage{pdflscape}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{enumerate}
+\usepackage[printonlyused]{acronym}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{subfig}
+\usepackage{amsmath}
+\usepackage{url}
+\usepackage{fixltx2e}
+
+\topmargin -1.5cm
+\oddsidemargin -0.04cm 
+\evensidemargin -0.04cm 
+\textwidth 16.59cm 
+\textheight 21.94cm 
+\parskip 7.2pt 
+
+\begin{document}
+
+
+
+
+\chapter{Data Storage for the Receiver}
+\label{DSReceiver}
+
+In order for the mission to succeed it is important that all collected data can be stored somewhere. Because the emitter is the only satellite with a link to the ground, it is most logical that all data is stored on the emitter. However it to minimize the chance of losing data the receivers will also be equipped with a small unit for data storage. Table \ref{DSReceiverTable} shows the values important for data storage on the emitter. 
+
+Assuming some problem occurs with data transmission that can only be solved after communication with a ground station the emitters may have to remember data of up to 7.5 hours (table \ref{DSReceiverTable}). This would require a storage capacity of 49 [Gbit]. As a result each receiver satellite will use a single 64 [Gbit] flash memory module from 3D-Plus. This also ensures the possibility to store more data should the need arise, or if one of the memory banks should fail. A final calculation is made to determine how long it would take to send all the saved data to the emitter, which is about 6.75 hours. For more details on the flash memory unit please go to the emitter section on page \pageref{DSEmitter}.
+
+\begin{table}
+\centering
+\begin{tabular}{c|c}
+\textbf{Parameter}  & \textbf{Emitter} \\\hline\hline
+	Max. time without contact to ground station & 7:35:33 \\
+	Total bit rate [Mbit/s] & 1.63 \\
+	Max. amount of data to be stored [Gbit] & 49 \\
+	Time required to send data to the emitter [s] & 6:47:19 \\
+\end{tabular}
+\caption{Some values used to determine the data storage for the receiver.}
+\label{DSReceiverTable}
+\end{table}
+
+
+
+\end{document}

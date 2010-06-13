@@ -1,0 +1,26 @@
+\section{Data Storage for the Emitter}
+\label{DSEmitter}
+
+In order to find an appropriate storage device it is important to known how much data will have to be stored. In order to do this the first thing done is choosing a ground station and determining when the satellite is in view. Many European polar orbit Earth observation missions use the Kiruna station located close to the North Pole, so the laser swarm will use this station as well. Simulating a period of three weeks will give a clear indication of the amount when the emitter in view, the amount of time the satellite is in view and the time in between two passes. The first three entries in table \ref{DSEmitterTable} show the results for these calculations.
+
+Next the total generated bit rate is determined, it is 8.13 [Mbit/s] as indicated in table \ref{DSEmitterTable}. Using this number and the maximum time between two passes over Kiruna the maximum amount of storage required can be determined. The result is indicated in table \ref{DSEmitterTable}, note that a 10\% margin is included to take into account possible anomalies. 
+
+Now the required amount of storage is known a suitable storage device can be chosen. The 64 [Gbit] flash memory module from 3D-Plus \ref{DataStorage} is the best choice due its ability to store a large amount of data in a small, space qualified, package. One module required about 1 Watt of power and has a weight of 6.10 grams, also it's dimensions are 20.4 x 13.84 x 12.13 mm. Because 244 [Gbit] is required the emitter will be equipped with 5 of these modules. The reason 5 modules are used when 4 is enough is to allow for a redundancy in data storage, because an error may occur preventing a download after on the long periods without contact with the ground.
+
+\begin{table}
+\centering
+\begin{tabular}{c|c}
+\textbf{Parameter}  & \textbf{Emitter} \\\hline\hline
+	Max. time without contact to ground station & 7:35:33 \\
+	Average time without contact to ground station & 1:39:00  \\
+	Average duration of contact to ground station & 0:08:30 \\
+	Total bit rate [Mbit/s] & 8.13 \\
+	Max. amount of data to be stored [Gbit] & 244 \\
+	Required downlink rate [Mbit/s] & 111 \\
+	Maximum available downlink rate [Mbit/s] & 150 \\
+\end{tabular}
+\caption{Important values used to determine the required memory on the emitter.}
+\label{DSEmitterTable}
+\end{table}
+
+Now a suitable storage medium is chosen it is checked whether the stored data can be sent to Earth without running out of storage capacity for new measurements. Investigation of the simulated data reveals that the largest intervals without contact occur once every 13 overpasses. Taking into account the new data received during these overpasses and the average time the emitter is visible the resulting required downlink rate is 111 [Mbit/s], as indicated in table \ref{DSEmitterTable}. Comparing this with the maximum possible downlink rate it is revealed that the 3D-Plus 64 [Gbit] memory is a viable option. So the emitter will carry 5 x 64 [Gbit] flash memory modules from 3D-Plus for data storage.

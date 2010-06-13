@@ -1,0 +1,91 @@
+\documentclass[11pt]{report}
+
+\usepackage{pdflscape}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{enumerate}
+\usepackage[printonlyused]{acronym}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{subfig}
+\usepackage{amsmath}
+\usepackage{url}
+\usepackage{fixltx2e}
+
+\topmargin -1.5cm
+\oddsidemargin -0.04cm 
+\evensidemargin -0.04cm 
+\textwidth 16.59cm 
+\textheight 21.94cm 
+\parskip 7.2pt 
+
+\begin{document}
+
+
+
+
+\chapter{Navigation}
+\label{NaviReceiver}
+In this chapter the possibilities for position determination are discussed, after which the best option is chosen and developed further. The first section will discuss the options considered for navigation, the second section at page \pageref{navi2} contains a small trade-off, and the final section at page \pageref{navi3} is concerned with further development of the result of the trade-off.
+
+\section{Option description}
+\label{navi1}
+For the position determination four different possibilities are considered, the first one is equipping every satellite with a \acs{GPS} receiver. This way all satellites can determine their position independent from each other. Several small \acs{GPS} receives have been developed specifically for small satellites.
+
+The second option is to use lasers to determine the both the relative position of the satellites and transmit data between satellites. To determine the absolute position of the satellites the emitter is equipped with a \acs{GPS} receiver as well. This will allow the receivers to determine their absolute position. The \acs{GPS} unit will also be used to ensure the clocks on the receiver satellites are properly synchronized.
+
+The third option is to use our intersatellite communications system to determine the relative position of the satellites, while maintaining regular communications alongside this. For this system to work the emitter is equipped with a GPS receiver in order to find its absolute position. This GPS unit is also used to ensure the clocks on board the receiver satellites are updated regularly. All satellites are designed to operate at a slightly different frequency to prevent interference from occurring. 
+The process used to determine the position of the receivers is as follows. All satellites send out a signal to all other satellites, which send back a signal themselves after a fixed amount of time. The time between the sending and receiving of the signals and processing time can be used to determine the relative distance between satellites. When all satellites are given the distance information from the other satellites and the GPS information from the receiver, the absolute position of each satellite can be determined. Note that the satellites have to be able to accurately determine where a signal has come from.
+
+The fourth and final option is to use the sun sensors and star trackers used for attitude determination to also determine the absolute position of the satellites.
+
+\section{Trade-Off}
+\label{navi2}
+This section does not contain a trade-off table, a decision is made based on the practicality of the option. As such the practicality of each options is discussed with a final paragraph addressing the final result. The design options will be treated in no particular order.
+
+The first option is using the sun sensors and star trackers to determine the position of the satellite, which -though possible- is a complex and tedious procedure. For example the accuracy will be different for when the satellite is in and out of eclipse. It should also be noted that the resulting accuracy will not be very high.
+
+The second option is using \acs{GPS}, this systems is commonly used on \acs{LEO} satellites for several years now. As long at least four \acs{GPS} satellites are in view, the position of the receiver can be determined. For some years companies have been designing cheap, small GPS receiver using \acs{COTS} parts. Also the real-time accuracy that can be obtained is in tens of meters at least up, and can go up to several meters. As such this is a viable option.
+
+The third option considered is using the communications system to determine the position of the satellites. Obviously, the technology for this technique is available. The biggest drawback of this technique is that every receiver satellite has to be equipped with an extensive communications system in order to keep track of the other satellites very precisely, non more so than the satellites that are not in the same orbit plane as the emitter. These satellites cross the orbital plane of the emitter twice per orbit, and as such the communication system has to be able to see the entire sphere of their surroundings. Because the position determination has to be performed accurately the system will require narrow field of view, moveable antennas. As a result this option is very impractical.
+
+The last option is similar to previously discussed one, as the laser is used both for communication and position determination. Also every satellite would require several laser systems to keep track of the other satellites. However, the technology for this method is not yet compact enough for nanosatellites or small microsatellites.
+
+The result of the investigations are that combining the communications system with the position determination is both very complex and heavy. So these neither of the two systems will not be used, this leaves the \acs{GPS}-only option and using the attitude systems.
+
+Using the attitude systems for position determination is more complex and less cost effective than using only \acs{GPS} \ref{MicroGPS}. So the option that will be used is a \acs{GPS} receiver on every satellite.
+
+\section{Working out the best option}
+\label{navi3}
+This section is split into two parts, the first concerning the choice of \acs{GPS} receiver and the second part considers the antenna(s) to use.
+
+\subsection{GPS receiver}
+In order to determine the best \acs{GPS} receiver three sources have been used. These sources are the GPS World website \ref{SurveyGPS}, the SpaceQuest website \ref{spacequest} and the \ac{SSTL} website \ref{Surreygps}. From \ref{SurveyGPS}, the 2010 document has the advantage of showing whether or not a receiver can be used in space. From this list the best candidate is the \acs{SSTL} SGR-05P receiver due to the fact it is designed solely for space applications and has the lowest weight. Another promising candidate is the GPS-12-V1 from SpaceQuest. In order to determine the best one both are compared side by side in table \ref{comparegps} on page \pageref{comparegps} for several characteristics.
+
+\begin{table}
+\centering
+\begin{tabular}{c||c|c}
+\textbf{Parameter} & \textbf{SGR-05P} & \textbf{GPS-12-V1} \\\hline\hline
+	Time accuracy [ns] & 500 & 20 \\
+	Position accuracy [m] & 10 & 10 \\
+	Velocity accuracy [m/s] & 0.15 & 0.03 \\
+	Time to first fix [s] & 90-180 & 30-60 \\
+	Size [mm] & 100 x 65 x 12 & 100 x 70 x 25\\
+	Mass [g] & 60 & $<$200 \\
+	Power [W] & 1 & 1 \\
+	Interface included? & no & yes \\
+\end{tabular}
+\caption{Comparison of the SGR-05P and the GPS-12-V1 by \acs{SSTL} and SpaceQuest respectively.}
+\label{comparegps}
+\end{table}
+
+From table \ref{comparegps} it can be seen that the SpaceQuest receiver has the best accuracy, but is heavier than the \acs{SSTL} receiver. However it should be noted that the GPS-12-V1 includes interface boards, for the SGR-05P there exits a receiver that is equipped with interface boards, it is the SGR-07. However that one is both heavier and larger than the GPS-12-V1. So the receiver that will be used by the swarm satellites is the GPS-12-V1.
+
+An additional and interesting characteristic of current \acs{GPS} receivers is that the position accuracy can be determined up to several centimeter or millimeters. It should be noted that since the \acs{GPS} receiver position is known to such great accuracy the same receiver is used on the emitter. The emitter will also use the same antenna, which is chosen in the next section.
+
+\subsection{GPS Antenna}
+The main source for possible antennae is again GPS World, however in this case their receiver survey at \ref{SurveyAnt}. This list is checked for space qualification, just like the receiver survey. There is only one antenna specifically developed for usage in space. This is the SGR Patch Antenna ASY-00741-04, which is also the smallest antenna and also specifically developed for small satellites like microsatellites.
+The antenna has a power requirement of 24 [mA] at 2.7 to 5 [V], its dimensions are 45 x 50 x 20 mm and it uses a cable with a length of 2 [m].
+
+\end{document}
