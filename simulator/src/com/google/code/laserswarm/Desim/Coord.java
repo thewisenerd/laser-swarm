@@ -1,5 +1,7 @@
 package com.google.code.laserswarm.Desim;
 
+import java.util.List;
+
 import javax.vecmath.Vector2d;
 
 import org.apache.commons.math.geometry.Vector3D;
@@ -20,11 +22,11 @@ public class Coord {
 	 * Reflection vector 
 	 * 
 	 */
-	public Vector2d vecR;		//angle reflected wrt normal 
+	public List<Vector2d> vecR;		//angle reflected wrt normal 
 	
 	public Coord() {			//Vector
 	vecI = new Vector2d();			//x azimuth in degrees
-	vecR = new Vector2d();			//y offset in degrees 
+	vecR = new List<Vector2d>();			//y offset in degrees 
 	
 	}
 	/**
