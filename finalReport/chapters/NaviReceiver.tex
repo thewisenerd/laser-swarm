@@ -1,35 +1,8 @@
-\documentclass[11pt]{report}
-
-\usepackage{pdflscape}
-\usepackage{longtable}
-\usepackage{multirow}
-\usepackage{enumerate}
-\usepackage[printonlyused]{acronym}
-\usepackage{multirow}
-\usepackage{graphicx}
-\usepackage{wrapfig}
-\usepackage{subfig}
-\usepackage{amsmath}
-\usepackage{url}
-\usepackage{fixltx2e}
-
-\topmargin -1.5cm
-\oddsidemargin -0.04cm 
-\evensidemargin -0.04cm 
-\textwidth 16.59cm 
-\textheight 21.94cm 
-\parskip 7.2pt 
-
-\begin{document}
-
-
-
-
-\chapter{Navigation}
+\section{Navigation}
 \label{NaviReceiver}
 In this chapter the possibilities for position determination are discussed, after which the best option is chosen and developed further. The first section will discuss the options considered for navigation, the second section at page \pageref{navi2} contains a small trade-off, and the final section at page \pageref{navi3} is concerned with further development of the result of the trade-off.
 
-\section{Option description}
+\subsection{Option description}
 \label{navi1}
 For the position determination four different possibilities are considered, the first one is equipping every satellite with a \acs{GPS} receiver. This way all satellites can determine their position independent from each other. Several small \acs{GPS} receives have been developed specifically for small satellites.
 
@@ -40,7 +13,7 @@ The process used to determine the position of the receivers is as follows. All s
 
 The fourth and final option is to use the sun sensors and star trackers used for attitude determination to also determine the absolute position of the satellites.
 
-\section{Trade-Off}
+\subsection{Trade-Off}
 \label{navi2}
 This section does not contain a trade-off table, a decision is made based on the practicality of the option. As such the practicality of each options is discussed with a final paragraph addressing the final result. The design options will be treated in no particular order.
 
@@ -56,11 +29,11 @@ The result of the investigations are that combining the communications system wi
 
 Using the attitude systems for position determination is more complex and less cost effective than using only \acs{GPS} \ref{MicroGPS}. So the option that will be used is a \acs{GPS} receiver on every satellite.
 
-\section{Working out the best option}
+\subsection{Working out the best option}
 \label{navi3}
 This section is split into two parts, the first concerning the choice of \acs{GPS} receiver and the second part considers the antenna(s) to use.
 
-\subsection{GPS receiver}
+\subsubsection{GPS receiver}
 In order to determine the best \acs{GPS} receiver three sources have been used. These sources are the GPS World website \ref{SurveyGPS}, the SpaceQuest website \ref{spacequest} and the \ac{SSTL} website \ref{Surreygps}. From \ref{SurveyGPS}, the 2010 document has the advantage of showing whether or not a receiver can be used in space. From this list the best candidate is the \acs{SSTL} SGR-05P receiver due to the fact it is designed solely for space applications and has the lowest weight. Another promising candidate is the GPS-12-V1 from SpaceQuest. In order to determine the best one both are compared side by side in table \ref{comparegps} on page \pageref{comparegps} for several characteristics.
 
 \begin{table}
@@ -84,8 +57,6 @@ From table \ref{comparegps} it can be seen that the SpaceQuest receiver has the 
 
 An additional and interesting characteristic of current \acs{GPS} receivers is that the position accuracy can be determined up to several centimeter or millimeters. It should be noted that since the \acs{GPS} receiver position is known to such great accuracy the same receiver is used on the emitter. The emitter will also use the same antenna, which is chosen in the next section.
 
-\subsection{GPS Antenna}
+\subsubsection{GPS Antenna}
 The main source for possible antennae is again GPS World, however in this case their receiver survey at \ref{SurveyAnt}. This list is checked for space qualification, just like the receiver survey. There is only one antenna specifically developed for usage in space. This is the SGR Patch Antenna ASY-00741-04, which is also the smallest antenna and also specifically developed for small satellites like microsatellites.
 The antenna has a power requirement of 24 [mA] at 2.7 to 5 [V], its dimensions are 45 x 50 x 20 mm and it uses a cable with a length of 2 [m].
-
-\end{document}
