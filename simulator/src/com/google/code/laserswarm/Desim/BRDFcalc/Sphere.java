@@ -16,9 +16,9 @@ import com.lyndir.lhunath.lib.system.logging.Logger;
  *   
  *
  */
-public class Sphere  extends TreeMap<Vector3d, Double>{
+public class Sphere  extends TreeMap<Vector3d, Integer>{
 	
-	double total;
+	int total;
 	private static final Logger	logger		= Logger.get(Sphere.class);
 	private static final long	serialVersionUID	= -1571965505162878630L;
 	
@@ -44,7 +44,7 @@ public class Sphere  extends TreeMap<Vector3d, Double>{
 	 * Rotate the points around the center  in the horizontal plane 
 	 */
 	@Override
-	public Double put(Vector3d key, Double value) {
+	public Integer put(Vector3d key, Integer value) {
 		// TODO Auto-generated method stub
 		total += value;
 		if(!this.containsKey(key)){
@@ -65,20 +65,23 @@ public class Sphere  extends TreeMap<Vector3d, Double>{
 		
 		}*/
 	@Override
-	public Double get(Object key) {
+	public Integer get(Object key) {
 		try{
-		Double tmp = super.get(key);
-		 return tmp/total;
+			return super.get(key);
 		}catch(ClassCastException e ){
 			logger.dbg("Vector needs to be made compareable: %s", key);
 			return null;
 		}catch(NullPointerException e){
 			logger.dbg("Element does not exist", e);
-			return 0.0;
+			return 0;
 		}
 		
 		
 		
+	}
+	
+	public double getFrac(Object key) {
+		return super.get(key)/total; 
 	}
 	
 	public Sphere() {
@@ -94,8 +97,8 @@ public class Sphere  extends TreeMap<Vector3d, Double>{
 		Vector3d nvec = new Vector3d(1.0,2.0,3.0);
 		Vector3d nvec2 = new Vector3d(1.0,3.0,2.0);
 		Vector3d nvec3 = new Vector3d(1.0,2.5,2.0);
-		round.put(nvec, 3.0);
-		round.put(nvec2, 2.3);
+	//	round.put(nvec, 3.0);
+	//	round.put(nvec2, 2.3);
 		System.out.println(round.get(nvec3));
 		
 	}

@@ -5,10 +5,26 @@ import java.util.List;
 
 import javax.vecmath.Vector3d;
 
+import com.google.code.laserswarm.SimulationTester;
+import com.google.common.collect.Lists;
+import com.lyndir.lhunath.lib.system.logging.Logger;
+
 public class Boundries {
 	//ECEF vector on earth
 	List<Vector3d> pnts;
+	private static final Logger	logger	= Logger.get(Boundries.class);
 	
+	public Boundries() {
+		pnts = Lists.newLinkedList();
+		// TODO Auto-generated constructor stub
+	}
+	/**
+	 * all arguments are in rad
+	 * @param latMin 
+	 * @param latMax
+	 * @param lonMin
+	 * @param lonMax
+	 */
 	public void setLatLonBound(double latMin, double latMax, double lonMin, double lonMax) {
 		pnts.add(makeVec(latMin,lonMin));
 		pnts.add(makeVec(latMin,lonMax));
@@ -20,7 +36,8 @@ public class Boundries {
 	}
 	
 	public boolean contains(Vector3d pnt) {
-		Double maxX = Double.NEGATIVE_INFINITY;
+		 pnt.normalize(); 
+			Double maxX = Double.NEGATIVE_INFINITY;
 		Double minX = Double.POSITIVE_INFINITY;
 		Double maxY = Double.NEGATIVE_INFINITY;
 		Double minY = Double.POSITIVE_INFINITY;
@@ -42,4 +59,12 @@ public class Boundries {
 		pnts.add(pnt);
 	}
 
+	public static void main(String[] args) {
+		Boundries bnd = new Boundries();
+		double rad = Math.PI/180;
+		Vector3d pnt1 = new Vector3d(0.9396926207859084,.0,0.3420201433256687);
+		bnd.setLatLonBound(0, 20*rad, 0, 20*rad);
+		logger.dbg("points in the list: %s", bnd.pnts);
+		logger.dbg("contains %s vector: %s", pnt1,bnd.contains(pnt1));
+	}
 }
