@@ -27,14 +27,14 @@ The last option is similar to previously discussed one, as the laser is used bot
 
 The result of the investigations are that combining the communications system with the position determination is both complex and heavy. So neither of the two systems will be used, this leaves the \acs{GPS}-only option and using the attitude systems.
 
-Using the attitude systems for position determination is more complex and less cost effective than using only \acs{GPS} \ref{MicroGPS}. So the option that will be used is a \acs{GPS} receiver on every satellite.
+Using the attitude systems for position determination is more complex and less cost effective than using only \acs{GPS} [\cite{MicroGPS}]. So the option that will be used is a \acs{GPS} receiver on every satellite.
 
 \subsection{Working out the best option}
 \label{navi3}
 This section is split into two parts, the first concerning the choice of \acs{GPS} receiver and the second part considers the antenna(s) to use.
 
 \subsubsection{GPS receiver}
-In order to determine the best \acs{GPS} receiver three sources have been used. These sources are the GPS World website \ref{SurveyGPS}, the SpaceQuest website \ref{spacequest} and the \ac{SSTL} website \ref{Surreygps}. From \ref{SurveyGPS}, the 2010 document has the advantage of showing whether or not a receiver can be used in space. From this list the best candidate is the \acs{SSTL} SGR-05P receiver due to the fact it is designed solely for space applications and has the lowest weight. Another promising candidate is the GPS-12-V1 from SpaceQuest. In order to determine the best one both are compared side by side in table \ref{comparegps} on page \pageref{comparegps} for several characteristics.
+In order to determine the best \acs{GPS} receiver three sources have been used. These sources are the GPS World website [\cite{SurveyGPS}], the SpaceQuest website [\cite{spacequest}] and the \ac{SSTL} website [\cite{Surreygps}]. From [\cite{SurveyGPS}], the 2010 document has the advantage of showing whether or not a receiver can be used in space. From this list the best candidate is the \acs{SSTL} SGR-05P receiver due to the fact it is designed solely for space applications and has the lowest weight. Another promising candidate is the GPS-12-V1 from SpaceQuest. In order to determine the best one both are compared side by side in table \ref{comparegps} on page \pageref{comparegps} for several characteristics.
 
 \begin{table}
 \centering
@@ -58,5 +58,5 @@ From table \ref{comparegps} it can be seen that the SpaceQuest receiver has the 
 An additional and interesting characteristic of current \acs{GPS} receivers is that the position accuracy can be determined up to several centimeter or millimeters. It should be noted that since the \acs{GPS} receiver position is known to such great accuracy the same receiver is used on the emitter. The emitter will also use the same antenna, which is chosen in the next section.
 
 \subsubsection{GPS Antenna}
-The main source for possible antennae is again GPS World, however in this case their receiver survey at \ref{SurveyAnt}. This list is checked for space qualification, just like the receiver survey. There is only one antenna specifically developed for usage in space. This is the SGR Patch Antenna ASY-00741-04, which is also the smallest antenna and also specifically developed for small satellites.
+The main source for possible antennae is again GPS World, however in this case their receiver survey at [\cite{SurveyAnt}]. This list is checked for space qualification, just like the receiver survey. There is only one antenna specifically developed for usage in space. This is the SGR Patch Antenna ASY-00741-04, which is also the smallest antenna and also specifically developed for small satellites.
 The antenna has a power requirement of 24 [mA] at 2.7 to 5 [V], its dimensions are 45 x 50 x 20 mm and it uses a cable with a length of 2 [m].
