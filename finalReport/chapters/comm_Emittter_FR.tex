@@ -1,4 +1,3 @@
-
 \section{Communication subsystems}
 This section will discuss the  three different communication links to which the emitter satellite is connected:
 \begin{itemize}
@@ -10,15 +9,18 @@ This section will discuss the  three different communication links to which the 
 These links are illustrated figure XXX
 For each link the link budget and the communications hardware selected will be presented.
 
+The end of this section contains a piece on the data storage, where the required amount of data storage is found, along with the storage medium to be used and it is checked whether the downlink rate is large enough.
+
+
 \subsection{Crosslink for scientific data and housekeeping data}
 \label{Crossem}
 This link transmits the scientific data gathered by the receiver satellites to the emitter satellite. To keep the receiver satellites as small as possible and to have efficient data storage, the receiver satellites will transmit their scientific data continuously so that the emitter satellite can store all data in one data bank before it is transmitted to the ground. In addition to scientific data, command and housekeeping data is also transmitted in this link.
 
 The link budget has the following input parameters: the frequency selected was 2 GHz, the data rate required is 1.62 Mbit/s, the maximum distance between the satellites is 261 km, the modulation used is QPSK. Atmospheric losses were not considered for obvious reasons.
 
-In the mid term report a frequency in the Ku-band was selected, however it turned out that the data rate was low enough to use S-band or more specifically 2 GHz, which requires far less power consuming hardware.
+In the mid-term report a frequency in the Ku-band was selected, however it turned out that the data rate was low enough to use S-band or more specifically 2 GHz, which requires far less power consuming hardware.
 
-The maximum distance is 261 km, which is longest distance that occurs between the emitter satellite and any of the receiver satellites. Distance between receiver satellites can be twice as long but were not considered after the relative tracking with these crosslinks was abandoned.
+The maximum distance between two satellites is 261 km, which is longest distance that occurs between the emitter satellite and any of the receiver satellites. Distance between receiver satellites can be twice as long but were not considered after the relative tracking with these crosslinks was abandoned.
 
 The QPSK was selected for its good balance between required E$_{b}$/N$_{0}$ and spectrum utilization. Also a lot of transceivers are available for this modulation.
 
@@ -29,12 +31,12 @@ Another important parameter is the data rate, 1.62 Mbit/s, which was calculated 
 Since the data rate is quite high for an S-band, nanosatellite S-band transceivers did not satisfy the requirements, which only allow 9.6 kbps at maximum \cite{cubeshopcomm}. However microsatellite sized transceivers turned out to be sufficient. The transceiver selected was an SBTRcvr of RDLabs, which has a maximum data rate of 10 Mbps for QPSK modulation, an input power of 12 Watt and an output power of 1 to 5 Watt \cite{RDLabs}.
 
 \subsubsection{Antenna}
-For low gain applications and frequencies below 4 GHz three antennas were considered: a dipole antenna, a helix antenna and a patch antenna. The dipole antenna was not an option since its gain is too low (theoretical gain of a half wave antenna is only 2.15 dBi). A helix antenna would be too large and would decrease the ballistic coefficient too much, for example the S-Band quadrifilar helix antenna of Surrey Satellite technology \cite{SurrHelix} is 0.5 m long with a base of 100mm on 100mm, while the S Band patch antenna \cite{SurrPatch} from the same company is only 20mm thick and 82mm on 82mm large. 
+For low gain applications and frequencies below 4 GHz three antennas were considered: a dipole antenna, a helix antenna and a patch antenna. The dipole antenna was not an option since its gain is too low (theoretical gain of a half wave antenna is only 2.15 dBi). A helix antenna would be too large and would decrease the ballistic coefficient too much, for example the S-Band quadrifilar helix antenna of Surrey Satellite technology \cite{SurrHelix} is 0.5 m long with a base of 100mm by 100mm, while the S Band patch antenna \cite{SurrPatch} from the same company is only 20mm thick and 82mm on 82mm large. 
 This S Band patch antenna, which was eventually selected, has a mass of only 80 grams, a 120$^{\circ}$ beamwidth and a gain of 4 dBi.
 5 antennas will be placed on the emitter satellite: 1 one nadir pointing and 4 facing the receiver satellites.
 
 \subsubsection{Link budget}
-Because the selected modulation is QPSK and the maximum allowable bit error rate is 10$^{-5}$, the required E$_{b}$/N$_{0}$ is equal to 9.6 dB. With the output power of the transceiver at maximum (5 Watt or 7 dBW) it is possible to have a E$_{b}$/N$_{0}$ of 10.35 dB, which leaves a margin of 2.36 dB.
+Because the selected modulation is QPSK and the maximum allowable bit error rate is 10$^{-5}$, the required E$_{b}$/N$_{0}$ is equal to 9.6 dB. With the output power of the transceiver at maximum (5 Watt or 7 dBW) it is possible to have a E$_{b}$/N$_{0}$ of 10.35 dB, which leaves a margin of 2.36 dB. For detailed link budget see Appendix XXX.
 
 \subsection{Ground-space link for scientific data}
 As mentioned the past subsection, all scientific data is collected on the emitter satellite which is then transmitted to the ground when it passes its ground station.
@@ -61,7 +63,7 @@ The ground station selected was ESRANGE, Kiruna, which allows up to 12 passes a 
 
 \subsubsection{Link budget}
 
-Similar to the link budget of the crosslinks, the selected modulation is SQPSK and the maximum allowable bit error rate is 10$^{-5}$, meaning the required E$_{b}$/N$_{0}$ is equal to 9.6 dB. With the output power of the transceiver at 5 Watt or 7 dBW, it is possible to have a E$_{b}$/N$_{0}$ of 10.35 dB, which leaves a margin of 29.3 dB.
+Similar to the link budget of the crosslinks, the selected modulation is SQPSK and the maximum allowable bit error rate is 10$^{-5}$, meaning the required E$_{b}$/N$_{0}$ is equal to 9.6 dB. With the output power of the transceiver at 5 Watt or 7 dBW, it is possible to have a E$_{b}$/N$_{0}$ of 10.35 dB, which leaves a margin of 29.3 dB. For detailed link budget see Appendix XXX.
 
 \subsection{Ground-space link for command and housekeeping data}
 Aside from the one way space to ground link for scientific data there is also a separate two way link for commands and housekeeping data. 
@@ -84,4 +86,6 @@ Also the S-band patch antenna from Surrey Satellite technologies was again selec
 The ground station selected was again ESRANGE, Kiruna, for the reasons as the ground-space link for scientific data. For S-band the base has several receiver antennas from 2.4m to 13m, but the linkbudget showed a 2.4m parabolic reflector dish is already more than sufficient. The gain of this antenna is 53 dBi and has a beamwidth of 30$^{circl}$ \cite{esrange}.
 
 \subsubsection{Link budget}
-For this last link budget, the selected modulation is QPSK and the maximum allowable bit error rate is 10$^{-5}$, meaning the required E$_{b}$/N$_{0}$ is equal to 9.6 dB. With the output power of the transceiver at 1 Watt or 0 dBW, it is possible to have a E$_{b}$/N$_{0}$ of 39.25 dB, which leaves a margin of 27.65 dB.
+For this last link budget, the selected modulation is QPSK and the maximum allowable bit error rate is 10$^{-5}$, meaning the required E$_{b}$/N$_{0}$ is equal to 9.6 dB. With the output power of the transceiver at 1 Watt or 0 dBW, it is possible to have a E$_{b}$/N$_{0}$ of 39.25 dB, which leaves a margin of 27.65 dB. For detailed link budget see Appendix XXX.
+
+\input{chapters/DataStorageEmitter.tex}
