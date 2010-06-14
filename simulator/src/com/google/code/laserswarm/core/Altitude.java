@@ -18,7 +18,6 @@ import com.google.code.laserswarm.Desim.elevation.ElevationComparison;
 import com.google.code.laserswarm.Desim.elevation.ElevationFinder;
 import com.google.code.laserswarm.Desim.elevation.slope.ElevationSlope;
 import com.google.code.laserswarm.Desim.elevation.slope.FindElevationNeighborInterpolation;
-import com.google.code.laserswarm.Desim.elevation.slope.SlopeComparison;
 import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.conf.Constellation;
 import com.google.code.laserswarm.conf.Satellite;
@@ -30,7 +29,6 @@ import com.google.code.laserswarm.simulation.SimTemplate;
 import com.google.code.laserswarm.simulation.SimVars;
 import com.google.code.laserswarm.simulation.Simulator;
 import com.google.code.laserswarm.simulation.SimulatorMaster;
-import com.google.code.laserswarm.simulation.postSimulation.SlopeSpread;
 import com.google.code.laserswarm.util.demReader.DemCreationException;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
@@ -43,7 +41,7 @@ public class Altitude {
 
 	public static void main(String[] args) throws DemCreationException, MathException,
 			IOException {
-		run(dataPoints, new FindElevationNeighborInterpolation(1, (int) 97e12, 15, 7, 0.3, 0.707));
+		run(dataPoints, new FindElevationNeighborInterpolation(1, (int) 97e12, 1, 7, 100, 0.707));
 	}
 
 	public static void run(int dataPoint, ElevationFinder findEl) throws DemCreationException,
@@ -105,8 +103,8 @@ public class Altitude {
 
 			HashMap<SimTemplate, Simulator> points = mgr.runSim();
 			for (SimTemplate templ : points.keySet()) { // assuming only one template
-				SlopeSpread slope = new SlopeSpread();
-				slope.modify(points.get(templ), templ.getConstellation());
+				// SlopeSpread slope = new SlopeSpread();
+				// slope.modify(points.get(templ), templ.getConstellation());
 				List<SimVars> dataPoints = points.get(templ).getDataPoints();
 				emitterHistory = new EmitterHistory(templ.getConstellation(), dataPoints);
 				constellation = templ.getConstellation();
@@ -134,8 +132,8 @@ public class Altitude {
 		logger.inf("heightAnalysed Stats:\n%s",
 				new ElevationComparison(EarthModel.getDefaultModel(), alts));
 
-		logger.inf("slope Stats:\n%s",
-				new SlopeComparison(EarthModel.getDefaultModel(), elSlope));
+		// logger.inf("slope Stats:\n%s",
+		// new SlopeComparison(EarthModel.getDefaultModel(), elSlope));
 
 		// Filter filtAvg = new FilterAverage(21);
 		// LinkedList<Point3d> averagedAlts = filtAvg.filter(alts);

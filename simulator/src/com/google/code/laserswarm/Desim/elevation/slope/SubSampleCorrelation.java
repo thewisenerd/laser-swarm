@@ -1,5 +1,8 @@
 package com.google.code.laserswarm.Desim.elevation.slope;
 
+import static com.google.code.laserswarm.math.TreeMapTools.treeMapAvg;
+import static com.google.code.laserswarm.math.TreeMapTools.treeMapsOverlap;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -269,39 +272,41 @@ public class SubSampleCorrelation implements SampleCorrelation {
 		}
 	}
 
-	private double treeMapAvg(TreeMap<Double, Vector3d> map) {
-		// Average the altitude within the given TreeMap.
-		double altTotal = 0;
-		for (Double alt : map.keySet()) {
-			altTotal += alt;
-		}
-		return altTotal / map.size();
-	}
-
 	private ElevationRelatedEntriesPoint findAndAverageRelatedAltitudes(TreeMap<Double, Vector3d> alts,
 			double tEmit, Point3d posEmit) {
 		ArrayList<TreeMap<Double, Vector3d>> entriesClose = Lists.newArrayList();
 		// Try to find lists of related altitudes, then put them in TreeMaps
 		for (Double currentAlt : alts.keySet()) {
-			boolean entryIsAlreadyListed = false;
-			boolean entryHasTreeMap = false;
+			boolean isInRelatedEntryMap = false;
 			for (TreeMap<Double, Vector3d> relatedEntryMap : entriesClose) {
-				if (relatedEntryMap.get(currentAlt) != null) {
-					entryIsAlreadyListed = true;
-				}
-			}
-			if (!entryIsAlreadyListed) {
-				for (Double thisAlt : alts.keySet()) {
-					Vector3d thisVect = alts.get(thisAlt);
+				for (Double thisAlt : relatedEntryMap.keySet()) {
 					if (Math.abs(currentAlt - thisAlt) < interval) {
-						if (!entryHasTreeMap) {
-							entryHasTreeMap = true;
-							entriesClose.add(new TreeMap<Double, Vector3d>());
-							entriesClose.get(entriesClose.size() - 1).put(currentAlt, thisVect);
-						}
-						entriesClose.get(entriesClose.size() - 1).put(thisAlt, thisVect);
+						isInRelatedEntryMap = true;
+						relatedEntryMap.put(currentAlt, alts.get(currentAlt));
+						break;
 					}
 				}
+				if (isInRelatedEntryMap) {
+					break;
+				}
+			}
+			if (!(isInRelatedEntryMap)) {
+				TreeMap<Double, Vector3d> treeMap = Maps.newTreeMap();
+				treeMap.put(currentAlt, alts.get(currentAlt));
+				entriesClose.add(treeMap);
+			}
+		}
+		// Find and join overlapping treeMaps.
+		for (int i = 0; i < entriesClose.size(); i++) {
+			TreeMap<Double, Vector3d> entryMapFirst = entriesClose.get(i);
+			int j = i + 1;
+			while (j < entriesClose.size()) {
+				TreeMap<Double, Vector3d> entryMapSecond = entriesClose.get(j);
+				if (treeMapsOverlap(entryMapFirst, entryMapSecond)) {
+					entryMapFirst.putAll(entryMapSecond);
+					entriesClose.remove(j);
+				}
+				j++;
 			}
 		}
 		// Try to find the TreeMap with the largest amount of altitudes.
