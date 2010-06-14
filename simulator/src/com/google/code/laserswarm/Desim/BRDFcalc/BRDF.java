@@ -25,16 +25,20 @@ public class BRDF extends Distribution  {
 		
 	Sphere curBRDF;			//sphere that represents the brdf 
 	Map<Vector3d, Sphere> brdf;
-	Vector3d direction; 	//direction of the origin
-	Vector3d inDir;			//direction of incidence
-	boolean symetric;		//the brdf is symetric around the zenith 
-	boolean normalized;		//the convert all incomming vectors to zenith
+	//Vector3d direction; 	//direction of the origin
+	//Vector3d inDir;			//direction of incidence
+	final boolean symetric;		//the brdf is symetric around the zenith 
+	/**
+	 * If true then the rotation step will be omitted and no slope will be taken into acount 
+	 */
+	final boolean normalized;		//the convert all incomming vectors to zenith
 	Rotation curRot;
 	private static final Logger	logger		= Logger.get(BRDF.class);
 	
 	
-	public BRDF(boolean sym) {
+	public BRDF(boolean sym,boolean norm) {
 	symetric = sym;
+	normalized = norm;
 	if(normalized)
 	{	this.curBRDF= new Sphere(); }
 	else{
@@ -43,23 +47,29 @@ public class BRDF extends Distribution  {
 	}
 	/**
 	 * Add to points to BRDF map
-	 * @param dirs in ECEF relative to the ground
-	 * @param emVec in ECEF relative to the ground
+	 * @param dirs in ENU relative to the ground
+	 * @param emVec in ENU relative to the ground
 	 */
-	public void add(Map<Vector3d,Double> dirs, Vector3d emVec, double atSl, double otSl, Vector3d trDir  ){
+	public void add(Map<Vector3d,Integer> dirs, Vector3d emVec, double atSl, double otSl, Vector3d trDir  ){
+		if(!normalized){
+			
+		
 		Sphere tmpSph = new Sphere();
 		makeRot(atSl,otSl,trDir);
 		curBRDF = tmpSph;
-		for (Map.Entry<Vector3d, Double> vecDblIt : dirs.entrySet()) {
+		for (Map.Entry<Vector3d, Integer> vecDblIt : dirs.entrySet()) {
 			tmpSph.put(reltoLoc(vecDblIt.getKey()), vecDblIt.getValue());
 			
 		}
 		brdf.put(reltoLoc(emVec), tmpSph);
+		}else{		//don't create the rot matrix
+			for (Map.Entry<Vector3d, Integer> vecDblIt : dirs.entrySet()) {
+				curBRDF.put(vecDblIt.getKey(), vecDblIt.getValue());
+				
+			}
+		}
+		
 	}
-
-
-
-	
 	
 	/**
 	 * convert from the inclined plane to normal plane
@@ -137,7 +147,10 @@ public class BRDF extends Distribution  {
 		
 	
 	}
-	
+	@Override
+	public String toString() {
+		return curBRDF.toString();
+	}
 	private Vector3d reltoLoc(Vector3d vector){
 		Vector3D vec = new Vector3D(vector.x,vector.y,vector.z); //vector to convert
 		vec = vec.normalize();
@@ -148,11 +161,17 @@ public class BRDF extends Distribution  {
 	}
 	
 	public static void main(String[] args) {
-		Vector3d convec = new Vector3d(1,0,0);
-		Vector3d emdir = new Vector3d(0.5,0.5,0.0);
+		Vector3d convec = new Vector3d(0,0,1);
+		Vector3d emdir = new Vector3d(1,0.0,0.0);
+		Map<Vector3d,Double> recs = Maps.newHashMap();
+		recs.put(convec, 3.0);
+		BRDF rdf =  new BRDF(false,false);
 		
+		//rdf.add(recs,convec,0.5,0.5,emdir);
+		
+		System.out.println(rdf);
 		//System.out.println(reltoLoc(0,.5, emdir,convec));
-		System.out.println(VectorMath.enuToLocal(convec, new Vector3d(0.5,-0.5,0.71)));
+		System.out.println(VectorMath.enuToLocal(convec, new Vector3d(0.5,.5,.5)));
 		
 	}
 	
@@ -160,7 +179,7 @@ public class BRDF extends Distribution  {
 	public double probability(Vector3d x) {
 		Double tmp;
 		try{
-		 tmp = curBRDF.get(x);
+		 tmp = curBRDF.getFrac(x);
 	}catch(NullPointerException e){
 		logger.dbg(e,"");
 		tmp = (double) 0;
