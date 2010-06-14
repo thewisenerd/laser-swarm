@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -14,10 +15,12 @@ import javax.vecmath.Point3d;
 import org.apache.commons.math.MathException;
 
 import com.google.code.laserswarm.TestFindElevation;
+import com.google.code.laserswarm.Desim.BRDFcalc.BRDFinput;
 import com.google.code.laserswarm.Desim.elevation.ElevationComparison;
 import com.google.code.laserswarm.Desim.elevation.ElevationFinder;
 import com.google.code.laserswarm.Desim.elevation.slope.ElevationSlope;
 import com.google.code.laserswarm.Desim.elevation.slope.FindElevationNeighborInterpolation;
+import com.google.code.laserswarm.Desim.elevation.slope.SlopeComparison;
 import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.conf.Constellation;
 import com.google.code.laserswarm.conf.Satellite;
@@ -42,7 +45,7 @@ public class Altitude {
 
 	public static void main(String[] args) throws DemCreationException, MathException,
 			IOException {
-		run(dataPoints, new FindElevationNeighborInterpolation(1, (int) 97e12, 1, 7, 100, 0.707));
+		run(dataPoints, new FindElevationNeighborInterpolation(1, (int) 97e12, 1, 7, 0.5, 0.707));
 	}
 
 	public static void run(int dataPoint, ElevationFinder findEl) throws DemCreationException,
@@ -130,20 +133,26 @@ public class Altitude {
 		alts = elSlope.getAltitudes();
 		plotter.plot(alts, 3, "heightAnalysed");
 
+		// Extract the slopes.
+		LinkedList<Point3d> slopeAlong = Lists.newLinkedList();
+		LinkedList<Point3d> slopeCross = Lists.newLinkedList();
+		Iterator<BRDFinput> slopeIt = elSlope.getBRDFIn().iterator();
+		Iterator<Point3d> altIt = alts.iterator();
+		while (slopeIt.hasNext()) {
+			BRDFinput slope = slopeIt.next();
+			Point3d point = altIt.next();
+			slopeAlong.add(new Point3d(slope.getAlongSlope() + Configuration.R0, point.y, point.z));
+			slopeCross.add(new Point3d(slope.getOffSlope() + Configuration.R0, point.y, point.z));
+		}
+
+		// Plot the slopes.
+		plotter.plot(slopeAlong, 3, "alongTrackSlopes");
+		plotter.plot(slopeCross, 3, "crossTrackSlopes");
+
 		logger.inf("heightAnalysed Stats:\n%s",
 				new ElevationComparison(EarthModel.getDefaultModel(), alts));
 
-		// logger.inf("slope Stats:\n%s",
-		// new SlopeComparison(EarthModel.getDefaultModel(), elSlope));
-
-		// Filter filtAvg = new FilterAverage(21);
-		// LinkedList<Point3d> averagedAlts = filtAvg.filter(alts);
-		// plotter.plot(averagedAlts, 3, "heightAnalysed&Averaged");
-		// Filter filtOutliers = new FilterOutlierRemoval(200, 50, 3);
-		// LinkedList<Point3d> outlierAlts = filtOutliers.filter(alts);
-		// plotter.plot(outlierAlts, 3, "heightAnalysed&OutlierFiltered");
-		// ElevationSlopeFilter filtSpikes = new FilterSpikes(3, 0.3);
-		// ElevationSlope despiked = filtSpikes.filter(elSlope);
-		// plotter.plot(despiked.getAltitudes(), 3, "heightAnalysed&SpikeFiltered");
+		logger.inf("slope Stats:\n%s",
+				new SlopeComparison(EarthModel.getDefaultModel(), elSlope));
 	}
 }
