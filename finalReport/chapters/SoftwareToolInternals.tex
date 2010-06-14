@@ -1,0 +1,104 @@
+\section{Software Tool Internals}
+\label{SoftwareToolInternals}
+
+In the software tool, the constellation is simulated, and the inverse problems of the altitude and BRDF determination are solved. For the simulation of constellation, satellites where given a set of parameters. Furthermore, satellite has a set of Keplerian elements to provide the orbit. 
+
+For the main emitter satellite there are a few other parameters describing the laser behavior. These are the laser wavelength, beam divergence, pulse time and power. The power is the actual lasing power of the laser, so not the input electrical power of the laser. Note that the laser is always pointing nadir.
+
+For the receiving satellites, the receiver is characterized by a receiver spectrum width, aperture area, receiver beam divergence (determines the footprint) and a receiver efficiency. The receiver efficiency is composed out of the optical efficiency ($\sim0.9$) and receiver chip efficiency ($\sim0.4$). Note the receiver is assumed to be perfectly pointed to the emitter footprint. Also, the footprint of the receiver is larger than that of the emitter.
+
+The basic path of the signal is that is transmitted, then propagates through the atmosphere to the earth. There it scatters back in all directions. If there is sunlight shining on the footprint, that is also scattered upwards. In the direction of each receiving satellite, a small cone of the reflected energy is scattered. This again propagates through the atmosphere and is then received by the receivers. The internals of the simulation steps will be discussed more closely in the following sections.
+
+\subsection{Emmition of the Signal}
+
+As mentioned before, the signal is emitted at the position of the emitter satellite. The power in each pulse can be determined by spreading the continues lasing power of the laser over its duty cycle:
+
+\begin{equation}
+	P_{pulsed} =  \frac{P_{continues}}{pulse length \times pulse frequency}
+\end{equation}
+
+This means that the power in of each pulse is high compared to the continues lasing power. The direction of the pulse is nadir. This means that when the signal travels trough the atmosphere it encounters only one airmass.
+
+\subsection{Atmospheric effects}
+
+When a signal travels through the atmosphere, it is modified in several ways. Of these modifications, largest effect is the atmospheric attenuation of the signal. This is also the only type of atmospheric effect that is taken into account.
+
+The atmospheric attenuation is dependent on both optical trickiness of the atmosphere and airmass (path length trough the atmosphere). The airmass factor and can be found using equation \ref{eq:airmass}. The optical trickiness is dependent on the laser frequency and can be found in tables (for $\sim$500nm this is 10\%). The attenuation of the signal can then be computed with equation \ref{eq:AtmAttenuation}.
+
+\begin{equation}
+	l = sec (z)
+	\label{eq:airmass}
+\end{equation}
+\begin{equation}
+	I = I_0 \: e^{ -optThick \cdot l }
+	\label{eq:AtmAttenuation}
+\end{equation}
+
+In equation \ref{eq:airmass}, z is the zenith angle (angle between the satellite direction and up direction on the earth). Note this equation is only valid when the satellite is not near the horizon as there this formula breaks down. But due to the maximal angular separation of 30$^\circ$ this situation is not reached.
+
+\subsection{The scattering}
+\subsubsection{Laser scattering}
+
+When the laser pulse reaches the ground it is scattered back. This is done via a scattering model.{Bla blab la explain .
+
+\begin{equation}
+	\theta _t = sim^{-1}\left(\frac{sin(\theta _0)}{\text{refrSurf}}\right)
+\end{equation}
+
+\begin{equation}
+Fresnel_s= \frac{\left(\text{refrAir} \cdot cos(\theta _0)-\text{refrSurf}\sqrt{1-\frac{sin(\theta _0)^2}{\text{refrSurf}^2}}\right)^2}
+							  {\left(\text{refrAir} \cdot cos(\theta _0)+\text{refrSurf} \sqrt{1-\frac{sin(\theta _0)^2}{\text{refrSurf}^2}}\right)^2}
+\end{equation}
+
+\begin{equation}
+	Fresnel_p = \frac{\left(-\text{refrSurf} \cdot cos[\theta _0)+\text{refrAir} \cdot \sqrt{1-\frac{sin[\theta _0)^2} {\text{refrSurf}^2}} \right)^2}
+								 	 {\left(\text{refrSurf} \cdot cos[\theta _0)+\text{refrAir} \cdot \sqrt{1-\frac{sin[\theta _0)^2} {\text{refrSurf}^2}} \right)^2}
+\end{equation}
+
+\begin{equation}
+	R_{Lambertian} = \int_0^{2\pi} \left(Fresnel_s \cdot Fresnel_p \right) cos(\theta _0)sin(\theta _0)
+\end{equation}
+
+\begin{equation}
+	\theta_1 = \text{out} \angle <0,0,1>
+\end{equation}
+
+\begin{equation} 
+	d \phi = in_{proj} \angle out_{proj}
+\end{equation}
+
+\begin{equation}
+	R_{Minnaert} = R_{Lambertian} \cdot (cos(\theta _0) cos(\theta _1))^{\kappa-1}
+\end{equation}
+
+\begin{equation}
+	R_{HenyeyGreenstein}=R_{Minnaert} \frac{1 - \theta^2 }{ (1 + 2 \theta (cos(\theta_0) cos(\theta _1) + sin(\theta _0)  sin(\theta _1) cos(d \phi))+ \theta^2 )^{1.5}}
+\end{equation}
+
+The photons are also distributed along the terrain. For this purpose the terrain is simplified with the same surface normal as the original terrain. Then using a model of the distribution of photons along the footprint the correct altitude is computed. The complete description of this model can PROBABLY be found in some appendix.
+
+\subsubsection{Noise Scattering}
+
+Also noise is reflected up to the satellites. This reflection takes place in the receiver footprint. Because the direction of the receiver is not perpendicular to the normal of the reflection area, the footprint becomes elliptical. Over this entire elliptical area, solar radiation is reflected to the receiver.
+
+The amount of solar flux that is reflected up to the satellites is only the flux in the spectral width of the receiver. Then using the laws of gray body radiation, the amount of solar flux in the given spectrum is computed that hits the receiver footprint. The equation used to compute the influx is:
+
+\begin{equation}
+	\lambda_{1,2} = \lambda _{laser} \pm \frac{Wavelength Bandwidth}{2}
+\end{equation}
+\begin{equation}
+	I = \sigma T^4 (f(\lambda _1, T, \epsilon) - f(\lambda _1, T, \epsilon))
+\end{equation}
+
+In this equation f(x) is an approximation of Planck's Integral \cite[p.~26]{rees}. This flux is then scatted in the same manner as for the laser scattering, to all the receivers. The big difference is that this is a continues process with respect to the laser, which happens in discrete steps.
+
+\subsection{Reception by the receiver}
+
+When the the energy of the laser pule and the noise, reach the receiver again, the amount of received photons can be determined. This is done based on the energy per photon, which is defined in equation \ref{eq:PhotonEnergy}. Then the total received photons, is the inbound energy divided by the energy per photon. The floating remainder then compared to a random number from zero to one, and if the random number is smaller then the remainder, an extra photon is added.
+
+\begin{equation}
+	E_{p}=\frac{h \cdot c}{\lambda}
+	\label{eq:PhotonEnergy}
+\end{equation}
+
+In equation \ref{eq:PhotonEnergy}, h is the Planck constant, c the speed of light and $\lambda$ the wavelength of the emitter laser (473 nm).
