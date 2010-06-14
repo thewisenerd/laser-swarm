@@ -1,6 +1,6 @@
 \section{Detailed Design Optical Emitting Payload} 
 \label{sec:DDlaser}
-\acs{LiDAR} is a remote sensing system comprising an optical emitting device, used to acquire topographic data, e.g. surface elevation gradients or ground composition by evaluating the \acs{BRDF}, considering multi-angular measurement are taken. For the generation of optical pulses, a highly efficient, diode-pumped, solid-state Nd-YAG \acs{laser} is considered \ac{DPSSL}. Solid-State \acp{laser} have a high \acs{TRL} with relatively good properties in terms of beam quality (Q-factor), efficiency and pulse manipulation. Data products for topographical missions require that the \ac{laser} wave form be nearly pure Gaussian (known as transverse mode $TEM_(00)$), both temporally and spatially, with a uniform wave front. The digitized time of flight waveform returning provides the topographic structure \cite{nd_yag_life}.
+\acs{LiDAR} is a remote sensing system comprising an optical emitting device, used to acquire topographic data, e.g. surface elevation gradients or ground composition by evaluating the \acs{BRDF}, considering multi-angular measurement are taken. For the generation of optical pulses, a highly efficient, diode-pumped, solid-state Nd-YAG \acs{laser} is considered \ac{DPSSL}. Solid-State \acp{laser} have a high \acs{TRL} with relatively good properties in terms of beam quality (Q-factor), efficiency and pulse manipulation. Data products for topographical missions require that the \ac{laser} wave form be nearly pure Gaussian (known as transverse resonator mode $TEM_(00)$), both temporally and spatially, with a uniform wave front. The digitized time of flight waveform returning provides the topographic structure \cite{nd_yag_life}.
 
 \subsection{Principles of \textit{AlGaAs} Laser Diodes}
 \label{laser_diodes}
@@ -17,14 +17,14 @@ A quantum well is a thin layer which can confine (quasi-)particles (typically el
 
 A major challenge is to reach the laser threshold, because the optical gain for the intracavity laser beam occurs only on a very small distance (in one or several quantum wells). It is therefore necessary to realize a laser resonator with very low losses, i.e., \textit{Bragg mirrors} with high reflectivity. A Bragg mirror (also called \textit{distributed Bragg reflector} is a structure which consists of an alternating sequence of layers of two different optical materials. The principle of operation can be understood as follows. Each interface between the two materials contributes a Fresnel reflection. For the design wavelength, the optical path length difference between reflections from subsequent interfaces is half the wavelength; in addition, the reflection coefficients for the interfaces have alternating signs. Therefore, all reflected components from the interfaces interfere constructively, which results in a strong reflection. The reflectivity achieved is determined by the number of layer pairs and by the refractive index contrast between the layer materials. 
 
-Individual \acs{laser} diodes normally generate continuous waves with powers $\sim$ 1 - 10 [mW]. To be able to generate higher power ($\sim$1 - 10 [W]) \textit{laser diodes arrays} or \textit{laser diode stacks} can be created, simply be combining multiple individual \acs{laser} diodes. High-power laser diode arrays \ac(LDAs) are used for a variety of space-based remote sensor laser programs as an energy source for \acp{DPSSL}. \acp{LDA} have been flown on NASA missions including MOLA, GLAS and MLA and have continued to be viewed as an important part of the \acs{laser}-based instrument component suite \cite{lda_main}. 
+Individual \acs{laser} diodes normally generate quasi-continuous waves with powers $\sim$ 1 - 10 [mW]. To be able to generate higher power ($\sim$1 - 10 [W]) \textit{laser diodes arrays} or \textit{laser diode stacks} can be created, simply be combining multiple individual \acs{laser} diodes. High-power laser diode arrays \ac(LDAs) are used for a variety of space-based remote sensor laser programs as an energy source for \acp{DPSSL}. \acp{LDA} have been flown on NASA missions including MOLA, GLAS and MLA and have continued to be viewed as an important part of the \acs{laser}-based instrument component suite \cite{lda_main}. 
 
 Laser diode bars have many single emitters arranged side-by-side and spaced approximately 0.5 [mm] apart, on a single slab of semiconductor material measuring approximately 0.5 [mm] x 10 [mm] in size. The individual emitters are connected in parallel which keeps the required voltage low at ~2V, but increases the required current to ~50 A/bar to 100 A/bar. Stacking these laser diode bars 2 to 20+ slabs high yields high power \acp{LDA} capable of emitting several hundreds of Watts. Electrically, the bars are wired in series increasing the voltage by 2 V/bar while maintaining the total current at ~50 A to 100 A. These arrays are one of the enabling technologies for efficient, high power solid-state lasers.
 
-Traditionally these arrays are operated in QCW (Quasi Continuous Wave) mode with pulse widths of ~50 µs to 200 µs and repetition rates of ~10 Hz to 200 Hz. In QCW mode, the wavelength and the output power of the laser reaches steady-state but the temperature does not. The advantage is a substantially higher output power than in CW mode, where the output power would be limited by the internal heating and the heat sinking properties of the device. The disadvantage is a much higher thermally induced mechanical stress caused by the constant heating and cooling cycle of the QCW operational mode.
+Traditionally these arrays are operated in QCW (Quasi Continuous Wave) mode with pulse widths of $\sim$50 µs to 200 µs and repetition rates of $\sim$10 Hz to 200 Hz. In QCW mode, the wavelength and the output power of the laser reaches steady-state, but the temperature does not. The advantage is a substantially higher output power than in CW mode, where the output power would be limited by the internal heating and the heat sinking properties of the device. The disadvantage is a much higher thermally induced mechanical stress caused by the constant heating and cooling cycle of the QCW operational mode, considering non-conductive cooling configurations.
 
 Considering the fact that Nd:YAG is considered as gain medium (\ref{nd_yag}), the existence of strong $Nd^{3+}$ absorption near 808 [nm] permits efficient pumping with a GaAlAs (Gallium-Aluminium-Arsenide) diode \acp{laser} for the $F_{3/2}\rightarrow I_{9/2}$ transition. The direct band gap crystal AlGaAs is often used for laser diodes with wavelengths between
-750nm and 880nm. $Al_{x}Ga_(1-x)As$, through changing the x, the ratio of the aluminium
+750nm and 880nm. $Al_{x}Ga_(1-x)As$, through changing the x, the ratio of the aluminum
 to gallium can be adjusted to vary the band gap and thereby control the wavelength. In the double heterostructure, stimulated emission occurs only within a thin active
 layer of GaAs, which is sandwiched between p- and n- doped AlGaAs layers that have
 a wider band gap. Laser diodes use heterojunctions to achieve simultaneous carrier and
@@ -37,7 +37,7 @@ photon confinement in the active region.
 \label{laser_power}
 \end{figure}
 
-A high laser efficiency demands that the light and injected charge carriers be confined as closely as possible to the same volume. The AlGaAs daser diode consists of a double heterojunction formed by an undoped (or lightly p-doped) active region surrounded by high bandgap p and n $Al_{x}Ga_(1-x)As$ cladding layers \cite{algaasdiodes}. The surrounding cladding layers provide an energy barrier to confine carriers to the active region. The actual operation wavelengths may range from 750 – 880 [nm] due to the effects of dopants, the size of the active region, and the compositions of the active and cladding layers. When a certain parameter is fixed, the wavelength can vary in several nanometers due to other variables. For example, when the active layer has an energy gap $E_{g} = 1.424 [eV]$, the nominal emission wavelength is $\lambda = hc/E_{g}= 871 [nm]$. When a bias voltage is applied in the forward direction, electrons and holes are injected into the active layer. Since the band gap energy is larger in the cladding layers than in the active layer, the injected electrons and holes are prevented from diffusing across the junction by the potential barriers formed between the active layer and cladding layers. The electrons and holes confined to the active layer create a state of population inversion, allowing the amplification of light by stimulated emission.
+A high laser efficiency demands that the light and injected charge carriers be confined as closely as possible to the same volume. The AlGaAs daser diode consists of a double heterojunction formed by an undoped (or lightly p-doped) active region surrounded by high bandgap p and n $Al_{x}Ga_(1-x)As$ cladding layers \cite{algaasdiodes}. The surrounding cladding layers provide an energy barrier to confine carriers to the active region. The actual operation wavelengths may range from 750 – 880 [nm] due to the effects of dopants, the size of the active region, and the compositions of the active and cladding layers. When a certain parameter is fixed, the wavelength can vary in several (sub)nanometers due to other variables. For example, when the active layer has an energy gap $E_{g} = 1.424 [eV]$, the nominal emission wavelength is $\lambda = hc/E_{g}= 871 [nm]$. When a bias voltage is applied in the forward direction, electrons and holes are injected into the active layer. Since the band gap energy is larger in the cladding layers than in the active layer, the injected electrons and holes are prevented from diffusing across the junction by the potential barriers formed between the active layer and cladding layers. The electrons and holes confined to the active layer create a state of population inversion, allowing the amplification of light by stimulated emission.
 
 \begin{figure} [ht]
 \centering
@@ -73,10 +73,11 @@ For applications where $TEM_{00}$ single mode operation is required, it is neces
 \label{SHG}
 Since Nd-YAG has no principle absorption peak at the desired wavelength for the \acs{LiDAR} mission, the frequency should be altered from the original 946 [nm]. This can be done using \textit{second harmonic generation} or \textit{frequency doubling} in nonlinear crystals.
 The physical mechanism behind frequency doubling can be understood as follows. Due to the ¦Ö(2) nonlinearity, the fundamental (pump) wave generates a nonlinear polarization wave which oscillates with twice the fundamental frequency. According to Maxwell's equations, this nonlinear polarization wave radiates an electromagnetic field with this doubled frequency. Due to phase-matching issues, the generated second-harmonic field propagates dominantly in the direction of the nonlinear polarization wave. The latter also interacts with the fundamental wave, so that the pump wave can be attenuated (pump depletion) when the second-harmonic intensity develops: energy is transferred from the pump wave to the second-harmonic wave.
+$\beta-BaB_{2}O_{4}$ is used for second, third, fourth and fifth harmonic generation of Nd doping \acp{laser}. Typical dimensions of these crystal are \sim0.05 - 10 [mm].
 
 \subsubsection{Pulse Generation}
 \label{pockel}
-The generation and manipulation of pulses can highly influent the data in \acs{LiDAR} missions. To be able to transform the continuous wave into a pulsed wave, Q-switching is applied. Q-switching is a technique for obtaining energetic short pulses from a laser by modulating the intracavity losses and thus the Q-factor (a measure of the damping of resonator modes) of the laser resonator. The technique is mainly applied for the generation of nanosecond pulses of high energy and peak power with solid-state bulk lasers. For \textit{active Q-switching}, the losses are modulated with an active control element typically either an acousto-optic or electro-optic modulator. Both techniques rely on the fact that the optical properties within a nonlinear crystal change on the occurrence of an induced sound wave (acousto-optic) or electric field (electro-optic). There are also mechanical Q-switches such as spinning mirrors, used as end mirrors of laser resonators. In any case, the achieved pulse energy and pulse duration depends on the energy stored in the gain medium, i.e. on the pump power and the pulse repetition rate.  A Pockels cell is a device consisting of an electro-optic crystal (with some electrodes attached to it) through which a light beam can propagate. Dependent on the configuration, the phase delay or polarization state in the crystal (due to the \textit{Pockels effect}) can be modulated by applying a variable electric voltage.  Hence, for short periods (dt) the polarization state of the incoming electromagnetic radiation can be altered. If a \textit{polarizer disk} is used after the Pockel cell, the generation of pulses will begin, since the polarizer disk transmits certain polarized states only, deflecting the rest (acting like a 'polarize filter'). Pulses in the order of nanoseconds could be created this way. Care should be taken at the fact that the peak power after the Pockel cell is increased in several orders, due to the conversion from continuous to pulsed waves. Hence, the polarizer disk should be able to cope with these stresses.
+The generation and manipulation of pulses can highly influent the data in \acs{LiDAR} missions. To be able to transform the quasi-continuous wave into a pulsed wave, Q-switching is applied. Q-switching is a technique for obtaining energetic short pulses from a \acs{laser} by modulating the intracavity losses and thus the Q-factor (a measure of the damping of resonator modes) of the laser resonator. The technique is mainly applied for the generation of nanosecond pulses of high energy and peak power with solid-state bulk lasers. For \textit{active Q-switching}, the losses are modulated with an active control element typically either an acousto-optic or electro-optic modulator. Both techniques rely on the fact that the optical properties within a nonlinear crystal change on the occurrence of an induced sound wave (acousto-optic) or electric field (electro-optic). There are also mechanical, less viable for space missions, Q-switches such as spinning mirrors, used as end mirrors of laser resonators. In any case, the achieved pulse energy and pulse duration depends on the energy stored in the gain medium, i.e. on the pump power and the pulse repetition rate.  A Pockels cell is a device consisting of an electro-optic crystal including electrodes through which a electromagnetic beam can propagate. Dependent on the configuration, the phase delay or polarization state in the crystal (due to the \textit{Pockels effect}) can be modulated by applying a flux electric voltage (typical second harmonic generation characteristics: \sim40,000 V / 0.1[mA])  Hence, for short periods (dt) the polarization state of the incoming electromagnetic radiation can be altered. If a \textit{polarizer disk} is used after the Pockel cell, the generation of pulses will begin, since the polarizer disk transmits certain polarized states only, deflecting the rest (acting like a 'polarize filter'). Pulses in the order of nanoseconds could be created this way. Care should be taken at the fact that the peak power after the Pockel cell is increased in several orders, due to the conversion from continuous to pulsed waves. Hence, the polarizer disk should be able to cope with these stresses. According to data posted after the GLAS-mission (using the same sort of \acs{laser}, an optical induced layer was formed at the non-linear crystal, probably induced by the high peak powers of the pulsed waves. In this configuration, the pulsed wave is created after the $\beta-BaB_{2}O_{4}$ - crystal, reducing the risk of the creation of critical optical damage (COD). 
 
 \begin{figure} [ht]
 \centering
@@ -87,7 +88,7 @@ The generation and manipulation of pulses can highly influent the data in \acs{L
 
 \subsection{Optical Characteristics} 
 \label{opticalchar}
-The radius of the beam equals 400 [$\mu$m]. Considering a $TEM_{00}$ transverse mode of electromagnetic radiation this results in a area equal to 
+Consindering for a moment, the radius of the beam equals 400 [$\mu$m]. Considering a $TEM_{00}$ transverse mode of electromagnetic radiation this results in a area equal to 
 \begin{equation}
 \label{area}
 A_{beam} = \pi \cdot r^{2} = \pi \cdot 400^{2} = 502,654 \mu m^{2} = 0.50265 cm^{2}
@@ -111,45 +112,97 @@ Considering the value of $E_{p}$ to be 1 [mJ] with a $f_{rep}$ of 5,000 [Hz], th
 P_{output} = E_{p} \cdot f_{rep} = 0.001 [J] \cdot 5,000[1/s] = 5.0 [W]
 \end{equation}
 
-Input power equals output power times efficiency = $16 W \times eff = ((0.35)*(0.99)^6)$
+The \textit{total} electrical-to-optical power efficiency of a laser system, i.e. the \textit{wall plug efficiency}, typically is \sim 10[\%], however, linear interpolations of the current data, considering the large amount of research done on this subject, shows that the wall plug efficiency increases with one percent point every year (on average) from 2004, giving an wall plug efficiency of \sim16 [\%] in 2010 and \textgreater20 [\%] in 2015 \cite{nd_yag_life}. A higher wall plug efficiency reduces the electrical power consumption and also the amount of heat which has to be removed. 
+  
 The pulse peak intensity equals $E_{p}/t_{p} = 0.001 [J] / 10\cdot10^{-9} [s] = 100,000 W$. The intensity turns out to be $\frac{E_{p}/t_{p}}{A_{beam}} = \frac{100,000 [W]}{0.50265 [cm^{2}]} = 198,950.6 [W/cm^{2}] (0.00199 [J/cm^{2}/10ns])$. The standard damage threshold energy $E_{p,damage}$for dielectric components equals $0.5 - 10 [J/cm^{2}/10 ns]$. Considering the lowest value $I_{p,damage}$, hence, $0.5 [J/cm^{2}/10 ns]$, and converting this to the appropriate dimensions, shows the intensity created within the electromagnetic pulses should do no harm to the dielectric components. Especially the polarizer disk (with the lowest $I_{p,damage}$) is vulnerable for peak power caused by pulsed electromagnetic radiation. 
 
 \subsection{Gaussian Beam Propagation and Diffraction}
 \label{diff}
-In most \acs{laser} applications, the intensity spatial distribution of the beam can be approximated by assuming that the \acs{laser} beam has an Gaussian intensity profile, which corresponds to the theoretical $TEM_{00}$ transverse mode. Unfortunately, the output from real-life \acp{laser} in not truly Gaussian. To accommodate this invariance, a quality factor, $M^{2}$ has been defined to describe the deviation of the \acs{laser} beam from a theoretical Gaussian. For high-energy multimode \acp{laser} the $M^{2}$ factor can be high as 25 - 30. The fun
+\subsection{Gaussian Beam Propagation And Diffraction}
+	\label{diffraction}
 
-Diffraction occurs when a wavefront(radiant beam)impinges upon the edge of an opaque screen or aperture. Light appears outside the perfect geometrical shadow because the light has been diffracted by the edge of the aperture. The effect this has on our simple rotationally symmetric optical systems is that a point does not map to a point, but is blurred or smeared.\cite{prism_book} 
+Collimated plane wave propagation (uniform \textbf{k}-vector distribution) in optical systems would give rise to discrete and accurate calculations. However, due to optical distortions and modifications, the \textbf{k}-vector distribution can change, hence, altering the wave propagation. 
 
-\begin{figure}[ht!]
-\centering
-\includegraphics[scale = 0.8]{chapters/img/diffraction_singleslit.png}
-\caption{Single-slit diffraction pattern.}
-\label{fig:single_slit}
-\end{figure}
-
-In far-field case, where the pattern observed is a long distance from the aperture, it is known as Fraunhofer diffraction. The patterns caused by diffraction can be analyzed via Fourier optics of a circular aperture for rotationally symmetric optical systems. The results are in the form of a Bessel function, which is shown as figure \ref{fig:single_slit} on page \ref{fig:single_slit} for single-slit diffraction. Therefore, the actual radiant energy distribution in the image of a point differs from the point because of diffraction. This diffraction spot is called the "Airy disc", a three-dimensional representation of which is given in figure \ref{fig:airydisk} on page \pageref{fig:airydisk} by definition or accepted practice. About 84\% of the radiant power is contained in this central disc. The diffraction limit is the ultimate design criterion as to how well the optical system creates an image. The diffraction limit is described as angular resolution, $\theta$, for half of the diffraction blur, which can be expressed as equation \ref{diffraction}. where D is the diameter of the aperture and $\lambda$ is the light wavelength.
+\textit{Gaussian Beams}
+For the analysis of the \acs{laser} beam intensity profile, a Gaussian profile (transverse resonator mode $TEM_{00}$) is considered corrected by the $M^{2}$ factor for optical distortion. The $M^{2}$ factor is a common measure of the beam quality of a laser beam.  The electric field distribution for a Gaussian beam is represented as:
 
 \begin{equation}
-\label{diffraction}
-\theta = 1.22\frac{\lambda}{D}
-\end {equation}
+	E(r,z) = E_{0}\cdot \frac{w_{0}}{w(z)} \cdot exp\left[\frac{-r^{2}}{w(z)}\right]\cdot exp\left[-i(kz-arctan\left(\frac{z}{z_{r}}\right)+\frac{kr^{2}}{2R(z)}\right]
+\end{equation}
 
-\begin{figure}[ht!]
-\centering
-\includegraphics[scale = 0.15]{chapters/img/diffraction_airydisk.png}
-\caption{Airy disk pattern.}
-\label{fig:airydisk}
-\end{figure}
+\begin{equation}
+	E(x,y,z) = exp\left[\frac{-i(kz + \psi(z)}{w(z)}\right]exp\left[\frac{-(x^{2}+y^{2})}{w^{2}(z)} - ik \frac{(x^{2}+y^{2})}{2R(z)}\right]
+\end{equation}
 
-To compare with previous earth observation mission \acs{ICEsat}, which produces 70 meters diameter laser spot, 10[mm] laser diameter can produce about 60 meters diameter without focusing system. 
+The main point of this section is to determine the Gaussian beam propagations dependency on diffraction phenomenon. To characterize the Gaussian beam in more details, the following equations are used to be able to describe the propagation.
 
+\begin{equation}
+\theta = \frac{\lambda}{\pi\cdot w_{0}}
+\end{equation}
+
+\begin{equation}
+w_{R}(z)=w_{0R}\sqrt{\left[1 + \left(\frac{z(\theta+\Delta \alpha) M^{2}}{w_{0R}}\right)^{2}\right]}
+\end{equation}
+
+\begin{equation}
+w_{R}(z)=w_{0R}(z)\sqrt{\left[1 + \left(\frac{z\lambda M^{2}}{\pi w_{0R}^{2}}\right)^{2}\right]}
+\end{equation}
+
+\begin{equation}
+R_{R}(z)=z\left[1 + \left(\frac{w_{0R}}{z\theta M^{2}}\right)^{2}\right]
+\end{equation}
+
+\begin{equation}
+R_{R}(z)=z\left[1 + \left(\frac{w_{0R}}{z(\theta+\Delta \alpha) M^{2}}\right)^{2}\right]
+\end{equation}
+
+\textit{Fraunhofer Diffraction} 
+Diffraction is a fundamental characteristic of all wave fields. The effect of diffraction is typically manifested when an obstacle is placed in the path of a beam. On an observation screen some distance away from the obstacle, one observes a rather complicated modulation of the time-average intensity in the vicinity of the boundary separating the illuminated region from the geometrical shadow cast by the obstacle. With the use of high-power lasers, diffraction of radiation beams (cavity oscillating in the fundamental transverse Gaussian $TEM_{00}$ mode) with finite transverse dimensions has significant consequences. The Fresnel number $F = a^{2}/\lambda \cdot R$, where a is the characteristic size ("radius") of the aperture,  $\lambda$ is the wavelength, and R is the distance from the aperture, determines the diffraction regime that should be considered (F<< 1: Fraunhofer (far-field); F \textgreater 1, Fresnel). The far-field light field is the Fourier transform of the aperatured field. The far-field light field is the Fourier transform of the aperatured field.
+	
+\begin{equation} 
+E(k_{x},k_{y}) = \mathcal{F}\left\{{\overbrace{t(x,y)}^{Transmission\  function}\cdot E(x,y)}\right\} = \iint(exp(-i(k_{x} x + k_{y}y))\cdot t(x,y)\cdot E(x,y)dxdy 
+\end{equation} 
+
+\begin{equation}
+E(x,y,z) = \frac{exp\left[-i(kz + \psi(z))\right]}{w(z)}\cdot exp\left[\frac{-(x^{2}+y^{2})}{w^{2}(z)}-\frac{ik(x^{2}+y^{2})}{2R(z)}\right]
+\end{equation}
+
+The lens incorporates a phase delay to the outgoing electromagnetic field. 
+
+\begin{equation}
+t_{lens} = exp\left\{-i(\left((n-1)(\frac{k}{2R}(x^{2}+y^{2})\right)\right\}
+\end{equation}
+
+Combining the above calculations, calculations for the Fraunhofer diffraction can be conducted, which shows the dependency on divergence.
+
+\begin{equation}
+\mathcal{F}\left\{\left(exp\left\{-i\left((n-1)\left(\frac{k}{2R(z)}\right)(x^{2}+y^{2})\right)\right\}\right)\otimes\left(\frac{exp\left[-i(kz + \psi(z))\right]}{w(z)}\cdot exp\left[\frac{-(x^{2}+y^{2})}{w^{2}(z)}-\frac{ik(x^{2}+y^{2})}{2R(z)}\right]\right)\right\}
+\end{equation}
+
+A different point of view, conveniently in the sense of the \acs{LiDAR} mission, considers the use of focal lengths to change the Gaussian beam diffraction, giving the same result as the above Fourier transform, i.e. the divergences influence the intensity profile. 
+
+\begin{equation} 
+E(x_{1},y_{1})=\iint\left[exp\left( ik\left(\frac{-2x x_{1}-2y y_{1}}{2z} + \frac{x^{2}+y^{2}}{2z}\cdot t_{lens}(x,y)\cdot E(x,y)\right)\right)\right]dx dy
+\end{equation} 
+
+\begin{equation} 
+\frac{k}{2z}=(n-1)\frac{k}{2R_{1}}
+\end{equation} 
+
+\begin{equation} 
+\frac{1}{f}=\left(n-1\right)\left[\frac{1}{R_{1}}-\frac{1}{R_{2}}\right]
+\end{equation} 
+
+\begin{equation} 
+E(x_{1},y_{1})=\iint exp\left[-i\frac{k}{f}\left(xx_{1}+yy_{1}\right)\cdot t(x,y)\cdot E(x,y)\right] dx dy
+\end{equation}
+ 
 \subsection{Thermal Control} 
 \label{opticalthermal}
 Basically, there are three critical parts (\acs{LDA}, Nd:YAG \acs{laser} crystal and optical components after polarizer disk) of the \acs{laser} configuration in terms of thermal control. All of these components shall be considered in this subsection.
 
 \textit{\acs{LDA}}.
-The constituent parts and materials of a typical \acs{LDA} are the diode die (laser bar) and the packaging materials. The packaging design and materials enable the array of laser bars to stay together in a stack, to be energized electrically (with a relatively high drive current), to pass the heat generated out of the unit to the mounting surface (thermal path, heat sinking), to be sufficiently rugged against mechanical insults, to provide a standard mounting interface (screws or clamps) and to be as small as possible. The active region of the LDA, where heat is generated, is only about 1 micron wide, located about 3 microns from the P side of the bar. The bars are about 0.1 mm wide and typically spaced about 0.5 mm from each other. Waste energy in the form of heat must be conductively transferred into the solder material and from there into the heat sink material (typically BeO or CuW) as rapidly as possible. The solder material of choice is a soft Indium alloy for its ductile property allowing the bar and the heat sink to expand or contract at different rate with temperature. The \acs{LDA} manufacturers try to use materials which possess higher thermal conductivity and a relatively comparable coefficient of thermal expansion (CTE) in order to minimize the thermal resistance of the device and the induced mechanical stresses. Additionally important to reducing mechanical stress is consideration of the use of soft solders which are highly pliable with a relatively low melting point (\~ 160oC). Post life test analysis indicates that solder deformation caused solder roll-over, in turn creating voids, which increase thermal resistance. When coupled with built-in stress due to fabrication, such roll over, in time often obstructs emitters, leading to increased heating, or extends across the bar from anode to cathode causing bar shorts which eventually result in contaminations to the emitter face and localized hot spots, further degrading performance. Excessive heating and thermal cycling of the LDA active regions plays a key role in limiting the reliability and lifetime of LDAs operated in the QCW mode, particularly where pulse widths are long. To improve the assembly’s heat extraction performance, advanced materials are being considered for packaging LDAs, which have high thermal conductivity and a CTE (Coefficient of Thermal Expansion) that matches that of the laser bars.
-
+The constituent parts and materials of a typical \acs{LDA} are the diode die (laser bar) and the mechanical structure. The packaging design and materials enable the array of laser bars to stay together in a stack, to be energized electrically (with a relatively high drive current), to pass the heat generated out of the unit to the mounting surface (thermal path, heat sinking), to be sufficiently rugged against mechanical insults, to provide a standard mounting interface (screws or clamps) and to be as small as possible. The active region of the \acs{LDA}, where heat is generated, is only about 1 micron wide, located about 3 microns from the P-side of the bar. The bars are about 0.1 [mm] wide and typically spaced about 0.5 [mm] from each other. Waste energy in the form of heat must be conductively transferred into the solder material and from there into the heat sink material (typically BeO or CuW) as rapidly as possible. The solder material of choice is a soft Indium alloy for its ductile property allowing the bar and the heat sink to expand or contract at different rate with temperature. The \acs{LDA} manufacturers try to use materials which possess higher thermal conductivity and a relatively comparable coefficient of thermal expansion (CTE) in order to minimize the thermal resistance of the device and the induced mechanical stresses. Additionally important to reducing mechanical stress is consideration of the use of soft solders which are highly pliable with a relatively low melting point (\~ 160 C). Post life test analysis indicates that solder deformation caused solder roll-over, in turn creating voids, which increase thermal resistance. When coupled with built-in stress due to fabrication, such roll over, in time often obstructs emitters, leading to increased heating, or extends across the bar from anode to cathode causing bar shorts which eventually result in contaminations to the emitter face and localized hot spots, further degrading performance. Excessive heating and thermal cycling of the \acs{LDA} active regions plays a key role in limiting the reliability and lifetime of \acp{LDA} operated in the QCW mode, particularly where pulse widths are long. To improve the assembly’s heat extraction performance, advanced materials are being considered for packaging \acp{LDA}, which have high thermal conductivity and a CTE (Coefficient of Thermal Expansion) that matches that of the laser bars to compensate inhomogeneous thermal strain.
 
 \begin{figure}[ht!]
 \centering
@@ -159,7 +212,7 @@ The constituent parts and materials of a typical \acs{LDA} are the diode die (la
 \end{figure}
 
 \textit{\acs{Nd:YAG} slab}. 
-The Nd:YAG slab plays a central role in the \acs{laser} configuration. To be able to cope with thermal stresses induced by the wave formation, the slab is thermally bonded to a molybdenum copper block in order to match the thermal expansion coefficients. 
+The Nd:YAG slab plays a central role in the \acs{laser} configuration. To be able to cope with thermal stresses induced by the wave formation, the slab is thermally bonded to a molybdenum copper block in order to match the CTE.
 
 %\begin{figure}[ht!]
 %\centering
@@ -168,19 +221,21 @@ The Nd:YAG slab plays a central role in the \acs{laser} configuration. To be abl
 %\label{reliability}
 %\end{figure}
 
-\textit{Electrical Component Temperature Dependency}
+\textit{Dilectrical Component Temperature Dependency}
+Optical misalignment is a serious issue  with the \acs{laser} configuration, both in the manufacturing phase, as well during the actual mission. Refractive indices of dielectric components alter the beam translation and should be considered. Given the fact that the refractive index is a material parameter with a direct dependency of temperature (temperature-dependent Sellmeier equation), beam propagation can change unwillingly during mission. 
+
 
 \subsection{ Laser Lifetime Expectance} 
 \label{opticallifetime}
 Multiple aspects influence the expected lifetime of the optical emitter device, such as power, temperature interval, repetition rate and intracavity properties. Since most \acp{laser} have a non-continuous mode of operation (i.e. the duty factor is lower then 100\%), reliability data for long-term cycles are not abundant available.  
 
-For damage-free operation in a harsh, hands-off, environment such as space, a major form of damage risk reduction is the creation of a large intracavity mode to reduce peak fluence. Since resonator efficiency depends strongly on the inversion density of the gain medium, it is advantageous to confine the desired cavity mode as close as possible. To accomplish this, the 808 [nm] light from the diode arrays was collimated by a single plano-convex cylindrical lens made of undoped YAG. By doing this, the probability of the existence of thermal lensing is reduced, increasing the beam quality and the lifetime. 
+For damage-free operation in a harsh, hands-off, environment such as space, a major form of damage risk reduction is the creation of a large single intracavity mode to reduce peak fluence. Since resonator efficiency depends strongly on the inversion density of the gain medium, it is advantageous to confine the desired cavity mode as close as possible. To accomplish this, the 808 [nm] light from the diode arrays should be collimated by a single plano-convex cylindrical lens (for maximal efficiency, made of undoped YAG). By doing this, the probability of the existence of thermal lensing is reduced, increasing the beam quality and the lifetime. 
 
 Considering a constant value of $f_{rep}$ of 5,000 [Hz], the total number of pulses equals $788.4\cdot10^{9}$ [pulses/5 years]. All optical components should be able to cope with the large amount of pulses and the peak power implied by these pulses, i.e. the energy damage threshold of the dielectric components should be higher than the incoming energy of the electromagnetic radiation. Since $I_{p,damage}$) is given with a temporal resolution in the order of a single pulse width ($\sim$10 [ns]), individual pulses can be analyzed. Stationary calculations can be conducted with the information based on the electromagnetic radiation energy and hence, the proper optical elements could be chosen ($I_{p,damage} > I_{p}$).
 
 \cite{nd_yag_life} shows an experimental set-up, where the lifetime of a \acs{DPSSL} is investigated, using approximately the same \acs{laser} configuration with $f_{rep}$ = 242 [Hz] and $E_{p}$ = 0.0150 [J]. The pulse energy is much larger then the value of $E_{p}$ in the case of the \acs{LiDAR} mission described in this report ($\sim$0.001 [J]). \ref{figure} shows the results. After $2.4\cdot10^{9}$ shots, there was no damage found in any of the cavity optics, but inspection of the diodes revealed that a single bas was lost on one array. After the first year, the pump pulse length was increased from 89 [$\mu$m] to 105 [$\mu$m] to restore the output energy to 15 [mJ]. This roughly simulated the procedure that would be performed in space in order to maintain an altimetry link. The final result was that after more than $4.8\cdot10^{9}$ 10 - 15 [mJ] laser pulses, there was no optical damage present in the system \cite{nd_yag_life}. This clearly indicates that the \acp{LDA} lifetime considerations are important for the entire \acs{laser} system. AlGaAs lasers can suffer from catastrophic optical damage (COD), rapid degradation, and gradual degradation. These phenomena are due to darkline defect propagation and a high surface recombination rate \cite{algaas}.
 
-\cite{nd_yag_life} shows an experimental set-up, where the lifetime of a \acs{DPSSL} is investigated, using approximately the same \acs{laser} configuration with $f_{rep} = 242 [Hz]$ and $E_{p} = 0.0150 [J]$. The pulse energy is much larger then the value of $E_{p}$ in the case of the \acs{LiDAR} mission described in this report ($\sim$0.001 [J]). \ref{figure} shows the results. After $2.4\cdot10^{9}$ shots, there was no damage found in any of the cavity optics, but inspection of the diodes revealed that a single bas was lost on one array. After the first year, the pump pulse length was increased from 89 [$\mu$m] to 105 [$\mu$m] to restore the output energy to 15 [mJ]. This roughly simulated the procedure that would be performed in space in order to maintain an altimetry link. The final result was that after more than $4.8\cdot10^{9} 10 - 15 [mJ]$ laser pulses, there was no optical damage present in the system \cite{nd_yag_life}. This clearly indicates that the \acp{LDA} lifetime considerations are important for the entire \acs{laser} system.
+\cite{nd_yag_life} shows an experimental set-up, where the lifetime of a \acs{DPSSL} is investigated, using approximately the same \acs{laser} configuration with $f_{rep} = 242 [Hz]$ and $E_{p} = 0.0150 [J]$. The pulse energy is much larger then the value of $E_{p}$ in the case of the \acs{LiDAR} mission described in this report ($\sim$0.001 [J]). \ref{figure} shows the results. After $2.4\cdot10^{9}$ shots, there was no damage found in any of the cavity optics, but inspection of the diodes revealed that a single bar was lost on one array. After the first year, the pump pulse length was increased from 89 [$\mu$m] to 105 [$\mu$m] to restore the output energy to 15 [mJ]. This roughly simulated the procedure that would be performed in space in order to maintain an altimetry link. The final result was that after more than $4.8\cdot10^{9} 10 - 15 [mJ]$ laser pulses, there was no optical damage present in the system \cite{nd_yag_life}. This clearly indicates that the \acp{LDA} lifetime considerations are important for the entire \acs{laser} system.
 
 
 \begin{figure}[ht!]
@@ -190,7 +245,7 @@ Considering a constant value of $f_{rep}$ of 5,000 [Hz], the total number of pul
 \label{reliability}
 \end{figure}
 
-Taken into account the fact that the total number of shots in five years exceed the number of total shots delivered by a single \acs{LDA} without considerable loss in power and beam quality, the obvious consequence is that multiple \acp{LDA} should be implemented within the structure. 
+Taken into account the fact that the total number of shots in five years exceed the number of total shots delivered by a single \acs{LDA} without considerable loss in power and beam quality, the obvious consequence is that multiple \acp{LDA} should be implemented within the structure. Given the fact that individual \acs{laser} diode has dimensions \sim0.01 [m], multiple diodes could be added to form a \acs{LDA} matrix.  
 
 \subsection{\acs{laser} Focus Calculation}
 \label{focus}
