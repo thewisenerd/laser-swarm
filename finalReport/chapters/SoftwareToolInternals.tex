@@ -37,45 +37,25 @@ In equation \ref{eq:airmass}, z is the zenith angle (angle between the satellite
 
 \subsection{Scattering}
 \subsubsection{Laser Scattering}
-
+\label{scatter}
 When the laser pulse reaches the ground it is scattered back. The scattering model used to describe this is taken from the discussion thereon in \cite{rees}. 
 
-\begin{equation}
-	\theta _t = sim^{-1}\left(\frac{sin(\theta _0)}{\text{refrSurf}}\right)
-	\label{eq:}
-\end{equation}
+Scatter is the physical process where incident radiation is absorbed and reflected back towards the atmosphere. To this end a scattering model is used. This scattering model is a way to construct a \ac{BRDF}. A \ac{BRDF} is a distribution of the incident light over the hemisphere \cite[pages 47-49]{rees}. An example is shown in figure \ref{fig:scatter}, page \pageref{fig:scatter}.\\\\
+The most basic example of a \ac{BRDF} is the Lambertian model \cite[pages 49-50]{rees}. This model assumes a homogeneous perfectly rough surface, causing a homogeneous scattering distribution. Apart from the index of refraction of the air, the incident radiation vector and the exittant radiation vector (which are all known), use of Snell's law is needed to find Fresnel's coefficients, thereby requiring the index of refraction of the ground.
 
-\begin{equation}
-Fresnel_s= \frac{\left(\text{refrAir} \cdot cos(\theta _0)-\text{refrSurf}\sqrt{1-\frac{sin(\theta _0)^2}{\text{refrSurf}^2}}\right)^2}
-							  {\left(\text{refrAir} \cdot cos(\theta _0)+\text{refrSurf} \sqrt{1-\frac{sin(\theta _0)^2}{\text{refrSurf}^2}}\right)^2}
-\end{equation}
+A modification that can be made to take into account the tendency of surfaces to scatter more in the direction of the surface normal, is called the Minnaert model \cite[page 50]{rees}. It causes a more elliptical \ac{BRDF}. It depends on the Minnaert parameter $\kappa$.
 
-\begin{equation}
-	Fresnel_p = \frac{\left(-\text{refrSurf} \cdot cos[\theta _0)+\text{refrAir} \cdot \sqrt{1-\frac{sin[\theta _0)^2} {\text{refrSurf}^2}} \right)^2}
-								 	 {\left(\text{refrSurf} \cdot cos[\theta _0)+\text{refrAir} \cdot \sqrt{1-\frac{sin[\theta _0)^2} {\text{refrSurf}^2}} \right)^2}
-\end{equation}
+Another important modification is the Henyey-Greenstein term. It accounts for the tendency of surfaces to back- or forwardscatter \cite[page 51]{rees}. This rotates and deforms the elliptical \ac{BRDF} obtained from the Minnaert model. The Henyey-Greenstein term is parameterized by $\Theta$. The final result is shown in figure \ref{fig:scatter}, page \pageref{fig:scatter}.\\\\
+This is the scattering model used in the program. Because there is no data from which all three parameters can be accurately determined, a coefficient map was made up. It does not matter much what the precise form of the \ac{BRDF} used in the simulation is, so long as it can be retrieved.
 
-\begin{equation}
-	R_{Lambertian} = \int_0^{2\pi} \left(Fresnel_s \cdot Fresnel_p \right) cos(\theta _0)sin(\theta _0)
-\end{equation}
+With the help of the formulae from \cite[pages 43-51]{rees}, the incidence vector can be taken and the number of photons radiated in a specific direction can be calculated. This is done by the same algorithms both for laser photons a for sun noise.
 
-\begin{equation}
-	\theta_1 = \text{out} \angle <0,0,1>
-\end{equation}
-
-\begin{equation} 
-	d \phi = in_{proj} \angle out_{proj}
-\end{equation}
-
-\begin{equation}
-	R_{Minnaert} = R_{Lambertian} \cdot (cos(\theta _0) cos(\theta _1))^{\kappa-1}
-\end{equation}
-
-\begin{equation}
-	R_{HenyeyGreenstein}=R_{Minnaert} \frac{1 - \theta^2 }{ (1 + 2 \theta (cos(\theta_0) cos(\theta _1) + sin(\theta _0)  sin(\theta _1) cos(d \phi))+ \theta^2 )^{1.5}}
-\end{equation}
-
-The photons are also distributed along the terrain. For this purpose the terrain is simplified with the same surface normal as the original terrain. Then using a model of the distribution of photons along the footprint the correct altitude is computed. The complete description of this model can PROBABLY be found in some appendix.
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=0.4\textwidth]{chapters/img/scatter.png}
+\caption{Example of a \ac{BRDF}}
+\label{fig:scatter}
+\end{figure}
 
 \subsubsection{Noise Scattering}
 
@@ -90,7 +70,7 @@ The amount of solar flux that is reflected up to the satellites is only the flux
 	I = \sigma T^4 (f(\lambda _1, T, \epsilon) - f(\lambda _1, T, \epsilon))
 \end{equation}
 
-In this equation f(x) is an approximation of Planck's Integral \cite[p.~26]{rees}. This flux is then scatted in the same manner as for the laser scattering, to all the receivers. The big difference is that this is a continues process with respect to the laser, which happens in discrete steps.
+In this equation f(x) is an approximation of Planck's Integral \cite[p.~26]{rees}. This flux is then scatted in the same manner as for the laser scattering, to all the receivers. The big difference is that this is a continuous process with respect to the laser, which happens in discrete steps.
 
 \subsection{Reception by the receiver}
 
