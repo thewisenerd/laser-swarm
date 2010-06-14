@@ -15,8 +15,8 @@ There are currently still few star trackers available for micro-satellites becau
 \begin{figure} [h]
 \centering
 \begin{tabular}{c c}
-%\includegraphics[width = 0.4\textwidth]{chapters/img/CoSS.jpg} & \includegraphics[width = 0.4\textwidth]{chapters/img/MSTracker.png}
-\includegraphics[width = 0.4\textwidth, bb=0 0 240px 180px]{chapters/img/CoSS.jpg} & \includegraphics[width = 0.4\textwidth, bb=0 0 219px 215px]{chapters/img/MSTracker.png}
+\includegraphics[width = 0.4\textwidth]{chapters/img/CoSS.jpg} & \includegraphics[width = 0.4\textwidth]{chapters/img/MSTracker.png}
+%\includegraphics[width = 0.4\textwidth, bb=0 0 240px 180px]{chapters/img/CoSS.jpg} & \includegraphics[width = 0.4\textwidth, bb=0 0 219px 215px]{chapters/img/MSTracker.png}
 \end{tabular}
 \caption[Sun sensor and star tracker]{The TNO Cosine Sun Sensor \cite{tnoweb} and the Aeroastro Miniature Star Tracker \cite{aeromst}}
 \label{fig:sunstar}
@@ -54,8 +54,8 @@ Figure \ref{fig:wheel} on page \pageref{fig:wheel} shows the general layout of a
 
 \begin{figure}
 \centering
-%\includegraphics[width=0.3\textwidth]{chapters/img/reactionwheel.png}
-\includegraphics[width=0.3\textwidth, bb=0 0 216px 190px]{chapters/img/reactionwheel.png}
+\includegraphics[width=0.3\textwidth]{chapters/img/reactionwheel.png}
+%\includegraphics[width=0.3\textwidth, bb=0 0 216px 190px]{chapters/img/reactionwheel.png}
 \caption[Basic reaction wheel]{The general layout of a one of the reaction wheels. The motor is depicted in grey, the wheel in white.}
 \label{fig:wheel}
 \end{figure}
@@ -91,14 +91,14 @@ The orbit determination will be done using the navigation subsystem, which is de
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Orbit Control}
 \label{ss:emDDocs}
-In section \ref{} the $\Delta V$ required for the emitter satellite is 221 m/s. Because the main manoeuvre of the satellite is the boost to a higher orbit a bipropellent thruster, an EADS' 10 N Bipropellant Thruster Model S10 - 23 is chosen \cite{10Nthruster}. This kind of thruster has already flown on over 90 satellites. The specific impulse $I_{sp}$ delivered by the thruster is 291s. The mass of the dual seat valve model is 650 grams, the general dimensions are 90.3 x 37.4 x 178.5 $mm^3$. The throat diameter is 2.85 mm and the diameter of the exit is 35 mm. By filling out the equation for the fuel mass over dry mass ratio
+In section \ref{frEmDV} the $\Delta V$ required for the emitter satellite is 225.38 m/s. Because the main manoeuvre of the satellite is the boost to a higher orbit a bipropellent thruster, an EADS' 10 N Bipropellant Thruster Model S10 - 23 is chosen \cite{10Nthruster}. This kind of thruster has already flown on over 90 satellites. The specific impulse $I_{sp}$ delivered by the thruster is 291s. The mass of the dual seat valve model is 650 grams, the general dimensions are 90.3 x 37.4 x 178.5 $mm^3$. The throat diameter is 2.85 mm and the diameter of the exit is 35 mm. By filling out the equation for the fuel mass over dry mass ratio
 
 \begin{equation}
 \frac{m_p}{m_0} = 1 - e^{-\Delta V/(I_{sp}g)}
 \label{fuelratio}
 \end{equation}
 
-the amount of fuel needed is 7.5\% of the dry mass of the satellite needs to be fuel. For the 50.4 kg satellite the fuel mass is therefore 3.8 kg. The thruster works on a 1:1.5 mixture dinitrogen tetroxide $N_2O_4$ and monomethylhydrazine $MMH$. This leads to fuel masses of 1.5 kg of $N_2O_2$ and 2.3 kg of $MMH$, with the typical bulk densities noted in \cite{larson} this leads to volumes of 1.32 and 2.88 litres respectively.
+the amount of fuel needed is 7.6\% of the dry mass of the satellite needs to be fuel. For the 50.4 kg satellite the fuel mass is therefore 3.8 kg. The thruster works on a 1:1.5 mixture dinitrogen tetroxide $N_2O_4$ and monomethylhydrazine $MMH$. This leads to fuel masses of 1.5 kg of $N_2O_2$ and 2.3 kg of $MMH$, with the typical bulk densities noted in \cite{larson} this leads to volumes of 1.32 and 2.88 litres respectively.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Pointing Mechanism}
