@@ -1,0 +1,231 @@
+
+\documentclass[11pt]{report}
+\pagestyle{myheadings}
+\markright{Group 13\hfill Laser Swarm\hfill}
+\usepackage{pdflscape}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{enumerate}
+\usepackage[printonlyused]{acronym}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{subfig}
+\usepackage{amsmath}
+\usepackage{url}
+\usepackage{fixltx2e}
+\usepackage{booktabs}
+\usepackage{rotating}
+
+\topmargin -1.5cm
+\oddsidemargin -0.04cm 
+\evensidemargin -0.04cm 
+\textwidth 16.59cm 
+\textheight 21.94cm 
+\parskip 7.2pt 
+
+\setcounter{secnumdepth}{5}
+\setcounter{tocdepth}{2}
+\pagenumbering{roman}
+
+\begin{document}
+
+%%%%%%%%%%%%%
+%
+%       TOP MATTER
+%
+%%%%%%%%%%%%%
+
+\input{chapters/titlePage.tex}
+
+%%%%%%%%%%%%%
+%
+%       PREFACE
+%
+%%%%%%%%%%%%%
+
+\input{chapters/preface.tex}
+
+%%%%%%%%%%%%%
+%
+%       TOC
+%
+%%%%%%%%%%%%%
+
+\newpage
+\addcontentsline{toc}{chapter}{Contents}
+\tableofcontents
+\newpage
+\addcontentsline{toc}{chapter}{List of Figures}
+\listoffigures
+\newpage
+\addcontentsline{toc}{chapter}{List of Tables}
+\listoftables
+
+%%%%%%%%%%%%%
+%
+%       SYMBOLS
+%
+%%%%%%%%%%%%%
+
+\newpage
+\addcontentsline{toc}{chapter}{List of Symbols}
+\Large{\textbf{List of Symbols}}
+\small
+\input{chapters/SymbList.tex}
+
+%%%%%%%%%%%%%
+%
+%       ACRONYMS 
+%
+%%%%%%%%%%%%%
+
+\newpage
+\addcontentsline{toc}{chapter}{List of Acronyms}
+\Large{\textbf{List of Acronyms}}
+\small
+\input{chapters/acronyms.tex}
+
+%%%%%%%%%%%%%
+%
+%       ABSTRACT
+%
+%%%%%%%%%%%%%
+
+\input{chapters/abstract.tex}
+
+%%%%%%%%%%%%%
+%
+%       INTRODUCTION
+%
+%%%%%%%%%%%%%
+
+\chapter{Introduction}
+\label{intro}
+\pagenumbering{arabic}
+\input{chapters/introduction.tex}
+
+%%%%%%%%%%%%%
+%
+%	 Project Management
+%
+%%%%%%%%%%%%%
+
+\chapter{Project Management}
+\label{project_management}
+\input{chapters/DDBB.tex}
+
+%%%%%%%%%%%%%
+%
+%	 Mission Approach
+%
+%%%%%%%%%%%%%
+
+\chapter{Mission Approach}
+\label{mission_approach}
+\input{chapters/DDFFD.tex}
+
+%%%%%%%%%%%%%
+%
+%       RISK MANAGEMENT
+%
+%%%%%%%%%%%%%
+
+\chapter{Risk Management}
+\label{risk_management}
+\input{chapters/DDRisk.tex}
+
+%%%%%%%%%%%%%
+%
+%       Astrodynamics
+%
+%%%%%%%%%%%%%
+
+\input{chapters/astrodynamics.tex}
+
+%%%%%%%%%%%%%
+%
+%      EMITTER				 
+%
+%%%%%%%%%%%%%
+
+\chapter{Emitter Satellite}
+\label{emitter}
+\input{chapters/DDlaser.tex}
+\input{chapters/NaviEmitter.tex}
+\input{chapters/comm_Emittter_FR.tex}
+\input{chapters/DataStorageEmitter.tex}
+\input{chapters/emDDadcs.tex}
+%\input{chapters/EPSEmitterFinalDesign.tex}
+
+%%%%%%%%%%%%%
+%
+%       RECEIVER
+%
+%%%%%%%%%%%%%
+	
+\chapter{Receiver Satellite}
+\label{receiver}
+\input{chapters/DDreceiver.tex}
+\input{chapters/NaviReceiver.tex}
+\input{chapters/comm_receiver.tex}
+\input{chapters/DataStorageReceiver.tex}
+\input{chapters/recDDadcs.tex}
+\input{chapters/EPSReceiverFinalDesign.tex}
+
+
+%%%%%%%%%%%%%
+%
+%       DATA VALIDATION
+%
+%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%
+%
+%       SUBSTAINABILITY
+%
+%%%%%%%%%%%%%
+
+\input{chapters/SS.tex}
+\input{chapters/SSPRO.tex}
+\input{chapters/SSOPE.tex}
+\input{chapters/SSEOL.tex}
+
+%%%%%%%%%%%%%
+%
+%       Compliance Matrix
+%
+%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%
+%
+%       Conclusion & Recommendations
+%
+%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%
+%
+%       BIBLIOGRAPHY
+%
+%%%%%%%%%%%%%
+
+\bibliographystyle{plain}
+\bibliography{bibliography}
+
+%%%%%%%%%%%%%
+%
+%       APPENDICIES
+%
+%%%%%%%%%%%%%
+
+\appendix
+\chapter{Soyuz-ST Factsheet}
+\label{appa}
+\newpage
+\begin{figure}[ht]
+\centering
+\includegraphics[width=1.0\textwidth, angle=0]{chapters/img/soyuzfact.png}
+\label{fig:soyuzfact}
+
+\end{figure}
+\end{document}
