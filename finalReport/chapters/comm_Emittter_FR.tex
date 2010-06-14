@@ -26,7 +26,7 @@ Another important parameter is the data rate, 1.62 Mbit/s, which was calculated 
 
 
 \subsubsection{Transceiver}
-Since the data rate is quite high for an S-band, nanosatellite S-band transceivers did not satisfy the requirements, which only allow 9.6 kb/s at maximum \cite{cubeshopcomm}. However microsatellite sized transceivers turned out to be sufficient. The transceiver selected was an SBTRcvr of RDLabs, which has a maximum data rate of 10 Mb/s for QPSK modulation, an input power of 12 Watt and an output power of 1 to 5 Watt \cite{RDLabs}.
+Since the data rate is quite high for an S-band, nanosatellite S-band transceivers did not satisfy the requirements, which only allow 9.6 kbps at maximum \cite{cubeshopcomm}. However microsatellite sized transceivers turned out to be sufficient. The transceiver selected was an SBTRcvr of RDLabs, which has a maximum data rate of 10 Mbps for QPSK modulation, an input power of 12 Watt and an output power of 1 to 5 Watt \cite{RDLabs}.
 
 \subsubsection{Antenna}
 For low gain applications and frequencies below 4 GHz three antennas were considered: a dipole antenna, a helix antenna and a patch antenna. The dipole antenna was not an option since its gain is too low (theoretical gain of a half wave antenna is only 2.15 dBi). A helix antenna would be too large and would decrease the ballistic coefficient too much, for example the S-Band quadrifilar helix antenna of Surrey Satellite technology \cite{SurrHelix} is 0.5 m long with a base of 100mm on 100mm, while the S Band patch antenna \cite{SurrPatch} from the same company is only 20mm thick and 82mm on 82mm large. 
@@ -39,15 +39,15 @@ Because the selected modulation is QPSK and the maximum allowable bit error rate
 \subsection{Ground-space link for scientific data}
 As mentioned the past subsection, all scientific data is collected on the emitter satellite which is then transmitted to the ground when it passes its ground station.
 
-The link budget has the following input parameters: the frequency selected was 8.2 GHz, the data rate allowed is 150 Mbit/s, the maximum distance between the ground station and the satellite is 1000 km, the modulation used is SQPSK.
+The link budget has the following input parameters: the frequency selected was 8.2 GHz, the data rate allowed is 150 Mbit/s, the maximum distance between the ground station and the satellite is 1000 km, the modulation used is QPSK.
 
 The frequency selected is of the X-band as was mentioned in the mid-term review, since it allows a high data rate and is commonly used for Earth observation satellites and thus a lot of ground stations have the right equipment for this frequency band.
 
-The data rate depends on the link time between ground station and satellite, the time between the passes and the storage capacity. The exact required data rate was determined in section XXX on data storage and resulted in 110 Mb/s, nevertheless the 150 Mb/s figure was used in the calculations for the linkbudget to allow for more margin.
+The data rate depends on the link time between ground station and satellite, the time between the passes and the storage capacity. The exact required data rate was determined in section XXX on data storage and resulted in 110 Mbps, nevertheless the 150 Mbps figure was used in the calculations for the linkbudget to allow for more margin.
 
 The distance between the station and the satellite follows from the maximum beam angle of antenna on the satellite (45$^{\circ}$), for a detailed calculation of this distance, see appendix YYY.
 
-The SQPSK modulation was chosen since it also allows a good balance between required E$_{b}$/N$_{0}$ and spectrum utilization and also allows a high data rate than QPSK on certain transmitters.
+The QPSK modulation was chosen since it also allows a good balance between required E$_{b}$/N$_{0}$ and spectrum utilization and also allows a high data rate of up to 500 Mbps.
 
 \subsubsection{Transmitter}
 The transmitters considered were the XTRA-6 from TESAT Spacecom \cite{TESATxtra} and the HRT150 from General Dynamics and \cite{HRT150}. Since the XTRA-6 is lighter, smaller and requires less power and allows a higher data rate than the HRT150, the choice was quickly made.
@@ -66,11 +66,11 @@ Similar to the link budget of the crosslinks, the selected modulation is SQPSK a
 \subsection{Ground-space link for command and housekeeping data}
 Aside from the one way space to ground link for scientific data there is also a separate two way link for commands and housekeeping data. 
 
-The link budget has the following input parameters: the frequency selected was 2 GHz, the data rate allowed is 20 kb/s, the maximum distance between the ground station and the satellite is 1000 km, the modulation used is QPSK.
+The link budget has the following input parameters: the frequency selected was 2 GHz, the data rate allowed is 20 kbps, the maximum distance between the ground station and the satellite is 1000 km, the modulation used is QPSK.
 
 The frequency selected is 2 GHz since only a very low data rate is required, and since most ground station over the world are equipped with hardware for S-band links this allows for many contact opportunities to send commands or receive housekeeping data in addition to its main ground station at ESRANGE.
 
-The data rate required is 20 kb/s, normally a housekeeping data is never more than a few kb/s\cite{satcom} but since the housekeeping data of 5 satellites has to go through the link, it was estimated that 20 kb/s should suffice.
+The data rate required is 20 kbps, normally a housekeeping data is never more than a few kbps\cite{satcom} but since the housekeeping data of 5 satellites has to go through the link, it was estimated that 20 kbps should suffice.
 
 The maximum distance is the same as for the space to ground link for scientific data.
 
