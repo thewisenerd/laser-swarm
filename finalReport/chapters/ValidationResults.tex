@@ -24,7 +24,7 @@ In this equation, f(x, mean, variance) is a normal distribution given mean and v
 
 \begin{figure}[ht]
 	\centering
-	\includegraphics[width=0.6\textwidth]{optimize-PowerAperture.png}%
+	\includegraphics[width=0.6\textwidth]{chapters/img/optimize-PowerAperture.png}%
 		\caption{Power-Aperture optimization visualization}%
 		\label{fig:PowerAperturePerformance}%
 \end{figure}
@@ -34,7 +34,7 @@ Note, these results are the bare minimum for the system to operate as designed. 
 \subsection{Height Reconstruction}
 \label{sec:HeightReconstruction}
 
-The height reconstruction algorithm takes as an input the photons received by the various satellites and the times they were received. Then the photon stream is divided in \emph{interpulse windows}. And interpulse window is as long as one over the pulse frequency. To cut down data volume, the photons inside an interpulse window are divided into a signal window and a noise window. The signal window is centered around the time the signal ought be received (as reconstructed from the emitter history) and bounded by the minimum land elevation (\sim -500 m, for the Dead Sea) and the maximum land elevation (Mt. Everest, \sim 9000 m); any photon that would render another height is not possible on the Earth, and can be discarded directly.
+The height reconstruction algorithm takes as an input the photons received by the various satellites and the times they were received. Then the photon stream is divided in \emph{interpulse windows}. And interpulse window is as long as one over the pulse frequency. To cut down data volume, the photons inside an interpulse window are divided into a signal window and a noise window. The signal window is centered around the time the signal ought be received (as reconstructed from the emitter history) and bounded by the minimum land elevation ($\sim -500 m$, for the Dead Sea) and the maximum land elevation (Mt. Everest, $\sim 9000 m$); any photon that would render another height is not possible on the Earth, and can be discarded directly.
 
 The signal photons are still a pretty mixed lot of noise and actual laser photons, and the next step is to separate the data from the noise. This is done by putting the photons in associated groupings. Before grouping, though, every photon is converted to a height. This is done by constructing an ellipse with the emitter and receiver satellites at the foci, and by setting the angles correctly (from the nadir-pointing requirements) the height is reconstructed.
 
@@ -62,7 +62,7 @@ In reality, the height distribution within footprint is responsible for effects 
 
 Multiple footprints are necessary to more accurately determine the BRDF hence a concept of region is defined. Each region consists of multiple footprints, and for each region the BRDF is calculated.
 
-To measure the BRDF, all that is needed is the normal vector of the plane  illuminated by the footprint and the amount of the received photons in the specific direction. As the slope of the local plane and the position of the receivers change (with swarm progressing along the orbit), photons are registered in the new direction. Number of received photons  in a specific direction with respect to the total photons corresponds to the relative magnitude of the BRDF in that direction. Since the maximum inclination of the receiver with respect to the normal is 30^\circ only a small cone of the BRDF is obtained. Furthermore, amount of points registered per footprint is at most the amount of receivers in the swarm, and since region on the ground changes much faster than the change in relative position of the receiver satellites, the registered points are not spread out through out the whole BRDF sphere but are confined to a small region. The values between points are then interpolated. 
+To measure the BRDF, all that is needed is the normal vector of the plane  illuminated by the footprint and the amount of the received photons in the specific direction. As the slope of the local plane and the position of the receivers change (with swarm progressing along the orbit), photons are registered in the new direction. Number of received photons  in a specific direction with respect to the total photons corresponds to the relative magnitude of the BRDF in that direction. Since the maximum inclination of the receiver with respect to the normal is $30^\circ$ only a small cone of the BRDF is obtained. Furthermore, amount of points registered per footprint is at most the amount of receivers in the swarm, and since region on the ground changes much faster than the change in relative position of the receiver satellites, the registered points are not spread out through out the whole BRDF sphere but are confined to a small region. The values between points are then interpolated. 
 
 
 
