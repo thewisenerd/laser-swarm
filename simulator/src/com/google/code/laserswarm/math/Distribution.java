@@ -64,8 +64,8 @@ public abstract class Distribution {
 	public List<Point3d> pointCloud(int steps, Point4d range) {
 		double step = (2 * Math.PI) / steps;
 		List<Point3d> points = Lists.newLinkedList();
-		for (double az = range.w; az < range.x; az += step) {
-			for (double el = range.y; el < range.z; el += step) {
+		for (double az = range.x; az < range.y; az += step) {
+			for (double el = range.z; el < range.w; el += step) {
 				Vector3d exittanceVector = new Vector3d(
 						Convert.toXYZ(new Point3d(1, az, Math.PI / 2 - el)));
 				double out = probability(exittanceVector);
