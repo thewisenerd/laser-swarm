@@ -9,6 +9,7 @@ For the receiving satellites, the receiver is characterized by the receiver spec
 
 The basic path of the signal is that it is transmitted, then propagates downwards through the atmosphere to the earth. There it scatters back in all directions. If there is sunlight shining on the footprint, that is also scattered upwards. In the direction of each receiving satellite, a small cone of the reflected energy is scattered. This again propagates through the atmosphere and is then received by the receivers. The internals of the simulation steps will be discussed more closely in the following sections.
 
+
 \subsection{Signal Emmission}
 As mentioned before, the signal is emitted at the position of the emitter satellite. The power in each pulse can be determined by spreading the continuous lasing power of the laser over its duty cycle:
 
@@ -84,3 +85,21 @@ When the the energy of the laser pule and the noise, reach the receiver again, t
 \end{equation}
 
 In equation \ref{eq:PhotonEnergy}, h is the Planck constant, c the speed of light and $\lambda$ the wavelength of the emitter laser (473 nm).
+
+\subsection{Orbit}
+\label{orbit}
+The orbit of each satellite in the constellation is defined by means of six Keplerian elements. These define the shape of the orbit, the orientation of the orbit with respect to the center of the Earth and the position of the satellite on the orbit.\\\\
+As there are a number of rotating bodies, three reference frames are used in order to facilitate the process of locating the satellites in space. The three reference frames used in the simulation are described below.
+
+The first is \ac{TOD}. Its X-axis points towards the direction of the vernal equinox and its Z-axis coincides with the axis of rotation of the earth. \ac{TOD} takes into account nutation and precession of the earth. For practical reasons, it does not rotate with respect to the Sun.
+ 
+In the second place there is \ac{ECEF}. Its X-axis points towards $0^\circ$ latitude and $0^\circ$ longitude. The XY plane lies in the plane of the equator. Its origin is in the center of mass of the Earth. 
+
+Thirdly there is the PQW. The P-axis points towards the perigee of the orbit, the PQ plane lies in the plane of the orbit and the W-axis is perpendicular to the plain of the orbit. The origin of the frame is at the focal point. 
+
+The program converts between the before-mentioned reference frames for the user's convenience.\\\\
+The position of the satellite is defined with respect to the \acs{TOD} reference frame. Kepler's equations are solved for a certain time to determine the position. The orbit is determined for every satellite in the constellation. The orbit is assumed to be perfect, meaning that its orientation and shape do not change: perturbations are not considered. 
+
+The Earth's rotation about its own axis and around the Sun is simulated in order to provide a more realistic simulation environment. From the rotation of the Earth around the Sun, the sun vector is deduced; this is used in noise calculations.
+
+Most of the functions are adapted to the simulator from the \ac{JAT} library. 
