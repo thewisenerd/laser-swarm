@@ -122,8 +122,6 @@ public class SlopeSpread implements IPostSimulation {
 		simulation.setDb(newDb); // Set the new db
 		logger.inf("Done slope spreading");
 
-		System.exit(1);
-
 		return simulation;
 	}
 }
