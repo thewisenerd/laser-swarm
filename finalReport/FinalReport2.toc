@@ -1,9 +1,9 @@
 \contentsline {chapter}{Preface}{i}
 \contentsline {chapter}{Contents}{ii}
 \contentsline {chapter}{List of Figures}{iv}
-\contentsline {chapter}{List of Tables}{v}
-\contentsline {chapter}{List of Symbols}{vi}
-\contentsline {chapter}{List of Acronyms}{viii}
+\contentsline {chapter}{List of Tables}{vi}
+\contentsline {chapter}{List of Symbols}{vii}
+\contentsline {chapter}{List of Acronyms}{ix}
 \contentsline {chapter}{\numberline {1}Introduction}{1}
 \contentsline {chapter}{\numberline {2}Launch and Astrodynamic Characteristics}{2}
 \contentsline {section}{\numberline {2.1}Launch Segment}{2}
@@ -25,9 +25,9 @@
 \contentsline {subsection}{\numberline {2.2.3}Swarm Configuration}{20}
 \contentsline {subsection}{\numberline {2.2.4}Stationkeeping}{25}
 \contentsline {subsection}{\numberline {2.2.5}Collision Avoidance}{25}
-\contentsline {section}{\numberline {2.3}Space Environment and Shielding}{25}
-\contentsline {chapter}{\numberline {3}Sustainable Development Strategy}{26}
-\contentsline {section}{\numberline {3.1}Production and Logistics}{26}
-\contentsline {section}{\numberline {3.2}Operations}{26}
-\contentsline {section}{\numberline {3.3}End of Life}{27}
-\contentsline {chapter}{\numberline {A}Soyuz-ST Factsheet}{29}
+\contentsline {section}{\numberline {2.3}Space Environment and Shielding}{27}
+\contentsline {chapter}{\numberline {3}Sustainable Development Strategy}{31}
+\contentsline {section}{\numberline {3.1}Production and Logistics}{31}
+\contentsline {section}{\numberline {3.2}Operations}{31}
+\contentsline {section}{\numberline {3.3}End of Life}{32}
+\contentsline {chapter}{\numberline {A}Soyuz-ST Factsheet}{34}

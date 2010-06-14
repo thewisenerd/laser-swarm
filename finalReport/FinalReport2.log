@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (MiKTeX 2.8) (preloaded format=pdflatex 2010.4.20)  14 JUN 2010 14:14
+This is pdfTeX, Version 3.1415926-1.40.10 (MiKTeX 2.8) (preloaded format=pdflatex 2010.4.20)  14 JUN 2010 17:36
 entering extended mode
 **C:/Users/Alex/Desktop/Laser*Swarm/laser-swarm/finalReport/FinalReport2.tex
 ("C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/finalReport/FinalReport2.tex"
@@ -233,6 +233,24 @@ Package: booktabs 2005/04/14 v1.61803 publication quality tables
 
 LaTeX Warning: Label `fig:recLife' multiply defined.
 
+
+LaTeX Warning: Label `fig:elecMin' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:elecMin' multiply defined.
+
+
+LaTeX Warning: Label `fig:elecMax' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:elecMax' multiply defined.
+
+
+LaTeX Warning: Label `fig:elecMin' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:elecMin' multiply defined.
+
 )
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 30.
 LaTeX Font Info:    ... okay on input line 30.
@@ -306,23 +324,24 @@ Underfull \hbox (badness 10000) in paragraph at lines 10--47
 ])
 \tf@toc=\write3
  [3]
-("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\finalReport\FinalReport2.lof")
-\tf@lof=\write4
-
+("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\finalReport\FinalReport2.lof"
 [4
 
-] ("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\finalReport\FinalReport2.lot"
-)
+])
+\tf@lof=\write4
+ [5]
+("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\finalReport\FinalReport2.lot")
 \tf@lot=\write5
- [5
+
+[6
 
 ]
 ("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\finalReport\chapters/SymbList.t
-ex" [6]) [7]
+ex" [7]) [8]
 ("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\finalReport\chapters/acronyms.t
 ex")
 ("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\finalReport\chapters/abstract.t
-ex" [8]
+ex" [9]
 Package acronym Info: Label `acro:LiDAR' newly defined as it shall be overridde
 n
 although it is yet undefined on input line 2.
@@ -342,11 +361,11 @@ ics.tex" [1
 Chapter 2.
 [2
 
-] <chapters/img/lvmass.png, id=57, 711.65875pt x 390.45876pt>
+] <chapters/img/lvmass.png, id=61, 711.65875pt x 390.45876pt>
 File: chapters/img/lvmass.png Graphic file (type png)
 
 <use chapters/img/lvmass.png>
-<chapters/img/soyuzvol.png, id=58, 528.97626pt x 712.6625pt>
+<chapters/img/soyuzvol.png, id=62, 528.97626pt x 712.6625pt>
 File: chapters/img/soyuzvol.png Graphic file (type png)
 
 <use chapters/img/soyuzvol.png>
@@ -371,7 +390,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 111--112
 []\OT1/cmr/m/n/10.95 Longitude
  []
 
-<chapters/img/launchsites.png, id=66, 1653.17625pt x 839.135pt>
+<chapters/img/launchsites.png, id=69, 1653.17625pt x 839.135pt>
 File: chapters/img/launchsites.png Graphic file (type png)
 
 <use chapters/img/launchsites.png>
@@ -382,7 +401,7 @@ Package acronym Info: Label `acro:ELS' newly defined as it shall be overridden
 although it is yet undefined on input line 132.
 [5 <C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/finalReport/chapters/img/soyu
 zvol.png (PNG copy)>]
-<chapters/img/launchprofile.png, id=70, 1447.4075pt x 739.76375pt>
+<chapters/img/launchprofile.png, id=73, 1447.4075pt x 739.76375pt>
 File: chapters/img/launchprofile.png Graphic file (type png)
 
 <use chapters/img/launchprofile.png>
@@ -396,7 +415,7 @@ Package acronym Info: Label `acro:RAAN' newly defined as it shall be overridden
 
 although it is yet undefined on input line 196.
 
-<chapters/img/solarCycle.png, id=78, 542.025pt x 414.04688pt>
+<chapters/img/solarCycle.png, id=81, 542.025pt x 414.04688pt>
 File: chapters/img/solarCycle.png Graphic file (type png)
 
 <use chapters/img/solarCycle.png>
@@ -417,11 +436,11 @@ rCycle.png (PNG copy)>] [10]
 
 LaTeX Warning: Reference `DDMBB' on page 11 undefined on input line 297.
 
-<chapters/img/wetareaEmitter.png, id=90, 240.9pt x 197.2971pt>
+<chapters/img/wetareaEmitter.png, id=93, 240.9pt x 197.2971pt>
 File: chapters/img/wetareaEmitter.png Graphic file (type png)
 
 <use chapters/img/wetareaEmitter.png>
-<chapters/img/densityAltitude.png, id=91, 578.6418pt x 434.1018pt>
+<chapters/img/densityAltitude.png, id=94, 578.6418pt x 434.1018pt>
 File: chapters/img/densityAltitude.png Graphic file (type png)
 
 <use chapters/img/densityAltitude.png> [11 <C:/Users/Alex/Desktop/Laser Swarm/l
@@ -431,15 +450,15 @@ e.png (PNG copy)>] [13]
 
 LaTeX Warning: Reference `DDMBB' on page 14 undefined on input line 429.
 
-[14] [15] [16] <chapters/img/emitterDecay.png, id=111, 240.9pt x 185.7339pt>
+[14] [15] [16] <chapters/img/emitterDecay.png, id=114, 240.9pt x 185.7339pt>
 File: chapters/img/emitterDecay.png Graphic file (type png)
 
 <use chapters/img/emitterDecay.png>
-<chapters/img/receiverDecay.png, id=112, 240.9pt x 185.7339pt>
+<chapters/img/receiverDecay.png, id=115, 240.9pt x 185.7339pt>
 File: chapters/img/receiverDecay.png Graphic file (type png)
 
 <use chapters/img/receiverDecay.png>
-<chapters/img/receiverDecay2nd.png, id=113, 240.9pt x 185.7339pt>
+<chapters/img/receiverDecay2nd.png, id=116, 240.9pt x 185.7339pt>
 File: chapters/img/receiverDecay2nd.png Graphic file (type png)
 
 <use chapters/img/receiverDecay2nd.png> [17
@@ -449,11 +468,11 @@ rDecay.png (PNG copy)>] [18 <C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/fina
 lReport/chapters/img/receiverDecay.png (PNG copy)>] [19 <C:/Users/Alex/Desktop/
 Laser Swarm/laser-swarm/finalReport/chapters/img/receiverDecay2nd.png (PNG copy
 )>]
-<chapters/img/primaryconfmax.png, id=123, 952.55875pt x 584.1825pt>
+<chapters/img/primaryconfmax.png, id=126, 952.55875pt x 584.1825pt>
 File: chapters/img/primaryconfmax.png Graphic file (type png)
 
 <use chapters/img/primaryconfmax.png>
-<chapters/img/primaryconfmin.png, id=124, 952.55875pt x 554.07pt>
+<chapters/img/primaryconfmin.png, id=127, 952.55875pt x 554.07pt>
 File: chapters/img/primaryconfmin.png Graphic file (type png)
 
 <use chapters/img/primaryconfmin.png> [20
@@ -461,16 +480,16 @@ File: chapters/img/primaryconfmin.png Graphic file (type png)
  <C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/finalReport/chapters/img/primar
 yconfmax.png (PNG copy)> <C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/finalRe
 port/chapters/img/primaryconfmin.png (PNG copy)>]
-<chapters/img/intersectionPhase.png, id=128, 1119.43219pt x 682.04813pt>
+<chapters/img/intersectionPhase.png, id=132, 1119.43219pt x 682.04813pt>
 File: chapters/img/intersectionPhase.png Graphic file (type png)
 
 <use chapters/img/intersectionPhase.png> [21 <C:/Users/Alex/Desktop/Laser Swarm
 /laser-swarm/finalReport/chapters/img/intersectionPhase.png (PNG copy)>]
-<chapters/img/relRec1.png, id=133, 240.9pt x 153.4533pt>
+<chapters/img/relRec1.png, id=136, 240.9pt x 153.4533pt>
 File: chapters/img/relRec1.png Graphic file (type png)
 
 <use chapters/img/relRec1.png>
-<chapters/img/relRec2.png, id=134, 240.9pt x 153.4533pt>
+<chapters/img/relRec2.png, id=137, 240.9pt x 153.4533pt>
 File: chapters/img/relRec2.png Graphic file (type png)
 
 <use chapters/img/relRec2.png>
@@ -480,17 +499,61 @@ LaTeX Warning: Float too large for page by 55.37149pt on input line 582.
 [22] [23 <C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/finalReport/chapters/im
 g/relRec1.png (PNG copy)> <C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/finalR
 eport/chapters/img/relRec2.png (PNG copy)>]
-<chapters/img/ground.png, id=141, 1331.97626pt x 958.58125pt>
+<chapters/img/ground.png, id=144, 1331.97626pt x 958.58125pt>
 File: chapters/img/ground.png Graphic file (type png)
 
 <use chapters/img/ground.png> [24
 
  <C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/finalReport/chapters/img/ground
-.png (PNG copy)>])
-("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\finalReport\chapters/SS.tex"
-[25
+.png (PNG copy)>]
+<chapters/img/collA.png, id=148, 552.56438pt x 386.19281pt>
+File: chapters/img/collA.png Graphic file (type png)
 
-]
+<use chapters/img/collA.png>
+<chapters/img/collB.png, id=149, 552.56438pt x 386.19281pt>
+File: chapters/img/collB.png Graphic file (type png)
+
+<use chapters/img/collB.png>
+<chapters/img/collC.png, id=150, 552.56438pt x 386.19281pt>
+File: chapters/img/collC.png Graphic file (type png)
+
+<use chapters/img/collC.png>
+<chapters/img/debris.png, id=151, 803.0pt x 602.25pt>
+File: chapters/img/debris.png Graphic file (type png)
+
+<use chapters/img/debris.png>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<chapters/img/meteoroid.png, id=152, 803.0pt x 602.25pt>
+File: chapters/img/meteoroid.png Graphic file (type png)
+
+<use chapters/img/meteoroid.png> [25
+
+] [26 <C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/finalReport/chapters/img/c
+ollA.png (PNG copy)> <C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/finalReport
+/chapters/img/collB.png (PNG copy)> <C:/Users/Alex/Desktop/Laser Swarm/laser-sw
+arm/finalReport/chapters/img/collC.png (PNG copy)>] [27 <C:/Users/Alex/Desktop/
+Laser Swarm/laser-swarm/finalReport/chapters/img/debris.png (PNG copy)>] [28 <C
+:/Users/Alex/Desktop/Laser Swarm/laser-swarm/finalReport/chapters/img/meteoroid
+.png (PNG copy)>]
+<chapters/img/sd2_dose.png, id=169, 803.0pt x 602.25pt>
+File: chapters/img/sd2_dose.png Graphic file (type png)
+
+<use chapters/img/sd2_dose.png>
+<chapters/img/elecFluxMax.png, id=170, 803.0pt x 602.25pt>
+File: chapters/img/elecFluxMax.png Graphic file (type png)
+
+<use chapters/img/elecFluxMax.png>
+<chapters/img/protFluxMax.png, id=171, 803.0pt x 602.25pt>
+File: chapters/img/protFluxMax.png Graphic file (type png)
+
+<use chapters/img/protFluxMax.png>)
+("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\finalReport\chapters/SS.tex"
+[29 <C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/finalReport/chapters/img/sd2
+_dose.png (PNG copy)>] [30 <C:/Users/Alex/Desktop/Laser Swarm/laser-swarm/final
+Report/chapters/img/elecFluxMax.png (PNG copy)> <C:/Users/Alex/Desktop/Laser Sw
+arm/laser-swarm/finalReport/chapters/img/protFluxMax.png (PNG copy)>]
 Chapter 3.
 Package acronym Info: Label `acro:EOL' newly defined as it shall be overridden
 although it is yet undefined on input line 4.
@@ -498,24 +561,24 @@ although it is yet undefined on input line 4.
 x")
 ("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\finalReport\chapters/SSOPE.tex"
 ) ("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\finalReport\chapters/SSEOL.te
-x") [26
+x") [31
 
 ]
 ("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\finalReport\FinalReport2.bbl"
-[27]
+[32]
 Missing character: There is no É in font cmr10!
 Missing character: There is no é in font cmr10!
 Missing character: There is no é in font cmr10!
-) [28
+) [33
 
 ]
 Appendix A.
-[29
+[34
 
-] <chapters/img/soyuzfact.png, id=161, 1451.4225pt x 829.0975pt>
+] <chapters/img/soyuzfact.png, id=194, 1451.4225pt x 829.0975pt>
 File: chapters/img/soyuzfact.png Graphic file (type png)
 
-<use chapters/img/soyuzfact.png> [30 <C:/Users/Alex/Desktop/Laser Swarm/laser-s
+<use chapters/img/soyuzfact.png> [35 <C:/Users/Alex/Desktop/Laser Swarm/laser-s
 warm/finalReport/chapters/img/soyuzfact.png (PNG copy)>]
 ("C:\Users\Alex\Desktop\Laser Swarm\laser-swarm\finalReport\FinalReport2.aux")
 
@@ -526,13 +589,13 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 3752 strings out of 495285
- 55849 string characters out of 3179881
- 122796 words of memory out of 3000000
- 6847 multiletter control sequences out of 15000+200000
+ 3814 strings out of 495285
+ 57175 string characters out of 3179881
+ 122974 words of memory out of 3000000
+ 6901 multiletter control sequences out of 15000+200000
  14873 words of font info for 52 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
- 44i,10n,45p,1055b,358s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 44i,11n,45p,1055b,362s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmbx10.pfb>
 <C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C
 :/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:
@@ -551,11 +614,12 @@ s/type1/public/amsfonts/cm/cmsl10.pfb><C:/Program Files (x86)/MiKTeX 2.8/fonts/
 type1/public/amsfonts/cm/cmssbx10.pfb><C:/Program Files (x86)/MiKTeX 2.8/fonts/
 type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86)/MiKTeX 2.8/fonts/ty
 pe1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files (x86)/MiKTeX 2.8/fonts/type1
-/public/amsfonts/cm/cmti10.pfb><C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/p
-ublic/amsfonts/cm/cmti12.pfb>
-Output written on FinalReport2.pdf (40 pages, 1511895 bytes).
+/public/amsfonts/cm/cmsy8.pfb><C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/pu
+blic/amsfonts/cm/cmti10.pfb><C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/publ
+ic/amsfonts/cm/cmti12.pfb>
+Output written on FinalReport2.pdf (46 pages, 1706139 bytes).
 PDF statistics:
- 229 PDF objects out of 1000 (max. 8388607)
+ 265 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 86 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 126 words of extra memory for PDF output out of 10000 (max. 10000000)
 

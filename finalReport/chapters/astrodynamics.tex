@@ -581,20 +581,19 @@ All these values are enough to simulate along and cross-track relative motion be
   \label{fig:relMotion}
 \end{figure}
 
-Finally, to confirm that all orbits intersect at different points, the azimuth and elevation of the intersection points are computed using the following equations:
+Finally, to confirm that all orbits intersect at different points, the longitude shift $L_x$ and the latitude $H_x$ of the intersection points are computed using the following equations:
 
 \begin{equation}
-cos(\eta_{max} ) = sin(\lambda _{min}/2) = sin(\phi _R/2)cos(i_R/2)
+L_x = 90 - \Delta N/2
+\end{equation}
+
+\begin{equation}
+tan H_x = cos\frac{\Delta N}{2}tan i
 \end{equation} 
-%TODO
 
-% - Relative inc.
-% - Rel. phase
-% - Max/Min Seperation
-% - Max/Min Nadir angle
-% - Rel. motion Graphs from STK.
-% - Crossing azimuth and elevation
+It is only interesting to see the intersections between Base, Receiver 1 and Receiver 2 as these distances are quite small (demonstrated previously to be around 22.82 km). As they all cross the ascending node at the same time the intersection of Receiver 1 will occur first at a longitude offset of 88.9096 degrees and a latitude of 85 degrees w.r.t. the node of the emitter satellite. The intersection of Receiver 2 then occurs at an offset of 91.0896 degrees w.r.t. to the emitter node. The latitude remains the same.
 
+Since the altitude of the orbits does not affect these angles, the relations hold for orbits 1S, 2S and 3S as well.
 
 \begin{landscape}
 \begin{figure}[ht!]
@@ -617,9 +616,106 @@ This concept has been successfully demonstrated by the ORBCOMM satellites \cite{
 \subsection{Collision Avoidance}
 \label{frSSCA}
 
-bla
+Collision avoidance is an integral part of formation design, yet this analysis cannot be properly performed without the detail design of the constellation. However some design approximations can be already made to estimate the risks.
+
+In the context of this formation, collision avoidance is important for two reasons: potential loss of two vehicles in a collision, one of them possibly being the emitter, and creation of a debris field which can jeopardize the safety of the rest of the platforms. A debris field evolution can be seen in figure \ref{fig:debris} on page \pageref{fig:debris}. This kind of debris propagation can very quickly lead to a snowball effect and destroy the whole constellation. A NASA90 debris flux model was run to simulate the propogation of a possible collision. The results can be seen in figure \ref{fig:debrisModel}. 
+
+\begin{figure}
+  \centering
+  \subfloat[]{\label{fig:elecMax}\includegraphics[width=0.5\textwidth]{chapters/img/collA.png}}                
+  \subfloat[]{\label{fig:elecMin}\includegraphics[width=0.5\textwidth]{chapters/img/collB.png}}\\
+  \subfloat[]{\label{fig:elecMin}\includegraphics[width=0.5\textwidth]{chapters/img/collC.png}}
+  \caption{Debris field evolution, (a) immediately after impact, (b) spreading out after some time and eventually settling into the orbit (c) and decaying. \emph{Source: \cite{constDesign}}}
+  \label{fig:debris}
+\end{figure}
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.8\textwidth, angle=0]{chapters/img/debris.png}
+\caption{NASA90 Debris Flux simulation. Orbital altitude - 500 km, Epoch start date - May 2017. \emph{Source: SPENVIS}.}
+\label{fig:debrisModel}
+\end{figure}
+
+Some preliminary formation collision estimates are shown in table \ref{table:coll} on page \pageref{table:coll}.
+
+\begin{table}
+	\centering
+	
+		\begin{tabular}{p{5cm}|p{5cm}|p{5cm}}
+		\toprule
+	\textbf{Parameters} & \textbf{5 Satellite Formation in 3 Planes} & \textbf{4 Satellite Formation in 3 Planes} \\
+		\hline \hline
+		No. of satellites & 5 & 4 \\
+		No. of orbit planes & 3 & 3 \\ 
+		Vertical dispersion [km] & 1 & 1 \\
+		In-track dispersion [km] & 22.78 - 276 & 45.56 - 552 \\
+		Potential impact area [km$^2$] & 10 & 10 \\ 
+		Collision opp. per orbit & 20 & 16 \\
+		Orbit period [min] & 94.62 & 95.12 \\ 
+		Collision opp. per year & 1.1$*$10$^5$ & 4.0$*$10$^5$ \\
+		Collision opp. in 5 years & 5.6$*$10$^5$ & 2.0$*$10$^6$ \\
+		Collision prob. per opp. & 1.0$*$10$^{-7}$ & 1.0$*$10$^{-7}$ \\
+		Mean number of collisions per year & 0.011 & 0.4\\
+		\bottomrule
+			\end{tabular}
+	\caption{Inter-satellite collision estimations for a formation of 5 primary and 4 secondary satellites. Probability values based on extrapolation of values given in \cite{constDesign}.}
+	\label{table:coll}
+\end{table}
+
+In order to successfully implement a safety-conscious formation design the following rules will have to be followed:
+ 
+\begin{enumerate}
+	\item Maximize spacing between platforms on orbit crossing.
+	\item Remove satellites at end of life.
+	\item Keep tracking the motion of "dead" satellites.
+	\item Remove launcher upper stages from the orbits.
+	\item Design replacement injections with collision avoidance in mind.
+	\item Capture any ejected components.
+	\item Avoid self-detonation.
+\end{enumerate}
+ 
+Following these rules will lead to a safer formation and eventually to an extended mission lifetime.
+
+Another topic is collision avoidance of object that are outside the considered formation. That is with other satellites, artificial and natural bodies. Figure \ref{fig:meteor} on page \pageref{fig:meteor} demonstrates a plot of the Grun model of meteoroid flux for 500 km altitude.
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width = 0.8\textwidth]{chapters/img/meteoroid.png}
+\caption{Grun model meteoroid flux for an orbit of 500 km altitude. \emph{Source: SPENVIS}. }
+\label{fig:meteor}
+\end{figure}
+
+It is obvious that the constellation faces quite a challenge as the low mass of the satellites makes them quite susceptible to objects with a mass of over 1 gram. It is also a problem because only pieces of about 10 cm across and more can be effectively tracked from Earth.
+
+Pending further investigation it is not unreasonable to allow a safety margin of 5\% on the total $\Delta V$ of both satellites. This however is something better left for further investigation.
 
 \section{Space Environment and Shielding}
 \label{frSEaS}
 
-Bla
+In space, satellites are exposed to streams of highly energetic charged particles coming from the sun. Radiation from these particles can cause severe damage to satellite subsystems, including the payload. The main particle radiation source encountered by the swarm in the \ac{LEO} comes from the Van Allen Belts. These are regions around the Earth where charged particles (protons, electrons and ions) are trapped inside the magnetic field of the planet.
+
+The total radiation dose consists of three components: proton dose, electron dose and the so-called Brehmsstrahlung X-Ray dose produced by the interaction between the electrons and the shielding material of the satellite. In \ac{LEO}, energetic protons in the inner radiation belt contribute most to the total radiation dose. This total is also strongly linked to the orbital altitude and below 1000 km will increase at approximately by the 5\textsuperscript{th} power of the altitude. Furthermore, just like with atmospheric drag, the solar activity plays a major role, thus all cases will be examined.
+
+The number of particles trapped in the Van Allen belts in the vicinity of the orbit under question can be modeled using The Space Environment Information System (SPENVIS) that can be located at the following address: \emph{http://www.spenvis.oma.be/}. SPENVIS contains a large array of NASA and ESA (as well as other) tools and models for complex orbit analysis. For the purposes of this evaluation two models are used: AP-8 and AE-8. The first model predicts proton flux with energy levels above 100 MeV. The latter estimates the flux of electrons with energy of 0.5 MeV or above.
+
+Figure \ref{fig:elecFlux} on page \pageref{fig:elecFlux} illustrates the trapped proton and electron flux as a function of distance from Earth Center. For the considered altitudes of 300 to 525 km (1.047 to 1.078 Earth radii) the satellites would encounter relatively the same order of magnitude of proton radiation. The electron radiation will decrease as the satellites decay.
+
+It is further possible to estimate the total dose of radiation that the satellites will experience with an assumed aluminum thickness of 1mm. Another SPENVIS model, called SHIELDOSE-2, is used for this estimation. The results are presented in figure \ref{fig:dose}.
+
+From the figure it is seen that with the standard cubesat shielding of 1 mm the total mission exposure is approximately in the order of 10$^4$ rad. This is an acceptable range for all space rated instruments considered in this design \cite{larson}. However if new technologies are not up to withholding this dose, an increase of thickness to 1.5 mm would bring the total dose to 10$^3$ rad. 
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width = \textwidth]{chapters/img/sd2_dose.png}
+\caption{Total radiation dose based on a five year mission at a 500 km altitude. \emph{Source: SPENVIS}. }
+\label{fig:dose}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \subfloat[]{\label{fig:elecMax}\includegraphics[width=0.7\textwidth]{chapters/img/elecFluxMax.png}}\\                
+  \subfloat[]{\label{fig:elecMin}\includegraphics[width=0.7\textwidth]{chapters/img/protFluxMax.png}}
+  \caption{AE-8 Electron Flux Model (energy $>$ 0.5 MeV) (a) and AP-8 Proton Flux Model (energy $>$ 100 MeV)(b).}
+  \label{fig:elecFlux}
+\end{figure}
+ 
