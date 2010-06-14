@@ -173,7 +173,7 @@ Furthermore the region is politically stable and the launch site is under the pr
 \subsection{Orbit Insertion}
 \label{frLSOI}
 
-The orbit insertion is separated into two distinct stages: primary orbits and secondary orbits. The primary orbits are located at an altitude of 500 km and contain the emitter and four initial receivers. The secondary orbits are located at a slightly different altitude of 550 (CHECK ALTITUDE!!!!) km and contain the auxiliary receivers intended for replenishment.
+The orbit insertion is separated into two distinct stages: primary orbits and secondary orbits. The primary orbits are located at an altitude of 500 km and contain the emitter and four initial receivers. The secondary orbits are located at a slightly different altitude of 525 km and contain the auxiliary receivers intended for replenishment.
 
 The configuration of the primary orbits is discussed in section \ref{frSSSC} and an image of the formation can be seen in figure \ref{fig:confmax} on page \pageref{fig:confmax}. The release sequence and the important parameters are as follows (for satellite and orbit numbers please refer to figure \ref{fig:confmax}):
 
@@ -187,13 +187,13 @@ The configuration of the primary orbits is discussed in section \ref{frSSSC} and
 	
 	where $V_i$ is the orbital velocity (7.612 km/s) and $\alpha$ is the relative inclination (2.17$^{\circ}$, see section \ref{frSSSC}) \cite{spacedesign}. The $\Delta$V is calculated to be 289.63 m/s.
 	
-	\item As the Fregat crosses the descending node and approaches the second plane intersection of the orbit, it does not need to change orientation (Orbit 3 intersects in the same direction on the descent phase as Orbit 2 does on the ascent phase). At the intersection Rec 1 is separated with a $\Delta$V of 289.63 m/s.
+	\item As the Fregat crosses the descending node and approaches the second plane intersection of the orbit, it does not need to change orientation (Orbit 3 intersects in the same direction on the descent phase as Orbit 2 does on the ascent phase). At the intersection Rec 1 is separated with a $\Delta$V of 289.63 m/s. This is a very large value thus the method of deployment should be thoroughly investigated in further design. 
 	\item After this the Fregat again aligns with the velocity vector of Orbit 1.
 	\item The Frigate should inject itself into a drift orbit with a negative drift rate of no less then 9.19 deg/orbit and re-injected back to Orbit 1 after traveling $90+\Delta \phi /2 = 90.09505$ degrees. This will bring the launcher 2.3 degrees behind the final emitter position, or 0.12 degrees behind Rec 4.
 	\item At this point the remaining three satellites: Rec 3, Base and Rec 4 should be put into drift orbits by the attachment mechanism in order to acquire the 2.18 degree orbital separation. The exact order and timing can be designed and adjusted accordingly.
 \end{enumerate}
 
-After this, the satellites can be considered to be in their orbits. The Fregat can start the burn to insert into the secondary orbits. The formation in the secondary orbit is the same as in the primary orbits minus the emitter, thus similar maneuvers have to be performed.
+After this, the satellites can be considered to be in their orbits. The Fregat can start the burn to insert into the secondary orbits. Once the altitude of 525 km is reached the Fregat performs a plane shift to change its \ac{RAAN} to approximately 10 degrees behind that of the primary orbit. The exact angle has to be carefully acquired through careful modeling of differential node precessions as the satellites decay. The general idea is that the secondary satellites should have the correct RAANs by the time they decay to arrive in the right position with respect to the emitter.  The formation in the secondary orbit is the same as in the primary orbits minus the emitter, thus similar maneuvers have to be performed.
 
 \subsection{Launch Date}
 \label{frLSLD}
@@ -251,17 +251,256 @@ Node Precession	&			 $\dot{\Omega}$					&			-0.6667	&			[deg/day]	 \\
 \label{table:orb1ref}
 \end{centering}
 \end{table}
+%--------------
+\subsubsection{Orbit Decay}
+\label{frEmOD}
+Atmospheric drag is by far the most relevant perturbation for \ac{LEO} satellites that cause loss of altitude and thus decays the orbit. It directly relates to mass as it influences the amount of fuel required to maintain the orbit, where as the mass influences the rate at which the orbit decays. Altitude selection relies heavily on estimation and analysis of drag data as for longer mission times, higher altitudes are preferred, while optical instruments prefer lower altitudes for increased accuracy.
 
+The drag that the satellite experiences due to atmospheric density is described by the following formula:
+
+\begin{equation}
+D = -\frac{1}{2} C_D \rho V^2A
+\label{drag}
+\end{equation}
+
+It follows that orbital parameter changes (semi-major axis, period and velocity respectively) per orbit are calculated using the following equations (assuming negligible eccentricity):
+
+\begin{equation}
+\Delta a = -2 \pi \left( C_D \frac{A}{m} \right) \rho a^2
+\label{deltaSMA}
+\end{equation}
+\begin{equation}
+\Delta P = -6 \pi^2 \left( C_D \frac{A}{m} \right) \rho \frac{a^2}{V}
+\label{deltaP}
+\end{equation}
+\begin{equation}
+\Delta V = \pi \left( C_D \frac{A}{m} \right) \rho aV
+\label{deltaV}
+\end{equation}
+
+The fundamental problem with accurately predicting effects due to atmospheric drag is twofold: firstly it is very hard to predict the satellite's ballistic coefficient:
+
+\begin{equation}
+\frac{m}{AC_D}
+\label{ball}
+\end{equation}
+
+Even with a well known mass to area ratio, the coefficient of drag can be highly variable, highly dependent on the shape of the satellite and its orientation with respect to the velocity vector. It is usually determined in laboratory conditions. For the orbit decay analysis the following equation for the coefficient of drag was used:
+
+\begin{equation}
+C_D = \alpha C_{DS} + \beta C_{DD}
+\label{cd}
+\end{equation}
+
+where $C_{DS}$ is the specular coefficient of drag, $C_{DD}$ is the diffuse coefficient of drag, $\alpha$ and $\beta$ are component fractions which are determined experimentally. The specular coefficient of drag is usually predominant. In reality this drag coefficient changes. The cross-sectional area normal to the velocity vector can also vary for the swarm satellites if the whole platform is reoriented for instrument pointing. These parameters were adjusted in such a way that a final average $C_D$ of 2.22 for the emitter as well as the receiver was achieved. This is a value which is very commonly used in space mission design.
+
+The cross-sectional area of the satellite perpendicular to the velocity vector for a sample period of 6 hours can be seen in figure \ref{fig:area} on page \pageref{fig:area}. The graph was generated using the correct geometry of the satellite simulated in the Satellite Tool Kit\texttrademark software, issued by AGI, Inc. The software also computes the mean area - 1.045948 m$^2$. This will be the area used for lifetime analysis. The mass used is final estimated satellite loaded orbit mass from section \ref{DDMBB}. It is computed to be 22.87 kg/m$^2$. This is well within the normal range for regular satellites \cite{larson}.
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=0.75\textwidth, angle=0]{chapters/img/wetareaEmitter.png}
+\caption{Simulated cross-sectional surface area of the emitter satellite perpendicular to velocity vector.}
+\label{fig:area}
+\end{figure}
+
+The second reason drag calculations are so unreliable, is because air density at any altitude is highly variable. Raising air density is primarily connected with solar activity. As solar activity increases every 11 years the atmosphere heats up. Contrary to conventional gas laws that would dictate a fall in density as the gas expands, the atmosphere simply rises, increasing density at higher altitudes. This was previously discussed in section \ref{frLSLD}.
+
+The density difference during maxima and minima for different altitudes is shown in figure \ref{fig:densityProfile} on page \pageref{fig:densityProfile}. Depending on the altitude, the density could vary for up to a whole order of magnitude between the minimum and maximum.
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=0.9\textwidth, angle=0]{chapters/img/densityAltitude.png}
+\caption{Air density vs. orbit altitude for different solar cycle stages.}
+\label{fig:densityProfile}
+\end{figure}
+
+The orbit lifetime simulation was produced using the software package Satellite Tool Kit\texttrademark and can be seen in figure \ref{fig:emLife} on page \pageref{fig:emLife}.
+
+The simulation performs orbit propagation up to the J$_4$ factor and uses the MSIS-86 Thermospheric Model for atmospheric density calculation. In addition it takes into account solar radiation pressure with an average sun exposed area of 0.84 (this area is also estimated from the satellite model simulations).
+
+It is obvious from the previous figure that, unmaintained, the orbit would totally decay in 4.8 years. Another notable time is the point at which the emitter passes the 450km altitude. This occurs at approximately 3.4 years after mission start. This is the altitude that will be considered as the absolute floor and will be used to approximate the altitude of the secondary satellite orbits.
+
+
+\subsubsection{Estimation of $\Delta V$}
+\label{frEmDV}
+
+In order to properly estimate the mass of the propellant required for the mission all maneuvers have to be taken into account. Every maneuver requires a certain velocity change in a specified direction. During its mission, the emitter satellite will perform the following maneuvers:
+
+\begin{itemize}
+	\item A phase change slowdown. As the satellite was released from the booster vehicle, it was injected into a drift orbit in order to separate into a certain phase shift. Once this phase shift is achieved, the satellite needs to perform a boost to bring itself back into the circular orbit. This $\Delta V$ is equal and opposite to the $\Delta V$ induced by the release mechanism. This $\Delta V$ is calculated using the following equation:
+	
+		\begin{equation} 
+ 			\omega _{drift} = (1080)\frac{\Delta V}{V} 
+		\end{equation}
+	where $\omega _{drift}$ is the drift rate given in deg/orbit. For the emitter to return out of its drift orbit in 90 degrees, this maneuver requires a $\Delta V$ of 64.8 m/s.
+	\item A boost to change the altitude from 450 km to 500 km after approximately 3.4 years in orbit. This maneuver is performed using a simple Hohmann transfer orbit and will require two burns. A simple transfer calculation is completed using the following method \cite{spacedesign}:
+	\begin{equation} 
+ 			V_{450} = \sqrt{\frac{GM}{a_{450}}} =  7.6405 km/s
+		\end{equation}
+		\begin{equation} 
+ 			V_{500} = \sqrt{\frac{GM}{a_{500}}} = 7.6127 km/s
+		\end{equation}
+		\begin{equation}
+			a_{ellipse} = \frac{a_{500}+a_{450}}{2} = 6853 km
+		\end{equation}
+		\begin{equation} 
+ 			V_{p} = \sqrt{\frac{2GM}{a_{450}}-\frac{GM}{a_{ellipse}}} = 7.6544 km/s
+		\end{equation}
+		\begin{equation} 
+ 			V_{a} = \sqrt{\frac{2GM}{a_{500}}-\frac{GM}{a_{ellipse}}} = 7.5988
+		\end{equation}
+			\begin{equation}
+			\Delta V_1 = 1000(V_p - V_{450}) = 13.9237 m/s
+		\end{equation}
+		\begin{equation}
+			\Delta V_2 = 1000(V_{500} - V_a) = 13.8984 m/s
+		\end{equation}
+		\begin{equation}
+			\Delta V = \Delta V_1 + \Delta V_2 = 27.8221 m/s
+		\end{equation}
+		
+		Thus the required $\Delta V$ for the Hohmann transfer is 27.8 m/s.
+	\item A deorbit burn to take the satellite down to comply with sustainability requirements. This $\Delta V$ is approximated by the following equation \cite{constDesign}:
+	
+	\begin{equation}
+			\Delta V_{deorbit} \approx V \left[ \frac{0.5(H_i - H_e)}{2R_E + H_i + H_e} \right]
+		\end{equation}
+	where $H_i$ is the initial altitude, $H_e$ is the reentry altitude and $R_e$ is the Earth's radius. Using the initial altitude of 500 km and a reentry altitude of 50 km, the $\Delta V$ is calculated to be 128.73 m/s. This is a very large value and in reality can be scaled down by considering a lower initial altitude (500 km is asumed in this analysis due to the consideration that a satellite might become disfunctional at the beginning at the mission and would need to be brought down) and a higher final reentry altitude (which is arbitrary). 
+	
+	\item The final consideration is the orbit injection accuracy of the Soyuz launch vehicle. The manufacturer states an inclination accuracy of 0.033 degrees for a 1000 km altitude orbit \cite{soyuzman}. For the purposes of this analysis, an accuracy of 0.03 degrees is used. The following equation is used to estimate the $\Delta V$ needed to correct this error:
+	\begin{equation}
+			\Delta V_{plane change} = 2V_i sin \frac{\alpha}{2}
+		\end{equation}
+	  where $V_i$ is the initial orbital velocity. The final $\Delta V$ is 3.99 m/s.
+\end{itemize}
+
+No $\Delta V$ is required for stationkeeping as the emitter will be allowed to decay naturally while the receivers will have to perform relative stationkeeping. Furthermore, the Soyuz launch vehicle can have a initial delivery altitude error. This is not considered, since it is assumed that as long as the constellation is delivered on the same altitude, no correction will be required and the lifetime of the mission will not be jeopardized. 
+
+The total $\Delta V$ required for the emitter is calculated to be approximately 225.38 m/s.
+
+
+
+%-------------
 
 \subsection{Receiver Orbits}
 \label{frSSRO}
 
-b lss
+\subsubsection{Orbital Parameters}
+\label{frSSRODOP}
+
+Unlike the emitter, the receiver satellites are placed in six different orbits and has to be designed to be able to handle all orbits and yet all the satellites have to have the same mass configuration at all times.
+
+The orbits are divided into primary and secondary. The primary orbits are shown in figure \ref{fig:confmax} on page \pageref{fig:confmax}. Receiver 1 is located in Orbit 3 which has all the same orbital characteristics of Orbit 1 as described in section \ref{frSSEODOP} with the exception of its \acs{RAAN} having a value of +2.18 degrees. This is the maximum angle of separation and is derived from the requirement of a laser reflection angle of 30 degrees. Receiver 2 in Orbit 2 on the other hand has a \acs{RAAN} of -2.18 degrees. Both of these receiver satellites pass their ascending nodes at the same time as the emitter satellite. The reason for this is that the inclination of the orbits induces a relative phase between the satellites which is favorable for collision avoidance.
+
+Receivers 3 and 4 are placed on the same orbit as the emitter. Receiver 3 travels with a positive phase offset of 2.18 degrees in front of the emitter, while the latter is trailing the emitter at the same offset.
+
+All orbital velocities and other parameters are identical to those described in section \ref{frSSEODOP}.
+
+The secondary orbits are designated 1S,2S and 3S, and are arranged in a similar manner while having an orbital altitude of 525 km. Receivers 1S, 2S, 3S and 4S also correspond in their arrangement to their primary counterparts.
+
+Parameters of the secondary orbits that are different to those of the primary are shown in table \ref{table:orbsecref} on page \pageref{table:orbsecref}.
+
+\begin{table}[!h]
+\begin{centering}
+\begin{tabular}{lccr}
+\toprule
+Parameter				&			Symbol			&			Value			&			Unit \\
+\hline \hline
+Altitude				&			h						&			525			&			[km]	 \\
+Semi-major Axis	&			a						&			6896			&			[km]	 \\
+Period (mins)		&			P						&			95.1298	&			[mins]	 \\
+Revolutions per day		&									&			15.1372	&			[revs/day]	 \\
+Angular Velocity		&			n						&			3.7843	&			[deg/min]	 \\
+Circular Velocity		&			V						&			7.6127	&			[km/s]	 \\
+Node Spacing	&			 						&			23.85	&			[deg]	 \\
+Node Precession	&			 $\dot{\Omega}$					&			-0.6584	&			[deg/day]	 \\
+\bottomrule
+\end{tabular}
+\caption{Orbital properties of the secondary orbits (only the parameters different to those of the primary orbits are shown).}
+\label{table:orbsecref}
+\end{centering}
+\end{table}
+
+The initial RAANs are yet to be determined and a very complex model is required to account for differential precessions between the primary and secondary orbits. This is crucial in order for the secondary constellation to arrive in the right place with respect to the emitter. The calculations though fall out of the scope of this investigation.
+
+\subsubsection{Orbit Decay}
+\label{frRecOD}
+
+The orbit decay analysis is done is a manner identical to that described in section \ref{frEmOD}. The final loaded mass of all the primary receiver satellites should be the same as the final orbits are established in order to decay at the same rate. The mean drag area estimated with the STK\texttrademark software is 0.3 m$^2$. The loaded mass is taken from section \ref{DDMBB}. The area exposed to sun (for solar pressure) is calculated to be 0.25 m$^2$. The ballistic coefficient then becomes 22.40 kg/m$^2$, which is extremely close to that calculated for the emitter satellite, certainly within the margins at this point in the design. This is key to maintaining the constellation. The final design of all the satellites should ensure they decay in absolutely the same manner.
+
+The results of the decay simulation can be seen in figure \ref{fig:recLife} on page \pageref{fig:recLife}. They are virtually the same as the decay shown in figure \ref{fig:emLife}.
+
+The decay rate of secondary satellites is shown in figure \ref{fig:recLife} on page \pageref{fig:recLife}. The actual altitude was iterated in order to see that the receivers would decay to 500 km in mid August 2020. In reality the secondary satellite will have to take 0.3 kg of fuel less then the primary (at the expense of less fuel available for the deorbit maneuver) as the emitter satellite would have lost 27.8 m/s worth of propellant after the Hohmann transfer back to 500 km. This will ensure the same decay rate of the secondary leg of the mission.    
+
+
+\subsubsection{Estimation of $\Delta V$}
+\label{frRecDV}
+
+During the mission different receiver satellites will require different $\Delta V$. The main concern is to equalize them as the final orbits are established. The differences are only different due to different phase shifts needed and different orbital velocities.
+
+The satellites will need to perform the following maneuvers:
+
+\begin{itemize}
+	\item A phase shift maneuver similar to the one described in section \ref{frEmDV}. For this maneuver different drift rates are required for the satellites. Receivers 1 and 2 will need a $\Delta V$ of 32.42 m/s (drift rate assumed to be half an orbit). Receiver 3 would require 31.58 m/s, but would require a whole orbit to establish its position. Receiver 4 would require a mere 0.85 m/s.
+	
+	The secondary orbit satellites have a different circular velocity thus also have different $\Delta V$'s. Receivers 1S and 2S require 32.37 m/s. Receiver 3S needs 31.52 m/s, and finally, Receiver 4S requires 0.84 m/s.
+	\item The deorbit maneuver will require the same $\Delta V$ for all primary satellites and is also equivalent to the that of the emitter - 128.73 m/s. The secondary satellites will require 27.8 m/s less (100.93 m/s in total) as explained earlier.
+	\item The correction for orbit insertion is identical for all primary satellites - 3.99 m/s (see section \ref{frEmDV}). Secondary satellites need a $\Delta V$ of 3.98 m/s. This difference is neglegiable.  
+\end{itemize}
+
+The total $\Delta V$ for each receiver satellite is computed in table \ref{table:dVrec} on page \pageref{table:dVrec}.
+
+\begin{table}[!h]
+\begin{centering}
+\begin{tabular}{lcccccc}
+\toprule
+				&			R1/R2			&			R3			&			R4		& R1S/R2S & R3S & R4S \\
+\hline \hline
+Phase shift				&			32.42						&			31.58		&			0.85		& 32.37 & 31.52 & 0.84	 \\
+Deorbit				&			128.73						&			128.73		&			128.73		& 100.93 & 100.93 & 100.93	 \\
+Inclination Correction			&			3.99						&			3.99		&			3.99		& 3.98 & 3.98 & 3.98	 \\ \hline \hline
+\textbf{Total	}		&			165.14						&			164.3		&			133.57		& 137.28 & 136.43 & 105.75	 \\
+\bottomrule
+\end{tabular}
+\caption{Total $\Delta V$ for individual receiver satellites. Values are given in m/s.}
+\label{table:dVrec}
+\end{centering}
+\end{table}
+
+The largest $\Delta V$ (i.e 165.14 m/s) was used for propulsion system design.
+
+Again no numbers are specified for stationkeeping. This topic is elaborated on in section \ref{frSSStation}.
+
+%------------------
+\begin{landscape}
+\begin{figure}[ht!]
+\centering
+\includegraphics[width = \textheight]{chapters/img/emitterDecay.png}
+\caption{Emitter satellite orbit decay with an assumed mission start in March 2017. Values used: $C_D$ = 2.22, mass = 53.1 kg, Area = 1.046 m$^2$.}
+\label{fig:emLife}
+\end{figure}
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width = \textheight]{chapters/img/receiverDecay.png}
+\caption{Receiver satellite orbit decay from a primary orbit with an assumed mission start in March 2017. Values used: $C_D$ = 2.22, mass = 14.92 kg, Area = 0.3 m$^2$.}
+\label{fig:recLife}
+\end{figure}
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width = \textheight]{chapters/img/receiverDecay2nd.png}
+\caption{Receiver satellite orbit decay from a secondary orbit with an assumed mission start in March 2017. Values used: $C_D$ = 2.22, mass = 14.92 kg, Area = 0.3 m$^2$.}
+\label{fig:recLife}
+\end{figure}
+\end{landscape}
 
 \subsection{Swarm Configuration}
 \label{frSSSC}
 
-\begin{figure}[!ht]
+The general configuration of all the satellites has been presented in the previous section and can be reviewed in figures \ref{fig:confmax} and \ref{fig:confmin}. As explained, the general rule of separation is 2.18 degrees between the nodes of the different orbital planes and a 2.18 degree in-track phase offset for the satellites occupying the same orbit. 
+
+\begin{figure}[!h]
 \centering
 \includegraphics[width=0.8\textwidth, angle=0]{chapters/img/primaryconfmax.png}
 \caption{Swarm configuration as seen when the emitter (labeled here as Base) crosses its ascending node. Orbit numbers represent the different orbital planes.}
@@ -274,6 +513,106 @@ b lss
 \caption{Swarm configuration as seen when the orbit planes intersect. In this figure the intersection in ascent is pictured.}
 \label{fig:confmin}
 \end{figure}
+
+A representative ground track can be seen in figure \ref{fig:ground} on page \pageref{fig:ground}.
+
+From this general configuration several interesting parameters about the formation can be acquired. Please refer to figure \ref{fig:constgeo} for a general configuration of geometry for constellations with the same inclinations.
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.8\textwidth, angle=0]{chapters/img/intersectionPhase.png}
+\caption{Relative geometry between two orbital planes with the same inclination. \emph{Source: \cite{constDesign}}.}
+\label{fig:constgeo}
+\end{figure}
+
+The large-scale relative motion of two satellites in different orbits is governed by only two key variables: the relative inclination, $i_R$ and relative phase, $\phi_R$. The relative inclination is the angle at which the two orbit planes intersect. The relative phase is the angle between the satellites when one intersects the other's orbit. The relative phase is the angular separation of the satellites at the time they intersect each other's orbit plane. This happens four times per orbit. The values of these angles are calculated using the following relations:
+
+\begin{equation}
+cos i_R = cos^2i+sin^2i cos \Delta N
+\label{ir}
+\end{equation}
+\begin{equation}
+\phi_R = (T_2-T_1)n+ \Delta \phi
+\label{phir}
+\end{equation}
+where
+\begin{equation}
+\Delta \phi = 180 - 2 \phi
+\label{deltaPhi}
+\end{equation}
+\begin{equation}
+tan \phi = \frac{tan ( 90 - \Delta N / 2)}{cos i}
+\label{tanphi}
+\end{equation}
+
+$\Delta N$ is the angular separation at the ascending nodes. Using these equations the relative inclination between Orbit 1 and 2, and 3 and 1 is 2.17 degrees, this corresponds to a separation at the nodes of 261.78 km. The relative inclination between Orbit 2 and 3 is twice this value. The relative phase between the Base and Receiver 1 is 0.1901 (or 22.82 km) as Receiver 1 always crosses Orbit 1 before the emitter satellite. Receiver 2 has the same relative phase with the emitter and trails behind on intersections. The relative phase between satellites in Orbit 2 and 3 is 0.3803 degrees or around 44.6 km.
+
+It is also possible to calculate the maximum and minimum separation angles, $\lambda$, using the following relations:
+
+\begin{equation}
+sin ( \frac{\lambda_{min}}{2} ) = sin ( \frac{ \phi_R }{2} ) cos ( \frac{i_R}{2} )
+\label{lambdamin}
+\end{equation}
+
+\begin{equation}
+cos ( \frac{\lambda_{max}}{2} ) = cos ( \frac{ \phi_R }{2} ) cos ( \frac{i_R}{2} )
+\label{lambdamax}
+\end{equation}
+
+The maximum and minimum angular separation between any two closest orbital planes then becomes 2.1809 and 0.1901 degrees respectively. The nadir angle can also be calculated. This is the angle between the vector pointing to any other satellite and the Earth center vector. The relations are as following:
+
+\begin{equation}
+sin (\eta_{min} ) = cos(\lambda _{max}/2) = cos(\phi _R/2)cos(i_R/2)
+\end{equation}
+
+\begin{equation}
+cos(\eta_{max} ) = sin(\lambda _{min}/2) = sin(\phi _R/2)cos(i_R/2)
+\end{equation}
+
+The actual values between cross-track satellites are then 89.91 and 88.91 degrees for maximum and minimum respectively. Along-track satellites have a constant nadir angle of 88.91 degrees.
+
+All these values are enough to simulate along and cross-track relative motion between the various satellites. Figure \ref{fig:relMotion} demonstrates the simulation of large scale relative motion between the Base, Receiver 1 and Receiver 2. Small scale motion is not simulated in this report and requires a more accurate analysis at a later point in time.
+
+\begin{figure}
+  \centering
+  \subfloat[]{\label{fig:relRec1}\includegraphics[width=1.0\textwidth]{chapters/img/relRec1.png}}\\                
+  \subfloat[]{\label{fig:relRec2}\includegraphics[width=1.0\textwidth]{chapters/img/relRec2.png}}
+  \caption{Large scale relative motion (a) of Receiver 1 w.r.t. Base and (b) of Receiver 2 w.r.t. Base.}
+  \label{fig:relMotion}
+\end{figure}
+
+Finally, to confirm that all orbits intersect at different points, the azimuth and elevation of the intersection points are computed using the following equations:
+
+\begin{equation}
+cos(\eta_{max} ) = sin(\lambda _{min}/2) = sin(\phi _R/2)cos(i_R/2)
+\end{equation} 
+%TODO
+
+% - Relative inc.
+% - Rel. phase
+% - Max/Min Seperation
+% - Max/Min Nadir angle
+% - Rel. motion Graphs from STK.
+% - Crossing azimuth and elevation
+
+
+\begin{landscape}
+\begin{figure}[ht!]
+\centering
+\includegraphics[width = \textwidth]{chapters/img/ground.png}
+\caption{A representative ground track of the formation.}
+\label{fig:ground}
+\end{figure}
+\end{landscape}
+
+\subsection{Stationkeeping}
+\label{frSSStation}
+
+As mentioned in section \ref{frRecDV} the satellites will not require any $\Delta V$ for stationkeeping maneuvers. This is because the concept of differential drag will be used to minimize propellant and to make the ballistic coefficients of the satellites more consistent.
+
+The principle works in the following way: the satellites are maintained by following the slowest decaying one. This is known as relative stationkeeping. All the satellites are allowed to decay naturally in sync with that single reference. Since the orbits of every satellite are always known due to accurate navigation, it is possible to analyze decay rates. The satellites are then ordered to adjust the orientation of the solar arrays during eclipse in such a way that differential drag reinstates them into the right positions. This is further made possible due to the fact that not position acquisition but rather position knowledge (and thus correct instrument pointing) is of primary importance to data collection.
+
+This concept has been successfully demonstrated by the ORBCOMM satellites \cite{constDesign}. It is understandable that the process of relative stationkeeping is more difficult to manage, however automated systems and prediction models can be designed to deal with this issue. Such systems however are not discussed here.  
 
 \subsection{Collision Avoidance}
 \label{frSSCA}

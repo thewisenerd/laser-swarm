@@ -5,7 +5,17 @@
 \contentsline {figure}{\numberline {2.3}{\ignorespaces Launch site locations and allowable inclinations for the Soyuz-ST. \emph {Sources: \cite {constDesign} and \cite {rockotman}.} \relax }}{6}
 \contentsline {figure}{\numberline {2.4}{\ignorespaces Launch profile of the Soyuz LV from Kourou. \emph {Sources: \cite {soyuzman}.} \relax }}{7}
 \contentsline {figure}{\numberline {2.5}{\ignorespaces Solar activity projection up to 2019. \emph {Source: NOAA/Space Weather Prediction Center.} \relax }}{9}
-\contentsline {figure}{\numberline {2.6}{\ignorespaces Swarm configuration as seen when the emitter (labeled here as Base) crosses its ascending node. Orbit numbers represent the different orbital planes.\relax }}{10}
-\contentsline {figure}{\numberline {2.7}{\ignorespaces Swarm configuration as seen when the orbit planes intersect. In this figure the intersection in ascent is pictured.\relax }}{11}
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Simulated cross-sectional surface area of the emitter satellite perpendicular to velocity vector.\relax }}{11}
+\contentsline {figure}{\numberline {2.7}{\ignorespaces Air density vs. orbit altitude for different solar cycle stages.\relax }}{12}
+\contentsline {figure}{\numberline {2.8}{\ignorespaces Emitter satellite orbit decay with an assumed mission start in March 2017. Values used: $C_D$ = 2.22, mass = 53.1 kg, Area = 1.046 m$^2$.\relax }}{17}
+\contentsline {figure}{\numberline {2.9}{\ignorespaces Receiver satellite orbit decay from a primary orbit with an assumed mission start in March 2017. Values used: $C_D$ = 2.22, mass = 14.92 kg, Area = 0.3 m$^2$.\relax }}{18}
+\contentsline {figure}{\numberline {2.10}{\ignorespaces Receiver satellite orbit decay from a secondary orbit with an assumed mission start in March 2017. Values used: $C_D$ = 2.22, mass = 14.92 kg, Area = 0.3 m$^2$.\relax }}{19}
+\contentsline {figure}{\numberline {2.11}{\ignorespaces Swarm configuration as seen when the emitter (labeled here as Base) crosses its ascending node. Orbit numbers represent the different orbital planes.\relax }}{20}
+\contentsline {figure}{\numberline {2.12}{\ignorespaces Swarm configuration as seen when the orbit planes intersect. In this figure the intersection in ascent is pictured.\relax }}{20}
+\contentsline {figure}{\numberline {2.13}{\ignorespaces Relative geometry between two orbital planes with the same inclination. \emph {Source: \cite {constDesign}}.\relax }}{21}
+\contentsline {figure}{\numberline {2.14}{\ignorespaces Large scale relative motion (a) of Receiver 1 w.r.t. Base and (b) of Receiver 2 w.r.t. Base.\relax }}{23}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{23}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{23}
+\contentsline {figure}{\numberline {2.15}{\ignorespaces A representative ground track of the formation.\relax }}{24}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
