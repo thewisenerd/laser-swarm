@@ -108,46 +108,9 @@ public class SubSampleCorrelation implements SampleCorrelation {
 			averageExclusionFilter(1);
 			// Final elevation and BRDFinput generation.
 			ElevationRelatedEntriesPoint rawElBRDF = rawElevationSlopes.get(middle);
-			out = new ElevationBRDF(rawElBRDF.getElevation(), genBRDFInput(rawElevationSlopes
-					.get(middle - 1), rawElBRDF, rawElevationSlopes.get(middle + 1)));
+			out = new ElevationBRDF(rawElBRDF.getElevation(), genBRDFInput(rawElevationSlopes));
 		}
 		return out;
-	}
-
-	private boolean averageExclusionFilter(int nSpacings) {
-		boolean didFilter = false;
-		Iterator<ElevationRelatedEntriesPoint> rawIt = rawElevationSlopes.iterator();
-		double totalAlt = 0;
-		double altNo = 0;
-		while (rawIt.hasNext()) {
-			totalAlt += rawIt.next().getElevation();
-			altNo++;
-		}
-		double altAvg = totalAlt / altNo;
-		while (rawIt.hasNext()) {
-			ElevationRelatedEntriesPoint thisElSlope = rawIt.next();
-			if (!(areEqual(altAvg, thisElSlope.getElevation(), nSpacings * equalitySpacing))) {
-				thisElSlope = adjustElevationRelatedEntriesPoint(thisElSlope, altAvg);
-			}
-		}
-		return didFilter;
-	}
-
-	private boolean spikeFilter(double spacing) {
-		boolean didFilter = false;
-		double first = rawElevationSlopes.get(middle - 1).getElevation();
-		double mid = rawElevationSlopes.get(middle).getElevation();
-		double last = rawElevationSlopes.get(middle + 1).getElevation();
-		if (areEqual(first, last, spacing)) {
-			if (!(areEqual(first, mid, spacing))) {
-				didFilter = true;
-				ElevationRelatedEntriesPoint middlePoint = rawElevationSlopes.get(middle);
-				double elevation = (first + last) / 2;
-				rawElevationSlopes.set(middle,
-						adjustElevationRelatedEntriesPoint(middlePoint, elevation));
-			}
-		}
-		return didFilter;
 	}
 
 	private ElevationRelatedEntriesPoint adjustElevationRelatedEntriesPoint(
@@ -184,12 +147,12 @@ public class SubSampleCorrelation implements SampleCorrelation {
 				int numPhotons = tempData.get(time);
 				LookupTable satPositions = receiverTimelines.get(curSat).getLookupPosition();
 				if (thisAlt < minEl || thisAlt > maxEl) {
-					logger.inf("Filtering impossible elevation: %s", maxEl - Configuration.R0);
+					logger.dbg("Filtering impossible elevation: %s", maxEl - Configuration.R0);
 				} else {
 					for (int i = 0; i < numPhotons; i++) {
 						altitudes.put(thisAlt, new Vector3d(satPositions.find(time)));
 					}
-					logger.inf("Found an altitude: %s, with photon no.: %s", thisAlt - Configuration.R0,
+					logger.dbg("Found an altitude: %s, with photon no.: %s", thisAlt - Configuration.R0,
 							numPhotons);
 				}
 			}
@@ -197,38 +160,63 @@ public class SubSampleCorrelation implements SampleCorrelation {
 		return altitudes;
 	}
 
-	private BRDFinput genBRDFInput(ElevationRelatedEntriesPoint lastElBRDF,
-			ElevationRelatedEntriesPoint elBRDF,
-			ElevationRelatedEntriesPoint nextElBRDF) {
+	private BRDFinput genBRDFInput(LinkedList<ElevationRelatedEntriesPoint> elBRDFs) {
+		ElevationRelatedEntriesPoint thisElBRDF = elBRDFs.get(middle);
+		ElevationRelatedEntriesPoint nextElBRDF = elBRDFs.get(middle + 1);
 		// Calculate the emitter groundtrack point.
-		Point3d posEmit = elBRDF.getPosEmit();
+		Point3d posEmit = thisElBRDF.getPosEmit();
 		Point3d posEmitSph = Convert.toSphere(posEmit);
-		posEmitSph.x -= elBRDF.getElevation();
+		posEmitSph.x -= thisElBRDF.getElevation();
 		Vector3d emPos = new Vector3d(Convert.toXYZ(posEmitSph));
 		// Calculate the direction in which the emitter is moving.
 		Vector3d nextEmPos = new Vector3d(nextElBRDF.getPosEmit());
-		Vector3d thisEmPos = new Vector3d(elBRDF.getPosEmit());
+		Vector3d thisEmPos = new Vector3d(thisElBRDF.getPosEmit());
 		Vector3d emDir = new Vector3d();
 		emDir.sub(nextEmPos, thisEmPos);
 		emDir.normalize();
 		// Calculate the along-track slope.
-		Point3d lastEmitSph = Convert.toSphere(lastElBRDF.getPosEmit());
-		Point3d thisEmitSph = Convert.toSphere(elBRDF.getPosEmit());
-		double avgRad = (lastEmitSph.x + thisEmitSph.x) / 2.0;
-		double difRad = Math.abs(lastEmitSph.x - thisEmitSph.x);
-		lastEmitSph.x = avgRad;
-		thisEmitSph.x = avgRad;
-		Point3d lastEmitCart = Convert.toXYZ(lastEmitSph);
-		Point3d thisEmitCart = Convert.toXYZ(thisEmitSph);
+		Iterator<ElevationRelatedEntriesPoint> elBRDFIt = elBRDFs.iterator();
+		int count = 0;
+		Point3d firstSlopeTot = new Point3d(0, 0, 0);
+		Point3d secondSlopeTot = new Point3d(0, 0, 0);
+		int firstCount = 0;
+		int secondCount = 0;
+		while (elBRDFIt.hasNext()) {
+			ElevationRelatedEntriesPoint thisEB = elBRDFIt.next();
+			Point3d thisEmitPos = Convert.toSphere(thisEB.getPosEmit());
+			double height = thisEB.getElevation();
+			if (count < middle) {
+				firstSlopeTot.x += height;
+				firstSlopeTot.y += thisEmitPos.y;
+				firstSlopeTot.z += thisEmitPos.z;
+				firstCount++;
+			} else if (count >= middle) {
+				secondSlopeTot.x += height;
+				secondSlopeTot.y += thisEmitPos.y;
+				secondSlopeTot.z += thisEmitPos.z;
+				secondCount++;
+			}
+			count++;
+		}
+		Point3d hFirst = new Point3d(firstSlopeTot.x / firstCount, firstSlopeTot.y / firstCount,
+				firstSlopeTot.z / firstCount);
+		Point3d hSecond = new Point3d(secondSlopeTot.x / secondCount, secondSlopeTot.y / secondCount,
+				secondSlopeTot.z / secondCount);
+		double avgRad = (hFirst.x + hSecond.x) / 2.0;
+		double difRad = hSecond.x - hFirst.x;
+		hFirst.x = avgRad;
+		hSecond.x = avgRad;
+		Point3d hFirstCart = Convert.toXYZ(hFirst);
+		Point3d hSecondCart = Convert.toXYZ(hSecond);
 		Vector3d difTan = new Vector3d();
-		difTan.sub(thisEmitCart, lastEmitCart);
+		difTan.sub(hFirstCart, hSecondCart);
 		double alongTrackSlope = difRad / difTan.length();
 		logger.dbg("avgRad, difRad, difTan: %s, %s, %s", avgRad, difRad, difTan.length());
 		// Calculate the cross-track slope.
 		Vector3d emitVect = new Vector3d(posEmit);
 		double footprintD = fractionD * 2.0 * cons.getEmitter().getBeamDivergence()
 				* (emitVect.length() - Configuration.R0);
-		TreeMap<Double, Vector3d> altitudes = elBRDF.getBestMap();
+		TreeMap<Double, Vector3d> altitudes = thisElBRDF.getBestMap();
 		double min = Double.MAX_VALUE;
 		double max = Double.MIN_VALUE;
 		for (Double alt : altitudes.keySet()) {
@@ -242,8 +230,14 @@ public class SubSampleCorrelation implements SampleCorrelation {
 		double a = Math.pow(alongTrackSlope, 2);
 		double b = Math.pow((max - min) / footprintD, 2);
 		double crossTrackSlope = Math.sqrt(b - a);
-		logger.dbg("min, max, footprintD: %s, %s, %s", min, max, footprintD);
-		logger.dbg("a, b, crossTrackSlope: %s, %s, %s", a, b, crossTrackSlope);
+		if (new Double(crossTrackSlope).isNaN()) {
+			crossTrackSlope = Double.MAX_VALUE;
+			logger
+					.inf("Intercepted a NaN crossTrackSlope. Is your footprint diameter fraction a bit too optimistic?");
+		}
+		logger.inf("min, max, footprintD: %s, %s, %s", min, max, footprintD);
+		logger.inf("a, b, along & crossTrackSlope: %s, %s, %s, %s", a, b, alongTrackSlope,
+				crossTrackSlope);
 		// The satellite vectors go in here.
 		Map<Vector3d, Integer> photonDirs = Maps.newLinkedHashMap();
 		for (Double time : altitudes.keySet()) {
@@ -255,12 +249,9 @@ public class SubSampleCorrelation implements SampleCorrelation {
 			}
 		}
 		// Get the current emitter time.
-		double curTime = elBRDF.getTEmit();
-		logger
-				.dbg(
-						"Generated the following BRDFinput: \nemPos: %s\nemDir: %s\nslopes: %s, %s\nphotonDirs: %s\ntime: %s",
-						emPos.toString(), emDir.toString(), alongTrackSlope, crossTrackSlope, photonDirs
-								.toString(), curTime);
+		double curTime = thisElBRDF.getTEmit();
+		logger.dbg("Generated the following BRDFinput: \nemPos: %s\nemDir: %s\nslopes: %s, %s\nphotonDirs: %s\ntime: %s",
+			emPos.toString(), emDir.toString(), alongTrackSlope, crossTrackSlope, photonDirs.toString(), curTime);
 		return new BRDFinput(emPos, emDir, alongTrackSlope, crossTrackSlope, photonDirs, curTime);
 	}
 
@@ -320,5 +311,41 @@ public class SubSampleCorrelation implements SampleCorrelation {
 		}
 		return new ElevationRelatedEntriesPoint(treeMapAvg(maxRelatedEntryMap), tEmit, posEmit,
 				entriesClose, maxRelatedEntryMap);
+	}
+
+	private boolean averageExclusionFilter(int nSpacings) {
+		boolean didFilter = false;
+		Iterator<ElevationRelatedEntriesPoint> rawIt = rawElevationSlopes.iterator();
+		double totalAlt = 0;
+		double altNo = 0;
+		while (rawIt.hasNext()) {
+			totalAlt += rawIt.next().getElevation();
+			altNo++;
+		}
+		double altAvg = totalAlt / altNo;
+		while (rawIt.hasNext()) {
+			ElevationRelatedEntriesPoint thisElSlope = rawIt.next();
+			if (!(areEqual(altAvg, thisElSlope.getElevation(), nSpacings * equalitySpacing))) {
+				thisElSlope = adjustElevationRelatedEntriesPoint(thisElSlope, altAvg);
+			}
+		}
+		return didFilter;
+	}
+
+	private boolean spikeFilter(double spacing) {
+		boolean didFilter = false;
+		double first = rawElevationSlopes.get(middle - 1).getElevation();
+		double mid = rawElevationSlopes.get(middle).getElevation();
+		double last = rawElevationSlopes.get(middle + 1).getElevation();
+		if (areEqual(first, last, spacing)) {
+			if (!(areEqual(first, mid, spacing))) {
+				didFilter = true;
+				ElevationRelatedEntriesPoint middlePoint = rawElevationSlopes.get(middle);
+				double elevation = (first + last) / 2;
+				rawElevationSlopes.set(middle,
+						adjustElevationRelatedEntriesPoint(middlePoint, elevation));
+			}
+		}
+		return didFilter;
 	}
 }

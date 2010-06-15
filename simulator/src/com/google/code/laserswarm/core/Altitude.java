@@ -45,7 +45,7 @@ public class Altitude {
 
 	public static void main(String[] args) throws DemCreationException, MathException,
 			IOException {
-		run(dataPoints, new FindElevationNeighborInterpolation(1, (int) 97e12, 1, 7, 0.5, 0.707));
+		run(dataPoints, new FindElevationNeighborInterpolation(1, (int) 97e12, 1, 17, 0.5, 0.707));
 	}
 
 	public static void run(int dataPoint, ElevationFinder findEl) throws DemCreationException,
