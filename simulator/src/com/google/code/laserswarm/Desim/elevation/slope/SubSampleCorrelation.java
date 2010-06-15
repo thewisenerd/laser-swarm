@@ -231,9 +231,8 @@ public class SubSampleCorrelation implements SampleCorrelation {
 		double b = Math.pow((max - min) / footprintD, 2);
 		double crossTrackSlope = Math.sqrt(b - a);
 		if (new Double(crossTrackSlope).isNaN()) {
-			crossTrackSlope = Double.MAX_VALUE;
-			logger
-					.inf("Intercepted a NaN crossTrackSlope. Is your footprint diameter fraction a bit too optimistic?");
+			crossTrackSlope = 0;
+			logger.wrn("Intercepted a NaN crossTrackSlope. Is your footprint diameter fraction a bit too optimistic?");
 		}
 		logger.inf("min, max, footprintD: %s, %s, %s", min, max, footprintD);
 		logger.inf("a, b, along & crossTrackSlope: %s, %s, %s, %s", a, b, alongTrackSlope,
@@ -250,8 +249,11 @@ public class SubSampleCorrelation implements SampleCorrelation {
 		}
 		// Get the current emitter time.
 		double curTime = thisElBRDF.getTEmit();
-		logger.dbg("Generated the following BRDFinput: \nemPos: %s\nemDir: %s\nslopes: %s, %s\nphotonDirs: %s\ntime: %s",
-			emPos.toString(), emDir.toString(), alongTrackSlope, crossTrackSlope, photonDirs.toString(), curTime);
+		logger
+				.dbg(
+						"Generated the following BRDFinput: \nemPos: %s\nemDir: %s\nslopes: %s, %s\nphotonDirs: %s\ntime: %s",
+						emPos.toString(), emDir.toString(), alongTrackSlope, crossTrackSlope, photonDirs
+								.toString(), curTime);
 		return new BRDFinput(emPos, emDir, alongTrackSlope, crossTrackSlope, photonDirs, curTime);
 	}
 
