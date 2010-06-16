@@ -29,16 +29,17 @@ The table \ref{tab:RWD} on page \pageref{tab:RWD} gives the documentation distri
  2       & Project Management                   &\\\hline
  2.1     & \ -Resource Allocation               & Zhuan &\\\hline
  2.2     & \ -Budget Breakdown                  & Zhuan &\\\hline
- 2.3     & \ -Operations and Logistic Concept Description&\\\hline
- 2.4     & \ -Project Design and Development Logic & GJ &\\\hline
+ 2.3     & \ -Operations and Logistic Concept Description & GJ &\\\hline
+ 2.4     & \ -Project Design and Development Logic & Lieuwe &\\\hline
  2.5     & \ -Project Gantt Chart               & Lieuwe &\\\hline\hline
  3       & Mission Approach                     &\\\hline
  3.1     & \ -Function Flow Diagram             & Lieuwe, Zhuan & \\\hline
  3.2     & \ -Function Breakdown Structure      & Lieuwe, Zhuan &\\\hline
  3.3     & \ -H/W Block Diagram                 & Lieuwe, &\\\hline
- 3.4     & \ -S/W Block Diagram                 &\\\hline
- 3.5     & \ -Electrical Block Diagram          &\\\hline
- 3.6     & \ -Data Handling Block Diagram       &\\\hline\hline
+ 3.4     & \ -S/W Block Diagram                 & Nikita &\\\hline
+ 3.5     & \ -Electrical Block Diagram          & Sean &\\\hline
+ 3.6     & \ -Data Handling Block Diagram       & GJ &\\\hline
+ 3.7     & \ -Communication Block Diagram       & Bart &\\\hline
  4       & Risk Management                      & Tim, Zhuan & \\\hline\hline
  5       & Launch and Astrodynamic Characteristics & Alex &\\\hline
  5.1     & \ -Launch Segment                    & Alex &\\\hline
@@ -95,7 +96,7 @@ The table \ref{tab:MB} on page \pageref{tab:MB} indicates mass budget breakdown 
 \begin{tabular}{|l|c|c|c|c|}
 \hline
  & \multicolumn{2}{|c|}{Emitter} & \multicolumn{2}{|c|}{Receiver} \\\hline
- Subsystem        & $M [kg]$ & \%$M_{dry}$ & $M [kg]$ & \%$M_{dry}$ \\\hline\hline
+ Subsystem        & $M kg$ & \%$M_{dry}$ & $M kg$ & \%$M_{dry}$ \\\hline\hline
  Communication    & 10.66    & 21          & 3        & 22.2 \\\hline
  Navigation       & 0.25     & 0.5         & 0.25     & 1.85 \\\hline
  OEP              & 15       & 29.8        & -        & - \\\hline
@@ -140,8 +141,8 @@ The table \ref{tab:CB} on page \pageref{tab:CB} gives the cost breakdown of both
   
  \multicolumn{1}{|c|}{Subsystem} & Cost [k\$] & \%Subtotal & Cost [k\$] & \%Subtotal & Cost [k\$] & \%Subtotal \\\hline
                                      %  cost [k$] %Total 
- \multicolumn{1}{|l|}{Payload}       & 8215.96 & 41.5 & 4048.74 & 46.58 & 8660 & 25.3 \\\hline
- \multicolumn{7}{|l|}{Bus Total}     \\\hline
+ \multicolumn{1}{|l|}{\textbf{Payload}}       & 8215.96 & 41.5 & 4048.74 & 46.58 & 8660 & 25.3 \\\hline
+ \multicolumn{7}{|l|}{\textbf{Bus Total}}     \\\hline
  \multicolumn{1}{|l|}{Structure}     & 1920.38 & 9.7 & 843.2 & 9.7 & 3322.33 & 9.7 \\\hline
  \multicolumn{1}{|l|}{Thermal}       & 217.776 & 1.1 & 95.62 & 1.1 & 376.76 & 1.1 \\\hline
  \multicolumn{1}{|l|}{EPS}           & 541 & 2.7 & 266 & 3.06 & 1193.694 & 3.49 \\\hline
@@ -150,15 +151,15 @@ The table \ref{tab:CB} on page \pageref{tab:CB} gives the cost breakdown of both
  \multicolumn{1}{|l|}{\acs{ADCS}}    & 199.093 & 1 & 175.914 & 2.02 & 1405.687 & 4.1 \\\hline
  \multicolumn{1}{|l|}{Tank}          & 0.713 & 0.0036 & 0.428 & 0.0049 & 3.649 & 0.011 \\\hline
  \multicolumn{1}{|l|}{Thruster}      & 570.64  & 2.88 & 356.65  & 4.1 & 3016.9 & 8.8 \\\hline
- \multicolumn{7}{|l|}{Wraps}     \\\hline
+ \multicolumn{7}{|l|}{\textbf{Wraps}}     \\\hline
  \multicolumn{1}{|l|}{\acs{IAT}}     & 1445.24 & 7.3 & 634.58 & 7.3 & 2500.34 & 7.3 \\\hline
  \multicolumn{1}{|l|}{Program Level} & 2395.53 & 12.1 & 1051.84 & 12.1 & 4144.36 & 12.1 \\\hline
  \multicolumn{1}{|l|}{\acs{GSE}}     & 692.92 & 3.5 & 304.25 & 3.5 & 1198.78 & 3.5 \\\hline
  \multicolumn{1}{|l|}{\acs{LOOS}}    & 633.53 & 3.2 & 278.17 & 3.2 & 1096.03 & 3.2 \\\hline
  \multicolumn{1}{|l|}{Subtotal}      & 19797.79 & 100 & 8692.92 & 100 & 34250.88 & 100 \\\hline
  \multicolumn{1}{|l|}{Launch}        & - & - & - & - & 18534.25 & - \\\hline\hline\hline
- \multicolumn{1}{|l|}{Total}         & - & - & - & - & 52785.13 & - \\\hline
- \multicolumn{1}{|l|}{Total (FY00)}  & - & - & - & - & 43089.90 & - \\\hline
+ \multicolumn{1}{|l|}{\textbf{Total}}         & - & - & - & - & 52785.13 & - \\\hline
+ \multicolumn{1}{|l|}{\textbf{Total (FY00)}}  & - & - & - & - & 43089.90 & - \\\hline
  
 \end{tabular}
 \caption{Cost Budget Breakdown.}
