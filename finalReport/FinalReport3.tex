@@ -101,7 +101,7 @@
 %%%%%%%%%%%%%
 
 \chapter{Introduction}
-\label{intro}
+\label{chap:intro}
 \pagenumbering{arabic}
 \input{chapters/introduction.tex}
 
@@ -112,7 +112,7 @@
 %%%%%%%%%%%%%
 
 \chapter{Project Management}
-\label{project_management}
+\label{chap:project_management}
 \input{chapters/DDBB.tex}
 
 %%%%%%%%%%%%%
@@ -122,7 +122,7 @@
 %%%%%%%%%%%%%
 
 \chapter{Mission Approach}
-\label{mission_approach}
+\label{chap:mission_approach}
 \input{chapters/DDFFD.tex}
 
 %%%%%%%%%%%%%
@@ -132,7 +132,7 @@
 %%%%%%%%%%%%%
 
 \chapter{Risk Management}
-\label{risk_management}
+\label{chap:risk_management}
 \input{chapters/DDRisk.tex}
 
 %%%%%%%%%%%%%
@@ -140,7 +140,8 @@
 %       Astrodynamics
 %
 %%%%%%%%%%%%%
-
+\chapter{Launch and Astrodynamic Characteristics}
+\label{chap:astrodynamics}
 \input{chapters/astrodynamics.tex}
 
 %%%%%%%%%%%%%
@@ -150,11 +151,10 @@
 %%%%%%%%%%%%%
 
 \chapter{Emitter Satellite}
-\label{emitter}
+\label{chap:emitter}
 \input{chapters/DDlaser.tex}
 \input{chapters/NaviEmitter.tex}
 \input{chapters/comm_Emittter_FR.tex}
-\input{chapters/DataStorageEmitter.tex}
 \input{chapters/emDDadcs.tex}
 %\input{chapters/EPSEmitterFinalDesign.tex}
 
@@ -165,11 +165,10 @@
 %%%%%%%%%%%%%
 	
 \chapter{Receiver Satellite}
-\label{receiver}
+\label{chap:receiver}
 \input{chapters/DDreceiver.tex}
 \input{chapters/NaviReceiver.tex}
 \input{chapters/comm_receiver.tex}
-\input{chapters/DataStorageReceiver.tex}
 \input{chapters/recDDadcs.tex}
 \input{chapters/EPSReceiverFinalDesign.tex}
 
@@ -181,7 +180,7 @@
 %%%%%%%%%%%%%
 
 \chapter{Data Validation}
-\label{sim}
+\label{chap:sim}
 \input{chapters/DataValidation.tex}
 \input{chapters/SoftwareToolInternals.tex}
 \input{chapters/ValidationResults.tex}
@@ -238,4 +237,7 @@
 
 \newpage
 \input{chapters/ApxEllipticalPhotonDistribution.tex}
+
+\newpage
+\input{chapters/APlinkbudget.tex}
 \end{document}
