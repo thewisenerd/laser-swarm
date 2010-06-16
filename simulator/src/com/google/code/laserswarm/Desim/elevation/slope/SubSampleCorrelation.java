@@ -78,8 +78,7 @@ public class SubSampleCorrelation implements SampleCorrelation {
 	}
 
 	@Override
-	public ElevationBRDF next(Map<Satellite, NoiseData> nextInterpulse,
-			double nextPulseT,
+	public ElevationBRDF next(Map<Satellite, NoiseData> nextInterpulse, double nextPulseT,
 			Point3d nextEmitPt) throws MathException {
 		for (Satellite tempSat : nextInterpulse.keySet()) {
 			if (interpulseData.get(tempSat) == null) {
@@ -108,7 +107,8 @@ public class SubSampleCorrelation implements SampleCorrelation {
 			averageExclusionFilter(1);
 			// Final elevation and BRDFinput generation.
 			ElevationRelatedEntriesPoint rawElBRDF = rawElevationSlopes.get(middle);
-			out = new ElevationBRDF(rawElBRDF.getElevation(), genBRDFInput(rawElevationSlopes));
+			double height = rawElBRDF.getElevation();
+			out = new ElevationBRDF(height, genBRDFInput(rawElevationSlopes));
 		}
 		return out;
 	}
@@ -232,7 +232,8 @@ public class SubSampleCorrelation implements SampleCorrelation {
 		double crossTrackSlope = Math.sqrt(b - a);
 		if (new Double(crossTrackSlope).isNaN()) {
 			crossTrackSlope = 0;
-			logger.wrn("Intercepted a NaN crossTrackSlope. Is your footprint diameter fraction a bit too optimistic?");
+			logger
+					.wrn("Intercepted a NaN crossTrackSlope. Is your footprint diameter fraction a bit too optimistic?");
 		}
 		logger.inf("min, max, footprintD: %s, %s, %s", min, max, footprintD);
 		logger.inf("a, b, along & crossTrackSlope: %s, %s, %s, %s", a, b, alongTrackSlope,
@@ -251,10 +252,12 @@ public class SubSampleCorrelation implements SampleCorrelation {
 		double curTime = thisElBRDF.getTEmit();
 		logger
 				.dbg(
-						"Generated the following BRDFinput: \nemPos: %s\nemDir: %s\nslopes: %s, %s\nphotonDirs: %s\ntime: %s",
-						emPos.toString(), emDir.toString(), alongTrackSlope, crossTrackSlope, photonDirs
+						"Generated the following BRDFinput: \nemPos: %s\nemDir: %s\ngroundPoint: %s\nslopes: %s, %s\nphotonDirs: %s\ntime: %s",
+						emPos.toString(), emDir.toString(), scatterPoint.toString(), alongTrackSlope,
+						crossTrackSlope, photonDirs
 								.toString(), curTime);
-		return new BRDFinput(emPos, emDir, alongTrackSlope, crossTrackSlope, photonDirs, curTime);
+		return new BRDFinput(emPos, emDir, scatterPoint, alongTrackSlope, crossTrackSlope, photonDirs,
+				curTime);
 	}
 
 	private boolean areEqual(double a, double b, double spacing) {

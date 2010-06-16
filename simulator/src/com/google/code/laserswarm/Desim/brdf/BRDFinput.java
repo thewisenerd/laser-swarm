@@ -49,6 +49,11 @@ public class BRDFinput {
 	 */
 	private double					currentTime;
 
+	/**
+	 * The point where everything was scattered.
+	 */
+	private Vector3d				scatterPoint;
+
 	public BRDFinput(BRDFinput input) {
 		emitterPosition = input.emitterPosition;
 		emitterDirection = input.emitterDirection;
@@ -58,15 +63,15 @@ public class BRDFinput {
 		currentTime = input.currentTime;
 	}
 
-	public BRDFinput(Vector3d emPos, Vector3d emDir, double alongSlope, double offSlope,
-			Map<Vector3d, Integer> recVecsECI, double curTime) {
-
+	public BRDFinput(Vector3d emPos, Vector3d emDir, Vector3d scatterPoint, double alongSlope,
+			double offSlope, Map<Vector3d, Integer> recVecsECI, double curTime) {
 		this.emitterPosition = emPos;
 		this.emitterDirection = emDir;
 		this.alongTrackSlope = alongSlope;
 		this.crossTrackSlope = offSlope;
 		this.receiverPositions = recVecsECI;
 		this.currentTime = curTime;
+		this.scatterPoint = scatterPoint;
 	}
 
 	@Override
@@ -124,9 +129,7 @@ public class BRDFinput {
 	}
 
 	public Vector3d getScatterPoint() {
-		// TODO Auto-generated method stub
-		//
-		throw new UnsupportedOperationException();
+		return scatterPoint;
 	}
 
 	public Vector3d getTerrainNormal() {

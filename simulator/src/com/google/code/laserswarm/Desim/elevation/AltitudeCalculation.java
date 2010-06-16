@@ -52,7 +52,6 @@ public class AltitudeCalculation {
 			theta = Math.PI / 2; // if the receiver and emitter are the same
 		double distGrndEmit = a * (1 - ecc_2) / (1 - ecc * Math.cos(theta)); // distance to the ground
 		// from the emitter
-		return em.length() - distGrndEmit; // altitude above the earth sphere in
-		// meters
+		return em.length() - distGrndEmit; // altitude above the earth center in meters
 	}
 }
