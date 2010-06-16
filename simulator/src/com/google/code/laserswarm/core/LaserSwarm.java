@@ -51,6 +51,22 @@ public abstract class LaserSwarm {
 		return l;
 	}
 
+	public void mkData() {
+		simulate();
+
+		/* Post simulation modifiers */
+		for (SimTemplate tmpl : simulations.keySet()) {
+			if (Configuration.hasAction(Actions.DISTRIBUTE_SLOPE)
+					&& Configuration.hasAction(Actions.PROCESS)) {
+				logger.inf("SlopeStpreading over %s", tmpl);
+				Simulator sim = simulations.get(tmpl);
+				SlopeSpread spread = new SlopeSpread();
+				simulations.put(tmpl, spread.modify(sim, tmpl.getConstellation()));
+			}
+
+		}
+	}
+
 	protected FindElevationNeighborInterpolation mkDataProcessor() {
 		return new FindElevationNeighborInterpolation(1, (int) 97e12, 5, 3, 0.3, 0.707);
 	}
@@ -97,6 +113,7 @@ public abstract class LaserSwarm {
 		}
 
 		if (fallback) {
+			mkData();
 			Iterator<SimTemplate> it = simulations.keySet().iterator();
 			if (it.hasNext()) {
 				SimTemplate templ = it.next();
@@ -135,18 +152,7 @@ public abstract class LaserSwarm {
 
 		/* Simulation */
 		if (Configuration.hasAction(Actions.SIMULATE)) {
-			simulate();
-		}
-
-		/* Post simulation modifiers */
-		for (SimTemplate tmpl : simulations.keySet()) {
-			if (Configuration.hasAction(Actions.DISTRIBUTE_SLOPE)) {
-				logger.inf("SlopeStpreading over %s", tmpl);
-				Simulator sim = simulations.get(tmpl);
-				SlopeSpread spread = new SlopeSpread();
-				simulations.put(tmpl, spread.modify(sim, tmpl.getConstellation()));
-			}
-
+			mkData();
 		}
 
 		/* Processing */

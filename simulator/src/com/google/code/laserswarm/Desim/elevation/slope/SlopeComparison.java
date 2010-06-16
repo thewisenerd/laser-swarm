@@ -30,7 +30,7 @@ public class SlopeComparison extends DescriptiveStatistics {
 		while (altIt.hasNext()) {
 			Point3d pSphere = altIt.next();
 			BRDFinput slope = slopeIt.next();
-			Point3d dir3d = Convert.toSphere(slope.getEmDir());
+			Point3d dir3d = Convert.toSphere(slope.getEmitterDirection());
 			double dAngle = 0.001;
 			DirectPosition2D forward = new DirectPosition2D(toDeg(pSphere.y + dAngle * dir3d.y), toDeg(pSphere.z
 						+ dAngle * dir3d.z));
@@ -58,8 +58,8 @@ public class SlopeComparison extends DescriptiveStatistics {
 			Point3d pRight = Convert.toXYZ(new Point3d(Configuration.R0, right.x, right.y));
 			double crossTrackSlope = (hRight - hLeft) / pLeft.distance(pRight);
 			double alongTrackSlope = (hForward - hBackward) / pForward.distance(pBackward);
-			addValue(Math.abs(crossTrackSlope - slope.getOffSlope())
-					+ Math.abs(alongTrackSlope - slope.getAlongSlope()));
+			addValue(Math.abs(crossTrackSlope - slope.getCrossTrackSlope())
+					+ Math.abs(alongTrackSlope - slope.getAlongTrackSlope()));
 		}
 	}
 }

@@ -30,6 +30,7 @@ public class SlopeSpread implements IPostSimulation {
 
 		ObjectContainer newDb = Simulator.mkDb(simulation, "afterSlope");
 
+		int i = 0;
 		List<SimVars> data = simulation.getDataPoints();
 		for (SimVars simVar : data) {
 			// logger.dbg("Processing point a t=%f", simVar.t0);
@@ -89,31 +90,27 @@ public class SlopeSpread implements IPostSimulation {
 					simVarNew.pR = new Point3d(dir);
 					simVarNew.tE.put(sat, tENew);
 					newSimVars.put(tRNew, simVarNew);
+				}
+			}
 
-					if (false) {
-						logger.dbg("\n\nNEW PHOTON");
-						logger.dbg("dH=>%s\tdt=%s", dH, dt);
-						logger.dbg("normal=>%s", simVar.surfNormal);
-						logger.dbg("TR from %s => %s", simVar.tR, tRNew);
-						logger.dbg("TE from %s => %s", simVar.tE.get(sat), tENew);
+			if (i % (data.size() / 5) == 0) {
+				int p1 = 0;
+				for (Satellite sat : simVar.tE.keySet()) {
+					p1 += simVar.photonsE.get(sat);
+				}
+
+				int p2 = 0;
+				for (SimVars simVarNew : newSimVars.values()) {
+					for (Satellite sat : simVarNew.tE.keySet()) {
+						p2 += simVarNew.photonsE.get(sat);
 					}
 				}
-
+				logger.inf("Processed %d of %d", i, data.size());
+				logger.inf("Photons %d => %d (spread over: %d vars)", p1, p2, newSimVars.size());
 			}
-
-			int p1 = 0;
-			for (Satellite sat : simVar.tE.keySet()) {
-				p1 += simVar.photonsE.get(sat);
-			}
-
-			int p2 = 0;
-			for (SimVars simVarNew : newSimVars.values()) {
+			i++;
+			for (SimVars simVarNew : newSimVars.values())
 				newDb.store(simVarNew);
-				for (Satellite sat : simVarNew.tE.keySet()) {
-					p2 += simVarNew.photonsE.get(sat);
-				}
-			}
-			logger.dbg("Photons %d => %d (spread over: %d vars)", p1, p2, newSimVars.size());
 		}
 
 		newDb.commit();

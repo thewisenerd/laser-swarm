@@ -63,7 +63,7 @@ public class OptimizeFilter extends LaserSwarm implements MultivariateRealFuncti
 	@Override
 	protected List<Constellation> mkConstellations() {
 		List<Constellation> constellations = Lists.newLinkedList();
-		constellations.add(mkConstellation(6, 0.075 * 0.075));
+		constellations.add(mkConstellation(3, 0.04 * 0.04));
 		return constellations;
 	}
 
@@ -140,6 +140,7 @@ public class OptimizeFilter extends LaserSwarm implements MultivariateRealFuncti
 			System.exit(1);
 		}
 
+		logger.inf("Performance: %f", performace);
 		prefLog.write(correlationInterval, comparisonQueueLength, whenEqual, performace);
 		return performace;
 	}

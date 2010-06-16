@@ -45,7 +45,7 @@ public class Altitude {
 
 	public static void main(String[] args) throws DemCreationException, MathException,
 			IOException {
-		run(dataPoints, new FindElevationNeighborInterpolation(1, (int) 97e12, 1, 17, 0.5, 0.707));
+		run(dataPoints, new FindElevationNeighborInterpolation(1, (int) 97e12, 5, 3, 0.3, 0.707));
 	}
 
 	public static void run(int dataPoint, ElevationFinder findEl) throws DemCreationException,
@@ -141,8 +141,8 @@ public class Altitude {
 		while (slopeIt.hasNext()) {
 			BRDFinput slope = slopeIt.next();
 			Point3d point = altIt.next();
-			slopeAlong.add(new Point3d(slope.getAlongSlope() + Configuration.R0, point.y, point.z));
-			slopeCross.add(new Point3d(slope.getOffSlope() + Configuration.R0, point.y, point.z));
+			slopeAlong.add(new Point3d(slope.getAlongTrackSlope() + Configuration.R0, point.y, point.z));
+			slopeCross.add(new Point3d(slope.getCrossTrackSlope() + Configuration.R0, point.y, point.z));
 		}
 
 		// Plot the slopes.
