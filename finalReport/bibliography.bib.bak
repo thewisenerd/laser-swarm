@@ -11,6 +11,14 @@
   timestamp = {2010.06.08}
 }
 
+@ELECTRONIC{10Nthruster,
+  author = {EADS Astrium},
+  title = {Bipropellant Thrusters and Apogee Motors},
+  url = {http://cs.astrium.eads.net/sp/SpacecraftPropulsion/BipropellantThrusters.html},
+  owner = {Lieuwe},
+  timestamp = {2010.06.13}
+}
+
 @TECHREPORT{midterm,
   author = {S. Billemont and L.S. Boersma and B. Buyens and S.R. Finck and J.P.
 	Florijn and T.C. Goossens and N.S. Oborin and A.J. Vorobiev and G.J.
@@ -252,6 +260,16 @@
   year = {2009},
   title = {Ku/Ka/X-Band high rate transmitter (HRT150)},
   url = {http://www.gd-space.com/documents/HRT%20150,%20091201A%20(SSE).pdf},
+  owner = {Bart},
+  timestamp = {2010.06.13}
+}
+
+@BOOK{satcom,
+  title = {Satellite Communications Systems: Systems, Techniques and Technology},
+  publisher = {Wiley},
+  year = {2002},
+  editor = {Zhili Sun},
+  author = {Gerard Maral, et al},
   owner = {Bart},
   timestamp = {2010.06.13}
 }
@@ -660,6 +678,15 @@
   timestamp = {2010.04.26}
 }
 
+@ELECTRONIC{DataStorage,
+  title = {64 Gbit Flash Memory Module},
+  language = {English},
+  organization = {3-D Plus},
+  url = {http://www.3d-plus.com/doc/prod/3dfp_0305_1.pdf},
+  owner = {Gert-Jan},
+  timestamp = {2010.06.13}
+}
+
 @ELECTRONIC{fresnel1,
   title = {Fresnel equations},
   url = {http://www.economicexpert.com/a/Fresnel:equations.html}
@@ -718,6 +745,14 @@
 @ELECTRONIC{refractiveIndices,
   title = {List of refractive indices},
   url = {http://en.wikipedia.org/wiki/List_of_refractive_indices}
+}
+
+@ELECTRONIC{zarm,
+  title = {Magnatic torquers for spacecraft attitude control},
+  organization = {ZARM, Microcosm},
+  url = {www.smad.com/analysis/torquers.pdf},
+  owner = {Lieuwe},
+  timestamp = {2010.06.14}
 }
 
 @MISC{cubesatshop,
