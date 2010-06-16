@@ -45,9 +45,9 @@ The link budget has the following input parameters: the frequency selected was 8
 
 The frequency selected is of the X-band as was mentioned in the mid-term review, since it allows a high data rate and is commonly used for Earth observation satellites and thus a lot of ground stations have the right equipment for this frequency band.
 
-The data rate depends on the link time between ground station and satellite, the time between the passes and the storage capacity. The exact required data rate was determined in section XXX on data storage and resulted in 110 Mbps, nevertheless the 150 Mbps figure was used in the calculations for the linkbudget to allow for more margin.
+The data rate depends on the link time between ground station and satellite, the time between the passes and the storage capacity. The exact required data rate was determined in section \ref{DSEmitter} on data storage and resulted in 111 Mbps, nevertheless the 150 Mbps figure was used in the calculations for the linkbudget to allow for more margin.
 
-The distance between the station and the satellite follows from the maximum beam angle of antenna on the satellite (45$^{\circ}$), for a detailed calculation of this distance, see appendix YYY.
+The distance between the station and the satellite follows from the maximum beam angle of antenna on the satellite (45$^{\circ}$).
 
 The QPSK modulation was chosen since it also allows a good balance between required E$_{b}$/N$_{0}$ and spectrum utilization and also allows a high data rate of up to 500 Mbps.
 
@@ -63,7 +63,7 @@ The ground station selected was ESRANGE, Kiruna, which allows up to 12 passes a 
 
 \subsubsection{Link budget}
 
-Similar to the link budget of the crosslinks, the selected modulation is QPSK and the maximum allowable bit error rate is 10$^{-5}$, meaning the required E$_{b}$/N$_{0}$ is equal to 9.6 dB. With the output power of the transceiver at 5 Watt or 7 dBW, it is possible to have a E$_{b}$/N$_{0}$ of 10.35 dB, which leaves a margin of 29.3 dB. For detailed link budget see Appendix XXX.
+Similar to the link budget of the crosslinks, the selected modulation is QPSK and the maximum allowable bit error rate is 10$^{-5}$, meaning the required E$_{b}$/N$_{0}$ is equal to 9.6 dB. With the output power of the transceiver at 5 Watt or 7 dBW, it is possible to have a E$_{b}$/N$_{0}$ of 10.35 dB, which leaves a margin of 29.3 dB. For detailed link budget see Appendix \ref{linkbudget}.
 
 \subsection{Ground-space link for command and housekeeping data}
 Aside from the one way space to ground link for scientific data there is also a separate two way link for commands and housekeeping data. 
@@ -86,6 +86,6 @@ Also the S-band patch antenna from Surrey Satellite technologies was again selec
 The ground station selected was again ESRANGE, Kiruna, for the reasons as the ground-space link for scientific data. For S-band the base has several receiver antennas from 2.4m to 13m, but the linkbudget showed a 2.4m parabolic reflector dish is already more than sufficient. The gain of this antenna is 53 dBi and has a beamwidth of 30$^{circl}$ \cite{esrange}.
 
 \subsubsection{Link budget}
-For this last link budget, the selected modulation is QPSK and the maximum allowable bit error rate is 10$^{-5}$, meaning the required E$_{b}$/N$_{0}$ is equal to 9.6 dB. With the output power of the transceiver at 1 Watt or 0 dBW, it is possible to have a E$_{b}$/N$_{0}$ of 39.25 dB, which leaves a margin of 27.65 dB. For detailed link budget see Appendix XXX.
+For this last link budget, the selected modulation is QPSK and the maximum allowable bit error rate is 10$^{-5}$, meaning the required E$_{b}$/N$_{0}$ is equal to 9.6 dB. With the output power of the transceiver at 1 Watt or 0 dBW, it is possible to have a E$_{b}$/N$_{0}$ of 39.25 dB, which leaves a margin of 27.65 dB. For detailed link budget see Appendix \ref{linkbudget}.
 
 \input{chapters/DataStorageEmitter.tex}
