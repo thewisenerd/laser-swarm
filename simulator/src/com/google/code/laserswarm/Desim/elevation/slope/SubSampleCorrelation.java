@@ -108,7 +108,9 @@ public class SubSampleCorrelation implements SampleCorrelation {
 			// Final elevation and BRDFinput generation.
 			ElevationRelatedEntriesPoint rawElBRDF = rawElevationSlopes.get(middle);
 			double height = rawElBRDF.getElevation();
-			out = new ElevationBRDF(height, genBRDFInput(rawElevationSlopes));
+			Point3d emitPtSph = Convert.toSphere(nextEmitPt);
+			out = new ElevationBRDF(height, genBRDFInput(new Point3d(height, emitPtSph.y, emitPtSph.z),
+					rawElevationSlopes));
 		}
 		return out;
 	}
@@ -160,7 +162,7 @@ public class SubSampleCorrelation implements SampleCorrelation {
 		return altitudes;
 	}
 
-	private BRDFinput genBRDFInput(LinkedList<ElevationRelatedEntriesPoint> elBRDFs) {
+	private BRDFinput genBRDFInput(Point3d scatterPoint, LinkedList<ElevationRelatedEntriesPoint> elBRDFs) {
 		ElevationRelatedEntriesPoint thisElBRDF = elBRDFs.get(middle);
 		ElevationRelatedEntriesPoint nextElBRDF = elBRDFs.get(middle + 1);
 		// Calculate the emitter groundtrack point.
@@ -256,7 +258,8 @@ public class SubSampleCorrelation implements SampleCorrelation {
 						emPos.toString(), emDir.toString(), scatterPoint.toString(), alongTrackSlope,
 						crossTrackSlope, photonDirs
 								.toString(), curTime);
-		return new BRDFinput(emPos, emDir, scatterPoint, alongTrackSlope, crossTrackSlope, photonDirs,
+		return new BRDFinput(emPos, emDir, new Vector3d(Convert.toXYZ(scatterPoint)), alongTrackSlope,
+				crossTrackSlope, photonDirs,
 				curTime);
 	}
 

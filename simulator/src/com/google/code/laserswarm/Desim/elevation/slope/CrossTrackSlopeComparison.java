@@ -8,7 +8,7 @@ import org.apache.commons.math.stat.descriptive.DescriptiveStatistics;
 import org.geotools.geometry.DirectPosition2D;
 import org.geotools.referencing.operation.projection.PointOutsideEnvelopeException;
 
-import com.google.code.laserswarm.Desim.BRDFcalc.BRDFinput;
+import com.google.code.laserswarm.Desim.brdf.BRDFinput;
 import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.earthModel.EarthModel;
 import com.google.code.laserswarm.math.Convert;
@@ -32,10 +32,10 @@ public class CrossTrackSlopeComparison extends DescriptiveStatistics {
 			BRDFinput slope = slopeIt.next();
 			Point3d dir3d = Convert.toSphere(slope.getEmitterDirection());
 			double dAngle = 0.00000001;
-			DirectPosition2D left = new DirectPosition2D(toDeg(pSphere.y + dAngle * dir3d.z),
-					toDeg(pSphere.z - dAngle * dir3d.y));
-			DirectPosition2D right = new DirectPosition2D(toDeg(pSphere.y - dAngle * dir3d.z),
-					toDeg(pSphere.z + dAngle * dir3d.y));
+			DirectPosition2D left = new DirectPosition2D(toDeg(pSphere.y) + dAngle * dir3d.z,
+					toDeg(pSphere.z) - dAngle * dir3d.y);
+			DirectPosition2D right = new DirectPosition2D(toDeg(pSphere.y) - dAngle * dir3d.z,
+					toDeg(pSphere.z) + dAngle * dir3d.y);
 			double hLeft = 0;
 			double hRight = 0;
 			try {

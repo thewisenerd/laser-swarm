@@ -8,7 +8,7 @@ import org.apache.commons.math.stat.descriptive.DescriptiveStatistics;
 import org.geotools.geometry.DirectPosition2D;
 import org.geotools.referencing.operation.projection.PointOutsideEnvelopeException;
 
-import com.google.code.laserswarm.Desim.BRDFcalc.BRDFinput;
+import com.google.code.laserswarm.Desim.brdf.BRDFinput;
 import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.earthModel.EarthModel;
 import com.google.code.laserswarm.math.Convert;
@@ -31,11 +31,11 @@ public class AlongTrackSlopeComparison extends DescriptiveStatistics {
 			Point3d pSphere = altIt.next();
 			BRDFinput slope = slopeIt.next();
 			Point3d dir3d = Convert.toSphere(slope.getEmitterDirection());
-			double dAngle = 0.00000001;
-			DirectPosition2D forward = new DirectPosition2D(toDeg(pSphere.y + dAngle * dir3d.y),
-					toDeg(pSphere.z + dAngle * dir3d.z));
-			DirectPosition2D backward = new DirectPosition2D(toDeg(pSphere.y - dAngle * dir3d.y),
-					toDeg(pSphere.z - dAngle * dir3d.z));
+			double dAngle = 0.0000001;
+			DirectPosition2D forward = new DirectPosition2D(toDeg(pSphere.y) + dAngle * dir3d.y,
+					toDeg(pSphere.z) + dAngle * dir3d.z);
+			DirectPosition2D backward = new DirectPosition2D(toDeg(pSphere.y) - dAngle * dir3d.y,
+					toDeg(pSphere.z) - dAngle * dir3d.z);
 			double hForward = 0;
 			double hBackward = 0;
 			try {

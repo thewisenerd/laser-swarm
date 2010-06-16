@@ -94,10 +94,10 @@ public class plotSlope {
 				dir3d = Convert.toSphere(dir3d);
 				double hFound;
 				if (isAlongTrack) {
-					DirectPosition2D forward = new DirectPosition2D(toDeg(last.y + dAngle * dir3d.y),
-							toDeg(last.z + dAngle * dir3d.z));
-					DirectPosition2D backward = new DirectPosition2D(toDeg(last.y - dAngle * dir3d.y),
-							toDeg(last.z - dAngle * dir3d.z));
+					DirectPosition2D forward = new DirectPosition2D(toDeg(last.y) + dAngle * dir3d.y,
+							toDeg(last.z) + dAngle * dir3d.z);
+					DirectPosition2D backward = new DirectPosition2D(toDeg(last.y) - dAngle * dir3d.y,
+							toDeg(last.z) - dAngle * dir3d.z);
 					double hForward = 0;
 					double hBackward = 0;
 					try {
@@ -112,10 +112,10 @@ public class plotSlope {
 							backward.y));
 					hFound = (hForward - hBackward) / pForward.distance(pBackward);
 				} else {
-					DirectPosition2D left = new DirectPosition2D(toDeg(last.y + dAngle * dir3d.z),
-							toDeg(last.z - dAngle * dir3d.y));
-					DirectPosition2D right = new DirectPosition2D(toDeg(last.y - dAngle * dir3d.z),
-							toDeg(last.z + dAngle * dir3d.y));
+					DirectPosition2D left = new DirectPosition2D(toDeg(last.y) + dAngle * dir3d.z,
+							toDeg(last.z) - dAngle * dir3d.y);
+					DirectPosition2D right = new DirectPosition2D(toDeg(last.y) - dAngle * dir3d.z,
+							toDeg(last.z) + dAngle * dir3d.y);
 					double hLeft = 0;
 					double hRight = 0;
 					try {
