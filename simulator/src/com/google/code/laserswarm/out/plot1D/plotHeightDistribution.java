@@ -28,7 +28,7 @@ public class plotHeightDistribution {
 	private static final Logger	logger	= Logger.get(plotHeightDistribution.class);
 
 	/**
-	 * Plots height versus time.
+	 * Plots height versus position.
 	 * 
 	 * @param sims
 	 *            The list of SimVars used to plot.
@@ -140,10 +140,10 @@ public class plotHeightDistribution {
 	}
 
 	/**
-	 * Plots height versus time.
+	 * Plots height versus position.
 	 * 
-	 * @param sims
-	 *            The list of SimVars used to plot.
+	 * @param alts
+	 *            The list of altitudes used to plot.
 	 * @param lineThickness
 	 *            Line thickness used in the plot.
 	 * @param plotFile

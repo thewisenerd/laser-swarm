@@ -19,6 +19,7 @@
 	<logger name="com.google.code.laserswarm.Desim.NoisePercentage" level="INFO" />
 	<logger name="com.google.code.laserswarm.Desim.NoiseData" level="INFO" />
 	<logger name="com.google.code.laserswarm.Desim.FindWindow" level="INFO" />
+	<logger name="com.google.code.laserswarm.out.plot1D.plotSlope" level="INFO" />
 	<logger name="com.google.code.laserswarm.out.plot1D.plotHeightDistribution" level="INFO" />
 	
 	<root level="DEBUG">

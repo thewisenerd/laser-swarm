@@ -18,14 +18,16 @@ import com.google.code.laserswarm.TestFindElevation;
 import com.google.code.laserswarm.Desim.BRDFcalc_old.BRDFinput;
 import com.google.code.laserswarm.Desim.elevation.ElevationComparison;
 import com.google.code.laserswarm.Desim.elevation.ElevationFinder;
+import com.google.code.laserswarm.Desim.elevation.slope.AlongTrackSlopeComparison;
+import com.google.code.laserswarm.Desim.elevation.slope.CrossTrackSlopeComparison;
 import com.google.code.laserswarm.Desim.elevation.slope.ElevationSlope;
 import com.google.code.laserswarm.Desim.elevation.slope.FindElevationNeighborInterpolation;
-import com.google.code.laserswarm.Desim.elevation.slope.SlopeComparison;
 import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.conf.Constellation;
 import com.google.code.laserswarm.conf.Satellite;
 import com.google.code.laserswarm.earthModel.EarthModel;
 import com.google.code.laserswarm.out.plot1D.plotHeightDistribution;
+import com.google.code.laserswarm.out.plot1D.plotSlope;
 import com.google.code.laserswarm.process.EmitterHistory;
 import com.google.code.laserswarm.process.TimeLine;
 import com.google.code.laserswarm.simulation.SimTemplate;
@@ -45,7 +47,7 @@ public class Altitude {
 
 	public static void main(String[] args) throws DemCreationException, MathException,
 			IOException {
-		run(dataPoints, new FindElevationNeighborInterpolation(1, (int) 97e12, 5, 3, 0.3, 0.707));
+		run(dataPoints, new FindElevationNeighborInterpolation(1, (int) 97e12, 1, 4, 0.5, 0.707));
 	}
 
 	public static void run(int dataPoint, ElevationFinder findEl) throws DemCreationException,
@@ -85,6 +87,7 @@ public class Altitude {
 		Constellation constellation = null;
 		Map<Satellite, TimeLine> satData = Maps.newHashMap();
 		plotHeightDistribution plotter = new plotHeightDistribution();
+		plotSlope plotSlope = new plotSlope();
 		ElevationSlope elSlope = new ElevationSlope();
 		LinkedList<Point3d> alts = Lists.newLinkedList();
 		if (new File("satData.xml").exists() & new File("emitterHistory.xml").exists()
@@ -146,13 +149,20 @@ public class Altitude {
 		}
 
 		// Plot the slopes.
-		plotter.plot(slopeAlong, 3, "alongTrackSlopes");
-		plotter.plot(slopeCross, 3, "crossTrackSlopes");
+		plotSlope.plot(slopeAlong, 3, "alongTrackSlopes");
+		plotSlope.plot(slopeCross, 3, "crossTrackSlopes");
+		plotSlope.plotFromDEM(EarthModel.getDefaultModel(), slopeAlong, 3, "simulatedAlongTrackSlopes",
+				true);
+		plotSlope.plotFromDEM(EarthModel.getDefaultModel(), slopeCross, 3, "simulatedCrossTrackSlopes",
+				false);
 
-		logger.inf("heightAnalysed Stats:\n%s",
+		logger.inf("Analysed height statistics:\n%s",
 				new ElevationComparison(EarthModel.getDefaultModel(), alts));
 
-		logger.inf("slope Stats:\n%s",
-				new SlopeComparison(EarthModel.getDefaultModel(), elSlope));
+		logger.inf("Along track slope statistics:\n%s",
+				new AlongTrackSlopeComparison(EarthModel.getDefaultModel(), elSlope));
+
+		logger.inf("Cross track slope statistics:\n%s",
+				new CrossTrackSlopeComparison(EarthModel.getDefaultModel(), elSlope));
 	}
 }
