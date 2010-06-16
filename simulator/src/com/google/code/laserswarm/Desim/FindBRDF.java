@@ -18,9 +18,7 @@ import com.google.code.laserswarm.Orbit.OrbConv;
  */
 
 public class FindBRDF {
-	/**
-	 * @param args
-	 */
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		// 

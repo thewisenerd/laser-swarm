@@ -8,7 +8,7 @@ import org.apache.commons.math.stat.descriptive.DescriptiveStatistics;
 import org.geotools.geometry.DirectPosition2D;
 import org.geotools.referencing.operation.projection.PointOutsideEnvelopeException;
 
-import com.google.code.laserswarm.Desim.BRDFcalc_old.BRDFinput;
+import com.google.code.laserswarm.Desim.brdf.BRDFinput;
 import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.earthModel.EarthModel;
 import com.google.code.laserswarm.math.Convert;

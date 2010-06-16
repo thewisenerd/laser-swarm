@@ -11,7 +11,7 @@ import org.apache.commons.math.MathException;
 import com.google.code.laserswarm.Desim.DataContainer;
 import com.google.code.laserswarm.Desim.FindWindow;
 import com.google.code.laserswarm.Desim.NoiseData;
-import com.google.code.laserswarm.Desim.BRDFcalc_old.BRDFinput;
+import com.google.code.laserswarm.Desim.brdf.BRDFinput;
 import com.google.code.laserswarm.Desim.elevation.ElevationFinder;
 import com.google.code.laserswarm.conf.Constellation;
 import com.google.code.laserswarm.conf.Satellite;

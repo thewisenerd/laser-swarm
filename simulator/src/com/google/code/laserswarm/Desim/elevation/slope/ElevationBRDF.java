@@ -1,6 +1,6 @@
 package com.google.code.laserswarm.Desim.elevation.slope;
 
-import com.google.code.laserswarm.Desim.BRDFcalc_old.BRDFinput;
+import com.google.code.laserswarm.Desim.brdf.BRDFinput;
 
 public class ElevationBRDF {
 	private double		elevation;
