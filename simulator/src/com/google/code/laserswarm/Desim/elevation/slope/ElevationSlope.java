@@ -4,7 +4,7 @@ import java.util.LinkedList;
 
 import javax.vecmath.Point3d;
 
-import com.google.code.laserswarm.Desim.BRDFcalc.BRDFinput;
+import com.google.code.laserswarm.Desim.BRDFcalc_old.BRDFinput;
 import com.google.common.collect.Lists;
 
 public class ElevationSlope {

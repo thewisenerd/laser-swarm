@@ -7,7 +7,7 @@ import java.util.Map;
 
 import javax.vecmath.Vector3d;
 
-import com.google.code.laserswarm.Desim.BRDFcalc.Region;
+import com.google.code.laserswarm.Desim.BRDFcalc_old.Region;
 import com.google.code.laserswarm.Orbit.OrbConv;
 
 /**

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.google.code.laserswarm.Desim.BRDFcalc;
+package com.google.code.laserswarm.Desim.BRDFcalc_old;
 
 import java.util.Comparator;
 import java.util.TreeMap;
@@ -16,8 +16,7 @@ import com.lyndir.lhunath.lib.system.logging.Logger;
  */
 public class Sphere extends TreeMap<Vector3d, Integer> {
 
-	private static final Logger			logger				= Logger.get(Sphere.class);
-	private static final long			serialVersionUID	= -1571965505162878630L;
+	private static final Logger			logger	= Logger.get(Sphere.class);
 
 	private static Comparator<Vector3d>	vecComparator;
 	static {

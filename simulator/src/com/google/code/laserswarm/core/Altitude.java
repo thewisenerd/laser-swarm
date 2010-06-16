@@ -15,7 +15,7 @@ import javax.vecmath.Point3d;
 import org.apache.commons.math.MathException;
 
 import com.google.code.laserswarm.TestFindElevation;
-import com.google.code.laserswarm.Desim.BRDFcalc.BRDFinput;
+import com.google.code.laserswarm.Desim.BRDFcalc_old.BRDFinput;
 import com.google.code.laserswarm.Desim.elevation.ElevationComparison;
 import com.google.code.laserswarm.Desim.elevation.ElevationFinder;
 import com.google.code.laserswarm.Desim.elevation.slope.ElevationSlope;
