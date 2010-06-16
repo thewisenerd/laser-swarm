@@ -20,11 +20,11 @@ The solar panels well be continously turned so that the cosine loss is at a mini
 During launch, the solar panels are held down by Dyneema wire bundles. These cables are cut by the DutchSpace thermal knife concept. The 'cutting' of the cables works as follows: electrical power is dissipated through a resistor on a ceramic plate (the blade of the knife). The resulting heat dissolves the links between the molecules in the aramid material of the cable. After about thirty seconds, the cables have been cut through. This system offers some advantages over deployment mechanisms that use pyrotechnic shocks. Because the tension in the cables lessens gradually, there are no high shocks during the release of the solar panels. Also, the thermal knife can be used multiple times, so it can be tested on the ground before it is used on a satellite. Thirdly, because there are no moving components, the system is less complex and has a higher reliability.
 \\\\
 For the deployment of the panels from their stowed position during launch to their fully deployed position when in orbit the smart memory alloy technique is used. In this concept, the SMA strips are heat treated in the deployed (hot) configuration and joined at the ends by metallic structural fittings. In the martensitic (cold) state, the hinge is manually buckled and folded into the stowed configuration. Application of heat via internally bonded, flexible nichrome heaters transforms the SMA into the austenitic (hot) state and causes the hinge deploy. Once deployed power is turned off and the SMA is allowed to cool back to the low temperature martensitic phase. Although the martensite phase is softer than the high temperature austenite phase, the very efficient section geometry in the deployed configuration allows the martensitic SMA hinge to support the lightweight solar array sections.
-\\\\
+\\ \\
 An important part of the EPS are the batteries. Recently, lithium-ion batteries have been developed and tested with the result that they are space qualified for LEO missions. There are three batteries, each one made up of two modules connected in parallel which each consist of 7 lithium-ion cells connected in series. This gives an output voltage of 28V at a capacity of six ampere-hours per battery.
 The amount of wiring was determined from SMAD and was based on the dry mass of the satellite.
 \\ \\
-Table \ref{tab:EPS_details} shows the dimensions, weight and power usage of each part of the emitter satellite's electrical power system.
+Table \ref{tab:EPS_detailsEm} shows the dimensions, weight and power usage of each part of the emitter satellite's electrical power system. The losses of the solar panels and batteries are considered in their design, therefore their power use is listed as zero in this table.
 
 
 \begin{table}[H!]
@@ -40,17 +40,17 @@ Part & \multicolumn{3}{c}{Dimensions [mm]} & Weight [g] & Power usage [W]\\
  Convertor & 95 & 60 & 17 & 80 & 1.5 \\ 
  Shunt regulator (2) & 2.8 & 2.6 & 1.05 & 0.1 & 0.5 \\ 
  Thermal knife (2) & 60 & 50 & 38 & 280 & 15**  \\
- Wiring & - & - & - & 1219 & 1.7 \\ 
- Solar panels (2) & 1200 & 600 & 0.75 & 600 & 0 \\
+ Wiring & - & - & - & 430 & 1.7 \\ 
+ Solar panels (2) & 1200 & 600 & 5.538 & 723.5 & 0 \\
  \midrule
- TOTAL & - & - & - & 2593.5 & 3.28***  \\ 
+ TOTAL & - & - & - & 5800 & 6.2***  \\ 
 \bottomrule
  \multicolumn{6}{l}{* for 4 minutes} \\
  \multicolumn{6}{l}{** for 60 seconds} \\
  \multicolumn{6}{l}{*** continuous power usage only} \\
 \end{tabular}
 \caption{EPS subpart details for receiver satellites}
-\label{tab:EPS_details}
+\label{tab:EPS_detailsEm}
 \end{table}
 
 The architecture of the power system is show in figure \ref{fig:emitter_block}. The power from the solar panels is transferred to the dc-dc convertor. There part of it is sent to charge the batteries and part is sent to power the payload. During eclipse periods, the power is sent from the batteries to the payload via the convertor.
