@@ -135,4 +135,10 @@ public abstract class VectorMath {
 		dR.sub(origin);
 		return dR;
 	}
+
+	public static Vector3d rotate(Tuple3d vector, int axis, double rotation) {
+		RotationMatrix rot = new RotationMatrix(axis, rotation);
+		VectorN rotated = rot.transform(new VectorN(vector.x, vector.y, vector.z));
+		return new Vector3d(rotated.getArray());
+	}
 }

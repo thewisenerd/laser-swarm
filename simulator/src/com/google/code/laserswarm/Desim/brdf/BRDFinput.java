@@ -3,12 +3,25 @@
  */
 package com.google.code.laserswarm.Desim.brdf;
 
-import static com.google.code.laserswarm.math.VectorMath.avgVector;
+import static com.google.code.laserswarm.math.Convert.toPoint;
+import static com.google.code.laserswarm.math.Convert.toSphere;
+import static com.google.code.laserswarm.math.Convert.toVector;
+import static com.google.code.laserswarm.math.Convert.toXYZ;
 import static com.google.code.laserswarm.math.VectorMath.relative;
+import static com.google.code.laserswarm.math.VectorMath.rotate;
 
 import java.util.Map;
 
+import javax.vecmath.Point3d;
 import javax.vecmath.Vector3d;
+
+import org.geotools.geometry.DirectPosition2D;
+import org.geotools.math.Plane;
+import org.geotools.referencing.operation.projection.PointOutsideEnvelopeException;
+
+import com.google.code.laserswarm.conf.Configuration;
+import com.google.code.laserswarm.earthModel.EarthModel;
+import com.lyndir.lhunath.lib.system.logging.Logger;
 
 /**
  * Class that contains the information needed by the FindBRDF class. All information corresponds to a
@@ -54,6 +67,8 @@ public class BRDFinput {
 	 */
 	private Vector3d				scatterPoint;
 
+	private static final Logger		logger	= Logger.get(BRDFinput.class);
+
 	public BRDFinput(BRDFinput input) {
 		emitterPosition = input.emitterPosition;
 		emitterDirection = input.emitterDirection;
@@ -95,6 +110,41 @@ public class BRDFinput {
 		return crossTrackSlope;
 	}
 
+	private double getCrossTrackSlopeCorrected() {
+		Vector3d pos = getScatterPoint();
+		Vector3d dir = getEmitterDirection();
+		Point3d posSphere = toSphere(pos);
+		Point3d dirSphere = toSphere(dir);
+		posSphere.scale(180 / Math.PI);
+		dirSphere.scale(180 / Math.PI);
+
+		double dAngle = 0.00000001;
+		DirectPosition2D left = new DirectPosition2D(posSphere.y + dAngle * dirSphere.z,
+				posSphere.z - dAngle * dirSphere.y);
+		DirectPosition2D right = new DirectPosition2D(posSphere.y - dAngle * dirSphere.z,
+				posSphere.z + dAngle * dirSphere.y);
+
+		double hLeft = 0;
+		double hRight = 0;
+		try {
+			EarthModel earth = EarthModel.getDefaultModel();
+			hLeft = earth.getElevation(left) + Configuration.R0;
+			hRight = earth.getElevation(right) + Configuration.R0;
+		} catch (PointOutsideEnvelopeException e) {
+			logger.wrn(e, "Boundary case prolly");
+		}
+		Point3d pLeft = toXYZ(new Point3d(Configuration.R0, left.x, left.y));
+		Point3d pRight = toXYZ(new Point3d(Configuration.R0, right.x, right.y));
+		double trueCrossTrackSlope = (hRight - hLeft) / pLeft.distance(pRight);
+
+		double cross1 = trueCrossTrackSlope - crossTrackSlope;
+		double cross2 = trueCrossTrackSlope + crossTrackSlope;
+		if (cross1 < cross2)
+			return crossTrackSlope;
+		else
+			return -crossTrackSlope;
+	}
+
 	/**
 	 * 
 	 * @return Returns the time at which the pulse under consideration was emitted.
@@ -133,9 +183,28 @@ public class BRDFinput {
 	}
 
 	public Vector3d getTerrainNormal() {
-		// TODO Auto-generated method stub
-		// 
-		throw new UnsupportedOperationException();
+		double crossSlope = getCrossTrackSlopeCorrected();
+		double alongSlope = getAlongTrackSlope();
+		Vector3d dir = getEmitterDirection();
+		Point3d dirSphere = toSphere(dir);
+
+		Vector3d alongTrackP = toVector(dirSphere);
+		alongTrackP.z = alongSlope;
+		Vector3d crosstrackP = toVector(dirSphere);
+		rotate(crosstrackP, 3, -90 * Math.PI / 180);
+		crosstrackP.z = crossSlope;
+
+		Plane terrainPlane = new Plane();
+		terrainPlane.setPlane(new Point3d(0, 0, 0),
+								toPoint(alongTrackP),
+								toPoint(crosstrackP));
+
+		Vector3d dZ_dLON = new Vector3d(1, 0, terrainPlane.z(1, 0));
+		Vector3d dZ_dLAT = new Vector3d(0, 1, terrainPlane.z(0, 1));
+
+		Vector3d n = new Vector3d();
+		n.cross(dZ_dLON, dZ_dLAT);
+		return n;
 	}
 
 	public void merge(BRDFinput brdFinput) {
@@ -149,6 +218,5 @@ public class BRDFinput {
 
 		alongTrackSlope = (alongTrackSlope + brdFinput.getAlongTrackSlope()) / 2;
 		crossTrackSlope = (crossTrackSlope + brdFinput.getCrossTrackSlope()) / 2;
-		normal = avgVector(getTerrainNormal(), brdFinput.getTerrainNormal());
 	}
 }
