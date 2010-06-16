@@ -663,7 +663,7 @@ Since the altitude of the orbits does not affect these angles, the relations hol
 \begin{landscape}
 \begin{figure}[ht!]
 \centering
-\includegraphics[width = \textwidth]{chapters/img/ground.png}
+\includegraphics[scale = 0.5]{chapters/img/ground.png}
 \caption{A representative ground track of the formation.}
 \label{fig:ground}
 \end{figure}
@@ -683,21 +683,21 @@ This concept has been successfully demonstrated by the ORBCOMM satellites \cite{
 
 Collision avoidance is an integral part of formation design, yet this analysis cannot be properly performed without the detail design of the constellation. However some design approximations can be already made to estimate the risks.
 
-In the context of this formation, collision avoidance is important for two reasons: potential loss of two vehicles in a collision, one of them possibly being the emitter, and creation of a debris field which can jeopardize the safety of the rest of the platforms. A debris field evolution can be seen in figure \ref{fig:debris} on page \pageref{fig:debris}. This kind of debris propagation can very quickly lead to a snowball effect and destroy the whole constellation. A NASA90 debris flux model was run to simulate the propogation of a possible collision. The results can be seen in figure \ref{fig:debrisModel}. 
+In the context of this formation, collision avoidance is important for two reasons: potential loss of two vehicles in a collision, one of them possibly being the emitter, and creation of a debris field which can jeopardize the safety of the rest of the platforms. A debris field evolution can be seen in figure \ref{fig:debris} on page \pageref{fig:debris}. This kind of debris propagation can very quickly lead to a snowball effect and destroy the whole constellation. A NASA90 debris flux model was run to simulate the propogation of a possible collision. The results can be seen in figure \ref{fig:debrisModel} on page \pageref{fig:debrisModel}. 
 
 \begin{figure}
   \centering
   \subfloat[]{\label{fig:elecMax}\includegraphics[width=0.5\textwidth]{chapters/img/collA.png}}                
   \subfloat[]{\label{fig:elecMin}\includegraphics[width=0.5\textwidth]{chapters/img/collB.png}}\\
   \subfloat[]{\label{fig:elecMin}\includegraphics[width=0.5\textwidth]{chapters/img/collC.png}}
-  \caption{Debris field evolution, (a) immediately after impact, (b) spreading out after some time and eventually settling into the orbit (c) and decaying. \emph{Source: \cite{constDesign}}}
+  \caption{Debris field evolution, (a) immediately after impact, (b) spreading out after some time and eventually settling into the orbit (c) and decaying. \emph{(Source: \cite{constDesign}})}
   \label{fig:debris}
 \end{figure}
 
 \begin{figure}[!h]
 \centering
 \includegraphics[width=0.8\textwidth, angle=0]{chapters/img/debris.png}
-\caption{NASA90 Debris Flux simulation. Orbital altitude - 500 km, Epoch start date - May 2017. \emph{Source: SPENVIS}.}
+\caption{NASA90 Debris Flux simulation. Orbital altitude - 500 km, Epoch start date - May 2017. \emph{(Source: SPENVIS}.)}
 \label{fig:debrisModel}
 \end{figure}
 
