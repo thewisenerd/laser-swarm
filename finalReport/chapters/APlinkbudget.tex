@@ -1,29 +1,146 @@
 
+\documentclass[11pt]{report}
+\pagestyle{myheadings}
+\markright{Group 13\hfill Laser Swarm\hfill}
+\usepackage{pdflscape}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{enumerate}
+\usepackage[printonlyused]{acronym}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{subfig}
+\usepackage{amsmath}
+\usepackage{url}
+\usepackage{fixltx2e}
+\usepackage{booktabs}
+\usepackage{rotating}
+
+\topmargin -1.5cm
+\oddsidemargin -0.04cm 
+\evensidemargin -0.04cm 
+\textwidth 16.59cm 
+\textheight 21.94cm 
+\parskip 7.2pt 
+
+\setcounter{secnumdepth}{5}
+\setcounter{tocdepth}{2}
+\pagenumbering{roman}
+
+\begin{document}
 \chapter{Linkbudgets for communication links}
 \label{linkbudgets}
-\section{Crosslinks scientific and housekeeping data}
 
-\begin{figure}[ht]
+\begin{table}[ht]
 \centering
-\includegraphics[width=0.6\textwidth, angle=0]{img/SSlinkbudget.png}
+\begin{tabular}{l | c | c | c }
+Item & Symbol & Value & Units \\ \hline
+Frequency	& f	& 8.2	& GHz \\
+Transmittance power	& P	& 7	& dBW \\
+Transmitter line loss	& $L_{l}$	& -1	& dB \\
+Transmit antenna beamwidth	& $\theta_{t}$	& 15	& deg \\
+Peak transmit antenna gain	& $G_{pt}$	& 23.03	& dBi \\
+Transmit antenna diameter	& $D_{t}$	& -	& m \\
+Transmit antenna pointing offset	& $e_{t}$	& 0.1	& deg \\
+Transmit antenna pointing loss	& $L_{pt}$ & -5.33$\cdot 10^{-4}$ & dB \\
+Transmit antenna gain (net)	& $G_{t}$	& 23.03	& dBi \\
+Equiv. isotropic radiated power	& EIRP	& 29.03	& dBW \\
+Propagation path length	& S	& 1000	& km \\
+Space loss	& $L_{s}$	& -170.73	& dB \\
+Propagation and polarization loss & $L_{a}$ & -0.5 & dB \\
+Rain attenuation	& $L_{rain}$	& -0.5	& dB \\
+Receive antenna diameter	& $D_{r}$	& 13	& m \\
+Peak receive antenna gain (net)	& $G_{rp}$	& 58.37	& dBi \\
+Receive antenna beamwidth	& $\theta_{r}$	& 0.18	& deg \\
+Receive antenna pointing error	& $e_{r}$	& 0.03	& deg \\
+Receive antenna pointing loss	& $L_{pr}$	& -0.33	& dB \\
+Receive antenna gain	& $G_{r}$	& 58.04	& dBi \\
+System noise temperature	& $T_{s}$	& 135	& K \\
+Data rate	& R	& 150 $\cdot10^{6}$	& bps \\
+Eb/N0	& $E_{b}$/$N_{0}$	& 40.87	& dB \\
+Carrier-to-noise density ratio	& C/$N{0}$	& 122.64	& db-Hz \\
+Bit error rate	& BER	& $10_{-5}$	& - \\
+Required Eb/N0	& Req $E_{b}$/$N_{0}$	& 9.6	& dB \\
+Implementation loss &	-	& -2	& dB \\
+Margin	& -	& 29.27	& dB \\
+\end{tabular}
 \caption{Crosslink linkbudget for scientific and housekeeping data}
 \label{figSSbudget}
-\end{figure}
+\end{table}
 
-\section{Ground-space link for scientific data}
-\begin{figure}[ht]
+\begin{table}[ht]
 \centering
-\includegraphics[width=0.6\textwidth, angle=0]{img/GSsciencelinkbudget.png}
+\begin{tabular}{l | c | c | c }
+Item & Symbol & Value & Units \\ \hline
+Frequency	& f	& 2	& GHz \\
+Transmittance power	& P	& 7	& dBW \\
+Transmitter line loss	& $L_{l}$	& -1	& dB \\
+Transmit antenna beamwidth	& $theta_{t}$	& 180	& deg \\
+Peak transmit antenna gain	& $G_{pt}$	& 4	& dBi \\
+Transmit antenna diameter	& $D_{t}$	& 0.082	& m \\
+Transmit antenna pointing offset	& $e_{t}$	& 0.1	& deg \\
+Transmit antenna pointing loss	& $L_{pt}$ & -3.70$\cdot 10^{-6}$ & dB \\
+Transmit antenna gain (net)	& $G_{t}$	& 4.00	& dBi \\
+Equiv. isotropic radiated power	& EIRP	& 10 & dBW \\
+Propagation path length	& S	& 262	& km \\
+Space loss	& $L_{s}$	& -164.84	& dB \\
+Propagation and polarization loss & $L_{a}$ & 0 & dB \\
+Rain attenuation	& $L_{rain}$	& 0	& dB \\
+Receive antenna diameter	& $D_{r}$	& 0.082 & m \\
+Peak receive antenna gain (net)	& $G_{rp}$	& 4.00	& dBi \\
+Receive antenna beamwidth	& $theta_{r}$	& 180	& deg \\
+Receive antenna pointing error	& $e_{r}$	& 0.1	& deg \\
+Receive antenna pointing loss	& $L_{pr}$	& 0	& dB \\
+Receive antenna gain	& $G_{r}$	& 4.00	& dBi \\
+System noise temperature	& $T_{s}$	& 135	& K \\
+Data rate	& R	& 1.62 $\cdot10^{6}$	& bps \\
+Eb/N0	& $E_{b}$/$N_{0}$	& 12.36	& dB \\
+Carrier-to-noise density ratio	& C/$N{0}$	& 74.46	& db-Hz \\
+Bit error rate	& BER	& $10_{-5}$	& - \\
+Required Eb/N0	& Req $E_{b}$/$N_{0}$	& 9.6	& dB \\
+Implementation loss &	-	& -1	& dB \\
+Margin	& -	& 1.76	& dB \\
+\end{tabular}
 \caption{Linkbudget ground-space link for scientific data}
 \label{figSSbudget}
-\end{figure}
+\end{table}
 
-\newpage
-\section{Ground-space link for housekeeping data}
-\begin{figure}[ht]
+\begin{table}[ht]
 \centering
-\includegraphics[width=0.6\textwidth, angle=0]{img/GShousekeepinglinkbudget.png}
+\begin{tabular}{l | c | c | c }
+Item & Symbol & Value & Units \\ \hline
+Frequency	& f	& 2	& GHz \\
+Transmittance power	& P	& 0	& dBW \\
+Transmitter line loss	& $L_{l}$	& -1	& dB \\
+Transmit antenna beamwidth	& $theta_{t}$	& 180	& deg \\
+Peak transmit antenna gain	& $G_{pt}$	& 4.00	& dBi \\
+Transmit antenna diameter	& $D_{t}$	& 0.082	& m \\
+Transmit antenna pointing offset	& $e_{t}$	& 0.1	& deg \\
+Transmit antenna pointing loss	& $L_{pt}$ & 0 & dB \\
+Transmit antenna gain (net)	& $G_{t}$	& 4.00	& dBi \\
+Equiv. isotropic radiated power	& EIRP	& 3.00	& dBW \\
+Propagation path length	& S	& 1000	& km \\
+Space loss	& $L_{s}$	& -158.47	& dB \\
+Propagation and polarization loss & $L_{a}$ & -0.5 & dB \\
+Rain attenuation	& $L_{rain}$	& -0.5	& dB \\
+Receive antenna diameter	& $D_{r}$	& 2.4	& m \\
+Peak receive antenna gain (net)	& $G_{rp}$	& 31.43	& dBi \\
+Receive antenna beamwidth	& $theta_{r}$	& 30	& deg \\
+Receive antenna pointing error	& $e_{r}$	& 0.03	& deg \\
+Receive antenna pointing loss	& $L_{pr}$	& 0	& dB \\
+Receive antenna gain	& $G_{r}$	& 31.44	& dBi \\
+System noise temperature	& $T_{s}$	& 135	& K \\
+Data rate	& R	& 20 $\cdot10^{3}$	& bps \\
+Eb/N0	& $E_{b}$/$N_{0}$	& 39.25	& dB \\
+Carrier-to-noise density ratio	& C/$N{0}$	& 82.26	& db-Hz \\
+Bit error rate	& BER	& $10_{-5}$	& - \\
+Required Eb/N0	& Req $E_{b}$/$N_{0}$	& 9.6	& dB \\
+Implementation loss &	-	& -2 & dB \\
+Margin	& -	& 27.65	& dB \\
+\end{tabular}
 \caption{Linkbudget ground-space link for housekeeping data}
 \label{figSSbudget}
-\end{figure}
+\end{table}
 
+\end{document}
