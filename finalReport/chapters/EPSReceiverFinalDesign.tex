@@ -3,7 +3,30 @@
 
 De EPS system of the receiver is almost the same as that of the emitter.
 
-The required power generation is 42W, resulting in a required area of 0.5 square meters. Again the STK program was used to verify that the assumed cosine loss value was correct. The calculated power generation for 0.5 square meters was 52.5W, thus again it is shown that the value was correct.
+Table \ref{receiverPowerBudget} gives the power budget for the receiver satellites. The required total power generation for the subsystems is 32.12W. Again a margin of $15\%$ was taken. This implies that the power system requires 4.9 W to operate resulting in a total power usage of 41.838 W. This resulted in a required solar panel area of 0.5 square meters. Again the STK program was used to verify that the assumed cosine loss value was correct. The calculated power generation for 0.5 square meters was 52.5W, thus again it is shown that the value was correct.
+
+\begin{table}
+\centering
+\begin{tabular}{cc}
+\toprule
+Subsystem & Power requirement [W]\\
+\midrule
+Communications & 28\\
+Navigation & 1.12\\
+ORP & 0.2\\
+ADCS & 2.8\\
+\midrule
+Total & 32.12\\
+Safety margin of $15\%$ & 4.818\\
+EPS & 4.9\\
+\midrule
+\midrule
+Grand Total & 41.838\\
+\bottomrule
+\end{tabular}
+\caption{Emitter power budget}
+\label{tab:emitterPowerBudget}
+\end{table}
 
 Because the power requirement is much less also the amount of batteries necessary was less. For the receiver, only one battery with 2 modules was needed to be able to power the satellite during eclipse.
 \\\\
