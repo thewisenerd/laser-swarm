@@ -16,7 +16,7 @@ The table \ref{tab:RWD} on page \pageref{tab:RWD} gives the documentation distri
 
 \newpage
 \begin{center}
-\begin{longtable}{|c|l|c|c|}\hline
+\begin{longtable}{|l|l|c|c|}\hline
  Chapter & Documentation                      & Author & Checked by \\\hline 
  -       & Title Page                           & Alex   & \\\hline                  
  -       & Preface                              & Co, Team& \\\hline
@@ -25,11 +25,12 @@ The table \ref{tab:RWD} on page \pageref{tab:RWD} gives the documentation distri
  -       & Abstract                             & Co, Bart &\\\hline
  1       & Introduction                         &&\\\hline\hline
  2       & Project Management                   &&\\\hline
- 2.1     & \ -Resource Allocation               & Zhuan &\\\hline
- 2.2     & \ -Budget Breakdown                  & Zhuan &\\\hline
- 2.3     & \ -Operations and Logistic Concept Description & GJ &\\\hline
- 2.4     & \ -Project Design and Development Logic & Lieuwe &\\\hline
- 2.5     & \ -Project Gantt Chart               & Lieuwe &\\\hline\hline
+ 2.1     & \ -Human Resource Allocation         & Zhuan &\\\hline
+ 2.2     & \ -Mass Budget Breakdown             & Zhuan &\\\hline
+ 2.3     & \ -Cost Budget Breakdown             & Zhuan &\\\hline
+ 2.4     & \ -Operations and Logistic Concept Description & GJ &\\\hline
+ 2.5     & \ -Project Design and Development Logic & Lieuwe &\\\hline
+ 2.6     & \ -Project Gantt Chart               & Lieuwe &\\\hline\hline
  3       & Mission Approach                     &&\\\hline
  3.1     & \ -Function Flow Diagram             & Lieuwe, Zhuan & \\\hline
  3.2     & \ -Function Breakdown Structure      & Lieuwe, Zhuan &\\\hline
@@ -40,32 +41,32 @@ The table \ref{tab:RWD} on page \pageref{tab:RWD} gives the documentation distri
  3.7     & \ -Communication Block Diagram       & Bart &\\\hline
  4       & Risk Management                      & Tim, Zhuan & \\\hline\hline
  5       & Launch and Astrodynamic Characteristics & Alex &\\\hline
- 5.1     & \ -Launch Segment                    & Alex &\\\hline
+ 5.1     & \ -Launch Segment                    & Alex, Sean &\\\hline
  5.2     & \ -Space Segment                     & Alex &\\\hline
  5.3     & \ -Space Environment and Shielding   & Alex &\\\hline\hline
- 6       & Emitter                              &&\\\hline
- 6.1     & \ -OEP                               & Tim &\\\hline
- 6.1.1   & \ \ -Principle of Diode Laser       & Tim &\\\hline
- 6.1.2   & \ \ -Diode Pumped Laser Configuration & Tim &\\\hline
+ 6       & Emitter Satellite                     &&\\\hline
+ 6.1     & \ -Detailed Design Optical Emitting Payload & Tim &\\\hline
+ 6.1.1   & \ \ -Principle of AlGaAs Laser Diode & Tim &\\\hline
+ 6.1.2   & \ \ -Diode Pumped Solide-State Laser Configuration & Tim &\\\hline
  6.1.3   & \ \ -Optical Characteristics        & Tim &\\\hline
- 6.1.4   & \ \ -Diffraction                    & Tim &\\\hline  
+ 6.1.4   & \ \ -Gaussian Beam Propagation and Diffraction & Tim &\\\hline  
  6.1.5   & \ \ -Thermal Control                & Tim, Lieuwe &\\\hline
- 6.1.6   & \ \ -Laser Life Time Expectancy     & Tim &\\\hline
+ 6.1.6   & \ \ -Laser Lifetime Expectancy     & Tim &\\\hline
  6.1.7   & \ \ -Laser Focus Calculation        & Zhuan &\\\hline
  6.2     & \ -Navigation                        & GJ &\\\hline
- 6.3     & \ -Communication                     & Bart &\\\hline
+ 6.3     & \ -Communication Subsystem           & Bart &\\\hline
  6.4     & \ -ADCS                              & Lieuwe &\\\hline
  6.5     & \ -EPS                               & Sean &\\\hline
- 7       & Receiver                             &&\\\hline
- 7.1     & \ -ORP                               & Zhuan &\\\hline
- 7.1.2   & \ \ -SPAD Research                  & Tim, Zhuan &\\\hline
- 7.1.3   & \ \ -Prism Design                   & Zhuan &\\\hline
- 7.1.4   & \ \ -Summary                        & Zhuan &\\\hline
- 7.1.5   & \ \ -Payload Cost Estimation        & Tim, Zhuan &\\\hline
- 7.1.6   & \ -Navigation                        & GJ &\\\hline
- 7.2     & \ -Communication                     & Bart &\\\hline
- 7.3     & \ -ADCS                              & Lieuwe &\\\hline
- 7.4     & \ -EPS                               & Sean &\\\hline
+ 7       & Receiver Satellite                           &&\\\hline
+ 7.1     & \ -Detailed Design Optical Receiver Payload & Zhuan &\\\hline
+ 7.1.1   & \ \ -SPAD                           & Tim, Zhuan &\\\hline
+ 7.1.2   & \ \ -Prism Design                   & Zhuan &\\\hline
+ 7.1.3   & \ \ -Summary                        & Zhuan &\\\hline
+ 7.1.4   & \ \ -Payload Cost Estimation        & Tim, Zhuan &\\\hline
+ 7.2   & \ -Navigation                        & GJ &\\\hline
+ 7.3     & \ -Communication Subsystem           & Bart &\\\hline
+ 7.4     & \ -ADCS                              & Lieuwe &\\\hline
+ 7.5     & \ -EPS                               & Sean &\\\hline
  8       & Data Validation                      & Simon, Co, Nikita &\\\hline
  8.1     & \ -Software Tool Internals           & Simon, Co, Nikita &\\\hline
  8.2     & \ -Validation Results                & Simon, Co, Nikita &\\\hline
@@ -111,6 +112,8 @@ The table \ref{tab:MB} on page \pageref{tab:MB} indicates mass budget breakdown 
 \caption{Mass Budget Breakdown of the emitter and a representative receiver satellites.}
 \label{tab:MB}
 \end{table}
+
+As discussed in section \ref{frRecDV}, the receivers would need different propellant masses. Table \ref{tab:MB} on page \pageref{tab:MB} displays the max receiver loaded mass, and mass in orbit is the same for all.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Cost Budget Breakdown}
