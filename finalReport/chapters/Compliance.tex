@@ -1,0 +1,38 @@
+This chapter serves as an overview of the missions main requirements and if these requirements were met. Furthermore the most important subsystem requirements are also included in this chapter. An overview of the most important requirements can be seen in table \ref{tab:ComplianceMatrix}. 
+\\\\
+There are four key requirements for this mission. The first is that the total cost of the mission is less than that of other existing laser altimetry missions. The ICESat mission was taken as the reference. It's budget was 200 million dollars. The same reasoning was applied to the mass and the lifetime of our mission. They also had to be equal or better than equivalent existing missions. The reference values, again taken from the ICESat mission, were 970 kg and 5 years respectively. The last requirement was that no scanner was used to do the actual scanning, making us choose laser altimetry.
+
+As can be seen in our compliance matrix, table \ref{tab:ComplianceMatrix}, all four key requirements were met. The total cost of our mission, including all satellites, launch cost and development, is 52.785 million dollars. The satellite was designed for a lifetime of 5 years. This, however, was done using worst case scenarios thus while the mission is designed to last five years, it is possible that the eventual lifetime will be longer. The third key requirement was that the total mass of our satellites was less than about 1000 kg. Because all our satellites are microsatellites the total mass is much less than the given maximum. The fourth key requirement was a mere formality. It was just added to make sure that laser altimetry was used. 
+\\\\
+The second part of the compliance table contains the most important requirements for the subsystems. Firstly the optical receiving payload must be pointed at the footprint of the laser pulse. This required a pointing accuracy of at least $0.1{}^{\circ}$. The designed ADCS system has an accuracy of $0.08{}^{\circ}$.
+From this follows the second subsystem requirement. To be able to determine the terrain height, one photon per pulse needs to be detected by the receivers. But to be able to create the BRDF at least 5 photons per pulse per receiver have to be detected. The final design receives, on average, 7 photons per pulse per receiver. This means that the correct terrein height and the BRDF can be accurately determined.
+To obtain these results the absolute position of the satellites needs to be known as accurately as possible. With on ground post-processing the position can be calculated to an accuracy of 1.5 mm, which is enough for our date processing. Also necessary to obtain this is that the time in each satellite needs to be synchronized. To do this a GPS is placed in each satellite whose clocks are synchronized with respect to each other.
+
+\begin{table}
+\centering
+\begin{tabular}{p{2.5in}p{1.5in}p{1in}p{1in}}
+\toprule
+Requirement & Final design & Section & Compliance\\
+\midrule
+\midrule
+\multicolumn{4}{c}{{\bf Key requirements}}\\
+\midrule
+Cost has to be less than \$ 200 million & \$ 52.785 million & Chapter 6 & \Checkmark \\
+Lifetime of at least 5 years & 5 years & Chapter 7 &\Checkmark \\
+Mass is at most 970 kg & 189.59 kg & Chapter 8 &\Checkmark \\
+No scanner may be used & & Chapter 9 &\Checkmark \\
+\midrule
+\midrule
+\multicolumn{4}{c}{{\bf Additional requirements}}\\
+\midrule
+Amount of received photons per pulse per satellite must be at least 5 to obtain good results & 7 per pulse & Chapter 10 & \Checkmark \\
+ORP pointing accuracy of at least $0.1{}^{\circ}$ & $0.08{}^{\circ}$ & Chapter 5 & \Checkmark \\
+Footprint size of maximum 100m & 72 m obtained with beamwidth of 4mm & Chapter 9 & \Checkmark \\
+Accurate absolute satellite position & 1.5 mm & Chapter 2 & \Checkmark \\
+Synchronized on-board clocks & use of GPS in each satellite & Chapter 2 & \Checkmark \\
+\bottomrule
+
+\end{tabular}
+\caption{Compliance matrix}
+\label{tab:ComplianceMatrix}
+\end{table}
