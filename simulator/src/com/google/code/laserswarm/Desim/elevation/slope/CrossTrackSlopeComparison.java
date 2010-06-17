@@ -24,12 +24,11 @@ public class CrossTrackSlopeComparison extends DescriptiveStatistics {
 
 	public CrossTrackSlopeComparison(EarthModel earth, ElevationSlope elSlope) {
 		super();
-		Iterator<Point3d> altIt = elSlope.getAltitudes().iterator();
 		Iterator<BRDFinput> slopeIt = elSlope.getBRDFIn().iterator();
 
-		while (altIt.hasNext()) {
-			Point3d pSphere = altIt.next();
+		while (slopeIt.hasNext()) {
 			BRDFinput slope = slopeIt.next();
+			Point3d pSphere = new Point3d(slope.getScatterPoint());
 			Point3d dir3d = Convert.toSphere(slope.getEmitterDirection());
 			double dAngle = 0.00000001;
 			DirectPosition2D left = new DirectPosition2D(toDeg(pSphere.y) + dAngle * dir3d.z,

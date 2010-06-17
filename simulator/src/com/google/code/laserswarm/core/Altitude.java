@@ -22,6 +22,7 @@ import com.google.code.laserswarm.Desim.elevation.slope.AlongTrackSlopeCompariso
 import com.google.code.laserswarm.Desim.elevation.slope.CrossTrackSlopeComparison;
 import com.google.code.laserswarm.Desim.elevation.slope.ElevationSlope;
 import com.google.code.laserswarm.Desim.elevation.slope.FindElevationNeighborInterpolation;
+import com.google.code.laserswarm.Desim.filter.elevationslope.FilterSpikes;
 import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.conf.Constellation;
 import com.google.code.laserswarm.conf.Satellite;
@@ -133,6 +134,11 @@ public class Altitude {
 			elSlope = findEl.run(satData, emitterHistory, constellation, dataPoints);
 			Configuration.write("altData.xml", elSlope);
 		}
+		// Do slope filtering.
+		FilterSpikes slopeFilter = new FilterSpikes(3, 0.5);
+		elSlope = slopeFilter.filter(elSlope);
+
+		// Plot the altitude results.
 		alts = elSlope.getAltitudes();
 		plotter.plot(alts, 3, "heightAnalysed");
 
@@ -140,12 +146,11 @@ public class Altitude {
 		LinkedList<Point3d> slopeAlong = Lists.newLinkedList();
 		LinkedList<Point3d> slopeCross = Lists.newLinkedList();
 		Iterator<BRDFinput> slopeIt = elSlope.getBRDFIn().iterator();
-		Iterator<Point3d> altIt = alts.iterator();
 		while (slopeIt.hasNext()) {
 			BRDFinput slope = slopeIt.next();
-			Point3d point = altIt.next();
-			slopeAlong.add(new Point3d(slope.getAlongTrackSlope() + Configuration.R0, point.y, point.z));
-			slopeCross.add(new Point3d(slope.getCrossTrackSlope() + Configuration.R0, point.y, point.z));
+			Point3d point = new Point3d(slope.getScatterPoint());
+			slopeAlong.add(new Point3d(slope.getAlongTrackSlope(), point.y, point.z));
+			slopeCross.add(new Point3d(slope.getCrossTrackSlope(), point.y, point.z));
 		}
 
 		// Plot the slopes.

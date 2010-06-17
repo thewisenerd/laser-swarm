@@ -75,7 +75,7 @@ public class ThreadRunner<T extends Runnable> extends Thread {
 						waiting.remove(tr);
 						running.get(tr).start();
 
-						logger.inf("Sarting %s (waiting:%s, running: %s)",
+						logger.inf("Starting %s (waiting: %s, running: %s)",
 								tr, waiting.size(), running.size());
 					}
 				}

@@ -253,8 +253,7 @@ public class plotSlope {
 			logger.dbg("Plot iteration: %s, with: %s, %s, %s", count, sphere.x, sphere.y, sphere.z);
 			Files.append(sphere.x + ";" + sphere.y + ";" + sphere.z + ";\n", out, Charset
 					.defaultCharset());
-			double rp = sphere.x;
-			double hFound = rp - Configuration.R0;
+			double hFound = sphere.x;
 			theta.add(sphere.y); // longitude
 			phi.add(sphere.z); // latitude
 			h.add(hFound);
