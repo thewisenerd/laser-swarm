@@ -1,3 +1,4 @@
+
 \section{Communication subsystems}
 This section will discuss the  three different communication links to which the emitter satellite is connected:
 \begin{itemize}
@@ -6,7 +7,19 @@ This section will discuss the  three different communication links to which the 
 \item Ground-space link for command and housekeeping data
 \end{itemize}
 
-These links are illustrated figure XXX
+These links are illustrated figure \ref{fig:allesZW}
+
+\begin{wrapfigure}{r}{0.5\textwidth}
+\vspace{-60pt}
+  \begin{center}
+    \includegraphics[width=0.48\textwidth]{chapter/img/allesZW.png}
+  \end{center}
+  \vspace{-15pt}
+  \caption{Communications architecture}
+  \vspace{-30pt}
+  \label{allesZW}
+\end{wrapfigure}
+
 For each link the link budget and the communications hardware selected will be presented.
 
 The end of this section contains a piece on the data storage, where the required amount of data storage is found, along with the storage medium to be used and it is checked whether the downlink rate is large enough.
@@ -28,9 +41,31 @@ Another important parameter is the data rate, 1.62 Mbit/s, which was calculated 
 
 
 \subsubsection{Transceiver}
+\begin{wrapfigure}{r}{0.25\textwidth}
+\vspace{-60pt}
+  \begin{center}
+    \includegraphics[width=0.24\textwidth]{chapter/img/Strans.png}
+  \end{center}
+  \vspace{-15pt}
+  \caption{S-band tranceiver for microsatellite platforms}
+  \vspace{-20pt}
+  \label{Strans}
+\end{wrapfigure}
+
 Since the data rate is quite high for an S-band, nanosatellite S-band transceivers did not satisfy the requirements, which only allow 9.6 kbps at maximum \cite{cubeshopcomm}. However microsatellite sized transceivers turned out to be sufficient. The transceiver selected was an SBTRcvr of RDLabs, which has a maximum data rate of 10 Mbps for QPSK modulation, an input power of 12 Watt and an output power of 1 to 5 Watt \cite{RDLabs}.
 
+
 \subsubsection{Antenna}
+\begin{wrapfigure}{r}{0.25\textwidth}
+\vspace{-20pt}
+  \begin{center}
+    \includegraphics[width=0.24\textwidth]{chapter/img/spatch.png}
+  \end{center}
+  \vspace{-15pt}
+  \caption{S-band patch antenna}
+  \vspace{-10pt}
+  \label{Spatch}
+\end{wrapfigure}
 For low gain applications and frequencies below 4 GHz three antennas were considered: a dipole antenna, a helix antenna and a patch antenna. The dipole antenna was not an option since its gain is too low (theoretical gain of a half wave antenna is only 2.15 dBi). A helix antenna would be too large and would decrease the ballistic coefficient too much, for example the S-Band quadrifilar helix antenna of Surrey Satellite technology \cite{SurrHelix} is 0.5 m long with a base of 100mm by 100mm, while the S Band patch antenna \cite{SurrPatch} from the same company is only 20mm thick and 82mm on 82mm large. 
 This S Band patch antenna, which was eventually selected, has a mass of only 80 grams, a 120$^{\circ}$ beamwidth and a gain of 4 dBi.
 5 antennas will be placed on the emitter satellite: 1 one nadir pointing and 4 facing the receiver satellites.
@@ -52,12 +87,31 @@ The distance between the station and the satellite follows from the maximum beam
 The QPSK modulation was chosen since it also allows a good balance between required E$_{b}$/N$_{0}$ and spectrum utilization and also allows a high data rate of up to 500 Mbps.
 
 \subsubsection{Transmitter}
+\begin{wrapfigure}{r}{0.25\textwidth}
+\vspace{-50pt}
+  \begin{center}
+    \includegraphics[width=0.24\textwidth]{chapter/img/Xtrans.png}
+  \end{center}
+  \vspace{-15pt}
+  \caption{X-band transceiver XTRA-6}
+  \vspace{-40pt}
+  \label{Xtrans}
+\end{wrapfigure}
 The transmitters considered were the XTRA-6 from TESAT Spacecom \cite{TESATxtra} and the HRT150 from General Dynamics and \cite{HRT150}. Since the XTRA-6 is lighter, smaller and requires less power and allows a higher data rate than the HRT150, the choice was quickly made.
 The XTRA-6 weighs 1.1 kg, measures 197x89x74 mm, consumes 30 Watts of power and has an output power of 6 Watts.
 
 \subsubsection{Antenna}
+\begin{wrapfigure}{r}{0.25\textwidth}[ht]
+\vspace{-60pt}
+  \begin{center}
+    \includegraphics[width=0.24\textwidth]{chapter/img/XPAA.png}
+  \end{center}
+  \vspace{-15pt}
+  \caption{X-band phased array XPAA}
+  \vspace{-40pt}
+  \label{XPAA}
+\end{wrapfigure}
 As was chosen in the mid term review, the antenna for the ground space link is a phased array. The phased array selected was the XPAA from Boeing's Phantom works in Seattle \cite{XPAA}. It has a mass of 5.5 kg, measures 330x305x74mm, has a gain of 23.03 dBi and a beamwidth of 15$^{\circ}$.
-
 \subsubsection{Ground station}
 The ground station selected was ESRANGE, Kiruna, which allows up to 12 passes a day as it is located above the pole circle. The ground station is operated by ESA and the SSE and is commonly used by Earth observation satellites. For X-band the base has a 13m parabolic receiver dish which has a very high gain, 58 dBi and a beamwidth of 0.18$^{circl}$ \cite{esrange}.
 
