@@ -26,13 +26,13 @@ Essentially, a \ac{SPAD} is a reversed biased \textit{p-n junction} that operate
 
 If the primary carrier is photogenerated, the leading edge of the avalanche pulse marks the arrival time of the detected photon. The current continues to flow until the avalanche can be quenched by lowering the bias voltage to the breakdown voltage ($V_b$) or below. For a photon to be detected, not only must it be absorbed in the detector active volume and generate a primary carrier (more precisely, an electron-hole pair, i.e. \textit{an exciton}), it is also necessary that the primary carrier succeeds in triggering an avalanche. The efficiency of photon detection thus increases with excess bias voltage $V_e$, since higher electric field gradient enhances the triggering probability.   
 
-As it happens in \ac{PMT}s, thermal generation effects produce current pulses even in the absence of illumination, and the Poissonian fluctuation of the dark counts represents the internal noise source of the detector. \textit{Dark-count rate} includes primary and secondary pulses. \textit{Primary dark pulses} are due to carriers thermally generated in the \acs{SPAD} junction, so that the count rate increases with the temperature as does the dark current in ordinary photodiodes. The rate also increases with $V_e$ because of field-assisted enhancement of the emission rate from generation centers and an increase in triggering probability. \textit{Secondary dark pulses} are due to afterpulsing effects that may strongly enhance the total dark-count rate. During avalanche some carriers are captured by deep levels in the junction depletion layer and subsequently released with a statistically fluctuating delay. Released carriers can retrigger the avalanche, generating afterpulses correlated with a previous avalanche pulse. The number of carriers captured during the avalanche pulse increases with the total number of carriers crossing the junction, that is, with the total charge of the avalanche pulse. Therefore afterpulsing increases with the delay of avalanche quenching and the current intensity, which is proportional to excess bias voltage $V_e$.
+As it happens in \ac{PMT}s, thermal generation effects produce current pulses even in the absence of illumination, and the Poissonian fluctuation of the dark counts represents the internal noise source of the detector. \textit{Dark-count rate} includes primary and secondary pulses. \textit{Primary dark pulses} are due to carriers thermally generated in the \acs{SPAD} junction, so that the count rate increases with the temperature as does the dark current in ordinary photodiodes. The rate also increases with $V_e$ because of field-assisted enhancement of the emission rate from generation centers and an increase in triggering probability. \textit{Secondary dark pulses} are due to afterpulsing effects that may strongly enhance the total dark-count rate. During avalanche some carriers are captured by deep levels in the junction depletion layer and subsequently released with a statistically fluctuating delay. Released carriers can retrigger the avalanche, generating afterpulses correlated with a previous avalanche pulse. The number of carriers captured during the avalanche pulse increases with the total number of carriers crossing the junction, that is, with the total charge of the avalanche pulse. Therefore afterpulsing increases with the delay of avalanche quenching and the current intensity, which is proportional to excess bias voltage $V_e$. The figure \ref{spad_para} on page \pageref{spad_para} shows some important parameters related to excess bias voltage and wavelength.
 
 \begin{figure} [ht]
 \centering
 \includegraphics[scale=0.8]{chapters/img/SPAD_Ve_functions.png}	
-\caption{\acs{SPAD} parameters diagrams }
-\label{spad}
+\caption{\acs{SPAD} parameters diagrams with excess bias voltage and wavelength}
+\label{spad_para}
 \end{figure}
 
 \subsubsection{Quenching Circuits}
@@ -51,9 +51,9 @@ Since the photon detection device will be operating in space, there is a big adv
 
 \subsection{Prism Design}
 \label{prism}
-Before the prism is taking into consideration, the optical filter is also considered as an option, which is more simple than prism and barriers. The optical filters bandwidth accuracy are in terms of several docades of nano meters(minimum 10nm\cite{optical_filter}), which is not acceptable since the objective is to filter out all noisy light except wavelength around 473nm. Meanwhile, the transmission is another problem for normal optical filters, which have much lower value(around 50\%) for smaller bandwidth accuracy (10nm to 20nm) and higher value(around 90\%) for larger bandwidth accuracy (more than 30nm), but prism can has higher transmission as 97\% for specified glass material.
+Before the prism is taking into consideration, the optical filter is also considered as an option, which is more simple than prism and barriers. The optical filters bandwidth accuracy are in terms of several docades of nano meters(minimum 10 nm\cite{optical_filter}), which is not acceptable since the objective is to filter out all noisy light except wavelength around 473 nm. Meanwhile, the transmission is another problem for normal optical filters, which have much lower value(around 50\%) for smaller bandwidth accuracy (10 nm to 20 nm) and higher value(around 90\%) for larger bandwidth accuracy (more than 30 nm), but prism can has higher transmission as 97\% for specified glass material.
 
-The figure \ref{fig:prism} on page \pageref{fig:prism} gives an overview of the receiver optics after the second parabolic mirror. the prism is used to filter out all the noisy light except wavelength 472[nm] to 474[nm]. The prism system needs to be accurate enough to perform the filtering in limited distance. The design contains the type of prism glass material, the incident angle($\alpha$), prism apex angle($A$) and distance between prism and barriers. They will be treated one by one.
+The figure \ref{fig:prism} on page \pageref{fig:prism} gives an overview of the receiver optics after the second parabolic mirror. the prism is used to filter out all the noisy light except wavelength 472 nm to 474 nm. The prism system needs to be accurate enough to perform the filtering in limited distance. The design contains the type of prism glass material, the incident angle($\alpha$), prism apex angle($A$) and distance between prism and barriers. They will be treated one by one.
 
 \begin{figure}[ht!]
 \centering
@@ -74,12 +74,12 @@ In figure \ref{fig:prism2D} on page \pageref{fig:prism2D}, the deviation angle $
 \label{epsilon}
 \epsilon = \alpha - A + sin^{-1}(sin(A)\sqrt{n^2 - (sin(\alpha))^2} - cos(A)sin(\alpha))
 \end {equation}
-The key requirement to design the prism is to maximize the $\frac{d\epsilon}{d\lambda}$,  because for wavelength 473[nm] larger $\frac{d\epsilon}{d\lambda}$ leads to smaller distance between prism and barriers as well as the risk. The equation \ref{epsilon} indicates that the deviation angle($\epsilon$) is a function of A, $\alpha$ and n. From Sellmeier formula\cite{prism_book}, the index of refraction n can be calculated as:
+The key requirement to design the prism is to maximize the $\frac{d\epsilon}{d\lambda}$,  because for wavelength 473 nm larger $\frac{d\epsilon}{d\lambda}$ leads to smaller distance between prism and barriers as well as the risk. The equation \ref{epsilon} indicates that the deviation angle($\epsilon$) is a function of A, $\alpha$ and n. From Sellmeier formula\cite{prism_book}, the index of refraction n can be calculated as:
 \begin{equation}
 \label{index_refraction}
 n^2 - 1 = \frac{a_{1}\lambda^2}{\lambda^2-b_{1}} + \frac{a_{2}\lambda^2}{\lambda^2-b_{2}} + \frac{a_{3}\lambda^2}{\lambda^2-b_{3}}
 \end {equation}
-In the equation \ref{index_refraction}, $a_{1}, a_{2}, a_{3}$ and $b_{1}, b_{2}, b_{3}$ are the dispersion coefficients, which have different values for different glasses. In this case, the most 17 common prism glasses from Schott\cite{prism_material}\cite{prism_book} company are analyzed. Since it is difficult to calculate $\frac{d\epsilon}{d\lambda}$ analytically, $\Delta\epsilon$ due to wavelength 472[nm], 473[nm] and 474[nm] can be obtained by inserting arbitrary A and $\alpha$, which is actually the $\frac{d\epsilon}{d\lambda}$ because the wavelength difference is only 1[nm] of each. During the calculation, no matter what values are given to A and $\alpha$, SF11 glass always has the maximum value of $\Delta\epsilon$ which means it is the optimal glass material. Meanwhile, SF11 glass also has an internal transmittance of 97\% for wavelength around 473[nm], which is acceptable. Next step is to determine the prism apex angle(A) and the incident angle($\alpha$). The prism apex angle is defined as 60 degrees because which gives the most average value for $\Delta\epsilon$. Meanwhile, this kind of euqilateral prisms are also referred to as dispersing prisms used for wavelength separating applications(see figure \ref{fig:prism_equilateral} on page \pageref{fig:prism_equilateral}). 
+In the equation \ref{index_refraction}, $a_{1}, a_{2}, a_{3}$ and $b_{1}, b_{2}, b_{3}$ are the dispersion coefficients, which have different values for different glasses. In this case, the most 17 common prism glasses from Schott\cite{prism_material}\cite{prism_book} company are analyzed. Since it is difficult to calculate $\frac{d\epsilon}{d\lambda}$ analytically, $\Delta\epsilon$ due to wavelength 472 nm, 473 nm and 474 nm can be obtained by inserting arbitrary A and $\alpha$, which is actually the $\frac{d\epsilon}{d\lambda}$ because the wavelength difference is only 1[nm] of each. During the calculation, no matter what values are given to A and $\alpha$, SF11 glass always has the maximum value of $\Delta\epsilon$ which means it is the optimal glass material. Meanwhile, SF11 glass also has an internal transmittance of 97\% for wavelength around 473 nm, which is acceptable. Next step is to determine the prism apex angle(A) and the incident angle($\alpha$). The prism apex angle is defined as 60 degrees because which gives the most average value for $\Delta\epsilon$. Meanwhile, this kind of euqilateral prisms are also referred to as dispersing prisms used for wavelength separating applications(see figure \ref{fig:prism_equilateral} on page \pageref{fig:prism_equilateral}). 
 
 \begin{figure}[ht!]
 \centering
@@ -88,7 +88,7 @@ In the equation \ref{index_refraction}, $a_{1}, a_{2}, a_{3}$ and $b_{1}, b_{2},
 \label{fig:prism_equilateral}
 \end{figure}
 
-To select the correct incident angle, the figure \ref{fig:prism_alpha} on page \pageref{fig:prism_alpha} is used. In the figure, the blue line has the asymptote about $\alpha = 54[deg]$. To avoid the asymptote, $\alpha = 55[deg]$ is selected as the incident angle, which leads to $\epsilon = 76[deg]$ and $\Delta\epsilon = 2.1432[mrad]$. The figure \ref{fig:SF11} is a part of the calculation in the excel sheet. There are two $\Delta\epsilon$ in the calculation, and $\Delta\epsilon1 = \epsilon(472[nm]) - \epsilon(473[nm])$ meanwhile $\Delta\epsilon2 = \epsilon(473[nm]) - \epsilon(474[nm])$. The driving $\Delta\epsilon$ is the smaller one, since it is the minimum requirement. Taking $\Delta\epsilon = 2.1432[mrad]$ into further calculation, in order to separate wavelength 472[nm], 473[nm] and 474[nm], barrier radius(or beam width) 1[mm] leads to distance 466.7[mm] between prism and barrier. To short the distance, more concentrated beam is needed from parabolic mirror and several flat mirror can also be used to redirect the beam in limited area. The figure \ref{fig:prism_final} on page \pageref{fig:prism_final} shows the final design of all angles.
+To select the correct incident angle, the figure \ref{fig:prism_alpha} on page \pageref{fig:prism_alpha} is used. In the figure, the blue line has the asymptote about $\alpha = 54 deg$. To avoid the asymptote, $\alpha = 55 deg$ is selected as the incident angle, which leads to $\epsilon = 76 deg$ and $\Delta\epsilon = 2.1432 mrad$. The figure \ref{fig:SF11} is a part of the calculation in the excel sheet. There are two $\Delta\epsilon$ in the calculation, and $\Delta\epsilon1 = \epsilon(472 nm) - \epsilon(473 nm)$ meanwhile $\Delta\epsilon2 = \epsilon(473 nm) - \epsilon(474 nm)$. The driving $\Delta\epsilon$ is the smaller one, since it is the minimum requirement. Taking $\Delta\epsilon = 2.1432 mrad$ into further calculation, in order to separate wavelength 472 nm, 473 nm and 474 nm, barrier radius(or beam width) 1 mm leads to distance 466.7 mm between prism and barrier. To short the distance, more concentrated beam is needed from parabolic mirror and several flat mirror can also be used to redirect the beam in limited area. The figure \ref{fig:prism_final} on page \pageref{fig:prism_final} shows the final design of all angles.
 
 \begin{figure}[ht!]
 \centering
@@ -97,13 +97,19 @@ To select the correct incident angle, the figure \ref{fig:prism_alpha} on page \
 \label{fig:prism_alpha}
 \end{figure}
 
-\begin{figure}[ht!]
+\begin{table}[ht!]
 \centering
-\includegraphics[scale = 0.8]{chapters/img/SF11.png}
-\caption{Glass 'SF11' calculations}
-\label{fig:SF11}
-\end{figure}
-
+\begin{tabular}{ccc|ccc}
+  a1 & a2 & a3 & b1 & b2 & b3 \\\hline
+  1.74 & 0.31 & 1.17 & 0.0136 & 0.0616 & 0.0122 \\\\
+  n(472 nm) & n(473 nm) & n(474 nm) & $\epsilon$(472 nm) & $\epsilon$(473 nm) & $\epsilon$(474 nm) \\\hline 
+  1.81094 & 1.81061 & 1.81028 & 1.33596 & 1.33377 & 1.33162 \\\\
+   \multicolumn{3}{c|}{$\Delta\epsilon$1 [mrad]} & \multicolumn{3}{c}{$\Delta\epsilon$2 [mrad]}\\\hline
+  \multicolumn{3}{c|}{2.19189} & \multicolumn{3}{c}{\textbf{2.14316}} 
+ \end{tabular}
+\caption{Glass 'SF11' calculation parameters}
+\label{tab:MB}
+\end{table}
 \begin{figure}[ht!]
 \centering
 \includegraphics[scale = 0.8]{chapters/img/prism_final.png}
@@ -136,7 +142,7 @@ Total                     &       &          &     220    &   0.1 \\
 
 \subsection{Payload Cost Estimation}
 \label{cost}
-The table \ref{tab:cost_payload} on \pageref{tab:cost_payload} is the cost breakdown of the whole emitter and receiver payload system. The table is divided into 3 main parts. The first part is the cost distribution on human resource. To design the payload prototype, different specific engineerings are required with a salary 122,380 \$ man work per year\cite{engineering_salary}, and 'Assessment manager' gains twice salary meantime 'General manager' who is in charge of the whole project desires triple salary of the normal engineers. The second part is mainly about the manufacturing and production, meanwhile a separate space qualification test is required. The third part first calculated the theoretical first unit cost of receiver and \acs{laser} then obtained total cost of two types of combinations(5 receiver and 3 \acs{laser} or 9 receiver and 3 \acs{laser}) due to learning curve\cite{Space2B}. It is obviously that the main cost of the payload is spent on 'Brian' engineering design which is reasonable. For example, the final cost of 5 receiver and 3 \acs{laser} $8.55 [M\$] = a + b + c = 5.13996 + 2.92 + 0.49$ and 9 receivers 3 \acs{laser} leads to $8.66 [M\$] = a + b + d = 5.13996 + 2.92 + 0.6$. Finally, the amount of cost is scaled to dollar year 2000.
+The table \ref{tab:cost_payload} on \pageref{tab:cost_payload} is the cost breakdown of the whole emitter and receiver payload system. The table is divided into 3 main parts. The first part is the cost distribution on human resource. To design the payload prototype, different specific engineerings are required with a salary 122,380 \$ man work per year\cite{engineering_salary}, and 'Assessment manager' gains twice salary meantime 'General manager' who is in charge of the whole project desires triple salary of the normal engineers. The second part is mainly about the manufacturing and production, meanwhile a separate space qualification test is required. The third part first calculated the theoretical first unit cost of receiver and \acs{laser} then obtained total cost of two types of combinations(5 receiver and 3 \acs{laser} or 9 receiver and 3 \acs{laser}) due to learning curve\cite{Space2B}. It is obviously that the main cost of the payload is spent on 'Brian' engineering design which is reasonable. For example, the final cost of 5 receiver and 3 \acs{laser} $8.55 M\$ = a + b + c = 5.13996 + 2.92 + 0.49$ and 9 receivers 3 \acs{laser} leads to $8.66 M\$ = a + b + d = 5.13996 + 2.92 + 0.6$. Finally, the amount of cost is scaled to dollar year 2000.
 
 \begin{table}[ht!]
 \centering
@@ -151,11 +157,11 @@ The table \ref{tab:cost_payload} on \pageref{tab:cost_payload} is the cost break
 &\begin{sideways}Thermal Engineering\end{sideways}
 &\begin{sideways}Assessment Manager\end{sideways}
 &\begin{sideways}General Manager\end{sideways}
-&\begin{sideways}Subtotal [M\$]\end{sideways}\\\hline
+&\begin{sideways}\textbf{Subtotal [M\$]}\end{sideways}\\\hline
 \acs{SPAD} &2 &1 &1 &1 &2 &1 &0 &0 &1 &1 &1.8357 \\
 Optics &0 &1 &1 &2 &0 &1 &1 &0 &1 &0 &0.97904 \\
 \acs{laser} &3 &1 &2 &2 &2 &2 &3 &1 &1 &1 &2.32522 \\ \hline \hline 
-Cost [M\$] &0.61 &0.37 &0.49 &0.61 &0.49 &0.49 &0.49 &0.12 &0.73 &0.73 &5.13996 (a) \\\hline\\
+Cost [M\$] &0.61 &0.37 &0.49 &0.61 &0.49 &0.49 &0.49 &0.12 &0.73 &0.73 &5.13996 (a) \\\hline\hline\\
 
 &\begin{sideways}Integration and Test\end{sideways} 
 &\begin{sideways}Space Qualification Test\end{sideways} 
@@ -167,10 +173,10 @@ Cost [M\$] &0.61 &0.37 &0.49 &0.61 &0.49 &0.49 &0.49 &0.12 &0.73 &0.73 &5.13996 
 &\begin{sideways}-\end{sideways} 
 &\begin{sideways}-\end{sideways} 
 &\begin{sideways}-\end{sideways}
-&\begin{sideways}Subtotal [M\$]\end{sideways}\\\hline
+&\begin{sideways}-\end{sideways}\\\hline
 Receiver [M\$] &0.24 &0.3 &0.15 &0.01 &0.5 & & & & & &1.2 \\
 \acs{laser} [M\$] &0.72 &0.3 &0.15 &0.05 &0.5 & & & & & &1.72 \\\hline\hline
-Cost [M\$] &0.96 &0.6 &0.3 &0.06 &1 & & & & & &2.92 (b)\\\hline\\
+Cost [M\$] &0.96 &0.6 &0.3 &0.06 &1 & & & & & &2.92 (b)\\\hline\hline\\
 
 &\begin{sideways}Unit Cost\end{sideways} 
 &\begin{sideways}5 Receiver\end{sideways} 
@@ -186,8 +192,8 @@ Cost [M\$] &0.96 &0.6 &0.3 &0.06 &1 & & & & & &2.92 (b)\\\hline\\
 Receiver [M\$] &0.034 &0.15 &0.26 & & & & & & & & \\
 \acs{laser} [M\$] &0.122 &0.34 &0.34 & & & & & & & & \\\hline\hline
 Cost [M\$] &0.156 &0.49 (c) &0.6 (d) & & & & & & & &\\\hline\hline\\
-Total [M\$] & &8.55 &8.66 & & & & & & & &\\\hline\\
-Total [FY00M\$] & &6.98 &7.07 & & & & & & & &\\
+\textbf{Total [M\$]} & &8.55 &8.66 & & & & & & & &\\\hline\\
+\textbf{Total [FY00M\$]} & &6.98 &7.07 & & & & & & & &\\
 \end{tabular}
 \caption{Cost breakdown for emitter and receiver payload}
 \label{tab:cost_payload}
