@@ -10,15 +10,15 @@ import org.apache.commons.math.analysis.interpolation.MicrosphereInterpolator;
 import com.google.code.laserswarm.math.Convert;
 import com.google.code.laserswarm.math.Distribution;
 
-public class BRDF extends Distribution {
+public class Brdf extends Distribution {
 
 	private MultivariateRealFunction	interpolatedDiscreteBRDF;
 
-	public BRDF(DiscreteBRDF discreteBRDF) throws MathException {
+	public Brdf(DiscreteBrdf discreteBRDF) throws MathException {
 		this(discreteBRDF, 1);
 	}
 
-	public BRDF(DiscreteBRDF discreteBRDF, double scale) throws MathException {
+	public Brdf(DiscreteBrdf discreteBRDF, double scale) throws MathException {
 		MicrosphereInterpolator interpolator = new MicrosphereInterpolator();
 		double[][] xVals = discreteBRDF.asArrayPoints();
 		double[] yVals = discreteBRDF.asArrayValues(scale);

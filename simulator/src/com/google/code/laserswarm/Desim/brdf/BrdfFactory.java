@@ -12,10 +12,10 @@ import java.util.Map;
 import javax.vecmath.Point3d;
 import javax.vecmath.Vector3d;
 
-public abstract class FactoryDiscreteBRDF {
+public abstract class BrdfFactory {
 
-	public static DiscreteBRDF construct(BRDFinput input) {
-		DiscreteBRDF brdf = new DiscreteBRDF();
+	public static DiscreteBrdf construct(BRDFinput input) {
+		DiscreteBrdf brdf = new DiscreteBrdf();
 
 		Vector3d normal = input.getTerrainNormal();
 		Map<Vector3d, Integer> receivers = input.getReceiverPositions();
@@ -34,7 +34,7 @@ public abstract class FactoryDiscreteBRDF {
 		return brdf;
 	}
 
-	public static DiscreteBRDF construct(LinkedList<BRDFinput> input) {
+	public static DiscreteBrdf construct(LinkedList<BRDFinput> input) {
 		BRDFinput compiledBrdfInput = input.getFirst().clone();
 		Iterator<BRDFinput> it = input.iterator();
 		it.next();// Skip the first one as the compiledBrdfInput is already based on it

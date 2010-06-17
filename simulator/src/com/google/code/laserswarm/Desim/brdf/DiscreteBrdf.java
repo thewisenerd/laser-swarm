@@ -10,7 +10,7 @@ import javax.vecmath.Point3d;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
 
-public class DiscreteBRDF {
+public class DiscreteBrdf {
 
 	/**
 	 * List of the coordinates of the brdf in <photons, lon, lat>
