@@ -21,9 +21,9 @@ public class FilterSpikes implements ElevationSlopeFilter {
 		}
 	}
 
-	public FilterSpikes(int queueLength, double whenEqual) {
-		qLength = queueLength;
-		middle = (int) Math.floor(((double) qLength) / 2.0);
+	public FilterSpikes(double whenEqual) {
+		qLength = 3;
+		middle = 1;
 		equalitySpacing = whenEqual;
 	}
 
@@ -39,50 +39,18 @@ public class FilterSpikes implements ElevationSlopeFilter {
 				slopeQueue.remove();
 			}
 			if (slopeQueue.size() == qLength) {
-				Iterator<BRDFinput> slopeQIt = slopeQueue.iterator();
-				int count = 0;
-				BRDFinput last = null;
-				BRDFinput current = null;
-				boolean stillEqual = true;
-				while (slopeQIt.hasNext()) {
-					last = current;
-					current = slopeQIt.next();
-					if (count == 0) {
-						last = current;
-						current = slopeQIt.next();
-						count++;
-					} else if (count == middle) {
-						current = slopeQIt.next();
-						count++;
-					}
-					if (!areEqual(last, current)) {
-						stillEqual = false;
-					}
-					count++;
-				}
-				if (stillEqual) {
-					if (areEqual(slopeQueue.getFirst(), slopeQueue.get(middle))) {
-						results.add(slopeQueue.get(middle));
+				BRDFinput one = slopeQueue.getFirst();
+				BRDFinput two = slopeQueue.get(middle);
+				BRDFinput three = slopeQueue.getLast();
+				if (areEqual(one, three)) {
+					if (areEqual(one, two)) {
+						results.add(two);
 					} else {
-						slopeQIt = slopeQueue.iterator();
-						double totalAlongSlope = 0;
-						double totalCrossSlope = 0;
-						double slopeNo = 0;
-						while (slopeQIt.hasNext()) {
-							BRDFinput localBRDFIn = slopeQIt.next();
-							double localAlongSlope = localBRDFIn.getAlongTrackSlope();
-							double localCrossSlope = localBRDFIn.getCrossTrackSlope();
-							if (!(slopeNo == middle)) {
-								totalAlongSlope += localAlongSlope;
-								totalCrossSlope += localCrossSlope;
-							}
-							slopeNo++;
-						}
-						BRDFinput midPt = slopeQueue.get(middle);
-						results.add(new BRDFinput(midPt.getEmitterPosition(), midPt
-								.getEmitterDirection(), midPt.getScatterPoint(), totalAlongSlope
-								/ (slopeNo - 1), totalCrossSlope / (slopeNo - 1), midPt
-								.getReceiverPositions(), midPt.getCurrentTime()));
+						double newAlongSlope = (one.getAlongTrackSlope() + three.getAlongTrackSlope()) / 2.0;
+						double newCrossSlope = (one.getCrossTrackSlope() + three.getCrossTrackSlope()) / 2.0;
+						results.add(new BRDFinput(two.getEmitterPosition(), two.getEmitterDirection(),
+								two.getScatterPoint(), newAlongSlope, newCrossSlope,
+								two.getReceiverPositions(), two.getCurrentTime()));
 					}
 				} else {
 					results.add(slopeQueue.get(middle));

@@ -28,7 +28,7 @@ public class AlongTrackSlopeComparison extends DescriptiveStatistics {
 
 		while (slopeIt.hasNext()) {
 			BRDFinput slope = slopeIt.next();
-			Point3d pSphere = new Point3d(slope.getScatterPoint());
+			Point3d pSphere = Convert.toSphere(new Point3d(slope.getScatterPoint()));
 			Point3d dir3d = Convert.toSphere(slope.getEmitterDirection());
 			double dAngle = 0.0000001;
 			DirectPosition2D forward = new DirectPosition2D(toDeg(pSphere.y) + dAngle * dir3d.y,

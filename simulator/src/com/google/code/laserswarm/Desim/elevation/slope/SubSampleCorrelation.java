@@ -29,7 +29,7 @@ import com.google.common.collect.Maps;
 import com.lyndir.lhunath.lib.system.logging.Logger;
 
 public class SubSampleCorrelation implements SampleCorrelation {
-	private static final Logger							logger				= Logger
+	private static final Logger							logger	= Logger
 																					.get(SubSampleCorrelation.class);
 
 	private Map<Satellite, TimeLine>					receiverTimelines;
@@ -39,10 +39,8 @@ public class SubSampleCorrelation implements SampleCorrelation {
 	private double										equalitySpacing;
 	private double										interval;
 	private double										fractionD;
-	private double										minEl				= Configuration.R0 - 500.0;
-	private double										maxEl				= Configuration.R0 + 9000.0;
-	private double										lastAlongTrackSlope	= 0;
-	private double										lastCrossTrackSlope	= 0;
+	private double										minEl	= Configuration.R0 - 500.0;
+	private double										maxEl	= Configuration.R0 + 9000.0;
 	private int											qLength;
 	private int											middle;
 	private Constellation								cons;
@@ -236,7 +234,7 @@ public class SubSampleCorrelation implements SampleCorrelation {
 		double b = Math.pow((max - min) / footprintD, 2);
 		double crossTrackSlope = Math.sqrt(b - a);
 		if (new Double(crossTrackSlope).isNaN()) {
-			crossTrackSlope = lastCrossTrackSlope;
+			crossTrackSlope = 0;
 			logger
 					.wrn("Intercepted a NaN crossTrackSlope. Is your footprint diameter fraction a bit too optimistic?");
 		}

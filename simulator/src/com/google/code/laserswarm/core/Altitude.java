@@ -27,6 +27,7 @@ import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.conf.Constellation;
 import com.google.code.laserswarm.conf.Satellite;
 import com.google.code.laserswarm.earthModel.EarthModel;
+import com.google.code.laserswarm.math.Convert;
 import com.google.code.laserswarm.out.plot1D.plotHeightDistribution;
 import com.google.code.laserswarm.out.plot1D.plotSlope;
 import com.google.code.laserswarm.process.EmitterHistory;
@@ -48,7 +49,7 @@ public class Altitude {
 
 	public static void main(String[] args) throws DemCreationException, MathException,
 			IOException {
-		run(dataPoints, new FindElevationNeighborInterpolation(1, (int) 97e12, 1, 4, 0.5, 0.707));
+		run(dataPoints, new FindElevationNeighborInterpolation(1, (int) 97e12, 1, 17, 0.5, 0.707));
 	}
 
 	public static void run(int dataPoint, ElevationFinder findEl) throws DemCreationException,
@@ -135,7 +136,7 @@ public class Altitude {
 			Configuration.write("altData.xml", elSlope);
 		}
 		// Do slope filtering.
-		FilterSpikes slopeFilter = new FilterSpikes(3, 0.5);
+		FilterSpikes slopeFilter = new FilterSpikes(1);
 		elSlope = slopeFilter.filter(elSlope);
 
 		// Plot the altitude results.
@@ -148,7 +149,7 @@ public class Altitude {
 		Iterator<BRDFinput> slopeIt = elSlope.getBRDFIn().iterator();
 		while (slopeIt.hasNext()) {
 			BRDFinput slope = slopeIt.next();
-			Point3d point = new Point3d(slope.getScatterPoint());
+			Point3d point = Convert.toSphere(new Point3d(slope.getScatterPoint()));
 			slopeAlong.add(new Point3d(slope.getAlongTrackSlope(), point.y, point.z));
 			slopeCross.add(new Point3d(slope.getCrossTrackSlope(), point.y, point.z));
 		}

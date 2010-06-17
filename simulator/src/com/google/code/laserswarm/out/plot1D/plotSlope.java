@@ -16,6 +16,7 @@ import java.util.LinkedList;
 
 import javax.imageio.ImageIO;
 import javax.vecmath.Point3d;
+import javax.vecmath.Vector3d;
 
 import org.geotools.geometry.DirectPosition2D;
 import org.geotools.referencing.operation.projection.PointOutsideEnvelopeException;
@@ -90,8 +91,11 @@ public class plotSlope {
 			double dAngle = 0.00000001;
 			if (last != null) {
 				Point3d dir3d = new Point3d();
-				dir3d.sub(Convert.toXYZ(sphere), Convert.toXYZ(last));
-				dir3d = Convert.toSphere(dir3d);
+				dir3d.sub(Convert.toXYZ(new Point3d(Configuration.R0, sphere.y, sphere.z)), Convert
+						.toXYZ(new Point3d(Configuration.R0, last.y, last.z)));
+				Vector3d norm = new Vector3d(dir3d);
+				norm.normalize();
+				dir3d = Convert.toSphere(new Point3d(norm));
 				double hFound;
 				if (isAlongTrack) {
 					DirectPosition2D forward = new DirectPosition2D(toDeg(last.y) + dAngle * dir3d.y,
