@@ -2,6 +2,7 @@ package com.google.code.laserswarm.Desim.brdf;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.vecmath.Point3d;
@@ -42,6 +43,14 @@ public class DiscreteBRDF {
 		return points;
 	}
 
+	private double[] asArrayScaledValues(double scale) {
+		double[] values = asArrayValues();
+		for (int i = 0; i < values.length; i++)
+			values[i] = values[i] * scale;
+
+		return values;
+	}
+
 	/**
 	 * Get the brdf value off all the coordinates in asArrayPoints (correct order)
 	 * 
@@ -59,6 +68,16 @@ public class DiscreteBRDF {
 
 	public ImmutableSet<Point3d> getPoints() {
 		return ImmutableSet.copyOf(knownPoints);
+	}
+
+	private ImmutableSet<Point3d> getScaledPoints(double scale) {
+		HashSet<Point3d> scaledP = Sets.newHashSet();
+		for (Point3d point : knownPoints) {
+			Point3d p2 = new Point3d(point);
+			p2.z = p2.z * scale;
+			scaledP.add(p2);
+		}
+		return ImmutableSet.copyOf(scaledP);
 	}
 
 }
