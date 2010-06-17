@@ -36,6 +36,7 @@ public class SubSampleCorrelation implements SampleCorrelation {
 	private Map<Satellite, DataContainer>				interpulseData;
 
 	private LinkedList<ElevationRelatedEntriesPoint>	rawElevationSlopes;
+	private LinkedList<Point3d>							oldHeights;
 	private double										equalitySpacing;
 	private double										interval;
 	private double										fractionD;
@@ -68,6 +69,7 @@ public class SubSampleCorrelation implements SampleCorrelation {
 	public SubSampleCorrelation(Constellation swarm, Map<Satellite, TimeLine> receiverTimes,
 			double correlationInterval, int comparisonQueueLength, double whenEqual, double fractionD) {
 		this.interpulseData = Maps.newHashMap();
+		this.oldHeights = Lists.newLinkedList();
 		this.receiverTimelines = receiverTimes;
 		this.interval = correlationInterval;
 		this.qLength = comparisonQueueLength;
@@ -98,6 +100,11 @@ public class SubSampleCorrelation implements SampleCorrelation {
 		rawElevationSlopes.add(result);
 		while (rawElevationSlopes.size() > qLength) {
 			rawElevationSlopes.removeFirst();
+		}
+		Point3d emitSph = Convert.toSphere(result.getPosEmit());
+		oldHeights.add(new Point3d(result.getElevation(), emitSph.y, emitSph.z));
+		while (oldHeights.size() > qLength) {
+			oldHeights.removeFirst();
 		}
 		if (rawElevationSlopes.size() == qLength) {
 			// Filter averages based on spike removal.
@@ -165,60 +172,29 @@ public class SubSampleCorrelation implements SampleCorrelation {
 
 	private BRDFinput genBRDFInput(Point3d scatterPoint, LinkedList<ElevationRelatedEntriesPoint> elBRDFs) {
 		ElevationRelatedEntriesPoint thisElBRDF = elBRDFs.get(middle);
-		ElevationRelatedEntriesPoint nextElBRDF = elBRDFs.get(middle + 1);
+		Point3d thisHeight = oldHeights.get(middle);
+		Point3d nextHeight = oldHeights.get(middle + 1);
 		// Calculate the emitter groundtrack point.
-		Point3d posEmit = thisElBRDF.getPosEmit();
-		Point3d posEmitSph = Convert.toSphere(posEmit);
-		posEmitSph.x -= thisElBRDF.getElevation();
-		Vector3d emPos = new Vector3d(Convert.toXYZ(posEmitSph));
+		Vector3d emPos = new Vector3d(Convert.toXYZ(thisHeight));
 		// Calculate the direction in which the emitter is moving.
-		Vector3d nextEmPos = new Vector3d(nextElBRDF.getPosEmit());
-		Vector3d thisEmPos = new Vector3d(thisElBRDF.getPosEmit());
 		Vector3d emDir = new Vector3d();
-		emDir.sub(nextEmPos, thisEmPos);
+		emDir.sub(Convert.toXYZ(nextHeight), Convert.toXYZ(thisHeight));
 		emDir.normalize();
 		// Calculate the along-track slope.
-		Iterator<ElevationRelatedEntriesPoint> elBRDFIt = elBRDFs.iterator();
-		int count = 0;
-		Point3d firstSlopeTot = new Point3d(0, 0, 0);
-		Point3d secondSlopeTot = new Point3d(0, 0, 0);
-		int firstCount = 0;
-		int secondCount = 0;
-		while (elBRDFIt.hasNext()) {
-			ElevationRelatedEntriesPoint thisEB = elBRDFIt.next();
-			Point3d thisEmitPos = Convert.toSphere(thisEB.getPosEmit());
-			double height = thisEB.getElevation();
-			if (count < middle) {
-				firstSlopeTot.x += height;
-				firstSlopeTot.y += thisEmitPos.y;
-				firstSlopeTot.z += thisEmitPos.z;
-				firstCount++;
-			} else if (count >= middle) {
-				secondSlopeTot.x += height;
-				secondSlopeTot.y += thisEmitPos.y;
-				secondSlopeTot.z += thisEmitPos.z;
-				secondCount++;
-			}
-			count++;
-		}
-		Point3d hFirst = new Point3d(firstSlopeTot.x / firstCount, firstSlopeTot.y / firstCount,
-				firstSlopeTot.z / firstCount);
-		Point3d hSecond = new Point3d(secondSlopeTot.x / secondCount, secondSlopeTot.y / secondCount,
-				secondSlopeTot.z / secondCount);
-		double avgRad = (hFirst.x + hSecond.x) / 2.0;
-		double difRad = hSecond.x - hFirst.x;
-		hFirst.x = avgRad;
-		hSecond.x = avgRad;
-		Point3d hFirstCart = Convert.toXYZ(hFirst);
-		Point3d hSecondCart = Convert.toXYZ(hSecond);
+		double avgRad = (thisHeight.x + nextHeight.x) / 2.0;
+		double difRad = nextHeight.x - thisHeight.x;
+		Point3d hThis = new Point3d(avgRad, thisHeight.y, nextHeight.z);
+		Point3d hNext = new Point3d(avgRad, nextHeight.y, nextHeight.z);
+		Point3d hThisCart = Convert.toXYZ(hThis);
+		Point3d hNextCart = Convert.toXYZ(hNext);
 		Vector3d difTan = new Vector3d();
-		difTan.sub(hFirstCart, hSecondCart);
+		difTan.sub(hNextCart, hThisCart);
 		double alongTrackSlope = difRad / difTan.length();
 		logger.dbg("avgRad, difRad, difTan: %s, %s, %s", avgRad, difRad, difTan.length());
 		// Calculate the cross-track slope.
-		Vector3d emitVect = new Vector3d(posEmit);
+		Vector3d emitVect = new Vector3d(thisElBRDF.getPosEmit());
 		double footprintD = fractionD * 2.0 * cons.getEmitter().getBeamDivergence()
-				* (emitVect.length() - Configuration.R0);
+				* (emitVect.length() - thisHeight.x);
 		TreeMap<Double, Vector3d> altitudes = thisElBRDF.getBestMap();
 		double min = Double.MAX_VALUE;
 		double max = Double.MIN_VALUE;
