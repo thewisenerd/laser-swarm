@@ -15,9 +15,13 @@ public class BRDF extends Distribution {
 	private MultivariateRealFunction	interpolatedDiscreteBRDF;
 
 	public BRDF(DiscreteBRDF discreteBRDF) throws MathException {
+		this(discreteBRDF, 1);
+	}
+
+	public BRDF(DiscreteBRDF discreteBRDF, double scale) throws MathException {
 		MicrosphereInterpolator interpolator = new MicrosphereInterpolator();
 		double[][] xVals = discreteBRDF.asArrayPoints();
-		double[] yVals = discreteBRDF.asArrayValues();
+		double[] yVals = discreteBRDF.asArrayValues(scale);
 
 		interpolatedDiscreteBRDF = interpolator.interpolate(xVals, yVals);
 	}

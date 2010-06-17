@@ -43,14 +43,6 @@ public class DiscreteBRDF {
 		return points;
 	}
 
-	private double[] asArrayScaledValues(double scale) {
-		double[] values = asArrayValues();
-		for (int i = 0; i < values.length; i++)
-			values[i] = values[i] * scale;
-
-		return values;
-	}
-
 	/**
 	 * Get the brdf value off all the coordinates in asArrayPoints (correct order)
 	 * 
@@ -66,11 +58,19 @@ public class DiscreteBRDF {
 		return vals;
 	}
 
+	public double[] asArrayValues(double scale) {
+		double[] values = asArrayValues();
+		for (int i = 0; i < values.length; i++)
+			values[i] = values[i] * scale;
+
+		return values;
+	}
+
 	public ImmutableSet<Point3d> getPoints() {
 		return ImmutableSet.copyOf(knownPoints);
 	}
 
-	private ImmutableSet<Point3d> getScaledPoints(double scale) {
+	public ImmutableSet<Point3d> getScaledPoints(double scale) {
 		HashSet<Point3d> scaledP = Sets.newHashSet();
 		for (Point3d point : knownPoints) {
 			Point3d p2 = new Point3d(point);
