@@ -196,7 +196,7 @@ The \ac{ELS} in Kourou, Guiana is currently being finalized and should accommoda
 
 A typical launch profile of the Soyuz launch vehicle from Kourou is shown in figure \ref{fig:launch} on page \pageref{fig:launch}. The first three stages of the vehicle are used propel the payload and the Frigate booster to a circular orbit at around 200 km. After separation (stage 6 on the figure), the Fregat initiates the first orbit injection burn to bring the satellites to the appropriate orbits.
 
-\begin{figure}[!h]
+\begin{figure}[ht]
 \centering
 \includegraphics[width=1.0\textwidth, angle=0]{chapters/img/launchprofile.png}
 \caption{Launch profile of the Soyuz LV from Kourou. \emph{(Sources: \cite{soyuzman}.)} }
@@ -263,9 +263,9 @@ After this, the satellites can be considered to be in their orbits. The Fregat c
 
 The launch date is dominated by development times and lifetime considerations. The satellite orbit decay is and thus lifetime is a function of atmospheric density. The density is, in turn, a function of the solar activity. The number of sun spots on the surface of the sun rises and falls every eleven years. The measurements are commonly represented in 10.7cm radio flux intensities. Figure \ref{fig:f10.7} on page \pageref{fig:f10.7} presents a projection for the next 10 years.
 
-\begin{figure}[ht!]
+\begin{figure}[h]
 \centering
-\includegraphics[width=1.0\textwidth, angle=0]{chapters/img/solarCycle.png}
+\includegraphics[width=1\textwidth, angle=0]{chapters/img/solarCycle.png}
 \caption{Solar activity projection up to 2019. \emph{(Source: NOAA/Space Weather Prediction Center.)} }
 \label{fig:f10.7}
 \end{figure}
@@ -370,7 +370,7 @@ The second reason drag calculations are so unreliable, is because air density at
 
 The density difference during maxima and minima for different altitudes is shown in figure \ref{fig:densityProfile} on page \pageref{fig:densityProfile}. Depending on the altitude, the density could vary for up to a whole order of magnitude between the minimum and maximum.
 
-\begin{figure}[ht!]
+\begin{figure}[ht]
 \centering
 \includegraphics[width=0.9\textwidth, angle=0]{chapters/img/densityAltitude.png}
 \caption{Air density vs. orbit altitude for different solar cycle stages.}
@@ -493,7 +493,7 @@ The orbit decay analysis is done is a manner identical to that described in sect
 
 The results of the decay simulation can be seen in figure \ref{fig:recLife} on page \pageref{fig:recLife}. They are virtually the same as the decay shown in figure \ref{fig:emLife}.
 
-The decay rate of secondary satellites is shown in figure \ref{fig:recLife} on page \pageref{fig:recLife}. The actual altitude was iterated in order to see that the receivers would decay to 500 km in mid August 2020. In reality the secondary satellite will have to take 0.3 kg of fuel less then the primary (at the expense of less fuel available for the deorbit maneuver) as the emitter satellite would have lost 27.8 m/s worth of propellant after the Hohmann transfer back to 500 km. This will ensure the same decay rate of the secondary leg of the mission.    
+The decay rate of secondary satellites is shown in figure \ref{fig:recLife2} on page \pageref{fig:recLife2}. The actual altitude was iterated in order to see that the receivers would decay to 500 km in mid August 2020. In reality the secondary satellite will have to take 0.3 kg of fuel less then the primary (at the expense of less fuel available for the deorbit maneuver) as the emitter satellite would have lost 27.8 m/s worth of propellant after the Hohmann transfer back to 500 km. This will ensure the same decay rate of the secondary leg of the mission.    
 
 
 \subsubsection{Estimation of $\Delta V$}
@@ -554,7 +554,7 @@ Again no numbers are specified for stationkeeping. This topic is elaborated on i
 \centering
 \includegraphics[width = \textheight]{chapters/img/receiverDecay2nd.png}
 \caption{Receiver satellite orbit decay from a secondary orbit with an assumed mission start in March 2017. Values used: $C_D$ = 2.22, mass = 14.92 kg, Area = 0.3 m$^2$.}
-\label{fig:recLife}
+\label{fig:recLife2}
 \end{figure}
 \end{landscape}
 
@@ -687,7 +687,7 @@ In the context of this formation, collision avoidance is important for two reaso
   \centering
   \subfloat[]{\label{fig:elecMax}\includegraphics[width=0.5\textwidth]{chapters/img/collA.png}}                
   \subfloat[]{\label{fig:elecMin}\includegraphics[width=0.5\textwidth]{chapters/img/collB.png}}\\
-  \subfloat[]{\label{fig:elecMin}\includegraphics[width=0.5\textwidth]{chapters/img/collC.png}}
+  \subfloat[]{\label{fig:elecMin2}\includegraphics[width=0.5\textwidth]{chapters/img/collC.png}}
   \caption{Debris field evolution, (a) immediately after impact, (b) spreading out after some time and eventually settling into the orbit (c) and decaying. \emph{(Source: \cite{constDesign}})}
   \label{fig:debris}
 \end{figure}
@@ -776,8 +776,8 @@ From the figure it is seen that with the standard cubesat shielding of 1 mm the 
 
 \begin{figure}
   \centering
-  \subfloat[]{\label{fig:elecMax}\includegraphics[width=0.7\textwidth]{chapters/img/elecFluxMax.png}}\\                
-  \subfloat[]{\label{fig:elecMin}\includegraphics[width=0.7\textwidth]{chapters/img/protFluxMax.png}}
+  \subfloat[]{\label{fig:elecMax2}\includegraphics[width=0.7\textwidth]{chapters/img/elecFluxMax.png}}\\                
+  \subfloat[]{\label{fig:elecMin3}\includegraphics[width=0.7\textwidth]{chapters/img/protFluxMax.png}}
   \caption{AE-8 Electron Flux Model (energy $>$ 0.5 MeV) (a) and AP-8 Proton Flux Model (energy $>$ 100 MeV)(b).}
   \label{fig:elecFlux}
 \end{figure}
