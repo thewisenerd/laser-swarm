@@ -37,6 +37,7 @@ import com.wolfram.jlink.MathLinkFactory;
 public abstract class Distribution {
 
 	private static final Logger	logger	= Logger.get(Distribution.class);
+	private static KernelLink	ml;
 
 	public static void main(String[] args) {
 		Configuration.getInstance(args);
@@ -111,22 +112,23 @@ public abstract class Distribution {
 	 *             If there was an error in creating the MathLink to Mathematica
 	 */
 	public Image toImage() throws LinkageError {
-		File kernelFile = Configuration.getInstance().getMathematicaKernel();
+		if (ml == null) {
 
-		if (kernelFile == null || !kernelFile.exists())
-			throw new LinkageError("Cannot find the Mathematica Kernel");
+			File kernelFile = Configuration.getInstance().getMathematicaKernel();
+			if (kernelFile == null || !kernelFile.exists())
+				throw new LinkageError("Cannot find the Mathematica Kernel");
 
-		KernelLink ml = null;
-		try {
-			String[] mlArgs = { "-linkmode", "launch", "-linkname", kernelFile.getAbsolutePath() };
-			ml = MathLinkFactory.createKernelLink(mlArgs);
-			ml.discardAnswer();
-		} catch (MathLinkException e) {
-			logger.wrn(e, "Kernel connection failed");
-			throw new LinkageError("An error occurred connecting to the kernel)");
+			try {
+				String[] mlArgs = { "-linkmode", "launch", "-linkname", kernelFile.getAbsolutePath() };
+				ml = MathLinkFactory.createKernelLink(mlArgs);
+				ml.discardAnswer();
+			} catch (MathLinkException e) {
+				logger.wrn(e, "Kernel connection failed");
+				throw new LinkageError("An error occurred connecting to the kernel)");
+			}
 		}
 
-		File csv = new File(Configuration.volatileCache, "scatter.csv");
+		File csv = new File(Configuration.volatileCache, "scatter-" + Math.random() + ".csv");
 		toCSV(csv.getAbsolutePath());
 
 		byte[] gifData = ml

@@ -1,10 +1,25 @@
 package com.google.code.laserswarm.math;
 
+import javax.vecmath.Point2d;
 import javax.vecmath.Point3d;
+import javax.vecmath.Tuple2d;
 import javax.vecmath.Tuple3d;
+import javax.vecmath.Vector2d;
 import javax.vecmath.Vector3d;
 
+import org.geotools.geometry.DirectPosition2D;
+
 public abstract class Convert {
+
+	/**
+	 * new DirectPosition2D(point.y * 180 / Math.PI, point.z * 180 / Math.PI);
+	 * 
+	 * @param point
+	 * @return
+	 */
+	public static DirectPosition2D toDirectPosition(Tuple3d point) {
+		return new DirectPosition2D(point.y * 180 / Math.PI, point.z * 180 / Math.PI);
+	}
 
 	/**
 	 * Convert from ECEF to ENU
@@ -13,7 +28,6 @@ public abstract class Convert {
 	 *            in ECEF
 	 * @return coordinates in ENU (x east, y north, up z)
 	 */
-
 	public static Vector3d toENU(Tuple3d coord) {
 		double a = coord.x;
 		double b = coord.y;
@@ -36,8 +50,21 @@ public abstract class Convert {
 		return new Vector3d(x, y, z);
 	}
 
+	public static Point2d toPoint(Tuple2d point) {
+		return new Point2d(point);
+	}
+
 	public static Point3d toPoint(Tuple3d point) {
 		return new Point3d(point);
+	}
+
+	/**
+	 * Extract y and z coordinate and put them in a 2d point
+	 * 
+	 * @return
+	 */
+	public static Point2d toPoint2d(Tuple3d point) {
+		return new Point2d(point.y, point.z);
 	}
 
 	/**
@@ -53,6 +80,10 @@ public abstract class Convert {
 		float phi = (float) Math.asin((xyz.z) / (r));// lat
 
 		return new Point3d(r, theta, phi);
+	}
+
+	public static Vector2d toVector(Tuple2d point) {
+		return new Vector2d(point);
 	}
 
 	public static Vector3d toVector(Tuple3d point) {
