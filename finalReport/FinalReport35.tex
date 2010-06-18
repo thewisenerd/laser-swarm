@@ -30,6 +30,9 @@
 \setcounter{tocdepth}{2}
 \pagenumbering{roman}
 
+\pagestyle{fancy}
+
+\renewcommand{\headrulewidth}{0 pt}
 \begin{document}
 
 %%%%%%%%%%%%%
@@ -100,9 +103,9 @@
 %       INTRODUCTION
 %
 %%%%%%%%%%%%%
-\rfoot{\setlength{\unitlength}{1mm}
+\rhead{\setlength{\unitlength}{1cm}
 \begin{picture}(0,0)
-\put(5,0){\includegraphics{anim/pic\thepage.png}}
+\put(-1,-0.7){\includegraphics[width = 2cm]{anim/pic\thepage.png}}
 \end{picture}}
 \chapter{Introduction}
 \label{chap:intro}
