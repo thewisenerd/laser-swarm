@@ -1,6 +1,6 @@
 \section{Human Resource Allocation}
 \label{DDHR}
-The first part of the project will involve a team of five specialists designing the five critical subsystems and one person designing the orbits of the swarm. The other four members will concentrate on the development of the software that will be used to assist the trade-off and verify the design. At later stages, some of the the software engineering personnel is heavily involved in designing proper algorithms for the processing of mission data, while others will be brought in to assist with detail design. 
+The first part of the project will involve a team of five specialists designing the five critical subsystems and one person designing the orbits of the swarm. The other four members will concentrate on the development of the software that will be used to assist the trade-off and verify the design. At later stages, some of the the software engineering personnel is heavily involved in designing proper algorithms for the processing of mission data, while others will be brought in to assist with detailed design. 
 
 A schematic representation of the resource allocation can be found in figure \ref{fig:DDBBHR} on page \pageref{fig:DDBBHR}.
 
@@ -12,7 +12,7 @@ A schematic representation of the resource allocation can be found in figure \re
 \label{fig:DDBBHR}
 \end{figure}
 
-The table \ref{tab:RWD} on page \pageref{tab:RWD} gives the documentation distribution of each person on each chapter.
+Table \ref{tab:RWD} on page \pageref{tab:RWD} gives the documentation distribution of each person on each chapter.
 
 \newpage
 \begin{center}
@@ -20,24 +20,24 @@ The table \ref{tab:RWD} on page \pageref{tab:RWD} gives the documentation distri
  Chapter & Documentation                      & Author & Checked by \\\hline 
  -       & Title Page                           & Alex & - \\\hline                  
  -       & Preface                              & Co, Team& All \\\hline
- -       & List of Symbol                       & - & - \\\hline
+ -       & List of Symbol                       & - & ? \\\hline
  -       & List of Acronyms                     & - & - \\\hline
  -       & Abstract                             & Co, Bart &\\\hline
  1       & Introduction                         &&\\\hline\hline
  2       & Project Management                   &&\\\hline
- 2.1     & \ -Human Resource Allocation         & Zhuan &\\\hline
- 2.2     & \ -Mass Budget Breakdown             & Zhuan &\\\hline
- 2.3     & \ -Cost Budget Breakdown             & Zhuan &\\\hline
- 2.4     & \ -Operations and Logistic Concept Description & GJ &\\\hline
- 2.5     & \ -Project Design and Development Logic & Lieuwe &\\\hline
- 2.6     & \ -Project Gantt Chart               & Lieuwe &\\\hline\hline
+ 2.1     & \ -Human Resource Allocation         & Zhuan & Sean \\\hline
+ 2.2     & \ -Mass Budget Breakdown             & Zhuan & Sean \\\hline
+ 2.3     & \ -Cost Budget Breakdown             & Zhuan & Sean \\\hline
+ 2.4     & \ -Operations and Logistic Concept Description & GJ & ? \\\hline
+ 2.5     & \ -Project Design and Development Logic & Lieuwe & Sean \\\hline
+ 2.6     & \ -Project Gantt Chart               & Lieuwe & ? \\\hline\hline
  3       & Mission Approach                     &&\\\hline
- 3.1     & \ -Function Flow Diagram             & Lieuwe, Zhuan & \\\hline
- 3.2     & \ -Function Breakdown Structure      & Lieuwe, Zhuan &\\\hline
- 3.3     & \ -H/W Block Diagram                 & Lieuwe, &\\\hline
- 3.4     & \ -S/W Block Diagram                 & Nikita &\\\hline
- 3.5     & \ -Electrical Block Diagram          & Sean &\\\hline
- 3.6     & \ -Data Handling Block Diagram       & GJ &\\\hline
+ 3.1     & \ -Function Flow Diagram             & Lieuwe, Zhuan & Bart\\\hline
+ 3.2     & \ -Function Breakdown Structure      & Lieuwe, Zhuan & Bart \\\hline
+ 3.3     & \ -H/W Block Diagram                 & Lieuwe, & GJ \\\hline
+ 3.4     & \ -S/W Block Diagram                 & Nikita & GJ \\\hline
+ 3.5     & \ -Electrical Block Diagram          & Sean & Bart \\\hline
+ 3.6     & \ -Data Handling Block Diagram       & GJ & \\\hline
  3.7     & \ -Communication Block Diagram       & Bart &\\\hline
  4       & Risk Management                      & Tim, Zhuan & \\\hline\hline
  5       & Launch and Astrodynamic Characteristics & Alex &\\\hline
@@ -85,7 +85,7 @@ The table \ref{tab:RWD} on page \pageref{tab:RWD} gives the documentation distri
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Mass Budget Breakdown}
 \label{DDMBB}
-The table \ref{tab:MB} on page \pageref{tab:MB} indicates mass budget breakdown for emitter and receiver satellites. The table is mainly divided into two parts. The first part gives each subsystem mass of emitter and receiver satellites in both kilograms and percentage of total dry mass. Meanwhile, the second part includes the mass of propellants and then also gives the total mass when the satellites are in their orbit. The deviation of all numbers in the table can be found in each corresponding chapter of the subsystem.
+The table \ref{tab:MB} on page \pageref{tab:MB} indicates mass budget breakdown for emitter and receiver satellites. The table is mainly divided into two parts. The first part gives each subsystem mass of emitter and receiver satellites in both kilograms and percentage of total dry mass. Meanwhile, the second part includes the mass of propellants and then also gives the total mass when the satellites are in their orbit. The derivation of all numbers in the table can be found in each corresponding chapter of the subsystem.
 
 \begin{table}[h!]
 \centering
@@ -109,16 +109,16 @@ The table \ref{tab:MB} on page \pageref{tab:MB} indicates mass budget breakdown 
  $M_{Loaded}$     & 54.41    & -           & 15.02    & - \\\hline
  $M_{Orbit}$      & 53.1     & -           & 14.92    & - \\\hline
 \end{tabular}
-\caption{Mass Budget Breakdown of the emitter and a representative receiver satellites.}
+\caption{Mass Budget Breakdown of the emitter and a representative receiver satellite.}
 \label{tab:MB}
 \end{table}
 
-As discussed in section \ref{frRecDV}, the receivers would need different propellant masses. Table \ref{tab:MB} on page \pageref{tab:MB} displays the max receiver loaded mass, and mass in orbit is the same for all.
+As discussed in section \ref{frRecDV}, the receivers would need different propellant masses. Table \ref{tab:MB} on page \pageref{tab:MB} displays the maximum receiver loaded mass, and mass in orbit is the same for all.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Cost Budget Breakdown}
 \label{DDCB}
-Figure \ref{fig:lifecycle} on page \pageref{fig:lifecycle} shows a typical life-cycle for a space mission. The \ac{RDTE} stage includes the planning, development and testing of all prototypes and qualification units, but does not include the technology development for different subsystems. In the case of the laser swarm this is largely dependent on the single emitter and one receiver unit. This stage is also mostly consistent of non-recurring costs. The production stage consists of actual manufacture of the physical satellites. The cost estimation in this stage is based on the \ac{TFU}. This is done because it is assumed that the first unit (in the case of the Laser Swarm, that would be the emitter and one receiver) would be the most expensive to produce. The rest of the swarm constellation satellite costs are calculated by taking a theoretical learning curve \cite{larson}. 
+Figure \ref{fig:lifecycle} on page \pageref{fig:lifecycle} shows the typical life-cycle for a space mission. The \ac{RDTE} stage includes the planning, development and testing of all prototypes and qualification units, but does not include the technology development for different subsystems. In the case of the laser swarm this is largely dependent on the single emitter and one receiver unit. This stage is also mostly consistent of non-recurring costs. The production stage consists of actual manufacture of the physical satellites. The cost estimation in this stage is based on the \ac{TFU}. This is done because it is assumed that the first unit (in the case of the Laser Swarm, that would be the emitter and one receiver) would be the most expensive to produce. The rest of the swarm constellation satellite costs are calculated by taking a theoretical learning curve \cite{larson}. 
 
 \begin{figure}[ht!]
 \centering
@@ -127,7 +127,7 @@ Figure \ref{fig:lifecycle} on page \pageref{fig:lifecycle} shows a typical life-
 \label{fig:lifecycle}
 \end{figure}
 
-The table \ref{tab:CB} on page \pageref{tab:CB} gives the cost breakdown of both theoretical first unit cost for either emitter or receiver satellite and also the swarm of 9 satellites including all the wraps.
+Table \ref{tab:CB} on page \pageref{tab:CB} gives the cost breakdown of both theoretical first unit cost for either emitter or receiver satellite and also the swarm of 9 satellites including all the wraps.
 
 \begin{table}[ht!]
 \centering
