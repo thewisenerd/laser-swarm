@@ -54,6 +54,7 @@
 %%%%%%%%%%%%%
 
 \newpage
+\footnotesize
 \addcontentsline{toc}{chapter}{Contents}
 \tableofcontents
 \newpage
@@ -72,7 +73,6 @@
 \newpage
 \addcontentsline{toc}{chapter}{List of Symbols}
 \Large{\textbf{List of Symbols}}
-\small
 \input{chapters/SymbList.tex}
 
 %%%%%%%%%%%%%
@@ -81,10 +81,9 @@
 %
 %%%%%%%%%%%%%
 
-\newpage
+%\newpage
 \addcontentsline{toc}{chapter}{List of Acronyms}
 \Large{\textbf{List of Acronyms}}
-\small
 \input{chapters/acronyms.tex}
 
 %%%%%%%%%%%%%
@@ -92,7 +91,7 @@
 %       ABSTRACT
 %
 %%%%%%%%%%%%%
-
+\small
 \input{chapters/abstract.tex}
 
 %%%%%%%%%%%%%
@@ -114,6 +113,7 @@
 
 \chapter{Project Management}
 \label{chap:project_management}
+\input{chapters/PMIntroduction.tex}
 \input{chapters/DDBB.tex}
 \input{chapters/OperationsLogistics.tex}
 \input{chapters/frPMgantt.tex}
@@ -160,6 +160,7 @@
 
 \chapter{Emitter Satellite}
 \label{chap:emitter}
+\input{chapters/EmitterIntroduction.tex}
 \input{chapters/DDlaser.tex}
 \input{chapters/NaviEmitter.tex}
 \input{chapters/comm_Emittter_FR.tex}
@@ -174,6 +175,7 @@
 	
 \chapter{Receiver Satellite}
 \label{chap:receiver}
+\input{chapters/ReceiverIntroduction.tex}
 \input{chapters/DDreceiver.tex}
 \input{chapters/NaviReceiver.tex}
 \input{chapters/comm_receiver.tex}
@@ -240,7 +242,7 @@
 \appendix
 \chapter{Soyuz-ST Factsheet}
 \label{appa}
-\newpage
+%\newpage
 \begin{figure}[ht]
 \centering
 %\includegraphics[width=1.3\textwidth, angle=270]{chapters/img/soyuzfact.png}
