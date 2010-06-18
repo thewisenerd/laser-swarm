@@ -1,6 +1,6 @@
 \section{Detailed Design Optical Emitting Payload} 
 \label{sec:DDlaser}
-\acs{LiDAR} is a remote sensing system comprising an optical emitting device, used to acquire topographic data, e.g. surface elevation gradients or ground composition by evaluating the \acs{BRDF}, considering multi-angular measurement are taken. For the generation of optical pulses, a highly efficient Nd:YAG (Neodymium-doped Yttrium Aluminum Garnet) hosted \ac{DPSLL}  is considered. Solid-State \acp{laser} have a high \acs{TRL} with relatively good properties in terms of beam quality (Q-factor), efficiency and pulse manipulation. Data products for topographical missions require that the \ac{laser} wave form be nearly pure Gaussian (known as transverse resonator mode $TEM_{00}$ (see figure \ref{gaussian_beam}), both temporally and spatially, with a uniform wave front. The digitized time of flight waveform returning provides the topographic structure \cite{nd_yag_life}.
+\acs{LiDAR} is a remote sensing system comprising an optical emitting device, used to acquire topographic data, e.g. surface elevation gradients or ground composition by evaluating the \acs{BRDF}, considering multi-angular measurement are taken. For the generation of optical pulses, a highly efficient Nd:YAG (Neodymium-doped Yttrium Aluminum Garnet) hosted \ac{DPSLL}  is considered. Solid-State \acp{laser} have a high \acs{TRL} with relatively good properties in terms of beam quality (Q-factor), efficiency and pulse manipulation. Data products for topographical missions require that the \ac{laser} wave form be nearly pure Gaussian (known as transverse resonator mode $TEM_{00}$ (see figure \ref{gaussian_beam}), both temporally and spatially, with a uniform wave front. The digitized time of flight waveform returning provides the topographic structure \cite{nd_yag_life}. This section describes the detailed design of the optical emitting device; an excessive and interesting introduction of the physical basics behind \acs{laser} technology can be found in \cite{laserfundamentals}. 
 
 \subsection{Principles of \textit{AlGaAs} Laser Diodes}
 \label{laser_diodes}
@@ -136,7 +136,7 @@ The pulse peak intensity equals $E_{p}/t_{p} = 0.001\ J / 10\cdot10^{-9}\ s = 10
 \subsection{Gaussian Beam Propagation and Diffraction}
 	\label{diffraction}
 
-Collimated plane wave propagation (uniform \textbf{k}-vector distribution) in optical systems would give rise to discrete and accurate calculations. However, due to optical distortions and modifications, the \textbf{k}-vector distribution can change, hence, altering the wave propagation. 
+\cite{fourieroptics}Collimated plane wave propagation (uniform \textbf{k}-vector distribution) in optical systems would give rise to discrete and accurate calculations. However, due to optical distortions and modifications, the \textbf{k}-vector distribution can change, hence, altering the wave propagation. This section is based on \cite{fourieroptics} and \cite{fourieroptics1}. 
 
 \textit{Gaussian Beams}
 The figure \ref{gaussian_beam} on page \pageref{gaussian_beam} shows the mathematical desription of the Gaussian beam. For the analysis of the \acs{laser} beam intensity profile, a Gaussian profile (transverse resonator mode $TEM_{00}$) is considered corrected by the $M^{2}$ factor for optical distortion. The $M^{2}$ factor is a common measure of the beam quality of a laser beam.  The electric field distribution for a Gaussian beam is represented as:
@@ -183,7 +183,7 @@ Diffraction is a fundamental characteristic of all wave fields. The effect of di
 	
 \begin{equation} 
 E(k_{x},k_{y}) = \mathcal{F}\left\{{\overbrace{t(x,y)}^{Transmission\  function}\cdot E(x,y)}\right\} = \iint(exp(-i(k_{x} x + k_{y}y))\cdot t(x,y)\cdot E(x,y)dxdy 
-\end{equation} 
+\end{equation}\cite{fourieroptics1} 
 
 \begin{equation}
 E(x,y,z) = \frac{exp\left[-i(kz + \psi(z))\right]}{w(z)}\cdot exp\left[\frac{-(x^{2}+y^{2})}{w^{2}(z)}-\frac{ik(x^{2}+y^{2})}{2R(z)}\right]
@@ -199,7 +199,7 @@ Combining the above calculations and using the characteristic equations for Gaus
 
 \begin{equation}
 \mathcal{F}\left\{\left(exp\left\{-i\left((n-1)\left(\frac{k}{2R(z)}\right)(x^{2}+y^{2})\right)\right\}\right)\otimes\left(\frac{exp\left[-i(kz + \psi(z))\right]}{w(z)}\cdot exp\left[\frac{-(x^{2}+y^{2})}{w^{2}(z)}-\frac{ik(x^{2}+y^{2})}{2R(z)}\right]\right)\right\}
-\end{equation}
+\end{equation}\cite{fourieroptics1} 
 
 A different point of view, conveniently in the sense of the \acs{LiDAR} mission, considers the use of focal lengths to change the Gaussian beam diffraction, giving the same result as the above Fourier transform, i.e. the divergences influence the intensity profile. The main goal of changing the divergence is influencing the footprint. Obviously, the footprints minimum size is  diffraction-limited. 
 
@@ -207,7 +207,7 @@ A different point of view, conveniently in the sense of the \acs{LiDAR} mission,
 E(x_{1},y_{1})=\iint\left[exp\left( ik\left(\frac{-2x x_{1}-2y y_{1}}{2z} + \frac{x^{2}+y^{2}}{2z}\cdot t_{lens}(x,y)\cdot E(x,y)\right)\right)\right]dx dy
 \end{equation} 
 
-Avoiding the quadratic terms and using the following relationship, the Fraunhofer diffraction pattern can be conducted.
+Avoiding the quadratic terms and using the following relationship, the Fraunhofer diffraction pattern can be conducted \cit{fraunhoferoptics}.
 
 \begin{equation} 
 \frac{k}{2z}=(n-1)\frac{k}{2R_{1}}
@@ -233,7 +233,7 @@ E(x_{1},y_{1})=\iint exp\left[-i\frac{k}{f}\left(xx_{1}+yy_{1}\right)\cdot t(x,y
 \label{diff_div}
 \end{figure}
 
-Assuming infinite inverse focal length, the footprint will be diffraction limited, resulting in a footprint according to $H\cdot tan(sin^{-1}(\frac{1.22\cdot \lambda}{a}))$. With an effective aperture of 0.4 cm, the footprint due to diffraction equals 72.1325 m (96.1767 m with 0.3 cm aperture).  
+Assuming infinite inverse focal length, the footprint will be diffraction limited, resulting in a footprint according to $H\cdot tan(sin^{-1}(\frac{1.22\cdot \lambda}{a}))$ \cite{fourieroptics}. With an effective aperture of 0.4 cm, the footprint due to diffraction equals 72.1325 m (96.1767 m with 0.3 cm aperture). Hence, 0.4 cm shows a considerately smaller footprint then the desired 100 m set as requirement. By altering the divergence, the footprint size can be altered. 
  
 \subsection{Thermal Control} 
 \label{opticalthermal}
@@ -241,6 +241,8 @@ Basically, there are three critical parts (\acs{LDA}, Nd:YAG \acs{laser} crystal
 
 \textit{\acs{LDA}}.
 The constituent parts and materials of a typical \acs{LDA} are the diode die (laser bar) and the mechanical structure. The packaging design and materials enable the array of laser bars to stay together in a stack, to be energized electrically (with a relatively high drive current), to pass the heat generated out of the unit to the mounting surface (thermal path, heat sinking), to be sufficiently rugged against mechanical insults, to provide a standard mounting interface (screws or clamps) and to be as small as possible. The active region of the \acs{LDA}, where heat is generated, is only about 1 micron wide, located about 3 microns from the P-side of the bar. The bars are about 0.1 mm wide and typically spaced about 0.5 mm from each other. Waste energy in the form of heat must be conductively transferred into the solder material and from there into the heat sink material (typically BeO or CuW) as rapidly as possible. The solder material of choice is a soft Indium alloy for its ductile property allowing the bar and the heat sink to expand or contract at different rate with temperature. The \acs{LDA} manufacturers try to use materials which possess higher thermal conductivity and a relatively comparable coefficient of thermal expansion (CTE) in order to minimize the thermal resistance of the device and the induced mechanical stresses. Additionally important to reducing mechanical stress is consideration of the use of soft solders which are highly pliable with a relatively low melting point (\~ 160 $C^{\circ}$). Post life test analysis indicates that solder deformation caused solder roll-over, in turn creating voids, which increase thermal resistance. When coupled with built-in stress due to fabrication, such roll over, in time often obstructs emitters, leading to increased heating, or extends across the bar from anode to cathode causing bar shorts which eventually result in contaminations to the emitter face and localized hot spots, further degrading performance. Excessive heating and thermal cycling of the \acs{LDA} active regions plays a key role in limiting the reliability and lifetime of \acp{LDA} operated in the QCW mode, particularly where pulse widths are long. To improve the assembles heat extraction performance, advanced materials are being considered for packaging \acp{LDA}, which have high thermal conductivity and a CTE (Coefficient of Thermal Expansion) that matches that of the laser bars to compensate inhomogeneous thermal strain. The figure \ref{thermal_control} on page \pageref{thermal_control} shows a decrease of diode lifetime as function of junction temperature.
+
+Conductive cooling highly influences the total mass of the optical emitting payload. Normally, \acp{laser} are (partly) convection cooled using pumping cooling fluid in the neighborhood of or through the \acs{laser} components to divert waste heat. Since convection cooling is non-viable, or at least, non-preferable, in in-situ space applications, conductive cooling is applied. High powers mean high temperature gradients and hence, more conductive material. Although the configuration of the \acs{laser} differs from the HELT (\cite{nd_yag_life}), the same mass of conductive materials is considered, resulting in a total optical emitting payload mass of 15 kg. 
 
 \begin{figure}[ht!]
 \centering
