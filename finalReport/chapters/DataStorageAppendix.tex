@@ -1,0 +1,58 @@
+\chapter{Data Storage calculations}
+\label{DSAppendix}
+
+This appendix will contain an overview of the results and performed calculations for the data storage chapter. The full list of contact times and passes over the Kiruna ground station is not included due to the large amount of data, however several key values will be provided.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{c|c}
+\hline
+\textbf{Parameter}  & \textbf{Value} \\\hline\hline
+	Max. time without contact to ground station & 7:35:33 \\
+	Average time without contact to ground station & 1:39:00  \\
+	Average time without contact, without the 6/7 hour periods & 1:17:02\\
+	Max. time in contact with the ground station & 0:11:47 \\
+	Average duration of contact to ground station & 0:08:30 \\
+  Minimum amount of orbit between 6/7 hour periods & 13 \\\hline
+\end{tabular}
+\caption{Most important values for the contact times with the Kiruna ground station.}
+\label{KirunaTime}
+\end{table}
+
+Table \ref{KirunaTime} shows the most important values used during the calculations. Note that the 13 orbits is the minimum encountered during the three week period that has been simulated, the average is actually somewhat higher. But because the minimum value is a critical value, this is the only value that is considered.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{c|c}
+\hline
+\textbf{Parameter}  & \textbf{Value} \\\hline\hline
+	Bitrate per receiving instrument [bits/s] & 1.312.399 \\
+	Bitrate for all 5 receivers [bits/s] & 6.561.995 \\
+	Data Storage safety factor [-] & 1.1 \\
+	Max. downlink rate [Mbits/s] & 150 \\
+	Max. intersatellite link [Mbits/s] & 2 \\\hline
+\end{tabular}
+\caption{Values used to determine the maximum required amount of storage, and the required downlink rate.}
+\label{InputValues}
+\end{table}
+
+Table \ref{InputValues} shows other important values required for the calculation of the required memory and downlink rate. In appendix \ref{scirate} on page \pageref{scirate} shows how the first value in table \ref{InputValues} has been obtained. The next value is found by multiplying the first by 5, and the safety factor is used to take into account the possibility of longer periods of downtime after the three week period that has been simulated. The maximum downlink rate and intersatellite rate have been determined using the available antennae.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{c|c}
+\hline
+\textbf{Parameter}  & \textbf{Value} \\\hline\hline
+	Required amount of data storage [Gbit] & 184.00 \\
+	Necessary amount of data storage [Gbit] & 202.39 \\
+	Average contact time between the 6/7 hour orbits [s] & 6625 \\
+	Total amount of data accumulated during the 13 orbits [Gbit] & 640.16 \\
+	Required downlink rate link [Mbits/s] & 96.64 \\\hline
+\end{tabular}
+\caption{Values determined to find the maximum amount of data storage and the minimum required downlink rate.}
+\label{ResultValues}
+\end{table}
+
+Multiplying the 5 receiver bitrate with the maximum time without contact yields the first entry in table \ref{ResultValues}. Using the safety factor the second entry is determined. The third entry is found by multiplying the average time with contact from table \ref{KirunaTime} by 13. The total amount of data is determined by adding the third and fifth entry in table \ref{KirunaTime} and multiplying them by 13 and the bitrate for the 5 receivers. The final term is found by dividing the total amount of accumulated data by the average contact time between the 6/7 hours orbits, both of which are given in table \ref{ResultValues}.
+
+Similar calculations have been performed to find the values found in the section on data storage for the receiver at page \pageref{DSReceiver}.
