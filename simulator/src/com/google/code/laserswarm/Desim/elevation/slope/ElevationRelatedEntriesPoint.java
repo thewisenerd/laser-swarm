@@ -25,6 +25,9 @@ public class ElevationRelatedEntriesPoint {
 		return relatedEntries;
 	}
 
+	/**
+	 * @return Returns the emitter position in ECEF.
+	 */
 	public Point3d getPosEmit() {
 		return posEmit;
 	}
@@ -33,6 +36,16 @@ public class ElevationRelatedEntriesPoint {
 		return tEmit;
 	}
 
+	/**
+	 * @param elevation
+	 *            Elevation in meters.
+	 * @param tEmit
+	 *            Time in seconds.
+	 * @param posEmit
+	 *            Emitter position in ECEF.
+	 * @param entriesClose
+	 * @param bestMap
+	 */
 	public ElevationRelatedEntriesPoint(double elevation, double tEmit, Point3d posEmit,
 			ArrayList<TreeMap<Double, Vector3d>> entriesClose, TreeMap<Double, Vector3d> bestMap) {
 		this.elevation = elevation;

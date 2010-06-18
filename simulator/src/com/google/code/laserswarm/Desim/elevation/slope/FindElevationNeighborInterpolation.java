@@ -11,7 +11,6 @@ import org.apache.commons.math.MathException;
 import com.google.code.laserswarm.Desim.DataContainer;
 import com.google.code.laserswarm.Desim.FindWindow;
 import com.google.code.laserswarm.Desim.NoiseData;
-import com.google.code.laserswarm.Desim.brdf.BRDFinput;
 import com.google.code.laserswarm.Desim.elevation.ElevationFinder;
 import com.google.code.laserswarm.conf.Constellation;
 import com.google.code.laserswarm.conf.Satellite;
@@ -75,10 +74,11 @@ public class FindElevationNeighborInterpolation implements ElevationFinder {
 	@Override
 	public ElevationSlope run(Map<Satellite, TimeLine> recTimes, EmitterHistory hist,
 			Constellation swarm, int dataPoints) throws MathException {
-		interpolator = new SubSampleCorrelation(swarm, recTimes, correlationInterval,
-				comparisonQueueLength, equalitySpacing, fractionD);
+		interpolator = new SubSampleCorrelation(recTimes, correlationInterval,
+				comparisonQueueLength, equalitySpacing);
 		Iterator<Double> timeIt = hist.time.iterator();
 		Map<Satellite, DataContainer> interpulseWindows = Maps.newHashMap();
+		LinkedList<ElevationRelatedEntriesPoint> firstResult = Lists.newLinkedList();
 		for (DataContainer tempData : interpulseWindows.values()) {
 			if (tempData == null) {
 				tempData = new DataContainer();
@@ -87,9 +87,7 @@ public class FindElevationNeighborInterpolation implements ElevationFinder {
 		}
 		FindWindow emitRecPair = new FindWindow(hist, timeIt, recTimes, swarm, frequency);
 		int count = 0;
-		ElevationSlope elSlope = new ElevationSlope();
 		LinkedList<Point3d> altitudes = Lists.newLinkedList();
-		LinkedList<BRDFinput> BRDFIn = Lists.newLinkedList();
 		while (count < dataPoints - 1 && timeIt.hasNext()) {
 			count++;
 			logger.inf("Iteration number %s", count);
@@ -97,13 +95,14 @@ public class FindElevationNeighborInterpolation implements ElevationFinder {
 			Map<Satellite, NoiseData> tempInterpulseWindow = emitRecPair.next();
 			Point3d thisEmit = new Point3d(hist.getPosition().find(emitRecPair.tPulse));
 			Point3d sphericalEmit = Convert.toSphere(thisEmit);
-			ElevationBRDF elPt = interpolator.next(tempInterpulseWindow, emitRecPair.tPulse,
+			ElevationRelatedEntriesPoint elPt = interpolator.next(tempInterpulseWindow,
+					emitRecPair.tPulse,
 					thisEmit);
 			if (elPt != null) {
 				double alt = elPt.getElevation();
 				logger.dbg("Altitude found: %s", alt);
 				altitudes.add(new Point3d(alt, sphericalEmit.y, sphericalEmit.z));
-				BRDFIn.add(elPt.getBRDFData());
+				firstResult.add(elPt);
 			}
 		}
 		logger.inf("Altitudes LinkedList size: %s", altitudes.size());
@@ -111,8 +110,8 @@ public class FindElevationNeighborInterpolation implements ElevationFinder {
 				|| Math.abs(altitudes.getLast().x - altitudes.get(altitudes.size() - 2).x) > 1000) {
 			altitudes.removeLast();
 		}
-		elSlope.setAltitudes(altitudes);
-		elSlope.setBRDFIn(BRDFIn);
+		BRDFInputGenerator generator = new BRDFInputGenerator(swarm, fractionD, 16);
+		ElevationSlope elSlope = generator.generate(firstResult);
 		return elSlope;
 	}
 }
