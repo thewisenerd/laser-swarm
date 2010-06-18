@@ -223,7 +223,7 @@ public class ElevationModel implements IElevationModel {
 		// 6 7 8
 		// p = (z1 - z6) + (z2 - z7) + (z3 - z8)/6g
 		// q = (z3 - z1) + (z5 - z4) + (z8 - z6)/6g
-		double dAngle = 0.00000001;
+		double dAngle = 0.00001;
 
 		double[] z2 = coverage.evaluate(
 				(DirectPosition) new DirectPosition2D(pos.x, pos.y + dAngle), new double[1]);

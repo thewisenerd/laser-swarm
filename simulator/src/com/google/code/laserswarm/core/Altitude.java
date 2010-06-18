@@ -22,8 +22,6 @@ import com.google.code.laserswarm.Desim.elevation.slope.AlongTrackSlopeCompariso
 import com.google.code.laserswarm.Desim.elevation.slope.CrossTrackSlopeComparison;
 import com.google.code.laserswarm.Desim.elevation.slope.ElevationSlope;
 import com.google.code.laserswarm.Desim.elevation.slope.FindElevationNeighborInterpolation;
-import com.google.code.laserswarm.Desim.filter.elevationslope.FilterAverageExclusion;
-import com.google.code.laserswarm.Desim.filter.elevationslope.FilterSpikes;
 import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.conf.Constellation;
 import com.google.code.laserswarm.conf.Satellite;
@@ -50,7 +48,7 @@ public class Altitude {
 
 	public static void main(String[] args) throws DemCreationException, MathException,
 			IOException {
-		run(dataPoints, new FindElevationNeighborInterpolation(1, (int) 97e12, 1, 3, 0.5, 0.707));
+		run(dataPoints, new FindElevationNeighborInterpolation(1, (int) 97e12, 1, 3, 0.5, 0.1));
 	}
 
 	public static void run(int dataPoint, ElevationFinder findEl) throws DemCreationException,
@@ -137,10 +135,10 @@ public class Altitude {
 			Configuration.write("altData.xml", elSlope);
 		}
 		// Do slope filtering.
-		FilterSpikes slopeFilter = new FilterSpikes(1);
-		elSlope = slopeFilter.filter(elSlope);
-		FilterAverageExclusion exclusionFilter = new FilterAverageExclusion(15, 1.0);
-		elSlope = exclusionFilter.filter(elSlope);
+		// FilterSpikes slopeFilter = new FilterSpikes(1);
+		// elSlope = slopeFilter.filter(elSlope);
+		// FilterAverageExclusion exclusionFilter = new FilterAverageExclusion(15, 1.0);
+		// elSlope = exclusionFilter.filter(elSlope);
 
 		// Plot the altitude results.
 		alts = elSlope.getAltitudes();

@@ -87,6 +87,7 @@ public class FindElevationNeighborInterpolation implements ElevationFinder {
 		}
 		FindWindow emitRecPair = new FindWindow(hist, timeIt, recTimes, swarm, frequency);
 		int count = 0;
+
 		LinkedList<Point3d> altitudes = Lists.newLinkedList();
 		while (count < dataPoints - 1 && timeIt.hasNext()) {
 			count++;

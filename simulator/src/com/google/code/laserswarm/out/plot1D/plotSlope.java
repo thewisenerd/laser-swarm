@@ -85,8 +85,6 @@ public class plotSlope {
 			last = sphere;
 			sphere = slopeIt.next();
 			logger.dbg("Plot iteration: %s, with: %s, %s, %s", count, sphere.x, sphere.y, sphere.z);
-			Files.append(sphere.x + ";" + sphere.y + ";" + sphere.z + ";\n", out, Charset
-					.defaultCharset());
 
 			double dAngle = 0.00000001;
 			if (last != null) {
@@ -98,10 +96,12 @@ public class plotSlope {
 				dir3d = Convert.toSphere(new Point3d(norm));
 				double hFound;
 				if (isAlongTrack) {
-					DirectPosition2D forward = new DirectPosition2D(toDeg(last.y) + dAngle * dir3d.y,
-							toDeg(last.z) + dAngle * dir3d.z);
-					DirectPosition2D backward = new DirectPosition2D(toDeg(last.y) - dAngle * dir3d.y,
-							toDeg(last.z) - dAngle * dir3d.z);
+					DirectPosition2D forward = new DirectPosition2D(toDeg(last.y) + dAngle
+							* toDeg(dir3d.y),
+							toDeg(last.z) + dAngle * toDeg(dir3d.z));
+					DirectPosition2D backward = new DirectPosition2D(toDeg(last.y) - dAngle
+							* toDeg(dir3d.y),
+							toDeg(last.z) - dAngle * toDeg(dir3d.z));
 					double hForward = 0;
 					double hBackward = 0;
 					try {
@@ -116,10 +116,12 @@ public class plotSlope {
 							backward.y));
 					hFound = (hForward - hBackward) / pForward.distance(pBackward);
 				} else {
-					DirectPosition2D left = new DirectPosition2D(toDeg(last.y) + dAngle * dir3d.z,
-							toDeg(last.z) - dAngle * dir3d.y);
-					DirectPosition2D right = new DirectPosition2D(toDeg(last.y) - dAngle * dir3d.z,
-							toDeg(last.z) + dAngle * dir3d.y);
+					DirectPosition2D left = new DirectPosition2D(
+							toDeg(last.y) + dAngle * toDeg(dir3d.z),
+							toDeg(last.z) - dAngle * toDeg(dir3d.y));
+					DirectPosition2D right = new DirectPosition2D(toDeg(last.y) - dAngle
+							* toDeg(dir3d.z),
+							toDeg(last.z) + dAngle * toDeg(dir3d.y));
 					double hLeft = 0;
 					double hRight = 0;
 					try {
@@ -131,8 +133,9 @@ public class plotSlope {
 					Point3d pLeft = Convert.toXYZ(new Point3d(Configuration.R0, left.x, left.y));
 					Point3d pRight = Convert.toXYZ(new Point3d(Configuration.R0, right.x, right.y));
 					hFound = (hRight - hLeft) / pLeft.distance(pRight);
-
 				}
+				Files.append(hFound + ";" + sphere.y + ";" + sphere.z + ";\n", out, Charset
+						.defaultCharset());
 				theta.add(sphere.y); // longitude
 				phi.add(sphere.z); // latitude
 				h.add(hFound);
@@ -177,6 +180,8 @@ public class plotSlope {
 				g.drawLine(x1, y1, x2, y2);
 			}
 		}
+		g.drawLine(wOffset, height - (int) (Math.abs(hMin) / hDiff * height), wOffset + width,
+				height - (int) (Math.abs(hMin) / hDiff * height));
 		final float dash1[] = { 10.0f };
 		final BasicStroke dashed = new BasicStroke(1.0f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER,
 				10.0f, dash1, 0.0f);
@@ -301,6 +306,8 @@ public class plotSlope {
 				g.drawLine(x1, y1, x2, y2);
 			}
 		}
+		g.drawLine(wOffset, height - (int) (Math.abs(hMin) / hDiff * height), wOffset + width,
+				height - (int) (Math.abs(hMin) / hDiff * height));
 		final float dash1[] = { 10.0f };
 		final BasicStroke dashed = new BasicStroke(1.0f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER,
 				10.0f, dash1, 0.0f);

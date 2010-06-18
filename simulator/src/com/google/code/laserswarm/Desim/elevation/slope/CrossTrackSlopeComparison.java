@@ -30,11 +30,11 @@ public class CrossTrackSlopeComparison extends DescriptiveStatistics {
 			BRDFinput slope = slopeIt.next();
 			Point3d pSphere = Convert.toSphere(new Point3d(slope.getScatterPoint()));
 			Point3d dir3d = Convert.toSphere(slope.getEmitterDirection());
-			double dAngle = 0.00000001;
-			DirectPosition2D left = new DirectPosition2D(toDeg(pSphere.y) + dAngle * dir3d.z,
-					toDeg(pSphere.z) - dAngle * dir3d.y);
-			DirectPosition2D right = new DirectPosition2D(toDeg(pSphere.y) - dAngle * dir3d.z,
-					toDeg(pSphere.z) + dAngle * dir3d.y);
+			double dAngle = 0.00001;
+			DirectPosition2D left = new DirectPosition2D(toDeg(pSphere.y) + dAngle * toDeg(dir3d.z),
+					toDeg(pSphere.z) - dAngle * toDeg(dir3d.y));
+			DirectPosition2D right = new DirectPosition2D(toDeg(pSphere.y) - dAngle * toDeg(dir3d.z),
+					toDeg(pSphere.z) + dAngle * toDeg(dir3d.y));
 			double hLeft = 0;
 			double hRight = 0;
 			try {
