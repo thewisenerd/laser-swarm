@@ -22,14 +22,14 @@ A detailed description of these parameters can be found in \ref{Crossem}.
 The transceiver selected was an SBTRcvr of RDLabs, which has a maximum data rate of 10 Mb/s for QPSK modulation, an input power of 12 Watt and an output power of 1 to 5 Watt \cite{RDLabs}.
 
 \subsubsection{Antenna}
-The S Band patch antenna from Surrey Satellite technologies\cite{SurrPatch} was selected as the antenna for this link, it has a mass of only 80 grams, a 120$^{\circ}$ beamwidth, a gain of 4 dBi and measures 82x82x20 mm. Three patch antennas are placed on the satellite, in order that one antenna is always pointing to the emitter satellite for each of the three possible directions the receiver payload can be pointed.
+The S-Band patch antenna from Surrey Satellite technologies \cite{SurrPatch} was selected as the antenna for this link, it has a mass of only 80 grams, a 120$^{\circ}$ beamwidth, a gain of 4 dBi and measures 82x82x20 mm. Three patch antennas are placed on the satellite, in order that one antenna is always pointing to the emitter satellite for each of the three possible directions the receiver payload can be pointed.
 
 \subsubsection{Link Budget}
 Because the selected modulation is QPSK and the maximum allowable bit error rate is 10$^{-5}$, the required E$_{b}$/N$_{0}$ is equal to 9.6 dB. With the output power of the transceiver at maximum (5 Watt or 7 dBW) it is possible to have a E$_{b}$/N$_{0}$ of 10.35 dB, which leaves a margin of 2.36 dB.
 
-A detail link budget can be found in Appendix XXX
+A detail link budget can be found in Appendix \ref{linkbudgets}
 
 \subsection{Ground-Space Link as Backup}
-The reader is pointed to subsection XXX for details on this as it has the exact linkbudget, hardware and antenna placement. 
+The reader is pointed to section \ref{emitter_GSL} for details on this as it has the exact link budget, hardware and antenna placement. 
 
 \input{chapters/DataStorageReceiver.tex}
