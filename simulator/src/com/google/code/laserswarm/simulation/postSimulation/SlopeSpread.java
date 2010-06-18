@@ -37,6 +37,7 @@ public class SlopeSpread implements IPostSimulation {
 			Vector3d normal = simVar.surfNormal;
 			if (normal.z == 1 && normal.lengthSquared() == 1) {
 				newDb.store(simVar);
+				i++;
 				continue;
 			}
 
@@ -51,8 +52,11 @@ public class SlopeSpread implements IPostSimulation {
 			EllipticalArea area = new EllipticalArea(a, b);
 
 			HashMap<Double, SimVars> newSimVars = Maps.newHashMap();
-			for (Satellite sat : simVar.photonsE.keySet()) {
+			for (Satellite sat : constellation.getReceivers()) {
 				// logger.inf("Working on satillite %s", sat);
+				if (simVar.photonsE.get(sat) == null)
+					continue;
+
 				for (int photon = 0; photon < simVar.photonsE.get(sat); photon++) {
 					double offset = 0;
 					try {
