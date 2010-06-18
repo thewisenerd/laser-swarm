@@ -138,7 +138,7 @@ public class SubSampleCorrelation implements SampleCorrelation {
 					for (int i = 0; i < numPhotons; i++) {
 						altitudes.put(thisAlt, new Vector3d(satPositions.find(time)));
 					}
-					logger.dbg("Found an altitude: %s, with photon no.: %s", thisAlt - Configuration.R0,
+					logger.dbg("Found height: %s, with photon no.: %s", thisAlt - Configuration.R0,
 							numPhotons);
 				}
 			}
