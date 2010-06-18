@@ -67,7 +67,7 @@ T_w = I_w \dot{\omega}_w
 \label{wheeltorque}
 \end{equation}
 
-where $I_w$ is the inertia tensor of the wheel and $\dot{\omega}_w$ the angular acceleration. The inertia of the wheel depends on the dimensions.  The basic build-up of the wheels is a disk with a skirt around the motor giving the mass at a distance from the rotation axis as shown in figure \ref{fig:wheel} on page \pageref{fig:wheel}. The thickness $b$ of the skirt is 8 mm for the yaw wheel and 5 mm for the other two, since the yaw wheel is also used for the instrument pointing increasing the torque requirements. Since the wheel is spinning it is required that the material of the wheel does not produce a magnetic field while rotating, therefore aluminium is chosen for the material. It has a density of $2850 kg/m^3$. The mass of the wheel is 
+where $I_w$ is the inertia tensor of the wheel and $\dot{\omega}_w$ the angular acceleration. The inertia of the wheel depends on the dimensions.  The basic build-up of the wheels is a disk with a skirt around the motor giving the mass at a distance from the rotation axis as shown in figure \ref{fig:wheel} on page \pageref{fig:wheel}. The thickness $b$ of the skirt is 8 mm for the yaw wheel and 5 mm for the other two, since the yaw wheel is also used for the instrument pointing increasing the torque requirements. Since the wheel is spinning it is required that the material of the wheel does not produce a magnetic field while rotating, therefore aluminium is chosen for the material. It has a density of $2850\ kg/m^3$. The mass of the wheel is 
 
 \begin{equation}
 m_w = m_{wd} + m_{ws} = \rho \pi \left(11\cdot 10^{-3}+b\right)^2 1\cdot 10^{-3} + \rho \pi \left(\left(11\cdot 10^{-3}+h\right)^2 - \left(11\cdot 10^{-3}\right)^2\right)\left(b-1\cdot 10^{-3}\right)^2
@@ -98,7 +98,7 @@ In section \ref{frEmDV} the $\Delta V$ required for the emitter satellite is 225
 \label{fuelratio}
 \end{equation}
 
-the amount of fuel needed is 7.6\% of the dry mass of the satellite needs to be fuel. For the 50.4 kg satellite the fuel mass is therefore 3.8 kg. The thruster works on a 1:1.5 mixture dinitrogen tetroxide $N_2O_4$ and monomethylhydrazine $MMH$. This leads to fuel masses of 1.5 kg of $N_2O_2$ and 2.3 kg of $MMH$, with the typical bulk densities noted in \cite{larson} this leads to volumes of 1.32 and 2.88 litres respectively.
+the amount of fuel needed is 7.6\% of the dry mass of the satellite needs to be fuel. For the 50.4 kg satellite the fuel mass is therefore 3.8 kg. The thruster works on a 1:1.5 mixture dinitrogen tetroxide $N_2O_4$ and monomethylhydrazine $MMH$. This leads to fuel masses of 1.5 kg of $N_2O_4$ and 2.3 kg of $MMH$, with the typical bulk densities noted in \cite{larson} this leads to volumes of 1.32 and 2.88 litres respectively.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Pointing Mechanism}
@@ -112,6 +112,7 @@ In table \ref{tab:adcspointbudgetemitter} on page \pageref{tab:adcspointbudgetem
 
 \begin{table}[h]
 \begin{tabular}{l | c | c c | c c | c }
+\hline
 Subsystem component    & Number & Mass & Cost & Total mass & Total cost & Power (max)\\ 
                        &   & [g] & [EUR]& [g]  &[EUR] & [W]         \\ \hline \hline
 Sun sensors            & 5 & 24  & 11000& 120   & 55000&  0 (0)      \\
@@ -123,7 +124,8 @@ Thruster			   & 1 & 650 & 400k & 650  & 400k &  1 (2)			\\
 Fuel tanks, pumps	   & 2 & 500 & 250* & 1000 & 500* & 0 (0)          \\ \hline
 Support structures     & - &  -  & -	& 770  & 300*     & 0 (0)			\\ \hline
 \textbf{Total} & & &                             & 3650 & 540k & 3.65 (4.4 rms) \\
-&&&&& 310k FY00\$ &
+&&&&& 310k FY00\$ &\\
+\hline
 \end{tabular}
 \caption[Mass, cost and power budget of AODCS and pointing mechanism emitter]{Dry mass, cost and power budget of different parts of the \ac{ADCS} and pointing mechanism. Starred prices are estimations based on material and machining cost.}
 \label{tab:adcspointbudgetemitter}

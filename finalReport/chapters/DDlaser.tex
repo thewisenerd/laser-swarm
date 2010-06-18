@@ -1,6 +1,6 @@
 \section{Detailed Design Optical Emitting Payload} 
 \label{sec:DDlaser}
-\acs{LiDAR} is a remote sensing system comprising an optical emitting device, used to acquire topographic data, e.g. surface elevation gradients or ground composition by evaluating the \acs{BRDF}, considering multi-angular measurement are taken. For the generation of optical pulses, a highly efficient Nd:YAG (Neodymium-doped Yttrium Aluminum Garnet) hosted \ac{DPSLL}  is considered. Solid-State \acp{laser} have a high \acs{TRL} with relatively good properties in terms of beam quality (Q-factor), efficiency and pulse manipulation. Data products for topographical missions require that the \ac{laser} wave form be nearly pure Gaussian (known as transverse resonator mode $TEM_{00}$ (see figure \ref{gaussian_beam}), both temporally and spatially, with a uniform wave front. The digitized time of flight waveform returning provides the topographic structure \cite{nd_yag_life}. This section describes the detailed design of the optical emitting device; an excessive and interesting introduction of the physical basics behind \acs{laser} technology can be found in \cite{laserfundamentals}. 
+\acs{LiDAR} is a remote sensing system comprising an optical emitting device, used to acquire topographic data, e.g. surface elevation gradients or ground composition by evaluating the \acs{BRDF}, considering multi-angular measurement are taken. For the generation of optical pulses, a highly efficient Nd:YAG (Neodymium-doped Yttrium Aluminum Garnet) hosted \ac{DPSSL}  is considered. Solid-State \acp{laser} have a high \acs{TRL} with relatively good properties in terms of beam quality (Q-factor), efficiency and pulse manipulation. Data products for topographical missions require that the \ac{laser} wave form be nearly pure Gaussian (known as transverse resonator mode $TEM_{00}$ (see figure \ref{gaussian_beam}), both temporally and spatially, with a uniform wave front. The digitized time of flight waveform returning provides the topographic structure \cite{nd_yag_life}. This section describes the detailed design of the optical emitting device; an excessive and interesting introduction of the physical basics behind \acs{laser} technology can be found in \cite{laserfundamentals}. 
 
 \subsection{Principles of \textit{AlGaAs} Laser Diodes}
 \label{laser_diodes}
@@ -9,7 +9,7 @@ Laser diodes are electrically pumped semiconductor \acp{laser}, in which the gai
 \begin{figure} [ht]
 \centering
 \includegraphics[scale=0.6]{chapters/img/diodelaser.png}	
-\caption[Basic diode laser configuration]{Basic diode laser configuration. Each layer boundary causes a partial reflection of an optical wave. For waves whose wavelength is close to four times the optical thickness of the layers, the many reflections combine with constructive interference, and the layers act as a high-quality reflector. The range of wavelengths that are reflected is called the \textit{photonic stopband}. Bragg's law describes the condition for constructive interference from successive crystallographic planes of the crystalline lattice according to n\cdot$\lambda  =2d\cdot sin(\theta)$.} \emph{(Source: \cite{laser_power})}
+\caption[Basic diode laser configuration]{Basic diode laser configuration. Each layer boundary causes a partial reflection of an optical wave. For waves whose wavelength is close to four times the optical thickness of the layers, the many reflections combine with constructive interference, and the layers act as a high-quality reflector. The range of wavelengths that are reflected is called the \textit{photonic stopband}. Bragg's law describes the condition for constructive interference from successive crystallographic planes of the crystalline lattice according to $n\cdot\lambda  =2d\cdot sin(\theta)$. \emph{(Source: \cite{laser_power})}} 
 \label{diode_laser_configuration}
 \end{figure}
 
@@ -28,7 +28,7 @@ Considering the fact that Nd:YAG is considered as gain medium (\ref{nd_yag}), th
 \begin{figure} [ht]
 \centering
 \includegraphics[scale=0.5]{chapters/img/laser_diode_algaas.png}	
-\caption{AlGaAs diode laser. Left: Biased P-N junction showing elementary charge carriers. Exciton dynamics initialize after applying electrical field. Vertical direction characterizes increasing energy. Photon excitation due to stimulated emission visualized in the middle of the GaAs active layer. Right: Basic GaAs diode dimensions and components \emph{(Source: \cite{algaasdiodes})}}
+\caption{AlGaAs diode laser. Left: Biased P-N junction showing elementary charge carriers. Exciton dynamics initialize after applying electrical field. Vertical direction characterizes increasing energy. Photon excitation due to stimulated emission visualized in the middle of the GaAs active layer. Right: Basic GaAs diode dimensions and components. \emph{(Source: \cite{algaasdiodes})}}
 \label{algaas_laser_configuration} 
 \end{figure}
 
@@ -37,7 +37,7 @@ A high laser efficiency demands that the light and injected charge carriers be c
 \begin{figure} [ht]
 \centering
 \includegraphics[scale=0.5]{chapters/img/laser_power.png}	
-\caption{Typical diode \acs{laser} characteristics (P-I, \eta-I and I-U graphs). Power and current information at constant temperature. Parameters decrease with higher temperatures. Properties at desired power output (16 W): 16 A, 0.3 V, 47\%\eta}
+\caption{Typical diode \acs{laser} characteristics (P-I, $\eta-I$ and I-U graphs). Power and current information at constant temperature. Parameters decrease with higher temperatures. Properties at desired power output (16 W): 16 A, 0.3 V, 47 \% efficiency.}
 \label{diode_laser_char}
 \end{figure}
 
@@ -75,7 +75,7 @@ The basic (simplified) configuration of the \acs{laser} with dimensions is shown
   Young's Modulus & 282 GPa\\
   dn/dT & $+8.9\cdot10^{-6}\ K^{-1}$\\\hline
 \end{tabular}
-\caption{Solid-State laser Nd:YAG parameters}
+\caption{Solid-State laser Nd:YAG parameters.}
 \label{tab:ndyag_parameters}
 \end{table}
 
@@ -83,14 +83,14 @@ For applications where $TEM_{00}$ single mode operation is required, it is neces
 
 \begin{figure} [ht]
 \centering
-\includegraphics[scale=1.2]{chapters/img/laser_line.png}	
+\includegraphics[scale=0.7]{chapters/img/laser_line.png}	
 \caption{Left: Nd ion spectral absorption. Right: Quantum energy level and transitions for the Nd:YAG crystal, including the used $F_{3/2}\rightarrow I_{9/2}$ transition. }
 \label{laser}
 \end{figure}
 
 \subsubsection{Second Harmonic Generation}
 \label{SHG}
-Since Nd-YAG has no principle absorption peak at the desired wavelength for the \acs{LiDAR} mission, the frequency should be altered from the original 946 nm. This can be done using \textit{second harmonic generation} or \textit{frequency doubling} in nonlinear $\beta-BaB_{2}O_{4}$ crystals.The physical mechanism behind frequency doubling can be understood using nonlinear optics \cite{laser}. Due to the first order nonlinearity, the fundamental (pump) wave generates a nonlinear polarization wave which oscillates with twice the fundamental frequency. According to Maxwell's equations, this nonlinear polarization wave radiates an electromagnetic field with this doubled frequency. Due to non-homogeneous phase-matching, the generated second-harmonic field propagates dominantly in the direction of the nonlinear polarization wave \cite(algaasdiodes); energy is transferred from the pump wave to the second-harmonic wave. $\beta-BaB_{2}O_{4}$ is used for second, third, fourth and fifth harmonic generation of Nd doping \acp{laser}. Typical dimensions of these crystal are $\sim0.05 - 10\ mm$.
+Since Nd-YAG has no principle absorption peak at the desired wavelength for the \acs{LiDAR} mission, the frequency should be altered from the original 946 nm. This can be done using \textit{second harmonic generation} or \textit{frequency doubling} in nonlinear $\beta-BaB_{2}O_{4}$ crystals.The physical mechanism behind frequency doubling can be understood using nonlinear optics \cite{laser}. Due to the first order nonlinearity, the fundamental (pump) wave generates a nonlinear polarization wave which oscillates with twice the fundamental frequency. According to Maxwell's equations, this nonlinear polarization wave radiates an electromagnetic field with this doubled frequency. Due to non-homogeneous phase-matching, the generated second-harmonic field propagates dominantly in the direction of the nonlinear polarization wave \cite{algaasdiodes}; energy is transferred from the pump wave to the second-harmonic wave. $\beta-BaB_{2}O_{4}$ is used for second, third, fourth and fifth harmonic generation of Nd doping \acp{laser}. Typical dimensions of these crystal are $\sim0.05 - 10\ mm$.
 
 \subsubsection{Pulse Generation}
 \label{pockel}
@@ -156,7 +156,7 @@ The figure \ref{gaussian_beam} on page \pageref{gaussian_beam} shows the mathema
 \label{gaussian_beam}
 \end{figure}
 
-The main point of this section is to determine the Gaussian beam propagations dependency on diffraction phenomenon. To characterize the Gaussian beam in more details, the following equations are used to be able to describe the propagation, where \theta denotes the natural optical Gaussian beam divergence,\alpha the induced divergence (due to optical distortion and focus misalignment) and $w_{0}$ is the beam waist. 
+The main point of this section is to determine the Gaussian beam propagations dependency on diffraction phenomenon. To characterize the Gaussian beam in more details, the following equations are used to be able to describe the propagation, where $\theta$ denotes the natural optical Gaussian beam divergence,$\alpha$ the induced divergence (due to optical distortion and focus misalignment) and $w_{0}$ is the beam waist. 
 
 \begin{equation}
 \theta = \frac{\lambda}{\pi\cdot w_{0}}
@@ -179,7 +179,7 @@ R_{real}(z)=z\left[1 + \left(\frac{w_{0,real}}{z(\theta+\Delta \alpha) M^{2}}\ri
 \end{equation}
 
 \textit{Fraunhofer Diffraction} 
-Diffraction is a fundamental characteristic of all wave fields. The effect of diffraction is typically manifested when an obstacle is placed (in the \acs{laser} configuration, the numerical aperture (NA) in the set-up, considering the diameter of this component equals or exceeds the \acs{laser} beam diameter) in the path of a beam.  On an observation screen some distance away from the obstacle, one observes a rather complicated modulation of the time-average intensity in the vicinity of the boundary separating the illuminated region from the geometrical shadow cast by the obstacle. With the use of high-power lasers, diffraction of radiation beams (cavity oscillating in the fundamental transverse Gaussian $TEM_{00}$ mode) with finite transverse dimensions has significant consequences. The Fresnel number $F = a^{2}/(\lambda \cdot R)$, where a is the characteristic size ("radius") of the aperture,  $\lambda$ is the wavelength, and R is the distance from the aperture, determines the diffraction regime that should be considered (F$\ll$ 1: Fraunhofer (far-field); F \textgreater 1, Fresnel). In the case of the \acs{LIDAR} mission, without actually numerically calculating the aperture, but assuming it to be \sim1 mm, the Fresnel number equals $\frac{0.001^{2}m}{(473\cdot10^{-9})m\cdot500000m}\=4.6\cdot10^{-6}$, clearly $\ll$ 1. The far-field light field is the Fourier transform of the apertured field.
+Diffraction is a fundamental characteristic of all wave fields. The effect of diffraction is typically manifested when an obstacle is placed (in the \acs{laser} configuration, the numerical aperture (NA) in the set-up, considering the diameter of this component equals or exceeds the \acs{laser} beam diameter) in the path of a beam.  On an observation screen some distance away from the obstacle, one observes a rather complicated modulation of the time-average intensity in the vicinity of the boundary separating the illuminated region from the geometrical shadow cast by the obstacle. With the use of high-power lasers, diffraction of radiation beams (cavity oscillating in the fundamental transverse Gaussian $TEM_{00}$ mode) with finite transverse dimensions has significant consequences. The Fresnel number $F = a^{2}/(\lambda \cdot R)$, where a is the characteristic size ("radius") of the aperture,  $\lambda$ is the wavelength, and R is the distance from the aperture, determines the diffraction regime that should be considered (F$\ll$ 1: Fraunhofer (far-field); F \textgreater 1, Fresnel). In the case of the \acs{LiDAR} mission, without actually numerically calculating the aperture, but assuming it to be $\sim$1 mm, the Fresnel number equals $\frac{0.001^{2}}{(473\cdot10^{-9})\cdot500000}=4.6\cdot10^{-6}$, clearly $\ll$ 1. The far-field light field is the Fourier transform of the apertured field.
 	
 \begin{equation} 
 E(k_{x},k_{y}) = \mathcal{F}\left\{{\overbrace{t(x,y)}^{Transmission\  function}\cdot E(x,y)}\right\} = \iint(exp(-i(k_{x} x + k_{y}y))\cdot t(x,y)\cdot E(x,y)dxdy 
@@ -207,22 +207,22 @@ A different point of view, conveniently in the sense of the \acs{LiDAR} mission,
 E(x_{1},y_{1})=\iint\left[exp\left( ik\left(\frac{-2x x_{1}-2y y_{1}}{2z} + \frac{x^{2}+y^{2}}{2z}\cdot t_{lens}(x,y)\cdot E(x,y)\right)\right)\right]dx dy
 \end{equation} 
 
-Avoiding the quadratic terms and using the following relationship, the Fraunhofer diffraction pattern can be conducted \cit{fraunhoferoptics}.
+Avoiding the quadratic terms and using the following relationship, the Fraunhofer diffraction pattern can be conducted \cite{fourieroptics}.
 
 \begin{equation} 
 \frac{k}{2z}=(n-1)\frac{k}{2R_{1}}
 \end{equation} 
 
-Adjusting the lens formula gives:
+Adjusting the lens formula gives, where subscript one denotes the front radius of the lens and two the aft radius of the lens:
 
 \begin{equation} 
 \frac{1}{f}=\left(n-1\right)\left[\frac{1}{R_{1}}-\frac{1}{R_{2}}\right]
 \end{equation} 
 
-The final result shows the dependency of focus length to the Fourier transform of the aperature field. 
+The final result shows the dependency of focus length to the Fourier transform of the aperture field. 
 
 \begin{equation} 
-E(x_{1},y_{1})=\iint exp\left[-i\frac{k}{f}\left(xx_{1}+yy_{1}\right)\cdot t(x,y)\cdot E(x,y)\right] dx dy
+E(x_{1},y_{1})=\iint exp\left[-i\frac{k}{f}\left(xx_{1}+yy_{1}\right)\right]\cdot t(x,y)\cdot E(x,y) dx dy
 \end{equation}
 
 
@@ -233,7 +233,7 @@ E(x_{1},y_{1})=\iint exp\left[-i\frac{k}{f}\left(xx_{1}+yy_{1}\right)\cdot t(x,y
 \label{diff_div}
 \end{figure}
 
-Assuming infinite inverse focal length, the footprint will be diffraction limited, resulting in a footprint according to $H\cdot tan(sin^{-1}(\frac{1.22\cdot \lambda}{a}))$ \cite{fourieroptics}. With an effective aperture of 0.4 cm, the footprint due to diffraction equals 72.1325 m (96.1767 m with 0.3 cm aperture). Hence, 0.4 cm shows a considerately smaller footprint then the desired 100 m set as requirement. By altering the divergence, the footprint size can be altered. 
+Assuming infinite inverse focal length, the footprint will be diffraction limited, resulting in a footprint according to $H\cdot tan(sin^{-1}(\frac{1.22\cdot \lambda}{a}))$ \cite{fourieroptics}. With an effective aperture of 0.4 cm, the footprint due to diffraction equals 72.1325 m (96.1767 m with 0.3 cm aperture). Hence, 0.4 cm shows a considerately smaller footprint then the desired 100 m set as requirement. By altering the divergence, the footprint size can be altered (see figure \ref{diff_div}). 
  
 \subsection{Thermal Control} 
 \label{opticalthermal}
