@@ -23,7 +23,7 @@ The end of this section contains a piece on the data storage, where the required
 \label{Crossem}
 This link transmits the scientific data gathered by the receiver satellites to the emitter satellite. To keep the receiver satellites as small as possible and to have efficient data storage, the receiver satellites will transmit their scientific data continuously so that the emitter satellite can store all data in one data bank before it is transmitted to the ground. In addition to scientific data, command and housekeeping data is also transmitted in this link.
 
-The link budget has the following input parameters: the frequency selected was 2 GHz, the data rate required is 1.62 Mbit/s, the maximum distance between the satellites is 261 km, the modulation used is \acs{QPSK}. Atmospheric losses were not considered for obvious reasons.
+The link budget has the following input parameters: the frequency selected was 2 GHz, the data rate required is 1.31 Mbit/s, the maximum distance between the satellites is 261 km, the modulation used is \acs{QPSK}. Atmospheric losses were not considered for obvious reasons.
 
 In the mid-term report a frequency in the Ku-band was selected, however it turned out that the data rate was low enough to use S-band or more specifically 2 GHz, which requires far less power consuming hardware.
 
@@ -31,7 +31,7 @@ The maximum distance between two satellites is 261 km, which is longest distance
 
 The QPSK was selected for its good balance between required E$_{b}$/N$_{0}$ and spectrum utilization. Also a lot of transceivers are available for this modulation.
 
-Another important parameter is the data rate, 1.62 Mbit/s, which was calculated in appendix \ref{scirate}. The position of the satellite is registered every second (144 bits), while for each received photon the coordinates on the array, time, satellite attitude and instrument attitude are registered (295 bits), with 5000 photons expected per second. Adding an extra 10 \% for overhead gives the final data rate between a single receiver satellite and the emitter satellite.
+Another important parameter is the data rate, 1.31 Mbit/s, which was calculated in appendix \ref{scirate}. The position of the satellite is registered 20 times per second (2880 bits), satellite attitude  2 times per second (210 bits) while for each received photon the coordinates on the array, time, and instrument attitude are registered (238 bits), with 5000 photons expected per second (1190000 bits). Adding an extra 10 \% for overhead gives the final data rate between a single receiver satellite and the emitter satellite.
 
 \subsubsection{Transceiver}
 
