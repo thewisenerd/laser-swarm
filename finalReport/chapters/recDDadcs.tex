@@ -70,7 +70,7 @@ The selected stepper motor is a Faulhaber ADM1220. The nominal power is 0.6 Watt
 
 A harmonic drive gearbox is chosen \cite{harmonicdrive}. Generally a harmonic drive gearbox has half the size and one third of the weight of a conventional gear. A Harmonic Drive CSF-8-50 is selected \cite{harmweb}. This gearbox has a gear ratio of 50:1, a diameter of 30 mm, a length of 22.1 mm and a mass of 26 g. With this set-up it is possible to make one rotation on the output axis using 20 x 50 = 1000 discrete steps. Divided over the $80^\circ$ of the possible pointing options this gives a pointing capability with steps of $0.08^\circ$.
 
-The output of the harmonic drive is put into a wheel with the same circumference as the $80^\circ$ sweep of the tumbler, so a complete rotation of the wheel sweeps the receiver from one extreme to the other. This translates into a wheel with a radius of 22.15 mm and a tumbler with a radius of 59.85 mm from the rotation axis of the receiver. The pointing of the receiver can be read by an array of sensors reading a 10-bit ($2^10 = 1024$ steps) grey code from the side of the tumbler. An example of such a grey code can be seen in figure \ref{fig:greytumbler}. This analogue code is read and digitalised by a set of ten optical link switches. 
+The output of the harmonic drive is put into a wheel with the same circumference as the $80^\circ$ sweep of the tumbler, so a complete rotation of the wheel sweeps the receiver from one extreme to the other. This translates into a wheel with a radius of 22.15 mm and a tumbler with a radius of 59.85 mm from the rotation axis of the receiver. The pointing of the receiver can be read by an array of sensors reading a 10-bit ($2^{10} = 1024$ steps) grey code from the side of the tumbler. An example of such a grey code can be seen in figure \ref{fig:greytumbler}. This analogue code is read and digitalised by a set of ten optical link switches. 
 
 \begin{figure}
 \centering
@@ -92,7 +92,7 @@ The along track pointing of the satellite is done by turning the satellite. Sinc
 \label{ss:recDDoverview}
 In table \ref{tab:adcspointbudgetreceiver} on page \pageref{tab:adcspointbudgetreceiver} an overview is given of all masses, costs and power requirements of the parts of \ac{ADCS}, \ac{ODCS} and the pointing mechanism. Because it is essential for the mission that the instrument is pointed towards the ground target extra mass is added to the support structures for the pointing mechanism.
 \begin{table}[h]
-\begin{tabular}{l | c | c c | c c | c }
+\begin{tabular}{l | c | c c | c c | c }\hline
 Subsystem component    & Number & Mass & Cost & Total mass & Total cost & Power (max)\\ 
                        &   & [g] & [EUR]& [g]  &[EUR] & [W]         \\ \hline \hline
 Sun sensors            & 4 & 24  & 11000& 96   & 44000&  0 (0)      \\
@@ -107,7 +107,8 @@ Thruster			   & 1 & 15  & 250k & 15   & 250k &  1 (2)      \\
 Fuel tanks and pumps   & 1 & 1130 & 300*& 1130  & 300*  & 0 (0)      \\ \hline
 Support structures     &	&	 &	    & 1000  & 400* & 0 (0) \\ \hline
 \textbf{Total} & & &                             & 2500  & 375k & 3.75 (4.5 rms) \\
-&&&&& 435500 FY00\$ &
+&&&&& 435500 FY00\$ &\\
+\hline
 \end{tabular}
 \caption[Mass, cost and power budget of AODCS and pointing mechanism receiver]{Mass, cost and power budget of different parts of the \ac{ADCS}, \ac{ODCS} and pointing mechanism of the receiver. Starred prices are estimations based on material and machining cost.}
 \label{tab:adcspointbudgetreceiver}
