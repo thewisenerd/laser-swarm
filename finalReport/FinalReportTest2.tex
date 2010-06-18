@@ -1,0 +1,232 @@
+
+\documentclass[11pt]{report}
+\pagestyle{myheadings}
+\markright{Group 13\hfill Laser Swarm\hfill}
+\usepackage{pdflscape}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{enumerate}
+\usepackage[printonlyused]{acronym}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{subfig}
+\usepackage{amsmath}
+\usepackage{url}
+\usepackage{fixltx2e}
+\usepackage{booktabs}
+\usepackage{fancyhdr}
+
+\topmargin -1.5cm
+\oddsidemargin -0.04cm 
+\evensidemargin -0.04cm 
+\textwidth 16.59cm 
+\textheight 21.94cm 
+\parskip 7.2pt 
+
+\setcounter{secnumdepth}{5}
+\setcounter{tocdepth}{2}
+\pagenumbering{roman}
+
+\pagestyle{fancy}
+\begin{document}
+%%%%%%%%%%%%%
+%
+%       TOP MATTER
+%
+%%%%%%%%%%%%%
+
+\input{chapters/titlePage.tex}
+
+%%%%%%%%%%%%%
+%
+%       PREFACE
+%
+%%%%%%%%%%%%%
+
+
+\input{chapters/preface.tex}
+
+%%%%%%%%%%%%%
+%
+%       TOC
+%
+%%%%%%%%%%%%%
+
+\newpage
+\addcontentsline{toc}{chapter}{Contents}
+\tableofcontents
+\newpage
+\addcontentsline{toc}{chapter}{List of Figures}
+\listoffigures
+\newpage
+\addcontentsline{toc}{chapter}{List of Tables}
+\listoftables
+
+%%%%%%%%%%%%%
+%
+%       SYMBOLS
+%
+%%%%%%%%%%%%%
+
+\newpage
+\addcontentsline{toc}{chapter}{List of Symbols}
+\Large{\textbf{List of Symbols}}
+\small
+\input{chapters/SymbList.tex}
+
+%%%%%%%%%%%%%
+%
+%       ACRONYMS 
+%
+%%%%%%%%%%%%%
+
+\newpage
+\addcontentsline{toc}{chapter}{List of Acronyms}
+\Large{\textbf{List of Acronyms}}
+\small
+\input{chapters/acronyms.tex}
+
+%%%%%%%%%%%%%
+%
+%       ABSTRACT
+%
+%%%%%%%%%%%%%
+
+\input{chapters/abstract.tex}
+
+%%%%%%%%%%%%%
+%
+%       INTRODUCTION
+%
+%%%%%%%%%%%%%
+\rfoot{\setlength{\unitlength}{1mm}
+\begin{picture}(0,0)
+\put(5,0){\includegraphics{anim/pic\thepage.png}}
+\end{picture}}
+\chapter{Introduction}
+\label{intro}
+\pagenumbering{arabic}
+\input{chapters/introduction.tex}
+
+%%%%%%%%%%%%%
+%
+%	 Flowdiagrams and breakdowns
+%
+%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%
+%
+%	 Budget breakdowns and resource Allocation
+%
+%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%
+%
+%       RISK MANAGEMENT
+%
+%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%
+%
+%       Project management
+%				 - Project Design and development logic
+%				 - Project Gantt Chart
+%				 
+%
+%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%
+%
+%       Cost Breakdown
+%
+%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%
+%
+%       INTERFACE
+%
+%				 -H/W S/W
+%				 - electircal block diagrams
+%				 - data handling
+%				 -data handling
+%
+%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%
+%
+%       Emitter
+%
+%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%
+%
+%       Receiver
+%
+%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%
+%
+%       Astrodynamics
+%
+%%%%%%%%%%%%%
+
+\input{chapters/astrodynamics.tex}
+
+%%%%%%%%%%%%%
+%
+%       DATA RECONSTRUCTION
+%
+%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%
+%
+%       OPS & LOGISTICS
+%
+%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%
+%
+%       Compliance Matrix
+%
+%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%
+%
+%       SUSTAINABLE
+%
+%%%%%%%%%%%%%
+
+\input{chapters/SS.tex}
+\input{chapters/SSPRO.tex}
+\input{chapters/SSOPE.tex}
+\input{chapters/SSEOL.tex}
+
+%%%%%%%%%%%%%
+%
+%       BIBLIOGRAPHY
+%
+%%%%%%%%%%%%%
+
+\bibliographystyle{plain}
+\bibliography{bibliography}
+
+%%%%%%%%%%%%%
+%
+%       APPENDICIES
+%
+%%%%%%%%%%%%%
+
+\appendix
+\chapter{Soyuz-ST Factsheet}
+\label{appa}
+\newpage
+\begin{figure}[ht]
+\centering
+\includegraphics[width=1.0\textwidth, angle=0]{chapters/img/soyuzfact.png}
+\label{fig:soyuzfact}
+
+\end{figure}
+\end{document}
