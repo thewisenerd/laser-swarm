@@ -17,6 +17,7 @@
 \usepackage{booktabs}
 \usepackage{rotating}
 \usepackage{bbding}
+\usepackage{fancyhdr}
 
 \topmargin -1.5cm
 \oddsidemargin -0.04cm 
@@ -99,7 +100,10 @@
 %       INTRODUCTION
 %
 %%%%%%%%%%%%%
-
+\rfoot{\setlength{\unitlength}{1mm}
+\begin{picture}(0,0)
+\put(5,0){\includegraphics{anim/pic\thepage.png}}
+\end{picture}}
 \chapter{Introduction}
 \label{chap:intro}
 \pagenumbering{arabic}
