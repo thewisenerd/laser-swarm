@@ -18,6 +18,9 @@
 \usepackage{rotating}
 \usepackage{bbding}
 \usepackage{fancyhdr}
+\usepackage{caption}
+\usepackage{hyperref}
+\hypersetup{pdfborder=0 0 0}
 
 \topmargin -1.5cm
 \oddsidemargin -0.04cm 
@@ -26,14 +29,16 @@
 \textheight 21.94cm 
 \parskip 7.2pt 
 
+\pagestyle{fancy}
+
+\renewcommand{\captionfont}{\footnotesize}
+\renewcommand{\headrulewidth}{0 pt}
+
+\begin{document}
+
 \setcounter{secnumdepth}{5}
 \setcounter{tocdepth}{2}
 \pagenumbering{roman}
-
-\pagestyle{fancy}
-
-\renewcommand{\headrulewidth}{0 pt}
-\begin{document}
 
 %%%%%%%%%%%%%
 %
@@ -45,10 +50,20 @@
 
 %%%%%%%%%%%%%
 %
+%       ABSTRACT
+%
+%%%%%%%%%%%%%
+
+\normalsize
+%\addcontentsline{toc}{chapter}{Abstract}
+\input{chapters/abstract.tex}
+
+%%%%%%%%%%%%%
+%
 %       PREFACE
 %
 %%%%%%%%%%%%%
-\normalsize
+
 \input{chapters/preface.tex}
 
 %%%%%%%%%%%%%
@@ -57,13 +72,19 @@
 %
 %%%%%%%%%%%%%
 \footnotesize
+
 \newpage
+\phantomsection
 \addcontentsline{toc}{chapter}{Contents}
 \tableofcontents
+
 \newpage
+\phantomsection
 \addcontentsline{toc}{chapter}{List of Figures}
 \listoffigures
+
 \newpage
+\phantomsection
 \addcontentsline{toc}{chapter}{List of Tables}
 \listoftables
 
@@ -74,6 +95,7 @@
 %%%%%%%%%%%%%
 
 \newpage
+\phantomsection
 \addcontentsline{toc}{chapter}{List of Symbols}
 \Large{\textbf{List of Symbols}}
 \footnotesize
@@ -85,35 +107,28 @@
 %
 %%%%%%%%%%%%%
 
-%\newpage
+\newpage
+\phantomsection
 \addcontentsline{toc}{chapter}{List of Acronyms}
 \Large{\textbf{List of Acronyms}}
 \footnotesize
 \input{chapters/acronyms.tex}
-
-%%%%%%%%%%%%%
-%
-%       ABSTRACT
-%
-%%%%%%%%%%%%%
-
 \small
-\input{chapters/abstract.tex}
 
 %%%%%%%%%%%%%
 %
 %       INTRODUCTION
 %
 %%%%%%%%%%%%%
-\rhead{\setlength{\unitlength}{1cm}
-\begin{picture}(0,0)
-\put(-1,-0.7){\includegraphics[width = 2cm]{anim/pic\thepage.png}}
-\end{picture}}
 \chapter{Introduction}
 \label{chap:intro}
 \pagenumbering{arabic}
 \input{chapters/introduction.tex}
 
+\rhead{\setlength{\unitlength}{1cm}
+\begin{picture}(0,0)
+\put(-1,-0.7){\includegraphics[width = 2cm]{anim/pic\thepage.png}}
+\end{picture}}
 %%%%%%%%%%%%%
 %
 %	 Project Management
@@ -123,7 +138,7 @@
 \chapter{Project Management}
 \label{chap:project_management}
 \input{chapters/PMIntroduction.tex}
-\input{chapters/DDBB.tex}
+\input{chapters/DDHR.tex}
 \input{chapters/OperationsLogistics.tex}
 \input{chapters/frPMgantt.tex}
 
@@ -135,12 +150,14 @@
 
 \chapter{Mission Approach}
 \label{chap:mission_approach}
+\input{chapters/MissionApproachIntro.tex}
 \input{chapters/DDFFD.tex}
 \input{chapters/frMAhwblock.tex}
 \input{chapters/SWBDiag.tex}
 \input{chapters/ElectricalBlockDiagram.tex}
 \input{chapters/DHBD.tex}
 \input{chapters/comFD.tex}
+\input{chapters/DDBB.tex}
 
 %%%%%%%%%%%%%
 %
@@ -159,7 +176,7 @@
 %%%%%%%%%%%%%
 \chapter{Launch and Astrodynamic Characteristics}
 \label{chap:astrodynamics}
-\input{chapters/astrodynamics.tex}
+\input{chapters/astrodynamicsRW.tex}
 
 %%%%%%%%%%%%%
 %
@@ -170,7 +187,8 @@
 \chapter{Emitter Satellite}
 \label{chap:emitter}
 \input{chapters/EmitterIntroduction.tex}
-\input{chapters/DDlaser.tex}
+%\input{chapters/DDlaser.tex}
+\input{chapters/DDlaserRW.tex}
 \input{chapters/NaviEmitter.tex}
 \input{chapters/comm_Emittter_FR.tex}
 \input{chapters/emDDadcs.tex}
@@ -268,4 +286,7 @@
 
 \newpage
 \input{chapters/APdatarate.tex}
+
+\newpage
+\input{chapters/DataStorageAppendix.tex}
 \end{document}
