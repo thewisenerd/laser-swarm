@@ -62,7 +62,7 @@ With the help of the formulae from \cite[pages 43-51]{rees}, the incidence vecto
 
 \subsubsection{Noise Scattering}
 
-Also noise is reflected up to the satellites. This reflection takes place in the receiver footprint. Because the direction of the receiver is not perpendicular to the normal of the reflection area, the footprint becomes elliptical. Over this entire elliptical area, solar radiation is reflected to the receiver.
+Also noise is reflected up to the satellites. This reflection takes place in the receiver footprint. Because the direction of the receiver is not perpendicular to the normal of the reflection area, the footprint becomes elliptical. Over this entire elliptical area, solar radiation is reflected to the receiver. The semi major and minor axis of this ellipse can be computed based on divergence of the sensor beam (receiver beam divergence). The SMAD multi pixel behavior is not implemented in the software, because this change would lead to the software to being completed on time. In order to approximate its behavior on a noise level, only the set of pixels that look directly to the emitter footprint are therefore bundled into one equivalent footprint. 
 
 The amount of solar flux that is reflected up to the satellites is only the flux in the spectral width of the receiver. Then using the laws of gray body radiation, the amount of solar flux in the given spectrum is computed that hits the receiver footprint. The equation used to compute the influx is:
 
