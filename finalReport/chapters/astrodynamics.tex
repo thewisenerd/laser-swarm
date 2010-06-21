@@ -1,4 +1,4 @@
-This chapter explains the characteristics of the launch and space segments of the mission. Section \ref{frLS} describes the three main characteristics of bringing the swarm into the orbit: launch vehicle, launch location and orbit insertion. Section \ref{frSS} discusses all the aspects of the constellation and its configuration, and delves into estimations of $\Delta$V and needed propellant. Finally, section \ref{frSEaS} deals with the hazardous space environment and ways of protecting the satellites against it. 
+This chapter explains the characteristics of the launch and space segments of the mission. Section \ref{frLS} describes the three main parts in bringing the swarm into the orbit: launch vehicle, launch location and orbit insertion. Section \ref{frSS} discusses all the aspects of the constellation and its configuration, and delves into estimations of $\Delta$V and needed propellant. Finally, section \ref{frSEaS} deals with the hazardous space environment and ways of protecting the satellites against it. 
 
 \section{Launch Segment}
 \label{frLS}
@@ -8,7 +8,7 @@ The launch segment of the mission includes the selection of the launch vehicle, 
 \subsection{Launch Vehicle}
 \label{frLSLV}
 
-The costs of launch vary greatly between different vehicles. Table \ref{table:vehicleCosts} on page \pageref{table:vehicleCosts} lists approximate total launch costs of respective platforms. The prices are given in Fiscal Year 2000 dollars for consistency.
+The costs of launch vary greatly between different vehicles. Table \ref{table:vehicleCosts} on page \pageref{table:vehicleCosts} lists approximate total launch costs of respective platforms. For consistency, the prices are given in Fiscal Year 2000 dollars.
 \begin{table}[h]
 \begin{centering}
 \begin{tabular}{llr}
@@ -28,11 +28,11 @@ Rokot & Eurokot & 9.8 - 11.4 \\
 \end{centering}
 \end{table}
 
-Based on the information  in the above table it is possible to single out a few platforms which will be affordable for the purpose of this feasibility study. The values represent the total launch segment costs. The Ariane V launcher is the most expensive option by far and would push the budget quite heavily, with an estimated cost of launch almost half of the total budget. However the payload capabilities of the Ariane V launcher far outweigh that of all other platforms, thus making it possible for a combined launch with other satellites, leading to shared costs. This however could jeopardize the mission in the sense that it becomes secondary priority. If that happens, the constellation would have have have higher requirements for orbit acquisition: an extra booster stage or higher onboard fuel capacity for the altitude and/or plane shift, which is not feasible. The Ariane V is therefore an unsuitable platform for this project. 
+Based on the information  in the above table it is possible to single out a few platforms which will be affordable for the purpose of this feasibility study. The values represent the total launch segment costs. The Ariane V launcher is the most expensive option by far and would push the budget quite heavily, with an estimated cost of launch almost half of the total budget. However the payload capabilities of the Ariane V launcher far outweigh that of all other platforms, thus making it possible for a combined launch with other satellites, leading to shared costs. This however could jeopardize the mission in the sense that it becomes secondary priority. If that happens, the constellation would have higher requirements for orbit acquisition: an extra booster stage or higher onboard fuel capacity for the altitude and/or plane shift, which is not feasible. The Ariane V is therefore an unsuitable platform for this project. 
 
 The rest of the launchers can be analyzed with respect to reliability. All of the launch vehicles have been tested, with the exception of the Vega system, which is yet to make its maiden flight. The Vega is therefore not suitable for the analysis at this time. It is for this reason that the project will no longer consider this system at all.  However, better data should be available in the near future which should allow for the Vega platform to be reevaluated.
 
-The same goes for the Falcon - 1e system. The launcher is still under development. Furthermore, the predecessor of the 1e system is the Falcon - 1, which out of total of five launches only had two successful, fails to make a favorable impression. 
+The same goes for the Falcon 1e. The launcher is an incremental improvement on the Falcon 1, of which only the last two launches out of five were successful. This technology is not proven enough for the purpose of the mission.
 
 Table \ref{table:LVreliability} on page \pageref{table:LVreliability} shows some reliability statistics for the remaining 3 vehicles.
 
@@ -64,7 +64,7 @@ An estimation of mass performance for the launch vehicle can be seen in figure \
 \begin{figure}[ht]
 \centering
 \includegraphics[width=1.0\textwidth, angle=0]{chapters/img/lvmass.png}
-\caption{Mass performance of the Soyuz-ST for circular Orbits. \emph{(Source: \cite{soyuzman}.})}
+\caption{Mass performance of the Soyuz-ST for circular orbits. \emph{(Source: \cite{soyuzman}.})}
 \label{fig:massperformance}
 \end{figure}
 
@@ -85,12 +85,10 @@ The choice of the Soyuz brings forth one more advantage: the use of a unique orb
 
 \subsubsection{Vibrational Analysis}
 \label{frLVCA}
+The launch is a critical part of the mission for the survival of the payload. It is during this period that the payload will experience the most severe loads. In this section the origin and magnitude of these loads will be discussed, as well as their impact on the payload. The main loads are the quasi-static loads, shock loads, sinusoidal loads, random vibrations and acoustic vibrations.
 
-The launch is a critical part of the mission for the survival of the payload. It is during this period that the payload will experience the most severe loads.
-In this section the origin and magnitude of these loads will be discussed and their impact on the payload. The main loads are the quasi-static loads, shock loads, sinusoidal loads, random vibrations, acoustic vibrations.
-\\ \\
 Quasi-static loads are caused by the engine thrust. The acceleration will increase steadily as the amount of fuel becomes less. Peaks are reached when the engines run out of fuel and stop giving thrust. The ignition of a stage also results in a peak load. These loads are all in the longitudinal direction. There are also quasi-static loads in the lateral direction caused by ground maneuvers and wind gusts. These kind of loads are expressed as load factors. The maximum load factors for the Soyuz launcher are $+1,5/-5\ g$ in longitudinal direction and $+1,8/-1,8\ g$ in lateral direction.
-\\ \\
+
 Shock loads are high acceleration loads over a short period of time. They are mostly the result of separation events such as the separation of the boosters, different stages of the launcher and the payload fairing. They also occur with the deployment of appendages such as the solar panels. The shock response spectrum of some launchers is given in figure \ref{fig:SRS} on page \pageref{fig:SRS}.
 
 \begin{figure}[ht!]
@@ -125,11 +123,11 @@ Another critical load source are random vibrations. For the Soyuz launcher, only
  Fregat flight & 0.002 & 0.002 & 1.63 & 875 \\
  \bottomrule
  \end{tabular}
- \caption{Soyuz maximum random vibrations}
+ \caption{Soyuz maximum random vibrations \emph{ Source: \cite{soyuzman}.}}
 \label{tab:random_vibr}
 \end{table}
 
-Acoustic vibrations are higher than random vibrations, up to 10 000 Hz. The main sources are the acoustic noise that radiates from the engines and from aerodynamic turbulence when the launcher passes through the transsonic part of the flight. During ground operations the venting system also produces noise. For the Soyuz launcher, this does not exceed 94 dB. Apart from the lift-off and the transsonic part of the flight, the acoustic vibrations are rather low. The structures that are affected the most by acoustic loads are structures with a low mass and high surface area, such as solar panels and skins sections. Table \ref{tab:acoustic_vibr} gives the acoustic noise spectrum under the fairing.
+Acoustic vibrations are higher than random vibrations, up to 10 000 Hz. The main sources are the acoustic noise that radiates from the engines and from aerodynamic turbulence when the launcher passes through the trans-sonic part of the flight. During ground operations the venting system also produces noise. For the Soyuz launcher, this does not exceed 94 dB. Apart from the lift-off and the trans-sonic part of the flight, the acoustic vibrations are rather low. The structures that are affected the most by acoustic loads are structures with a low mass and high surface area, such as solar panels and skins sections. Table \ref{tab:acoustic_vibr} gives the acoustic noise spectrum under the fairing.
 
 \begin{table}[H!]
 \centering
@@ -147,11 +145,11 @@ Frequency [Hz] & (reference: 0 dB = 2 X $10^{-5} Pa$ ) \\
 2000 & 121 \\
 \bottomrule
  \end{tabular}
- \caption{Soyuz acoustic noise spectrum}
+ \caption{Soyuz acoustic noise spectrum \emph{ Source: \cite{soyuzman}.}}
 \label{tab:acoustic_vibr}
 \end{table}
 
-Sinusoidal loads occur mainly during the atmospheric flight. They are caused by the lift off, bending of the rocket motors, aerodynamic buffeting and oscillations in the propulsion system. To avoid these kind of vibrations, the payload must be constructed in such a way that the payloads natural frequencies will not be close to those of the launcher. This will avoid resonance and thus the payload will experience much lower loads. For the Soyuz launcher it is required that the natural frequencies of the payload will be higher than 15 Hz in lateral direction and higher than 35 Hz in longitudinal direction. 
+Sinusoidal loads occur mainly during the atmospheric flight. They are caused by lift off, bending of the rocket motors, aerodynamic buffeting and oscillations in the propulsion system. To avoid these kind of vibrations, the payload must be constructed in such a way that the payload's natural frequencies will not be close to those of the launcher. This will avoid resonance and thus the payload will experience much lower loads. For the Soyuz launcher it is required that the natural frequencies of the payload will be higher than 15 Hz in lateral direction and higher than 35 Hz in longitudinal direction. 
 
 \subsection{Launch Site}
 \label{frLSLS}
@@ -165,7 +163,7 @@ The selection of the launch site relies on several factors:
 	\item Security and political reasons. 
 \end{itemize}
 
-The first factor is crucial. It is paramount that the satellites are injected into their final inclinations at launch and do not have to perform any inclination change maneuvers, which require a substantial $\Delta$V. With this in mind choosing a launch site closer to the equator is necessary. Launch sites at higher latitudes would need to sacrifice velocity and thus payload mass because of their location. Table \ref{table:launchtable} on page \pageref{table:launchtable} shows a number of possible launch sites and their locations \cite{larson}. The list contains only the sites compatible with the Soyuz-ST launch vehicle. Furthermore, in figure \ref{fig:launchsites} on page \pageref{fig:launchsites}, the same sites are indicated with their respective authorized inclination ranges.
+The first factor is crucial. It is paramount that the satellites are injected into their final inclinations at launch and do not have to perform any inclination change maneuvers, which require a substantial amount of $\Delta$V. With this in mind choosing a launch site closer to the equator is necessary. Launch sites at higher latitudes would need to sacrifice velocity and thus payload mass because of their location. Table \ref{table:launchtable} on page \pageref{table:launchtable} shows a number of possible launch sites and their locations \cite{larson}. The list contains only the sites compatible with the Soyuz-ST launch vehicle. Furthermore, in figure \ref{fig:launchsites} on page \pageref{fig:launchsites}, the same sites are indicated with their respective authorized inclination ranges.
 
 \begin{table}[ht!]
 \begin{centering}
@@ -194,7 +192,7 @@ Even though all the sites in table \ref{table:launchtable} allow inclinations of
 
 The \ac{ELS} in Kourou, Guyana is currently being finalized and should accommodate its first Soyuz launch in 2010 \cite{arianesoyuz}.
 
-A typical launch profile of the Soyuz launch vehicle from Kourou is shown in figure \ref{fig:launch} on page \pageref{fig:launch}. The first three stages of the vehicle are used to propel the payload and the Frigate booster in to a circular orbit at around 200 km. After separation (stage 6 on the figure), the Fregat initiates the first orbit injection burn to bring the satellites to the appropriate orbits.
+A typical launch profile of the Soyuz launch vehicle from Kourou is shown in figure \ref{fig:launch} on page \pageref{fig:launch}. The first three stages of the vehicle are used to propel the payload and the Fregat booster in to a circular orbit at around 200 km. After separation (stage 6 on the figure), the Fregat initiates the first orbit injection burn to bring the satellites to the appropriate orbits.
 
 \begin{figure}[ht]
 \centering
@@ -213,7 +211,7 @@ With this information it is possible to further calculate some important launch 
 	\end{equation}
 	
 	where $L$ is the site latitude. For the case of Kourou the inertial velocity is 462.51 m/s.
-	\item The launch azimuth in inertial frame of reference is given by:
+	\item The launch azimuth in the inertial frame of reference is given by:
 	
 	\begin{equation} 
  		A_{Z_I} = arcsin(\frac{cos i}{cos L})
@@ -226,12 +224,12 @@ With this information it is possible to further calculate some important launch 
  		A_Z = arctan(\frac{V_0sinA_{Z_I}-V_{eq}cosL}{V_0cosA_{Z_I}})
 	\end{equation}
 	
-	where $V_0$ is the orbital velocity reached by the launcher before separation and the first burn of Fregat upper stage (see above, around 7.784 km/s), $V_{eq}$ is the velocity of the Earth's rotation at the equator - 464.5 m/s. Thus the corrected launch azimuth becomes 1.61 degrees. 
+	where $V_0$ is the orbital velocity reached by the launcher before separation and the first burn of the Fregat upper stage (see above, around 7.784 km/s), $V_{eq}$ is the velocity of the Earth's rotation at the equator - 464.5 m/s. Thus the corrected launch azimuth becomes 1.61 degrees. 
 	
 	\item The required launch velocity is calculated to be 7.76 km/s which means that due to Earth's rotation 26.8 m/s are saved.
 \end{itemize}
 
-Furthermore the region is politically stable and the launch site is under the protection from the French government and other security forces. All safety procedures are kept to the highest of standards and the spaceport is easily accessible by air or sea \cite{soyuzman}.
+Furthermore the region is politically stable and the launch site is under the protection from the French government and other security forces. All safety procedures are kept to the highest of standards and the spaceport is easily accessible by air or sea (Source: \cite{soyuzman}).
 
 \subsection{Orbit Insertion}
 \label{frLSOI}
@@ -250,18 +248,18 @@ The configuration of the primary orbits is discussed in section \ref{frSSSC} and
 	
 	where $V_i$ is the orbital velocity (7.612 km/s) and $\alpha$ is the relative inclination (2.17$^{\circ}$, see section \ref{frSSSC}) \cite{spacedesign}. The $\Delta$V is calculated to be 289.63 m/s.
 	
-	\item As the Fregat crosses the descending node and approaches the second plane intersection of the orbit, it does not need to change orientation (Orbit 3 intersects in the same direction on the descent phase as Orbit 2 does on the ascent phase). At the intersection Rec 1 is separated with a $\Delta$V of 289.63 m/s. This is a very large value thus the method of deployment should be thoroughly investigated in further design. 
+	\item As the Fregat crosses the descending node and approaches the second plane intersection of the orbit, it does not need to change orientation (Orbit 3 intersects in the same direction on the descent phase as Orbit 2 does on the ascent phase). At the intersection Rec 1 is separated with a $\Delta$V of 289.63 m/s. This is a very large value thus the method of deployment should be thoroughly investigated in a further design. 
 	\item After this the Fregat again aligns with the velocity vector of Orbit 1.
 	\item The Frigate should inject itself into a drift orbit with a negative drift rate of no less then 9.19 deg/orbit and re-injected back to Orbit 1 after traveling $90+\Delta \phi /2 = 90.09505$ degrees. This will bring the launcher 2.3 degrees behind the final emitter position, or 0.12 degrees behind Rec 4.
 	\item At this point the remaining three satellites: Rec 3, Base and Rec 4 should be put into drift orbits by the attachment mechanism in order to acquire the 2.18 degree orbital separation. The exact order and timing can be designed and adjusted accordingly.
 \end{enumerate}
 
-After this, the satellites can be considered to be in their orbits. The Fregat can start the burn to insert into the secondary orbits. Once the altitude of 525 km is reached the Fregat performs a plane shift to change its \ac{RAAN} to approximately 10 degrees behind that of the primary orbit. The exact angle has to be carefully acquired through careful modeling of differential node precessions as the satellites decay. The general idea is that the secondary satellites should have the correct RAANs by the time they decay to arrive in the right position with respect to the emitter.  The formation in the secondary orbit is the same as in the primary orbits minus the emitter, thus similar maneuvers have to be performed.
+After this, the satellites can be considered to be in their orbits. The Fregat can start the burn to insert into the secondary orbits. Once the altitude of 525 km is reached the Fregat performs a plane shift to change its \ac{RAAN} to approximately 10 degrees behind that of the primary orbit. The exact angle has to be carefully acquired through careful modeling of differential node precessions as the satellites decay. The general idea is that the secondary satellites should have the correct \acp{RAAN} by the time they decay to arrive in the right position with respect to the emitter.  The formation in the secondary orbit is the same as in the primary orbits minus the emitter, thus similar maneuvers have to be performed.
 
 \subsection{Launch Date}
 \label{frLSLD}
 
-The launch date is dominated by development times and lifetime considerations. The satellite orbit decay is and thus lifetime is a function of atmospheric density. The density is, in turn, a function of the solar activity. The number of sun spots on the surface of the sun rises and falls every eleven years. The measurements are commonly represented in 10.7 cm radio flux intensities. Figure \ref{fig:f10.7} on page \pageref{fig:f10.7} presents a projection for the next 10 years.
+The launch date is dominated by development times and lifetime considerations. The satellite orbit decay and thus the lifetime is a function of the atmospheric density. The density is, in turn, a function of the solar activity. The number of sun spots on the surface of the sun rises and falls every eleven years. The measurements are commonly represented in 10.7 cm radio flux intensities. Figure \ref{fig:f10.7} on page \pageref{fig:f10.7} presents a projection for the next 10 years.
 
 \begin{figure}[h]
 \centering
@@ -283,7 +281,7 @@ This section covers the astrodynamical characteristics of the mission. The emitt
 \subsubsection{Orbital Parameters}
 \label{frSSEODOP}
 
-The emitter satellite is injected into a circular orbit at an altitude of 500 km. The eccentricity is frozen at 0. Inclination is chosen to be 85 degrees, as this allows access to polar areas, which are places of interest for the mission. Furthermore, the inclination provides an inherent relative phase for the crossing orbits. The \acl{RAAN} can be chosen arbitrary for the start of the mission, as no specific target is assumed for the mission. For consistency, in all following discussions it is assumed to be 0 degrees. The same goes for the Argument of Perigee and the True Anomaly. As the orbit is circular, these values are not really relevant. The emitter satellite acts as the reference for all the receivers.
+The emitter satellite is injected into a circular orbit at an altitude of 500 km. The eccentricity is frozen at 0. Inclination is chosen to be 85 degrees, as this allows access to polar areas, which are places of interest for the mission. Furthermore, the inclination provides an inherent relative phase for the crossing orbits. The \acl{RAAN} can be chosen arbitrary for the start of the mission, as no specific target is assumed for the mission. For consistency, in all following discussions it is assumed to be 0 degrees. The same goes for the Argument of Perigee and the True Anomaly. As the orbit is circular, these values are not really relevant. The emitter satellite acts as the reference for all the receiver satellites.
 
 The orbit is non-sunsynchronous and does not have a specific repeat track. This allows for larger coverage of the Earth. 
 
@@ -317,7 +315,7 @@ Node Precession	&			 $\dot{\Omega}$					&			-0.6667	&			[deg/day]	 \\
 %--------------
 \subsubsection{Orbit Decay}
 \label{frEmOD}
-Atmospheric drag is by far the most relevant perturbation for \ac{LEO} satellites that cause loss of altitude and thus decays the orbit. It directly relates to mass as it influences the amount of fuel required to maintain the orbit, where as the mass influences the rate at which the orbit decays. Altitude selection relies heavily on estimation and analysis of drag data as for longer mission times, higher altitudes are preferred, while optical instruments prefer lower altitudes for increased accuracy.
+Atmospheric drag is by far the most relevant perturbation for \ac{LEO} satellites that causes loss of altitude and thus decays the orbit. It directly relates to mass as it influences the amount of fuel required to maintain the orbit, where as the mass influences the rate at which the orbit decays. Altitude selection relies heavily on estimation and analysis of drag data as for longer mission times, higher altitudes are preferred, while optical instruments prefer lower altitudes for increased accuracy.
 
 The drag that the satellite experiences due to atmospheric density is described by the following formula:
 
@@ -355,9 +353,9 @@ C_D = \alpha C_{DS} + \beta C_{DD}
 \label{cd}
 \end{equation}
 
-where $C_{DS}$ is the specular coefficient of drag, $C_{DD}$ is the diffuse coefficient of drag, $\alpha$ and $\beta$ are component fractions which are determined experimentally. The specular coefficient of drag is usually predominant. In reality this drag coefficient changes. The cross-sectional area normal to the velocity vector can also vary for the swarm satellites if the whole platform is reoriented for instrument pointing. These parameters were adjusted in such a way that a final average $C_D$ of 2.22 for the emitter as well as the receiver was achieved. This is a value which is very commonly used in space mission design.
+where $C_{DS}$ is the specular coefficient of drag, $C_{DD}$ is the diffuse coefficient of drag, $\alpha$ and $\beta$ are component fractions which are determined experimentally. The specular coefficient of drag is usually predominant. In reality this drag coefficient changes. The cross-sectional area normal to the velocity vector can also vary for the swarm satellites if the whole platform is reoriented for instrument pointing. These parameters were adjusted in such a way that a final average $C_D$ of 2.22 for the emitter as well as the receiver was achieved. This is a value which is commonly used in space mission design.
 
-The cross-sectional area of the satellite perpendicular to the velocity vector for a sample period of 6 hours can be seen in figure \ref{fig:area} on page \pageref{fig:area}. The graph was generated using the correct geometry of the satellite simulated in the Satellite Tool Kit\texttrademark software, issued by AGI, Inc. The software also computes the mean area - 1.045948 m$^2$. This will be the area used for lifetime analysis. The mass used is final estimated satellite loaded orbit mass from section \ref{DDMBB}. It is computed to be 22.87 kg/m$^2$. This is well within the normal range for regular satellites \cite{larson}.
+The cross-sectional area of the satellite perpendicular to the velocity vector for a sample period of 6 hours can be seen in figure \ref{fig:area} on page \pageref{fig:area}. The graph was generated using the correct geometry of the satellite simulated in the Satellite Tool Kit\texttrademark software, issued by AGI, Inc. The software also computes the mean area - 1.045948 m$^2$. This will be the area used for lifetime analysis. The mass used is the final estimated satellite loaded orbit mass from section \ref{DDMBB}. It is computed to be 22.87 kg/m$^2$. This is well within the normal range for regular satellites \cite{larson}.
 
 \begin{figure}[ht!]
 \centering
@@ -366,9 +364,9 @@ The cross-sectional area of the satellite perpendicular to the velocity vector f
 \label{fig:area}
 \end{figure}
 
-The second reason drag calculations are so unreliable, is because air density at any altitude is highly variable. Raising air density is primarily connected with solar activity. As solar activity increases every 11 years the atmosphere heats up. Contrary to conventional gas laws that would dictate a fall in density as the gas expands, the atmosphere simply rises, increasing density at higher altitudes. This was previously discussed in section \ref{frLSLD}.
+The second reason drag calculations are so unreliable, is because air density at any altitude is highly variable. Raising air density is primarily connected with solar activity. As solar activity increases every 11 years the atmosphere heats up. Seemingly contrary to conventional gas laws that would dictate a fall in density as the gas expands, the atmosphere simply rises, increasing density at higher altitudes. This was previously discussed in section \ref{frLSLD}.
 
-The density difference during maxima and minima for different altitudes is shown in figure \ref{fig:densityProfile} on page \pageref{fig:densityProfile}. Depending on the altitude, the density could vary for up to a whole order of magnitude between the minimum and maximum.
+The density difference during solar maxima and minima for different altitudes is shown in figure \ref{fig:densityProfile} on page \pageref{fig:densityProfile}. Depending on the altitude, the density could vary for up to a whole order of magnitude between the minimum and maximum.
 
 \begin{figure}[ht]
 \centering
@@ -379,10 +377,9 @@ The density difference during maxima and minima for different altitudes is shown
 
 The orbit lifetime simulation was produced using the software package Satellite Tool Kit\texttrademark and can be seen in figure \ref{fig:emLife} on page \pageref{fig:emLife}.
 
-The simulation performs orbit propagation up to the J$_4$ factor and uses the MSIS-86 Thermospheric Model for atmospheric density calculation. In addition it takes into account solar radiation pressure with an average sun exposed area of 0.84 (this area is also estimated from the satellite model simulations).
+The simulation performs orbit propagation up to the $J_4$ factor and uses the MSIS-86 Thermospheric Model for atmospheric density calculation. In addition it takes into account solar radiation pressure with an average sun exposed area of 0.84 (this area is also estimated from the satellite model simulations).
 
 It is obvious from the previous figure that, unmaintained, the orbit would totally decay in 4.8 years. Another notable time is the point at which the emitter passes the 450 km altitude. This occurs at approximately 3.4 years after mission start. This is the altitude that will be considered as the absolute floor and will be used to approximate the altitude of the secondary satellite orbits.
-
 
 \subsubsection{Estimation of $\Delta V$}
 \label{frEmDV}
@@ -437,7 +434,7 @@ In order to properly estimate the mass of the propellant required for the missio
 	  where $V_i$ is the initial orbital velocity. The final $\Delta V$ is 3.99 m/s.
 \end{itemize}
 
-No $\Delta V$ is required for stationkeeping as the emitter will be allowed to decay naturally while the receivers will have to perform relative stationkeeping. Furthermore, the Soyuz launch vehicle can have a initial delivery altitude error. This is not considered, since it is assumed that as long as the constellation is delivered on the same altitude, no correction will be required and the lifetime of the mission will not be jeopardized. 
+No $\Delta V$ is required for stationkeeping as the emitter will be allowed to decay naturally while the receivers will have to perform relative stationkeeping. Furthermore, the Soyuz launch vehicle can have a initial delivery altitude error. This is not considered, since it is assumed that as long as the constellation is delivered to the same altitude, no correction will be required and the lifetime of the mission will not be jeopardized. 
 
 The total $\Delta V$ required for the emitter is calculated to be approximately 225.38 m/s.
 
@@ -451,15 +448,13 @@ The total $\Delta V$ required for the emitter is calculated to be approximately 
 \subsubsection{Orbital Parameters}
 \label{frSSRODOP}
 
-Unlike the emitter, the receiver satellites are placed in six different orbits and has to be designed to be able to handle all orbits and yet all the satellites have to have the same mass configuration at all times.
+Unlike the emitter, the receiver satellites are placed in six different orbits and have to be designed to be able to handle all orbits and yet all the satellites have to have the same mass configuration at all times.
 
 The orbits are divided into primary and secondary. The primary orbits are shown in figure \ref{fig:confmax} on page \pageref{fig:confmax}. Receiver 1 is located in Orbit 3 which has all the same orbital characteristics of Orbit 1 as described in section \ref{frSSEODOP} with the exception of its \acs{RAAN} having a value of +2.18 degrees. This is the maximum angle of separation and is derived from the requirement of a laser reflection angle of 30 degrees. Receiver 2 in Orbit 2 on the other hand has a \acs{RAAN} of -2.18 degrees. Both of these receiver satellites pass their ascending nodes at the same time as the emitter satellite. The reason for this is that the inclination of the orbits induces a relative phase between the satellites which is favorable for collision avoidance.
 
-Receivers 3 and 4 are placed on the same orbit as the emitter. Receiver 3 travels with a positive phase offset of 2.18 degrees in front of the emitter, while the latter is trailing the emitter at the same offset.
+Receivers 3 and 4 are placed on the same orbit as the emitter. Receiver 3 travels with a positive phase offset of 2.18 degrees in front of the emitter, while the latter is trailing the emitter with the same offset. All orbital velocities and other parameters are identical to those described in section \ref{frSSEODOP}.
 
-All orbital velocities and other parameters are identical to those described in section \ref{frSSEODOP}.
-
-The secondary orbits are designated 1S,2S and 3S, and are arranged in a similar manner while having an orbital altitude of 525 km. Receivers 1S, 2S, 3S and 4S also correspond in their arrangement to their primary counterparts.
+The secondary orbits are designated 1S, 2S and 3S, and are arranged in a similar manner while having an orbital altitude of 525 km. Receivers 1S, 2S, 3S and 4S also correspond in their arrangement to their primary counterparts.
 
 Parameters of the secondary orbits that are different to those of the primary are shown in table \ref{table:orbsecref} on page \pageref{table:orbsecref}.
 
@@ -489,7 +484,7 @@ The initial RAANs are yet to be determined and a very complex model is required 
 \subsubsection{Orbit Decay}
 \label{frRecOD}
 
-The orbit decay analysis is done is a manner identical to that described in section \ref{frEmOD}. The final loaded mass of all the primary receiver satellites should be the same as the final orbits are established in order to decay at the same rate. The mean drag area estimated with the STK\texttrademark software is 0.3 m$^2$. The loaded mass is taken from section \ref{DDMBB}. The area exposed to sun (for solar pressure) is calculated to be 0.25 m$^2$. The ballistic coefficient then becomes 22.40 kg/m$^2$, which is extremely close to that calculated for the emitter satellite, certainly within the margins at this point in the design. This is key to maintaining the constellation. The final design of all the satellites should ensure they decay in absolutely the same manner.
+The orbit decay analysis is done in a manner identical to that described in section \ref{frEmOD}. The final loaded mass of all the primary receiver satellites should be the same as the final orbits are established in order to decay at the same rate. The mean drag area estimated with the STK\texttrademark software is 0.3 m$^2$. The loaded mass is taken from section \ref{DDMBB}. The area exposed to the sun (for solar pressure) is calculated to be 0.25 m$^2$. The ballistic coefficient then becomes 22.40 kg/m$^2$, which is extremely close to that calculated for the emitter satellite, certainly within the margins at this point in the design. This is key to maintaining the constellation. The final design of all the satellites should ensure they decay in the closest possible manner.
 
 The results of the decay simulation can be seen in figure \ref{fig:recLife} on page \pageref{fig:recLife}. They are virtually the same as the decay shown in figure \ref{fig:emLife}.
 
@@ -504,11 +499,11 @@ During the mission different receiver satellites will require different $\Delta 
 The satellites will need to perform the following maneuvers:
 
 \begin{itemize}
-	\item A phase shift maneuver similar to the one described in section \ref{frEmDV}. For this maneuver different drift rates are required for the satellites. Receivers 1 and 2 will need a $\Delta V$ of 32.42 m/s (drift rate assumed to be half an orbit). Receiver 3 would require 31.58 m/s, but would require a whole orbit to establish its position. Receiver 4 would require a mere 0.85 m/s.
+	\item A phase shift maneuver similar to the one described in section \ref{frEmDV}. For this maneuver different drift rates are required for the satellites. Receivers 1 and 2 will need a $\Delta V$ of 32.42 m/s (drift rate assumed to be half an orbit). Receiver 3 would require 31.58 m/s, but would require an entire orbit to establish its position. Receiver 4 would require a mere 0.85 m/s.
 	
 	The secondary orbit satellites have a different circular velocity thus also have different $\Delta V$'s. Receivers 1S and 2S require 32.37 m/s. Receiver 3S needs 31.52 m/s, and finally, Receiver 4S requires 0.84 m/s.
 	\item The deorbit maneuver will require the same $\Delta V$ for all primary satellites and is also equivalent to the that of the emitter - 128.73 m/s. The secondary satellites will require 27.8 m/s less (100.93 m/s in total) as explained earlier.
-	\item The correction for orbit insertion is identical for all primary satellites - 3.99 m/s (see section \ref{frEmDV}). Secondary satellites need a $\Delta V$ of 3.98 m/s. This difference is neglegiable.  
+	\item The correction for orbit insertion is identical for all primary satellites - 3.99 m/s (see section \ref{frEmDV}). Secondary satellites need a $\Delta V$ of 3.98 m/s. This difference is neglegible.  
 \end{itemize}
 
 The total $\Delta V$ for each receiver satellite is computed in table \ref{table:dVrec} on page \pageref{table:dVrec}.
@@ -539,21 +534,21 @@ Again no numbers are specified for stationkeeping. This topic is elaborated on i
 \begin{figure}[ht!]
 \centering
 \includegraphics[width = \textheight]{chapters/img/emitterDecay.png}
-\caption{Emitter satellite orbit decay with an assumed mission start in March 2017. Values used: $C_D$ = 2.22, mass = 53.1 kg, Area = 1.046 m$^2$.}
+\caption{Emitter satellite orbit decay with an assumed mission start in March 2017. Values used: $C_D = 2.22$, $mass = 53.1 kg$, $area = 1.046 m^2$.}
 \label{fig:emLife}
 \end{figure}
 
 \begin{figure}[ht!]
 \centering
 \includegraphics[width = \textheight]{chapters/img/receiverDecay.png}
-\caption{Receiver satellite orbit decay from a primary orbit with an assumed mission start in March 2017. Values used: $C_D$ = 2.22, mass = 14.92 kg, Area = 0.3 m$^2$.}
+\caption{Receiver satellite orbit decay from a primary orbit with an assumed mission start in March 2017. Values used: $C_D = 2.22$, $mass = 14.92 kg$, $area = 0.3 m^2$.}
 \label{fig:recLife}
 \end{figure}
 
 \begin{figure}[ht!]
 \centering
 \includegraphics[width = \textheight]{chapters/img/receiverDecay2nd.png}
-\caption{Receiver satellite orbit decay from a secondary orbit with an assumed mission start in March 2017. Values used: $C_D$ = 2.22, mass = 14.92 kg, Area = 0.3 m$^2$.}
+\caption{Receiver satellite orbit decay from a secondary orbit with an assumed mission start in March 2017. Values used: $C_D = 2.22$, $mass = 14.92 kg$, $area = 0.3 m^2$.}
 \label{fig:recLife2}
 \end{figure}
 \end{landscape}
@@ -608,7 +603,7 @@ tan \phi = \frac{tan ( 90 - \Delta N / 2)}{cos i}
 \label{tanphi}
 \end{equation}
 
-$\Delta N$ is the angular separation at the ascending nodes. Using these equations the relative inclination between Orbit 1 and 2, and 3 and 1 is 2.17 degrees, this corresponds to a separation at the nodes of 261.78 km. The relative inclination between Orbit 2 and 3 is twice this value. The relative phase between the Base and Receiver 1 is 0.1901 (or 22.82 km) as Receiver 1 always crosses Orbit 1 before the emitter satellite. Receiver 2 has the same relative phase with the emitter and trails behind on intersections. The relative phase between satellites in Orbit 2 and 3 is 0.3803 degrees or around 44.6 km.
+$\Delta N$ is the angular separation at the ascending nodes. Using these equations the relative inclination between Orbit 1 and 2, and 3 and 1 is 2.17 degrees; this corresponds to a separation at the nodes of 261.78 km. The relative inclination between Orbit 2 and 3 is twice this value. The relative phase between the Base and Receiver 1 is 0.1901 (or 22.82 km) as Receiver 1 always crosses Orbit 1 before the emitter satellite. Receiver 2 has the same relative phase with the emitter and trails behind on intersections. The relative phase between satellites in Orbit 2 and 3 is 0.3803 degrees or around 44.6 km.
 
 It is also possible to calculate the maximum and minimum separation angles, $\lambda$, using the following relations:
 
@@ -679,7 +674,7 @@ This concept has been successfully demonstrated by the ORBCOMM satellites \cite{
 \subsection{Collision Avoidance}
 \label{frSSCA}
 
-Collision avoidance is an integral part of formation design, yet this analysis cannot be properly performed without the detail design of the constellation. However some design approximations can be already made to estimate the risks.
+Collision avoidance is an integral part of formation design, yet this analysis cannot be properly performed without the detailed design of the constellation. However some design approximations can be already made to estimate the risks.
 
 In the context of this formation, collision avoidance is important for two reasons: potential loss of two vehicles in a collision, one of them possibly being the emitter, and creation of a debris field which can jeopardize the safety of the rest of the platforms. A debris field evolution can be seen in figure \ref{fig:debris} on page \pageref{fig:debris}. This kind of debris propagation can very quickly lead to a snowball effect and destroy the whole constellation. A NASA90 debris flux model was run to simulate the propogation of a possible collision. The results can be seen in figure \ref{fig:debrisModel} on page \pageref{fig:debrisModel}. 
 
@@ -759,13 +754,13 @@ In space, satellites are exposed to streams of highly energetic charged particle
 
 The total radiation dose consists of three components: proton dose, electron dose and the so-called Brehmsstrahlung X-Ray dose produced by the interaction between the electrons and the shielding material of the satellite. In \ac{LEO}, energetic protons in the inner radiation belt contribute most to the total radiation dose. This total is also strongly linked to the orbital altitude and below 1000 km will increase at approximately by the 5\textsuperscript{th} power of the altitude. Furthermore, just like with atmospheric drag, the solar activity plays a major role, thus all cases will be examined.
 
-The number of particles trapped in the Van Allen belts in the vicinity of the orbit under question can be modeled using The Space Environment Information System (SPENVIS) that can be located at the following address: \emph{http://www.spenvis.oma.be/}. SPENVIS contains a large array of NASA and ESA (as well as other) tools and models for complex orbit analysis. For the purposes of this evaluation two models are used: AP-8 and AE-8. The first model predicts proton flux with energy levels above 100 MeV. The latter estimates the flux of electrons with energy of 0.5 MeV or above.
+The number of particles trapped in the Van Allen belts in the vicinity of the orbit under question can be modeled using The Space Environment Information System (SPENVIS) that can be located at the following address: \emph{http://www.spenvis.oma.be/}. SPENVIS contains a large array of NASA and ESA (as well as other) tools and models for complex orbit analysis. For the purposes of this evaluation two models are used: AP-8 and AE-8. The first model predicts proton flux with energy levels above 100 MeV. The latter estimates the flux of electrons with energy levels of 0.5 MeV or above.
 
 Figure \ref{fig:elecFlux} on page \pageref{fig:elecFlux} illustrates the trapped proton and electron flux as a function of distance from Earth Center. For the considered altitudes of 300 to 525 km (1.047 to 1.078 Earth radii) the satellites would encounter relatively the same order of magnitude of proton radiation. The electron radiation will decrease as the satellites decay.
 
 It is further possible to estimate the total dose of radiation that the satellites will experience with an assumed aluminum thickness of 1mm. Another SPENVIS model, called SHIELDOSE-2, is used for this estimation. The results are presented in figure \ref{fig:dose}.
 
-From the figure it is seen that with the standard cubesat shielding of 1 mm the total mission exposure is approximately in the order of 10$^4$ rad. This is an acceptable range for all space rated instruments considered in this design \cite{larson}. However if new technologies are not up to withholding this dose, an increase of thickness to 1.5 mm would bring the total dose to 10$^3$ rad. 
+From the figure it is seen that with the standard cubesat shielding of 1 mm the total mission exposure is approximately in the order of $10^4$ rad. This is an acceptable range for all space rated instruments considered in this design (Source: \cite{larson}). However if new technologies cannot withstand this dose, an increase of thickness to 1.5 mm would bring the total dose to $10^3$ rad. 
 
 \begin{figure}[!h]
 \centering
