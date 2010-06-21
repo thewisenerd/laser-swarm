@@ -35,7 +35,6 @@ import com.google.code.laserswarm.simulation.SimTemplate;
 import com.google.code.laserswarm.simulation.SimVars;
 import com.google.code.laserswarm.simulation.Simulator;
 import com.google.code.laserswarm.simulation.SimulatorMaster;
-import com.google.code.laserswarm.simulation.postSimulation.SlopeSpread;
 import com.google.code.laserswarm.util.demReader.DemCreationException;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
@@ -48,7 +47,7 @@ public class Altitude {
 
 	public static void main(String[] args) throws DemCreationException, MathException,
 			IOException {
-		run(dataPoints, new FindElevationNeighborInterpolation(1, (int) 97e12, 0.15, 9, 0.5, 0.707));
+		run(dataPoints, new FindElevationNeighborInterpolation(1, (int) 97e12, 1, 9, 0.5, 0.707));
 	}
 
 	public static void run(int dataPoint, ElevationFinder findEl) throws DemCreationException,
@@ -111,8 +110,8 @@ public class Altitude {
 
 			HashMap<SimTemplate, Simulator> points = mgr.runSim();
 			for (SimTemplate templ : points.keySet()) { // assuming only one template
-				SlopeSpread slope = new SlopeSpread();
-				slope.modify(points.get(templ), templ.getConstellation());
+			// SlopeSpread slope = new SlopeSpread();
+			// slope.modify(points.get(templ), templ.getConstellation());
 				List<SimVars> dataPoints = points.get(templ).getDataPoints();
 				emitterHistory = new EmitterHistory(templ.getConstellation(), dataPoints);
 				constellation = templ.getConstellation();
