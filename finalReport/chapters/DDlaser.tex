@@ -129,9 +129,9 @@ Considering the value of $E_{p}$ to be 1 [mJ] with a $f_{rep}$ of 5,000 [Hz], th
 P_{output} = E_{p} \cdot f_{rep} = 0.001\ J \cdot 5,000\ 1/s = 5.0\ W
 \end{equation}
 
-The \textit{total} electrical-to-optical power efficiency of a laser system ($\eta_{wp}$), i.e. the \textit{wall plug efficiency}, typically is $\sim 10\ \%$, however, linear interpolations of the current data, considering the large amount of research done on this subject, shows that $\eta_{wp}$ increases with one percent point every year (on average) from 2004, giving an wall plug efficiency of $\sim16\ \%$ in 2010 and \textgreater20 \% in 2015 \cite{nd_yag_life}. A higher value of $\eta_{wp}$ reduces the electrical power consumption and also the amount of heat which has to be removed. Simulation shows a power needed for succesfull photon detection in this altimetry mission of $\sim5 W$, ending up with a total power need of 50 W ($\eta_{wp}$=0.1) or (more realistic considering launch in 2017) 25 W ($\eta_{wp}$ = 0.2). 
+The \textit{total} electrical-to-optical power efficiency of a laser system ($\eta_{wp}$), i.e. the \textit{wall plug efficiency}, typically is $\sim 10\ \%$, however, linear interpolations of the current data, considering the large amount of research done on this subject, shows that $\eta_{wp}$ increases with one percent point every year (on average) from 2004, giving an wall plug efficiency of $\sim16\ \%$ in 2010 and \textgreater20 \% in 2015 \cite{nd_yag_life}. A higher value of $\eta_{wp}$ reduces the electrical power consumption and also the amount of heat which has to be removed. Simulation shows a power needed for succesfull photon detection in this altimetry mission of $\sim5 W$, ending up with a total power requirement of 50 W ($\eta_{wp}$=0.1) or (more realistic considering launch in 2017) 25 W ($\eta_{wp}$ = 0.2). 
   
-The pulse peak intensity equals $E_{p}/t_{p} = 0.001\ J / 10\cdot10^{-9}\ s = 100,000\ W$. The intensity turns out to be $\frac{E_{p}/t_{p}}{A_{beam}} = \frac{100,000\ W}{0.50265\ cm^{2}} = 198,950.6\ W/cm^{2} (0.00199\ J/cm^{2}/10ns)$. The standard damage threshold energy $E_{p,damage}$for dielectric components equals $0.5 - 10\ J/cm^{2}/10ns$. Considering the lowest value $I_{p,damage}$, hence, $0.5\ J/cm^{2}/10ns$, and converting this to the appropriate dimensions, shows the intensity created within the electromagnetic pulses should do no harm to the dielectric components. Especially the polarizer disk (with the lowest $I_{p,damage}$) is vulnerable for peak power caused by pulsed electromagnetic radiation. 
+The pulse peak intensity equals $E_{p}/t_{p} = 0.001\ J / 10\cdot10^{-9}\ s = 100,000\ W$. The intensity turns out to be $\frac{E_{p}/t_{p}}{A_{beam}} = \frac{100,000\ W}{0.50265\ cm^{2}} = 198,950.6\ W/cm^{2} (0.00199\ J/cm^{2}/10ns)$. The standard damage threshold energy $E_{p,damage}$for dielectric components equals $0.5 - 10\ J/cm^{2}/10ns$. Considering the lowest value $I_{p,damage}$, hence, $0.5\ J/cm^{2}/10ns$, and converting this to the appropriate dimensions, shows that the intensity created within the electromagnetic pulses should do no harm to the dielectric components. Especially the polarizer disk (with the lowest $I_{p,damage}$) is vulnerable for peak power caused by pulsed electromagnetic radiation. 
 
 \subsection{Gaussian Beam Propagation and Diffraction}
 	\label{diffraction}
@@ -139,7 +139,7 @@ The pulse peak intensity equals $E_{p}/t_{p} = 0.001\ J / 10\cdot10^{-9}\ s = 10
 \cite{fourieroptics}Collimated plane wave propagation (uniform \textbf{k}-vector distribution) in optical systems would give rise to discrete and accurate calculations. However, due to optical distortions and modifications, the \textbf{k}-vector distribution can change, hence, altering the wave propagation. This section is based on \cite{fourieroptics} and \cite{fourieroptics1}. 
 
 \textit{Gaussian Beams}
-The figure \ref{gaussian_beam} on page \pageref{gaussian_beam} shows the mathematical desription of the Gaussian beam. For the analysis of the \acs{laser} beam intensity profile, a Gaussian profile (transverse resonator mode $TEM_{00}$) is considered corrected by the $M^{2}$ factor for optical distortion. The $M^{2}$ factor is a common measure of the beam quality of a laser beam.  The electric field distribution for a Gaussian beam is represented as:
+Figure \ref{gaussian_beam} on page \pageref{gaussian_beam} shows the mathematical desription of the Gaussian beam. For the analysis of the \acs{laser} beam intensity profile, a Gaussian profile (transverse resonator mode $TEM_{00}$) is considered corrected by the $M^{2}$ factor for optical distortion. The $M^{2}$ factor is a common measure of the beam quality of a laser beam.  The electric field distribution for a Gaussian beam is represented as:
 
 \begin{equation}
 	E(r,z) = E_{0}\cdot \frac{w_{0}}{w(z)} \cdot exp\left[\frac{-r^{2}}{w(z)}\right]\cdot exp\left[-i(kz-arctan\left(\frac{z}{z_{r}}\right)+\frac{kr^{2}}{2R(z)}\right]
@@ -189,7 +189,7 @@ E(k_{x},k_{y}) = \mathcal{F}\left\{{\overbrace{t(x,y)}^{Transmission\  function}
 E(x,y,z) = \frac{exp\left[-i(kz + \psi(z))\right]}{w(z)}\cdot exp\left[\frac{-(x^{2}+y^{2})}{w^{2}(z)}-\frac{ik(x^{2}+y^{2})}{2R(z)}\right]
 \end{equation}
 
-The lens incorporates a phase delay to the outgoing electromagnetic field. For the entire derivation of the this equation, \cite{laser_power} should be evaluated (in this case, R is the curvature of the lens). 
+The lens incorporates a phase delay to the outgoing electromagnetic field. For the entire derivation of this equation, \cite{laser_power} should be evaluated (in this case, R is the curvature of the lens). 
 
 \begin{equation}
 t_{lens} = exp\left\{-i(\left((n-1)(\frac{k}{2R}(x^{2}+y^{2})\right)\right\}
