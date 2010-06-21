@@ -23,15 +23,14 @@ The end of this section contains a piece on the data storage, where the required
 \label{Crossem}
 This link transmits the scientific data gathered by the receiver satellites to the emitter satellite. To keep the receiver satellites as small as possible and to have efficient data storage, the receiver satellites will transmit their scientific data continuously so that the emitter satellite can store all data in one data bank before it is transmitted to the ground. In addition to scientific data, command and housekeeping data is also transmitted in this link.
 
-The link budget has the following input parameters: the frequency selected was 2 GHz, the data rate required is 1.31 Mbit/s, the maximum distance between the satellites is 261 km, the modulation used is \acs{QPSK}. Atmospheric losses were not considered for obvious reasons.
-
+The link budget has the following input parameters: the frequency selected was 2 GHz, the data rate required is 1.31 Mbit/s, the maximum distance between the satellites is 261 km and the modulation used is \acs{QPSK}.
 In the mid-term report a frequency in the Ku-band was selected, however it turned out that the data rate was low enough to use S-band or more specifically 2 GHz, which requires far less power consuming hardware.
 
 The maximum distance between two satellites is 261 km, which is longest distance that occurs between the emitter satellite and any of the receiver satellites. Distance between receiver satellites can be twice as long but were not considered after the relative tracking with these crosslinks was abandoned.
 
 The QPSK was selected for its good balance between required E$_{b}$/N$_{0}$ and spectrum utilization. Also a lot of transceivers are available for this modulation.
 
-Another important parameter is the data rate, 1.31 Mbit/s, which was calculated in appendix \ref{scirate}. The position of the satellite is registered 20 times per second (2880 bits), satellite attitude  2 times per second (210 bits) while for each received photon the coordinates on the array, time, and instrument attitude are registered (238 bits), with 5000 photons expected per second (1190000 bits). Adding an extra 10 \% for overhead gives the final data rate between a single receiver satellite and the emitter satellite.
+Another important parameter is the data rate, 1.31 Mbit/s, which was calculated in appendix \ref{scirate}. The position of the satellite is registered 20 times per second (2880 bits), satellite attitude twice per second (210 bits) while for each received photon the coordinates on the array, time, and instrument attitude are registered (238 bits), with 5000 photons expected per second (1190000 bits). Adding an extra 10 \% for overhead gives the final data rate between a single receiver satellite and the emitter satellite.
 
 \subsubsection{Transceiver}
 
@@ -64,9 +63,9 @@ Because the selected modulation is QPSK and the maximum allowable bit error rate
 \subsection{Ground-Space Link for Scientific Data}
 As mentioned the past subsection, all scientific data is collected on the emitter satellite which is then transmitted to the ground when it passes its ground station.
 
-The link budget has the following input parameters: the frequency selected was 8.2 GHz, the data rate allowed is 150 Mbit/s, the maximum distance between the ground station and the satellite is 1000 km, the modulation used is QPSK.
+The link budget has the following input parameters: the frequency selected was 8.2 GHz, the data rate allowed is 150 Mbit/s, the maximum distance between the ground station and the satellite is 1000 km and the modulation used is QPSK.
 
-The frequency selected is of the X-band as was mentioned in the mid-term review, since it allows a high data rate and is commonly used for Earth observation satellites and thus a lot of ground stations have the right equipment for this frequency band.
+The frequency selected is that of X-band as was mentioned in the mid-term review, since it allows a high data rate and is commonly used for Earth observation satellites and thus a lot of ground stations have the right equipment for this frequency band.
 
 The data rate depends on the link time between ground station and satellite, the time between the passes and the storage capacity. The exact required data rate was determined in section \ref{DSEmitter} on data storage and resulted in 111 Mbps, nevertheless the 150 Mbps figure was used in the calculations for the linkbudget to allow for more margin.
 
@@ -91,7 +90,7 @@ Similar to the link budget of the crosslinks, the selected modulation is QPSK an
 \label{emitter_GSL}
 Aside from the one way space to ground link for scientific data there is also a separate two way link for commands and housekeeping data. 
 
-The link budget has the following input parameters: the frequency selected was 2 GHz, the data rate allowed is 20 kbps, the maximum distance between the ground station and the satellite is 1000 km, the modulation used is QPSK.
+The link budget has the following input parameters: the frequency selected was 2 GHz, the data rate allowed is 20 kbps, the maximum distance between the ground station and the satellite is 1000 km and the modulation used is QPSK.
 
 The frequency selected is 2 GHz since only a very low data rate is required, and since most ground station over the world are equipped with hardware for S-band links this allows for many contact opportunities to send commands or receive housekeeping data in addition to its main ground station at ESRANGE.
 
@@ -109,6 +108,6 @@ Also the S-band patch antenna from Surrey Satellite technologies was again selec
 The ground station selected was again ESRANGE, Kiruna, for the reasons as the ground-space link for scientific data. For S-band the base has several receiver antennas from 2.4 m to 13 m, but the linkbudget showed a 2.4 m parabolic reflector dish is already more than sufficient. The gain of this antenna is 53 dBi and has a beamwidth of 30$^{circ}$ \cite{esrange}.
 
 \subsubsection{Link Budget}
-For this last link budget, the selected modulation is QPSK and the maximum allowable bit error rate is 10$^{-5}$, meaning the required E$_{b}$/N$_{0}$ is equal to 9.6 dB. With the output power of the transceiver at 1 Watt or 0 dBW, it is possible to have a E$_{b}$/N$_{0}$ of 39.25 dB, which leaves a margin of 27.65 dB. For detailed link budget see Appendix \ref{linkbudgets}.
+For this last link budget, the selected modulation is QPSK and the maximum allowable bit error rate is 10$^{-5}$, meaning the required E$_{b}$/N$_{0}$ is equal to 9.6 dB. With the output power of the transceiver at 1 Watt or 0 dBW, it is possible to have a E$_{b}$/N$_{0}$ of 39.25 dB, which leaves a margin of 27.65 dB. For a detailed calculation of the link budget see Appendix \ref{linkbudgets}.
 
 \input{chapters/DataStorageEmitter.tex}
