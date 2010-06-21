@@ -1,6 +1,6 @@
-\section{Detailed Design Optical Receiving Payload}
+\section{Detailed Design of the Optical Receiving Payload}
 \label{sec:DDreceiver}
-The figure \ref{fig:receiver_overview} on page \pageref{fig:receiver_overview} gives an overview diagram of the receiver optics.  More information about the design concept or trade off can be found in the midterm report. In this detailed design report, the wavelength filter system and the single photon detection device \acs{SPAD} research will be the pivot, after that the receiver payload summary and budget will be drawn.
+The figure \ref{fig:receiver_overview} on page \pageref{fig:receiver_overview} gives an overview diagram of the receiver optics.  First the design concept will be shortly demonstrated, though in this detailed design, the wavelength filter system and the \acl{SPAD} research will be the pivot. Finally the receiver payload summary and budget will be drawn up.
 
 \begin{figure}[ht!]
 \centering
@@ -9,9 +9,34 @@ The figure \ref{fig:receiver_overview} on page \pageref{fig:receiver_overview} g
 \label{fig:receiver_overview}
 \end{figure} 
 
+\subsection{Introduction}
+\subsubsection{Design Concept}
+The design concept for the optical receiving payload is demonstrated in figure \ref{fig:receiver_overview}, page \pageref{fig:receiver_overview}. Before going into this drawing, one first has to realize that a parabolic mirror takes parallel lightbeams and focuses them on a single focal point, or vice versa. Good examples of parabolic mirrors are solar collectors and satellite dishes.
+
+Now in the left of figure \ref{fig:receiver_overview}, one can see the incident photons coming from the top. They are collected by the first parabolic reflector, which is the size of the receiver aperture, and sent through the focal point into the second parabolic mirror, top left. The second parabolic mirror has about the same focal point as the first parabolic mirror, and it is adjusted so that the light incident on it is transformed into a very tight parallel beam. The width of this focused beam is one millimeter.
+
+The tight beam passes into the receiver assembly, the box shown to the utmost left of the figure. This assembly is enlarged in the top right of the drawing. The light beam passes through the prism which diffracts and filters out the light that is not in the required bandwidth. The exact working of this filter will be explained in section \ref{prism} After passing through the hole in the barrier, the filtered light is ready to be received by the \acp{SPAD}.
+
+This part is enlarged on the right bottom of the drawing. The challenge here is to take the single coherent beam of light and spread it correctly over 32 by 32 widely spaced micron-scale detectors. This problem is solved by spreading the light out by a lens (not shown in the drawing), and then letting it fall on a 32 by 32 faceted array of elliptical mirrors.
+
+Elliptical mirrors have a very interesting property: they take light coming from one focal point and focus it on the other focal point. The faceted mirror consists of elliptical mirrors, each of them having a commong focal point, which is the imaginary focal point behind the concave lens. Now whereas all 1024 elliptic facets have the first focal point in common, their second focal point is aligned, for every one of them, with their own detector in the 32 by 32 detector array. This allows subsampling of the beam onto the \ac{SPAD} array.
+
+As the receiver orbit will drop over time, the focusing of the optical receiving payload has to be changed periodically. For this end, a linear actuator is put behind the secondary mirror, which refocuses it to keep the beam parallel when necessary. The design for this linear actuator is the same as for the laser focusing, so the reader is referred to section \ref{focus}, page \pageref{focus} for more detail.
+
+\subsubsection{Performance Considerations}
+The optical receiving payload has to perform well enough for the mission to deliver what its customers expect from it. This section explores what the impact of the payload design is on performance.
+
+Firstly, the worst case resolution for the detector array is 97 picoseconds. This corresponds to a height of less than 3 centimeters, which is very good. This means that, once noise is filtered out, topology can be determined very accurately.
+
+Secondly, the fact that the system uses an array of a 1024 detectors brings some interesting benefits to the platform. Not only does it allow the pointing requirements to be less stringent, but it also allows one to look within the footprint. The pointing accuracy is one tenth of a degree, which is about 870 meters on the Earth radius. There are 32 by 32 detectors, which means that a single detector will look at a 27 by 27 meter area. The laser dictating a footprint of 72 meters, this means that in total 9 to 16 detectors will be looking at the footprint at any time. This seems little - at most 16 out of 1024 detectors looking at the footprint. But as the number of photons per satellite per pulse is around, this is justificable.
+
+The footprint subsampling allows the payload to not alone determine the terrain slope along the groundtrack of the emitter, but also cross-track. This allows determination of the (averaged) surface normal. In turn, this terrain surface normal allows much more precise determination of the \ac{BRDF}.
+
+Another help here is the oversampling done by the constellation. At a forward speed of 8 km/s, and a sampling rate of 5 kHz, one finds that a footprint of 72 meters is imaged 45 times. This allows sophisticated averaging techniques, leading to precise terrain topology reconstruction, surface reflection characteristics determination, and \ac{BRDF} computation.
+
 \subsection{\ac{SPAD}}
 \label{SPAD}
-\ac{SPAD} identifies a class of solid-state photo detectors based on a reverse biased \textit{p-n junction} in which a photo-generated carrier can trigger an avalanche current due to the impact ionization mechanism. This device is able to detect low intensity signals (down to the single photon) and to signal the arrival times of the photons with a jitter of a few tens of picoseconds. However, these devices are typically based on complex circuits, whose area occupation and power consumption makes their integration impossible at a pixel level. In this case, 32 \ac{TDC}s have been implemented on chip serving an array of 128x128 SPAD based pixels, while reports an example of in-pixel implementation, in a linear array, of a \ac{TAC}\cite{SPAD3}. The figure \ref{fig:spad_overview} on page \pageref{fig:spad_overview} is how the \acs{SPAD} chip looks like.
+A \acl{SPAD} identifies a class of solid-state photon detectors based on a reverse biased \textit{p-n junction} in which a photon-generated carrier can trigger an avalanche current due to the impact ionization mechanism. This device is able to detect low intensity signals (down to a single photon) and to signal the arrival times of the photons with a jitter of a few tens of picoseconds. However, these devices are typically based on complex circuits, whose area occupation and power consumption makes their integration impossible at the pixel level. In this case, 32 \acp{TDC} have been implemented on chip serving an array of 128x128 SPAD based pixels, while reports show an example of an in-pixel implementation, in a linear array, of a \ac{TAC} (\cite{SPAD3}). Figure \ref{fig:spad_overview} on page \pageref{fig:spad_overview} shows what the \acs{SPAD} chip looks like.
 
 \begin{figure}[ht!]
 \centering
@@ -22,38 +47,23 @@ The figure \ref{fig:receiver_overview} on page \pageref{fig:receiver_overview} g
 
 \subsubsection{Avalanche Diodes}
 \label{diodes}	
-Essentially, a \ac{SPAD} is a reversed biased \textit{p-n junction} that operates at a voltage level above the breakdown voltage. At this bias, the electric field is so high that a single charge carrier injected into the depletion layer can trigger a self-sustaining avalanche. The current rises swiftly (nanoseconds or subnanosecond rise time) to a macroscopic steady level in the milliampere range. Bias supply voltage $V_a$ exceeds breakdown voltage (non-destructive and reversible process) $V_b$ by an amount called the \textit{excess bias voltage} $V_e = (V_a - V_b)$, which has a determining influence on detector performance. Actually, the value of the ratio $\frac{V_e}{V_b}$ is important, not the value of $V_e$ alone, because the performance is related to the excess electric field above breakdown level. 
+\aclp{SPAD} consist of avalanche diode. An avalanche diode is a \textit{p-n junction}, which has a voltage applied so that a single photon striking the depletion layer is amplified to a sustained avalanche. The start of the avalanche marks the arrival time of the photon. The avalanche is sustained until the diode is quenched.
 
-If the primary carrier is photogenerated, the leading edge of the avalanche pulse marks the arrival time of the detected photon. The current continues to flow until the avalanche can be quenched by lowering the bias voltage to the breakdown voltage ($V_b$) or below. For a photon to be detected, not only must it be absorbed in the detector active volume and generate a primary carrier (more precisely, an electron-hole pair, i.e. \textit{an exciton}), it is also necessary that the primary carrier succeeds in triggering an avalanche. The efficiency of photon detection thus increases with excess bias voltage $V_e$, since higher electric field gradient enhances the triggering probability.   
+Quenching is done by reversing the voltage to normal bias, which effectively wipes the diode, so that there is no avalanche any more and the device is light sensitive again. Quenching in our array is active. This reduces the dead time to values well below the 100 picosecond mark.
 
-As it happens in \ac{PMT}s, thermal generation effects produce current pulses even in the absence of illumination, and the Poissonian fluctuation of the dark counts represents the internal noise source of the detector. \textit{Dark-count rate} includes primary and secondary pulses. \textit{Primary dark pulses} are due to carriers thermally generated in the \acs{SPAD} junction, so that the count rate increases with the temperature as does the dark current in ordinary photodiodes. The rate also increases with $V_e$ because of field-assisted enhancement of the emission rate from generation centers and an increase in triggering probability. \textit{Secondary dark pulses} are due to afterpulsing effects that may strongly enhance the total dark-count rate. During avalanche some carriers are captured by deep levels in the junction depletion layer and subsequently released with a statistically fluctuating delay. Released carriers can retrigger the avalanche, generating afterpulses correlated with a previous avalanche pulse. The number of carriers captured during the avalanche pulse increases with the total number of carriers crossing the junction, that is, with the total charge of the avalanche pulse. Therefore afterpulsing increases with the delay of avalanche quenching and the current intensity, which is proportional to excess bias voltage $V_e$. The figure \ref{spad_para} on page \pageref{spad_para} shows some important parameters related to excess bias voltage and wavelength.
+An avalanche may also be caused thermally. This is called \textit{dark noise}. As it increases with temperature, this means that for the receiver the lowest operable temperature is favoured. In space, this is not hard to achieve for such a low power chip. Additional dark noise is generated by stored charges, caused by quenching and avalanches.
 
-\begin{figure} [ht]
-\centering
-\includegraphics[scale=0.8]{chapters/img/SPAD_Ve_functions.png}	
-\caption{\acs{SPAD} parameters diagrams with excess bias voltage and wavelength}
-\label{spad_para}
-\end{figure}
-
-\subsubsection{Quenching Circuits}
-\label{AQC}
-A \acs{SPAD} is generally implemented as a p-n junction biased above breakdown. Including quenching and recharge, there is a total 'Dead time' required by the \acs{SPAD} to perform detection for the next photon, which is also responsible for the upper limit of photon flux detectable by a \acs{SPAD}. Different quenching circuits will lead to different \acs{SPAD} dead time and smaller dead time is prior since during the time the \acs{SPAD} cannot detect any incoming photons. There exist mainly two categories of quenching circuits, named active and passive quenching. 
-
-In active quenching, the avalanche is sensed and a feedback circuit provides a mechanism to force the reverse bias of the p-n junction below breakdown. The same circuit is generally used to actively recharge the device to its initial state, above breakdown, so as to enable the next detection cycle.
-
-In passive quenching, the avalanche current is used to directly act on the reverse bias voltage by lowering it towards breakdown voltage, which eventually quenches the current. If this is achieved, for example, using a resistance in series to the photo diode, the effective capacitance of the junction must be passively recharged through the quenching resistance.
-
-According to the experimental result, the passive quenching circuit has the dead time in terms of hundreds nanoseconds but the active quenching circuit can reduce the dead time to a few tens of nanoseconds. That is the reason the active quenching circuit is selected in this case.
+A lot more can be said about avalanche diodes, but this report is not the place to do so. For more information, the reader can refer to the excellent work by those who built the chip we use: \cite{SPAD}, \cite{SPAD2} and \cite{SPAD3}.
 
 \subsubsection{Space Qualification}
 \label{SQ}
-Since the photon detection device will be operating in space, there is a big advantage of the 32$\times$32 pixel array \acs{SPAD} which did the \acs{ESA}'s space qualification test. According to professor Charbon (\acs{SPAD} developer), the \acs{SPAD} chip itself is survived during the test but not the motherboard connected to it, which means that a separate space application motherboard for \acs{SPAD} need to be designed.
+As the photon detection device will be operated in space, a big advantage of the 32$\times$32 pixel array \ac{SPAD} is that it was tested according to the \acsp{ESA} space qualification test. According to professor Charbon (\ac{SPAD} developer), the \ac{SPAD} chip itself survived during the test but not the motherboard connected to it, which means that a separate space application motherboard for the \ac{SPAD} chip needs to be designed.
 
 \subsection{Prism Design}
 \label{prism}
-Before the prism is taking into consideration, the optical filter is also considered as an option, which is more simple than prism and barriers. The optical filters bandwidth accuracy are in terms of several docades of nano meters (minimum 10 nm \cite{optical_filter}), which is not acceptable since the objective is to filter out all noisy light except wavelength around 473 nm. Meanwhile, the transmission is another problem for normal optical filters, which have much lower value(around 50\%) for smaller bandwidth accuracy (10 nm to 20 nm) and higher value (around 90\%) for larger bandwidth accuracy (more than 30 nm), but prism can has higher transmission as 97\% for specified glass material.
+Before the prism is taking into consideration, the optical filter is also considered as an option, which is more simple than a prism and barrier system. The optical filter bandwidth accuracies are in terms of several tenths of nanometers, with a minimum of 10 nm (\cite{optical_filter}), which is not acceptable since the objective is to filter out all noise except for a 1 nm wavelength band around 473 nm both ways. Meanwhile, the transmission is another problem for normal optical filters, which have much lower values (of around 50\%) for smaller bandwidth accuracies (10 nm to 20 nm) and higher values (of around 90\%) for larger bandwidth accuracy (more than 30 nm), but prism can have transmissions as high as 97\% for the specified glass material.
 
-The figure \ref{fig:prism} on page \pageref{fig:prism} gives an overview of the receiver optics after the second parabolic mirror. the prism is used to filter out all the noisy light except wavelength 472 nm to 474 nm. The prism system needs to be accurate enough to perform the filtering in limited distance. The design contains the type of prism glass material, the incident angle ($\alpha$), prism apex angle ($A$) and distance between prism and barriers. They will be treated one by one.
+Figure \ref{fig:prism} on page \pageref{fig:prism} gives an overview of the receiver optics after the second parabolic mirror. the prism is used to filter out all the noise light except those between 472 nm and 474 nm. The prism system needs to be accurate enough to perform the filtering within limited distance. The design contains the type of prism glass material, the incident angle $\alpha$, the prism apex angle $A$ and the distance between prism and barriers. They will be treated one by one.
 
 \begin{figure}[ht!]
 \centering
@@ -74,12 +84,14 @@ In figure \ref{fig:prism2D} on page \pageref{fig:prism2D}, the deviation angle $
 \label{epsilon}
 \epsilon = \alpha - A + sin^{-1}(sin(A)\sqrt{n^2 - (sin(\alpha))^2} - cos(A)sin(\alpha))
 \end {equation}
-The key requirement to design the prism is to maximize the $\frac{d\epsilon}{d\lambda}$,  because for wavelength 473 nm larger $\frac{d\epsilon}{d\lambda}$ leads to smaller distance between prism and barriers as well as the risk. The equation \ref{epsilon} indicates that the deviation angle($\epsilon$) is a function of A, $\alpha$ and n. From Sellmeier formula \cite{prism_book}, the index of refraction n can be calculated as:
+The key requirement to design the prism is to maximize the $\frac{d\epsilon}{d\lambda}$, because for a wavelength of 473 nm larger $\frac{d\epsilon}{d\lambda}$ leads to a smaller distance between prism and barriers. Equation \ref{epsilon} indicates that the deviation angle($\epsilon$) is a function of $A$, $\alpha$ and $n$. From Sellmeier's formula (see \cite{prism_book}), the index of refraction $n$ can be calculated to be:
 \begin{equation}
 \label{index_refraction}
 n^2 - 1 = \frac{a_{1}\lambda^2}{\lambda^2-b_{1}} + \frac{a_{2}\lambda^2}{\lambda^2-b_{2}} + \frac{a_{3}\lambda^2}{\lambda^2-b_{3}}
 \end {equation}
-In the equation \ref{index_refraction}, $a_{1}, a_{2}, a_{3}$ and $b_{1}, b_{2}, b_{3}$ are the dispersion coefficients, which have different values for different glasses. In this case, the most 17 common prism glasses from Schott \cite{prism_material}\cite{prism_book} company are analyzed. Since it is difficult to calculate $\frac{d\epsilon}{d\lambda}$ analytically, $\Delta\epsilon$ due to wavelength 472 nm, 473 nm and 474 nm can be obtained by inserting arbitrary A and $\alpha$, which is actually the $\frac{d\epsilon}{d\lambda}$ because the wavelength difference is only 1[nm] of each. During the calculation, no matter what values are given to A and $\alpha$, SF11 glass always has the maximum value of $\Delta\epsilon$ which means it is the optimal glass material. Meanwhile, SF11 glass also has an internal transmittance of 97\% for wavelength around 473 nm, which is acceptable. Next step is to determine the prism apex angle(A) and the incident angle($\alpha$). The prism apex angle is defined as 60 degrees because which gives the most average value for $\Delta\epsilon$. Meanwhile, this kind of euqilateral prisms are also referred to as dispersing prisms used for wavelength separating applications(see figure \ref{fig:prism_equilateral} on page \pageref{fig:prism_equilateral}). 
+In the equation \ref{index_refraction}, $a_{1}, a_{2}, a_{3}$ and $b_{1}, b_{2}, b_{3}$ are the dispersion coefficients, which have different values for different glasses. In this case, the 17 most common prism glasses from the Schott company (see \cite{prism_material} and \cite{prism_book}) are analyzed. Since it is difficult to calculate $\frac{d\epsilon}{d\lambda}$ analytically, $\Delta\epsilon$ is calculated for the wavelengths of 472 nm, 473 nm and 474 nm can be obtained by inserting arbitrary A and $\alpha$, which is actually the $\frac{d\epsilon}{d\lambda}$ because the wavelength difference is only 1 nm of each. During the calculation, no matter what values are given for $A$ and $\alpha$, the SF11 glass always has the maximum value of $\Delta\epsilon$ which means it is the optimal choice of glass. Meanwhile, SF11 glass also has an internal transmittance of 97\% for wavelengths around 473 nm, which is acceptable.
+
+The next step is to determine the prism apex angle $A$ and the incident angle $\alpha$. The prism apex angle is defined as 60 degrees because this gives the best average value for $\Delta\epsilon$. Meanwhile, this kind of equilateral prisms are also often used as dispersing prisms for wavelength separation applications(see figure \ref{fig:prism_equilateral} on page \pageref{fig:prism_equilateral}). 
 
 \begin{figure}[ht!]
 \centering
@@ -88,7 +100,7 @@ In the equation \ref{index_refraction}, $a_{1}, a_{2}, a_{3}$ and $b_{1}, b_{2},
 \label{fig:prism_equilateral}
 \end{figure}
 
-To select the correct incident angle, the figure \ref{fig:prism_alpha} on page \pageref{fig:prism_alpha} is used. In the figure, the blue line has the asymptote about $\alpha = 54^\circ$. To avoid the asymptote, $\alpha = 55^\circ$ is selected as the incident angle, which leads to $\epsilon = 76^\circ$ and $\Delta\epsilon = 2.1432\ mrad$. The figure \ref{tab:SF11} on page \pageref{tab:SF11} is a part of the calculation in the excel sheet. There are two $\Delta\epsilon$ in the calculation, and $\Delta\epsilon1 = \epsilon(472\ nm) - \epsilon(473\ nm)$ meanwhile $\Delta\epsilon2 = \epsilon(473\ nm) - \epsilon(474\ nm)$. The driving $\Delta\epsilon$ is the smaller one, since it is the minimum requirement. Taking $\Delta\epsilon = 2.1432\ mrad$ into further calculation, in order to separate wavelength 472 nm, 473 nm and 474 nm, barrier radius(or beam width) 1 mm leads to distance 466.7 mm between prism and barrier. To short the distance, more concentrated beam is needed from parabolic mirror and several flat mirror can also be used to redirect the beam in limited area. The figure \ref{fig:prism_final} on page \pageref{fig:prism_final} shows the final design of all angles.
+To select the correct incident angle, figure \ref{fig:prism_alpha} on page \pageref{fig:prism_alpha} is used. In the figure, the blue line is the asymptote about $\alpha = 54^\circ$. To avoid the asymptote, $\alpha = 55^\circ$ is selected as the incident angle, which leads to $\epsilon = 76^\circ$ and $\Delta\epsilon = 2.1432\ mrad$. Figure \ref{tab:SF11} on page \pageref{tab:SF11} is a part of the calculation in the excel sheet. There are two $\Delta\epsilon$s in the calculation; $\Delta\epsilon1 = \epsilon(472\ nm) - \epsilon(473\ nm)$ whereas $\Delta\epsilon2 = \epsilon(473\ nm) - \epsilon(474\ nm)$. The driving $\Delta\epsilon$ is the smaller one, since it is the minimum requirement. Taking $\Delta\epsilon = 2.1432\ mrad$ into further calculation, in order to separate the wavelength around 473 nm, at 472 nm and 474 nm, a barrier radius (or beam width) of 1 mm leads to a distance of 466.7 mm between prism and barrier. To shorten the distance, more concentrated beams are needed from the second parabolic mirror, or several flat mirrors can also be used to redirect the beam in a limited area. The figure \ref{fig:prism_final} on page \pageref{fig:prism_final} shows the final design of all angles.
 
 \begin{figure}[ht!]
 \centering
@@ -120,7 +132,7 @@ To select the correct incident angle, the figure \ref{fig:prism_alpha} on page \
 
 \subsection{Summary}
 \label{sum}
-The table \ref{tab:receiverbudget} on page \pageref{tab:receiverbudget} is the budget breakdown including mass and power consumption. To be clear, the large parabolic mirror is used to collect the reflected photons and the small parabolic mirror is used to create parallel tight beam before the prism. Flat mirrors are used after the prism to focus the light on faceted mirror. A separate cost estimation can be found in the section \ref{cost} on page \pageref{cost}.
+The table \ref{tab:receiverbudget} on page \pageref{tab:receiverbudget} is the budget breakdown including mass and power consumption. To repeat, the large parabolic mirror is used to collect the reflected photons and the small parabolic mirror is used to create parallel tight beam before the prism. Flat mirrors are used after the prism to focus the light on faceted mirror. A separate cost estimation can be found in the section \ref{cost} on page \pageref{cost}.
 
 \begin{table}[ht!]
 \centering
@@ -128,13 +140,14 @@ The table \ref{tab:receiverbudget} on page \pageref{tab:receiverbudget} is the b
 \hline
 Components                & Mass  & Quantity & Total mass & Power\\ 
                           &  [g]  &          &     [g]    &  [W] \\\hline\hline
-Parabolic mirror (large)  &  100  &     1    &     100    &   0   \\
+Parabolic mirror (large)  &  95   &     1    &      95    &   0   \\
 Parabolic mirror (small)  &  10   &     1    &     10     &   0   \\
+Linear actuator		  &  5    &     1    &     5      &   0   \\
 Faceted mirror            &  30   &     1    &     30     &   0   \\ 
 Flat mirror               &  10   &     5    &     50     &   0   \\
 \acs{SPAD}                &  10   &     1    &     10     &   0.1 \\
 Prism                     &  10   &     1    &     10     &   0   \\ 
-Diverge lens              &  10   &     1    &     10     &   0   \\ \hline
+Concave lens              &  10   &     1    &     10     &   0   \\ \hline
 Total                     &       &          &     220    &   0.1 \\\hline
 \end{tabular}
 \caption{Buget breakdown for receiver payload}
@@ -144,7 +157,13 @@ Total                     &       &          &     220    &   0.1 \\\hline
 
 \subsection{Payload Cost Estimation}
 \label{cost}
-The table \ref{tab:cost_payload} on \pageref{tab:cost_payload} is the cost breakdown of the whole emitter and receiver payload system. The table is divided into 3 main parts. The first part is the cost distribution on human resource. To design the payload prototype, different specific engineerings are required with a salary 122,380 \$ man work per year\cite{engineering_salary}, and 'Assessment manager' gains twice salary meantime 'General manager' who is in charge of the whole project desires triple salary of the normal engineers. The second part is mainly about the manufacturing and production, meanwhile a separate space qualification test is required. The third part first calculated the theoretical first unit cost of receiver and \acs{laser} then obtained total cost of two types of combinations(5 receiver and 3 \acs{laser} or 9 receiver and 3 \acs{laser}) due to learning curve\cite{Space2B}. It is obviously that the main cost of the payload is spent on 'Brian' engineering design which is reasonable. For example, the final cost of 5 receiver and 3 \acs{laser} $8.55 M\$ = a + b + c = 5.13996 + 2.92 + 0.49$ and 9 receivers 3 \acs{laser} leads to $8.66 M\$ = a + b + d = 5.13996 + 2.92 + 0.6$. Finally, the amount of cost is scaled to dollar year 2000.
+The table \ref{tab:cost_payload} on \pageref{tab:cost_payload} is the cost breakdown of the whole emitter and receiver payload system. The table is divided into 3 main parts.
+
+The first part is the cost distribution on human resource. To design the payload prototype, different specific engineering skills are required with a salary of 122,380 \$ per manyear \cite{engineering_salary}. The 'Assessment manager' gains twice this salary, whereas the 'General manager' who is in charge of the whole project desires triple the salary of the normal engineers.
+
+The second part is mainly about the manufacturing and production and the separate space qualification test that is required.
+
+The third part first calculates the theoretical first unit cost of the receiver and the \acs{laser}, and then the obtained total cost of two types of combinations(5 receivers and 3 \acsp{laser} or 9 receivers and 3 \acsp{laser}) due to the learning curve effect \cite{Space2B}. It is obviously that the main cost of the payload is spent on the engineering design which is reasonable. For example, the final cost of 5 receivers and 3 \acsp{laser} would be $8.55 M\$ = a + b + c = 5.13996 + 2.92 + 0.49$; 9 receivers and 3 \acsp{laser} would lead to $8.66 M\$ = a + b + d = 5.13996 + 2.92 + 0.6$. Finally, the cost is scaled to American dollars in fiscal year 2000.
 
 \begin{table}[ht!]
 \centering
