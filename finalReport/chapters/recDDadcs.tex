@@ -1,18 +1,18 @@
 %Receiver
 \section{\acl{AODCS}}
 \label{recDDadcs}
-The \ac{AODCS} of the receiver is basically a scaled down version of the \ac{AODCS} of the emitter, with some scaled down components. Section \ref{ss:recDDads} will thread the attitude determination, section \ref{ss:recDDacs} the attitude control, the orbit determination of the receiver satellites is covered in section \ref{ss:recDDods} and the orbit control in section \ref{ss:recDDocs}. The pointing mechanism for the receiver satellites is significantly more complex compare to the emitter and is described in section \ref{ss:recDDpoint}. Section \ref{ss:recDDoverview} will give an overview of the whole \ac{AODCS} and pointing mechanism of the receiver.
+The \ac{AODCS} of the receiver is basically a scaled down version of the \ac{AODCS} of the emitter, with some scaled down components. Section \ref{ss:recDDads} will treat the attitude determination, section \ref{ss:recDDacs} the attitude control, the orbit determination of the receiver satellites is covered in section \ref{ss:recDDods} and the orbit control in section \ref{ss:recDDocs}. The pointing mechanism for the receiver satellites is significantly more complex compared to the emitter and is described in section \ref{ss:recDDpoint}. Section \ref{ss:recDDoverview} will give an overview of the whole \ac{AODCS} and pointing mechanism of the receiver.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Attitude Determination}
 \label{ss:recDDads}
-Just as the with the emitter the attitude determination of the receiver satellites is done with sun sensors and a star tracker. The only difference between the two kinds of satellites is that the receiver has got only four sun sensors. In stead of have a sun sensor on each side wall there is only one on the front wall and two on the back looking out at an angle of sixty degrees. This way room is saved and still the entire surrounding of the satellite is covered.
+Just as the with the emitter, the attitude determination of the receiver satellites is done with sun sensors and a star tracker. The only difference between the two kinds of satellites is that the receiver has got only four sun sensors. Instead of having a sun sensor on each side, there is only one on the front wall and two on the back looking out at an angle of sixty degrees. This way space is saved and the entire surrounding of the satellite is covered.
 
 The type of sun sensor and star tracker used are the same as in the emitter satellite. Details can be found in section \ref{ss:emDDads}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Attitude Control}
 \label{ss:recDDacs}
-Just as the emitter satellite the receiver uses reaction wheels and magneto torquers for its attitude control. Since the satellite itself is smaller, also the wheels and torquers are scaled down. Figure \ref{fig:catacs} on page \pageref{fig:catacs} shows a possible layout to have control around all axis.
+Just as the emitter satellite, the receiver uses reaction wheels and magneto torquers for its attitude control. Since the satellite itself is smaller, the wheels and torquers are scaled down. Figure \ref{fig:catacs} on page \pageref{fig:catacs} shows a possible layout to have control around all axes.
 
 \begin{figure} [h]
 \centering
@@ -22,7 +22,7 @@ Just as the emitter satellite the receiver uses reaction wheels and magneto torq
 \label{fig:catacs}
 \end{figure}
 
-The sizing of the reaction wheels for the receiver satellites is done in the same way as the wheels of the emitter satellite. Filling out equations \ref{distgg} to \ref{distae} for the worst case of the receiver satellites leads to disturbance torques of 
+The sizing of the reaction wheels for the receiver satellites is done in the same way as the wheels of the emitter satellite. Filling out equations \ref{distgg} to \ref{distae} for the worst case configuration of the receiver satellites leads to disturbance torques of 
 
 \begin{eqnarray*}
 T_g \,=& \frac{3\cdot 398600.4\cdot 10^9}{2\cdot 6878000^3} \left| 1.316 - 0.101 \right| \sin{\left(2\cdot 30^\circ \right)} &= 1.933\cdot 10^{-6}\,Nm\\
@@ -33,7 +33,7 @@ T_a \,=& \dfrac{1}{2} 1.80 \cdot 10^{-12}\cdot 2.2\cdot 0.53 \cdot 7613^2 \left(
 
 The moments of inertia used are derived from the model of the receiver satellite, i.e. $I_x = 1.307\,kgm^2$,  $I_y = 0.101\,kgm^2$ and $I_z = 1.316\,kgm^2$. Other typical properties are derived using SMAD \cite{larson} and the master thesis of Angel Garza about attitude control of cubesats  \cite{wheelmotor}. The total disturbance torque expected is the sum of the above values $1.65 \cdot 10^{-5}\,Nm$. With a margin of safety of 2 applied this leads to a maximum control torque required of $3.31\cdot 10^{-5}\, Nm$. Taking a angular acceleration of $100\,rad/s^2$ ($\sim$ 10\% of maximum) this will lead to a required wheel moment of inertia of $3.306\cdot 10^{-7}\,kgm^2$. With a wheel height $h$ of 1 cm this leads to a wheel skirt thickness $b$ of 1.1 cm. The mass of one wheel is 36 grams.
 
-The magneto torquers chosen are CubeSat Magnetorquers, which are available off the shelf from the cubesat webshop \cite{cubesatshop}. The weight is 30 grams and the diameter is 9 mm and the length is 70 mm. They can provide a torque of 0.2 $Am^2$. Three are required for the 3 axis desaturation. Price is 1150 EUR a piece. Three are needed to desaturate all three wheels.
+The magneto torquers chosen are CubeSat Magnetorquers, which are available off-the-shelf from the cubesat webshop \cite{cubesatshop}. The weight is 30 grams and the diameter is 9 mm and the length is 70 mm. They can provide a torque of 0.2 $Am^2$. Three are required for the 3 axis desaturation. Price is 1150 EUR a piece. Three are needed to desaturate all three wheels.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Orbit Determination}
@@ -56,7 +56,7 @@ For orbit control a $\Delta V$ budget of 165.14 m/s is required (derived in sect
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Pointing Mechanism}
 \label{ss:recDDpoint}
-The pointing mechanism is use for pointing the receiver off-nadir towards the ground target. The right ascension difference of $2.18^\circ$ translates into a pointing difference of about $30^\circ$ in both directions. To be able to still make measurements when the distance between the satellites gets bigger a total design pointing angle of $80^\circ$ is chosen, $10^\circ$ extra on both sides. The pointing of the instrument is done by a tumbler, driven by a wheel, connected to a gear box, attached to a stepper motor. The general layout can be seen in figure \ref{fig:point} on page \pageref{fig:point}. The different parts of the pointing mechanism will be discussed in reverse order in this section.
+The pointing mechanism is used for pointing the receiver off-nadir towards the ground target. The right ascension difference of $2.18^\circ$ translates into a pointing difference of about $30^\circ$ in both directions. To be able to still make measurements when the distance between the satellites gets bigger a total design pointing angle of $80^\circ$ is chosen, $10^\circ$ extra on both sides. The pointing of the instrument is done by a tumbler, driven by a wheel, connected to a gear box, attached to a stepper motor. The general layout can be seen in figure \ref{fig:point} on page \pageref{fig:point}. The different parts of the pointing mechanism will be discussed in reverse order in this section.
 
 \begin{figure} [h]
 \centering
@@ -79,7 +79,7 @@ The output of the harmonic drive is put into a wheel with the same circumference
 \label{fig:greytumbler}
 \end{figure}
 
-The along track pointing of the satellite is done by turning the satellite. Since the solar panels are on the sides of the satellite they can still be pointed and the added drag on the satellite is minimal. Figure \ref{fig:pointattitude} shows the attitudes of the satellites while pointing at the ground target in both the side looking and the along track looking mode.
+The along track pointing of the satellite is done by turning the satellite. Since the solar panels are on the sides of the satellite they can still be pointed and the added drag to the satellite is minimal. Figure \ref{fig:pointattitude} shows the attitudes of the satellites while pointing at the ground target in both the side looking and the along track looking mode.
 
 \begin{figure}
 \centering
