@@ -1,0 +1,2 @@
+-(-h+R) \sqrt{-h^2+2 h R}+R^2 \text{ArcCos}\left[\frac{-h+R}{R}\right]
+http://mathworld.wolfram.com/CircularSegment.html
