@@ -1,42 +1,4 @@
-\documentclass[11pt]{report}
-\pagestyle{myheadings}
-\markright{Group 13\hfill FLAMeS \hfill}
-\usepackage{pdflscape}
-\usepackage{longtable}
-\usepackage{multirow}
-\usepackage{enumerate}
-\usepackage[printonlyused]{acronym}
-\usepackage{multirow}
-\usepackage{graphicx}
-\usepackage{wrapfig}
-\usepackage{subfig}
-\usepackage{amsmath}
-\usepackage{url}
-\usepackage{fixltx2e}
-\usepackage{booktabs}
-\usepackage{rotating}
-\usepackage{bbding}
-\usepackage{fancyhdr}
-
-\topmargin -1.5cm
-\oddsidemargin -0.04cm 
-\evensidemargin -0.04cm 
-\textwidth 16.59cm 
-\textheight 21.94cm 
-\parskip 7.2pt 
-
-\setcounter{secnumdepth}{5}
-\setcounter{tocdepth}{2}
-\pagenumbering{roman}
-
-\pagestyle{fancy}
-
-\renewcommand{\headrulewidth}{0 pt}
-\begin{document}
-\chapter{Stuff}
-
-
-
+\chapter{Technical Risk Assessment}
 \label{RiskMan}
 The main objective of the technical risk assessment is to determine the reliability compared to the possible (functional or financial) consequences per specific event. To be able to determine any of these reliabilities, a definition of reliability should be stated. In this case, reliability is formulated as:
 \begin{quote}
@@ -145,7 +107,7 @@ Laser degradation is dependent on multiple parameters: thermal properties, input
 This is dependent on ADCS risks.
 
 \textit{I2. Receive and detect photons}\\ 
-The \ac{SPAD} is used to detect incoming photons, the actual technology is space qualified and as such the probability of missing photons is minimal. Furthermore the optical construction used in conjunction with the \acs{SMAD} leaves a minimal probability of missing photons. 
+The \ac{SPAD} is used to detect incoming photons, the actual technology is space qualified and as such the probability of missing photons is minimal. Furthermore the optical construction used in conjunction with the \acs{larson} leaves a minimal probability of missing photons. 
 
 \textit{I3. Turn photon into electrical signal}\\ 
 With the high level of technical readiness, the reliability is high as well.
@@ -227,17 +189,10 @@ Sometimes it is possible to decrease the failure probability. For example, A1, E
 
 \begin{figure} [h]
 	\begin{center}
- \includegraphics[trim = 0mm 0mm 0mm 35mm, clip,width=1.0\textwidth,angle=0]{img/TRA_RM.png}	
+ \includegraphics[trim = 0mm 0mm 0mm 35mm, clip,width=1.0\textwidth,angle=0]{chapters/img/TRA_RM.png}	
 	\caption{Technical Risk Map}
 	\label{TRA_RM}
 	\end{center}
 \end{figure}
 
 \end{enumerate}
-
-
-
-
-
-
-\end{document}
