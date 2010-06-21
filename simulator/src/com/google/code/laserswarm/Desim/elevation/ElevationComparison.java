@@ -1,6 +1,5 @@
 package com.google.code.laserswarm.Desim.elevation;
 
-import java.io.IOException;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -12,7 +11,6 @@ import org.geotools.referencing.operation.projection.PointOutsideEnvelopeExcepti
 
 import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.earthModel.EarthModel;
-import com.google.code.laserswarm.out.plot1D.plotHeightDistribution;
 import com.google.common.collect.Lists;
 import com.lyndir.lhunath.lib.system.logging.Logger;
 
@@ -36,13 +34,6 @@ public class ElevationComparison extends DescriptiveStatistics {
 			}
 			addValue(pSphere.x - h);
 			alts.add(new Point3d(h, pSphere.y, pSphere.z));
-		}
-
-		plotHeightDistribution plotter = new plotHeightDistribution();
-		try {
-			plotter.plot(alts, 3, "HeightFromDigitalElevationModel");
-		} catch (IOException e) {
-			logger.err(e, "Error");
 		}
 	}
 
