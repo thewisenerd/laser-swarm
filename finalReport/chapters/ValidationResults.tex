@@ -55,20 +55,41 @@ It is clear that the along track slope can be calculated with greater accuracy a
 \subsection{BRDF Reconstruction}
 \label{sec:BRDFReconstuction}
 
-To exploit the multi-angular observation and to demonstrate extra functionality of the Laser Swarm an attempt is made to determine BRDF. 
-The BRDF is useful in determining the anisotropic reflectance properties of the surfaces on the ground that way aiding elimination of the noise. Furthermore BRDF can be used to determine the Vegetation Index (VI) by correlating the BRDF with other geomatic data. 
 
-In reality, the height distribution within footprint is responsible for effects such as shadowing, masking and re-reflections. A footprint also can be comprised of different materials therefore having a varying BRDF. In scientific community a model was established to model the BRDF for a flat surface, in theory this model could be extended to model the BRDF of a footprint as a function of the height distribution, however, this is outside the scope of this feasibility study. 
+To exploit the multi-angular observation and to demonstrate extra functionality of the Laser Swarm an attempt is made to determine BRDF. 
+The BRDF is useful in determining the anisotropic reflectance properties of the surfaces on the ground that way aiding elimination of the noise. Furthermore BRDF can be used to determine the Vegetation Index (VI) by correlating the BRDF with other geomatic data \cite{BRDFwanner}. 
+
+
+
+In reality, the height distribution within a footprint is responsible for effects such as shadowing, masking and re-reflections \cite{BRDFsparrow}. A footprint also can be comprised of different materials therefore having a varying BRDF. In scientific community a model was established to model the BRDF for a flat surface, in theory this model could be extended to model the BRDF of a footprint as a function of the height distribution, however, this is outside the scope of this feasibility study. 
+
 
 Multiple footprints are necessary to more accurately determine the BRDF hence a concept of region is defined. Each region consists of multiple footprints, and for each region the BRDF is calculated.
 
-To measure the BRDF, all that is needed is the normal vector of the plane  illuminated by the footprint and the amount of the received photons in the specific direction. As the slope of the local plane and the position of the receivers change (with swarm progressing along the orbit), photons are registered in the new direction. Number of received photons  in a specific direction with respect to the total photons corresponds to the relative magnitude of the BRDF in that direction. Since the maximum inclination of the receiver with respect to the normal is $30^\circ$ only a small cone of the BRDF is obtained. Furthermore, amount of points registered per footprint is at most the amount of receivers in the swarm, and since region on the ground changes much faster than the change in relative position of the receiver satellites, the registered points are not spread out through out the whole BRDF sphere but are confined to a small region. The values between points are then interpolated. 
+To measure the BRDF, all that is needed is the normal vector of the plane illuminated by the footprint and the amount of the received photons in the specific direction. As the slope of the local plane and the position of the receivers change (with swarm progressing along the orbit), photons are registered from a different point of view for every footprint. Number of received photons in a specific direction with respect to the total photons corresponds to the relative magnitude of the BRDF in that direction. Since the maximum inclination of the receiver with respect to the normal is $30^\circ$ only a small cone of the BRDF is obtained. Furthermore, amount of points registered per footprint is at most the amount of receivers in the swarm, and since region on the ground changes much faster than the change in relative position of the receiver satellites, the registered points are not spread out through out the whole BRDF sphere but are confined to a small region. 
+
+For practical purposes BRDF does not need to be known exactly, so to make the inversion process easier various semi-empirical models of BRDF exist. Semi-empirical models approximate the shape of the BRDF by means of some a-priori information \cite{BRDFwanner}. So in order to invert BRDF from measured points, coefficients in the following equation need to be found:
+
+\[
+R(\theta ,\vartheta ,\phi ) = f_{iso}  + f_{geo} K_{geo} (\theta ,\vartheta ,\phi ) + f_{vol} K_{vol} (\theta ,\vartheta ,\phi )
+\]
+
+
+$R$ representing relative radiance as a function of the position of the light source ($\theta$) and position of the observer ($\vartheta$, $\phi$).
+And $f_{iso}$  , $f_{geo}$, $f_{vol}$  being the coefficients that need to be determined. $K_{geo}$ and $K_{vol}$ are so called kernels which are function of the incident light and they are known in advance. Different types of kernels exist, each one does a better job of approximating BRDF of a specific type of terrain. 
+For the purposes of simulation a simplified empirical model will be used:
+
+\[
+R_{{\rm{model}}} (\theta ,\vartheta ,\phi ){\rm{ }} = {\rm{ }}p_0 (\theta _{}^2  + \vartheta _{}^2 ) + p_1 \vartheta _{}^2 \theta _{}^2  + p_2 \vartheta \theta \cos (\phi ) + p_3 
+\]
+
+
+The coefficients $p_0$, $p_1$,$p_2$,$p_3$ are estimated from measured data by means of multivariable regression analysis \cite{BRDFrob}. 
 
 
 
-The BRDF calculating algorithm does not take into account the height distribution within the footprint and assumes that the BRDF within the footprint remains the same. These assumptions are valid as the height distribution within the footprint and the BRDF are indistinguishable from each other. However as the overall height distribution is random, that roughly corresponds to Lambergian BRDF and can be treated as a systematic error that can affects all results equally. Assumption that the BRDF is constant within the footprint is supported by the fact that in the observation missions the area being measured is usually multiple orders of magnitude larger than the footprint. 
 
-
+The BRDF calculating algorithm does not take into account the height distribution within the footprint and assumes that the BRDF within the footprint remains the same. These assumptions are valid as the height distribution within the footprint and the BRDF are indistinguishable from each other. However as the overall height distribution is random, that roughly corresponds to Lambergian BRDF and can be treated as a systematic error that can affects all results equally. Assumption that the BRDF is constant within the footprint is supported by the fact that in the observation missions the area being measured is usually multiple orders of magnitude larger than the footprint.
 
 
 
