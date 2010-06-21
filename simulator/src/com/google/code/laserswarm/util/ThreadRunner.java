@@ -15,10 +15,11 @@ public class ThreadRunner<T extends Runnable> extends Thread {
 	private Map<T, Thread>		completed	= Maps.newLinkedHashMap();
 	private boolean				complete;
 
+	private int					MaxThreads	= Configuration.getInstance().demThreads;
+
 	private static final Logger	logger		= Logger.get(ThreadRunner.class);
 
 	public ThreadRunner() {
-
 	}
 
 	public ThreadRunner(Set<T> threads) {
@@ -36,7 +37,7 @@ public class ThreadRunner<T extends Runnable> extends Thread {
 		}
 	}
 
-	private void addThreads(Set<T> threads) {
+	public void addThreads(Set<T> threads) {
 		for (T t : threads)
 			addThread(t);
 	}
@@ -103,9 +104,23 @@ public class ThreadRunner<T extends Runnable> extends Thread {
 				} catch (InterruptedException e) {
 					logger.wrn(e, "Interrupted while sleeping");
 				}
-			} while (running.size() >= Configuration.demThreads);
+			} while (running.size() >= MaxThreads);
 		}
 		complete = true;
+	}
+
+	public void setMaxThreads(int maxThreads) {
+		MaxThreads = maxThreads;
+	}
+
+	public void waitForMerge() {
+		while (!isComplete())
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				logger.wrn(e, "Interrupted while sleeping");
+				break;
+			}
 	}
 
 }

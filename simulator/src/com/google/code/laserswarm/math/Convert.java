@@ -68,6 +68,28 @@ public abstract class Convert {
 	}
 
 	/**
+	 * Point3d(1, point.x, point.y)
+	 * 
+	 * @param point
+	 * @param x
+	 * @return
+	 */
+	public static Point3d toPoint3d(Tuple2d point) {
+		return toPoint3d(point, 1);
+	}
+
+	/**
+	 * Point3d(x, point.x, point.y)
+	 * 
+	 * @param point
+	 * @param x
+	 * @return
+	 */
+	public static Point3d toPoint3d(Tuple2d point, double x) {
+		return new Point3d(x, point.x, point.y);
+	}
+
+	/**
 	 * Convert XYZ to (R; theta; phi) or equivalently (R; long; lat)
 	 * 
 	 * @param xyz

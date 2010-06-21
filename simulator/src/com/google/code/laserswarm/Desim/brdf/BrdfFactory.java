@@ -28,7 +28,7 @@ public abstract class BrdfFactory {
 			Vector3d directionENU = ecefToEnu(directionECEF, scatterSphere.y, scatterSphere.z);
 			Vector3d directionLocal = enuToLocal(directionENU, normal);
 			Point3d directionSphere = toSphere(directionLocal);
-			brdf.addPoint(new Point3d(photons, directionSphere.y, directionSphere.z));
+			brdf.addVector(new Point3d(photons, directionSphere.y, directionSphere.z));
 		}
 
 		return brdf;

@@ -2,6 +2,13 @@ package com.google.code.laserswarm.earthModel;
 
 public class ScatteringParam {
 
+	public static ScatteringParam random() {
+		double scatter = Math.random() * 2 + 1;
+		double kappaMinnaert = Math.random() * 2 - 1;
+		double thetaHenyeyGreenstein = Math.random() * 2 * Math.PI - Math.PI;
+		return new ScatteringParam(scatter, kappaMinnaert, thetaHenyeyGreenstein);
+	}
+
 	/**
 	 * The index of reflection of the local terrain
 	 */
@@ -43,6 +50,12 @@ public class ScatteringParam {
 
 	public double getThetaHenyeyGreenstein() {
 		return thetaHenyeyGreenstein;
+	}
+
+	@Override
+	public String toString() {
+		return String.format("indexOfRefraction=%f\tkappaMinnaert=%f\tthetaHenyeyGreenstein=%f",
+				indexOfRefraction, kappaMinnaert, thetaHenyeyGreenstein);
 	}
 
 }

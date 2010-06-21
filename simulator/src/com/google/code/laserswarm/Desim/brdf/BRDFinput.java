@@ -7,6 +7,10 @@ import static com.google.code.laserswarm.math.Convert.toPoint;
 import static com.google.code.laserswarm.math.Convert.toSphere;
 import static com.google.code.laserswarm.math.Convert.toVector;
 import static com.google.code.laserswarm.math.Convert.toXYZ;
+import static com.google.code.laserswarm.math.VectorMath.ecefToEnu;
+import static com.google.code.laserswarm.math.VectorMath.enuToEcef;
+import static com.google.code.laserswarm.math.VectorMath.enuToLocal;
+import static com.google.code.laserswarm.math.VectorMath.localToEnu;
 import static com.google.code.laserswarm.math.VectorMath.relative;
 import static com.google.code.laserswarm.math.VectorMath.rotate;
 
@@ -76,6 +80,7 @@ public class BRDFinput {
 		crossTrackSlope = input.crossTrackSlope;
 		receiverPositions = input.receiverPositions;
 		currentTime = input.currentTime;
+		scatterPoint = input.scatterPoint;
 	}
 
 	public BRDFinput(Vector3d emPos, Vector3d emDir, Vector3d scatterPoint, double alongSlope,
@@ -90,7 +95,7 @@ public class BRDFinput {
 	}
 
 	@Override
-	protected BRDFinput clone() {
+	public BRDFinput clone() {
 		return new BRDFinput(this);
 	}
 
@@ -189,31 +194,47 @@ public class BRDFinput {
 		Point3d dirSphere = toSphere(dir);
 
 		Vector3d alongTrackP = toVector(dirSphere);
-		alongTrackP.z = alongSlope;
+		alongTrackP.x = alongSlope;
 		Vector3d crosstrackP = toVector(dirSphere);
-		rotate(crosstrackP, 3, -90 * Math.PI / 180);
-		crosstrackP.z = crossSlope;
+		crosstrackP = rotate(crosstrackP, 1, -90 * Math.PI / 180);
+		crosstrackP.x = crossSlope;
 
 		Plane terrainPlane = new Plane();
 		terrainPlane.setPlane(new Point3d(0, 0, 0),
 								toPoint(alongTrackP),
 								toPoint(crosstrackP));
 
-		Vector3d dZ_dLON = new Vector3d(1, 0, terrainPlane.z(1, 0));
-		Vector3d dZ_dLAT = new Vector3d(0, 1, terrainPlane.z(0, 1));
+		Vector3d dZ_dLON = new Vector3d(1, 0, terrainPlane.x(1, 0));
+		Vector3d dZ_dLAT = new Vector3d(0, 1, terrainPlane.x(0, 1));
+
+		Point3d sp = toSphere(scatterPoint);
+		Vector3d nTrue = EarthModel.getDefaultModel().getSurfaceNormal(
+				new DirectPosition2D(sp.y * 180 / Math.PI, sp.z * 180 / Math.PI));
 
 		Vector3d n = new Vector3d();
 		n.cross(dZ_dLON, dZ_dLAT);
-		return n;
+		return nTrue;
 	}
 
 	public void merge(BRDFinput brdFinput) {
-		Vector3d scatterPoint2 = brdFinput.getScatterPoint();
+		Vector3d scatter = brdFinput.getScatterPoint();
+		Point3d scatterSphere = toSphere(scatter);
+		Vector3d scatter2 = brdFinput.getScatterPoint();
+		Point3d scatterSphere2 = toSphere(scatter2);
+
 		for (Vector3d receiverPos2 : brdFinput.getReceiverPositions().keySet()) {
 			Integer photons = brdFinput.getReceiverPositions().get(receiverPos2);
-			Vector3d position = relative(scatterPoint2, receiverPos2);
-			position.add(getScatterPoint());
-			receiverPositions.put(position, photons);
+			Vector3d position2 = relative(scatter2, receiverPos2);
+
+			Vector3d enu2 = ecefToEnu(position2, scatterSphere2.y, scatterSphere2.z);
+			Vector3d normal2 = brdFinput.getTerrainNormal();
+			Vector3d local = enuToLocal(enu2, normal2);
+
+			Vector3d normal = getTerrainNormal();
+			Vector3d enu = localToEnu(local, normal);
+			Vector3d ecef = enuToEcef(enu, scatterSphere.y, scatterSphere.z);
+			ecef.add(getScatterPoint());
+			receiverPositions.put(ecef, photons);
 		}
 
 		alongTrackSlope = (alongTrackSlope + brdFinput.getAlongTrackSlope()) / 2;

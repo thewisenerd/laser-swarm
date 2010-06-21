@@ -3,7 +3,7 @@ package com.google.code.laserswarm.math;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
-import java.util.List;
+import java.util.Set;
 
 import javax.vecmath.Point3d;
 import javax.vecmath.Point4d;
@@ -27,8 +27,8 @@ public class DistributionComparison extends DescriptiveStatistics {
 		return d1 - tolerance < d2 && d1 + tolerance > d2;
 	}
 
-	private List<Point3d>	cloud1;
-	private List<Point3d>	cloud2;
+	private Set<Point3d>	cloud1;
+	private Set<Point3d>	cloud2;
 
 	/**
 	 * Compare over an entire hemisphere
@@ -61,8 +61,8 @@ public class DistributionComparison extends DescriptiveStatistics {
 	public DistributionComparison(Distribution distribution, Distribution distribution2, Point4d range,
 			boolean fullStore) {
 
-		List<Point3d> cloud1 = distribution.pointCloud(100, range);
-		List<Point3d> cloud2 = distribution2.pointCloud(100, range);
+		Set<Point3d> cloud1 = distribution.pointCloud(72, range);
+		Set<Point3d> cloud2 = distribution2.pointCloud(72, range);
 
 		for (Point3d basePoint : cloud1) {
 			double baseSize = basePoint.z;
@@ -80,7 +80,7 @@ public class DistributionComparison extends DescriptiveStatistics {
 
 	}
 
-	private LinkedList<Point3d> findClosest(Point3d basePoint, List<Point3d> cloud2) {
+	private LinkedList<Point3d> findClosest(Point3d basePoint, Set<Point3d> cloud2) {
 		final double baseAz = basePoint.x;
 		final double baseEl = basePoint.y;
 
@@ -109,11 +109,11 @@ public class DistributionComparison extends DescriptiveStatistics {
 		return canidates;
 	}
 
-	public List<Point3d> getCloud1() {
+	public Set<Point3d> getCloud1() {
 		return cloud1;
 	}
 
-	public List<Point3d> getCloud2() {
+	public Set<Point3d> getCloud2() {
 		return cloud2;
 	}
 

@@ -87,13 +87,7 @@ public abstract class DemReader {
 		}
 		ThreadRunner<DemParseThread> tr = new ThreadRunner<DemParseThread>(parsers);
 		tr.start();
-
-		while (!tr.isComplete())
-			try {
-				Thread.sleep(100);
-			} catch (InterruptedException e) {
-				logger.wrn(e, "Interrupted while sleeping");
-			}
+		tr.waitForMerge();
 
 		for (DemParseThread parser : parsers)
 			if (parser.getDem() != null)

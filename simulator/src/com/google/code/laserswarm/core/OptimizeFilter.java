@@ -10,8 +10,6 @@ import org.apache.commons.math.analysis.MultivariateRealFunction;
 import org.apache.commons.math.optimization.GoalType;
 import org.apache.commons.math.optimization.RealPointValuePair;
 import org.apache.commons.math.optimization.direct.NelderMead;
-import org.apache.commons.math.stat.descriptive.StatisticalSummaryValues;
-import org.apache.commons.math.stat.inference.TTestImpl;
 
 import com.google.code.laserswarm.Desim.elevation.ElevationComparison;
 import com.google.code.laserswarm.Desim.elevation.slope.FindElevationNeighborInterpolation;
@@ -30,7 +28,7 @@ import com.lyndir.lhunath.lib.system.logging.Logger;
 public class OptimizeFilter extends LaserSwarm implements MultivariateRealFunction {
 
 	private static final Logger	logger		= Logger.get(OptimizeFilter.class);
-	private static final long	SEQ_LENGTH	= 1000;
+	private static final long	SEQ_LENGTH	= 2000;
 
 	public static void main(String[] args) {
 		Configuration.getInstance();
@@ -101,7 +99,7 @@ public class OptimizeFilter extends LaserSwarm implements MultivariateRealFuncti
 	}
 
 	private int toSpecialInt(double value) {
-		int y = (int) value;
+		int y = (int) (value * 5);
 		y *= 2;
 		y++;
 		return Math.max(y, 3);
@@ -131,17 +129,20 @@ public class OptimizeFilter extends LaserSwarm implements MultivariateRealFuncti
 		// NormalDistribution gausian = new NormalDistributionImpl(stats.getMean(),
 		// stats.getStandardDeviation());
 
-		TTestImpl ttest = new TTestImpl();
+		// TTestImpl ttest = new TTestImpl();
 		double performace = -1;
-		try {
-			performace = ttest.tTest(new StatisticalSummaryValues(0, 1, 1000, 3, -3, 0), stats);
-		} catch (MathException e) {
-			e.printStackTrace();
-			System.exit(1);
-		}
+		// try {
+		// performace = ttest.tTest(new StatisticalSummaryValues(0, 1, 1000, 3, -3, 0), stats);
+		// } catch (MathException e) {
+		// e.printStackTrace();
+		// System.exit(1);
+		// }
+		performace = 1 / (stats.getMean() * stats.getStandardDeviation());
 
 		logger.inf("Performance: %f", performace);
-		prefLog.write(correlationInterval, comparisonQueueLength, whenEqual, performace);
+		prefLog.write(correlationInterval, comparisonQueueLength, whenEqual, performace, stats.getN(),
+						stats.getMin(), stats.getMax(), stats.getMean(), stats.getStandardDeviation(),
+						stats.getPercentile(50), stats.getSkewness(), stats.getKurtosis());
 		return performace;
 	}
 }

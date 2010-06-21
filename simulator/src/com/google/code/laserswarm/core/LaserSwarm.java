@@ -1,6 +1,7 @@
 package com.google.code.laserswarm.core;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -18,6 +19,7 @@ import com.google.code.laserswarm.conf.Satellite;
 import com.google.code.laserswarm.conf.Configuration.Actions;
 import com.google.code.laserswarm.earthModel.EarthModel;
 import com.google.code.laserswarm.out.Report;
+import com.google.code.laserswarm.out.plot1D.plotHeightDistribution;
 import com.google.code.laserswarm.process.EmitterHistory;
 import com.google.code.laserswarm.process.TimeLine;
 import com.google.code.laserswarm.simulation.SimTemplate;
@@ -55,15 +57,13 @@ public abstract class LaserSwarm {
 		simulate();
 
 		/* Post simulation modifiers */
-		for (SimTemplate tmpl : simulations.keySet()) {
-			if (Configuration.hasAction(Actions.DISTRIBUTE_SLOPE)
-					&& Configuration.hasAction(Actions.PROCESS)) {
+		if (Configuration.hasAction(Actions.DISTRIBUTE_SLOPE)) {
+			for (SimTemplate tmpl : simulations.keySet()) {
 				logger.inf("SlopeStpreading over %s", tmpl);
 				Simulator sim = simulations.get(tmpl);
 				SlopeSpread spread = new SlopeSpread();
 				simulations.put(tmpl, spread.modify(sim, tmpl.getConstellation()));
 			}
-
 		}
 	}
 
@@ -95,39 +95,46 @@ public abstract class LaserSwarm {
 		EmitterHistory emitterHistory = null;
 		Constellation constellation = null;
 
-		boolean fallback = false;
-		if (Configuration.hasAction(Actions.SAVED)) {
-			try {
-				satData = Configuration.read("satData.xml", Configuration
-						.getDefaultSerializer("satData.xml"));
-				emitterHistory = Configuration.read("emitterHistory.xml", Configuration
-						.getDefaultSerializer("emitterHistory.xml"));
-				constellation = Configuration.read("constellation.xml", Configuration
-						.getDefaultSerializer("constellation.xml"));
-			} catch (FileNotFoundException e) {
-				logger.wrn(e, "Cannot load data, using fallback (computing again)");
-				fallback = true;
-			}
-		} else {
-			fallback = true;
-		}
-
-		if (fallback) {
-			mkData();
-			Iterator<SimTemplate> it = simulations.keySet().iterator();
-			if (it.hasNext()) {
-				SimTemplate templ = it.next();
-				List<SimVars> dataPoints = simulations.get(templ).getDataPoints();
-				emitterHistory = new EmitterHistory(templ.getConstellation(), dataPoints);
-
-				constellation = templ.getConstellation();
-				ImmutableList<SimVars> dataPointsImm = ImmutableList.copyOf(dataPoints);
-				satData = Maps.newHashMap();
-				for (Satellite sat : templ.getConstellation().getReceivers()) {
-					satData.put(sat, new TimeLine(sat, templ.getConstellation(), dataPointsImm));
+		if (simulations == null || simulations.size() == 0) {
+			boolean fallback = false;
+			if (Configuration.hasAction(Actions.SAVED)) {
+				try {
+					satData = Configuration.read("satData.xml", Configuration
+							.getDefaultSerializer("satData.xml"));
+					emitterHistory = Configuration.read("emitterHistory.xml", Configuration
+							.getDefaultSerializer("emitterHistory.xml"));
+					constellation = Configuration.read("constellation.xml", Configuration
+							.getDefaultSerializer("constellation.xml"));
+				} catch (FileNotFoundException e) {
+					logger.wrn(e, "Cannot load data, using fallback (computing again)");
+					fallback = true;
 				}
 			} else {
-				throw new RuntimeException("Cannot load any data");
+				fallback = true;
+			}
+
+			if (fallback) {
+				mkData();
+				Iterator<SimTemplate> it = simulations.keySet().iterator();
+				if (it.hasNext()) {
+					SimTemplate templ = it.next();
+					List<SimVars> dataPoints = simulations.get(templ).getDataPoints();
+					emitterHistory = new EmitterHistory(templ.getConstellation(), dataPoints);
+
+					constellation = templ.getConstellation();
+					ImmutableList<SimVars> dataPointsImm = ImmutableList.copyOf(dataPoints);
+					satData = Maps.newHashMap();
+					for (Satellite sat : templ.getConstellation().getReceivers()) {
+						satData.put(sat, new TimeLine(sat, templ.getConstellation(), dataPointsImm));
+					}
+					if (Configuration.hasAction(Actions.SAVED)) {
+						Configuration.write("satData.xml", satData);
+						Configuration.write("emitterHistory.xml", emitterHistory);
+						Configuration.write("constellation.xml", constellation);
+					}
+				} else {
+					throw new RuntimeException("Cannot load any data");
+				}
 			}
 
 		}
@@ -136,6 +143,14 @@ public abstract class LaserSwarm {
 			ElevationSlope elSlope = dataprocessor.run(
 					satData, emitterHistory, constellation, emitterHistory.getTime().size());
 			processed.add(elSlope);
+
+			plotHeightDistribution plotter = new plotHeightDistribution();
+			try {
+				plotter.plot(elSlope.getAltitudes(), 3, "heightAnalysed");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} catch (MathException e) {
 			e.printStackTrace();
 			System.exit(1);

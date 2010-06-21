@@ -1,30 +1,79 @@
 package com.google.code.laserswarm.Desim.brdf;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.code.laserswarm.math.Convert.toVector;
+import static com.google.code.laserswarm.math.Convert.toXYZ;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.vecmath.Point3d;
+import javax.vecmath.Tuple3d;
+import javax.vecmath.Vector3d;
 
-import com.google.common.collect.ImmutableSet;
+import org.apache.commons.math.MathException;
+import org.apache.commons.math.stat.descriptive.StatisticalSummary;
+import org.apache.commons.math.stat.descriptive.SummaryStatistics;
+import org.opengis.coverage.PointOutsideCoverageException;
+
+import com.google.code.laserswarm.earthModel.ScatteringCharacteristics;
+import com.google.code.laserswarm.earthModel.ScatteringParam;
+import com.google.code.laserswarm.math.Distribution;
+import com.google.code.laserswarm.util.GuiFactory;
 import com.google.common.collect.Sets;
 
 public class DiscreteBrdf {
 
-	/**
-	 * List of the coordinates of the brdf in <photons, lon, lat>
-	 */
-	private Set<Point3d>	knownPoints	= Sets.newHashSet();
+	public static void main(String[] args) {
+		DiscreteBrdf discreteBrdf = DiscreteBrdf.random(50);
+		try {
+			Brdf brdf = new Brdf(discreteBrdf);
+			GuiFactory.getImageFrame("test", brdf.toImage());
+		} catch (MathException e) {
+			e.printStackTrace();
+			System.exit(1);
+		}
+	}
 
-	/**
-	 * Add a coordinate of the brdf in <photons, lon, lat>
-	 * 
-	 * @param point
-	 */
-	public void addPoint(Point3d point) {
-		checkNotNull(point);
-		knownPoints.add(point);
+	public static DiscreteBrdf random(int rays) {
+		ScatteringParam param = ScatteringParam.random();
+		ScatteringCharacteristics brdf = new ScatteringCharacteristics(
+				new Vector3d(Math.random(), Math.random(), Math.random()), param);
+
+		DiscreteBrdf discreteBrdf = new DiscreteBrdf();
+		for (int i = 0; i < rays; i++) {
+			Vector3d ray = new Vector3d(1, Math.random() * 2 * Math.PI, Math.random() * Math.PI / 2);
+			Point3d rayXYZ = toXYZ(ray);
+			ray.x = brdf.probability(toVector(rayXYZ));
+			discreteBrdf.addVector(ray);
+		}
+		return discreteBrdf;
+	}
+
+	private Set<BrdfSection2>	sections		= Sets.newHashSet();
+	private double				internalScale	= 1;
+
+	public void addVector(Tuple3d vector) {
+		if (vector.y < 0)
+			vector.y += Math.PI * 2;
+		if (vector.z < 0)
+			vector.z += Math.PI * 2;
+
+		boolean added = false;
+		for (BrdfSection2 section : sections) {
+			try {
+				section.add(vector);
+				added = true;
+				break;
+			} catch (PointOutsideCoverageException e) {
+				continue;
+			}
+		}
+
+		if (!added) {
+			BrdfSection2 section = BrdfSection2.findSection(vector);
+			section.add(vector);
+			sections.add(section);
+		}
+
 	}
 
 	/**
@@ -33,11 +82,11 @@ public class DiscreteBrdf {
 	 * @return
 	 */
 	public double[][] asArrayPoints() {
-		double[][] points = new double[knownPoints.size()][2];
+		double[][] points = new double[sections.size()][2];
 		int i = 0;
-		for (Point3d coordinate : knownPoints) {
-			points[i][0] = coordinate.y;
-			points[i][1] = coordinate.z;
+		for (BrdfSection2 section : sections) {
+			points[i][0] = section.getBounds().getCenterX();
+			points[i][1] = section.getBounds().getCenterY();
 			i++;
 		}
 		return points;
@@ -49,35 +98,69 @@ public class DiscreteBrdf {
 	 * @return
 	 */
 	public double[] asArrayValues() {
-		double[] vals = new double[knownPoints.size()];
+		double[] vals = new double[sections.size()];
 		int i = 0;
-		for (Point3d coordinate : knownPoints) {
-			vals[i] = coordinate.x;
+		for (BrdfSection2 section : sections) {
+			vals[i] = section.getPhotonCountAvg() * internalScale;
 			i++;
 		}
 		return vals;
 	}
 
 	public double[] asArrayValues(double scale) {
-		double[] values = asArrayValues();
-		for (int i = 0; i < values.length; i++)
-			values[i] = values[i] * scale;
-
-		return values;
-	}
-
-	public ImmutableSet<Point3d> getPoints() {
-		return ImmutableSet.copyOf(knownPoints);
-	}
-
-	public ImmutableSet<Point3d> getScaledPoints(double scale) {
-		HashSet<Point3d> scaledP = Sets.newHashSet();
-		for (Point3d point : knownPoints) {
-			Point3d p2 = new Point3d(point);
-			p2.z = p2.z * scale;
-			scaledP.add(p2);
+		double[] vals = new double[sections.size()];
+		int i = 0;
+		for (BrdfSection2 section : sections) {
+			vals[i] = section.getPhotonCountAvg() * scale * internalScale;
+			i++;
 		}
-		return ImmutableSet.copyOf(scaledP);
+		return vals;
 	}
 
+	public StatisticalSummary compareTo(Distribution distribution) {
+		SummaryStatistics stats = new SummaryStatistics();
+		return compareTo(distribution, stats);
+	}
+
+	public StatisticalSummary compareTo(Distribution distribution, SummaryStatistics stats) {
+
+		for (BrdfSection2 section : sections) {
+			Point3d resulatant = section.getResulatant();
+			double ourValue = resulatant.x * internalScale;
+			Point3d direction = toXYZ(resulatant);
+			double thereValue = distribution.probability(toVector(direction));
+			stats.addValue(thereValue - ourValue);
+		}
+
+		return stats;
+	}
+
+	public double getInternalScale() {
+		return internalScale;
+	}
+
+	public Set<BrdfSection2> getSections() {
+		return sections;
+	}
+
+	/**
+	 * Set the internal scale to match the given distribution
+	 * 
+	 * @param distribution
+	 * @return returns the internal scale
+	 */
+	public double scaleTo(Distribution distribution) {
+		internalScale = 1;
+
+		double ownSum = 0;
+		double equivalentSum = 0;
+		for (BrdfSection2 section : sections) {
+			Point3d resulatant = section.getResulatant();
+			ownSum += resulatant.x;
+			Point3d direction = toXYZ(resulatant);
+			equivalentSum += distribution.probability(toVector(direction));
+		}
+		internalScale = equivalentSum / ownSum;
+		return internalScale;
+	}
 }

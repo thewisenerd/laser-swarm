@@ -3,7 +3,9 @@ package com.google.code.laserswarm.util;
 import java.awt.Graphics2D;
 import java.awt.Image;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
@@ -42,6 +44,13 @@ public abstract class GuiFactory {
 		JFrame fr = new JFrame(name);
 		fr.setSize(800, 600);
 		fr.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		return fr;
+	}
+
+	public static JFrame getImageFrame(String name, Image image) {
+		JFrame fr = getDefaultJFrame(name);
+		fr.add(new JLabel(new ImageIcon(image)));
+		fr.setVisible(true);
 		return fr;
 	}
 
