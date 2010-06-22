@@ -1,29 +1,22 @@
 \section{Conclusions}
 \label{frCRconclusions}
 The goal of this feasibility study was to demonstrate that a satellite constellation, consisting of a single emitter and several receivers, would perform
-superior (in terms of cost and lifetime) to existing spaceborne laser altimetry systems. A \ac{LiDAR} mission with a total of nine satellites is designed dedicated to making multi-angular measurements using a low power \ac{Nd-YAG} \ac{laser}, a \ac{SPAD} array and advanced dedicated optics enable intra-footprint. 
+superior (in terms of performance, cost and lifetime) to existing spaceborne laser altimetry systems. A \ac{LiDAR} mission with a total of nine satellites is designed dedicated to making multi-angular measurements using a low power \ac{Nd-YAG} \ac{laser}, a \ac{SPAD} array and advanced dedicated optics enable intra-footprint. 
 
-The emitter satellite is designed to be a micro-satellite with a total mass of just over 50 kg. All basic subsystems like, \ac{ADCS}, Communications and \ac{EPS} are present to ensure that payload performs its mission. The payloads of the emitter satellite are the \ac{laser} and one receiver. The \ac{laser} is a 5000 Hz pulsed \ac{Nd-YAG} \ac{laser} with 1 mJ per pulse and a wavelength of 473 nm. Advanced optics are used to adapt the footprint size to optimise the measurements.
+The emitter satellite is designed to be a micro-satellite with a total mass of just over 50 kg. All basic subsystems like \ac{ADCS}, Communications and \ac{EPS} are present to ensure that the payload is able to perform its mission. The payloads of the emitter satellite are the \ac{laser} and one receiver. The \ac{laser} is a 5000 Hz pulsed \ac{Nd-YAG} \ac{laser} with 1 mJ per pulse and a wavelength of 473 nm. Advanced optics are used to adapt the footprint size to optimize measurements.
 
-All receiver satellites are exactly the same nano-satellites with a dry mass of about 15 kg. The satellites are based on a six unit cubesat design, so most components can be bought off the shelf. The receiver instrument is built up out of a \ac{SPAD} array with an optical system to focus as many of the incoming photons on the array as possible. A pointing mechanism and the satellite attitude are used to point the instrument to the ground target.
+All receiver satellites are identical micro-satellites with a dry mass of about 15 kg. The satellites are based on a six unit cubesat design, so most components can be bought off the shelf. The receiver instrument consists of a \ac{SPAD} array with an optical system to focus as many of the incoming photons on the array as possible. A pointing mechanism and the satellite attitude are used to point the instrument to the ground target.
 
 The satellites are inserted in six different orbital planes at two different altitudes. In the first half of the mission measurements are made by four receivers in the lower orbit, in the second half the emitter satellite is boosted up to the higher orbit, where a second set of four receiver satellites are waiting to make measurements for that part of the mission. Using this scheme less propellant is needed for orbit keeping.
 
-A java tool has been created to simulate and validate the constellation to optimise the constellation and the laser power requirements.
-
-The mission designed is able to reach the set constraints, so the concept is considered feasible.
+A java tool has been created to simulate and validate the constellation to optimise the constellation and the laser power requirements. The mission designed is able to reach the set constraints, so the concept is considered feasible. More specifically, the simulator shows that with the systems considered it is possible to accurately determine the terrain height distribution and slopes with accuracies in the centimeter range. Given the direct relation between multi-angular measurements and photon counts and on the other hand \ac{BRDF} reconstruction, it is certainly possible to determine reliably the \ac{BRDF} of the terrain. However, for the exact algorithm a more detailed investigation will have to be done.
 
 \section{Recommendations}
 \label{frCRrecommendations}
-For further research the optics of both the emitter and receiver instruments need to be further developed and vibration tested. The parts are essential for the success of the mission and even the smallest error could totally render the system useless.
+For further research the optics of both the emitter and receiver instruments need to be further developed and vibration tested. These parts are essential for the success of the mission and even the smallest error could render the system completely useless. For the laser, a vibrational analysis for the individual components has to be performed and the lifetime has to be closesly tested and investigated for every component.
 
 Another problem which has not been treated in this research is the thermal control of the satellites. Especially in the tightly packed receiver satellites the thermal control could pose a major problem. The packing could be solved by using more state-of-the-art products or \ac{MEMS}.
 
-For the satellites to get into the correct constellation a dedicated upper rocket stage needs to be developed, which is able to introduce all satellites into their correct orbit. To be able to boost the emitter satellite into the second formation accurate predictions of all orbits need to be made to counter the effects of precession.
-%optics
-%thermal control
-%mems
-%state-of-the-art
-%orbital simulations
-%launch system
+Furthermore, to be able to boost the emitter satellite into the second formation accurate predictions of all orbits need to be made to counter the effects of precession. Further research on orbit insertion, including the proper procedure, has to be performed. Orbit modeling is also needed to determine correct separation and orbital angles. Tools for automated stationkeeping will also need to be developed.
 
+Also the cosine loss should be investigated in more detail to further optimize the design of the solar panels.
