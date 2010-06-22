@@ -13,18 +13,18 @@ import javax.vecmath.Point3d;
 
 import org.apache.commons.math.MathException;
 
-import com.google.code.laserswarm.Desim.elevation.ElevationFinder;
-import com.google.code.laserswarm.Desim.elevation.FindElevation;
-import com.google.code.laserswarm.Desim.elevation.correlation.OutlierRemovalCorrelation;
-import com.google.code.laserswarm.Desim.filter.Filter;
-import com.google.code.laserswarm.Desim.filter.FilterAverage;
-import com.google.code.laserswarm.Desim.filter.FilterOutlierRemoval;
 import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.conf.Constellation;
 import com.google.code.laserswarm.conf.Satellite;
 import com.google.code.laserswarm.conf.Configuration.Actions;
+import com.google.code.laserswarm.desim.elevation.ElevationFinder;
+import com.google.code.laserswarm.desim.elevation.FindElevation;
+import com.google.code.laserswarm.desim.elevation.correlation.OutlierRemovalCorrelation;
+import com.google.code.laserswarm.desim.filter.Filter;
+import com.google.code.laserswarm.desim.filter.FilterAverage;
+import com.google.code.laserswarm.desim.filter.FilterOutlierRemoval;
 import com.google.code.laserswarm.earthModel.EarthModel;
-import com.google.code.laserswarm.out.plot1D.plotHeightDistribution;
+import com.google.code.laserswarm.out.plot1D.PlotHeightDistribution;
 import com.google.code.laserswarm.process.EmitterHistory;
 import com.google.code.laserswarm.process.TimeLine;
 import com.google.code.laserswarm.simulation.SimTemplate;
@@ -76,7 +76,7 @@ public class TestFindElevation {
 		EmitterHistory emitterHistory = null;
 		Constellation constellation = null;
 		Map<Satellite, TimeLine> satData = Maps.newHashMap();
-		plotHeightDistribution plotter = new plotHeightDistribution();
+		PlotHeightDistribution plotter = new PlotHeightDistribution();
 		LinkedList<Point3d> alts = Lists.newLinkedList();
 		if (new File("satData.xml").exists() & new File("emitterHistory.xml").exists()
 				& new File("constellation.xml").exists() & dontSimulate) {

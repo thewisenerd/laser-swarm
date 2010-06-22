@@ -11,15 +11,15 @@ import java.util.Set;
 
 import org.apache.commons.math.MathException;
 
-import com.google.code.laserswarm.Desim.elevation.slope.ElevationSlope;
-import com.google.code.laserswarm.Desim.elevation.slope.FindElevationNeighborInterpolation;
 import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.conf.Constellation;
 import com.google.code.laserswarm.conf.Satellite;
 import com.google.code.laserswarm.conf.Configuration.Actions;
+import com.google.code.laserswarm.desim.elevation.slope.ElevationSlope;
+import com.google.code.laserswarm.desim.elevation.slope.FindElevationNeighborInterpolation;
 import com.google.code.laserswarm.earthModel.EarthModel;
 import com.google.code.laserswarm.out.Report;
-import com.google.code.laserswarm.out.plot1D.plotHeightDistribution;
+import com.google.code.laserswarm.out.plot1D.PlotHeightDistribution;
 import com.google.code.laserswarm.process.EmitterHistory;
 import com.google.code.laserswarm.process.TimeLine;
 import com.google.code.laserswarm.simulation.SimTemplate;
@@ -145,7 +145,7 @@ public abstract class LaserSwarm {
 					satData, emitterHistory, constellation, emitterHistory.getTime().size());
 			processed.add(elSlope);
 
-			plotHeightDistribution plotter = new plotHeightDistribution();
+			PlotHeightDistribution plotter = new PlotHeightDistribution();
 			try {
 				plotter.plot(elSlope.getAltitudes(), 3, "heightAnalysed");
 			} catch (IOException e) {

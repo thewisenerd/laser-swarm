@@ -24,8 +24,8 @@ import com.google.common.collect.Lists;
 import com.google.common.io.Files;
 import com.lyndir.lhunath.lib.system.logging.Logger;
 
-public class plotHeightDistribution {
-	private static final Logger	logger	= Logger.get(plotHeightDistribution.class);
+public class PlotHeightDistribution {
+	private static final Logger	logger	= Logger.get(PlotHeightDistribution.class);
 
 	/**
 	 * Plots height versus position.

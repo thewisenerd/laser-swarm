@@ -7,11 +7,11 @@ import javax.vecmath.Point3d;
 
 import org.geotools.geometry.DirectPosition2D;
 
-import com.google.code.laserswarm.Orbit.OrbitClass;
 import com.google.code.laserswarm.conf.Satellite;
 import com.google.code.laserswarm.earthModel.EarthModel;
 import com.google.code.laserswarm.earthModel.ElevationModel;
 import com.google.code.laserswarm.math.Convert;
+import com.google.code.laserswarm.orbit.OrbitClass;
 import com.google.common.collect.Lists;
 import com.lyndir.lhunath.lib.system.logging.Logger;
 

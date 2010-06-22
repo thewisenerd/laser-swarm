@@ -8,14 +8,14 @@ import java.util.List;
 
 import com.google.code.laserswarm.conf.Constellation;
 import com.google.code.laserswarm.conf.Satellite;
-import com.google.code.laserswarm.out.plot1D.plotHeightDistribution;
+import com.google.code.laserswarm.out.plot1D.PlotHeightDistribution;
 import com.google.code.laserswarm.simulation.SimTemplate;
 import com.google.code.laserswarm.simulation.SimVars;
 import com.google.code.laserswarm.simulation.Simulator;
 import com.lyndir.lhunath.lib.system.logging.Logger;
 
-public class writeLaTeXTable {
-	private static final Logger	logger	= Logger.get(plotHeightDistribution.class);
+public class WriteLaTeXTable {
+	private static final Logger	logger	= Logger.get(PlotHeightDistribution.class);
 
 	private String format(double val) {
 		return Double.toString(Math.floor(100000.0 * val) / 100000.0);

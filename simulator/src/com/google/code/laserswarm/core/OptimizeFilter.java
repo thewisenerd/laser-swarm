@@ -11,11 +11,11 @@ import org.apache.commons.math.optimization.GoalType;
 import org.apache.commons.math.optimization.RealPointValuePair;
 import org.apache.commons.math.optimization.direct.NelderMead;
 
-import com.google.code.laserswarm.Desim.elevation.ElevationComparison;
-import com.google.code.laserswarm.Desim.elevation.slope.FindElevationNeighborInterpolation;
 import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.conf.Constellation;
 import com.google.code.laserswarm.conf.Configuration.Actions;
+import com.google.code.laserswarm.desim.elevation.ElevationComparison;
+import com.google.code.laserswarm.desim.elevation.slope.FindElevationNeighborInterpolation;
 import com.google.code.laserswarm.earthModel.EarthModel;
 import com.google.code.laserswarm.simulation.Prospector;
 import com.google.code.laserswarm.simulation.SimTemplate;

@@ -7,10 +7,10 @@ import javax.vecmath.Point3d;
 
 import org.geotools.geometry.DirectPosition2D;
 
-import com.google.code.laserswarm.Orbit.OrbitClass;
 import com.google.code.laserswarm.conf.Satellite;
 import com.google.code.laserswarm.earthModel.EarthModel;
 import com.google.code.laserswarm.earthModel.ElevationModel;
+import com.google.code.laserswarm.orbit.OrbitClass;
 
 public class LandProspector extends Prospector {
 

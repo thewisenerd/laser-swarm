@@ -1,10 +1,10 @@
 package com.google.code.laserswarm;
 
-import com.google.code.laserswarm.out.table.writeLaTeXTable;
+import com.google.code.laserswarm.out.table.WriteLaTeXTable;
 
 public class TestWriteLaTeXTable {
 	public static void main(String[] args) {
-		writeLaTeXTable write = new writeLaTeXTable();
+		WriteLaTeXTable write = new WriteLaTeXTable();
 		write.write(SimulationTester.sim(), "../report/simulator/tables/testTable.tex");
 	}
 }
