@@ -7,7 +7,7 @@ For the main emitter satellite there are a few other parameters describing the l
 
 For the receiving satellites, the receiver is characterized by the receiver spectral filter width, the aperture area, the receiver beam divergence (which determines the footprint) and the receiver efficiency. The receiver efficiency is composed out of the optical efficiency ($\sim0.9$) and receiver chip efficiency ($\sim0.34$). Note the receiver is assumed to be perfectly pointed to the emitter footprint. Also, the footprint of the receiver is larger than the footprint of the emitter.
 
-The basic path of the signal is that it is transmitted, then propagates downwards through the atmosphere to the earth. There it scatters back in all directions. If there is sunlight shining on the footprint, that is also scattered upwards. In the direction of each receiving satellite, a small cone of the reflected energy is scattered. This again propagates through the atmosphere and is then received by the receivers. The internals of the simulation steps will be discussed more closely in the following sections.
+The basic path of the signal is as follows: First it is transmitted, then it propagates downwards through the atmosphere to the earth. There it scatters back in all directions. If there is sunlight shining on the footprint, that is also scattered upwards. In the direction of each receiving satellite, a small cone of the reflected energy is scattered. This again propagates through the atmosphere and is then received by the receivers. The internals of the simulation steps will be discussed more closely in the following sections.
 
 
 \subsection{Signal Emmission}
@@ -23,7 +23,7 @@ This means that the power in each pulse is high compared to the continuous lasin
 
 When a signal travels through the atmosphere, it is modified in several ways. Of these modifications, the largest effect is the atmospheric attenuation of the signal. This is also the only type of atmospheric effect that is taken into account.
 
-The atmospheric attenuation is dependent on both optical thickness of the atmosphere and airmass (path length through the atmosphere). The airmass factor and can be found using equation \ref{eq:airmass}. The optical thickness is dependent on the laser frequency and can be found in tables (for 473 nm this is about 10\%). The attenuation of the signal can then be computed with equation \ref{eq:AtmAttenuation}.
+The atmospheric attenuation is dependent on both optical thickness of the atmosphere and airmass (path length through the atmosphere). The airmass factor can be found using equation \ref{eq:airmass}. The optical thickness is dependent on the laser frequency and can be found in tables (for 473 nm this is about 10\%). The attenuation of the signal can then be computed with equation \ref{eq:AtmAttenuation}.
 
 \begin{equation}
 	l = sec (z)
@@ -34,7 +34,7 @@ The atmospheric attenuation is dependent on both optical thickness of the atmosp
 	\label{eq:AtmAttenuation}
 \end{equation}
 
-In equation \ref{eq:airmass}, $z$ is the zenith angle (angle between the satellite direction and up direction on the earth). Note this equation is only valid when the satellite is not near the horizon as there this formula breaks down. But due to the maximum angular separation of 2.18$^\circ$ this situation is not encountered.
+In equation \ref{eq:airmass}, $z$ is the zenith angle (angle between the satellite direction and up direction on the earth). Note this equation is only valid when the satellite is not near the horizon, because then this formula breaks down. However, due to the maximum angular separation of 2.18$^\circ$ this situation is not encountered.
 
 \subsection{Scattering}
 \subsubsection{Laser Scattering}
@@ -58,13 +58,10 @@ With the help of the formulae from \cite[pages 43-51]{rees}, the incidence vecto
 \label{fig:scatter}
 \end{figure}
 
-
-
 \subsubsection{Noise Scattering}
+Also noise is reflected up to the satellites. This reflection takes place in the receiver footprint. Because the direction of the receiver is not perpendicular to the normal of the reflection area, the footprint becomes elliptical. Over this entire elliptical area, solar radiation is reflected to the receiver. The semi major and minor axis of this ellipse can be computed based on divergence of the sensor beam (receiver beam divergence). The \ac{SPAD} multi pixel behavior is not implemented in the software, because this change would lead to the software not being completed in time. In order to approximate its behavior on a noise level, only the set of pixels that look directly to the emitter footprint are therefore bundled into one equivalent footprint. 
 
-Also noise is reflected up to the satellites. This reflection takes place in the receiver footprint. Because the direction of the receiver is not perpendicular to the normal of the reflection area, the footprint becomes elliptical. Over this entire elliptical area, solar radiation is reflected to the receiver. The semi major and minor axis of this ellipse can be computed based on divergence of the sensor beam (receiver beam divergence). The SMAD multi pixel behavior is not implemented in the software, because this change would lead to the software to being completed on time. In order to approximate its behavior on a noise level, only the set of pixels that look directly to the emitter footprint are therefore bundled into one equivalent footprint. 
-
-The amount of solar flux that is reflected up to the satellites is only the flux in the spectral width of the receiver. Then using the laws of gray body radiation, the amount of solar flux in the given spectrum is computed that hits the receiver footprint. The equation used to compute the influx is:
+The amount of solar flux that is reflected up to the satellites is only the flux in the spectral width of the receiver. Then using the laws of gray body radiation, the amount of solar flux inside the receiver footprint in the given spectrum is computed. The equation used to compute the influx is:
 
 \begin{equation}
 	\lambda_{1,2} = \lambda _{laser} \pm \frac{Wavelength Bandwidth}{2}
@@ -73,11 +70,10 @@ The amount of solar flux that is reflected up to the satellites is only the flux
 	I = \sigma T^4 (f(\lambda _1, T, \epsilon) - f(\lambda _1, T, \epsilon))
 \end{equation}
 
-In this equation $f(x)$ is an approximation of Planck's Integral \cite[p.~26]{rees}. This flux is then scatted in the same manner as for the laser scattering, to all the receivers. The big difference is that this is a continuous process with respect to the laser, which happens in discrete steps.
+In this equation $f(x)$ is an approximation of Planck's Integral \cite[p.~26]{rees}. This flux is then scatted in the same manner as for the laser scattering, to all the receivers. The big difference is that this is a continuous process, whereas the laser scattering happens in discrete steps.
 
 \subsection{Reception by the receiver}
-
-When the the energy of the laser pulse and the noise, reach the receiver again, the amount of received photons can be determined. This is done based on the energy per photon, which is defined in equation \ref{eq:PhotonEnergy}. Then the total number of received photons is equal to the inbound energy divided by the energy per photon. The floating remainder is then compared to a random generated number from zero to one, and if the random number is smaller than the remainder, an extra photon is added.
+When the the energy of the laser pulse and the noise, reach the receiver again, the amount of received photons can be determined. This is done based on the energy per photon, which is defined in equation \ref{eq:PhotonEnergy}. Now the total number of received photons is equal to the inbound energy divided by the energy per photon. The floating point remainder is then compared to a random generated number from zero to one, and if the random number is smaller than the remainder, an extra photon is added.
 
 \begin{equation}
 	E_{p}=\frac{h \cdot c}{\lambda}
@@ -91,7 +87,7 @@ In equation \ref{eq:PhotonEnergy}, $h$ is the Planck constant, $c$ the speed of 
 The orbit of each satellite in the constellation is defined by means of six Keplerian elements. These define the shape of the orbit, the orientation of the orbit with respect to the center of the Earth and the position of the satellite on the orbit.\\\\
 As there are a number of rotating bodies, three reference frames are used in order to facilitate the process of locating the satellites in space. The three reference frames used in the simulation are described below.
 
-The first is \ac{TOD} frame, and it is a more precise implementation of the \acs{ECI} frame. Its X-axis points towards the direction of the vernal equinox and its Z-axis coincides with the axis of rotation of the earth. \ac{TOD} takes into account nutation and precession of the earth. For practical reasons, it does not rotate with respect to the Sun.
+The first is the \ac{TOD} frame, and it is a more precise implementation of the \acs{ECI} frame. Its X-axis points towards the direction of the vernal equinox and its Z-axis coincides with the axis of rotation of the earth. \ac{TOD} takes into account nutation and precession of the earth. For practical reasons, it does not rotate with respect to the Sun.
  
 In the second place there is \ac{ECEF}. Its X-axis points towards $0^\circ$ latitude and $0^\circ$ longitude. The XY plane lies in the plane of the equator. Its origin is in the center of mass of the Earth. 
 

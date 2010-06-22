@@ -46,6 +46,8 @@ When an altitude is substituted, either by the spike or the averaging outlier de
 
 For the height determination, accuracies of 3 cm can be obtained when not taking into account sloping, which is as large as the precision caused by the maximum time uncertainty of 97 picoseconds, meaning that, without sloping, the algorithm is perfectly accurate at determining the original height distribution. When sloping is applied to the terrain, accuracy dimishes somewhat, especially over heavily sloping or topographically varying terrain. Because the bandwidth over which the data photons are spread out increases, the chances of noise photons being included increase. This in turn causes more variation in the signal, and standard deviations for moderately sloped terrain are in the range of ten to a few tens of centimeters. This does vary a lot for topographically more extremely varying results though. How this affects data validity will have to be researched in a further study.
 
+Note that, even for extremely sloped terrain, a measurement taken by night will have a 3 cm accuracy, due to the absense of thermal and solar noise. So if for a certain terrain it would be too sloped for daylight measurement, night time measurements will still give accurate terrain information. This is, however, a last resort. If it is needed will need to be determined by further studies.
+
 \subsection{Slope}
 \label{sec:Slope}
 To facilitate \ac{BRDF} reconstruction, the slopes are calculated. The along track slope is simply found by averaging the slope over the last few datapoints. The cross track slope is a little more difficult. Two approaches can be taken. 
