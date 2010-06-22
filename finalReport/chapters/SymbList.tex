@@ -18,17 +18,17 @@ b                                  	& width                                     
 
 c                                   & speed of light                           																& $km/s$ \\
 
-cg                                  & center of gravity                         															& m \\
-
-$c_{pa}$                            & center of aerodynamic pressure            															& m \\
-
-$c_{ps}$                            & center of solar pressure                   															& m \\
-
 $C_D$																& drag coefficient 																												& $-$ \\
 
 $C_{DD}$													  & diffuse drag coefficient																								& $-$ \\
 
 $C_{DS}$						       					& specular drag coefficient 																							& $-$ \\
+
+cg                                  & center of gravity                         															& m \\
+
+$c_{pa}$                            & center of aerodynamic pressure            															& m \\
+
+$c_{ps}$                            & center of solar pressure                   															& m \\
 
 D																		& air drag 																																& N \\
 
@@ -46,53 +46,53 @@ $E_g$                               & energy gap                                
 
 $E_{p,damage}$                      & standard damage treshold energy            															& $J/cm^2/s$ \\
 
-$f_{rep}$                     			& pulse repetition rate                   																& Hertz \\
+$f_{rep}$                     			& pulse repetition rate                   																& Hz \\
 
 $F_S$                           		& solar constant                            															& $1367 W/m^2$ \\
 
+G                                   & gravitational constant                      														& $6.67259\cdot 10^{-11} m^3/{kg.s^2}$ \\
+
 g 																	& gravitational acceleration 																							& $m/s^2$ \\
 
-G                                   & gravitational constant                      														& $m^3/{kg.s^2}$ \\
+H                                   & latitude shift                            															& km \\
 
 h                                   & height                                      														& km \\
 
 h                                   & Planck's constant                           														& J.s \\
 
-H                                   & latitude shift                            															& kn \\
-
 $H_e$                               & reentry altitude     																										& km \\
 
 $H_i$                               & initial altitude for deorbit manoeuvre     															& km \\
 
-$I_{sp}$													 	& specific impulse 																												& s \\
+I                                   & inertia tensor                          																& $km.m^2$ \\
+
+I                                   & signal attenuation                         															& dB \\
 
 i 																	& inclination 																														& rad \\
 
 i                                   & incidence angle of the sun                 															& $^\circ$ \\
 
-I                                   & inertia tensor                          																& $km.m^2$ \\
-
-I                                   & signal attenuation                         															& ??? \\
-
 $i_R$ 															& relative inclination 																										& rad \\
+
+$I_{sp}$													 	& specific impulse 																												& s \\
 
 L                                   & launch site latitude                        														& $^\circ$ \\
 
 $L_x$                               & longitude shift                               													& km \\
 
-m 																	& mass 																																		& kg \\
-
 M                                   & magnetic moment of the Earth                 														& $T.m^3$ \\
 
+m 																	& mass 																																		& kg \\
+
 $m_{dry}$                           & dry mass                                    														& kg \\
-
-$m_propellant$								    	& propellant mass 																												& kg \\
-
-$m_p$ 															& propellant mass 																												& kg \\
 
 $m_{loaded}$												& sum of dry mass and propellant mass																			& kg \\
 
 $m_{orbit}$                         & satellite mass once in orbit                														& kg \\
+
+$m_p$								    						& propellant mass 																												& kg \\
+
+$m_propellant$ 											& propellant mass 																												& kg \\
 
 $m_w$                               & reaction wheel mass  																										& kg \\
 
@@ -110,15 +110,15 @@ n                                		& angular velocity                           
 
 $n_e$ 															& refractive index 																												& $-$ \\
 
-$N_0$                           		& noise density                                														& ?? \\
-
-$P_{pulsed}$ 												& power of a pulsed laser beam																						& Watt \\
-
-$P_{continuous}$ 										& power of a continuous laser beam																				& Watt \\
+$N_0$                           		& noise density                                														& $W/Hz$ \\
 
 P                             			& period                                      														& minutes \\
 
+$P_{continuous}$ 										& power of a continuous laser beam																				& Watt \\
+
 $P_{output}$                       	& output power                             																& Watt \\
+
+$P_{pulsed}$ 												& power of a pulsed laser beam																						& Watt \\
 
 PSD                             		& power spectral density                       														& $g/{Hz^2}$ \\
 
@@ -160,14 +160,8 @@ $v_0$                               & launcher orbital velocity before spearatio
 
 $w_0$                       				& beam waist                                      												& m \\
 
-$\Delta V$                           & change in speed required for different orbit 														& $m/s$ \\
-
-$\Delta V_{deorbit}$                 & change in speed required for deorbit and reentry  											& $m/s$ \\ 
-
-$\Delta V_{planechange}$             & change in speed required for the correction of injection inaccuracy			& $m/s$ \\ 
-
-$\Delta N$                           & angular seperation at ascending nodes            												& $^\circ$ \\    
-
+z                             			& zenith angle                                  													& $^\circ$ \\     
+ 
 $\alpha$                            & relative inclination                        														& $^\circ$ \\
 
 $\alpha$                            & incidence angle                        																	& $^\circ$ \\
@@ -175,6 +169,14 @@ $\alpha$                            & incidence angle                        			
 $\alpha$                            & induced divergence                       																& $^\circ$ \\
 
 $\gamma$                            & divergence angle                         																& $^\circ$ \\
+
+$\Delta N$                          & angular seperation at ascending nodes            												& $^\circ$ \\   
+
+$\Delta V$                          & change in speed required for different orbit 														& $m/s$ \\
+
+$\Delta V_{deorbit}$                & change in speed required for deorbit and reentry  											& $m/s$ \\ 
+
+$\Delta V_{planechange}$            & change in speed required for the correction of injection inaccuracy			& $m/s$ \\ 
 
 $\epsilon$                         	& deviation angle                          																& $^\circ$ \\
 
@@ -186,7 +188,9 @@ $\theta$                            & natural optical Gaussian beam divergence  
 
 $\theta$                            & deviation from nadir                             												&  $^\circ$ \\
 
-$\Theta$                            & Henyeye-Greenstein term                           											&  ??? \\
+$\Theta$                            & Henyeye-Greenstein term                           											& rad \\
+
+$\kappa$                            & Minnaert parameter                  																		& - \\
 
 $\lambda$ 													& wavelength																															& m \\
 
@@ -196,25 +200,21 @@ $\mu$														 		& gravitational constant of the Earth 																		& 
 
 $\rho$ 															& density 																																& $kg/m^3$ \\
 
-z                             			& zenith angle                                  													& $^\circ$ \\     
-
 $\phi$ 															& phase angle 																														& rad \\
 	
 $\phi _R$														& relative phase angle 																										& rad \\
      
 $\Omega$ 														& right ascension of the ascending node 																	& rad \\
 
-$\dot \Omega _{J_2 }$ 							& rate of precession 																											& rad/s \\
-
 $\omega$ 														& argument of perigee																											& rad \\
-
-$\dot \omega$ 											& time rate of change of the argument of perigee 													& rad/s\\
-
-$\dot \omega_{max}$                 & maximum angular acceleration                														& $rad/s^2$ \\ 
 
 $\omega_{drift}$                    & drift rate                                  														& $^\circ/orbit$ \\
 
-$\kappa$                            & Minnaert parameter                  																		& ??? \\
+$\dot \omega$ 											& time rate of change of the argument of perigee 													& rad/s \\
+
+$\dot \Omega _{J_2 }$ 							& rate of precession 																											& rad/s \\
+
+$\dot \omega_{max}$                 & maximum angular acceleration                														& $rad/s^2$ \\ 
  
 \end{longtable}
 \end{center}
