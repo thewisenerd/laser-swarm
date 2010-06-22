@@ -17,6 +17,8 @@ public abstract class GuiFactory {
 		fr.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
 		JPanel left = new JPanel() {
+			private static final long	serialVersionUID	= 1L;
+
 			@Override
 			public void paintComponent(java.awt.Graphics g) {
 				super.paintComponent(g);
@@ -25,6 +27,8 @@ public abstract class GuiFactory {
 			};
 		};
 		JPanel right = new JPanel() {
+			private static final long	serialVersionUID	= 1L;
+
 			@Override
 			public void paintComponent(java.awt.Graphics g) {
 				super.paintComponent(g);

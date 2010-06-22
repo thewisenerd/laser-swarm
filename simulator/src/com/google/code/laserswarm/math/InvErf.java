@@ -3,19 +3,16 @@ package com.google.code.laserswarm.math;
 import org.apache.commons.math.MathException;
 import org.apache.commons.math.special.Erf;
 
-import com.lyndir.lhunath.lib.system.logging.Logger;
-
 public class InvErf {
 
-	private static double[]		a		= new double[] { 0.886226899, -1.645349621, 0.914624893,
-										-0.140543331 };
-	private static double[]		b		= new double[] { -2.118377725, 1.442710462, -0.329097515,
-										0.012229801 };
-	private static double[]		c		= new double[] { -1.970840454, -1.624906493, 3.429567803,
-										1.641345311 };
-	private static double[]		d		= new double[] { 3.543889200, 1.637067800 };
-
-	private static final Logger	logger	= Logger.get(InvErf.class);
+	private static double[]	a	= new double[] {
+								0.886226899, -1.645349621, 0.914624893, -0.140543331 };
+	private static double[]	b	= new double[] {
+								-2.118377725, 1.442710462, -0.329097515, 0.012229801 };
+	private static double[]	c	= new double[] {
+								-1.970840454, -1.624906493, 3.429567803, 1.641345311 };
+	private static double[]	d	= new double[] {
+								3.543889200, 1.637067800 };
 
 	/**
 	 * Returns the inverse of the error function erf(x).

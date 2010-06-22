@@ -30,7 +30,7 @@ public class SampleIterator implements Iterator<MeasermentSample> {
 
 	public static void main(String[] args) throws MathException {
 		Configuration.getInstance().getMode().remove(Actions.DEM_CACHE);
-		HashMap<SimTemplate, Simulator> results = new SimulationTester().sim();
+		HashMap<SimTemplate, Simulator> results = SimulationTester.sim();
 		SimTemplate tmpl = results.keySet().iterator().next();
 		Simulator sim = results.get(tmpl);
 		List<SimVars> data = sim.getDataPoints();

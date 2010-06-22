@@ -17,7 +17,8 @@ import com.lyndir.lhunath.lib.system.logging.Logger;
 
 public class DistributionComparison extends DescriptiveStatistics {
 
-	private static final Logger	logger	= Logger.get(DistributionComparison.class);
+	private static final long	serialVersionUID	= 1L;
+	private static final Logger	logger				= Logger.get(DistributionComparison.class);
 
 	public static boolean approxEquals(double d1, double d2) {
 		return approxEquals(d1, d2, 1E-6);

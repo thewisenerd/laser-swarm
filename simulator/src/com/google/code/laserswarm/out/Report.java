@@ -11,10 +11,11 @@ import com.google.code.laserswarm.simulation.SimTemplate;
 import com.google.code.laserswarm.simulation.Simulator;
 
 public class Report {
+
 	private static Configuration	conf	= Configuration.getInstance();
 
 	public static void write(HashMap<SimTemplate, Simulator> sims) {
-		if (Configuration.getInstance().hasAction(Actions.PLOT_DISK)) {
+		if (Configuration.hasAction(Actions.PLOT_DISK)) {
 			PlotHeightDistribution plot = new PlotHeightDistribution();
 			int num = 0;
 			for (Simulator sim : SimulationTester.sim().values()) {
@@ -23,7 +24,7 @@ public class Report {
 						+ conf.getFilePrefixReport() + "HeightDistributionPlot" + num);
 			}
 		}
-		if (Configuration.getInstance().hasAction(Actions.TABULATE)) {
+		if (Configuration.hasAction(Actions.TABULATE)) {
 			writeLaTeXTable write = new writeLaTeXTable();
 			write.write(sims, conf.getFilePathReport() + "simulator/table" + conf.getFilePrefixReport()
 					+ "Performance.tex");

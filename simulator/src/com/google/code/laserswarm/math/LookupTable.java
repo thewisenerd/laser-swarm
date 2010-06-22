@@ -9,7 +9,8 @@ import com.lyndir.lhunath.lib.system.logging.Logger;
 
 public class LookupTable extends TreeMap<Double, Tuple3d> {
 
-	private static final Logger	logger	= Logger.get(LookupTable.class);
+	private static final long	serialVersionUID	= 1L;
+	private static final Logger	logger				= Logger.get(LookupTable.class);
 
 	public Tuple3d find(double t) {
 		Double tf = floorKey(t);

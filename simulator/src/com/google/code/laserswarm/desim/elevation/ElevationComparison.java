@@ -12,11 +12,9 @@ import org.geotools.referencing.operation.projection.PointOutsideEnvelopeExcepti
 import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.earthModel.EarthModel;
 import com.google.common.collect.Lists;
-import com.lyndir.lhunath.lib.system.logging.Logger;
 
 @SuppressWarnings("serial")
 public class ElevationComparison extends DescriptiveStatistics {
-	private static final Logger	logger	= Logger.get(ElevationComparison.class);
 
 	public ElevationComparison(EarthModel earth, List<Point3d> set1) {
 		super();
@@ -42,7 +40,6 @@ public class ElevationComparison extends DescriptiveStatistics {
 		Iterator<Point3d> it1 = set1.iterator();
 		Iterator<Point3d> it2 = set2.iterator();
 
-		Point3d o = new Point3d(0, 0, 0);
 		while (it1.hasNext() && it2.hasNext()) {
 			Point3d p1 = it1.next();
 			Point3d p2 = it2.next();

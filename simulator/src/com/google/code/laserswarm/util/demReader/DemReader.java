@@ -56,10 +56,10 @@ public abstract class DemReader {
 					logger.inf("Loading %s from cache (%s,%s)", fileName, cf, ef);
 					dem = new ElevationModel(cf, ef);
 				} else
-					throw new DemFormatException();
+					throw new DemCreationException();
 			}
 		} else {
-			throw new DemFormatException();
+			throw new DemCreationException();
 		}
 
 		if (!cached && Configuration.hasAction(Actions.DEM_CACHE))

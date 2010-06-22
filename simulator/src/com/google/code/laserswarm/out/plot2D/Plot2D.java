@@ -32,6 +32,8 @@ import com.google.code.laserswarm.util.demReader.DemReader;
 
 public class Plot2D extends JFrame {
 
+	private static final long	serialVersionUID	= 1L;
+
 	public static int findSqSize(BufferedImage im) {
 		int s = Math.min(im.getWidth(), im.getHeight());
 		System.out.println("Size = " + s);
@@ -208,6 +210,8 @@ public class Plot2D extends JFrame {
 		setSize(800, 600);
 		setLocationRelativeTo(null);
 		add(new JPanel() {
+			private static final long	serialVersionUID	= 1L;
+
 			@Override
 			public void paint(Graphics g) {
 				super.paint(g);

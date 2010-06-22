@@ -70,7 +70,7 @@ public class ArcInfoASCII_1 extends DemReader {
 					Runtime.getRuntime().maxMemory(),// 
 					Runtime.getRuntime().totalMemory());
 
-			if (Configuration.getInstance().hasAction(Actions.FORCE_FLAT)) {
+			if (Configuration.hasAction(Actions.FORCE_FLAT)) {
 				matrix = MatrixFactory.zeros(nRows, nCols);
 			} else {
 

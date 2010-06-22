@@ -6,15 +6,11 @@ import org.apache.commons.math.analysis.UnivariateRealFunction;
 import org.apache.commons.math.distribution.AbstractDistribution;
 import org.apache.commons.math.special.Erf;
 
-import com.lyndir.lhunath.lib.system.logging.Logger;
-
 public class EllipticalArea extends AbstractDistribution implements UnivariateRealFunction {
 
 	private static final long	serialVersionUID	= 1L;
-	private static final Logger	logger				= Logger.get(EllipticalArea.class);
 
 	private double				a;
-	private double				b;
 
 	public EllipticalArea() {
 		this(1, 1);
@@ -22,7 +18,6 @@ public class EllipticalArea extends AbstractDistribution implements UnivariateRe
 
 	public EllipticalArea(double a, double b) {
 		this.a = a;
-		this.b = b;
 	}
 
 	@Override

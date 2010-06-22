@@ -15,7 +15,7 @@ public class ThreadRunner<T extends Runnable> extends Thread {
 	private Map<T, Thread>		completed	= Maps.newLinkedHashMap();
 	private boolean				complete;
 
-	private int					MaxThreads	= Configuration.getInstance().demThreads;
+	private int					MaxThreads	= Configuration.demThreads;
 
 	private static final Logger	logger		= Logger.get(ThreadRunner.class);
 
