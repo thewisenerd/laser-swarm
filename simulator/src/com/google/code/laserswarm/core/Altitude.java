@@ -27,7 +27,7 @@ import com.google.code.laserswarm.desim.elevation.slope.ElevationSlope;
 import com.google.code.laserswarm.desim.elevation.slope.FindElevationNeighborInterpolation;
 import com.google.code.laserswarm.earthModel.EarthModel;
 import com.google.code.laserswarm.math.Convert;
-import com.google.code.laserswarm.out.plot1D.PlotHeightDistribution;
+import com.google.code.laserswarm.out.plot1D.plotHeightDistribution2;
 import com.google.code.laserswarm.out.plot1D.PlotSlope;
 import com.google.code.laserswarm.process.EmitterHistory;
 import com.google.code.laserswarm.process.TimeLine;
@@ -86,7 +86,7 @@ public class Altitude {
 		EmitterHistory emitterHistory = null;
 		Constellation constellation = null;
 		Map<Satellite, TimeLine> satData = Maps.newHashMap();
-		PlotHeightDistribution plotter = new PlotHeightDistribution();
+		plotHeightDistribution2 plotter = new plotHeightDistribution2();
 		PlotSlope plotSlope = new PlotSlope();
 		ElevationSlope elSlope = new ElevationSlope();
 		LinkedList<Point3d> alts = Lists.newLinkedList();

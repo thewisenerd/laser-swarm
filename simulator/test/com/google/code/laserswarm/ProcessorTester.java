@@ -15,7 +15,7 @@ import com.google.code.laserswarm.conf.Constellation;
 import com.google.code.laserswarm.conf.Satellite;
 import com.google.code.laserswarm.earthModel.EarthModel;
 import com.google.code.laserswarm.earthModel.ElevationModel;
-import com.google.code.laserswarm.out.plot1D.PlotHeightDistribution;
+import com.google.code.laserswarm.out.plot1D.plotHeightDistribution2;
 import com.google.code.laserswarm.process.EmitterHistory;
 import com.google.code.laserswarm.process.MeasermentSample;
 import com.google.code.laserswarm.process.SampleIterator;
@@ -110,7 +110,7 @@ public class ProcessorTester {
 
 		Satellite Emit = new Satellite();
 		HashMap<SimTemplate, Simulator> points = mgr.runSim();
-		PlotHeightDistribution plotter = new PlotHeightDistribution();
+		plotHeightDistribution2 plotter = new plotHeightDistribution2();
 		plotter.plot(points.get(template).getDataPoints(), 3, "out.png");
 		for (SimTemplate templ : points.keySet()) { // assuming only one template
 			List<SimVars> dataPoints = points.get(templ).getDataPoints();

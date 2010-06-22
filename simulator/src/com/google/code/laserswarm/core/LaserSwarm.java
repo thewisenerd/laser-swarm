@@ -19,7 +19,7 @@ import com.google.code.laserswarm.desim.elevation.slope.ElevationSlope;
 import com.google.code.laserswarm.desim.elevation.slope.FindElevationNeighborInterpolation;
 import com.google.code.laserswarm.earthModel.EarthModel;
 import com.google.code.laserswarm.out.Report;
-import com.google.code.laserswarm.out.plot1D.PlotHeightDistribution;
+import com.google.code.laserswarm.out.plot1D.plotHeightDistribution2;
 import com.google.code.laserswarm.process.EmitterHistory;
 import com.google.code.laserswarm.process.TimeLine;
 import com.google.code.laserswarm.simulation.SimTemplate;
@@ -145,7 +145,7 @@ public abstract class LaserSwarm {
 					satData, emitterHistory, constellation, emitterHistory.getTime().size());
 			processed.add(elSlope);
 
-			PlotHeightDistribution plotter = new PlotHeightDistribution();
+			plotHeightDistribution2 plotter = new plotHeightDistribution2();
 			try {
 				plotter.plot(elSlope.getAltitudes(), 3, "heightAnalysed");
 			} catch (IOException e) {

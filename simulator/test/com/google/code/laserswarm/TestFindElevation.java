@@ -24,7 +24,7 @@ import com.google.code.laserswarm.desim.filter.Filter;
 import com.google.code.laserswarm.desim.filter.FilterAverage;
 import com.google.code.laserswarm.desim.filter.FilterOutlierRemoval;
 import com.google.code.laserswarm.earthModel.EarthModel;
-import com.google.code.laserswarm.out.plot1D.PlotHeightDistribution;
+import com.google.code.laserswarm.out.plot1D.plotHeightDistribution2;
 import com.google.code.laserswarm.process.EmitterHistory;
 import com.google.code.laserswarm.process.TimeLine;
 import com.google.code.laserswarm.simulation.SimTemplate;
@@ -76,7 +76,7 @@ public class TestFindElevation {
 		EmitterHistory emitterHistory = null;
 		Constellation constellation = null;
 		Map<Satellite, TimeLine> satData = Maps.newHashMap();
-		PlotHeightDistribution plotter = new PlotHeightDistribution();
+		plotHeightDistribution2 plotter = new plotHeightDistribution2();
 		LinkedList<Point3d> alts = Lists.newLinkedList();
 		if (new File("satData.xml").exists() & new File("emitterHistory.xml").exists()
 				& new File("constellation.xml").exists() & dontSimulate) {

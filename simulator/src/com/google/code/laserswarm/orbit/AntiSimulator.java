@@ -44,7 +44,7 @@ import com.google.code.laserswarm.conf.Configuration;
 import com.google.code.laserswarm.conf.Satellite;
 import com.google.code.laserswarm.conf.Configuration.Actions;
 import com.google.code.laserswarm.math.Convert;
-import com.google.code.laserswarm.out.plot1D.PlotHeightDistribution;
+import com.google.code.laserswarm.out.plot1D.plotHeightDistribution2;
 import com.google.code.laserswarm.process.EmitterHistory;
 import com.google.code.laserswarm.process.MeasermentSample;
 import com.google.code.laserswarm.process.SampleIterator;
@@ -606,7 +606,7 @@ public class AntiSimulator {
 		// hi.add(tmpSim);
 		// //tmpSim.
 		// }
-		  PlotHeightDistribution plotter = new PlotHeightDistribution(); 
+		  plotHeightDistribution2 plotter = new plotHeightDistribution2(); 
 		  //List<SimVars> abcd =
 			  /*
 		 * Lists.newLinkedList(); abcd = desim(ret.getRec(),ret.getEm(),ret.getEmHist());
