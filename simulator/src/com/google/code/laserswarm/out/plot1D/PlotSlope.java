@@ -28,8 +28,8 @@ import com.google.common.collect.Lists;
 import com.google.common.io.Files;
 import com.lyndir.lhunath.lib.system.logging.Logger;
 
-public class plotSlope2 {
-	private static final Logger		logger		= Logger.get(plotSlope2.class);
+public class PlotSlope {
+	private static final Logger		logger		= Logger.get(PlotSlope.class);
 	private static DecimalFormat	formatter	= new DecimalFormat("#.###");
 
 	private static double toDeg(double rad) {
