@@ -60,43 +60,9 @@ public class SubSampleCorrelation implements SampleCorrelation {
 		this.receiverTimelines = receiverTimes;
 		this.interval = correlationInterval;
 		this.qLength = comparisonQueueLength;
-		this.middle = (int) Math.floor((double) qLength / 2.0);
+		this.middle = (int) Math.floor(qLength / 2.0);
 		this.equalitySpacing = whenEqual;
 		this.rawElevationSlopes = Lists.newLinkedList();
-	}
-
-	@Override
-	public ElevationRelatedEntriesPoint next(Map<Satellite, NoiseData> nextInterpulse,
-			double nextPulseT,
-			Point3d nextEmitPt) throws MathException {
-		for (Satellite tempSat : nextInterpulse.keySet()) {
-			if (interpulseData.get(tempSat) == null) {
-				interpulseData.put(tempSat, new DataContainer());
-				interpulseData.get(tempSat).setQueueLength(1);
-			}
-			interpulseData.get(tempSat).add(nextInterpulse.get(tempSat));
-		}
-		ElevationRelatedEntriesPoint out = null;
-		// Do all calculations that can be done for a single data point (or: interpulse window).
-		TreeMap<Double, Vector3d> altitudes = findInterpulseData(nextEmitPt, nextPulseT);
-		// Find and average altitudes that show a strong correlation.
-		ElevationRelatedEntriesPoint result = findAndAverageRelatedAltitudes(altitudes, nextPulseT,
-				nextEmitPt);
-		// Some queue maintenance.
-		rawElevationSlopes.add(result);
-		while (rawElevationSlopes.size() > qLength) {
-			rawElevationSlopes.removeFirst();
-		}
-		if (rawElevationSlopes.size() == qLength) {
-			// Filter averages based on spike removal.
-			spikeFilter(25 * equalitySpacing);
-			spikeFilter(5 * equalitySpacing);
-			spikeFilter(equalitySpacing);
-			averageExclusionFilter(5);
-			averageExclusionFilter(1);
-			out = rawElevationSlopes.get(middle);
-		}
-		return out;
 	}
 
 	private ElevationRelatedEntriesPoint adjustElevationRelatedEntriesPoint(
@@ -118,40 +84,31 @@ public class SubSampleCorrelation implements SampleCorrelation {
 				closeEntryMaps, bestFitMap);
 	}
 
-	private TreeMap<Double, Vector3d> findInterpulseData(Point3d nextEmitPt, Double nextPulseT)
-			throws MathException {
-		TreeMap<Double, Vector3d> altitudes = Maps.newTreeMap();
-		double satCount = 0;
-		for (Satellite curSat : interpulseData.keySet()) {
-			satCount++;
-			DataContainer tempContainer = interpulseData.get(curSat);
-			TreeMap<Double, Integer> tempData = tempContainer.getData().getLast().getData();
-			for (Double time : tempData.keySet()) {
-				double thisAlt = AltitudeCalculation.calcAlt(nextEmitPt,
-						new Point3d(receiverTimelines.get(curSat)
-								.getLookupPosition().find(time)), time - nextPulseT);
-				int numPhotons = tempData.get(time);
-				LookupTable satPositions = receiverTimelines.get(curSat).getLookupPosition();
-				if (thisAlt < minEl || thisAlt > maxEl) {
-					logger.dbg("Filtering impossible elevation: %s", maxEl - Configuration.R0);
-				} else {
-					for (int i = 0; i < numPhotons; i++) {
-						altitudes.put(thisAlt, new Vector3d(satPositions.find(time)));
-					}
-					logger.dbg("Found height: %s, with photon no.: %s", thisAlt - Configuration.R0,
-							numPhotons);
-				}
-			}
-		}
-		return altitudes;
-	}
-
 	private boolean areEqual(double a, double b, double spacing) {
 		if (Math.abs(a - b) < spacing) {
 			return true;
 		} else {
 			return false;
 		}
+	}
+
+	private boolean averageExclusionFilter(int nSpacings) {
+		boolean didFilter = false;
+		Iterator<ElevationRelatedEntriesPoint> rawIt = rawElevationSlopes.iterator();
+		double totalAlt = 0;
+		double altNo = 0;
+		while (rawIt.hasNext()) {
+			totalAlt += rawIt.next().getElevation();
+			altNo++;
+		}
+		double altAvg = totalAlt / altNo;
+		while (rawIt.hasNext()) {
+			ElevationRelatedEntriesPoint thisElSlope = rawIt.next();
+			if (!(areEqual(altAvg, thisElSlope.getElevation(), nSpacings * equalitySpacing))) {
+				thisElSlope = adjustElevationRelatedEntriesPoint(thisElSlope, altAvg);
+			}
+		}
+		return didFilter;
 	}
 
 	/**
@@ -214,23 +171,66 @@ public class SubSampleCorrelation implements SampleCorrelation {
 				entriesClose, maxRelatedEntryMap);
 	}
 
-	private boolean averageExclusionFilter(int nSpacings) {
-		boolean didFilter = false;
-		Iterator<ElevationRelatedEntriesPoint> rawIt = rawElevationSlopes.iterator();
-		double totalAlt = 0;
-		double altNo = 0;
-		while (rawIt.hasNext()) {
-			totalAlt += rawIt.next().getElevation();
-			altNo++;
-		}
-		double altAvg = totalAlt / altNo;
-		while (rawIt.hasNext()) {
-			ElevationRelatedEntriesPoint thisElSlope = rawIt.next();
-			if (!(areEqual(altAvg, thisElSlope.getElevation(), nSpacings * equalitySpacing))) {
-				thisElSlope = adjustElevationRelatedEntriesPoint(thisElSlope, altAvg);
+	private TreeMap<Double, Vector3d> findInterpulseData(Point3d nextEmitPt, Double nextPulseT)
+			throws MathException {
+		TreeMap<Double, Vector3d> altitudes = Maps.newTreeMap();
+		double satCount = 0;
+		for (Satellite curSat : interpulseData.keySet()) {
+			satCount++;
+			DataContainer tempContainer = interpulseData.get(curSat);
+			TreeMap<Double, Integer> tempData = tempContainer.getData().getLast().getData();
+			for (Double time : tempData.keySet()) {
+				double thisAlt = AltitudeCalculation.calcAlt(nextEmitPt,
+						new Point3d(receiverTimelines.get(curSat)
+								.getLookupPosition().find(time)), time - nextPulseT);
+				int numPhotons = tempData.get(time);
+				LookupTable satPositions = receiverTimelines.get(curSat).getLookupPosition();
+				if (thisAlt < minEl || thisAlt > maxEl) {
+					logger.dbg("Filtering impossible elevation: %s", maxEl - Configuration.R0);
+				} else {
+					for (int i = 0; i < numPhotons; i++) {
+						altitudes.put(thisAlt, new Vector3d(satPositions.find(time)));
+					}
+					logger.inf("Found height: %s, with photon no.: %s", thisAlt - Configuration.R0,
+							numPhotons);
+				}
 			}
 		}
-		return didFilter;
+		return altitudes;
+	}
+
+	@Override
+	public ElevationRelatedEntriesPoint next(Map<Satellite, NoiseData> nextInterpulse,
+			double nextPulseT,
+			Point3d nextEmitPt) throws MathException {
+		for (Satellite tempSat : nextInterpulse.keySet()) {
+			if (interpulseData.get(tempSat) == null) {
+				interpulseData.put(tempSat, new DataContainer());
+				interpulseData.get(tempSat).setQueueLength(1);
+			}
+			interpulseData.get(tempSat).add(nextInterpulse.get(tempSat));
+		}
+		ElevationRelatedEntriesPoint out = null;
+		// Do all calculations that can be done for a single data point (or: interpulse window).
+		TreeMap<Double, Vector3d> altitudes = findInterpulseData(nextEmitPt, nextPulseT);
+		// Find and average altitudes that show a strong correlation.
+		ElevationRelatedEntriesPoint result = findAndAverageRelatedAltitudes(altitudes, nextPulseT,
+				nextEmitPt);
+		// Some queue maintenance.
+		rawElevationSlopes.add(result);
+		while (rawElevationSlopes.size() > qLength) {
+			rawElevationSlopes.removeFirst();
+		}
+		if (rawElevationSlopes.size() == qLength) {
+			// Filter averages based on spike removal.
+			spikeFilter(25 * equalitySpacing);
+			spikeFilter(5 * equalitySpacing);
+			spikeFilter(equalitySpacing);
+			averageExclusionFilter(5);
+			averageExclusionFilter(1);
+			out = rawElevationSlopes.get(middle);
+		}
+		return out;
 	}
 
 	private boolean spikeFilter(double spacing) {

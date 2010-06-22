@@ -7,6 +7,7 @@ import static com.google.code.laserswarm.math.Convert.toPoint;
 import static com.google.code.laserswarm.math.Convert.toSphere;
 import static com.google.code.laserswarm.math.Convert.toVector;
 import static com.google.code.laserswarm.math.Convert.toXYZ;
+import static com.google.code.laserswarm.math.VectorMath.avgVector;
 import static com.google.code.laserswarm.math.VectorMath.ecefToEnu;
 import static com.google.code.laserswarm.math.VectorMath.enuToEcef;
 import static com.google.code.laserswarm.math.VectorMath.enuToLocal;
@@ -239,5 +240,6 @@ public class BRDFinput {
 
 		alongTrackSlope = (alongTrackSlope + brdFinput.getAlongTrackSlope()) / 2;
 		crossTrackSlope = (crossTrackSlope + brdFinput.getCrossTrackSlope()) / 2;
+		scatterPoint = avgVector(scatterPoint, brdFinput.scatterPoint);
 	}
 }

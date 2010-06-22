@@ -95,8 +95,8 @@ public abstract class LaserSwarm {
 		EmitterHistory emitterHistory = null;
 		Constellation constellation = null;
 
-		if (simulations == null || simulations.size() == 0) {
-			boolean fallback = false;
+		boolean fallback = false;
+		if (!(simulations != null && simulations.size() > 0))
 			if (Configuration.hasAction(Actions.SAVED)) {
 				try {
 					satData = Configuration.read("satData.xml", Configuration
@@ -109,34 +109,35 @@ public abstract class LaserSwarm {
 					logger.wrn(e, "Cannot load data, using fallback (computing again)");
 					fallback = true;
 				}
-			} else {
+			} else
 				fallback = true;
-			}
+		else
+			fallback = true;
 
-			if (fallback) {
+		/* Use and possible make the new simulation */
+		if (fallback) {
+			if (simulations == null || simulations.size() == 0)
 				mkData();
-				Iterator<SimTemplate> it = simulations.keySet().iterator();
-				if (it.hasNext()) {
-					SimTemplate templ = it.next();
-					List<SimVars> dataPoints = simulations.get(templ).getDataPoints();
-					emitterHistory = new EmitterHistory(templ.getConstellation(), dataPoints);
+			Iterator<SimTemplate> it = simulations.keySet().iterator();
+			if (it.hasNext()) {
+				SimTemplate templ = it.next();
+				List<SimVars> dataPoints = simulations.get(templ).getDataPoints();
+				emitterHistory = new EmitterHistory(templ.getConstellation(), dataPoints);
 
-					constellation = templ.getConstellation();
-					ImmutableList<SimVars> dataPointsImm = ImmutableList.copyOf(dataPoints);
-					satData = Maps.newHashMap();
-					for (Satellite sat : templ.getConstellation().getReceivers()) {
-						satData.put(sat, new TimeLine(sat, templ.getConstellation(), dataPointsImm));
-					}
-					if (Configuration.hasAction(Actions.SAVED)) {
-						Configuration.write("satData.xml", satData);
-						Configuration.write("emitterHistory.xml", emitterHistory);
-						Configuration.write("constellation.xml", constellation);
-					}
-				} else {
-					throw new RuntimeException("Cannot load any data");
+				constellation = templ.getConstellation();
+				ImmutableList<SimVars> dataPointsImm = ImmutableList.copyOf(dataPoints);
+				satData = Maps.newHashMap();
+				for (Satellite sat : templ.getConstellation().getReceivers()) {
+					satData.put(sat, new TimeLine(sat, templ.getConstellation(), dataPointsImm));
 				}
+				if (Configuration.hasAction(Actions.SAVED)) {
+					Configuration.write("satData.xml", satData);
+					Configuration.write("emitterHistory.xml", emitterHistory);
+					Configuration.write("constellation.xml", constellation);
+				}
+			} else {
+				throw new RuntimeException("Cannot load any data");
 			}
-
 		}
 
 		try {

@@ -4,6 +4,8 @@ import static com.google.code.laserswarm.math.Convert.toDirectPosition;
 import static com.google.code.laserswarm.math.Convert.toSphere;
 import static com.google.code.laserswarm.math.VectorMath.enuToLocal;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -44,18 +46,18 @@ public class BrdfComparison extends LaserSwarm {
 	public static void main(String[] args) {
 		Configuration.getInstance();
 		Configuration.setMode(Sets.newHashSet(
-				Actions.PROSPECT, Actions.PROCESS));
+				Actions.SIMULATE, Actions.PROSPECT, Actions.PROCESS));
 
 		Prospector.roughTimeStep = 3;
 
 		new BrdfComparison().run();
 	}
 
-	private int	QUE_SIZE	= 2;
+	private int	QUE_SIZE	= 5;
 
-	private void compareBrdf(LinkedList<BRDFinput> que, SummaryStatistics stat) {
+	private boolean compareBrdf(LinkedList<BRDFinput> que, SummaryStatistics stat) {
 		BRDFinput compiledBrdfInput;
-		if (false) {
+		if (true) {
 			compiledBrdfInput = que.getFirst().clone();
 			Iterator<BRDFinput> it = que.iterator();
 			it.next();// Skip the first one as the compiledBrdfInput is already based on it
@@ -68,17 +70,18 @@ public class BrdfComparison extends LaserSwarm {
 		DiscreteBrdf discreteBrdf = BrdfFactory.construct(compiledBrdfInput);
 
 		Vector3d norm = compiledBrdfInput.getTerrainNormal();
-		System.out.println(norm);
-
-		System.out.println("using: " + norm);
 
 		int nrP = 0;
 		for (Vector3d origin : compiledBrdfInput.getReceiverPositions().keySet()) {
-			System.out.println(origin);
+			// System.out.println(origin);
 			nrP += compiledBrdfInput.getReceiverPositions().get(origin);
 		}
-		System.out.println("photons: " + nrP);
+		logger.dbg("photons: %s\t# Rx:%s", nrP, compiledBrdfInput.getReceiverPositions().size());
 
+		if (nrP < compiledBrdfInput.getReceiverPositions().size() * 1.1)
+			return false;
+
+		System.out.println("using: " + norm);
 		DirectPosition2D pos = toDirectPosition(toSphere(compiledBrdfInput.getScatterPoint()));
 		ScatteringParam param = EarthModel.getDefaultModel().getScatteringParam(pos);
 		Vector3d in = enuToLocal(new Vector3d(0, 0, 1),
@@ -96,7 +99,11 @@ public class BrdfComparison extends LaserSwarm {
 			System.exit(1);
 		}
 
-		GuiFactory.dualImageGui(brdf.toImage(), brdf2.toImage());
+		Dimension imSize = Toolkit.getDefaultToolkit().getScreenSize();
+		imSize.width = imSize.width / 2;
+		GuiFactory.dualImageGui(brdf.toImage(500, 600), brdf2.toImage(500, 600));
+
+		return true;
 	}
 
 	@Override
@@ -110,21 +117,20 @@ public class BrdfComparison extends LaserSwarm {
 
 			LinkedList<BRDFinput> que = Lists.newLinkedList();
 			for (BRDFinput brdFinput : brdfInputs) {
-				logger.inf("Iterating over t=%f", brdFinput.getCurrentTime());
+				// logger.inf("Iterating over t=%f", brdFinput.getCurrentTime());
 				que.add(brdFinput);
-				norm = que.getFirst().getTerrainNormal();
-				System.out.println("Testing " + norm);
+				System.out.println(brdFinput.getReceiverPositions().values().iterator().next());
 
 				if (que.size() >= QUE_SIZE) {
-					System.out.println("Computing for " + norm);
 					que.removeFirst();
-					compareBrdf(que, stats.createContributingStatistics());
-					try {
-						System.out.println("press enter");
-						new BufferedReader(new InputStreamReader(System.in)).readLine();
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
+					boolean result = compareBrdf(que, stats.createContributingStatistics());
+					if (result)
+						try {
+							System.out.println("press enter");
+							new BufferedReader(new InputStreamReader(System.in)).readLine();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
 					System.out.println("continuing ...");
 				}
 			}
@@ -135,7 +141,7 @@ public class BrdfComparison extends LaserSwarm {
 	@Override
 	protected List<Constellation> mkConstellations() {
 		LinkedList<Constellation> l = Lists.newLinkedList();
-		l.add(Constellation.swarm(4, 0.007, 500));
+		l.add(Constellation.swarm(10, 0.007, 500));
 		return l;
 	}
 

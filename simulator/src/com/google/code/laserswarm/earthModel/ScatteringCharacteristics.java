@@ -188,4 +188,5 @@ public class ScatteringCharacteristics extends Distribution {
 		return "Index of Refraction:" + refrSurf + "\nkappaMinnaert:" + kappa
 				+ "\nthetaHenyeyGreenstein:" + Theta;
 	}
+
 }

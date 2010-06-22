@@ -69,7 +69,7 @@ public class Brdf extends Distribution {
 	}
 
 	@Override
-	public Image toImage() throws LinkageError {
+	public Image toImage(int width, int hight) throws LinkageError {
 		if (ml == null) {
 
 			File kernelFile = Configuration.getInstance().getMathematicaKernel();
@@ -109,7 +109,7 @@ public class Brdf extends Distribution {
 								+ "cloud = ListPointPlot3D[coordinates*scale];"
 								+ "vectorPlot = Graphics3D[{Line[vectors]}];"
 								+ "Show[cloud, vectorPlot]",
-						800, 600, 0, false);
+						width, hight, 0, false);
 		Image im = Toolkit.getDefaultToolkit().createImage(gifData);
 		return im;
 	}

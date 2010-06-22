@@ -2,6 +2,7 @@ package com.google.code.laserswarm.util;
 
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Toolkit;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -13,6 +14,7 @@ public abstract class GuiFactory {
 
 	public static JFrame dualImageGui(final Image im1, final Image im2) {
 		JFrame fr = getDefaultJFrame("Image comparison");
+		fr.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
 		JPanel left = new JPanel() {
 			@Override
@@ -33,7 +35,7 @@ public abstract class GuiFactory {
 
 		JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, left, right);
 		splitPane.setOneTouchExpandable(true);
-		splitPane.setDividerLocation(fr.getWidth() / 2);
+		splitPane.setDividerLocation(Toolkit.getDefaultToolkit().getScreenSize().width / 2);
 
 		fr.add(splitPane);
 		fr.setVisible(true);
@@ -41,8 +43,12 @@ public abstract class GuiFactory {
 	}
 
 	public static JFrame getDefaultJFrame(String name) {
+		return getDefaultJFrame(name, 800, 600);
+	}
+
+	public static JFrame getDefaultJFrame(String name, int w, int h) {
 		JFrame fr = new JFrame(name);
-		fr.setSize(800, 600);
+		fr.setSize(w, h);
 		fr.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		return fr;
 	}

@@ -198,6 +198,11 @@ public abstract class Distribution {
 	 *             If there was an error in creating the MathLink to Mathematica
 	 */
 	public Image toImage() throws LinkageError {
+		return toImage(800, 600);
+	}
+
+	public Image toImage(int width, int hight) throws LinkageError {
+
 		loadKernel();
 
 		File csv = new File(Configuration.volatileCache, "scatter-" + Math.random() + ".csv");
@@ -211,7 +216,7 @@ public abstract class Distribution {
 								+ "scale = scale /Mean[scale];"
 								+ "coordinates = data[[All, 3 ;; 5]];"
 								+ "ListPointPlot3D[coordinates*scale]",
-						800, 600, 0, false);
+						width, hight, 0, false);
 		Image im = Toolkit.getDefaultToolkit().createImage(gifData);
 		return im;
 	}
