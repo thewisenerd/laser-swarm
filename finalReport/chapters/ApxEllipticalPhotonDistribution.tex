@@ -1,7 +1,7 @@
 \chapter{Elliptical photon distribution}
 \label{EllipticalPhotonDistribution}
 
-In order to compute where in a the elliptical footprint a photon hits, one needs to create a function that translates a random number to an offset in the a-axis (since the height difference is independent of the b-axis location). This function can be computed using the inverse function of the integral function of the ellipse function (normalized by area). This transformation is based in the equation of the ellipse.
+In order to compute where in the elliptical footprint a photon hits, one needs to create a function that translates a random number to an offset in the semimajor axis (since the height difference is independent of the semiminor axis location). This function can be computed using the inverse function of the integral function of the ellipse function (normalized by area). This transformation is based in the equation of the ellipse.
 
 \begin{equation}
 	\frac{x^2}{a^2}+\frac{y^2}{b^2}=0
@@ -22,7 +22,7 @@ From this, the normalized y coordinate can be extracted and the integral can be 
 	\label{eq:distributionCDF}
 \end{equation}
 
-Equation \ref{eq:distributionCDF} is to complex to solve for analytically and very computationally intensive for numerical approximation. To that purpose, an approximation is used in the form of a normal function with zero variance and a mean based on the semi-major axis. In figure \ref{fig:CDFcomparison}, a comparison is given between the approximation (purple) and the real function (blue). The final function can now be found by inverting equation \ref{eq:approxCDF}. The result can then be simplified to equation \ref{eq:EllipticalAreaInvCDF} which maps for a random number between zero and one, the offset on the a-axis of the photon hit.
+Equation \ref{eq:distributionCDF} is too complex to solve analytically and is very computationally intensive for numerical approximation. To that purpose, an approximation is used in the form of a normal function with zero variance and a mean based on the semi-major axis. In figure \ref{fig:CDFcomparison}, a comparison is given between the approximation (purple) and the real function (blue). The final function can now be found by inverting equation \ref{eq:approxCDF}. The result can then be simplified to equation \ref{eq:EllipticalAreaInvCDF} which maps a random number between zero and one to the offset on the semimajor axis of the photon hit.
 
 \begin{equation}
 	y(x,a) = NormalCDF(0, 0.5a);
