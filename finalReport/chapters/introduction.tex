@@ -1,8 +1,10 @@
 In February 2010 the ICESat mission ended after 7 years of measuring ice sheet mass balance, cloud and aerosol heights, as well as land topography and vegetation characteristics.
 To do all this, ICESat had only one instrument on board: a space based \ac{LiDAR} system (\ac{GLAS}), allowing for an unprecedented 3D view of the Earth's surface and atmosphere.
 The laser lifetimes, however, were severely limited because of manufacturing errors in one of the laser components.
-ICESat followed only one of the possible approaches for \ac{LiDAR}, namely the use of a high energy laser and a large receiver telescope. An alternative is using a high frequency, low energy laser and a single photon detector. The advantage of the latter approach is that it has a much lower mass, but it is uncertain if even a single photon per pulse reaches the receiver. One possible solution could be the use of a swarm of satellites around the emitter, each equipped with a single photon detector. However the technical feasibility of this concept has not yet been proven.
-The purpose of this project was to explore this last alternative, in order to fulfill a similar mission to ICESat's: monitoring changes that take place at the surface of the Earth. With multi-angular measurements, a new dimension of information is obtained and characteristic data such as the \acs{BRDF} or the slope of the terrain can be measured. This allows inferring into the nature of the observed terrain, the identification of crops and correction of anisotropic effects from other space missions.
+
+ICESat followed only one of the possible approaches for \ac{LiDAR}, namely the use of a high energy laser and a large receiver telescope. An alternative is using a high frequency, low energy laser and a single photon detector. The advantage of the latter approach is that it has a much lower mass, but it is uncertain if even a single photon per pulse reaches the receiver. One possible solution could be the use of a swarm of satellites around the emitter, each equipped with a single photon detector. The technical feasibility of this concept has not yet been proven.
+
+The purpose of this project was to explore this last alternative, in order to fulfill a mission similar to ICESat's: monitoring changes that take place at the surface of the Earth. With multi-angular measurements, a new dimension of information is obtained and characteristic data such as the \acs{BRDF} or the slope of the terrain can be measured. This allows inferring the nature of the observed terrain, the identification of crops and correction of anisotropic effects from other space missions.
 
 In this final report the detailed design of the satellite swarm will be presented. Each subsystem will be dealt with separately for the receiver satellites and the emitter satellite. The report will also document how the gathered data is post-processed to obtain usable results and how the \acs{BRDF} is determined.
 
@@ -10,18 +12,18 @@ The project management is discussed in chapter \ref{chap:project_management}. Th
 The working of the software tool is given in chapter \ref{chap:sim}. There the data validation and the obtained results will be discussed. The sustainable aspect of the mission is documented in chapter \ref{SS}. 
 Finally the compliance matrix is given in chapter \ref{chap:CM} and the conclusion as to the feasibility of the mission can be found in chapter \ref{frCRconclusions}.
 
-\textbf{Problem Statement \& Approach}\\
+\section*{Problem Statement \& Approach}
 The goal of this project is to determine the technical feasibility of a constellation of satellites with one satellite emitting a high frequency, low energy laser and the other satellites receiving the reflected photons.
 
 To determine the technical feasibility of the laser swarm concept, several aspects have been studied:
 
 \begin{itemize}
-\item Orbits: Which altitude is optimal? Which satellite formation is optimal?
+\item Orbits: Which altitude is optimal? What satellite formation is practical?
 \item Attitude and pointing: Which pointing accuracy is required? How can it be achieved?
-\item Communication: Which communication architecture is optimal?
-\item Synchronization and localization: Which time and position accuracy is required? How can it be achieved?
+\item Communication: Which communication architecture is best?
+\item Synchronization and localization: Which time and position accuracy is required? How can this be achieved?
 \item Photon budget: How powerful does the laser need to be? How efficiently can the photons be detected? What will the signal to noise ratio be?
-\item Slope determination \& BRDF: Is it possible to extract BRDF and slope from the received information?
+\item Slope determination \& \ac{BRDF}: Is it possible to extract \ac{BRDF} and slope from the received information?
 \end{itemize}
 
-So the approach for this project is twofold: a detailed design was made in which all all foreseeable issues are addressed and software was written to predict the signal received based on the choices made in the detailed design.
+The approach for this project is twofold: firstly a detailed design was made in which all all foreseeable issues are addressed and secondly software was written to predict the signal received based on the choices made in the detailed design.
