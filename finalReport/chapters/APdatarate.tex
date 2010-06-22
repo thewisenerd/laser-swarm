@@ -5,7 +5,7 @@ This data can be split up in three parts: payload generated data, satellite atti
 \begin{equation}
 R_{scientific}=O\cdot (R_{payload}+ R_{attitude} + R_{position})
 \end{equation}
-Where O is the overhead factor.
+Where $O$ is the overhead factor.
 
 To calculate $R_{payload}$ the following equation is used:
 \begin{equation}
@@ -14,7 +14,7 @@ R_{payload}=f_{p} \cdot ((x_{SPAD}+y_{SPAD})\cdot n+ \alpha_{payload}+t)
 \begin{equation}
 R_{payload}=5000 \cdot ((5+5)\cdot 18+10+48)=1,190,000 bps=1.19 Mbps 
 \end{equation}
-Where $f_{p}$ is the frequency of the laser pulse, $x_{SPAD}$ and $y_{SPAD}$ the array coordinates of the SPAD, n the number of samples $\alpha_{payload}$ the angle at wich the instrument is pointing and t the time at which the photon was registered.
+Where $f_{p}$ is the frequency of the laser pulse, $x_{SPAD}$ and $y_{SPAD}$ the array coordinates of the SPAD, n the number of samples $\alpha_{payload}$ the angle at wich the instrument is pointing and $t$ the time at which the photon was registered.
 
 Next the attitude data rate is calculated:
 \begin{equation}
@@ -23,7 +23,7 @@ R_{attitude}=f_{a} \cdot (\psi + \theta + \phi +t)
 \begin{equation}
 R_{attitude}=2 \cdot (19+19+19+48)=210 bps 
 \end{equation}
-Where $f_{a}$ is frequency at which the star tracker updates the attitude, $\psi$ and $\theta$ and $\phi$ is yaw, pitch and roll respectively and t is again the time at which the attitude was registered.
+Where $f_{a}$ is frequency at which the star tracker updates the attitude, $\psi$ and $\theta$ and $\phi$ is yaw, pitch and roll respectively and $t$ is again the time at which the attitude was registered.
 
 Similarly the position data rate is calculated:
 \begin{equation}
@@ -32,9 +32,9 @@ R_{position}=f_{pos} \cdot (x + y + z +t)
 \begin{equation}
 R_{position}=20 \cdot (32+32+32+48)=2880 bps 
 \end{equation}
-Where $f_{pos}$ is frequency at which the GPS receiver updates the position, x and y and z are absolute position coordinates and t is the time at which the attitude was registered.
+Where $f_{pos}$ is frequency at which the GPS receiver updates the position, $x$, $y$ and $z$ are absolute position coordinates and $t$ is the time at which the attitude was registered.
 
-Now that all data rates are calculated the total science data rate can be calculated:
+Now that all data rates are calculated, the total science data rate can be calculated:
 \begin{equation}
 R_{scientific}=1.1\cdot (1,190,000 + 210 + 2,880) bps= 1,312,399 bps
 \end{equation}
